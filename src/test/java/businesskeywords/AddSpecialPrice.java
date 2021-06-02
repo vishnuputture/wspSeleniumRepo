@@ -1,0 +1,169 @@
+package businesskeywords;
+
+import com.winSupply.core.Helper;
+import com.winSupply.core.ReusableLib;
+import org.openqa.selenium.WebElement;
+import pages.AddSpecialPricingPage;
+import pages.LoginPage;
+import pages.MasterPage;
+import businesskeywords.*;
+import supportLibraries.Utility_Functions;
+import commonkeywords.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import java.util.List;
+
+public class AddSpecialPrice extends ReusableLib  {
+
+	CommonActions commonObj;
+	/**
+     * Constructor to initialize the {@link Helper} object and in turn the
+     * objects wrapped by it
+     *
+     * @param helper The {@link Helper} object
+     */
+    public AddSpecialPrice(Helper helper) {
+    	
+        super(helper);
+        commonObj = new CommonActions(helper);
+    }
+    
+    public void getCustItemData() {
+    	List <String> data= DBCall.getWISEDATA();
+    	
+    	 Utility_Functions.xUpdateJson("CustomerNo", data.get(0));
+    	 Utility_Functions.xUpdateJson("ItemNo", data.get(1));
+    	
+    }
+    public void validateAddSpecialPriceTitle() throws NoSuchElementException{
+    	//CommonActions commonObj = new CommonActions(helper);
+    	commonObj.masterToOrderProcessing();
+    	commonObj.orderProcToSplPricing();
+    	commonObj.splPricingToAddPricing();
+    	commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing","Validating add special price page title");
+    }
+    
+    public void enterInvalidcustNum() {
+    	
+    	//CommonActions commonObj = new CommonActions(helper);
+    	commonObj.masterToOrderProcessing();
+    	commonObj.orderProcToSplPricing();
+    	commonObj.splPricingToAddPricing();
+    	commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing","Validating add special price page title");
+    	
+    	sendKeys(AddSpecialPricingPage.custNumTxtBox,jsonData.getData("InvalidCustNum"),"Entering invalid customer number");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	commonObj.validateText(AddSpecialPricingPage.validationLbl, "Customer Number does not exist","Validating message for invalid customer number");
+    	
+    	
+    	
+    	
+    }
+    
+    public void enterInvaliditemNum() {
+    	//CommonActions commonObj = new CommonActions(helper);
+    	commonObj.masterToOrderProcessing();
+    	commonObj.orderProcToSplPricing();
+    	commonObj.splPricingToAddPricing();
+    	commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing","Validating add special price page title");
+    	sendKeys(AddSpecialPricingPage.custNumTxtBox,Utility_Functions.xGetJsonAsString("CustomerNo"),"Entering customer number");
+    	sendKeys(AddSpecialPricingPage.itemNumTxtBox,jsonData.getData("InvalidItemNum"),"Entering invalid item number");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	commonObj.validateText(AddSpecialPricingPage.validationLbl, "Item Number does not exist","Validating message for invalid item number");
+    	
+    	
+    }
+    
+    public void addAndExitSpecialPrice() {
+    	
+    	//CommonActions commonObj= new CommonActions(helper);
+    	try {
+    		commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing","Validating add special price page title");
+    	}catch(NoSuchElementException e) {
+    		commonObj.masterToOrderProcessing();
+        	commonObj.orderProcToSplPricing();
+        	commonObj.splPricingToAddPricing();
+        	
+        	commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing","Validating add special price page title");
+    	}
+    	String custNo = Utility_Functions.xGetJsonAsString("CustomerNo");
+    	String itemNo = Utility_Functions.xGetJsonAsString("ItemNo");
+    	if(custNo==null||itemNo==null) {
+    	List <String> data= DBCall.getWISEDATA();
+    	
+    	 Utility_Functions.xUpdateJson("CustomerNo", data.get(0));
+    	 Utility_Functions.xUpdateJson("ItemNo", data.get(1));
+    	 custNo = Utility_Functions.xGetJsonAsString("CustomerNo");
+    	 itemNo = Utility_Functions.xGetJsonAsString("ItemNo");
+    	}
+    	commonObj.addSpecialPriceRecord(custNo,itemNo);
+    	commonObj.exitAddSpecialPricingToSplPrice();
+    }
+    
+    public void addAndExitMultipleSpecialPrice() {
+    	//CommonActions commonObj= new CommonActions(helper);
+    	try {
+    		commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing","Validating add special price page title");
+    	}catch(NoSuchElementException e) {
+    		//commonObj.masterToOrderProcessing();
+        	//commonObj.orderProcToSplPricing();
+        	commonObj.splPricingToAddPricing();
+        	
+        	commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing","Validating add special price page title");
+    	}
+    	
+    	
+    	String[] custNumList = jsonData.getData("validCustNum").split(",");
+    	String[] itemNumList = jsonData.getData("validItemNum").split(",");
+    	
+    	for(int i=0; i<custNumList.length;i++) {
+    		commonObj.addSpecialPriceRecord(custNumList[i],itemNumList[i]);
+    	}
+    	commonObj.exitAddSpecialPricingToSplPrice();
+    	
+    	
+    }
+    
+    public void addSpecialPriceRecord() {
+    	sendKeys(AddSpecialPricingPage.custNumTxtBox,jsonData.getData("validCustNum"),"Entering customer number");
+    	sendKeys(AddSpecialPricingPage.itemNumTxtBox,jsonData.getData("itemNum"),"Entering item number");
+    	sendKeys(AddSpecialPricingPage.specialPriceTxtBox,jsonData.getData("specialPrice"),"Entering special price");
+    	
+    	Date dt = new Date();
+    	Calendar c = Calendar.getInstance(); 
+    	c.setTime(dt); 
+    	c.add(Calendar.DATE, 1);
+    	dt = c.getTime();
+    	SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");  
+        String strDate= formatter.format(dt);  
+    	System.out.println(strDate);
+    	
+    	sendKeys(AddSpecialPricingPage.expDateTxtBox,strDate,"Entering date");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	if(Utility_Functions.xWaitForElementPresent(driver,AddSpecialPricingPage.successLbl, 5)) {
+    		String successMessage = Utility_Functions.getText(driver,AddSpecialPricingPage.successLbl);
+    		System.out.println("Text: "+successMessage);
+    		Utility_Functions.xAssertEquals(report, jsonData.getData("success"), successMessage.trim(), "Validating success message");
+    	}else {
+    		System.out.println("Text: Not found");
+    		throw new NoSuchElementException("Could not find :"+AddSpecialPricingPage.successLbl);
+    	}
+    }
+    
+    public void exitSplPriceToMaster() {
+    	
+    	//CommonActions commonObj= new CommonActions(helper);
+    	commonObj.exitAddSpecialPricingToSplPrice();
+    	commonObj.exitSplPriceToMasterPage();
+    }
+    
+  
+}
