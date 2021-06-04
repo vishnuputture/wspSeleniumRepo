@@ -12,12 +12,12 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                bat 'mvn compile'
+                sh 'mvn compile'
             }
         }
         stage('Test'){
             steps{
-                bat 'mvn -f pom.xml clean test -P runSmoke -DDefaultExecutionMode=LOCAL'
+                sh 'mvn -f pom.xml clean test -P runSmoke -DDefaultExecutionMode=LOCAL'
             }
         }
     }
