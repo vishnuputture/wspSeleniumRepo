@@ -53,7 +53,7 @@ public class WebDriverFactory {
 
 		String platform = System.getProperty("DefaultPlatform");
 		if(platform==null){
-			properties.getProperty("DefaultPlatform");
+			platform=properties.getProperty("DefaultPlatform");
 		}
 		String headless = properties.getProperty("HeadLess");
 
