@@ -17,7 +17,7 @@ pipeline{
         }
         stage('Test'){
             steps{
-                sh 'mvn -f pom.xml clean test -P runSmoke -DDefaultExecutionMode=LOCAL'
+                sh 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL'
             }
         }
     }
