@@ -752,6 +752,17 @@ public abstract class ReusableLib {
         }
     }
 
+
+    protected void sendKeysAndTabOut(By el, String strVal) {
+        if (!strVal.isEmpty() && strVal != "" && strVal != null) {
+            waitForElementClickable(el, globalWait);
+            WebElement elment = getElement(el);
+            elment.click();
+            elment.clear();
+            elment.sendKeys(strVal);
+            elment.sendKeys(Keys.TAB);
+        }
+    }
     protected void sendKey(By el, String strVal) {
         if (!strVal.isEmpty() && strVal != "" && strVal != null) {
             waitForElementClickable(el, globalWait);

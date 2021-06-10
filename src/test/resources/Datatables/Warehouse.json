@@ -1,0 +1,10 @@
+{
+	"Business_Flow": [
+		{
+			"Tc_AddTruck": "addNewtruck"
+
+		}
+	],
+	"General_Data": [
+	]
+}

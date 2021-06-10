@@ -2198,7 +2198,12 @@ public class Utility_Functions extends ReusableLib {
         JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
         js.executeScript(mouseScript, el);
     }
+    public static void xMouseClick(FrameworkDriver driver, By el) {
 
+        String mouseScript = "arguments[0].click();";
+        JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+        js.executeScript(mouseScript, driver.findElement(el));
+    }
     public static boolean xMouseDoubleClick(FrameworkDriver driver, WebElement el) {
 
         Actions builder = new Actions(driver.getWebDriver());
@@ -2233,6 +2238,14 @@ public class Utility_Functions extends ReusableLib {
                 + "else if(document.createEventObject) { " + "arguments[0].fireEvent('onmouseover');" + "}";
         JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
         js.executeScript(mouseOverScript, el);
+    }
+
+    public static void xmouseOver(FrameworkDriver driver, By el) {
+        String mouseOverScript = "if(document.createEvent){" + "var evObj = document.createEvent('MouseEvents');"
+                + "evObj.initEvent('mouseover', true, false); " + "arguments[0].dispatchEvent(evObj);" + "} "
+                + "else if(document.createEventObject) { " + "arguments[0].fireEvent('onmouseover');" + "}";
+        JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+        js.executeScript(mouseOverScript, driver.findElement(el));
     }
 
     public static void xMouseOver(FrameworkDriver driver, WebElement el) {

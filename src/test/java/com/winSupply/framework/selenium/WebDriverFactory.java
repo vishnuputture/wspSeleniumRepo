@@ -51,7 +51,10 @@ public class WebDriverFactory {
 		WebDriver driver = null;
 		properties = Settings.getInstance();
 
-		String platform = properties.getProperty("DefaultPlatform");
+		String platform = System.getProperty("DefaultPlatform");
+		if(platform==null){
+			platform=properties.getProperty("DefaultPlatform");
+		}
 		String headless = properties.getProperty("HeadLess");
 
 		switch (browser) {
