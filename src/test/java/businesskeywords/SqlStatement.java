@@ -4,7 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
 import commonkeywords.CommonActions;
-
+import commonkeywords.DBCall;
 
 import org.openqa.selenium.WebElement;
 
@@ -76,6 +76,8 @@ public class SqlStatement extends ReusableLib {
 
 
     public void insertSpecialPricePAPRecord() {
+    	
+    
         commonObj.goToSqlApp();
 
 

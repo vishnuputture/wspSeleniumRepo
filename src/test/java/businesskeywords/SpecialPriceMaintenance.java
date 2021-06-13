@@ -275,5 +275,10 @@ public class SpecialPriceMaintenance extends ReusableLib {
         Utility_Functions.xAssertEquals(report, "Price as Parent records are display only", res, "Validating pap record exists");
         click(SpecialPricePage.btnF3);
     }
+    
+    public void cleanUP()
+    {
+    	DBCall.delteDBTableData();
+    }
 
 }

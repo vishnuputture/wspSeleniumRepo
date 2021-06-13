@@ -32,6 +32,28 @@ public class DBCall {
 
 	//DELETE FROM DTA99599/IM08
 	//DElete method to be written
+	
+	/**
+	 * This method on invocation will delete the table contents of IM08
+	 */
+	
+	public static void delteDBTableData()
+	{
+		
+		Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
+
+		
+			try
+			{
+				String delCustomerData = "DELETE FROM DTA99599/IM08";
+				int i=sqlStatement.executeUpdate(delCustomerData);
+				System.out.println("Delet Statement RUN Successfully and value is "+i);
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		
+	}
 
 	/**
 	 *
