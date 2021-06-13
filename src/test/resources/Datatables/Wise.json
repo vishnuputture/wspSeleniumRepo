@@ -1,23 +1,23 @@
 {
 	"Business_Flow": [
 		{
-			"Tc_17_NavigateToAddSpecialScreen": "siteLogin,validateAddSpecialPriceTitle,exitSplPriceToMaster,signOut",
-			"Tc_19_ValidateCustomerNumber": "siteLogin,getCustItemData,enterInvalidcustNum,addAndExitSpecialPrice,delAddedSpclPrice,exitSplPricePage,signOut",
-			"Tc_20_ValidateItemNumber": "siteLogin,getCustItemData,enterInvaliditemNum,addAndExitSpecialPrice,delAddedSpclPrice,exitSplPricePage,signOut",
-			"Tc_22_ValidateDBafterAdd": "siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql,navigateToSplPricing,delSpecialPriceRecordandExit,signOut",
-			"Tc_5_ValidatePositiontoCustomerNumber_Beginning": "siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,positionCustNum,delAllPriceRecord",
-			"Tc_9_ValidatePositiontoCustomerNumber_Middle": "siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,positionCustNum,delAllPriceRecord",
-			"Tc_10_ValidatePositiontoCustomerNumber_End": "siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,positionCustNum,delAllPriceRecord",
-			"Tc_11_ValidatePositiontoItemNumber_Beginning": "siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionCustItemBegin,delAllPriceRecord",
-			"Tc_13_ValidatePositiontoItemNumber_Middle": "siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionItemNumMiddle,delAllPriceRecord",
+			"Tc_17_NavigateToAddSpecialScreen": "launchApp,siteLogin,validateAddSpecialPriceTitle,exitSplPriceToMaster,signOut",
+			"Tc_19_ValidateCustomerNumber": "launchApp,siteLogin,getCustItemData,enterInvalidcustNum,addAndExitSpecialPrice,delAddedSpclPrice,exitSplPricePage,signOut",
+			"Tc_20_ValidateItemNumber": "launchApp,siteLogin,getCustItemData,enterInvaliditemNum,addAndExitSpecialPrice,delAddedSpclPrice,exitSplPricePage,signOut",
+			"Tc_22_ValidateDBafterAdd": "launchApp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql,navigateToSplPricing,delSpecialPriceRecordandExit,signOut",
+			"Tc_5_ValidatePositiontoCustomerNumber_Beginning": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,positionCustNum,delAllPriceRecord",
+			"Tc_9_ValidatePositiontoCustomerNumber_Middle": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,positionCustNum,delAllPriceRecord",
+			"Tc_10_ValidatePositiontoCustomerNumber_End": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,positionCustNum,delAllPriceRecord",
+			"Tc_11_ValidatePositiontoItemNumber_Beginning": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionCustItemBegin,delAllPriceRecord",
+			"Tc_13_ValidatePositiontoItemNumber_Middle": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionItemNumMiddle,delAllPriceRecord",
 			"Tc_API_validatePricing": "getPricingResponse",
 			"Tc_API_updatePricing": "getResponseForPriceAndCostUpdates",
-			"Tc_23_ValidateDBAfterDelete": "siteLogin,getCustItemData,addAndExitSpecialPrice,delAddedSpclPrice,exitSplPricePage,retrieveAndValidateDeletedSpPrice,exitSql,signOut",
-			"Tc_2_ValidateNoSpecialPriceMessage": "siteLogin,delAllPriceRecord,validateNoSpecialPriceMessage",
-			"Tc_3_ValidateDefaultFiltersSplPricing": "siteLogin,validateSplPriceFilterValue",
-			"Tc_12_ValidatePositiontoItemNumber_End": "siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionCustItemEnd,delAllPriceRecord",
-			"Tc_24_InsertPAPRecordToDelete":"siteLogin,getCustItemData,insertSpecialPricePAPRecord,exitInsertSql,deleteSpecialPricePAPRecord",
-			"Tc_21_E2E": "siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql"
+			"Tc_23_ValidateDBAfterDelete": "launchApp,siteLogin,getCustItemData,addAndExitSpecialPrice,delAddedSpclPrice,exitSplPricePage,retrieveAndValidateDeletedSpPrice,exitSql,signOut",
+			"Tc_2_ValidateNoSpecialPriceMessage": "launchApp,siteLogin,delAllPriceRecord,validateNoSpecialPriceMessage",
+			"Tc_3_ValidateDefaultFiltersSplPricing": "launchApp,siteLogin,validateSplPriceFilterValue",
+			"Tc_12_ValidatePositiontoItemNumber_End": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionCustItemEnd,delAllPriceRecord",
+			"Tc_24_InsertPAPRecordToDelete":"launchApp,siteLogin,getCustItemData,insertSpecialPricePAPRecord,exitInsertSql,deleteSpecialPricePAPRecord",
+			"Tc_21_E2E": "launchApp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql"
 		}
 	],
 	"General_Data": [

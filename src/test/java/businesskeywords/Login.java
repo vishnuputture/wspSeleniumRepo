@@ -1,5 +1,6 @@
 package businesskeywords;
 
+import com.paulhammant.ngwebdriver.ByAngular;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -9,33 +10,44 @@ import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;
 
 public class Login extends ReusableLib {
-	
-	 /**
+
+    /**
      * Constructor to initialize the {@link Helper} object and in turn the
      * objects wrapped by it
      *
      * @param helper The {@link Helper} object
      */
-	
 
-	
+
     public Login(Helper helper) {
         super(helper);
     }
-    
-    public void siteLogin() {
-         String  env = getProperties("ENV");
-		String url = properties.getProperty(env + "URL");
-    	driver.get(url);
-        ngWaitRequestToFinish();
 
-    	String user = properties.getProperty("UserName");
-    	String password = properties.getProperty("Password");
-        sendKeys(LoginPage.userNametxtBox,user,"Entering username "+user);
-        sendKeys(LoginPage.passWordtxtBox,password,"Entering password ******");
+
+    /**
+     * This method is invoked to login to WISE application
+     */
+
+    public void launchApp(){
+        String env = getProperties("ENV");
+        String url = properties.getProperty(env + "URL");
+        driver.get(url);
+        ngWaitRequestToFinish();
+    }
+
+    /**
+     * Keyword to  enter user name and password and submit
+     *
+     */
+    public void siteLogin() {
+        String user = properties.getProperty("UserName");
+        String password = properties.getProperty("Password");
+        sendKeys(LoginPage.userNametxtBox, user, "Entering username " + user);
+        sendKeys(LoginPage.passWordtxtBox, password, "Entering password ******");
         Utility_Functions.actionKey(Keys.ENTER, driver);
-        if(Utility_Functions.xIsDisplayed(driver,LoginPage.pendingScreenTitle)) {
-        	Utility_Functions.actionKey(Keys.ENTER, driver);
+        ngWaitRequestToFinish();
+        if (Utility_Functions.xIsDisplayed(driver, LoginPage.pendingScreenTitle)) {
+            Utility_Functions.actionKey(Keys.ENTER, driver);
         }
     }
 }
