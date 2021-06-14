@@ -15,5 +15,5 @@ public class SqlStatementPage extends ReusableLib {
 	public static By resultRow= By.id("D_6_2");
 	public static By sqlTitle= By.xpath("//div[@id='D_3_2'][contains(text(),'Enter')]");
 	public static By choiceTxtBox=By.id("I_5_31");
-	public static By resultRowInsert= By.id("D_7_7");
+	public static By resultRowInsert= By.xpath("//div[contains(text(),'inserted')]");
 }
