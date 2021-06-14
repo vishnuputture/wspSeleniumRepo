@@ -24,7 +24,7 @@ public class Login extends ReusableLib {
     }
     
     public void siteLogin() {
-         String  env = getProperties("ENV");
+        String  env = getProperties("ENV");
 		String url = properties.getProperty(env + "URL");
     	driver.get(url);
         ngWaitRequestToFinish();

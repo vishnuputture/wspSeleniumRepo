@@ -15,6 +15,10 @@ import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class SqlStatement extends ReusableLib{
 
 	CommonActions commonObj;
@@ -76,8 +80,19 @@ public class SqlStatement extends ReusableLib{
     	commonObj.goToSqlApp();
     	//commonObj.sqlInsertSpecialPricePAP(Utility_Functions.xGetJsonAsString("CustomerNo"),Utility_Functions.xGetJsonAsString("ItemNo"),Utility_Functions.xGetJsonAsString("Date1"),Utility_Functions.xGetJsonAsString("Date2"));
     	//masterComObj.goToSqlApp();
-    	
-    	commonObj.sqlInsertSpecialPricePAP(Utility_Functions.xGetJsonAsString("CustomerNo"),Utility_Functions.xGetJsonAsString("ItemNo"),"20210519","20210528");
+		Date dt1 = new Date();
+		Date dt2 = new Date();
+		Calendar c = Calendar.getInstance();
+		c.setTime(dt1);
+		c.add(Calendar.DATE, -1);
+		dt1 = c.getTime();
+		c.add(Calendar.DATE, 5);
+		dt2 = c.getTime();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		String strDate= formatter.format(dt1);
+		String endDate = formatter.format(dt2);
+
+		commonObj.sqlInsertSpecialPricePAP(Utility_Functions.xGetJsonAsString("CustomerNo"),Utility_Functions.xGetJsonAsString("ItemNo"),strDate,endDate);
     	
     	if(Utility_Functions.xWaitForElementPresent(driver,SqlStatementPage.resultRowInsert, 5)) {
     		String result = Utility_Functions.getText(driver,SqlStatementPage.resultRowInsert);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.mattermost.MattermostAPIHandler;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.SkipException;
@@ -53,6 +54,8 @@ public abstract class BaseTestCase {
 
 	protected static String TEST_STATUS;
 
+	private MattermostAPIHandler mattermost;
+
 	public static int countReRunFailedTestCase = 1;
 	public static boolean rerun = false;
 	public static int rerunCounter = 0;
@@ -86,6 +89,7 @@ public abstract class BaseTestCase {
 	 */
 	@BeforeSuite
 	public void setUpTestSuite(ITestContext testContext) {
+		numberOfTests = 0;
 		resultSummaryManager.setRelativePath();
 		resultSummaryManager.initializeTestBatch(testContext.getSuite().getName());
 
@@ -110,6 +114,10 @@ public abstract class BaseTestCase {
 		if (qtestSave.equalsIgnoreCase("true")) {
 			QTestManager.createQtestSuite();
 		}
+		if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
+			MattermostAPIHandler.postMessage("Starting Test Suite: " + testContext.getSuite().getName());
+		}
+
 	}
 
 	/**
@@ -138,10 +146,12 @@ public abstract class BaseTestCase {
 	 */
 
 	public static List<String> failedTestCase = new ArrayList<String>();
+	public static Integer numberOfTests;
 	public static String currentPacakage;
 	public static String currentTestCase;
 
 	protected synchronized void tearDownTestRunner(SeleniumTestParameters testParameters, CoreScript coreScript) {
+		numberOfTests++;
 		TestCaseBean testCaseBean = coreScript.getTestCaseBean();
 		String testReportName = coreScript.getReportName();
 		String executionTime = coreScript.getExecutionTime();
@@ -166,14 +176,21 @@ public abstract class BaseTestCase {
 			String path = resultSummaryManager.getReportPath() + Util.getFileSeparator() + "Screenshots"
 					+ Util.getFileSeparator();
 			QTestManager.uploadTestScreenshotstoTestLog(path, currentTestCase);
+
 			// System.out.println(path);
 		}
+		if (getProperties("Mattermost_post_details").equalsIgnoreCase("true")) {
+			MattermostAPIHandler.postMessage(testParameters.getCurrentTestcase() + ": " + testStatus);
+		}
+
 		if ("Failed".equalsIgnoreCase(testStatus)) {
 			failedTestCase.add(
 					"testscripts." + testParameters.getCurrentScenario() + "." + testParameters.getCurrentTestcase());
 			Assert.fail(coreScript.getFailureDescription());
 
 		}
+
+
 
 	}
 
@@ -183,6 +200,11 @@ public abstract class BaseTestCase {
 	 */
 	@AfterSuite
 	public void tearDownTestSuite() {
+		if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
+			MattermostAPIHandler.postMessage("After Test Suite: " + properties.getProperty("RunConfiguration") + "\n" +
+					"Failed tests: " + failedTestCase.size() + "/" + numberOfTests);
+		}
+
 		resultSummaryManager.wrapUp(true);
 		extentReport.flush();
 		resultSummaryManager.launchResultSummary();
