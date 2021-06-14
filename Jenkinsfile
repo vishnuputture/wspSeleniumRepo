@@ -1,7 +1,7 @@
 pipeline{
     agent{
         node{
-            label 'master'
+            label 'windows_slave'
         }
     }
 
@@ -12,12 +12,12 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                sh 'mvn compile'
+                bat 'mvn compile'
             }
         }
         stage('Test'){
             steps{
-                sh 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL'
+                bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL'
             }
         }
     }

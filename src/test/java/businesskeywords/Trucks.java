@@ -17,36 +17,42 @@ public class Trucks extends ReusableLib {
         super(helper);
     }
 
-    public void addNewtruck (){
+    public void navigateToShippingManifest() {
+        driver.get(jsonData.getData("Url"));
+        //driver.get("http://wservicedev.winwholesale.com/shipping-manifest-manager/#/truck-list/warehousing");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
 
-        driver.get("http://wservicedev.winwholesale.com/shipping-manifest-manager/#/truck-list/warehousing");
-        waitForElementDisappear(MasterPage.loadingAnime,globalWait);
-        click(TruckPage.companySelectorToggle);
+    /**
+     * Keyword to Add
+     */
+    public void addNewtruck() {
+        click(TruckPage.companySelectorToggle, "Click on company toggle");
         //ngWaitRequestToFinish();
         click(TruckPage.winIntoCompany);
-        sendKeys(TruckPage.companyNumInput,"99599");
-        Utility_Functions.xMouseClick(driver,TruckPage.selectButton);
-       // Utility_Functions.xmouseOver(driver,TruckPage.menuIcontruch);
+        sendKeys(TruckPage.companyNumInput, jsonData.getData("CompanyNum"), "Entering company number");
+        Utility_Functions.xMouseClick(driver, TruckPage.selectButton);
+        // Utility_Functions.xmouseOver(driver,TruckPage.menuIcontruch);
         click(TruckPage.menuIcontruch);
-        click(TruckPage.subManuTruck);
-        waitForElementDisappear(MasterPage.loadingAnime,globalWait);
-        click(TruckPage.addNewTruckBtn);
+        click(TruckPage.subManuTruck, "Navigate to trucks page");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        click(TruckPage.addNewTruckBtn, "Click on add new truck button");
 
-        sendKeys(TruckPage.truckNameInput,"Test11");
+        sendKeys(TruckPage.truckNameInput, jsonData.getData("TruckName"), "Entering truck name");
 
-        sendKeys(TruckPage.licensePlateNumberInput,"111234");
+        sendKeys(TruckPage.licensePlateNumberInput, jsonData.getData("LicensePlateNum"), "Entering license plate number");
 
-        sendKeysAndTabOut(TruckPage.newTruckPlateExpInput,"06/20/2021");
+        sendKeysAndTabOut(TruckPage.newTruckPlateExpInput, "06/20/2021");
 
-        sendKeys(TruckPage.yearInput,"2019");
-        sendKeys(TruckPage.makeInput,"Toyato");
-        sendKeys(TruckPage.modelInput,"Trundra");
+        sendKeys(TruckPage.yearInput, jsonData.getData("MakeYear"), "Entering year");
+        sendKeys(TruckPage.makeInput, jsonData.getData("Make"), "Entering make");
+        sendKeys(TruckPage.modelInput, jsonData.getData("Model"), "Entering model");
 
-        sendKeys(TruckPage.vinInput,"123456543");
-        sendKeys(TruckPage.emptyTruckWeightInput,"4000");
-        sendKeys(TruckPage.weightLimitInput,"5000");
-        click(TruckPage.saveBtn);
-        waitForElementDisappear(MasterPage.loadingAnime,globalWait);
+        sendKeys(TruckPage.vinInput, jsonData.getData("Vin"), "Entering vin number");
+        sendKeys(TruckPage.emptyTruckWeightInput, jsonData.getData("EmptyWeight"), "Entering empty truck weight");
+        sendKeys(TruckPage.weightLimitInput, jsonData.getData("WeightLimit"), "Entering weight limit");
+        click(TruckPage.saveBtn, "Saving record");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
 
     }
