@@ -16,8 +16,8 @@
 			"Tc_2_ValidateNoSpecialPriceMessage": "launchApp,siteLogin,delAllPriceRecord,validateNoSpecialPriceMessage",
 			"Tc_3_ValidateDefaultFiltersSplPricing": "launchApp,siteLogin,validateSplPriceFilterValue",
 			"Tc_12_ValidatePositiontoItemNumber_End": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionCustItemEnd,delAllPriceRecord",
-			"Tc_24_InsertPAPRecordToDelete":"launchApp,siteLogin,getCustItemData,insertSpecialPricePAPRecord,exitInsertSql,deleteSpecialPricePAPRecord",
-			"Tc_21_E2E": "launchApp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql"
+			"Tc_24_InsertPAPRecordToDelete":"launchApp,siteLogin,getCustItemData,insertSpecialPricePAPRecord,exitInsertSql,deleteSpecialPricePAPRecord,cleanUp",
+			"Tc_21_E2E": "launchApp,cleanUp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql"
 		}
 	],
 	"General_Data": [

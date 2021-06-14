@@ -276,7 +276,7 @@ public class SpecialPriceMaintenance extends ReusableLib {
         click(SpecialPricePage.btnF3);
     }
     
-    public void cleanUP()
+    public void cleanUp()
     {
     	DBCall.delteDBTableData();
     }

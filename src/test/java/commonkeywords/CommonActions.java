@@ -173,7 +173,7 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void sqlInsertSpecialPricePAP(String custNum, String itemNum,String Date1,String Date2) {
 		System.out.println(Date1+"-"+Date2);
-		sendKeys(SqlStatementPage.sqltxtBox1,"insert into im08 VALUES");
+		sendKeys(SqlStatementPage.sqltxtBox1,"insert into DTA99599/IM08 VALUES");
 		sendKeys(SqlStatementPage.sqltxtBox2,"('1',"+"'"+custNum+"'"+","+"'"+itemNum+"'"+", ' ',' ', ' ',4, 0,");
 		sendKeys(SqlStatementPage.sqltxtBox3,"'"+Date1+"'"+","+"'"+Date2+"'"+", 0, 0, 0, ' ', 'PAP')");
 
