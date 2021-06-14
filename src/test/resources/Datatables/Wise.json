@@ -11,7 +11,7 @@
 			"Tc_11_ValidatePositiontoItemNumber_Beginning": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionCustItemBegin,delAllPriceRecord",
 			"Tc_13_ValidatePositiontoItemNumber_Middle": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionItemNumMiddle,delAllPriceRecord",
 			"Tc_API_validatePricing": "getPricingResponse",
-			"Tc_API_updatePricing": "getResponseForPriceAndCostUpdates",
+			"Tc_API_updatePricing": "cleanUp,getResponseForPriceAndCostUpdates",
 			"Tc_23_ValidateDBAfterDelete": "launchApp,siteLogin,getCustItemData,addAndExitSpecialPrice,delAddedSpclPrice,exitSplPricePage,retrieveAndValidateDeletedSpPrice,exitSql,signOut",
 			"Tc_2_ValidateNoSpecialPriceMessage": "launchApp,siteLogin,delAllPriceRecord,validateNoSpecialPriceMessage",
 			"Tc_3_ValidateDefaultFiltersSplPricing": "launchApp,siteLogin,validateSplPriceFilterValue",

@@ -44,8 +44,9 @@ public class SqlStatement extends ReusableLib {
             System.out.println("Text: " + result);
             result = result.replaceAll("\\s", "");
             result = result.replaceAll("\\.0*$", "");
-            //Utility_Functions.xAssertEquals(report, "1"+Utility_Functions.xGetJsonAsString("CustomerNo")+Utility_Functions.xGetJsonAsString("ItemNo")+jsonData.getData("specialPrice"),result, "Validating result set");
-            Utility_Functions.xAssertEquals(report, "1" + Utility_Functions.xGetJsonAsString("CustomerNo") + Utility_Functions.xGetJsonAsString("ItemNo"), result, "Validating result set");
+            String cust_item= Utility_Functions.xGetJsonAsString("CustomerNo")+Utility_Functions.xGetJsonAsString("ItemNo");
+            Utility_Functions.xAssertEquals(report, "1"+Utility_Functions.xGetJsonAsString("CustomerNo")+Utility_Functions.xGetJsonAsString("ItemNo")+jsonData.getData("specialPrice"),result, "Validating result set");
+            //Utility_Functions.xAssertEquals(report, "1" + Utility_Functions.xGetJsonAsString("CustomerNo") + Utility_Functions.xGetJsonAsString("ItemNo"), result, "Validating result set");
         } else {
             System.out.println("Text: Not found");
             throw new NoSuchElementException("Could not find :" + SqlStatementPage.resultRow);
