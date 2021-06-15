@@ -115,7 +115,8 @@ public abstract class BaseTestCase {
 			QTestManager.createQtestSuite();
 		}
 		if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
-			MattermostAPIHandler.postMessage("Starting Test Suite: " + testContext.getSuite().getName());
+			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
+			MattermostAPIHandler.postMessage(channel, "Starting Test Suite: " + testContext.getSuite().getName());
 		}
 
 	}
@@ -180,7 +181,8 @@ public abstract class BaseTestCase {
 			// System.out.println(path);
 		}
 		if (getProperties("Mattermost_post_details").equalsIgnoreCase("true")) {
-			MattermostAPIHandler.postMessage(testParameters.getCurrentTestcase() + ": " + testStatus);
+			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
+			MattermostAPIHandler.postMessage(channel, testParameters.getCurrentTestcase() + ": " + testStatus);
 		}
 
 		if ("Failed".equalsIgnoreCase(testStatus)) {
@@ -201,7 +203,8 @@ public abstract class BaseTestCase {
 	@AfterSuite
 	public void tearDownTestSuite() {
 		if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
-			MattermostAPIHandler.postMessage("After Test Suite: " + properties.getProperty("RunConfiguration") + "\n" +
+			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
+			MattermostAPIHandler.postMessage(channel, "After Test Suite: " + properties.getProperty("RunConfiguration") + "\n" +
 					"Failed tests: " + failedTestCase.size() + "/" + numberOfTests);
 		}
 
