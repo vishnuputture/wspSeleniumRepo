@@ -21,6 +21,7 @@ tmp/
 *.iml
 .DS_Store
 .idea
+.temp
 .classpath
 .settings/
 /Results
