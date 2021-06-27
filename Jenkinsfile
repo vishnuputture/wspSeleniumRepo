@@ -34,8 +34,7 @@ pipeline{
             steps{
                emailext mimeType: 'text/html',
                body: '${FILE,path="test-output/Extent Result/ExtentReport.html"}', 
-               subject: "Email Report from - '${env.JOB_NAME}' ",
-               Status: currentBuild.result, 
+               subject: "Email Report from - '${env.JOB_NAME}' ", 
                to: 'QAAutomation@winsupplyinc.com'
             }
         }
