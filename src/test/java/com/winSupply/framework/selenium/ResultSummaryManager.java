@@ -106,8 +106,8 @@ public class ResultSummaryManager {
     }
 
     private void initializeReportSettings() {
-        if (System.getProperty("ReportPath") != null) {
-            reportPath = System.getProperty("ReportPath");
+        if (properties.getProperty("ReportPath") != null) {
+            reportPath = properties.getProperty("ReportPath");
         } else {
             reportPath = TimeStamp.getInstance();
         }
