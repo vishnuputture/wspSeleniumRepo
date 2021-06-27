@@ -40,8 +40,8 @@ public class Login extends ReusableLib {
      *
      */
     public void siteLogin() {
-        String user = properties.getProperty("UserName");
-        String password = properties.getProperty("Password");
+        String user = getProperties("UserName");
+        String password = getProperties("Password");
         sendKeys(LoginPage.userNametxtBox, user, "Entering username " + user);
         sendKeys(LoginPage.passWordtxtBox, password, "Entering password ******");
         Utility_Functions.actionKey(Keys.ENTER, driver);
