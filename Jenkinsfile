@@ -32,7 +32,11 @@ pipeline{
         }
           stage('Email'){
             steps{
-               emailext (to: 'QAAutomation@winsupplyinc.com', replyTo: 'QAAutomation@winsupplyinc.com', subject: "Email Report from - '${env.JOB_NAME}' ", body: readFile("test-output/Extent Result/ExtentReport.html"), mimeType: 'text/html');
+               emailext mimeType: 'text/html',
+               body: '${FILE,path="test-output/Extent Result/ExtentReport.html"}', 
+               subject: "Email Report from - '${env.JOB_NAME}' ",
+               Status: currentBuild.result, 
+               to: 'QAAutomation@winsupplyinc.com'
             }
         }
     }
