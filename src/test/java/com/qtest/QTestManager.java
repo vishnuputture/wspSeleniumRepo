@@ -11,7 +11,7 @@ import java.util.Properties;
 import com.winSupply.framework.Settings;
 
 public class QTestManager {
-	public static int projectid = 39801;
+	public static int projectid;
 	public static int testCycleid;
 	// Mapping between UI id and Test ID
 	public static Map<Integer, String> testCaseMapper;
@@ -229,14 +229,15 @@ public class QTestManager {
 	 * @param testCaseName
 	 */
 	public static void uploadTestScreenshotstoTestLog(String path, String testCaseName) {
+		if (testCaseid != 0) {
 		List<String> allScreenshots = getAllScreenshots(path, testCaseName);
-
 		for (String imgName : allScreenshots) {
 			try {
 				QtestAPIHandler.uploadTestLogAttachment(projectid, path, imgName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
 		}
 
 	}
