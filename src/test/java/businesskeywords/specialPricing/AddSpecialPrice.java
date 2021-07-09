@@ -1,4 +1,4 @@
-package businesskeywords;
+package businesskeywords.specialPricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;

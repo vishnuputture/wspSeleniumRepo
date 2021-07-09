@@ -1,4 +1,4 @@
-package businesskeywords;
+package businesskeywords.common;
 
 import com.paulhammant.ngwebdriver.ByAngular;
 import com.paulhammant.ngwebdriver.NgWebDriver;
