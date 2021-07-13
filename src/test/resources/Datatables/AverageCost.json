@@ -1,0 +1,13 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_AddItemData": "createItemMasterData"
+
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "TC_AddItemData"
+    }
+  ]
+}

@@ -237,4 +237,43 @@ public class DBCall {
 		return Arrays.asList(cust,item.trim(),master);
 	}
 
+	public static void createItemInItemMaster(String Item,String Desc,String EOM)
+	{
+		Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
+
+		try
+		{
+			String insertItemMaster = "INSERT INTO DTA99599/IM01(IMITM,IMDSC1,IMPUM)\n" +
+					"VALUES("+"'"+Item+"'"+","+"'"+Desc+"'"+","+"'"+EOM+"'"+")";
+			int i=sqlStatement.executeUpdate(insertItemMaster);
+			System.out.println("Item Created  Successfully and return value is "+i);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+
+	}
+
+	public static String SearchItemInItemMaster(String itemNo)
+	{
+		String item="";
+		Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
+		String masterNo = "select * from DTA99599/im01 where IMITM="+"'"+itemNo+"'";
+		System.out.println(masterNo);
+
+		try {
+			ResultSet customerSet = sqlStatement.executeQuery(masterNo);
+			while(customerSet.next())
+			{
+				item= customerSet.getString("IMITM");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return item;
+
+		}
+
 }
