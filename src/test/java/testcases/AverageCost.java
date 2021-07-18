@@ -14,4 +14,19 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_25_ValidateItemCreation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to create average cost ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_26_ValidateItemDeletion(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to delete average cost ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

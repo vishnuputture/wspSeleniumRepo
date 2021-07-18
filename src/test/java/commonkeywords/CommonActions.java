@@ -30,6 +30,16 @@ public class CommonActions extends ReusableLib {
 	/**
 	 *
 	 *
+	 * This method navigates from master to inventory management page
+	 *
+	 */
+	public void masterToInventory() {
+		click(MasterPage.inventoryMenu,"Click inventory management");
+	}
+
+	/**
+	 *
+	 *
 	 * This method navigates from master to order processing page
 	 *
 	 */
@@ -45,6 +55,16 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void orderProcToSplPricing() {
 		click(MasterPage.specialPricingMenu,"Click special price");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from order processing page to special price maintenance page
+	 *
+	 */
+	public void inventoryToItemMaster() {
+		click(MasterPage.ItemMasterMenu,"Click special price");
 	}
 
 	/**

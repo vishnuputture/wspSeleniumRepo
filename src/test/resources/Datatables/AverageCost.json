@@ -1,13 +1,24 @@
+
 {
   "Business_Flow": [
     {
-      "Tc_AddItemData": "createItemMasterData"
+      "Tc_AddItemData": "createItemMasterData",
+      "Tc_25_ValidateItemCreation": "launchApp,siteLogin,validateItemMasterTitle,createAverageCostItem",
+      "Tc_26_ValidateItemDeletion": "launchApp,siteLogin,validateItemMasterTitle,deleteAvgCostItem"
 
     }
   ],
   "General_Data": [
     {
       "TC_ID": "TC_AddItemData"
+    },
+    {
+      "TC_ID": "Tc_26_ValidateItemDeletion"
+
+    },
+    {
+      "TC_ID": "Tc_25_ValidateItemCreation"
+
     }
   ]
 }
