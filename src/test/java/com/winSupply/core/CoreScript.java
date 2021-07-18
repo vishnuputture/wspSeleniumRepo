@@ -692,6 +692,7 @@ public class CoreScript {
                 String fileName = packageFile.getName();
 
 
+
                 /*
                  * inserted to handle the sub directory under Businesscomponent
                  * modified on: 25-06-2021
@@ -704,14 +705,57 @@ public class CoreScript {
                     for (int j = 0; j < packageSubFiles.length; j++) {
                         File packageSubFile = packageSubFiles[j];
                         String fileSubName = packageSubFile.getName();
+
+                        String encryptedReusableComponents = "";
+                        if (packageSubFile.isDirectory()) {
+                            File packageSub2Directory =  packageSubFile;
+                            String packageSub2Name = packageSub2Directory.getName();
+                            File[] packageSub2Files = packageSub2Directory.listFiles();
+                            for (int k = 0; k < packageSub2Files.length; k++) {
+                                File packageSub2File = packageSub2Files[k];
+                                String fileSub2Name = packageSub2File.getName();
+                                if (fileSub2Name.endsWith(CLASS_FILE_EXTENSION)) {
+                                    // Remove the .class extension to get the class name
+                                    String className = fileSub2Name.substring(0, fileSub2Name.length() - CLASS_FILE_EXTENSION.length());
+                                    encryptedReusableComponents = WhitelistingPath
+                                            .cleanStringForFilePath(packageName+ "." + packageSubName + "." + packageSub2Name + "." + className);
+                                    Class<?> reusableComponents = Class.forName(encryptedReusableComponents);
+                                    Method executeComponent;
+                                    try {
+                                        // Convert the first letter of the method to lowercase
+                                        // (in line with java naming conventions)
+                                        currentKeyword = currentKeyword.substring(0, 1).toLowerCase() + currentKeyword.substring(1);
+                                        executeComponent = reusableComponents.getMethod(currentKeyword, (Class<?>[]) null);
+                                        if (executeComponent == null){
+                                            continue;
+                                        }
+                                    } catch (NoSuchMethodException ex) {
+                                        // If the method is not found in this class, search the
+                                        // next class
+                                        continue;
+                                    }
+                                    isMethodFound = true;
+                                    report.setCurrentClassName(className);
+                                    report.setBusinessComponent(currentKeyword);
+
+                                    Constructor<?> ctor = reusableComponents.getDeclaredConstructors()[0];
+                                    Object businessComponent = ctor.newInstance(helper);
+                                    executeComponent.invoke(businessComponent, (Object[]) null);
+                                    break;
+                                }
+                            }
+                            if (isMethodFound){
+                                break;
+                            }
+                        }
+
                         if (fileSubName.endsWith(CLASS_FILE_EXTENSION)) {
                             // Remove the .class extension to get the class name
                             String className = fileSubName.substring(0, fileSubName.length() - CLASS_FILE_EXTENSION.length());
-                            String encryptedReusableComponents = WhitelistingPath
-                                    .cleanStringForFilePath(packageName+ "." + packageSubName + "." + className);
+                            encryptedReusableComponents = WhitelistingPath
+                                    .cleanStringForFilePath(packageName + "." + packageSubName + "." + className);
                             Class<?> reusableComponents = Class.forName(encryptedReusableComponents);
                             Method executeComponent;
-
                             try {
                                 // Convert the first letter of the method to lowercase
                                 // (in line with java naming conventions)
@@ -736,6 +780,7 @@ public class CoreScript {
                         break;
                     }
                 }
+
 
                 // We only want the .class files
                 if (fileName.endsWith(CLASS_FILE_EXTENSION)) {

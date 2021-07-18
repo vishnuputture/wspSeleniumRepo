@@ -1,12 +1,8 @@
-package businesskeywords.specialPricing;
+package businesskeywords.Pricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import org.openqa.selenium.WebElement;
 import pages.AddSpecialPricingPage;
-import pages.LoginPage;
-import pages.MasterPage;
-import businesskeywords.*;
 import supportLibraries.Utility_Functions;
 import commonkeywords.*;
 

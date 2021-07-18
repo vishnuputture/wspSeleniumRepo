@@ -1,4 +1,4 @@
-package businesskeywords.averagecost;
+package businesskeywords.Inventory.averagecost;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
