@@ -19,5 +19,6 @@ public class ItemMasterPage extends ReusableLib{
     public static By messageAddSuccessful = By.xpath("//div[@id='dynoInfoBox']/span[@class='growl-text']");
     public static By deleteItemAction = By.xpath("//div[@id='lnkDeleteItem']");
     public static By btnAlertContinue = By.xpath("//input[@value='Continue']");
+    public static By txtInputPkgQuantity = By.xpath("//input[@id='inBuyStdPackQty']");
 
 }

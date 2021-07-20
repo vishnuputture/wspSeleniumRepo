@@ -29,4 +29,36 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_27_ValidateItemUpdate(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to delete average cost ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_28_ValidateReceiveCorrection(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to delete average cost ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_29_ValidateCostAdjustmentProcess(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to delete average cost ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_30_ValidateCostAdjustmentLedger(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to delete average cost ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

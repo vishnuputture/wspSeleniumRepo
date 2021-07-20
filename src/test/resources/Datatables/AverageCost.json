@@ -4,8 +4,11 @@
     {
       "Tc_AddItemData": "createItemMasterData",
       "Tc_25_ValidateItemCreation": "launchApp,siteLogin,validateItemMasterTitle,createAverageCostItem",
-      "Tc_26_ValidateItemDeletion": "launchApp,siteLogin,validateItemMasterTitle,deleteAvgCostItem"
-
+      "Tc_26_ValidateItemDeletion": "launchApp,siteLogin,validateItemMasterTitle,deleteAvgCostItem",
+	  "Tc_27_ValidateItemUpdate": "launchApp,siteLogin,validateItemMasterTitle,updateAvgCostItem",
+	  "Tc_28_ValidateReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,attachVendor",
+	  "Tc_29_ValidateCostAdjustmentProcess": "launchApp,siteLogin,validateAvgCostAdjustTitle,fillCostAdjustmentDetails,processCostAdjustment",
+	  "Tc_30_ValidateCostAdjustmentLedger": "launchApp,siteLogin,validateAvgCostAdjustTitle,validateLedger"
     }
   ],
   "General_Data": [
@@ -18,6 +21,22 @@
     },
     {
       "TC_ID": "Tc_25_ValidateItemCreation"
+
+    },
+    {
+      "TC_ID": "Tc_27_ValidateItemUpdate"
+
+    },
+    {
+      "TC_ID": "Tc_28_ValidateReceiveCorrection"
+
+    },
+    {
+      "TC_ID": "Tc_29_ValidateCostAdjustmentProcess"
+
+    },
+    {
+      "TC_ID": "Tc_30_ValidateCostAdjustmentLedger"
 
     }
   ]
