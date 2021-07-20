@@ -30,6 +30,8 @@ import com.winSupply.framework.selenium.FrameworkDriver;
 import io.appium.java_client.AppiumDriver;
 import supportLibraries.Utility_Functions;
 
+import com.winSupply.core.*; // Added on 04 July 2021
+
 /**
  * FrameworkDriver script class which encapsulates the coreScript logic of the framework
  *
@@ -256,7 +258,7 @@ public class CoreScript {
 
     private int getNumberOfIterations() {
         String encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
-               "src" + Util.getFileSeparator()
+                "src" + Util.getFileSeparator()
                         + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator() + "Datatables");
         String datatablePath = encryptedDatatablePath+ Util.getFileSeparator() +
                 testParameters.getCurrentScenario() + ".json";
@@ -268,7 +270,7 @@ public class CoreScript {
 
 
         if (properties.getProperty("Approach").equalsIgnoreCase("KeywordDriven")) {
-           return jsonDataExcess.getIteration();
+            return jsonDataExcess.getIteration();
         }
 
         return 1;
@@ -313,9 +315,28 @@ public class CoreScript {
 
 //        File businessFile = new File(encryptedBusinessFlowAccess + Util.getFileSeparator() +
 //                testParameters.getCurrentScenario() + ".json");
-        File businessFile = new File(
-                "src/test/resources/Datatables/"+
-                testParameters.getCurrentScenario() + ".json");
+
+        //*** Changed on 04 July 2021 ****//
+        String datatablePath = frameworkParameters.getRelativePath() + Util.getFileSeparator() + "src"
+                + Util.getFileSeparator() + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator()
+                + "Datatables";
+        TestConfigurations t = new TestConfigurations();
+        String subPath = t.currentMethodName.toString().replace("package testcases.", "");
+        String encryptedDatatablePath;
+        if (subPath != null && !subPath.contains("package testcases")) {
+            encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
+                    datatablePath + "/" + subPath + "/" + testParameters.getCurrentScenario() + ".json");
+        }
+        else {
+            encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
+                    datatablePath + "/" + testParameters.getCurrentScenario() + ".json");
+        }
+
+        File businessFile = new File(encryptedDatatablePath);
+
+        //*** end ****//
+
+
 
         Object businessKeywords = null;
         ReadContext wctx;
@@ -358,8 +379,21 @@ public class CoreScript {
         String datatablePath = frameworkParameters.getRelativePath() + Util.getFileSeparator() + "src"
                 + Util.getFileSeparator() + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator()
                 + "Datatables";
-        String encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
-                datatablePath + Util.getFileSeparator() + testParameters.getCurrentScenario() + ".json");
+
+        //*** Changed on 04 July 2021 ****//
+        TestConfigurations t = new TestConfigurations();
+        String subPath = t.currentMethodName.toString().replace("package testcases.", "");
+        String encryptedDatatablePath;
+        if (subPath != null) {
+            encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
+                    datatablePath + "/" + subPath + "/" + testParameters.getCurrentScenario() + ".json");
+        }
+        else {
+            encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
+                    datatablePath + "/" + testParameters.getCurrentScenario() + ".json");
+        }
+
+        //*** end ****//
 
         String runTimeDatatablePath;
         Boolean includeTestDataInReport = Boolean.parseBoolean(properties.getProperty("IncludeTestDataInReport"));
@@ -657,6 +691,97 @@ public class CoreScript {
                 File packageFile = packageFiles[i];
                 String fileName = packageFile.getName();
 
+
+
+                /*
+                 * inserted to handle the sub directory under Businesscomponent
+                 * modified on: 25-06-2021
+                 */
+
+                if (packageFile.isDirectory()) {
+                    File packageSubDirectory =  packageFile;
+                    String packageSubName = packageSubDirectory.getName();
+                    File[] packageSubFiles = packageSubDirectory.listFiles();
+                    for (int j = 0; j < packageSubFiles.length; j++) {
+                        File packageSubFile = packageSubFiles[j];
+                        String fileSubName = packageSubFile.getName();
+
+                        String encryptedReusableComponents = "";
+                        if (packageSubFile.isDirectory()) {
+                            File packageSub2Directory =  packageSubFile;
+                            String packageSub2Name = packageSub2Directory.getName();
+                            File[] packageSub2Files = packageSub2Directory.listFiles();
+                            for (int k = 0; k < packageSub2Files.length; k++) {
+                                File packageSub2File = packageSub2Files[k];
+                                String fileSub2Name = packageSub2File.getName();
+                                if (fileSub2Name.endsWith(CLASS_FILE_EXTENSION)) {
+                                    // Remove the .class extension to get the class name
+                                    String className = fileSub2Name.substring(0, fileSub2Name.length() - CLASS_FILE_EXTENSION.length());
+                                    encryptedReusableComponents = WhitelistingPath
+                                            .cleanStringForFilePath(packageName+ "." + packageSubName + "." + packageSub2Name + "." + className);
+                                    Class<?> reusableComponents = Class.forName(encryptedReusableComponents);
+                                    Method executeComponent;
+                                    try {
+                                        // Convert the first letter of the method to lowercase
+                                        // (in line with java naming conventions)
+                                        currentKeyword = currentKeyword.substring(0, 1).toLowerCase() + currentKeyword.substring(1);
+                                        executeComponent = reusableComponents.getMethod(currentKeyword, (Class<?>[]) null);
+                                        if (executeComponent == null){
+                                            continue;
+                                        }
+                                    } catch (NoSuchMethodException ex) {
+                                        // If the method is not found in this class, search the
+                                        // next class
+                                        continue;
+                                    }
+                                    isMethodFound = true;
+                                    report.setCurrentClassName(className);
+                                    report.setBusinessComponent(currentKeyword);
+
+                                    Constructor<?> ctor = reusableComponents.getDeclaredConstructors()[0];
+                                    Object businessComponent = ctor.newInstance(helper);
+                                    executeComponent.invoke(businessComponent, (Object[]) null);
+                                    break;
+                                }
+                            }
+                            if (isMethodFound){
+                                break;
+                            }
+                        }
+
+                        if (fileSubName.endsWith(CLASS_FILE_EXTENSION)) {
+                            // Remove the .class extension to get the class name
+                            String className = fileSubName.substring(0, fileSubName.length() - CLASS_FILE_EXTENSION.length());
+                            encryptedReusableComponents = WhitelistingPath
+                                    .cleanStringForFilePath(packageName + "." + packageSubName + "." + className);
+                            Class<?> reusableComponents = Class.forName(encryptedReusableComponents);
+                            Method executeComponent;
+                            try {
+                                // Convert the first letter of the method to lowercase
+                                // (in line with java naming conventions)
+                                currentKeyword = currentKeyword.substring(0, 1).toLowerCase() + currentKeyword.substring(1);
+                                executeComponent = reusableComponents.getMethod(currentKeyword, (Class<?>[]) null);
+                            } catch (NoSuchMethodException ex) {
+                                // If the method is not found in this class, search the
+                                // next class
+                                continue;
+                            }
+                            isMethodFound = true;
+                            report.setCurrentClassName(className);
+                            report.setBusinessComponent(currentKeyword);
+
+                            Constructor<?> ctor = reusableComponents.getDeclaredConstructors()[0];
+                            Object businessComponent = ctor.newInstance(helper);
+                            executeComponent.invoke(businessComponent, (Object[]) null);
+                            break;
+                        }
+                    }
+                    if (isMethodFound){
+                        break;
+                    }
+                }
+
+
                 // We only want the .class files
                 if (fileName.endsWith(CLASS_FILE_EXTENSION)) {
                     // Remove the .class extension to get the class name
@@ -828,7 +953,7 @@ public class CoreScript {
     private void wrapUp() {
         endTime = Util.getCurrentTime();
 
-      List<Map<String, Object>> listDat= new ArrayList<>();
+        List<Map<String, Object>> listDat= new ArrayList<>();
         for (TestStepBean tsb :report.getTestStepBeanList()) {
             Map<String,Object> testStep= new HashMap<>();
             testStep.put("StepName", tsb.getTestStepName());

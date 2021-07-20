@@ -1,0 +1,58 @@
+
+{
+  "Business_Flow": [
+    {
+      "Tc_21_SearchItemData": "searchItemMasterData",
+      "Tc_22_UpdateItemData": "updateItemMasterData",
+      "Tc_23_UpdateItemQuantity": "updateOnHandQuantity",
+      "Tc_24_UpdateItemAVGCost": "updateItemAverageCost",
+      "Tc_25_ValidateItemCreation": "launchApp,siteLogin,validateItemMasterTitle,createAverageCostItem",
+      "Tc_26_ValidateItemDeletion": "launchApp,siteLogin,validateItemMasterTitle,deleteAvgCostItem",
+	  "Tc_27_ValidateItemUpdate": "launchApp,siteLogin,validateItemMasterTitle,updateAvgCostItem",
+	  "Tc_28_ValidateReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,attachVendor",
+	  "Tc_29_ValidateCostAdjustmentProcess": "launchApp,siteLogin,validateAvgCostAdjustTitle,fillCostAdjustmentDetails,processCostAdjustment",
+	  "Tc_30_ValidateCostAdjustmentLedger": "launchApp,siteLogin,validateAvgCostAdjustTitle,validateLedger"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_21_SearchItemData"
+    },
+    {
+      "TC_ID": "Tc_22_UpdateItemData",
+       "key": "IMPC1",
+        "val": "XX"
+    },
+    {
+      "TC_ID": "Tc_23_UpdateItemQuantity"
+    },
+    {
+      "TC_ID": "Tc_24_UpdateItemAVGCost",
+      "Cost": 95
+    },
+    {
+      "TC_ID": "Tc_26_ValidateItemDeletion"
+
+    },
+    {
+      "TC_ID": "Tc_25_ValidateItemCreation"
+
+    },
+    {
+      "TC_ID": "Tc_27_ValidateItemUpdate"
+
+    },
+    {
+      "TC_ID": "Tc_28_ValidateReceiveCorrection"
+
+    },
+    {
+      "TC_ID": "Tc_29_ValidateCostAdjustmentProcess"
+
+    },
+    {
+      "TC_ID": "Tc_30_ValidateCostAdjustmentLedger"
+
+    }
+  ]
+}

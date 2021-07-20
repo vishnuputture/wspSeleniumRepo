@@ -1,4 +1,4 @@
-package businesskeywords;
+package businesskeywords.Pricing.SpecialPricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -8,13 +8,11 @@ import commonkeywords.*;
 
 import org.openqa.selenium.WebElement;
 import pages.SpecialPricePage;
-import pages.AddSpecialPricingPage;
 import pages.MasterPage;
 import supportLibraries.Utility_Functions;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 

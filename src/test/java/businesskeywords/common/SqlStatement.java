@@ -1,4 +1,4 @@
-package businesskeywords;
+package businesskeywords.common;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -122,4 +122,5 @@ public class SqlStatement extends ReusableLib {
             throw new NoSuchElementException("Could not find :" + SqlStatementPage.sqlTitle);
         }
     }
+
 }

@@ -1,17 +1,11 @@
-package businesskeywords;
+package businesskeywords.Pricing.SpecialPricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
 import commonkeywords.CommonActions;
 
-import org.openqa.selenium.WebElement;
-
-import pages.AddSpecialPricingPage;
 import pages.MasterPage;
-import supportLibraries.Utility_Functions;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 
 public class Master extends ReusableLib {
     CommonActions commonObj;

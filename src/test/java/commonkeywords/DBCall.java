@@ -6,10 +6,7 @@ import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import com.ibm.db2.jcc.DB2Administrator;
 
@@ -235,6 +232,139 @@ public class DBCall {
 
 
 		return Arrays.asList(cust,item.trim(),master);
+	}
+
+	public static Statement getDBConnection()
+	{
+		Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
+		return sqlStatement;
+	}
+
+	public static void createItemInItemMaster(String Item,String Desc,String EOM)
+	{
+		Statement sqlStatement=getDBConnection();
+
+		try
+		{
+			String insertItemMaster = "INSERT INTO DTA99599/IM01(IMITM,IMDSC1,IMPUM)\n" +
+					"VALUES("+"'"+Item+"'"+","+"'"+Desc+"'"+","+"'"+EOM+"'"+")";
+			int i=sqlStatement.executeUpdate(insertItemMaster);
+			System.out.println("Item Created  Successfully and return value is "+i);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+
+	}
+
+	public static String SearchItemInItemMaster(String itemNo)
+	{
+		String item="";
+		Statement sqlStatement=getDBConnection();
+		String masterNo = "select * from DTA99599/im01 where IMITM="+"'"+itemNo+"'";
+		System.out.println(masterNo);
+
+		try {
+			ResultSet customerSet = sqlStatement.executeQuery(masterNo);
+			while(customerSet.next())
+			{
+				item= customerSet.getString("IMITM");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return item;
+
+		}
+
+	public static void UpdateItemInItemMaster(String itemNo,ArrayList<String> key,ArrayList<String> val)
+	{
+
+		Statement sqlStatement=getDBConnection();
+		for (int i=0;i<key.size();i++) {
+			String masterNo = "update DTA99599/im01 SET " + key.get(0)+"="+ "'"+val.get(0)+"'"+" where IMITM= "+"'"+itemNo+"'";
+			System.out.println(masterNo);
+
+			try {
+				int upd = sqlStatement.executeUpdate(masterNo);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+
+	public static String updateAndSearchQTY(String itemNo,int qty)
+	{
+		Statement sqlStatement=getDBConnection();
+
+		String query1 = "update DTA99599/im02t SET QTY_ON_HAND ="+qty+" where ITEM_NUMBER= "+"'"+itemNo+"'";
+		System.out.println(query1);
+
+		try {
+			int upd = sqlStatement.executeUpdate(query1);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String item="";
+
+		String query2 = "select * from DTA99599/im02t where ITEM_NUMBER="+"'"+itemNo+"'";
+		System.out.println(query2);
+
+		try {
+			ResultSet customerSet = sqlStatement.executeQuery(query2);
+			while(customerSet.next())
+			{
+				item= customerSet.getString("QTY_ON_HAND");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return item;
+
+	}
+
+	public static String updateAndSearchAVGCost(String itemNo,int amt)
+	{
+		Statement sqlStatement=getDBConnection();
+
+		String query1 = "update DTA99599/im02t SET AVERAGE_COST ="+amt+" where ITEM_NUMBER= "+"'"+itemNo+"'";
+		System.out.println(query1);
+
+		try {
+			int upd = sqlStatement.executeUpdate(query1);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String item="";
+
+		String query2 = "select * from DTA99599/im02t where ITEM_NUMBER="+"'"+itemNo+"'";
+		System.out.println(query2);
+
+		try {
+			ResultSet customerSet = sqlStatement.executeQuery(query2);
+			while(customerSet.next())
+			{
+				item= customerSet.getString("AVERAGE_COST");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return item;
+
 	}
 
 }

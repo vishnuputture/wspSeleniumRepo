@@ -1220,8 +1220,29 @@ public class Utility_Functions extends ReusableLib {
             actualVal = actualVal.replace("$", "").trim();
         }
         Assert.assertEquals(actualVal, expValue, CstmMsg);
+     
         report.updateTestLog("VerifyVal",
                 CstmMsg + " Expected text '" + expValue + "' is matching With Actual Text '" + actualVal + "'",
+                Status.PASS);
+
+    }
+    
+    /**
+     * Assert two String value are unequal
+     *
+     * @param report    to log value in report
+     * @param expValue  pass expected value
+     * @param actualVal Pass expected value
+     * @param CstmMsg   pass Custom Message
+     */
+    public static void xAssertNotEquals(Report report, String expValue, String actualVal, String CstmMsg) {
+        if (actualVal.contains("$")) {
+            actualVal = actualVal.replace("$", "").trim();
+        }
+        Assert.assertNotEquals(actualVal, expValue, CstmMsg);
+     
+        report.updateTestLog("VerifyVal",
+                CstmMsg + " Expected text '" + expValue + "' not matching With Actual Text '" + actualVal + "'",
                 Status.PASS);
 
     }

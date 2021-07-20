@@ -30,6 +30,16 @@ public class CommonActions extends ReusableLib {
 	/**
 	 *
 	 *
+	 * This method navigates from master to inventory management page
+	 *
+	 */
+	public void masterToInventory() {
+		click(MasterPage.inventoryMenu,"Click inventory management");
+	}
+
+	/**
+	 *
+	 *
 	 * This method navigates from master to order processing page
 	 *
 	 */
@@ -45,6 +55,45 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void orderProcToSplPricing() {
 		click(MasterPage.specialPricingMenu,"Click special price");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from order inventory to item master page
+	 *
+	 */
+	public void inventoryToItemMaster() {
+		click(MasterPage.ItemMasterMenu,"Click item master");
+	}
+	
+	/**
+	 *
+	 *
+	 * This method navigates from inventory to inventory adjustments receipt correction page
+	 *
+	 */
+	public void inventoryAdjustToInvCorrections() {
+		click(MasterPage.inventoryReceiptMenu,"Click inventory adjustment");
+	}
+	/**
+	 *
+	 *
+	 * This method navigates from inventory to average cost adjustments page
+	 *
+	 */
+	public void inventoryAdjustToavgCostAdjust() {
+		click(MasterPage.avgCostAdjustmentMenu,"Click average cost adjustment");
+	}
+	
+	/**
+	 *
+	 *
+	 * This method navigates from inventory to inventory adjustment page
+	 *
+	 */
+	public void inventoryToInvAdjustments() {
+		click(MasterPage.inventoryAdjustmentMenu,"Click inventory adjustment");
 	}
 
 	/**
@@ -67,7 +116,7 @@ public class CommonActions extends ReusableLib {
 		if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
 			String title = Utility_Functions.getText(driver,ele);
 			System.out.println("Text: "+title);
-			Utility_Functions.xAssertEquals(report, text, title.trim(), msg);
+			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
 		}else {
 			System.out.println("Text: Not found");
 			throw new NoSuchElementException("Could not find :"+ele);
