@@ -8,8 +8,29 @@ import org.testng.annotations.Test;
 public class AverageCost extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "API", dataProviderClass = TestConfigurations.class)
-    public void tc_AddItemData(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to add Item in Item Master from DB");
+    public void Tc_21_SearchItemData(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    @Test(groups = {}, dataProvider = "API", dataProviderClass = TestConfigurations.class)
+    public void Tc_22_UpdateItemData(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to update item In ItemMaster");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    @Test(groups = {}, dataProvider = "API", dataProviderClass = TestConfigurations.class)
+    public void Tc_23_UpdateItemQuantity(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to update on hand quantity");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    @Test(groups = {}, dataProvider = "API", dataProviderClass = TestConfigurations.class)
+    public void Tc_24_UpdateItemAVGCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to update average cost");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

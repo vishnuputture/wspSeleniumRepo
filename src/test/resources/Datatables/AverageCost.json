@@ -2,7 +2,10 @@
 {
   "Business_Flow": [
     {
-      "Tc_AddItemData": "createItemMasterData",
+      "Tc_21_SearchItemData": "searchItemMasterData",
+      "Tc_22_UpdateItemData": "updateItemMasterData",
+      "Tc_23_UpdateItemQuantity": "updateOnHandQuantity",
+      "Tc_24_UpdateItemAVGCost": "updateItemAverageCost",
       "Tc_25_ValidateItemCreation": "launchApp,siteLogin,validateItemMasterTitle,createAverageCostItem",
       "Tc_26_ValidateItemDeletion": "launchApp,siteLogin,validateItemMasterTitle,deleteAvgCostItem",
 	  "Tc_27_ValidateItemUpdate": "launchApp,siteLogin,validateItemMasterTitle,updateAvgCostItem",
@@ -13,7 +16,19 @@
   ],
   "General_Data": [
     {
-      "TC_ID": "TC_AddItemData"
+      "TC_ID": "Tc_21_SearchItemData"
+    },
+    {
+      "TC_ID": "Tc_22_UpdateItemData",
+       "key": "IMPC1",
+        "val": "XX"
+    },
+    {
+      "TC_ID": "Tc_23_UpdateItemQuantity"
+    },
+    {
+      "TC_ID": "Tc_24_UpdateItemAVGCost",
+      "Cost": 95
     },
     {
       "TC_ID": "Tc_26_ValidateItemDeletion"
