@@ -279,7 +279,7 @@ public class DBCall {
 
 		}
 
-	public static void UpdateItemInItemMaster(String itemNo,ArrayList<String> key,ArrayList<String> val)
+	public static String UpdateItemInItemMaster(String itemNo,ArrayList<String> key,ArrayList<String> val)
 	{
 
 		Statement sqlStatement=getDBConnection();
@@ -295,6 +295,23 @@ public class DBCall {
 				e.printStackTrace();
 			}
 		}
+
+		String item="";
+
+		String query2 = "select * from DTA99599/im01 where IMITM="+"'"+itemNo+"'";
+		System.out.println(query2);
+
+		try {
+			ResultSet customerSet = sqlStatement.executeQuery(query2);
+			while(customerSet.next())
+			{
+				item= customerSet.getString("IMPC1");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return item;
 
 	}
 

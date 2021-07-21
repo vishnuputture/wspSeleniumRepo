@@ -382,7 +382,7 @@ public class CoreScript {
 
         //*** Changed on 04 July 2021 ****//
         TestConfigurations t = new TestConfigurations();
-        String subPath = t.currentMethodName.toString().replace("package testcases.", "");
+        String subPath = t.currentMethodName.toString().replace("package testcases", "");
         String encryptedDatatablePath;
         if (subPath != null) {
             encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
