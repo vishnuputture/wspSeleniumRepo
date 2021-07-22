@@ -24,11 +24,12 @@
         "val": "XX"
     },
     {
-      "TC_ID": "Tc_23_UpdateItemQuantity"
+      "TC_ID": "Tc_23_UpdateItemQuantity",
+      "QTY": "200"
     },
     {
       "TC_ID": "Tc_24_UpdateItemAVGCost",
-      "Cost": 95
+      "Cost": "95"
     },
     {
       "TC_ID": "Tc_26_ValidateItemDeletion"
