@@ -36,7 +36,7 @@ public class AverageCost extends TestConfigurations {
         tearDownTestRunner(testParameters, coreScript);
     }
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_25_ValidateItemCreation(SeleniumTestParameters testParameters) {
+    public void Tc_9_ValidateItemCreation(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to create average cost ");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

@@ -6,7 +6,7 @@
       "Tc_22_UpdateItemData": "updateItemMasterData",
       "Tc_23_UpdateItemQuantity": "updateOnHandQuantity",
       "Tc_24_UpdateItemAVGCost": "updateItemAverageCost",
-      "Tc_25_ValidateItemCreation": "launchApp,siteLogin,validateItemMasterTitle,createAverageCostItem",
+      "Tc_9_ValidateItemCreation": "launchApp,siteLogin,validateItemMasterTitle,createAverageCostItem",
       "Tc_26_ValidateItemDeletion": "launchApp,siteLogin,validateItemMasterTitle,deleteAvgCostItem",
 	  "Tc_27_ValidateItemUpdate": "launchApp,siteLogin,validateItemMasterTitle,updateAvgCostItem",
 	  "Tc_28_ValidateReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,attachVendor",
@@ -36,7 +36,7 @@
 
     },
     {
-      "TC_ID": "Tc_25_ValidateItemCreation"
+      "TC_ID": "Tc_9_ValidateItemCreation"
 
     },
     {
