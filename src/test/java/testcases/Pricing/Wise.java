@@ -1,4 +1,4 @@
-package testcases;
+package testcases.Pricing;
 
 import com.winSupply.core.CoreScript;
 import com.winSupply.core.TestConfigurations;

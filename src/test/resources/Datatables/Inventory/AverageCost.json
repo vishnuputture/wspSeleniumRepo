@@ -21,7 +21,7 @@
     {
       "TC_ID": "Tc_22_UpdateItemData",
        "key": "IMPC1",
-        "val": "XX"
+        "val": "ZZ"
     },
     {
       "TC_ID": "Tc_23_UpdateItemQuantity",

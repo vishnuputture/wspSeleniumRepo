@@ -21,6 +21,8 @@ public class TestConfigurations extends BaseTestCase {
 	public Object[][] api(Method currentMethod) {
 		currentScenario = currentMethod.getDeclaringClass().getSimpleName();
 		currentTestcase = currentMethod.getName();
+
+		currentMethodName = currentMethod.getDeclaringClass().getPackage().toString();
 		currentTestcase = currentTestcase.substring(0, 1).toUpperCase().concat(currentTestcase.substring(1));
 
 		return new Object[][] {
@@ -101,11 +103,14 @@ public class TestConfigurations extends BaseTestCase {
 	public Object[][] noBrowser(Method currentMethod) {
 		currentScenario = currentMethod.getDeclaringClass().getSimpleName();
 		currentTestcase = currentMethod.getName();
+		currentMethodName = currentMethod.getDeclaringClass().getPackage().toString();
 		currentTestcase = currentTestcase.substring(0, 1).toUpperCase().concat(currentTestcase.substring(1));
 
 		return new Object[][] {
 				{ new SeleniumParametersBuilders(currentScenario, currentTestcase).testInstance("Instance1")
 						.extentReport(extentReport).extentTest(extentTest).executionMode(ExecutionMode.DB).build() } };
 	}
+
+
 
 }

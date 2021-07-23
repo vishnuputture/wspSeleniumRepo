@@ -321,11 +321,11 @@ public class CoreScript {
                 + Util.getFileSeparator() + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator()
                 + "Datatables";
         TestConfigurations t = new TestConfigurations();
-        String subPath = t.currentMethodName.toString().replace("package testcases.", "");
+        String subPath = t.currentMethodName.toString().replace("package testcases", "");
         String encryptedDatatablePath;
-        if (subPath != null && !subPath.contains("package testcases")) {
+        if (subPath != null ) {
             encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
-                    datatablePath + "/" + subPath + "/" + testParameters.getCurrentScenario() + ".json");
+                    datatablePath + "/" + subPath.replace(".","") + "/" + testParameters.getCurrentScenario() + ".json");
         }
         else {
             encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
@@ -386,7 +386,7 @@ public class CoreScript {
         String encryptedDatatablePath;
         if (subPath != null) {
             encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
-                    datatablePath + "/" + subPath + "/" + testParameters.getCurrentScenario() + ".json");
+                    datatablePath + "/" + subPath.replace(".","") + "/" + testParameters.getCurrentScenario() + ".json");
         }
         else {
             encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
@@ -855,6 +855,7 @@ public class CoreScript {
     private void quitWebDriver() {
         switch (testParameters.getExecutionMode()) {
             case API:
+            case DB:
                 break;
             case LOCAL:
             case REMOTE:

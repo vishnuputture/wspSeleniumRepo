@@ -3,7 +3,7 @@
 <suite name="Regression" parallel="none" thread-count="1">
 	<test name="SanityCheck">
 		<classes>
-			<class name="testcases.AverageCost">
+			<class name="testcases.Inventory.AverageCost">
 				<methods>
 					<include name="Tc_25_ValidateItemCreation"></include>
 					<include name="Tc_27_ValidateItemUpdate"></include>
