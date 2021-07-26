@@ -3,6 +3,7 @@ package commonkeywords;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -26,6 +27,9 @@ public class DBCall {
 
 		return bytesJson;
 	}
+
+
+
 
 	//DELETE FROM DTA99599/IM08
 	//DElete method to be written
@@ -121,8 +125,9 @@ public class DBCall {
 	public static int validateItemExists(String cust,String item)
 	{
 		int x=0;
-		Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
-
+		Connection c1=Utility_Functions.xDBConnectionWise("db2", "WINQAauto", "P3rFoRm3R", "db2");
+		//Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
+		Statement sqlStatement= Utility_Functions.xDBStatementWise(c1);
 		String getCustomer = "SELECT count(*) as size FROM DTA99599/IM08 WHERE CACUST ="+"'"+cust+"'"+" and CAITEM ="+"'"+item+"'";
 		System.out.println(getCustomer);
 
@@ -135,7 +140,16 @@ public class DBCall {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			if(c1 !=null)
+			try
+			{
+				c1.close();
+			}catch (SQLException e){
+				e.printStackTrace();
+			}
 		}
+
 		return x;
 	}
 
@@ -234,13 +248,22 @@ public class DBCall {
 		return Arrays.asList(cust,item.trim(),master);
 	}
 
-	public static Statement getDBConnection()
+
+    public static  Connection getConnection()
 	{
-		Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
-		return sqlStatement;
+		Connection con=Utility_Functions.xDBConnectionWise("db2", "WINQAauto", "P3rFoRm3R", "db2");
+		return con;
 	}
 
-	public static void createItemInItemMaster(String Item,String Desc,String EOM)
+	public static void closeDBConnection()
+	{
+		Utility_Functions.xDBCloseConnection(getConnection());
+	}
+
+
+
+
+/*	public static void createItemInItemMaster(String Item,String Desc,String EOM)
 	{
 		Statement sqlStatement=getDBConnection();
 
@@ -256,12 +279,12 @@ public class DBCall {
 		}
 
 
-	}
+	}*/
 
 	public static String SearchItemInItemMaster(String itemNo)
 	{
 		String item="";
-		Statement sqlStatement=getDBConnection();
+		Statement sqlStatement=Utility_Functions.xDBStatementWise(getConnection());
 		String masterNo = "select * from DTA99599/im01 where IMITM="+"'"+itemNo+"'";
 		System.out.println(masterNo);
 
@@ -282,7 +305,7 @@ public class DBCall {
 	public static String UpdateItemInItemMaster(String itemNo,ArrayList<String> key,ArrayList<String> val)
 	{
 
-		Statement sqlStatement=getDBConnection();
+		Statement sqlStatement=Utility_Functions.xDBStatementWise(getConnection());
 		for (int i=0;i<key.size();i++) {
 			String masterNo = "update DTA99599/im01 SET " + key.get(0)+"="+ "'"+val.get(0)+"'"+" where IMITM= "+"'"+itemNo+"'";
 			System.out.println(masterNo);
@@ -318,7 +341,7 @@ public class DBCall {
 
 	public static String updateAndSearchQTY(String itemNo,int qty)
 	{
-		Statement sqlStatement=getDBConnection();
+		Statement sqlStatement=Utility_Functions.xDBStatementWise(getConnection());
 
 		String query1 = "update DTA99599/im02t SET QTY_ON_HAND ="+qty+" where ITEM_NUMBER= "+"'"+itemNo+"'";
 		System.out.println(query1);
@@ -352,7 +375,7 @@ public class DBCall {
 
 	public static String updateAndSearchAVGCost(String itemNo,int amt)
 	{
-		Statement sqlStatement=getDBConnection();
+		Statement sqlStatement=Utility_Functions.xDBStatementWise(getConnection());
 
 		String query1 = "update DTA99599/im02t SET AVERAGE_COST ="+amt+" where ITEM_NUMBER= "+"'"+itemNo+"'";
 		System.out.println(query1);
@@ -383,5 +406,7 @@ public class DBCall {
 		return item;
 
 	}
+
+
 
 }

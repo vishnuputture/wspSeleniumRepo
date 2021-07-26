@@ -25,6 +25,7 @@ public class itemMaster extends ReusableLib {
           String item=DBCall.SearchItemInItemMaster(Utility_Functions.xGetJsonAsString("CreatedCost"));
           System.out.println("Item found "+item);
           Utility_Functions.xAssertEquals(report,Utility_Functions.xGetJsonAsString("CreatedCost"),item.substring(0,item.indexOf(" ")), "Item found Successfully");
+          DBCall.closeDBConnection();
 
     }
 
@@ -38,6 +39,7 @@ public class itemMaster extends ReusableLib {
         System.out.println(res);
         String cmp=jsonData.getData("val");
         Utility_Functions.xAssertEquals(report,cmp,res, "Item updated successfully");
+        DBCall.closeDBConnection();
     }
 
     public void updateOnHandQuantity()
@@ -47,6 +49,7 @@ public class itemMaster extends ReusableLib {
         System.out.println("Item found and Updated Quantity on hand is "+qty);
         System.out.println(cmp);
         Utility_Functions.xAssertEquals(report,cmp,qty, "On hand Value updated Successfully");
+        DBCall.closeDBConnection();
     }
 
     public void updateItemAverageCost()
@@ -55,5 +58,6 @@ public class itemMaster extends ReusableLib {
         String avg= DBCall.updateAndSearchAVGCost(Utility_Functions.xGetJsonAsString("CreatedCost"),Integer.parseInt(cmp));
         System.out.println("Item found and Updated average price is  "+avg);
         Utility_Functions.xAssertEquals(report,cmp,avg.substring(0,avg.indexOf(".")), "Average Cost is Updated successfully");
+        DBCall.closeDBConnection();
     }
 }
