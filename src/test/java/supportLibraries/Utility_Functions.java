@@ -1702,6 +1702,62 @@ public class Utility_Functions extends ReusableLib {
         }
 
     }
+    public static Connection xDBConnectionWise(String dbname, String UserName, String Pwd,String dbType) {
+        String url = getDBUrl(dbname);
+        // Load Oracle jdbc driver
+        try {
+            // Class.forName("org.postgresql.FrameworkDriver");
+            switch (dbType) {
+                case "db2":
+                    Class.forName("com.ibm.db2.jcc.DB2Driver");
+                    break;
+                case "oracle":
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    break;
+                default:
+                    throw new ClassNotFoundException();
+            }
+
+            Connection con = DriverManager.getConnection(url, UserName, Pwd);
+            // Create Statement Object
+            return con;
+
+        } catch (ClassNotFoundException e1) {
+
+            e1.printStackTrace();
+            return null;
+        }catch (SQLException e) {
+
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Statement xDBStatementWise(Connection con)
+    {
+        try
+        {
+            Statement stmt = con.createStatement();
+            //    System.out.println("db statement: "+stmt.toString());
+            return stmt;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void xDBCloseConnection(Connection con)
+    {
+        if(con!=null)
+        {
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        }
+    }
 
     public static String getDBUrl(String dbname) {
         String url = "";
