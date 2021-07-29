@@ -773,13 +773,14 @@ public abstract class ReusableLib {
         }
     }
 
-    protected void sendKeys(WebElement el, String strVal) {
+    protected void sendKeys(WebElement el, String strVal,String CustomMsg) {
         if (!strVal.isEmpty() && strVal != "" && strVal != null) {
             WebElement elment = el;
             elment.click();
             elment.clear();
             elment.sendKeys(strVal);
         }
+        report.updateTestLog("EnterData", strVal + " " + CustomMsg, Status.PASS);
     }
 
     protected void sendKeys(By el, String strVal, String CustomMsg) {

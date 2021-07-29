@@ -10,6 +10,7 @@ import pages.LoginPage;
 import pages.MasterPage;
 import pages.ReceiveCorrectionPage;
 import pages.CostAdjustmentPage;
+import pages.ItemLedgerPage;
 import businesskeywords.*;
 import supportLibraries.Utility_Functions;
 import commonkeywords.*;
@@ -132,23 +133,100 @@ public class createCost extends ReusableLib {
     	
     }
     
+    public void createMultipleItems() {
+    	for(int i=0;i<=1;i++) {
+    		click(ItemMasterPage.addItemAction,"Click on add item");
+            sendKeys(ItemMasterPage.txtBoxDescription,"testdesc"+i,"Enter description for item number"+i+1);
+            sendKeys(ItemMasterPage.txtBoxUOM,"EA","Enter UOM");
+            click(ItemMasterPage.btnSave,"Click on save changes");
+
+            if (Utility_Functions.xWaitForElementPresent(driver, ItemMasterPage.messageAddSuccessful, 10)) {
+                String successMessage = Utility_Functions.getText(driver,  ItemMasterPage.messageAddSuccessful);
+                System.out.println("Text: " + successMessage);
+                Utility_Functions.xAssertEquals(report, "Record successfully added !", successMessage.trim(), "Validating success message");
+            } else {
+                System.out.println("Text: Not found");
+                throw new NoSuchElementException("Could not find :" + ItemMasterPage.messageAddSuccessful);
+            }
+
+            System.out.println("Created item : "+getAttribute(ItemMasterPage.txtBoxSearch,"value"));
+            Utility_Functions.xUpdateJson("ItemNo"+i, getAttribute(ItemMasterPage.txtBoxSearch,"value"));
+    	}
+    	
+    	click(ItemMasterPage.btnExit,"Exit from page");
+    }
+    
     public void attachVendor() {
     	sendKeys(ReceiveCorrectionPage.txtVendorSearch,"000388","Enter vendor code");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	sendKeys(ReceiveCorrectionPage.txtQuantity,"100","Enter quantity");
-    	sendKeys(ReceiveCorrectionPage.txtItemNumber,Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
-    	sendKeys(ReceiveCorrectionPage.txtExplanation,"Test data","Enter explanation");
+    	
+    	List<WebElement> eleQuantityList = driver.findElements(ReceiveCorrectionPage.txtQuantity);
+    	List<WebElement> eleItemNumberList = driver.findElements(ReceiveCorrectionPage.txtItemNumber);
+    	List<WebElement> eleExplanationList = driver.findElements(ReceiveCorrectionPage.txtExplanation);
+    	//sendKeys(ReceiveCorrectionPage.txtQuantityfirst,"100","Enter quantity");
+    	//sendKeys(ReceiveCorrectionPage.txtItemNumberfirst,Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
+    	//sendKeys(ReceiveCorrectionPage.txtExplanationfirst,"Test data","Enter explanation");
+    	
+    	for(int i=0;i<=1;i++) {
+    		sendKeys(eleQuantityList.get(i),"100","Enter quantity");
+    		sendKeys(eleItemNumberList.get(i),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
+    		sendKeys(eleExplanationList.get(i),"Test data","Enter explanation");
+    	}
     	Utility_Functions.actionKey(Keys.ENTER, driver);
     	
     	
     	 click(ReceiveCorrectionPage.btnProcess,"Click on process");
     	 click(ReceiveCorrectionPage.btnContinuePop,"Click on continue");
     	 
-    	 sendKeys(ReceiveCorrectionPage.txtItemNumber,Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
+    	 sendKeys(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
     	 Utility_Functions.actionKey(Keys.ENTER, driver);
-     	String onHandVal = Utility_Functions.getText(driver,ReceiveCorrectionPage.lblOnHand);
+     	String onHandVal = Utility_Functions.getText(driver.findElements(ReceiveCorrectionPage.lblOnHand).get(0));
+     	
+     	Utility_Functions.xAssertEquals(report, "200", onHandVal.trim(), "Validating on hand value");
+    }
+    
+    public void attachVendorMultipleItem() {
+    	 commonObj.inventoryToInvAdjustments();
+         commonObj.inventoryAdjustToInvCorrections();
+         //commonObj.splPricingToAddPricing();
+         commonObj.validateText(ReceiveCorrectionPage.lblTitle, "Receiving Correction (I-355)", "Validating item Master page title");
+        sendKeys(ReceiveCorrectionPage.txtVendorSearch,"000388","Enter vendor code");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	List<WebElement> eleQuantityList = driver.findElements(ReceiveCorrectionPage.txtQuantity);
+    	List<WebElement> eleItemNumberList = driver.findElements(ReceiveCorrectionPage.txtItemNumber);
+    	List<WebElement> eleExplanationList = driver.findElements(ReceiveCorrectionPage.txtExplanation);
+    	
+    	for(int i=0;i<=1;i++) {
+    		sendKeys(eleQuantityList.get(i),"100","Enter quantity");
+    		sendKeys(eleItemNumberList.get(i),Utility_Functions.xGetJsonAsString("ItemNo"+i),"Enter item number");
+    		sendKeys(eleExplanationList.get(i),"Test data","Enter explanation");
+    	}
+    	
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	
+   	 click(ReceiveCorrectionPage.btnProcess,"Click on process");
+   	 click(ReceiveCorrectionPage.btnContinuePop,"Click on continue");
+   	 
+   	 for(int i=0;i<=1;i++) {
+   		 sendKeys(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(i),Utility_Functions.xGetJsonAsString("ItemNo"+i),"Enter item number");
+   		Utility_Functions.actionKey(Keys.ENTER, driver);
+     	String onHandVal = Utility_Functions.getText(driver.findElements(ReceiveCorrectionPage.lblOnHand).get(i));
      	
      	Utility_Functions.xAssertEquals(report, "100", onHandVal.trim(), "Validating on hand value");
+   	 }
+    }
+    
+    public void navigateItemLedgerFromCorrection() {
+    	click(driver.findElements(ReceiveCorrectionPage.btnItemLedger).get(0),"Click on item ledger");
+    	
+    }
+    
+    public void navigateItemLedgerFromAdjustment() {
+    	sendKeys(CostAdjustmentPage.txtItemNumber,Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	click(CostAdjustmentPage.btnLedger,"Click on the item ledger button");
     }
     
     public void fillCostAdjustmentDetails() {
@@ -171,9 +249,20 @@ public class createCost extends ReusableLib {
     }
     
     public void validateLedger() {
-    	sendKeys(CostAdjustmentPage.txtItemNumber,Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	click(CostAdjustmentPage.btnLedger,"Click on the item ledger button");
-    	//Utility_Functions.xAssertEquals(report,  Utility_Functions.getText(driver, CostAdjustmentPage.lblLedgerPrice).substring(0, 4), Utility_Functions.xGetJsonAsString("NewAvgCost").substring(0, 4), "Validating on ledger price value");
+    	
+    	
+    	Utility_Functions.xAssertEquals(report,  getAttribute(ItemLedgerPage.txtItemNumber,"value"), Utility_Functions.xGetJsonAsString("CreatedCost"), "Validating item number");
+    	Utility_Functions.xAssertEquals(report,  Utility_Functions.getText(driver,ItemLedgerPage.lblQtyAfter), "200", "Validating item quantity");
+    	
+    }
+    
+    public void validateMultipleLedgerFromCorrection() {
+    	for(int i=0;i<=1;i++) {
+    		click(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(i),"");
+    		click(driver.findElements(ReceiveCorrectionPage.btnItemLedger).get(i),"Click on item ledger");
+    		Utility_Functions.xAssertEquals(report,  getAttribute(ItemLedgerPage.txtItemNumber,"value"), Utility_Functions.xGetJsonAsString("ItemNo"+i), "Validating item number");
+        	Utility_Functions.xAssertEquals(report,  Utility_Functions.getText(driver,ItemLedgerPage.lblQtyAfter), "100", "Validating item quantity");
+        	click(ItemLedgerPage.btnExit,"Exit from page");
+    	}
     }
 }

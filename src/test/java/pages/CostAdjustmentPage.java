@@ -20,5 +20,5 @@ public class CostAdjustmentPage extends ReusableLib{
 	 public static By lblCurrNewCost = By.xpath("//div[@id='outSACOST.1']");
 	 public static By btnProcess = By.xpath("//input[@id='btnSubmit']");
 	 public static By btnLedger = By.xpath("//input[@id='Button1.1']");
-	 public static By lblLedgerPrice = By.xpath("//div[@id='outPrice.1']");
+	
 }

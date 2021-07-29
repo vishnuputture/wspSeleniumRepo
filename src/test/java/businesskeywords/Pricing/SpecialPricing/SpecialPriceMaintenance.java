@@ -100,7 +100,7 @@ public class SpecialPriceMaintenance extends ReusableLib {
         List<WebElement> eleList = driver.findElements(SpecialPricePage.selectPricingRecordBox);
         if (eleList.size() > 0) {
             for (WebElement element : eleList) {
-                sendKeys(element, "4");
+                sendKeys(element, "4","");
             }
             Utility_Functions.actionKey(Keys.ENTER, driver);
             waitForElementDisappear(MasterPage.loadingAnime, globalWait);

@@ -68,6 +68,14 @@ public class AverageCost extends TestConfigurations {
     }
     
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_31_ValidateMultipleReceiveCorrection(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to delete average cost ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_29_ValidateCostAdjustmentProcess(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to delete average cost ");
         CoreScript coreScript = new CoreScript(testParameters);
