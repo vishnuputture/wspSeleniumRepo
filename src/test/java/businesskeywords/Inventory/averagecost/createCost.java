@@ -224,24 +224,36 @@ public class createCost extends ReusableLib {
     }
     
     public void navigateItemLedgerFromAdjustment() {
-    	sendKeys(CostAdjustmentPage.txtItemNumber,Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
+    	sendKeys(driver.findElements(CostAdjustmentPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	click(CostAdjustmentPage.btnLedger,"Click on the item ledger button");
+    	click(driver.findElements(CostAdjustmentPage.btnLedger).get(0),"Click on the item ledger button");
     }
     
     public void fillCostAdjustmentDetails() {
     	
-    	sendKeys(CostAdjustmentPage.txtItemNumber,Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
-    	sendKeys(CostAdjustmentPage.txtQuantity,"50","Enter quantity to adjust");
-    	sendKeys(CostAdjustmentPage.txtInCorrectCost,"1","Enter incorrect cost");
-    	sendKeys(CostAdjustmentPage.txtNewCost,"2","Enter correct cost");
+    	sendKeys(driver.findElements(CostAdjustmentPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
+    	sendKeys(driver.findElements(CostAdjustmentPage.txtQuantity).get(0),"50","Enter quantity to adjust");
+    	sendKeys(driver.findElements(CostAdjustmentPage.txtInCorrectCost).get(0),"1","Enter incorrect cost");
+    	sendKeys(driver.findElements(CostAdjustmentPage.txtNewCost).get(0),"2","Enter correct cost");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	 String currAvgCost = Utility_Functions.getText(driver, CostAdjustmentPage.lblCurrAvgCost);
-    	 String newAvgCost = Utility_Functions.getText(driver, CostAdjustmentPage.lblCurrNewCost);
-    	 Utility_Functions.xUpdateJson("NewAvgCost", newAvgCost);
+    	 String currAvgCost = Utility_Functions.getText(driver.findElements(CostAdjustmentPage.lblCurrAvgCost).get(0));
+    	 String newAvgCost = Utility_Functions.getText(driver.findElements(CostAdjustmentPage.lblCurrNewCost).get(0) );
+    	 //Utility_Functions.xUpdateJson("NewAvgCost", newAvgCost);
     	 Utility_Functions.xAssertNotEquals(report, currAvgCost, newAvgCost, "Validating that current avg cost is not equal to new avg cost");
     	 
     	
+    }
+    
+    public void processMultipleCostAdjustments() {
+    	for(int i=0;i<=1;i++) {
+    		sendKeys(driver.findElements(CostAdjustmentPage.txtItemNumber).get(i),Utility_Functions.xGetJsonAsString("ItemNo"+i),"Enter item number");
+        	sendKeys(driver.findElements(CostAdjustmentPage.txtQuantity).get(i),"50","Enter quantity to adjust");
+        	sendKeys(driver.findElements(CostAdjustmentPage.txtInCorrectCost).get(i),"1","Enter incorrect cost");
+        	sendKeys(driver.findElements(CostAdjustmentPage.txtNewCost).get(i),"2","Enter correct cost");
+        	
+    	}
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	click(CostAdjustmentPage.btnProcess,"Click on the process button");
     }
     
     public void processCostAdjustment() {
@@ -260,6 +272,20 @@ public class createCost extends ReusableLib {
     	for(int i=0;i<=1;i++) {
     		click(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(i),"");
     		click(driver.findElements(ReceiveCorrectionPage.btnItemLedger).get(i),"Click on item ledger");
+    		Utility_Functions.xAssertEquals(report,  getAttribute(ItemLedgerPage.txtItemNumber,"value"), Utility_Functions.xGetJsonAsString("ItemNo"+i), "Validating item number");
+        	Utility_Functions.xAssertEquals(report,  Utility_Functions.getText(driver,ItemLedgerPage.lblQtyAfter), "100", "Validating item quantity");
+        	click(ItemLedgerPage.btnExit,"Exit from page");
+    	}
+    }
+    
+    public void validateMultipleLedgerFromAdjustment() {
+    	for(int i=0; i<=1;i++) {
+    		sendKeys(driver.findElements(CostAdjustmentPage.txtItemNumber).get(i),Utility_Functions.xGetJsonAsString("ItemNo"+i),"Enter item number");
+    		Utility_Functions.actionKey(Keys.ENTER, driver);
+    	}
+    	
+    	for(int i=0;i<=1;i++) {
+    		click(driver.findElements(CostAdjustmentPage.btnLedger).get(i),"Click on the item ledger button");
     		Utility_Functions.xAssertEquals(report,  getAttribute(ItemLedgerPage.txtItemNumber,"value"), Utility_Functions.xGetJsonAsString("ItemNo"+i), "Validating item number");
         	Utility_Functions.xAssertEquals(report,  Utility_Functions.getText(driver,ItemLedgerPage.lblQtyAfter), "100", "Validating item quantity");
         	click(ItemLedgerPage.btnExit,"Exit from page");
