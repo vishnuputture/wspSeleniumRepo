@@ -14,6 +14,7 @@
 	  "Tc_30_ValidateCostAdjustmentLedger": "launchApp,siteLogin,validateAvgCostAdjustTitle,navigateItemLedgerFromAdjustment,validateLedger",
 	  "Tc_31_ValidateMultipleReceiveCorrection": "launchApp,siteLogin,validateItemMasterTitle,createMultipleItems,attachVendorMultipleItem,validateMultipleLedgerFromCorrection",
 	  "Tc_32_ValidateMultipleCostAdjustment": "launchApp,siteLogin,validateAvgCostAdjustTitle,processMultipleCostAdjustments,validateMultipleLedgerFromAdjustment",
+	  "Tc_33_ValidateQuantityFieldReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,validateQuantityReceivedCorrections",
     }
   ],
   "General_Data": [
@@ -63,6 +64,10 @@
     },
     {
       "TC_ID": "Tc_32_ValidateMultipleCostAdjustment"
+
+    },
+    {
+      "TC_ID": "Tc_33_ValidateQuantityFieldReceiveCorrection"
 
     }
   ]

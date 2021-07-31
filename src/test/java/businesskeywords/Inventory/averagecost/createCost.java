@@ -185,6 +185,20 @@ public class createCost extends ReusableLib {
      	Utility_Functions.xAssertEquals(report, "200", onHandVal.trim(), "Validating on hand value");
     }
     
+    public void validateQuantityReceivedCorrections() {
+    	sendKeys(driver.findElements(ReceiveCorrectionPage.txtQuantity).get(0),"600","Enter excess quantity");
+    	sendKeys(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
+    	
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	Utility_Functions.xAssertEquals(report,"Warning: Quantity exceeds limit of 500. Ensure value is correct.",Utility_Functions.getText(driver.findElements(ReceiveCorrectionPage.txtQuantity).get(0), "title"),"Validating warning message for excess quantity");
+    	
+    	sendKeys(driver.findElements(ReceiveCorrectionPage.txtQuantity).get(0),"-500","Enter negative quantity");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	Utility_Functions.xAssertEquals(report,"Warning: Qty for "+Utility_Functions.xGetJsonAsString("CreatedCost")+" will take On-Hand to a negative value.",Utility_Functions.getText(driver.findElements(ReceiveCorrectionPage.txtQuantity).get(0), "title"),"Validating warning message for negative quantity");
+    }
+    
     public void attachVendorMultipleItem() {
     	 commonObj.inventoryToInvAdjustments();
          commonObj.inventoryAdjustToInvCorrections();
