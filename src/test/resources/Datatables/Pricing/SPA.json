@@ -1,0 +1,13 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_161_VerifySPAScreenHeader": "launchApp,siteLogin,validateSPAApplicationTitle,exitSPAApplication,signOut"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_161_VerifySPAScreenHeader",
+      "Title": "SPA - Contract Browse ()"
+    }
+  ]
+}

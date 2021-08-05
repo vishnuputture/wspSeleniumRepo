@@ -4,13 +4,9 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
 import commonkeywords.CommonActions;
-import commonkeywords.DBCall;
-
-import org.openqa.selenium.WebElement;
 
 import pages.SqlStatementPage;
-import pages.MasterPage;
-import pages.SpecialPricePage;
+import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
