@@ -2,6 +2,8 @@ package commonkeywords;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import java.util.List;
+import org.openqa.selenium.WebElement;
 import pages.*;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.SpecialPricePage;
@@ -130,6 +132,16 @@ public class CommonActions extends ReusableLib {
 			throw new NoSuchElementException("Could not find :"+ele);
 		}
 	}
+
+	public void validateElementExists(By ele, String msg) {
+        if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
+            System.out.println("Element: "+ ele + " exists");
+
+        }else {
+            System.out.println("Element: Not found");
+            throw new NoSuchElementException("Could not find :"+ele);
+        }
+    }
 
 	/**
 	 *
