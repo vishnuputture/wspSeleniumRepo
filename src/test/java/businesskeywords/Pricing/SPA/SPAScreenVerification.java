@@ -9,7 +9,10 @@ import pages.pricing.SpecialPricePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 
 public class SPAScreenVerification extends ReusableLib {
-    public SPAScreenVerification(Helper helper) {super(helper);}
+    public SPAScreenVerification(Helper helper) {
+        super(helper);
+        commonObj = new CommonActions(helper);
+    }
 
     CommonActions commonObj;
 
