@@ -47,6 +47,14 @@ public class CommonActions extends ReusableLib {
 		click(MasterPage.orderProcessMenu,"Click order processing");
 	}
 
+	public void masterToSalesAnalysis() {
+	    click(MasterPage.salesAnalysisMenu, "Click sales analysis");
+    }
+
+    public void salesAnalysisToSPAApplication() {
+	    click(SalesAnalysisPage.spaApplication, "Click Special Price Allowance");
+    }
+
 	/**
 	 *
 	 *
