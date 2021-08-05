@@ -6,6 +6,7 @@
 			<class name="testcases.Pricing.SPA" >
 				<methods>
 					<include name="Tc_161_VerifySPAScreenHeader"></include>
+                    <include name="Tc_166_VerifySPAScreenInformation"></include>
 				</methods>
 			</class>
 		</classes>
