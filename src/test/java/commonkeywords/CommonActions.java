@@ -2,9 +2,9 @@ package commonkeywords;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import org.openqa.selenium.WebElement;
 import pages.*;
-import businesskeywords.*;
+import pages.pricing.AddSpecialPricingPage;
+import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
 import java.text.SimpleDateFormat;
@@ -54,7 +54,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void orderProcToSplPricing() {
-		click(MasterPage.specialPricingMenu,"Click special price");
+		click(OrderProcessingPage.specialPricingMenu,"Click special price");
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void inventoryToItemMaster() {
-		click(MasterPage.ItemMasterMenu,"Click item master");
+		click(MasterPage.itemMasterMenu,"Click item master");
 	}
 	
 	/**
