@@ -1,4 +1,4 @@
-package pages;
+package pages.common;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;

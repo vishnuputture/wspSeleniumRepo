@@ -62,6 +62,7 @@ public class WebDriverFactory {
             case CHROME:
             	// Takes the system proxy settings automatically
 
+
     			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
     			ChromeOptions options = new ChromeOptions();
     			// disable ephemeral flash permissions flag

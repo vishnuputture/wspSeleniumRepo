@@ -2,9 +2,10 @@ package commonkeywords;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import org.openqa.selenium.WebElement;
-import pages.*;
-import businesskeywords.*;
+import pages.common.MasterPage;
+import pages.common.SqlStatementPage;
+import pages.pricing.AddSpecialPricingPage;
+import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
 import java.text.SimpleDateFormat;

@@ -7,8 +7,8 @@ import com.winSupply.framework.Status;
 import commonkeywords.*;
 
 import org.openqa.selenium.WebElement;
-import pages.SpecialPricePage;
-import pages.MasterPage;
+import pages.pricing.SpecialPricePage;
+import pages.common.MasterPage;
 import supportLibraries.Utility_Functions;
 
 import org.apache.commons.lang3.ArrayUtils;

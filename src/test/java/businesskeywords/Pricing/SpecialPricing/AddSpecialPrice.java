@@ -2,7 +2,7 @@ package businesskeywords.Pricing.SpecialPricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import pages.AddSpecialPricingPage;
+import pages.pricing.AddSpecialPricingPage;
 import supportLibraries.Utility_Functions;
 import commonkeywords.*;
 

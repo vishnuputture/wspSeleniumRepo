@@ -1,4 +1,4 @@
-package pages;
+package pages.warehouse;
 
 import org.openqa.selenium.By;
 

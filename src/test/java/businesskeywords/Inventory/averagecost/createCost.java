@@ -4,20 +4,12 @@ package businesskeywords.Inventory.averagecost;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import org.openqa.selenium.WebElement;
-import pages.AddSpecialPricingPage;
-import pages.ItemMasterPage;
-import pages.LoginPage;
-import pages.MasterPage;
-import pages.ReceiveCorrectionPage;
-import pages.CostAdjustmentPage;
-import pages.ItemLedgerPage;
-import businesskeywords.*;
+import pages.inventory.ItemMasterPage;
+import pages.inventory.ReceiveCorrectionPage;
+import pages.inventory.CostAdjustmentPage;
+import pages.inventory.ItemLedgerPage;
 import supportLibraries.Utility_Functions;
 import commonkeywords.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
