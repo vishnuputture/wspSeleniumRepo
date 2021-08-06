@@ -3,18 +3,22 @@ package businesskeywords.Inventory.averagecost;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+<<<<<<< HEAD
 import org.openqa.selenium.WebElement;
 import pages.inventory.ItemMasterPage;
 import pages.inventory.ReceiveCorrectionPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemLedgerPage;
+=======
+import pages.ItemMasterPage;
+import pages.ReceiveCorrectionPage;
+import pages.CostAdjustmentPage;
+>>>>>>> f149f5ff71db29f8b65e51dbb3b34a1e8edfe391
 import supportLibraries.Utility_Functions;
 import commonkeywords.*;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-
-import java.util.List;
 
 public class createCost extends ReusableLib {
     CommonActions commonObj;

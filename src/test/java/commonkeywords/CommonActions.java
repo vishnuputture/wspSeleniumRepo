@@ -2,8 +2,14 @@ package commonkeywords;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+<<<<<<< HEAD
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
+=======
+import java.util.List;
+import org.openqa.selenium.WebElement;
+import pages.*;
+>>>>>>> f149f5ff71db29f8b65e51dbb3b34a1e8edfe391
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
@@ -48,6 +54,14 @@ public class CommonActions extends ReusableLib {
 		click(MasterPage.orderProcessMenu,"Click order processing");
 	}
 
+	public void masterToSalesAnalysis() {
+	    click(MasterPage.salesAnalysisMenu, "Click sales analysis");
+    }
+
+    public void salesAnalysisToSPAApplication() {
+	    click(SalesAnalysisPage.spaApplication, "Click Special Price Allowance");
+    }
+
 	/**
 	 *
 	 *
@@ -55,7 +69,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void orderProcToSplPricing() {
-		click(MasterPage.specialPricingMenu,"Click special price");
+		click(OrderProcessingPage.specialPricingMenu,"Click special price");
 	}
 
 	/**
@@ -65,7 +79,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void inventoryToItemMaster() {
-		click(MasterPage.ItemMasterMenu,"Click item master");
+		click(MasterPage.itemMasterMenu,"Click item master");
 	}
 	
 	/**
@@ -123,6 +137,16 @@ public class CommonActions extends ReusableLib {
 			throw new NoSuchElementException("Could not find :"+ele);
 		}
 	}
+
+	public void validateElementExists(By ele, String msg) {
+        if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
+            System.out.println("Element: "+ ele + " exists");
+
+        }else {
+            System.out.println("Element: Not found");
+            throw new NoSuchElementException("Could not find :"+ele);
+        }
+    }
 
 	/**
 	 *
