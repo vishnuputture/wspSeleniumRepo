@@ -2,12 +2,11 @@ package commonkeywords;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import org.openqa.selenium.WebElement;
 import pages.*;
-import businesskeywords.*;
 import supportLibraries.Utility_Functions;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -229,4 +228,49 @@ public class CommonActions extends ReusableLib {
 		Utility_Functions.actionKey(Keys.ENTER, driver);
 	}
 
+//Vishnu
+	/**
+	 *
+	 *
+	 * This method navigates from inventory management Main Menu to inventory management Menu2 page
+	 *
+	 */
+	public void InventoryManagementMainMenuToInventoryManagementMenu2() {
+		click(InventoryManagementMainMenuPage.moreInventorySelections,"Click More Inventory Selection");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from inventory management Menu2 page to matrix cost update page
+	 *
+	 */
+	public void InventoryManagementMenu2ToMatrixCostUpdate() {
+		click(InventoryManagementMenu2Page.matrixCostUpdate,"Click Matrix Cost Update");
+	}
+
+	/**
+	 *
+	 *
+	 * This method Convert String to Int
+	 *
+	 */
+	public int convertStringToInt(String value) {
+		try {
+			return Integer.parseInt(value);
+		} catch (Exception e) {
+			System.out.println("Can't convert to Integer");
+			return 0;
+		}
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from Item Master page to Inventory page
+	 *
+	 */
+	public void exitItemMasterPage() {
+		//Utility_Functions.actionKey(Keys., driver);
+	}
 }

@@ -20,5 +20,6 @@ public class ItemMasterPage extends ReusableLib{
     public static By deleteItemAction = By.xpath("//div[@id='lnkDeleteItem']");
     public static By btnAlertContinue = By.xpath("//input[@value='Continue']");
     public static By txtInputPkgQuantity = By.xpath("//input[@id='inBuyStdPackQty']");
-
+    public static By poField = By.xpath("//input[@id='inPOCost']");
+    public static By btnF3=By.id("btnExit");
 }

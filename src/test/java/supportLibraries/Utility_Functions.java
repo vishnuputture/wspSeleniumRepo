@@ -982,6 +982,8 @@ public class Utility_Functions extends ReusableLib {
 
     public static boolean validateLinks(List<WebElement> list, String webElementText) {
         for (WebElement element : list) {
+            System.out.println("Util "+element.getText());
+            System.out.println("Web text "+webElementText);
             if (element.getText().equals(webElementText)) {
                 return true;
             }
@@ -4576,6 +4578,27 @@ public class Utility_Functions extends ReusableLib {
         } else {
             report.updateTestLog(tblDtls, output, Status.PASS);
         }
+
+    }
+//#######################----------------##################################################//
+    /**
+     * Assert two String value are equal
+     *
+     * @param report    to log value in report
+     * @param expValue  pass expected value
+     * @param actualVal Pass expected value
+     * @param Replace   Character to be replaced
+     * @param CstmMsg   pass Custom Message
+     */
+    public static void xAssertEquals(Report report, String expValue, String actualVal,String Replace, String CstmMsg) {
+        if (actualVal.contains(Replace)) {
+            actualVal = actualVal.replace(Replace, "").trim();
+        }
+        Assert.assertEquals(actualVal, expValue, CstmMsg);
+
+        report.updateTestLog("VerifyVal",
+                CstmMsg + " Expected text '" + expValue + "' is matching With Actual Text '" + actualVal + "'",
+                Status.PASS);
 
     }
 }

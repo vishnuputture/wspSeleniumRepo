@@ -138,6 +138,43 @@ public class Wise extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_137_verify_Item_number_by_navigating_to_Item_Ledger(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_151_verify_updating_POCost_providing_Input_values(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_155_verify_updated_Field_in_Item_Master_Page(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_154_verify_Warning_message_Switching_LastCost_to_AverageCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

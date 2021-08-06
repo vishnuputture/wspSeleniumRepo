@@ -17,7 +17,12 @@
 			"Tc_3_ValidateDefaultFiltersSplPricing": "launchApp,siteLogin,validateSplPriceFilterValue",
 			"Tc_12_ValidatePositiontoItemNumber_End": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionCustItemEnd,delAllPriceRecord",
 			"Tc_24_InsertPAPRecordToDelete":"launchApp,siteLogin,getCustItemData,insertSpecialPricePAPRecord,exitInsertSql,deleteSpecialPricePAPRecord,cleanUp",
-			"Tc_21_E2E": "launchApp,cleanUp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql"
+			"Tc_21_E2E": "launchApp,cleanUp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql",
+			"Tc_137_verify_Item_number_by_navigating_to_Item_Ledger": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,navigationToItemLedger,exitItemLedgerToMatrixToInventory,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"Tc_151_verify_updating_POCost_providing_Input_values": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,modifyPOField,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,modifyProposedMtxCostField,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"Tc_155_verify_updated_Field_in_Item_Master_Page": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,modifyPOCostField,exitMatrixToInventoryManagementMenu2Page,exitInventoryMenu2ToInventoryManagementMainMenuPage,validateItemMasterField,signOut",
+			"Tc_154_verify_Warning_message_Switching_LastCost_to_AverageCost": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,searchItemNoFromTheList,exitMatrixToInventoryManagementMenu2Page,signOut"
 		}
 	],
 	"General_Data": [
@@ -150,6 +155,34 @@
 			"specialPrice": "100",
 			"success": "Record added. Add another or F12 to return.",
 			"error": "Customer Number does not exist"
+		},
+		{
+			"TC_ID": "Tc_137_verify_Item_number_by_navigating_to_Item_Ledger",
+			"Title": "Item Number validation"
+		},
+		{
+			"TC_ID": "Tc_151_verify_updating_POCost_providing_Input_values",
+			"Title": "Update Po Cost with different values",
+			"7_integer_Value": "787878",
+			"11_integer_value": "12345678912",
+			"Enter_0": "0",
+			"Character": "asGht%$"
+		},
+		{
+			"TC_ID": "Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values",
+			"Title": "Update Proposed Matrix Cost with different values",
+			"7_integer_Value": "787878",
+			"11_integer_value": "12345678912",
+			"Enter_0": "0",
+			"Character": "asGht%$"
+		},
+		{
+			"TC_ID": "Tc_155_verify_updated_Field_in_Item_Master_Page",
+			"Title": "Update Matrix cost update  Po field and validate in Item Master Page"
+		},
+		{
+			"TC_ID": "Tc_154_verify_Warning_message_Switching_LastCost_to_AverageCost",
+			"Title": "Searching Item number on the page"
 		}
 	]
 }
