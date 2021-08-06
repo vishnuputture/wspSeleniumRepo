@@ -90,7 +90,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<testNG.suiteXmlFile>src/test/resources/Suites/Sanity/averagecost.xml</testNG.suiteXmlFile>
+				<testNG.suiteXmlFile>src/test/resources/Suites/Sanity/inventory.xml</testNG.suiteXmlFile>
 			</properties>
 			<build>
 				<pluginManagement>
