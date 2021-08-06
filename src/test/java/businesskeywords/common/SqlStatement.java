@@ -5,11 +5,9 @@ import com.winSupply.core.ReusableLib;
 
 import commonkeywords.CommonActions;
 
-<<<<<<< HEAD
+
 import pages.common.SqlStatementPage;
-=======
-import pages.SqlStatementPage;
->>>>>>> f149f5ff71db29f8b65e51dbb3b34a1e8edfe391
+
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;

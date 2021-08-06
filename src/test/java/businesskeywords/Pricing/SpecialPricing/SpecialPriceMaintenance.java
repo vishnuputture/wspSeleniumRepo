@@ -8,11 +8,9 @@ import commonkeywords.*;
 
 import org.openqa.selenium.WebElement;
 import pages.pricing.SpecialPricePage;
-<<<<<<< HEAD
+
 import pages.common.MasterPage;
-=======
-import pages.MasterPage;
->>>>>>> f149f5ff71db29f8b65e51dbb3b34a1e8edfe391
+
 import supportLibraries.Utility_Functions;
 
 import org.apache.commons.lang3.ArrayUtils;

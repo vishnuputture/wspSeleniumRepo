@@ -2,14 +2,13 @@ package commonkeywords;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-<<<<<<< HEAD
+
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
-=======
+
 import java.util.List;
 import org.openqa.selenium.WebElement;
 import pages.*;
->>>>>>> f149f5ff71db29f8b65e51dbb3b34a1e8edfe391
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
