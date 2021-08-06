@@ -1,4 +1,4 @@
-package pages;
+package pages.pricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;

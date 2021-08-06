@@ -1,4 +1,4 @@
-package businesskeywords.Pricing.SpecialPricing;
+package businesskeywords.common;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -28,6 +28,14 @@ public class Master extends ReusableLib {
 
     public void navigateToSplPricing() {
         commonObj.orderProcToSplPricing();
+    }
+
+    public void navigateToSalesAnalysis() {
+        commonObj.masterToSalesAnalysis();
+    }
+
+    public void navigateToSPAApplication() {
+        commonObj.salesAnalysisToSPAApplication();
     }
 
 

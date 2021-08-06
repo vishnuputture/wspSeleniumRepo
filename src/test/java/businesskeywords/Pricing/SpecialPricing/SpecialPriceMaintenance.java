@@ -7,7 +7,7 @@ import com.winSupply.framework.Status;
 import commonkeywords.*;
 
 import org.openqa.selenium.WebElement;
-import pages.SpecialPricePage;
+import pages.pricing.SpecialPricePage;
 import pages.MasterPage;
 import supportLibraries.Utility_Functions;
 
