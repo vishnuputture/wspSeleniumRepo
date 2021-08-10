@@ -35,7 +35,8 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
         System.out.println("Item no : "+itemN0);
         String decValue = poUpdation.updateField(poUpdation.fieldWithValidRandomValue(),MatrixCostUpdatePage.poField);
         values.add(itemN0);
-        values.add(decValue);
+        String[] arrSplit = decValue.split("\\.");
+        values.add(arrSplit[0]);
         System.out.println("Size : "+values.size());
     }
 
@@ -58,7 +59,8 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
         Utility_Functions.actionKey(Keys.ENTER, driver);
         String expValue = driver.findElement(MatrixCostUpdatePage.poFieldItem).getAttribute("value");
         System.out.println("Exp : " + expValue);
-        Utility_Functions.xAssertEquals(report, values.get(1),expValue, ",","Updated value");
+        String[] arrSplit = expValue.split("\\.");
+        Utility_Functions.xAssertEquals(report, values.get(1)+".0000",arrSplit[0]+".0000", ",","Updated value");
         click(MatrixCostUpdatePage.btnF3);
     }
 }

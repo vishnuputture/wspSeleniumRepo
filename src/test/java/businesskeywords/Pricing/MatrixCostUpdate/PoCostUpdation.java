@@ -32,7 +32,16 @@ public class PoCostUpdation extends ReusableLib {
      *
      */
     public void verifyPOFieldWithDiffValues() {
-        click(MatrixCostUpdatePage.checkBox,"Disable CheckBox");
+        String checked=driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        System.out.println("Is it checked  : "+checked);
+        try{
+            checked.equals("true");
+            System.out.println("Entered if");
+            click(MatrixCostUpdatePage.checkBox,"Disable the Update Matrix Cost checkBox");
+            click(MatrixCostUpdatePage.radioButton);
+        }catch (Exception e){
+            System.out.println("Disabled the Update Matrix Cost checkBox");
+        }
         propMtrxUpd.CancelUpdatedValue(fieldWithValidRandomValue(),MatrixCostUpdatePage.poField);
         propMtrxUpd.CancelUpdatedValue(jsonData.getData("11_integer_value"),MatrixCostUpdatePage.poField);
         propMtrxUpd.CancelUpdatedValue(jsonData.getData("Enter_0"),MatrixCostUpdatePage.poField);

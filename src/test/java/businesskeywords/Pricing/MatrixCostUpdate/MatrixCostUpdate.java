@@ -151,7 +151,7 @@ public class MatrixCostUpdate extends ReusableLib {
             Utility_Functions.xAssertEquals(report,exp_itemNumber,exp_itemNumber,"Item number found in page "+i);
             break;
             }catch (Exception e){
-                    clickIfAvlble(MatrixCostUpdatePage.nextPage, "Item number not present on the page");
+                    clickIfAvlble(MatrixCostUpdatePage.nextPage, "Item number not present on the page and Go to next Page");
                     System.out.println("Page Count " + i);
             }
         }

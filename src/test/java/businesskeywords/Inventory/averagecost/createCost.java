@@ -10,9 +10,6 @@ import pages.inventory.ReceiveCorrectionPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemLedgerPage;
 
-import pages.pricing.ItemMasterPage;
-import pages.ReceiveCorrectionPage;
-import pages.CostAdjustmentPage;
 import supportLibraries.Utility_Functions;
 import commonkeywords.*;
 

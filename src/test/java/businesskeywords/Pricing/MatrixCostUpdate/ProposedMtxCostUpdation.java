@@ -24,38 +24,43 @@ public class ProposedMtxCostUpdation extends ReusableLib {
     }
 
     /**
-     *
-     *
      * This method to modify PO field with different values
-     *
      */
     public void verifyProposedMtxFieldWithDiffValues() {
-        int randNumber=Utility_Functions.xRandomFunction();
-        String validValue=Integer.toString(randNumber);
-        CancelUpdatedValue(validValue,MatrixCostUpdatePage.ProposedMtxCost);
-        CancelUpdatedValue(jsonData.getData("11_integer_value"),MatrixCostUpdatePage.ProposedMtxCost);
-        CancelUpdatedValue(jsonData.getData("Enter_0"),MatrixCostUpdatePage.ProposedMtxCost);
+        int randNumber = Utility_Functions.xRandomFunction();
+        String validValue = Integer.toString(randNumber);
+        String checked = driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        System.out.println("Is it checked  : " + checked);
+        try {
+            checked.equals("true");
+            System.out.println("Entered if");
+            click(MatrixCostUpdatePage.checkBox, "Disable the Update Matrix Cost checkBox");
+            click(MatrixCostUpdatePage.radioButton);
+        } catch (Exception e) {
+            System.out.println("Disabled the Update Matrix Cost checkBox");
+        }
+        CancelUpdatedValue(validValue, MatrixCostUpdatePage.ProposedMtxCost);
+        CancelUpdatedValue(jsonData.getData("11_integer_value"), MatrixCostUpdatePage.ProposedMtxCost);
+        CancelUpdatedValue(jsonData.getData("Enter_0"), MatrixCostUpdatePage.ProposedMtxCost);
     }
 
-    public void CancelUpdatedValue(String fieldValue, By field){
+    public void CancelUpdatedValue(String fieldValue, By field) {
         try {
-            int fieldDigit=Integer.parseInt(fieldValue);
-            String decValue;
-            if(fieldValue.equals("0") || fieldDigit<1000000) {
-                decValue = Utility_Functions.xformatVal(fieldValue, ".0000");
-            }else{
-                decValue = Utility_Functions.xformatVal(fieldValue, ".000");
-            }
             System.out.println(fieldValue);
-            System.out.println(decValue);
-            Utility_Functions.xSendKeys(driver, report, MatrixCostUpdatePage.ProposedMtxCost, fieldValue, "Enter "+fieldValue+" into Proposed Matrix Cost Field");
+            Utility_Functions.xSendKeys(driver, report, field, fieldValue, "Enter " + fieldValue + " into Matrix Cost Field");
             click(MatrixCostUpdatePage.saveButton, "Click Save Changes Button");
             click(MatrixCostUpdatePage.cancelButton, "Click Cancel Button");
-            Utility_Functions.timeWait(2);
+            Utility_Functions.timeWait(3);
             String exp_pOValue = driver.findElement(field).getAttribute("value");
-            Utility_Functions.xAssertEquals(report,decValue,exp_pOValue,"Field Matrix Cost value updated");
-        }catch (Exception e){
-            Utility_Functions.xIsElementDisplayed(report, driver.findElement(MatrixCostUpdatePage.invalidErrorPopUp), "Invalid input popUp "+fieldValue);
+            System.out.println("exp_pOValue: " + exp_pOValue);
+            String[] arrSplit = exp_pOValue.split("\\.");
+            System.out.println("After Splite: " + arrSplit[0]);
+            if(fieldValue.equals("0")) {
+                Utility_Functions.xAssertEquals(report, exp_pOValue,".0000", "Field Matrix Cost value updated");
+            }else{Utility_Functions.xAssertEquals(report, fieldValue+".0000", arrSplit[0]+".0000", "Field Matrix Cost value updated");}
+            } catch (Exception e) {
+            Utility_Functions.xIsElementDisplayed(report, driver.findElement(MatrixCostUpdatePage.invalidErrorPopUp), "Invalid input popUp " + fieldValue);
         }
     }
+
 }

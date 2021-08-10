@@ -20,13 +20,14 @@
 			"Tc_21_E2E": "launchApp,cleanUp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql",
 			"Tc_137_verify_Item_number_by_navigating_to_Item_Ledger": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,navigationToItemLedger,exitItemLedgerToMatrixToInventory,exitMatrixToInventoryManagementMenu2Page,signOut",
 			"Tc_151_verify_updating_POCost_providing_Input_values": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,verifyPOFieldWithDiffValues,exitMatrixToInventoryManagementMenu2Page,signOut",
-			"Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,modifyProposedMtxCostField,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,verifyProposedMtxFieldWithDiffValues,exitMatrixToInventoryManagementMenu2Page,signOut",
 			"Tc_155_verify_updated_Field_in_Item_Master_Page": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,selectRecordFromTable,modifyPOCostField,exitMatrixToInventoryManagementMenu2Page,exitInventoryMenu2ToInventoryManagementMainMenuPage,validateItemMasterField,signOut",
 			"Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,validateDiscardBtn,validateCancelBtn,modifyPOCostField,navigateToLastCost,searchItemNoFromTheList,exitMatrixToInventoryManagementMenu2Page,signOut",
 			"Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,unSelectAndSelectChekBox,exitMatrixToInventoryManagementMenu2Page,signOut",
 			"Tc_140_verify_the_functionality_of_Select_Function_Drop_Down": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,selectFunctionalityDrop,verifyF1HelpFunctionality,verifyF3ExitFunctionality,signOut",
 			"Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,updateExcludeMcReport,exitMatrixToInventoryManagementMenu2Page,signOut",
-			"Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,validateNoAction,exitMatrixToInventoryManagementMenu2Page,signOut"
+			"Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,validateNoAction,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"TC_177_verify_the_functionality_of_adding_a_Row_to_Pricing_Matrix": "launchApp,siteLogin,navigateToPricingMatrixPage,addRowAndValidateRowAdded,exitPricingMatrix,signOut"
 		}
 	],
 	"General_Data": [
@@ -203,6 +204,10 @@
 		{
 			"TC_ID": "Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons",
 			"Title": "verify Functionality of No Action"
+		},
+		{
+			"TC_ID": "TC_177_verify_the_functionality_of_adding_a_Row_to_Pricing_Matrix",
+			"Title": "Adding a Row to Pricing Matrix"
 		}
 	]
 }

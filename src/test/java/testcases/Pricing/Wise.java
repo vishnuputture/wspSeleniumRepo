@@ -210,4 +210,12 @@ public class Wise extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_177_verify_the_functionality_of_adding_a_Row_to_Pricing_Matrix(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

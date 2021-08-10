@@ -10,6 +10,7 @@ import java.util.List;
 import org.openqa.selenium.WebElement;
 import pages.*;
 import pages.pricing.AddSpecialPricingPage;
+import pages.pricing.MatrixCostUpdatePage;
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
@@ -257,7 +258,6 @@ public class CommonActions extends ReusableLib {
 //Vishnu
 	/**
 	 *
-	 *
 	 * This method navigates from inventory management Main Menu to inventory management Menu2 page
 	 *
 	 */
@@ -266,7 +266,6 @@ public class CommonActions extends ReusableLib {
 	}
 
 	/**
-	 *
 	 *
 	 * This method navigates from inventory management Menu2 page to matrix cost update page
 	 *
@@ -277,26 +276,28 @@ public class CommonActions extends ReusableLib {
 
 	/**
 	 *
-	 *
-	 * This method Convert String to Int
+	 * This method navigates from Order Processing Menu to Options And Constants Menu
 	 *
 	 */
-	public int convertStringToInt(String value) {
-		try {
-			return Integer.parseInt(value);
-		} catch (Exception e) {
-			System.out.println("Can't convert to Integer");
-			return 0;
-		}
+	public void navigateToOptionsAndConstantsMenu() {
+		click(MasterPage.optionAndConstantsMenu,"Click Options And Constants Menu");
 	}
 
 	/**
 	 *
-	 *
-	 * This method navigates from Item Master page to Inventory page
+	 * This method navigates from Options And Constants Menu to Pricing Matrix
 	 *
 	 */
-	public void exitItemMasterPage() {
-		//Utility_Functions.actionKey(Keys., driver);
+	public void navigateToPricingMatrix() {
+		click(MasterPage.pricingMatrix,"Click Pricing Matrix");
+	}
+
+	/**
+	 *
+	 * This method Exit From Pricing Matrix
+	 *
+	 */
+	public void exitFromPricingMatrix() {
+		click(SpecialPricePage.btnF3,"Exit from Pricing Matrix");
 	}
 }
