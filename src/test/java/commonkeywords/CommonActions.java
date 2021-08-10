@@ -2,6 +2,10 @@ package commonkeywords;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+
+import pages.common.MasterPage;
+import pages.common.SqlStatementPage;
+
 import java.util.List;
 import org.openqa.selenium.WebElement;
 import pages.*;

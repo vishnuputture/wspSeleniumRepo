@@ -1,11 +1,8 @@
 package businesskeywords.common;
 
-import com.paulhammant.ngwebdriver.ByAngular;
-import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import org.openqa.selenium.WebElement;
-import pages.LoginPage;
+import pages.common.LoginPage;
 import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;
 

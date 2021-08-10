@@ -43,6 +43,9 @@ public class MatrixCostUpdatePage extends ReusableLib {
     public static By totalPages=By.xpath("//div[@id='txtTotalPage']");
     public static By itemList=By.xpath("//a[@href='javascript:void(0)']");
     public static By nextPage=By.xpath("//span[text()='Next']");
+    public static By txtBoxSearch = By.xpath("//input[@id='inItemNumber']");
+    public static By poFieldItem = By.xpath("//input[@id='inPOCost']");
+    public static By btnF3=By.id("btnExit");
     public static By validateUpdatedPoValue(String itemNo){
         return By.xpath("//a[text()='"+itemNo+"']/following::input");
     }

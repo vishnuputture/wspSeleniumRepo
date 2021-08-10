@@ -26,6 +26,8 @@ import org.openqa.selenium.safari.SafariDriver;
 import com.winSupply.framework.FrameworkException;
 import com.winSupply.framework.Settings;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 /**
  * Factory class for creating the {@link WebDriver} object as required
  *
@@ -58,62 +60,67 @@ public class WebDriverFactory {
 
         switch (browser) {
             case CHROME:
-                // Takes the system proxy settings automatically
+            	// Takes the system proxy settings automatically
 
-                DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                ChromeOptions options = new ChromeOptions();
-                // disable ephemeral flash permissions flag
-                options.addArguments("--disable-features=EnableEphemeralFlashPermission");
-//	    options.addArguments("--disable-web-security");
-                options.addArguments("--allow-running-insecure-content");
-                capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-                try {
-                    String path = null;
-                    switch (platform) {
-                        case "WINDOWS":
-                            path = properties.getProperty("ChromeDriverPath");
 
-                            break;
-                        case "MAC":
-                            path = properties.getProperty("MChromeDriverPath");
+    			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+    			ChromeOptions options = new ChromeOptions();
+    			// disable ephemeral flash permissions flag
+    			options.addArguments("--disable-features=EnableEphemeralFlashPermission");
 
-                            break;
+//    	    options.addArguments("--disable-web-security");
+    			options.addArguments("--allow-running-insecure-content");
 
-                    }
-                    System.setProperty("webdriver.chrome.driver", path);
+    			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-                    //driver = new ChromeDriver(capabilities);
+    			try {
+    				/*String path=null;
+    				switch (platform) {
+    				case "WINDOWS":
+    					path=properties.getProperty("ChromeDriverPath");
+    					
+    					break;
+    				case "MAC":
+    					path=properties.getProperty("MChromeDriverPath");
+    					
+    					break;
 
-                    options.addArguments("--disable-web-security");
-                    options.addArguments("--allow-running-insecure-content");
-                    options.addArguments(" --ignore-certificate-errors");
-                    options.addArguments("--allow-running-insecure-content");
-                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-                    ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
-                    builder.usingDriverExecutable(new File(path));
-                    builder.usingAnyFreePort();
-                    ChromeDriverService service = builder
-                            .build();
-                    driver = new ChromeDriver(service, options);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println(e);
-                }
+    				}*/
+    				//System.setProperty("webdriver.chrome.driver", path);
+    				
+    				//driver = new ChromeDriver(capabilities);
 
-                // driver.manage().deleteAllCookies();
-                break;
+    			options.addArguments("--disable-web-security");
+    			options.addArguments("--allow-running-insecure-content");
+    			options.addArguments(" --ignore-certificate-errors");
+    			options.addArguments("--allow-running-insecure-content");
+    			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+    			WebDriverManager.chromedriver().setup();
+    				ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
+    				//builder.usingDriverExecutable(new File(path));
+    				builder.usingAnyFreePort();
+    				ChromeDriverService service = builder
+    					.build();
+    				driver = new ChromeDriver(service, options);
+    			} catch (Exception e) {
+    				e.printStackTrace();
+    				System.out.println(e);
+    			}
+
+    			// driver.manage().deleteAllCookies();
+    			break;
 
             case FIREFOX:
                 // Takes the system proxy settings automatically
 
-                switch (platform) {
+                /*switch (platform) {
                     case "WINDOWS":
                         System.setProperty("webdriver.gecko.driver", properties.getProperty("GeckoDriverPath"));
                         break;
                     case "MAC":
                         System.setProperty("webdriver.gecko.driver", properties.getProperty("MGeckoDriverPath"));
                         break;
-                }
+                }*/
 
 
                 FirefoxBinary firefoxBinary = new FirefoxBinary();
@@ -124,8 +131,8 @@ public class WebDriverFactory {
 
                 DesiredCapabilities handlSSLErr = DesiredCapabilities.firefox();
                 handlSSLErr.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-
-
+                WebDriverManager.firefoxdriver().setup();
+                
                 try {
                     if (headless.toUpperCase().equals("NO")) {
                         driver = new FirefoxDriver(handlSSLErr);
@@ -152,8 +159,8 @@ public class WebDriverFactory {
 
             case INTERNET_EXPLORER:
                 // Takes the system proxy settings automatically
-
-                System.setProperty("webdriver.ie.driver", properties.getProperty("InternetExplorerDriverPath"));
+            	WebDriverManager.iedriver().setup();
+                //System.setProperty("webdriver.ie.driver", properties.getProperty("InternetExplorerDriverPath"));
                 driver = new InternetExplorerDriver();
                 break;
 
@@ -161,7 +168,8 @@ public class WebDriverFactory {
                 break;
             case EDGE:
                 // Takes the system proxy settings automatically
-                System.setProperty("webdriver.edge.driver", properties.getProperty("EdgeDriverPath"));
+            	WebDriverManager.edgedriver().setup();
+                //System.setProperty("webdriver.edge.driver", properties.getProperty("EdgeDriverPath"));
                 driver = new EdgeDriver();
                 break;
 

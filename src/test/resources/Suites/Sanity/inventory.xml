@@ -24,6 +24,9 @@
 					<include name="Tc_28_ValidateReceiveCorrection"></include>
 					<include name="Tc_29_ValidateCostAdjustmentProcess"></include>
 					<include name="Tc_30_ValidateCostAdjustmentLedger"></include>
+					<include name="Tc_31_ValidateMultipleReceiveCorrection"></include>
+					<include name="Tc_32_ValidateMultipleCostAdjustment"></include>
+					<include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
 				</methods>
 			</class>
 		</classes>

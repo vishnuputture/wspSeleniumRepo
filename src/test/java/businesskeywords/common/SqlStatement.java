@@ -5,7 +5,9 @@ import com.winSupply.core.ReusableLib;
 
 import commonkeywords.CommonActions;
 
-import pages.SqlStatementPage;
+
+import pages.common.SqlStatementPage;
+
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;

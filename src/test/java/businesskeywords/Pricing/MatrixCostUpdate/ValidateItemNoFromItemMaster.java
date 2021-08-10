@@ -4,7 +4,6 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
-import pages.pricing.ItemMasterPage;
 import pages.pricing.MatrixCostUpdatePage;
 import supportLibraries.Utility_Functions;
 
@@ -55,11 +54,11 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
         commonObj.inventoryToItemMaster();
         System.out.println("Size : "+values.size());
         System.out.println("String[] values : " + values.get(0) + " & " + values.get(1));
-        sendKeys(ItemMasterPage.txtBoxSearch, values.get(0));
+        sendKeys(MatrixCostUpdatePage.txtBoxSearch, values.get(0));
         Utility_Functions.actionKey(Keys.ENTER, driver);
-        String expValue = driver.findElement(ItemMasterPage.poField).getAttribute("value");
+        String expValue = driver.findElement(MatrixCostUpdatePage.poFieldItem).getAttribute("value");
         System.out.println("Exp : " + expValue);
         Utility_Functions.xAssertEquals(report, values.get(1),expValue, ",","Updated value");
-        click(ItemMasterPage.btnF3);
+        click(MatrixCostUpdatePage.btnF3);
     }
 }

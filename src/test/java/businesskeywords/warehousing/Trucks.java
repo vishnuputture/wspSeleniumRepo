@@ -2,8 +2,8 @@ package businesskeywords.warehousing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import pages.MasterPage;
-import pages.TruckPage;
+import pages.common.MasterPage;
+import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
 public class Trucks extends ReusableLib {

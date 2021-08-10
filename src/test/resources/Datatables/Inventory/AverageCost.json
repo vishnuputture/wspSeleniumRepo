@@ -9,9 +9,12 @@
       "Tc_25_ValidateItemCreation": "launchApp,siteLogin,validateItemMasterTitle,createAverageCostItem",
       "Tc_26_ValidateItemDeletion": "launchApp,siteLogin,validateItemMasterTitle,deleteAvgCostItem",
 	  "Tc_27_ValidateItemUpdate": "launchApp,siteLogin,validateItemMasterTitle,updateAvgCostItem",
-	  "Tc_28_ValidateReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,attachVendor",
+	  "Tc_28_ValidateReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,attachVendor,navigateItemLedgerFromCorrection,validateLedger",
 	  "Tc_29_ValidateCostAdjustmentProcess": "launchApp,siteLogin,validateAvgCostAdjustTitle,fillCostAdjustmentDetails,processCostAdjustment",
-	  "Tc_30_ValidateCostAdjustmentLedger": "launchApp,siteLogin,validateAvgCostAdjustTitle,validateLedger"
+	  "Tc_30_ValidateCostAdjustmentLedger": "launchApp,siteLogin,validateAvgCostAdjustTitle,navigateItemLedgerFromAdjustment,validateLedger",
+	  "Tc_31_ValidateMultipleReceiveCorrection": "launchApp,siteLogin,validateItemMasterTitle,createMultipleItems,attachVendorMultipleItem,validateMultipleLedgerFromCorrection",
+	  "Tc_32_ValidateMultipleCostAdjustment": "launchApp,siteLogin,validateAvgCostAdjustTitle,processMultipleCostAdjustments,validateMultipleLedgerFromAdjustment",
+	  "Tc_33_ValidateQuantityFieldReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,validateQuantityReceivedCorrections",
     }
   ],
   "General_Data": [
@@ -48,11 +51,23 @@
 
     },
     {
+      "TC_ID": "Tc_31_ValidateMultipleReceiveCorrection"
+
+    },
+    {
       "TC_ID": "Tc_29_ValidateCostAdjustmentProcess"
 
     },
     {
       "TC_ID": "Tc_30_ValidateCostAdjustmentLedger"
+
+    },
+    {
+      "TC_ID": "Tc_32_ValidateMultipleCostAdjustment"
+
+    },
+    {
+      "TC_ID": "Tc_33_ValidateQuantityFieldReceiveCorrection"
 
     }
   ]

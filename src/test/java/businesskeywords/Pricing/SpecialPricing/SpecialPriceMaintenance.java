@@ -8,7 +8,9 @@ import commonkeywords.*;
 
 import org.openqa.selenium.WebElement;
 import pages.pricing.SpecialPricePage;
-import pages.MasterPage;
+
+import pages.common.MasterPage;
+
 import supportLibraries.Utility_Functions;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -100,7 +102,7 @@ public class SpecialPriceMaintenance extends ReusableLib {
         List<WebElement> eleList = driver.findElements(SpecialPricePage.selectPricingRecordBox);
         if (eleList.size() > 0) {
             for (WebElement element : eleList) {
-                sendKeys(element, "4");
+                sendKeys(element, "4","");
             }
             Utility_Functions.actionKey(Keys.ENTER, driver);
             waitForElementDisappear(MasterPage.loadingAnime, globalWait);

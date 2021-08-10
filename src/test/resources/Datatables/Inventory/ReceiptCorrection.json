@@ -1,0 +1,26 @@
+
+{
+  "Business_Flow": [
+    {
+
+      "Tc_28_ValidateReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,attachVendor,navigateItemLedgerFromCorrection,validateLedger",
+      "Tc_31_ValidateMultipleReceiveCorrection": "launchApp,siteLogin,validateItemMasterTitle,createMultipleItems,attachVendorMultipleItem,validateMultipleLedgerFromCorrection",
+      "Tc_33_ValidateQuantityFieldReceiveCorrection": "launchApp,siteLogin,validateRcvCorrectionTitle,validateQuantityReceivedCorrections"
+    }
+  ],
+  "General_Data": [
+
+    {
+      "TC_ID": "Tc_28_ValidateReceiveCorrection"
+
+    },
+    {
+      "TC_ID": "Tc_31_ValidateMultipleReceiveCorrection"
+
+    },
+    {
+      "TC_ID": "Tc_33_ValidateQuantityFieldReceiveCorrection"
+
+    }
+  ]
+}

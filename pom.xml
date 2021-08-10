@@ -90,7 +90,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<testNG.suiteXmlFile>src/test/resources/Suites/Sanity/averagecost.xml</testNG.suiteXmlFile>
+				<testNG.suiteXmlFile>src/test/resources/Suites/Sanity/inventory.xml</testNG.suiteXmlFile>
 			</properties>
 			<build>
 				<pluginManagement>
@@ -272,6 +272,13 @@
 			<version>1.1.0</version>
 		</dependency>
 
+		<!-- Driver Dependancy -->
+		<dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.0.0</version>
+            <scope>test</scope>
+        </dependency>
 		<!-- Appium Dependency -->
 		<dependency>
 			<groupId>io.appium</groupId>
@@ -645,6 +652,12 @@
 			<groupId>com.paulhammant</groupId>
 			<artifactId>ngwebdriver</artifactId>
 			<version>1.1.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>4.4.3</version>
 		</dependency>
 
 	</dependencies>

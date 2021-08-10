@@ -5,7 +5,7 @@ import com.winSupply.core.ReusableLib;
 
 import commonkeywords.CommonActions;
 
-import pages.MasterPage;
+import pages.common.MasterPage;
 
 public class Master extends ReusableLib {
     CommonActions commonObj;
