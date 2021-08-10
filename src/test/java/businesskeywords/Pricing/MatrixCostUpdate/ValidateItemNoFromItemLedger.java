@@ -3,8 +3,8 @@ package businesskeywords.Pricing.MatrixCostUpdate;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
-import pages.MatrixCostUpdatePage;
-import pages.SpecialPricePage;
+import pages.pricing.MatrixCostUpdatePage;
+import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
 public class ValidateItemNoFromItemLedger extends ReusableLib {

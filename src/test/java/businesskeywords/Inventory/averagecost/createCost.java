@@ -3,7 +3,7 @@ package businesskeywords.Inventory.averagecost;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import pages.ItemMasterPage;
+import pages.pricing.ItemMasterPage;
 import pages.ReceiveCorrectionPage;
 import pages.CostAdjustmentPage;
 import supportLibraries.Utility_Functions;

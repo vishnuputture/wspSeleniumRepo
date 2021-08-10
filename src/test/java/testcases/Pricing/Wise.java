@@ -170,8 +170,41 @@ public class Wise extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_154_verify_Warning_message_Switching_LastCost_to_AverageCost(SeleniumTestParameters testParameters) {
+    public void Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_140_verify_the_functionality_of_Select_Function_Drop_Down(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case validate filter ");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

@@ -4,8 +4,8 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
-import pages.ItemMasterPage;
-import pages.MatrixCostUpdatePage;
+import pages.pricing.ItemMasterPage;
+import pages.pricing.MatrixCostUpdatePage;
 import supportLibraries.Utility_Functions;
 
 import java.util.ArrayList;
@@ -32,16 +32,20 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
      */
     public void modifyPOCostField() {
         values=new ArrayList();
-        click(MatrixCostUpdatePage.checkBox, "Disable CheckBox");
-        click(MatrixCostUpdatePage.radioButton, "Click radio button");
         String itemN0 = driver.findElement(MatrixCostUpdatePage.itemNumber).getText();
         System.out.println("Item no : "+itemN0);
-        int randNumber = Utility_Functions.xRandomFunction();
-        String number = Integer.toString(randNumber);
-        String decValue = poUpdation.update(number);
+        String decValue = poUpdation.updateField(poUpdation.fieldWithValidRandomValue(),MatrixCostUpdatePage.poField);
         values.add(itemN0);
         values.add(decValue);
         System.out.println("Size : "+values.size());
+    }
+
+    /**
+     * This method to select first row record from the Matrix cost Update table
+     */
+    public void selectRecordFromTable() {
+        click(MatrixCostUpdatePage.checkBox, "Disable CheckBox");
+        click(MatrixCostUpdatePage.radioButton, "Click radio button");
     }
 
     /**

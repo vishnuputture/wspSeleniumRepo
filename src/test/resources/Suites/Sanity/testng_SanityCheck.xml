@@ -8,10 +8,13 @@
 						<!--<include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
 						<include name="Tc_151_verify_updating_POCost_providing_Input_values"></include>
 						<include name="Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values"></include>
-						<include name="Tc_155_verify_updated_Field_in_Item_Master_Page"></include>
-					--><include name="Tc_154_verify_Warning_message_Switching_LastCost_to_AverageCost"></include>
-
-
+						--><include name="Tc_155_verify_updated_Field_in_Item_Master_Page"></include>
+					<!--<include name="Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost"></include>
+                    <include name="Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button"></include>
+                    <include name="Tc_140_verify_the_functionality_of_Select_Function_Drop_Down"></include>
+                    <include name="Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons"></include>
+                <include name="Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons"></include>
+-->
                 <!-- 		<include name="Tc_19_ValidateCustomerNumber"></include>
                         <include name="Tc_20_ValidateItemNumber"></include>
                         <include name="Tc_22_ValidateDBafterAdd"></include>

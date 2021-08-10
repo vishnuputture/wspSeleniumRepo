@@ -19,10 +19,14 @@
 			"Tc_24_InsertPAPRecordToDelete":"launchApp,siteLogin,getCustItemData,insertSpecialPricePAPRecord,exitInsertSql,deleteSpecialPricePAPRecord,cleanUp",
 			"Tc_21_E2E": "launchApp,cleanUp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql",
 			"Tc_137_verify_Item_number_by_navigating_to_Item_Ledger": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,navigationToItemLedger,exitItemLedgerToMatrixToInventory,exitMatrixToInventoryManagementMenu2Page,signOut",
-			"Tc_151_verify_updating_POCost_providing_Input_values": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,modifyPOField,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"Tc_151_verify_updating_POCost_providing_Input_values": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,verifyPOFieldWithDiffValues,exitMatrixToInventoryManagementMenu2Page,signOut",
 			"Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,modifyProposedMtxCostField,exitMatrixToInventoryManagementMenu2Page,signOut",
-			"Tc_155_verify_updated_Field_in_Item_Master_Page": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,modifyPOCostField,exitMatrixToInventoryManagementMenu2Page,exitInventoryMenu2ToInventoryManagementMainMenuPage,validateItemMasterField,signOut",
-			"Tc_154_verify_Warning_message_Switching_LastCost_to_AverageCost": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,searchItemNoFromTheList,exitMatrixToInventoryManagementMenu2Page,signOut"
+			"Tc_155_verify_updated_Field_in_Item_Master_Page": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,selectRecordFromTable,modifyPOCostField,exitMatrixToInventoryManagementMenu2Page,exitInventoryMenu2ToInventoryManagementMainMenuPage,validateItemMasterField,signOut",
+			"Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,validateDiscardBtn,validateCancelBtn,modifyPOCostField,navigateToLastCost,searchItemNoFromTheList,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,unSelectAndSelectChekBox,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"Tc_140_verify_the_functionality_of_Select_Function_Drop_Down": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,selectFunctionalityDrop,verifyF1HelpFunctionality,verifyF3ExitFunctionality,signOut",
+			"Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,updateExcludeMcReport,exitMatrixToInventoryManagementMenu2Page,signOut",
+			"Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,validateNoAction,exitMatrixToInventoryManagementMenu2Page,signOut"
 		}
 	],
 	"General_Data": [
@@ -165,24 +169,40 @@
 			"Title": "Update Po Cost with different values",
 			"7_integer_Value": "787878",
 			"11_integer_value": "12345678912",
-			"Enter_0": "0",
-			"Character": "asGht%$"
+			"Enter_0": "0"
 		},
 		{
 			"TC_ID": "Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values",
 			"Title": "Update Proposed Matrix Cost with different values",
-			"7_integer_Value": "787878",
 			"11_integer_value": "12345678912",
-			"Enter_0": "0",
-			"Character": "asGht%$"
+			"Enter_0": "0"
 		},
 		{
 			"TC_ID": "Tc_155_verify_updated_Field_in_Item_Master_Page",
-			"Title": "Update Matrix cost update  Po field and validate in Item Master Page"
+			"Title": "Update Matrix cost update  Po field and validate in Item Master Page",
+			"11_integer_value": "12345678912",
+			"Enter_0": "0"
+
 		},
 		{
-			"TC_ID": "Tc_154_verify_Warning_message_Switching_LastCost_to_AverageCost",
+			"TC_ID": "Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost",
 			"Title": "Searching Item number on the page"
+		},
+		{
+			"TC_ID": "Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button",
+			"Title": "CheckBox validation"
+		},
+		{
+			"TC_ID": "Tc_140_verify_the_functionality_of_Select_Function_Drop_Down",
+			"Title": "verify Select Functionality"
+		},
+		{
+			"TC_ID": "Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons",
+			"Title": "verify Functionality of Exclude M/C Report"
+		},
+		{
+			"TC_ID": "Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons",
+			"Title": "verify Functionality of No Action"
 		}
 	]
 }

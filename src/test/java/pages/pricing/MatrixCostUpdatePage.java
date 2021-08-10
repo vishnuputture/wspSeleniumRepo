@@ -1,4 +1,4 @@
-package pages;
+package pages.pricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -9,11 +9,23 @@ public class MatrixCostUpdatePage extends ReusableLib {
     public MatrixCostUpdatePage(Helper helper) {
         super(helper);
     }
+
     public static By avgCostRadioBtn=By.xpath("//label[text()='Average Cost']/preceding::input[@id='RbtAvgCost']");
     public static By lastCostRadioBtn=By.xpath("//label[text()='Last Cost']/preceding::input[@id='RbtLastCost']");
     public static By enabledRadioBtn = By.xpath("//input[@class='label']");
+    public static By f3ExitOpt = By.xpath("//option[text()='F3 - Exit']");
+    public static By f1HelpOpt = By.xpath("//option[text()='F1 - Help']");
+    public static By warningPopUp = By.xpath("//span[text()='Warning Message']");
     public static By exitButton=By.id("btnCancel");
+    public static By noActionRadioBtn=By.id("rbtNoAction.1");
+    public static By excMCRepoRadioBtn=By.id("rbtExlMC.1");
+    public static By selectFunDrop=By.id("ddbSelFunction");
+    public static By discardButton=By.id("CssButton1");
+    public static By cancelButton=By.id("CssButton2");
     public static By checkBox=By.id("RbtMtxUpdAll");
+    public static By avgColor=By.id("outAvgCost.1");
+    public static By lastColor=By.id("outLastCost.1");
+    public static By continueButton=By.id("CssButton1");
     public static By radioButton=By.xpath("//input[contains(@id,'rbtUpdMtxC')]");
     public static By poField=By.xpath("//input[contains(@id,'outPOCost')]");
     public static By ProposedMtxCost=By.xpath("//input[contains(@id,'outPropMtx')]");
