@@ -43,6 +43,7 @@ public class MatrixCostUpdate extends ReusableLib {
      *
      */
     public void validateMtxCstUpdUI() {
+        Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.pageHeader),"Verify 'Matrix Cost Update' Header is displayed");
         String[] str={"MF Code","Item Number","Description","PO Cost","Last Cost","Average Cost","Matrix Cost","Variance %","Proposed Matrix Cost","Update Matrix Cost","Exclude M/C Report","No Action"};
         List<String> text =new ArrayList<>();
         text.addAll(Arrays.asList(str));
@@ -81,8 +82,8 @@ public class MatrixCostUpdate extends ReusableLib {
      *
      */
     public void validatePOValue(String itemNo,String exp_poValue) {
-        vrfyElmentExist(MatrixCostUpdatePage.validateUpdatedPoValue(itemNo),"Item Number");
-        String act_pOValue=driver.findElement(MatrixCostUpdatePage.validateUpdatedPoValue(itemNo)).getAttribute("value");
+        vrfyElmentExist(validateUpdatedPoValue(itemNo),"Item Number");
+        String act_pOValue=driver.findElement(validateUpdatedPoValue(itemNo)).getAttribute("value");
         Utility_Functions.xAssertEquals(report,act_pOValue,exp_poValue,"Updated PO value ");
         //Utility_Functions.validateFieldMatch(report,driver.findElement(MatrixCostUpdatePage.validateUpdatedPoValue(itemNo)),act_pOValue);
     }
@@ -92,8 +93,8 @@ public class MatrixCostUpdate extends ReusableLib {
      *
      */
     public void validateItemNumber(String exp_itemNumber) {
-        vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(exp_itemNumber),"Item Number");
-        String act_itemNumber=driver.findElement(MatrixCostUpdatePage.validateItemNumber(exp_itemNumber)).getText();
+        vrfyElmentExist(validateItemNumbr(exp_itemNumber),"Item Number");
+        String act_itemNumber=driver.findElement(validateItemNumbr(exp_itemNumber)).getText();
         Utility_Functions.xAssertEquals(report,act_itemNumber,exp_itemNumber,"Item Number ");
         //Utility_Functions.validateFieldMatch(report,driver.findElement(MatrixCostUpdatePage.validateItemNumber(exp_itemNumber)),act_itemNumber);
     }
@@ -189,18 +190,26 @@ public class MatrixCostUpdate extends ReusableLib {
         click(MatrixCostUpdatePage.saveButton,"Click save button");
         Utility_Functions.waitForElementVisible(driver,MatrixCostUpdatePage.updateButton,2);
         click(MatrixCostUpdatePage.cancelButton,"Click Cancel Button");
-        vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(itemNo),"Item Number: "+itemNo+" is displayed after click on Cancel button");
+        vrfyElmentExist(validateItemNumbr(itemNo),"Item Number: "+itemNo+" is displayed after click on Cancel button");
         click(MatrixCostUpdatePage.saveButton,"Click save button");
         click(MatrixCostUpdatePage.updateButton,"Click Update button");
-        Utility_Functions.xWaitForElementDisappear(driver,MatrixCostUpdatePage.validateItemNumber(itemNo),3);
+        Utility_Functions.xWaitForElementDisappear(driver,validateItemNumbr(itemNo),3);
         Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.avgColor),"Item Number: "+itemNo+" is Not displayed after click on Update button");
+    }
+
+    public By validateUpdatedPoValue(String itemNo){
+        return By.xpath("//a[text()='"+itemNo+"']/following::input");
+    }
+
+    public By validateItemNumbr(String itemNo){
+        return By.xpath("//a[text()='"+itemNo+"']");
     }
 
     public void clkUpdatebtn(){
         String itemNo=selectRecord(MatrixCostUpdatePage.radioButton);
         click(MatrixCostUpdatePage.saveButton,"Click save button");
         click(MatrixCostUpdatePage.updateButton,"Click Update button");
-        Utility_Functions.xWaitForElementDisappear(driver,MatrixCostUpdatePage.validateItemNumber(itemNo),3);
+        Utility_Functions.xWaitForElementDisappear(driver,validateItemNumbr(itemNo),3);
         Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.avgColor),"Item Number: "+itemNo+" is Not displayed after click on Update button");
     }
 
@@ -213,7 +222,7 @@ public class MatrixCostUpdate extends ReusableLib {
         String itemNo=selectRecord(MatrixCostUpdatePage.noActionRadioBtn);
         click(MatrixCostUpdatePage.saveButton,"Click save button");
         click(MatrixCostUpdatePage.continueButton,"Click Continue Button");
-        vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(itemNo),"Item Number: "+itemNo+" is displayed after click on Continue button");
+        vrfyElmentExist(validateItemNumbr(itemNo),"Item Number: "+itemNo+" is displayed after click on Continue button");
     }
 
 //TC-154
@@ -235,7 +244,7 @@ public class MatrixCostUpdate extends ReusableLib {
         navigateToAverageCost();
         String color1=driver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
         Utility_Functions.xAssertEquals(report,color1,"rgba(51, 153, 0, 1)","Average Cost Column values are green");
-        vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(itemNo),"Item Number: "+itemNo+" is displayed after click on Discard button");
+        vrfyElmentExist(validateItemNumbr(itemNo),"Item Number: "+itemNo+" is displayed after click on Discard button");
     }
 
     public void slctRecord() {
@@ -267,7 +276,7 @@ public class MatrixCostUpdate extends ReusableLib {
         String itemNo=selectRecord(MatrixCostUpdatePage.radioButton);
         click(MatrixCostUpdatePage.saveButton,"Click on Save button");
         click(MatrixCostUpdatePage.cancelButton,"Click on Cancel Button");
-        vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(itemNo),"Item Number: "+itemNo+" is displayed after click on Cancel button");
+        vrfyElmentExist(validateItemNumbr(itemNo),"Item Number: "+itemNo+" is displayed after click on Cancel button");
     }
 
     /**
@@ -281,7 +290,7 @@ public class MatrixCostUpdate extends ReusableLib {
         navigateToLastCost();
         vrfyElmentExist(MatrixCostUpdatePage.warningPopUp,"Warning message PopUp");
         click(MatrixCostUpdatePage.cancelButton,"Click on Cancel Button");
-        vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(itemNo),"Item Number: "+itemNo+" is displayed after click on Cancel button");
+        vrfyElmentExist(validateItemNumbr(itemNo),"Item Number: "+itemNo+" is displayed after click on Cancel button");
     }
 
     /**
