@@ -4,14 +4,16 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Util;
 import commonkeywords.CommonActions;
+import org.apache.commons.lang3.StringUtils;
 import org.opencv.core.Mat;
 import org.openqa.selenium.By;
 import pages.pricing.MatrixCostUpdatePage;
 import supportLibraries.Utility_Functions;
 
 public class PoCostUpdation extends ReusableLib {
-    CommonActions commonObj;
-    ProposedMtxCostUpdation propMtrxUpd;
+    CommonActions commonObj = new CommonActions(helper);
+    ProposedMtxCostUpdation propMtrxUpd=new ProposedMtxCostUpdation(helper);
+    MatrixCostUpdate mtxCostUpd=new MatrixCostUpdate(helper);
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -22,8 +24,6 @@ public class PoCostUpdation extends ReusableLib {
 
     public PoCostUpdation(Helper helper) {
         super(helper);
-        commonObj = new CommonActions(helper);
-        propMtrxUpd=new ProposedMtxCostUpdation(helper);
     }
 
     /**
@@ -32,16 +32,7 @@ public class PoCostUpdation extends ReusableLib {
      *
      */
     public void verifyPOFieldWithDiffValues() {
-        String checked=driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
-        System.out.println("Is it checked  : "+checked);
-        try{
-            checked.equals("true");
-            System.out.println("Entered if");
-            click(MatrixCostUpdatePage.checkBox,"Disable the Update Matrix Cost checkBox");
-            click(MatrixCostUpdatePage.radioButton);
-        }catch (Exception e){
-            System.out.println("Disabled the Update Matrix Cost checkBox");
-        }
+        mtxCostUpd.selectRecord(MatrixCostUpdatePage.radioButton);
         propMtrxUpd.CancelUpdatedValue(fieldWithValidRandomValue(),MatrixCostUpdatePage.poField);
         propMtrxUpd.CancelUpdatedValue(jsonData.getData("11_integer_value"),MatrixCostUpdatePage.poField);
         propMtrxUpd.CancelUpdatedValue(jsonData.getData("Enter_0"),MatrixCostUpdatePage.poField);
@@ -55,6 +46,12 @@ public class PoCostUpdation extends ReusableLib {
     public String fieldWithValidRandomValue() {
         int randNumber=Utility_Functions.xRandomFunction();
         String validValue=Integer.toString(randNumber);
+        int leg=validValue.length();
+        System.out.println("Leght of random value: "+leg);
+        if(leg>7){
+            validValue= StringUtils.chop(validValue);
+            System.out.println("Chopped last string"+validValue);
+        }
         return validValue;
     }
 
@@ -64,11 +61,19 @@ public class PoCostUpdation extends ReusableLib {
      *
      */
     public void unSelectAndSelectChekBox() {
-        Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.avgCostRadioBtn),"Verify 'Average Cost' is selected by default");
+        String checked=driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        System.out.println("Is it checked  : "+checked);
+        try{
+            checked.equals("true");
+            System.out.println("Entered if");
+            click(MatrixCostUpdatePage.checkBox,"Disable the Update Matrix Cost checkBox");
+        }catch (Exception e){
+            System.out.println("Disabled the Update Matrix Cost checkBox");
+        }
+        mtxCostUpd.navigateToAverageCost();
         String color=driver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
         System.out.println("Color : "+color);
         Utility_Functions.xAssertEquals(report,color,"rgba(51, 153, 0, 1)","Average Cost Column values are green");
-        click(MatrixCostUpdatePage.checkBox,"Unselect CheckBox");
         click(MatrixCostUpdatePage.checkBox,"Select Check Box");
         waitForElementClickable(MatrixCostUpdatePage.saveButton,3);
         click(MatrixCostUpdatePage.saveButton);
@@ -76,6 +81,28 @@ public class PoCostUpdation extends ReusableLib {
         waitForElementClickable(MatrixCostUpdatePage.continueButton,3);
         click(MatrixCostUpdatePage.continueButton,"Click continue button");
     }
+
+    /**
+     *
+     * This method to unselect Checkbox and navigate to Average Cost
+     *
+     */
+    public void unSelToAvgCost() {
+        String checked = driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        System.out.println("Is it checked  : " + checked);
+        try {
+            checked.equals("true");
+            System.out.println("Entered if");
+            click(MatrixCostUpdatePage.checkBox, "Disable the Update Matrix Cost checkBox");
+        } catch (Exception e) {
+            System.out.println("Disabled the Update Matrix Cost checkBox");
+        }
+        mtxCostUpd.navigateToAverageCost();
+        String color = driver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
+        System.out.println("Color : " + color);
+        Utility_Functions.xAssertEquals(report, color, "rgba(51, 153, 0, 1)", "Average Cost Column values are green");
+    }
+
 
     /**
      *
@@ -117,7 +144,7 @@ public class PoCostUpdation extends ReusableLib {
         }
         System.out.println("Dec value "+decValue);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSendKeys(driver, report, by, fieldValue, "Enter "+fieldValue+" into PO Field");
+        Utility_Functions.xSendKeys(driver, report, by, fieldValue, "Enter "+fieldValue+" into Field");
         click(MatrixCostUpdatePage.saveButton, "Click Save Changes Button");
         click(MatrixCostUpdatePage.updateButton, "Click Update Button");
         Utility_Functions.timeWait(2);

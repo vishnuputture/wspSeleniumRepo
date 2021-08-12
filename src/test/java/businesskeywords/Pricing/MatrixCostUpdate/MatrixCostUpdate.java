@@ -9,8 +9,12 @@ import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.MatrixCostUpdatePage;
 import supportLibraries.Utility_Functions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MatrixCostUpdate extends ReusableLib {
-    CommonActions commonObj;
+    CommonActions commonObj = new CommonActions(helper);
     public static String exp_itemNumber;
 
     /**
@@ -22,7 +26,6 @@ public class MatrixCostUpdate extends ReusableLib {
 
     public MatrixCostUpdate(Helper helper) {
         super(helper);
-        commonObj = new CommonActions(helper);
     }
 
     /**
@@ -33,6 +36,24 @@ public class MatrixCostUpdate extends ReusableLib {
         commonObj.masterToInventory();
         commonObj.InventoryManagementMainMenuToInventoryManagementMenu2();
         commonObj.InventoryManagementMenu2ToMatrixCostUpdate();
+    }
+
+    /**
+     * This method to validate Matrix Cost Update UI
+     *
+     */
+    public void validateMtxCstUpdUI() {
+        String[] str={"MF Code","Item Number","Description","PO Cost","Last Cost","Average Cost","Matrix Cost","Variance %","Proposed Matrix Cost","Update Matrix Cost","Exclude M/C Report","No Action"};
+        List<String> text =new ArrayList<>();
+        text.addAll(Arrays.asList(str));
+        Utility_Functions.ValidateFieldsPresentonPage(report,text, driver.findElements(MatrixCostUpdatePage.tableHeaders),"Text");
+        String[] selcFun={"Last Cost","Average Cost"};
+        List<String> value =Arrays.asList(selcFun);
+        Utility_Functions.ValidateFieldsPresentonPage(report,value, driver.findElements(MatrixCostUpdatePage.compareTo),"Visible Text");
+        selectFunctionalityDrop();
+        Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.exportExcel),"Verify 'Export to Excel' option is displayed");
+        Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.saveButton),"Verify 'Save Changes' button is displayed");
+        Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.exitButton),"Verify 'F3-Exit' button is displayed");
     }
 
     /**
@@ -175,6 +196,14 @@ public class MatrixCostUpdate extends ReusableLib {
         Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.avgColor),"Item Number: "+itemNo+" is Not displayed after click on Update button");
     }
 
+    public void clkUpdatebtn(){
+        String itemNo=selectRecord(MatrixCostUpdatePage.radioButton);
+        click(MatrixCostUpdatePage.saveButton,"Click save button");
+        click(MatrixCostUpdatePage.updateButton,"Click Update button");
+        Utility_Functions.xWaitForElementDisappear(driver,MatrixCostUpdatePage.validateItemNumber(itemNo),3);
+        Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.avgColor),"Item Number: "+itemNo+" is Not displayed after click on Update button");
+    }
+
 //TC-148
     /**
      * This method to validate No Action Functionality
@@ -189,19 +218,28 @@ public class MatrixCostUpdate extends ReusableLib {
 
 //TC-154
     /**
-     * This method to functionality of Discard Button
+     *This method to functionality of Discard Button from warning popUp: When Navigation from Average cost to Last Cost
+     *
+     * And return to Average Cost
      *
      */
-    public void validateDiscardBtn() {
-        String itemNo=selectRecord(MatrixCostUpdatePage.discardButton);
+    public void validateDiscardBtnWar() {
+        unSelToAvgCost();
+        String itemNo=selectRecord(MatrixCostUpdatePage.radioButton);
         navigateToLastCost();
-        String color=driver.findElement(MatrixCostUpdatePage.lastColor).getCssValue("color");
-        Utility_Functions.xAssertEquals(report,color,"rgba(51, 153, 0, 1)","Last Cost Column values are green");
-        click(MatrixCostUpdatePage.discardButton,"CLick Discard Button");
+        click(MatrixCostUpdatePage.discardButton, "CLick Discard Button");
+        String color = driver.findElement(MatrixCostUpdatePage.lastColor).getCssValue("color");
+        Utility_Functions.xAssertEquals(report, color, "rgba(51, 153, 0, 1)", "Last Cost Column values are green");
+        click(MatrixCostUpdatePage.checkBox);
+        click(MatrixCostUpdatePage.checkBox);
         navigateToAverageCost();
         String color1=driver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
         Utility_Functions.xAssertEquals(report,color1,"rgba(51, 153, 0, 1)","Average Cost Column values are green");
         vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(itemNo),"Item Number: "+itemNo+" is displayed after click on Discard button");
+    }
+
+    public void slctRecord() {
+        selectRecord(MatrixCostUpdatePage.radioButton);
     }
 
     /**
@@ -209,18 +247,100 @@ public class MatrixCostUpdate extends ReusableLib {
      *
      */
     public String selectRecord(By by) {
-        click(MatrixCostUpdatePage.checkBox,"Unselect CheckBox");
-        click(by,"Select record from the list");
+        String checked=driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        try{
+            checked.equals("true");
+            click(MatrixCostUpdatePage.checkBox,"Disable the Update Matrix Cost checkBox");
+            click(by,"Select record from the list");
+        }catch (Exception e){
+            click(by,"Select record from the list");
+        }
         String itemNo=driver.findElement(MatrixCostUpdatePage.itemNumber).getText();
         return itemNo;
     }
 
     /**
-     * This method to functionality of Cancel Button
+     * This method to functionality of Cancel Button after clicking on Save changes button
      *
      */
     public void validateCancelBtn() {
-        String itemNo=selectRecord(MatrixCostUpdatePage.cancelButton);
+        String itemNo=selectRecord(MatrixCostUpdatePage.radioButton);
+        click(MatrixCostUpdatePage.saveButton,"Click on Save button");
+        click(MatrixCostUpdatePage.cancelButton,"Click on Cancel Button");
         vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(itemNo),"Item Number: "+itemNo+" is displayed after click on Cancel button");
+    }
+
+    /**
+     * This method to functionality of Cancel Button on Warning PopUp
+     *
+     * When Navigation from Average cost to Last Cost
+     *
+     */
+    public void validateCancelBtnWar() {
+        String itemNo=selectRecord(MatrixCostUpdatePage.radioButton);
+        navigateToLastCost();
+        vrfyElmentExist(MatrixCostUpdatePage.warningPopUp,"Warning message PopUp");
+        click(MatrixCostUpdatePage.cancelButton,"Click on Cancel Button");
+        vrfyElmentExist(MatrixCostUpdatePage.validateItemNumber(itemNo),"Item Number: "+itemNo+" is displayed after click on Cancel button");
+    }
+
+    /**
+     * This method to functionality of Save Button on Warning PopUp
+     *
+     * When Navigation from Average cost to Last Cost
+     *
+     */
+    public void validateSaveBtnWar() {
+        String itemNo=selectRecord(MatrixCostUpdatePage.radioButton);
+        navigateToLastCost();
+        vrfyElmentExist(MatrixCostUpdatePage.warningPopUp,"Warning message PopUp");
+        click(MatrixCostUpdatePage.saveWarBtn,"Click on Save Button");
+        vrfyElmentExist(MatrixCostUpdatePage.updateButton,"Informational message PopUp");
+        click(MatrixCostUpdatePage.cancelButton,"Click Cancel Button");
+        String color = driver.findElement(MatrixCostUpdatePage.lastColor).getCssValue("color");
+        Utility_Functions.xAssertEquals(report, color, "rgba(51, 153, 0, 1)", "Item Number: "+itemNo+" Changes made are not saved. Last Cost Radio button is selected");
+    }
+
+    /**
+     *
+     * This method to unselect Checkbox and navigate to Average Cost
+     *
+     */
+    public void unSelToAvgCost() {
+        String checked = driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        System.out.println("Is it checked  : " + checked);
+        try {
+            checked.equals("true");
+            System.out.println("Entered if");
+            click(MatrixCostUpdatePage.checkBox, "Disable the Update Matrix Cost checkBox");
+        } catch (Exception e) {
+            System.out.println("Disabled the Update Matrix Cost checkBox");
+        }
+        navigateToAverageCost();
+        String color = driver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
+        System.out.println("Color : " + color);
+        Utility_Functions.xAssertEquals(report, color, "rgba(51, 153, 0, 1)", "Average Cost Column values are green");
+    }
+
+
+    /**
+     *
+     * This method to unselect Checkbox and navigate to Last Cost
+     *
+     */
+    public void unSelToLastCost() {
+        String checked = driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        System.out.println("Is it checked  : " + checked);
+        try {
+            checked.equals("true");
+            System.out.println("Entered if");
+            click(MatrixCostUpdatePage.checkBox, "Disable the Update Matrix Cost checkBox");
+        } catch (Exception e) {
+            System.out.println("Disabled the Update Matrix Cost checkBox");
+        }
+        navigateToLastCost();
+        String color = driver.findElement(MatrixCostUpdatePage.lastColor).getCssValue("color");
+        System.out.println("Color : " + color);
+        Utility_Functions.xAssertEquals(report, color, "rgba(51, 153, 0, 1)", "Last Cost Column values are green");
     }
 }

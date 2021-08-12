@@ -8,7 +8,7 @@ import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
 public class ValidateItemNoFromItemLedger extends ReusableLib {
-    CommonActions commonObj;
+    CommonActions commonObj = new CommonActions(helper);
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -19,7 +19,6 @@ public class ValidateItemNoFromItemLedger extends ReusableLib {
 
     public ValidateItemNoFromItemLedger(Helper helper) {
         super(helper);
-        commonObj = new CommonActions(helper);
     }
 
     /**

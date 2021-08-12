@@ -7,9 +7,11 @@ import org.openqa.selenium.By;
 import pages.pricing.MatrixCostUpdatePage;
 import supportLibraries.Utility_Functions;
 
+import java.util.ArrayList;
+
 public class ProposedMtxCostUpdation extends ReusableLib {
 
-    CommonActions commonObj;
+    CommonActions commonObj = new CommonActions(helper);
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -20,25 +22,16 @@ public class ProposedMtxCostUpdation extends ReusableLib {
 
     public ProposedMtxCostUpdation(Helper helper) {
         super(helper);
-        commonObj = new CommonActions(helper);
     }
 
     /**
-     * This method to modify PO field with different values
+     * This method to modify Proposed field with different values
      */
     public void verifyProposedMtxFieldWithDiffValues() {
+        MatrixCostUpdate mtxCostUpd=new MatrixCostUpdate(helper);
         int randNumber = Utility_Functions.xRandomFunction();
         String validValue = Integer.toString(randNumber);
-        String checked = driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
-        System.out.println("Is it checked  : " + checked);
-        try {
-            checked.equals("true");
-            System.out.println("Entered if");
-            click(MatrixCostUpdatePage.checkBox, "Disable the Update Matrix Cost checkBox");
-            click(MatrixCostUpdatePage.radioButton);
-        } catch (Exception e) {
-            System.out.println("Disabled the Update Matrix Cost checkBox");
-        }
+        mtxCostUpd.selectRecord(MatrixCostUpdatePage.radioButton);
         CancelUpdatedValue(validValue, MatrixCostUpdatePage.ProposedMtxCost);
         CancelUpdatedValue(jsonData.getData("11_integer_value"), MatrixCostUpdatePage.ProposedMtxCost);
         CancelUpdatedValue(jsonData.getData("Enter_0"), MatrixCostUpdatePage.ProposedMtxCost);
@@ -49,7 +42,18 @@ public class ProposedMtxCostUpdation extends ReusableLib {
             System.out.println(fieldValue);
             Utility_Functions.xSendKeys(driver, report, field, fieldValue, "Enter " + fieldValue + " into Matrix Cost Field");
             click(MatrixCostUpdatePage.saveButton, "Click Save Changes Button");
-            click(MatrixCostUpdatePage.cancelButton, "Click Cancel Button");
+            Utility_Functions.timeWait(5);
+            System.out.println("After 3 sec");
+            Utility_Functions.xIsDisplayed(driver,MatrixCostUpdatePage.infMessage);
+            System.out.println("Present");
+            try {
+                Utility_Functions.xClickIfAvlbl(driver, driver.findElement(MatrixCostUpdatePage.cbtn));
+            }catch (Exception e){}
+            System.out.println("Present");
+            try {
+                Utility_Functions.xClickIfAvlbl(driver, report, driver.findElement(MatrixCostUpdatePage.cancelButton), "Click Cancel button");
+            }catch (Exception e){}
+            System.out.println("Present");
             Utility_Functions.timeWait(3);
             String exp_pOValue = driver.findElement(field).getAttribute("value");
             System.out.println("exp_pOValue: " + exp_pOValue);

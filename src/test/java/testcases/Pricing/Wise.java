@@ -148,7 +148,7 @@ public class Wise extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_151_verify_updating_POCost_providing_Input_values(SeleniumTestParameters testParameters) {
+    public void Tc_142_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case validate filter ");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -156,7 +156,7 @@ public class Wise extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_152_verify_updating_ProposedMatrixCost_providing_Input_values(SeleniumTestParameters testParameters) {
+    public void Tc_143_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case validate filter ");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -164,7 +164,7 @@ public class Wise extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_155_verify_updated_Field_in_Item_Master_Page(SeleniumTestParameters testParameters) {
+    public void Tc_168_verify_the_functionality_of_PO_Cost_and_Proposed_Matrix_Cost_box_and_Save_Button(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case validate filter ");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -213,6 +213,38 @@ public class Wise extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_177_verify_the_functionality_of_adding_a_Row_to_Pricing_Matrix(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_179_verify_the_functionality_of_copying_Row_to_Pricing_Matrix(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case validate filter ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case validate filter ");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
