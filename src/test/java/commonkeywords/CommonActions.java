@@ -6,11 +6,11 @@ import com.winSupply.core.ReusableLib;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
 
-import java.util.List;
-import org.openqa.selenium.WebElement;
 import pages.*;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.SpecialPricePage;
+import pages.pricing.matrixcost.InventoryManagementMainMenuPage;
+import pages.pricing.matrixcost.InventoryManagementMenu2Page;
 import supportLibraries.Utility_Functions;
 
 import java.text.SimpleDateFormat;
@@ -253,4 +253,49 @@ public class CommonActions extends ReusableLib {
 		Utility_Functions.actionKey(Keys.ENTER, driver);
 	}
 
+//Vishnu
+	/**
+	 *
+	 * This method navigates from inventory management Main Menu to inventory management Menu2 page
+	 *
+	 */
+	public void InventoryManagementMainMenuToInventoryManagementMenu2() {
+		click(InventoryManagementMainMenuPage.moreInventorySelections,"Click More Inventory Selection");
+	}
+
+	/**
+	 *
+	 * This method navigates from inventory management Menu2 page to matrix cost update page
+	 *
+	 */
+	public void InventoryManagementMenu2ToMatrixCostUpdate() {
+		click(InventoryManagementMenu2Page.matrixCostUpdate,"Click Matrix Cost Update");
+	}
+
+	/**
+	 *
+	 * This method navigates from Order Processing Menu to Options And Constants Menu
+	 *
+	 */
+	public void navigateToOptionsAndConstantsMenu() {
+		click(MasterPage.optionAndConstantsMenu,"Click Options And Constants Menu");
+	}
+
+	/**
+	 *
+	 * This method navigates from Options And Constants Menu to Pricing Matrix
+	 *
+	 */
+	public void navigateToPricingMatrix() {
+		click(MasterPage.pricingMatrix,"Click Pricing Matrix");
+	}
+
+	/**
+	 *
+	 * This method Exit From Pricing Matrix
+	 *
+	 */
+	public void exitFromPricingMatrix() {
+		click(SpecialPricePage.btnF3,"Exit from Pricing Matrix");
+	}
 }

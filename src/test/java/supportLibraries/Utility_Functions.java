@@ -982,6 +982,8 @@ public class Utility_Functions extends ReusableLib {
 
     public static boolean validateLinks(List<WebElement> list, String webElementText) {
         for (WebElement element : list) {
+            System.out.println("Util "+element.getText());
+            System.out.println("Web text "+webElementText);
             if (element.getText().equals(webElementText)) {
                 return true;
             }
@@ -4577,5 +4579,53 @@ public class Utility_Functions extends ReusableLib {
             report.updateTestLog(tblDtls, output, Status.PASS);
         }
 
+    }
+//#######################----------------##################################################//
+    /**
+     * Assert two String value are equal
+     *
+     * @param report    to log value in report
+     * @param expValue  pass expected value
+     * @param actualVal Pass expected value
+     * @param Replace   Character to be replaced
+     * @param CstmMsg   pass Custom Message
+     */
+    public static void xAssertEquals(Report report, String expValue, String actualVal,String Replace, String CstmMsg) {
+        if (actualVal.contains(Replace)) {
+            actualVal = actualVal.replace(Replace, "").trim();
+        }
+        Assert.assertEquals(actualVal, expValue, CstmMsg);
+
+        report.updateTestLog("VerifyVal",
+                CstmMsg + " Expected text '" + expValue + "' is matching With Actual Text '" + actualVal + "'",
+                Status.PASS);
+
+    }
+
+    /**
+     *
+     * Validate Field present on the page
+     *
+     */
+    public static List<String> ValidateFieldsPresentonPage(Report report,List<String> List1, List<WebElement> WebElements,
+                                                            String TextToBeDisplayed) {
+        List<String> WebElementsList = new ArrayList<String>();
+        for (WebElement element : WebElements) {
+            WebElementsList.add(element.getText());
+        }
+        for (String str : List1) {
+            if (WebElementsList.contains(str)) {
+                System.out.println("'"+str+"' Present on the page");
+                WebElementsList.add(str);
+            }else{
+                report.updateTestLog(TextToBeDisplayed,
+                        "Text: '"+str+"' Not present on the page",
+                        Status.FAIL);
+            }
+        }
+        report.updateTestLog(TextToBeDisplayed,
+                "'" + WebElementsList + "'" + " present on the page",
+                Status.PASS);
+        return List1;
     }
 }

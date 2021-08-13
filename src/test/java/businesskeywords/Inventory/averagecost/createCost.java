@@ -146,21 +146,21 @@ public class createCost extends ReusableLib {
             System.out.println("Created item : "+getAttribute(ItemMasterPage.txtBoxSearch,"value"));
             Utility_Functions.xUpdateJson("ItemNo"+i, getAttribute(ItemMasterPage.txtBoxSearch,"value"));
     	}
-    	
+
     	click(ItemMasterPage.btnExit,"Exit from page");
     }
-    
+
     public void attachVendor() {
     	sendKeys(ReceiveCorrectionPage.txtVendorSearch,"000388","Enter vendor code");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	
+
     	List<WebElement> eleQuantityList = driver.findElements(ReceiveCorrectionPage.txtQuantity);
     	List<WebElement> eleItemNumberList = driver.findElements(ReceiveCorrectionPage.txtItemNumber);
     	List<WebElement> eleExplanationList = driver.findElements(ReceiveCorrectionPage.txtExplanation);
     	//sendKeys(ReceiveCorrectionPage.txtQuantityfirst,"100","Enter quantity");
     	//sendKeys(ReceiveCorrectionPage.txtItemNumberfirst,Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
     	//sendKeys(ReceiveCorrectionPage.txtExplanationfirst,"Test data","Enter explanation");
-    	
+
     	for(int i=0;i<=1;i++) {
     		sendKeys(eleQuantityList.get(i),"100","Enter quantity");
     		sendKeys(eleItemNumberList.get(i),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
@@ -175,24 +175,24 @@ public class createCost extends ReusableLib {
     	 sendKeys(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
     	 Utility_Functions.actionKey(Keys.ENTER, driver);
      	String onHandVal = Utility_Functions.getText(driver.findElements(ReceiveCorrectionPage.lblOnHand).get(0));
-     	
+
      	Utility_Functions.xAssertEquals(report, "200", onHandVal.trim(), "Validating on hand value");
     }
-    
+
     public void validateQuantityReceivedCorrections() {
     	sendKeys(driver.findElements(ReceiveCorrectionPage.txtQuantity).get(0),"600","Enter excess quantity");
     	sendKeys(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
-    	
+
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	
+
     	Utility_Functions.xAssertEquals(report,"Warning: Quantity exceeds limit of 500. Ensure value is correct.",Utility_Functions.getText(driver.findElements(ReceiveCorrectionPage.txtQuantity).get(0), "title"),"Validating warning message for excess quantity");
-    	
+
     	sendKeys(driver.findElements(ReceiveCorrectionPage.txtQuantity).get(0),"-500","Enter negative quantity");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	
+
     	Utility_Functions.xAssertEquals(report,"Warning: Qty for "+Utility_Functions.xGetJsonAsString("CreatedCost")+" will take On-Hand to a negative value.",Utility_Functions.getText(driver.findElements(ReceiveCorrectionPage.txtQuantity).get(0), "title"),"Validating warning message for negative quantity");
     }
-    
+
     public void attachVendorMultipleItem() {
     	 commonObj.inventoryToInvAdjustments();
          commonObj.inventoryAdjustToInvCorrections();
@@ -200,23 +200,23 @@ public class createCost extends ReusableLib {
          commonObj.validateText(ReceiveCorrectionPage.lblTitle, "Receiving Correction (I-355)", "Validating item Master page title");
         sendKeys(ReceiveCorrectionPage.txtVendorSearch,"000388","Enter vendor code");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	
+
     	List<WebElement> eleQuantityList = driver.findElements(ReceiveCorrectionPage.txtQuantity);
     	List<WebElement> eleItemNumberList = driver.findElements(ReceiveCorrectionPage.txtItemNumber);
     	List<WebElement> eleExplanationList = driver.findElements(ReceiveCorrectionPage.txtExplanation);
-    	
+
     	for(int i=0;i<=1;i++) {
     		sendKeys(eleQuantityList.get(i),"100","Enter quantity");
     		sendKeys(eleItemNumberList.get(i),Utility_Functions.xGetJsonAsString("ItemNo"+i),"Enter item number");
     		sendKeys(eleExplanationList.get(i),"Test data","Enter explanation");
     	}
-    	
+
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	
-    	
+
+
    	 click(ReceiveCorrectionPage.btnProcess,"Click on process");
    	 click(ReceiveCorrectionPage.btnContinuePop,"Click on continue");
-   	 
+
    	 for(int i=0;i<=1;i++) {
    		 sendKeys(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(i),Utility_Functions.xGetJsonAsString("ItemNo"+i),"Enter item number");
    		Utility_Functions.actionKey(Keys.ENTER, driver);
@@ -225,18 +225,18 @@ public class createCost extends ReusableLib {
      	Utility_Functions.xAssertEquals(report, "100", onHandVal.trim(), "Validating on hand value");
    	 }
     }
-    
+
     public void navigateItemLedgerFromCorrection() {
     	click(driver.findElements(ReceiveCorrectionPage.btnItemLedger).get(0),"Click on item ledger");
-    	
+
     }
-    
+
     public void navigateItemLedgerFromAdjustment() {
     	sendKeys(driver.findElements(CostAdjustmentPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
     	click(driver.findElements(CostAdjustmentPage.btnLedger).get(0),"Click on the item ledger button");
     }
-    
+
     public void fillCostAdjustmentDetails() {
     	
     	sendKeys(driver.findElements(CostAdjustmentPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
@@ -258,24 +258,24 @@ public class createCost extends ReusableLib {
         	sendKeys(driver.findElements(CostAdjustmentPage.txtQuantity).get(i),"50","Enter quantity to adjust");
         	sendKeys(driver.findElements(CostAdjustmentPage.txtInCorrectCost).get(i),"1","Enter incorrect cost");
         	sendKeys(driver.findElements(CostAdjustmentPage.txtNewCost).get(i),"2","Enter correct cost");
-        	
+
     	}
     	Utility_Functions.actionKey(Keys.ENTER, driver);
     	click(CostAdjustmentPage.btnProcess,"Click on the process button");
     }
-    
+
     public void processCostAdjustment() {
     	click(CostAdjustmentPage.btnProcess,"Click on the process button");
     }
     
     public void validateLedger() {
-    	
-    	
+
+
     	Utility_Functions.xAssertEquals(report,  getAttribute(ItemLedgerPage.txtItemNumber,"value"), Utility_Functions.xGetJsonAsString("CreatedCost"), "Validating item number");
     	Utility_Functions.xAssertEquals(report,  Utility_Functions.getText(driver,ItemLedgerPage.lblQtyAfter), "200", "Validating item quantity");
-    	
+
     }
-    
+
     public void validateMultipleLedgerFromCorrection() {
     	for(int i=0;i<=1;i++) {
     		click(driver.findElements(ReceiveCorrectionPage.txtItemNumber).get(i),"");
@@ -285,13 +285,13 @@ public class createCost extends ReusableLib {
         	click(ItemLedgerPage.btnExit,"Exit from page");
     	}
     }
-    
+
     public void validateMultipleLedgerFromAdjustment() {
     	for(int i=0; i<=1;i++) {
     		sendKeys(driver.findElements(CostAdjustmentPage.txtItemNumber).get(i),Utility_Functions.xGetJsonAsString("ItemNo"+i),"Enter item number");
     		Utility_Functions.actionKey(Keys.ENTER, driver);
     	}
-    	
+
     	for(int i=0;i<=1;i++) {
     		click(driver.findElements(CostAdjustmentPage.btnLedger).get(i),"Click on the item ledger button");
     		Utility_Functions.xAssertEquals(report,  getAttribute(ItemLedgerPage.txtItemNumber,"value"), Utility_Functions.xGetJsonAsString("ItemNo"+i), "Validating item number");

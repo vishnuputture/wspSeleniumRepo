@@ -138,6 +138,6 @@ public class Wise extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    
+
 
 }
