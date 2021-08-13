@@ -1,4 +1,4 @@
-package pages.pricing;
+package pages.pricing.matrixcost;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;

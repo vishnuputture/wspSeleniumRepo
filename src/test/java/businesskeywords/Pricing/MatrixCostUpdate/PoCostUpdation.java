@@ -2,12 +2,10 @@ package businesskeywords.Pricing.MatrixCostUpdate;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import com.winSupply.framework.Util;
 import commonkeywords.CommonActions;
 import org.apache.commons.lang3.StringUtils;
-import org.opencv.core.Mat;
 import org.openqa.selenium.By;
-import pages.pricing.MatrixCostUpdatePage;
+import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import supportLibraries.Utility_Functions;
 
 public class PoCostUpdation extends ReusableLib {

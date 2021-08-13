@@ -3,7 +3,7 @@ package businesskeywords.Pricing.MatrixCostUpdate;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
-import pages.pricing.MatrixCostUpdatePage;
+import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 

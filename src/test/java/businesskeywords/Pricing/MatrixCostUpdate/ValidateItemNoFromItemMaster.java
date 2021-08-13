@@ -4,7 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
-import pages.pricing.MatrixCostUpdatePage;
+import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import supportLibraries.Utility_Functions;
 
 import java.util.ArrayList;

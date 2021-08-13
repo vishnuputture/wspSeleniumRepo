@@ -7,7 +7,7 @@
 				<methods>
 					<!--                MATRIX COST UPDATE             -->
 
-					<include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
+
 					<!--<include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
 					<include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
 					<include name="Tc_142_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>

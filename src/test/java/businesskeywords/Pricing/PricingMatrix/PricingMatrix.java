@@ -1,10 +1,10 @@
-package businesskeywords.Pricing;
+package businesskeywords.Pricing.PricingMatrix;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
-import pages.pricing.PricingMatrixPage;
+import pages.pricing.pricingmatrix.PricingMatrixPage;
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
