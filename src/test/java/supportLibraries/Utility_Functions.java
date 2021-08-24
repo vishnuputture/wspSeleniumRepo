@@ -4608,15 +4608,16 @@ public class Utility_Functions extends ReusableLib {
      *
      */
     public static List<String> ValidateFieldsPresentonPage(Report report,List<String> List1, List<WebElement> WebElements,
-                                                            String TextToBeDisplayed) {
+                                                           String TextToBeDisplayed) {
         List<String> WebElementsList = new ArrayList<String>();
+        List<String> WebElementsList1 = new ArrayList<String>();
         for (WebElement element : WebElements) {
             WebElementsList.add(element.getText());
         }
         for (String str : List1) {
             if (WebElementsList.contains(str)) {
                 System.out.println("'"+str+"' Present on the page");
-                WebElementsList.add(str);
+                WebElementsList1.add(str);
             }else{
                 report.updateTestLog(TextToBeDisplayed,
                         "Text: '"+str+"' Not present on the page",
@@ -4624,8 +4625,19 @@ public class Utility_Functions extends ReusableLib {
             }
         }
         report.updateTestLog(TextToBeDisplayed,
-                "'" + WebElementsList + "'" + " present on the page",
+                "'" + WebElementsList1 + "'" + " present on the page",
                 Status.PASS);
         return List1;
+    }
+
+    /**
+     *
+     * Generate Random Number
+     *
+     */
+    public static int genRandNum(int number) {
+        Random random = new Random();
+        int x = random.nextInt(number);
+        return x;
     }
 }
