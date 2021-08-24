@@ -1,0 +1,38 @@
+
+{
+  "Business_Flow": [
+    {
+      "Tc_26_Navigation_to_Cycle_Count_Adjustments": "launchApp,siteLogin,validateCycleCountAdj,signOut",
+      "Tc_27_Verify_assignment_quantity_to_Item": "launchApp,siteLogin,validateCycleCountAdj,validateUpadtedCount,exitFromCycleCostAdj,signOut",
+      "Tc_29_Negative_Quantity_to_Item": "launchApp,siteLogin,validateCycleCountAdj,nagValidation,exitFromCycleCostAdj,signOut",
+      "Tc_30_Navigation_To_Item_Ledger_Screen": "launchApp,siteLogin,validateCycleCountAdj,navCycleCostAdjProgram,navLedger,exitItemLedgerProgram,exitFromCycleCostAdj,signOut",
+      "Tc_31_Verify_Item_Ledger_Screen": "launchApp,siteLogin,validateCycleCountAdj,validateItemLedgerFiled,exitItemLedgerProgram,exitFromCycleCostAdj,signOut",
+      "Tc_28_assignment_of_quantity_to_multiple_items": "launchApp,siteLogin,validateCycleCountAdj,navCycleCostAdjProgram,verifyCount,exitFromCycleCostAdj,signOut",
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_26_Navigation_to_Cycle_Count_Adjustments",
+      "Title": "Navigate to Cycle Cost Adjustment"
+    },
+    {
+      "TC_ID": "Tc_27_Verify_assignment_quantity_to_Item",
+      "Title": "To Verify assignment of quantity to Item"
+    },
+    {
+      "TC_ID": "Tc_29_Negative_Quantity_to_Item",
+      "Title": "To Verify Assignment of Negative Quantity to Item"
+    },
+    {
+      "TC_ID": "Tc_30_Navigation_To_Item_Ledger_Screen",
+      "Title": "To Verify Navigation To Item Ledger Screen"
+    },
+    {
+      "TC_ID": "Tc_31_Verify_Item_Ledger_Screen",
+      "Title": "To Verify Item Ledger Screen"
+    },
+    {
+      "TC_ID": "Tc_28_assignment_of_quantity_to_multiple_items",
+      "Title": "To Verify assignment of quantity to multiple items"
+    }  ]
+}
