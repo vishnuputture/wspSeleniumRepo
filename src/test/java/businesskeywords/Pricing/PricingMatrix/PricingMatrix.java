@@ -2,11 +2,19 @@ package businesskeywords.Pricing.PricingMatrix;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Status;
+
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+
 import pages.pricing.pricingmatrix.PricingMatrixPage;
+import pages.inventory.ItemMasterPage;
+import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
+import java.util.Random;
 
 public class PricingMatrix extends ReusableLib {
     CommonActions commonObj;
@@ -32,6 +40,16 @@ public class PricingMatrix extends ReusableLib {
         commonObj.masterToOrderProcessing();
         commonObj.navigateToOptionsAndConstantsMenu();
         commonObj.navigateToPricingMatrix();
+    }
+    
+    
+    
+    public void validatePricingMatrixTitle() throws NoSuchElementException {
+
+        commonObj.masterToOrderProcessing();
+        commonObj.navigateToOptionsAndConstantsMenu();
+        commonObj.navigateToPricingMatrix();
+        commonObj.validateText(PricingMatrixPage.pageTitle, "Pricing Matrix Revisions", "Validating pricing matrix page title");
     }
 
     /**
@@ -84,7 +102,7 @@ public class PricingMatrix extends ReusableLib {
      * This method to Copy Row to Pricing Matrix
      *
      */
-    public void copyRowPricingMtx() {
+    /*public void copyRowPricingMtx() {
         disRow_Col();
         click(PricingMatrixPage.copyRow,"click F2=Cpy Row");
         String rowFrom=getRow(PricingMatrixPage.firstRow);
@@ -110,7 +128,7 @@ public class PricingMatrix extends ReusableLib {
         String actRow2=driver.findElement(PricingMatrixPage.secondCell).getText();
         String expRow2=driver.findElement(PricingMatrixPage.cellSecRowSecCol).getText();
         Utility_Functions.xVrfyTextAvlble(report,expRow1,actRow1,"Row copied from: "+rowFrom+" to Row: "+rowTo+" ");
-    }
+    }*/
 
     /**
      * This method to get row name
@@ -137,4 +155,138 @@ public class PricingMatrix extends ReusableLib {
     public void exitPricingMatrix() {
         commonObj.exitFromPricingMatrix();
     }
+    
+    
+    public void validateStartRowCol() {
+    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strRow,"value"), Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), "Validating first row value");
+    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strCol,"value"), Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), "Validating first column value");
+    	
+    }
+    
+    public void changeRowCol() {
+    	String secondRow = Utility_Functions.getText(driver,  PricingMatrixPage.secondRow);
+    	String secondCol = Utility_Functions.getText(driver,  PricingMatrixPage.secondCol);
+    	
+    	sendKeys(PricingMatrixPage.strRow,secondRow,"Changing first row");
+    	sendKeys(PricingMatrixPage.strCol,secondCol,"Changing first column");
+    	
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), secondCol, "Validating first column name");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), secondRow, "Validating first row name");
+    	
+    }
+    
+    public void addRow() {
+    	click(PricingMatrixPage.addRow,"Click on add row button");
+    	sendKeys(PricingMatrixPage.txtBoxAction,"A","Enter A in action box");
+    	
+    	String rowName = "";
+    	for(int i=0; i<=2;i++) {
+    		Random random = new Random();
+
+            char randomizedCharacter = (char) (random.nextInt(26) + 'A');
+            rowName = rowName+randomizedCharacter;
+    	}
+    	
+    	sendKeys(PricingMatrixPage.txtMatrixRowCode,rowName,"Enter row name");
+    	
+    	sendKeys(PricingMatrixPage.txtDescription1,"Test desc","Enter row description");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	click(PricingMatrixPage.btnF3Exit,"Click on exit button");
+    	
+    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strRow,"value"), rowName, "Validating first row value");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), rowName, "Validating first row name");
+    }
+    
+    public void addCol() {
+    	click(PricingMatrixPage.addCol,"Click on add column button");
+    	sendKeys(PricingMatrixPage.txtBoxAction,"A","Enter A in action box");
+    	
+    	String colName = "";
+    	for(int i=0; i<=2;i++) {
+    		Random random = new Random();
+
+            char randomizedCharacter = (char) (random.nextInt(26) + 'A');
+            colName = colName+randomizedCharacter;
+    	}
+    	
+    	sendKeys(PricingMatrixPage.txtMatrixRowCode,colName,"Enter column name");
+    	
+    	sendKeys(PricingMatrixPage.txtDescription1,"Test desc","Enter column description");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	
+    	click(PricingMatrixPage.btnF3Exit,"Click on exit button");
+    	
+    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strCol,"value"), colName, "Validating first column value");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), colName, "Validating first column name");
+    }
+    
+    public void copyRow() {
+    	click(PricingMatrixPage.copyRow,"Click on copy row button");
+    	String copyCol1 = Utility_Functions.getText(driver, PricingMatrixPage.copyCol1);
+    	String copyCol2 = Utility_Functions.getText(driver, PricingMatrixPage.copyCol2);
+    	
+    	String copyRow1 = Utility_Functions.getText(driver, PricingMatrixPage.copyRow1);
+    	String copyRow2 = Utility_Functions.getText(driver, PricingMatrixPage.copyRow2);
+    	sendKeys(PricingMatrixPage.copyColFrom,copyRow1,"Enter from row name");
+    	sendKeys(PricingMatrixPage.copyColTo,copyRow2,"Enter to row name");
+    	sendKeys(PricingMatrixPage.selectRowFrom,copyCol1,"Enter from col name");
+    	sendKeys(PricingMatrixPage.selectRowTo,copyCol2,"Enter to col name");
+    	
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	sendKeys(PricingMatrixPage.notBlank,"N");
+    	click(PricingMatrixPage.enterLink,"Click ENTER");
+        Utility_Functions.xClickIfAvlbl(driver,PricingMatrixPage.f8END);
+        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), copyRow2, "Validating first row name");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), copyCol2, "Validating first column name");
+    }
+    
+    
+    public void copyCol() {
+    	click(PricingMatrixPage.copyRow,"Click on copy column button");
+    	String copyCol1 = Utility_Functions.getText(driver, PricingMatrixPage.copyCol1);
+    	String copyCol2 = Utility_Functions.getText(driver, PricingMatrixPage.copyCol2);
+    	
+    	String copyRow1 = Utility_Functions.getText(driver, PricingMatrixPage.copyRow1);
+    	String copyRow2 = Utility_Functions.getText(driver, PricingMatrixPage.copyRow2);
+    	sendKeys(PricingMatrixPage.copyColFrom,copyRow1,"Enter from col name");
+    	sendKeys(PricingMatrixPage.copyColTo,copyRow2,"Enter to col name");
+    	sendKeys(PricingMatrixPage.selectRowFrom,copyCol1,"Enter from row name");
+    	sendKeys(PricingMatrixPage.selectRowTo,copyCol2,"Enter to row name");
+    	
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	sendKeys(PricingMatrixPage.notBlank,"N");
+    	click(PricingMatrixPage.enterLink,"Click ENTER");
+        Utility_Functions.xClickIfAvlbl(driver,PricingMatrixPage.f8END);
+        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), copyRow2, "Validating first row name");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), copyCol2, "Validating first column name");
+    }
+    
+    public void moreKeysValidation() {
+    	String[] firstSet = {"btnCF01","btnCF02","btnCF04","btnCF05","btnCF07","btnCF11","btnCF12","btnCF24","btnPageDown","btnPageUp","btnSubmit","btnExit"};
+    	String[] secondSet = {"btnCF13","btnCF14","btnCF15","btnCF24","btnPageDown","btnPageUp","btnSubmit","btnExit"};
+    	//String[] commonSet = {}
+    	
+    	for(int i=0; i<=1;i++) {
+    		click(PricingMatrixPage.btnF24,"Click on more buttons");
+    		String[] buttonSet;
+    		if(i==0) {
+    			 buttonSet = secondSet;
+    		}else {
+    			 buttonSet = firstSet;
+    		}
+    			for(String id : buttonSet) {
+    				if(Utility_Functions.xIsDisplayed(driver, PricingMatrixPage.getButton(id))) {
+    					report.updateTestLog("Search", getAttribute( PricingMatrixPage.getButton(id),"value")+"is present", Status.PASS);
+    				}else {
+    					report.updateTestLog("Search", "Button "+id +" is not present", Status.FAIL);
+    				}
+    			}
+    			
+    		
+    	}
+    }
+    
 }
