@@ -13,7 +13,7 @@
 					<include name="Tc_30_ValidateCostAdjustmentLedger"></include>
 				</methods>
 			</class>-->
-			<class name="testcases.Inventory.AverageCost" >
+		<!--	<class name="testcases.Inventory.AverageCost" >
 				<methods>
 					<include name="Tc_21_SearchItemData"></include>
 					<include name="Tc_22_UpdateItemData"></include>
@@ -27,6 +27,17 @@
 					<include name="Tc_31_ValidateMultipleReceiveCorrection"></include>
 					<include name="Tc_32_ValidateMultipleCostAdjustment"></include>
 					<include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
+				</methods>
+			</class>-->
+
+			<class name="testcases.Inventory.CycleCostAdjust" >
+				<methods>
+					<include name="Tc_26_Navigation_to_Cycle_Count_Adjustments"></include>
+					<include name="Tc_27_Verify_assignment_quantity_to_Item"></include>
+					<include name="Tc_29_Negative_Quantity_to_Item"></include>
+					<include name="Tc_30_Navigation_To_Item_Ledger_Screen"></include>
+					<include name="Tc_31_Verify_Item_Ledger_Screen"></include>
+					<include name="Tc_28_assignment_of_quantity_to_multiple_items"></include>
 				</methods>
 			</class>
 		</classes>

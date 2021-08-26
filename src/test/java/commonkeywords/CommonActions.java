@@ -7,6 +7,7 @@ import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
 
 import pages.*;
+import pages.inventory.CostAdjustmentPage;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.SpecialPricePage;
 import pages.pricing.matrixcost.InventoryManagementMainMenuPage;
@@ -297,5 +298,14 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void exitFromPricingMatrix() {
 		click(SpecialPricePage.btnF3,"Exit from Pricing Matrix");
+	}
+
+	/**
+	 *
+	 * This method Exit From Cycle Cost Adjustment
+	 *
+	 */
+	public void exitFromCycleCostAdj() {
+		click(CostAdjustmentPage.exitBtn,"Exit Cycle Cost Adjustment");
 	}
 }
