@@ -4,7 +4,7 @@
 	<test name="SanityCheck">
 
 		<classes>
-	<!--		<class name="testcases.Inventory.AverageCost">
+			<!--<class name="testcases.Inventory.AverageCost">
 				<methods>
 					<include name="Tc_25_ValidateItemCreation"></include>
 					<include name="Tc_27_ValidateItemUpdate"></include>
@@ -13,7 +13,7 @@
 					<include name="Tc_30_ValidateCostAdjustmentLedger"></include>
 				</methods>
 			</class>-->
-		<!--	<class name="testcases.Inventory.AverageCost" >
+			<class name="testcases.Inventory.AverageCost" >
 				<methods>
 					<include name="Tc_21_SearchItemData"></include>
 					<include name="Tc_22_UpdateItemData"></include>
@@ -28,7 +28,7 @@
 					<include name="Tc_32_ValidateMultipleCostAdjustment"></include>
 					<include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
 				</methods>
-			</class>-->
+			</class>
 
 			<class name="testcases.Inventory.CycleCostAdjust" >
 				<methods>
