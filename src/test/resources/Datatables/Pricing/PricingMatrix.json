@@ -1,0 +1,37 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_188_ValidateNavigationToPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle",
+      "Tc_191_ValidateFirstRowColPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,validateStartRowCol,changeRowCol",
+      "Tc_193_ValidateAddRowPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,addRow",
+      "Tc_194_ValidateCopyRowPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,copyRow",
+      "Tc_195_ValidateAddColPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,addCol",
+      "Tc_196_ValidateCopyColPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,copyCol",
+      "Tc_199_ValidateMoreKeysPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,moreKeysValidation"
+      
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_188_ValidateNavigationToPricingMatrix"
+    },
+     {
+      "TC_ID": "Tc_191_ValidateFirstRowColPricingMatrix"
+    },
+    {
+      "TC_ID": "Tc_193_ValidateAddRowPricingMatrix"
+    },
+    {
+      "TC_ID": "Tc_194_ValidateCopyRowPricingMatrix"
+    },
+    {
+      "TC_ID": "Tc_196_ValidateCopyColPricingMatrix"
+    },
+    {
+      "TC_ID": "Tc_195_ValidateAddColPricingMatrix"
+    },
+    {
+      "TC_ID": "Tc_199_ValidateMoreKeysPricingMatrix"
+    }
+  ]
+}
