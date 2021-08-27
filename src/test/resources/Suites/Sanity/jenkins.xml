@@ -4,7 +4,7 @@
     <test name="SanityCheck">
 
         <classes>
-  <!--          <class name="testcases.Inventory.AverageCost">
+            <class name="testcases.Inventory.AverageCost">
                 <methods>
                     <include name="Tc_21_SearchItemData"></include>
                     <include name="Tc_22_UpdateItemData"></include>
@@ -19,7 +19,7 @@
                     <include name="Tc_32_ValidateMultipleCostAdjustment"></include>
                     <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
                 </methods>
-            </class>-->
+            </class>
 <!--            <class name="testcases.Pricing.MatrixCostUpdate">
                 <methods>
                     <include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
@@ -57,7 +57,7 @@
                     <include name="Tc_21_E2E"></include>
                 </methods>
             </class>
-        <!--    <class name="testcases.Pricing.PricingMatrix">
+            <class name="testcases.Pricing.PricingMatrix">
                 <methods>
                     <include name="Tc_188_ValidateNavigationToPricingMatrix"></include>
                     <include name="Tc_191_ValidateFirstRowColPricingMatrix"></include>
@@ -78,7 +78,7 @@
                     <include name="Tc_28_assignment_of_quantity_to_multiple_items"></include>
 
                 </methods>
-            </class>-->
+            </class>
         </classes>
     </test>
 </suite>
