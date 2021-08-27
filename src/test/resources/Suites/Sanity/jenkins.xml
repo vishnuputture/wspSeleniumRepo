@@ -4,7 +4,7 @@
     <test name="SanityCheck">
 
         <classes>
-            <class name="testcases.Inventory.AverageCost">
+  <!--          <class name="testcases.Inventory.AverageCost">
                 <methods>
                     <include name="Tc_21_SearchItemData"></include>
                     <include name="Tc_22_UpdateItemData"></include>
@@ -19,8 +19,8 @@
                     <include name="Tc_32_ValidateMultipleCostAdjustment"></include>
                     <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
                 </methods>
-            </class>
-            <class name="testcases.Pricing.MatrixCostUpdate">
+            </class>-->
+<!--            <class name="testcases.Pricing.MatrixCostUpdate">
                 <methods>
                     <include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
                     <include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
@@ -35,7 +35,7 @@
                     <include name="Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
                     <include name="Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
                 </methods>
-            </class>
+            </class>-->
             <class name="testcases.Pricing.Wise">
                 <methods>
                     <include name="Tc_19_ValidateCustomerNumber"></include>
@@ -57,6 +57,28 @@
                     <include name="Tc_21_E2E"></include>
                 </methods>
             </class>
+        <!--    <class name="testcases.Pricing.PricingMatrix">
+                <methods>
+                    <include name="Tc_188_ValidateNavigationToPricingMatrix"></include>
+                    <include name="Tc_191_ValidateFirstRowColPricingMatrix"></include>
+                    <include name="Tc_193_ValidateAddRowPricingMatrix"></include>
+                    <include name="Tc_194_ValidateCopyRowPricingMatrix"></include>
+                    <include name="Tc_195_ValidateAddColPricingMatrix"></include>
+                    <include name="Tc_196_ValidateCopyColPricingMatrix"></include>
+                    <include name="Tc_199_ValidateMoreKeysPricingMatrix"></include>
+                </methods>
+            </class>
+            <class name="testcases.Inventory.CycleCostAdjust">
+                <methods>
+                    <include name="Tc_26_Navigation_to_Cycle_Count_Adjustments"></include>
+                    <include name="Tc_27_Verify_assignment_quantity_to_Item"></include>
+                    <include name="Tc_29_Negative_Quantity_to_Item"></include>
+                    <include name="Tc_30_Navigation_To_Item_Ledger_Screen"></include>
+                    <include name="Tc_31_Verify_Item_Ledger_Screen"></include>
+                    <include name="Tc_28_assignment_of_quantity_to_multiple_items"></include>
+
+                </methods>
+            </class>-->
         </classes>
     </test>
 </suite>
