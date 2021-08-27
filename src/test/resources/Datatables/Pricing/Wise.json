@@ -60,7 +60,7 @@
 			"TC_ID": "Tc_5_ValidatePositiontoCustomerNumber_Beginning",
 			"Title": "Add/Maintain Special Pricing",
 			"validCustNum": "000300,099599",
-			"validItemNum": "000538044,00053410BTI",
+			"validItemNum": "5105TCW158SS2,AMN0159R00002P",
 			"specialPrice": "1",
 			"filterCustNum": "250",
 			"success": "Record added. Add another or F12 to return."
@@ -69,7 +69,7 @@
 			"TC_ID": "Tc_9_ValidatePositiontoCustomerNumber_Middle",
 			"Title": "Add/Maintain Special Pricing",
 			"validCustNum": "000300,099599",
-			"validItemNum": "000538044,00053410BTI",
+			"validItemNum": "5105TCW158SS2,AMN0159R00002P",
 			"specialPrice": "1",
 			"filterCustNum": "350",
 			"success": "Record added. Add another or F12 to return."
@@ -78,7 +78,7 @@
 			"TC_ID": "Tc_10_ValidatePositiontoCustomerNumber_End",
 			"Title": "Add/Maintain Special Pricing",
 			"validCustNum": "000300,099599",
-			"validItemNum": "000538044,00053410BTI",
+			"validItemNum": "5105TCW158SS2,AMN0159R00002P",
 			"specialPrice": "1",
 			"filterCustNum": "999999",
 			"success": "Record added. Add another or F12 to return."
