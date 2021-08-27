@@ -40,6 +40,18 @@ public class Master extends ReusableLib {
 
 
     /**
+     * This method is invoked to navigate to Working with sales quotes
+     */
+    public void navigateToSalesQuotesMenu() {
+        commonObj.navigateToSalesQuotes();
+    }
+
+    public void navigateToWorkingSalesQuotes() {
+        commonObj.navigationToWorkingSalesQuotes();
+    }
+
+
+    /**
      * This method is invoked to sign out of wise application
      */
 

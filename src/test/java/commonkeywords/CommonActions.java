@@ -1,8 +1,10 @@
 package commonkeywords;
 
+import businesskeywords.common.Master;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
+import pages.SalesQuotes.WorkWithSalesQuotes;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
 
@@ -307,5 +309,23 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void exitFromCycleCostAdj() {
 		click(CostAdjustmentPage.exitBtn,"Exit Cycle Cost Adjustment");
+	}
+
+	/**
+	 *
+	 * This method navigate to Sales Quotes Menu
+	 *
+	 */
+	public void navigateToSalesQuotes() {
+		click(MasterPage.salesQuotes,"Click on Sales Quotes Menu");
+	}
+
+	/**
+	 *
+	 * This method navigate to Working Sales Sales Quotes Program
+	 *
+	 */
+	public void navigationToWorkingSalesQuotes() {
+		click(MasterPage.salesQuotes,"Click on Sales Quotes Menu");
 	}
 }

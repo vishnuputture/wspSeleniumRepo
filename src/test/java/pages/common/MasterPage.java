@@ -22,4 +22,5 @@ public class MasterPage extends ReusableLib {
 	public static By loadingAnime=By.id("_pui_loading_animation");
 	public static By optionAndConstantsMenu = By.xpath("//div[text()='24']/following-sibling::div/a[contains(text(),'Options')]");
 	public static By pricingMatrix = By.xpath("//div[text()='20']/following-sibling::div/a[contains(text(),'Pricing')]");
+	public static By salesQuotes = By.xpath("//div[text()='13']/following-sibling::div/a[contains(text(),'Sales')]");
 }
