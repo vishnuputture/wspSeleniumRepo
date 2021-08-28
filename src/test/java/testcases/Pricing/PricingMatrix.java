@@ -63,5 +63,29 @@ public class PricingMatrix extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+	
+	@Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_197_ValidatePgLeftRightPricingMatrix(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to test that page left and right keys functionality is working properly in pricing matrix page ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+	
+	@Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_198_ValidatePgUpDownPricingMatrix(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to test that page up and down keys functionality is working properly in pricing matrix page ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+	
+	@Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_200_ValidateDisplayListPricingMatrix(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to test that the display list key functionality is working properly in pricing matrix page ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
   
 }

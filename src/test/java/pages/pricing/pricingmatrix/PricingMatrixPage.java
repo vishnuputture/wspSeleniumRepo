@@ -43,6 +43,11 @@ public class PricingMatrixPage extends ReusableLib {
     public static By copyCol1 = By.id("D_7_12");
     public static By copyCol2 = By.id("D_7_22");
     public static By btnF24 = By.id("btnCF24");
+    public static By col7 = By.id("D_7_72");
+    public static By row5 = By.id("D_16_4");
+    public static By dispListTitle = By.id("D_2_20");
+    public static By selectRowTxtBox = By.id("I_4_26");
+    public static By selectColTxtBox = By.id("I_4_28");
     
     
     public static By getButton(String id) {
