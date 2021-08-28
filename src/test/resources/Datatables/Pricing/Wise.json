@@ -86,8 +86,8 @@
 		{
 			"TC_ID": "Tc_11_ValidatePositiontoItemNumber_Beginning",
 			"Title": "Add/Maintain Special Pricing",
-			"validCustNum": "000300,099599,099599,000300,099599",
-			"validItemNum": "0005A53A,00053410BTI,000538042,000538044,160500160",
+			"validCustNum": "000300,099599",
+			"validItemNum": "5105TCW158SS2,AMN0159R00002P",
 			"specialPrice": "1",
 			"filterItemNum": "0001",
 			"success": "Record added. Add another or F12 to return."
@@ -95,8 +95,8 @@
 		{
 			"TC_ID": "Tc_12_ValidatePositiontoItemNumber_End",
 			"Title": "Add/Maintain Special Pricing",
-			"validCustNum": "000300,099599,099599,000300,099599",
-			"validItemNum": "0005A53A,00053410BTI,000538042,000538044,160500160",
+			"validCustNum": "000300,099599",
+			"validItemNum": "5105TCW158SS2,AMN0159R00002P",
 			"specialPrice": "1",
 			"filterItemNum": "9999999999999999",
 			"success": "Record added. Add another or F12 to return."
@@ -104,8 +104,8 @@
 		{
 			"TC_ID": "Tc_13_ValidatePositiontoItemNumber_Middle",
 			"Title": "Add/Maintain Special Pricing",
-			"validCustNum": "000300,099599,099599,000300,099599",
-			"validItemNum": "0005A53A,00053410BTI,000538042,000538044,160500160",
+			"validCustNum": "000300,099599",
+			"validItemNum": "5105TCW158SS2,AMN0159R00002P",
 			"filteredCustNum": "099599,000300,099599",
 			"filteredItemNum": "000538042,000538044,160500160",
 			"specialPrice": "1",
@@ -143,8 +143,8 @@
 		{
 			"TC_ID": "Tc_24_InsertPAPRecordToDelete",
 			"Title": "Add/Maintain Special Pricing",
-			"Date1": "20210518",
-			"Date2": "20210610",
+			"Date1": "20210918",
+			"Date2": "20210920",
 			"success": "Record added. Add another or F12 to return.",
 			"error": "Customer Number does not exist"
 		},
