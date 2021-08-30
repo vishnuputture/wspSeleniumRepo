@@ -283,19 +283,8 @@ public class CycleCostAdjust extends ReusableLib {
         double amt = d + d1;
         String amont = driver.findElement(CostAdjustmentPage.amountyMod).getText();
         double amount = Double.parseDouble(amont);
-
-        DecimalFormat df2 = new DecimalFormat("#.##");
-        String amountV = df2.format(amt);
-            System.out.println("amountV: "+amountV);
-            System.out.println("amount: "+amount);
-        try {
-            Utility_Functions.xAssertEquals(report, "" + amountV + "", "" + amount + "", "Amount: ");
-        } catch (Exception e) {
-            System.out.println("Catch field");
-            String val = "" + amountV + "".replaceAll(".0", "");
-            String valEx = "" + amont + "".replaceAll(".0", "");
-            Utility_Functions.xAssertEquals(report, "" + val + "", "" + valEx + "", "Amount: ");
-        }
-        return amountV;
+        System.out.println("amount : "+amount);
+        Utility_Functions.xAssertEquals(report, "" + amt + "", "" + amount + "", "Amount: ");
+        return amont;
     }
-    }
+}
