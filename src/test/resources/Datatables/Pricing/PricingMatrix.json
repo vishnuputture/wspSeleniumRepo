@@ -7,7 +7,10 @@
       "Tc_194_ValidateCopyRowPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,copyRow",
       "Tc_195_ValidateAddColPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,addCol",
       "Tc_196_ValidateCopyColPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,copyCol",
-      "Tc_199_ValidateMoreKeysPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,moreKeysValidation"
+      "Tc_199_ValidateMoreKeysPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,moreKeysValidation",
+      "Tc_197_ValidatePgLeftRightPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,pgLeftRt",
+      "Tc_198_ValidatePgUpDownPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,pgUpDn",
+      "Tc_200_ValidateDisplayListPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,validateDispList"
       
     }
   ],
@@ -32,6 +35,15 @@
     },
     {
       "TC_ID": "Tc_199_ValidateMoreKeysPricingMatrix"
+    },
+    {
+      "TC_ID": "Tc_197_ValidatePgLeftRightPricingMatrix"
+    },
+    {
+      "TC_ID": "Tc_198_ValidatePgUpDownPricingMatrix"
+    },
+    {
+      "TC_ID": "Tc_200_ValidateDisplayListPricingMatrix"
     }
   ]
 }
