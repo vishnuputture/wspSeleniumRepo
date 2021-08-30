@@ -37,6 +37,7 @@ public class Login extends ReusableLib {
      *
      */
     public void siteLogin() {
+    	waitForVisible(LoginPage.signOnPageTitle);
         String user = getProperties("UserName");
         String password = getProperties("Password");
         sendKeys(LoginPage.userNametxtBox, user, "Entering username " + user);
