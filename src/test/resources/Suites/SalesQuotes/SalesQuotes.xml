@@ -4,9 +4,9 @@
 	<test name="SalesQuotes">
 
 		<classes>
-			<class name="testcases.SalesQuotes.WorkWithSalesQuotes">
+			<class name="testcases.SalesQuotes.WorkWithSalesQuote">
 				<methods>
-					<include name="Tc_25_ValidateItemCreation"></include>
+					<include name="SalesQuotesSmoke"></include>
 				</methods>
 			</class>
 		</classes>
