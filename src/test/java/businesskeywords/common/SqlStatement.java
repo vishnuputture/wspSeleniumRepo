@@ -80,7 +80,7 @@ public class SqlStatement extends ReusableLib {
         commonObj.goToSqlApp();
 
 
-        commonObj.sqlInsertSpecialPricePAP(Utility_Functions.xGetJsonAsString("CustomerNo"), Utility_Functions.xGetJsonAsString("ItemNo"), "20210610", "20210629");
+        commonObj.sqlInsertSpecialPricePAP(Utility_Functions.xGetJsonAsString("CustomerNo"), Utility_Functions.xGetJsonAsString("ItemNo"), "20210810", "20210929");
 
         if (Utility_Functions.xWaitForElementPresent(driver, SqlStatementPage.resultRowInsert, 5)) {
             String result = Utility_Functions.getText(driver, SqlStatementPage.resultRowInsert);
