@@ -1,4 +1,4 @@
-package businesskeywords.Pricing;
+package businesskeywords.SalesQuotes.WorkWithSalesQuotes;
 
 import businesskeywords.SalesQuotes.WorkWithSalesQuotes.WorkWithSalesQuote;
 import com.winSupply.core.Helper;
@@ -10,7 +10,7 @@ import pages.pricing.ReportsMenu;
 import supportLibraries.Utility_Functions;
 
 public class ReportMenu extends ReusableLib {
-    CommonActions commonObj=new CommonActions(helper);
+    CommonActions commonObj;
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
      * objects wrapped by it
@@ -20,6 +20,7 @@ public class ReportMenu extends ReusableLib {
 
     public ReportMenu(Helper helper) {
         super(helper);
+        commonObj=new CommonActions(helper);
     }
 
     /**
@@ -27,6 +28,7 @@ public class ReportMenu extends ReusableLib {
      *
      */
     public void navigateToPrintInvoicesProgram() {
+        commonObj.masterToOrderProcessing();
         click(ReportsMenu.reportMenu,"Click Reports Menu");
         click(ReportsMenu.printInvoices,"Click Print Invoices");
     }
@@ -38,7 +40,7 @@ public class ReportMenu extends ReusableLib {
     public void createInvoices() {
         sendKeys(ReportsMenu.enterSel,"I");
         Utility_Functions.actionKey(Keys.ENTER, driver);
-        sendKeys(ReportsMenu.KeyNo1, WorkWithSalesQuote.salesOrder);
+        sendKeys(ReportsMenu.KeyNo1, Utility_Functions.xGetJsonData("SOSmoke"));
         sendKeys(ReportsMenu.KeyNo2, "01");
         Utility_Functions.actionKey(Keys.F1, driver);
         System.out.println("Invoice Done......");

@@ -1,4 +1,4 @@
-package businesskeywords.Pricing;
+package businesskeywords.SalesQuotes.WorkWithSalesQuotes;
 
 import businesskeywords.SalesQuotes.WorkWithSalesQuotes.WorkWithSalesQuote;
 import com.winSupply.core.Helper;
@@ -26,7 +26,21 @@ public class ShippingConfirmation  extends ReusableLib {
      *
      */
     public void navigateToShippingConfirmation() {
+        commonObj.masterToOrderProcessing();
         click(pages.pricing.ShippingConfirmation.shipConf,"Click Shipping Confirmation Program");
+    }
+
+    /**
+     * This method to Order Confirmation
+     *
+     */
+    public void orderConfirmation() {
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        sendKeys(pages.pricing.ShippingConfirmation.orderNum1,Utility_Functions.xGetJsonData("SOSmoke"));
+        sendKeys(pages.pricing.ShippingConfirmation.orderNum2,"01");
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        sendKeys(pages.pricing.ShippingConfirmation.qtyToShip,"1");
+        click(pages.pricing.ShippingConfirmation.confOrder,"Click Confirm Order");
     }
 
     /**
@@ -38,16 +52,5 @@ public class ShippingConfirmation  extends ReusableLib {
         click(pages.pricing.ShippingConfirmation.exitShipConf,"Exit from Shipping Confirmation Program");
     }
 
-    /**
-     * This method to Order Confirmation
-     *
-     */
-    public void orderConfirmation() {
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-        sendKeys(pages.pricing.ShippingConfirmation.orderNum1, WorkWithSalesQuote.salesOrder);
-        sendKeys(pages.pricing.ShippingConfirmation.orderNum2,"01");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-        sendKeys(pages.pricing.ShippingConfirmation.qtyToShip,"1");
-        click(pages.pricing.ShippingConfirmation.confOrder,"Click Confirm Order");
-    }
+
 }

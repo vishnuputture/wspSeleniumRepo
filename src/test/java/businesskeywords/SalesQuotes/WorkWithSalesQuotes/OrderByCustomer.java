@@ -1,4 +1,4 @@
-package businesskeywords.Pricing;
+package businesskeywords.SalesQuotes.WorkWithSalesQuotes;
 
 import businesskeywords.SalesQuotes.WorkWithSalesQuotes.WorkWithSalesQuote;
 import com.winSupply.core.Helper;
@@ -33,6 +33,37 @@ public class OrderByCustomer extends ReusableLib {
         commonObj.ordeprocessingtoOrderbyCustomerpage();
     }
 
+
+    /**
+     * This method validate Order Details
+     *
+     */
+    public void orderDetails() {
+        sendKeys(OrderByCustomerPage.orderNum,Utility_Functions.xGetJsonData("SOSmoke") + "-01");
+        click(OrderByCustomerPage.nexttn, "Click Next Button");
+        String custNo = Utility_Functions.getText(driver, OrderByCustomerPage.custNum);
+        String orderNo = Utility_Functions.getText(driver, OrderByCustomerPage.orderNumFiled).trim();
+        String jobName = Utility_Functions.getText(driver, OrderByCustomerPage.jobName).trim();
+        String CustNb = jsonData.getData("CustNum");
+        String JobName = jsonData.getData("JobName");
+        Utility_Functions.xAssertEquals(report, CustNb, custNo, "Customer Number: ");
+        Utility_Functions.xAssertEquals(report, JobName, jobName, "Job Name: ");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.xGetJsonData("SOSmoke") + "-01", orderNo, "Order Number: ");
+        //sendKeys(OrderByCustomerPage.optFiled, "1");
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+    }
+
+    /**
+     * This method validate Back Order Quantity
+     *
+     */
+    public void validBOQty() {
+        orderDetails();
+        System.out.println("OK.....................");
+        String boQty= Utility_Functions.getText(driver,OrderByCustomerPage.boQty).trim();
+        Utility_Functions.xAssertEquals(report,"1",boQty,"Blank BO QTY: ");  //Need To Change after App Fix
+    }
+
     /**
      * This method exit from Order By Customer
      *
@@ -42,35 +73,7 @@ public class OrderByCustomer extends ReusableLib {
         Utility_Functions.actionKey(Keys.F3, driver);
     }
 
-    /**
-     * This method validate Order Details
-     *
-     */
-    public void orderDetails() {
-        sendKeys(OrderByCustomerPage.orderNum, WorkWithSalesQuote.salesOrder + "-01");
-        click(OrderByCustomerPage.nexttn, "Click Next Button");
-        String custNo = Utility_Functions.getText(driver, OrderByCustomerPage.custNum);
-        String orderNo = Utility_Functions.getText(driver, OrderByCustomerPage.orderNumFiled).trim();
-        String jobName = Utility_Functions.getText(driver, OrderByCustomerPage.jobName).trim();
-        String CustNb = jsonData.getData("CustNum");
-        String JobName = jsonData.getData("JobName");
-        Utility_Functions.xAssertEquals(report, CustNb, custNo, "Customer Number: ");
-        Utility_Functions.xAssertEquals(report, JobName, jobName, "Job Name: ");
-        Utility_Functions.xAssertEquals(report, WorkWithSalesQuote.salesOrder + "-01", orderNo, "Order Number: ");
-        //sendKeys(OrderByCustomerPage.optFiled, "1");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-    }
-
-    /**
-     * This method validate Order Status
-     *
-     */
-    public void orderStatus() {
-        orderDetails();
-        String status=Utility_Functions.getText(driver,OrderByCustomerPage.stats);
-        String inProcess = jsonData.getData("InProgressStatus");
-        Utility_Functions.xAssertEquals(report, inProcess, status, "Order Status: ");
-    }
+//*********************************************************************************************************
 
     /**
      * This method validate Order Status for invoice and close
@@ -85,14 +88,18 @@ public class OrderByCustomer extends ReusableLib {
 
     }
 
+
     /**
-     * This method validate Back Order Quantity
+     * This method validate Order Status
      *
      */
-    public void validBOQty() {
+    public void orderStatus() {
         orderDetails();
-        System.out.println("OK.....................");
-        String boQty= Utility_Functions.getText(driver,OrderByCustomerPage.boQty).trim();
-        Utility_Functions.xAssertEquals(report,"1",boQty,"Order Number: ");
+        String status=Utility_Functions.getText(driver,OrderByCustomerPage.stats);
+        String inProcess = jsonData.getData("InProgressStatus");
+        Utility_Functions.xAssertEquals(report, inProcess, status, "Order Status: ");
     }
+
+
+
 }
