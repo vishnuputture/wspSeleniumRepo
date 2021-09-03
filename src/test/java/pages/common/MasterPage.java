@@ -13,7 +13,9 @@ public class MasterPage extends ReusableLib {
     public static By salesAnalysisMenu=By.xpath("//div[text()='5']/following-sibling::div");
 	public static By inventoryMenu = By.xpath("//div[text()='7']/following-sibling::div");
 	public static By inventoryAdjustmentMenu = By.xpath("//div[text()='13']/following-sibling::div/a[contains(text(),'Entry')]");
+	public static By purchaseOrderMenu = By.xpath("//div[text()='11']/following-sibling::div/a[contains(text(),'Purchase')]");
 	public static By inventoryReceiptMenu = By.xpath("//div[text()='5']/following-sibling::div/a[contains(text(),'Receipt')]");
+	public static By inventoryReciptMenu = By.xpath("//div[text()='4']/following-sibling::div/a[contains(text(),'Inventory')]");
 	public static By avgCostAdjustmentMenu = By.xpath("//div[text()='7']/following-sibling::div/a[contains(text(),'Average')]");
     public static By itemMasterMenu =By.xpath("//div[text()='12']/following-sibling::div/a[contains(text(),'Revision')]");
 	public static By btnSignOut=By.xpath("//a[text()='Signoff']");
@@ -22,4 +24,5 @@ public class MasterPage extends ReusableLib {
 	public static By loadingAnime=By.id("_pui_loading_animation");
 	public static By optionAndConstantsMenu = By.xpath("//div[text()='24']/following-sibling::div/a[contains(text(),'Options')]");
 	public static By pricingMatrix = By.xpath("//div[text()='20']/following-sibling::div/a[contains(text(),'Pricing')]");
+	public static By salesQuotes = By.xpath("//div[text()='13']/following-sibling::div/a[contains(text(),'Sales')]");
 }

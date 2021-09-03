@@ -4640,4 +4640,15 @@ public class Utility_Functions extends ReusableLib {
         int x = random.nextInt(number);
         return x;
     }
+
+    /**
+     *
+     * This Method to Right Click on the Element
+     *
+     */
+    public static void rightClick(FrameworkDriver driver, By element) {
+        Actions builder = new Actions(driver.getWebDriver());
+        WebElement elementLocator = driver.findElement(element);
+        builder.contextClick(elementLocator).perform();
+    }
 }

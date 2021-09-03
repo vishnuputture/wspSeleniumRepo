@@ -3,12 +3,14 @@ package commonkeywords;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
+import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
 
 import pages.*;
 import pages.inventory.CostAdjustmentPage;
 import pages.pricing.AddSpecialPricingPage;
+import pages.pricing.OrderByCustomerPage;
 import pages.pricing.SpecialPricePage;
 import pages.pricing.matrixcost.InventoryManagementMainMenuPage;
 import pages.pricing.matrixcost.InventoryManagementMenu2Page;
@@ -307,5 +309,64 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void exitFromCycleCostAdj() {
 		click(CostAdjustmentPage.exitBtn,"Exit Cycle Cost Adjustment");
+	}
+
+	/**
+	 *
+	 * This method navigate to Sales Quotes Menu
+	 *
+	 */
+	public void navigateToSalesQuotes() {
+		click(MasterPage.salesQuotes,"Click on Sales Quotes Menu");
+	}
+
+	/**
+	 *
+	 * This method navigate to Working Sales Sales Quotes Program
+	 *
+	 */
+	public void navigationToWorkingSalesQuotes() {
+		click(WorkWithSalesQuotesPage.workingSalesQuotes,"Click on Working Sales Sales Quotes");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from Master to Purchase Order Menu
+	 *
+	 */
+	public void masterToPurchaseOrder() {
+		click(MasterPage.purchaseOrderMenu,"Click Purchase Order");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from Purchase Order Menu to Inventory Receipt Program
+	 *
+	 */
+	public void purchaseOrderToInventoryReceipt() {
+		click(MasterPage.inventoryReciptMenu,"Click Inventory Receipt");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from sales Quotes Page to master page
+	 *
+	 */
+	public void exitSalesQuotesToMasterPage() {
+		Utility_Functions.xWaitForElementToBeClickable(driver, SpecialPricePage.btnF3, 5);
+		click(SpecialPricePage.btnF3,"Click F3");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from order processing to Order by Customer page
+	 *
+	 */
+	public void ordeprocessingtoOrderbyCustomerpage() {
+		click(OrderByCustomerPage.orderByCust,"Click Order By Customer");
 	}
 }
