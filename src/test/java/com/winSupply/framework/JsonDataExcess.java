@@ -95,8 +95,21 @@ public class JsonDataExcess {
     }
 
     public int getIteration(){
-        int size=getData().size();
-       return size==0?1:size;
+
+      //  int size=getData().size();
+        List<HashMap<String, String>> ListofHash=getData();
+        int size=ListofHash.size();
+        try
+        { int iteration=0;
+        for(HashMap<String,String> map:ListofHash)
+        { iteration=  Integer.parseInt(map.get("Iteration"));
+            System.out.println(map.get("Iteration"));
+          System.out.println(iteration);
+        }
+        return iteration;
+        }catch (Exception e) {
+            return size == 0 ? 1 : size;
+        }
     }
 
 

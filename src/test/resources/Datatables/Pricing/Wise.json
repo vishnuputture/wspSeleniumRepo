@@ -27,7 +27,8 @@
 	"General_Data": [
 		{
 			"TC_ID": "Tc_17_NavigateToAddSpecialScreen",
-			"Title": "Add/Maintain Special Pricing"
+			"Title": "Add/Maintain Special Pricing",
+			"Iteration": "2"
 		},
 		{
 			"TC_ID": "Tc_2_ValidateNoSpecialPriceMessage",
