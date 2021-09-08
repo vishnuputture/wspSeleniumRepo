@@ -264,7 +264,7 @@ public class CoreScript {
                 testParameters.getCurrentScenario() + ".json";*/
 
 
-        //added on 9th sept
+        //added on 8th sept 2021, to use the correct path for json
         //**********************************************************************************************//
         String datatablePath = frameworkParameters.getRelativePath() + Util.getFileSeparator() + "src"
                 + Util.getFileSeparator() + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator()

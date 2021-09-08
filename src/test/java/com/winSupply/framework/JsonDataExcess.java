@@ -94,6 +94,10 @@ public class JsonDataExcess {
         return dataMap;
     }
 
+    /**
+     * Code Added on 8th September 2021mfor multiple iteration
+     * @return iteration count
+     */
     public int getIteration(){
 
       //  int size=getData().size();
@@ -104,7 +108,7 @@ public class JsonDataExcess {
         for(HashMap<String,String> map:ListofHash)
         { iteration=  Integer.parseInt(map.get("Iteration"));
             System.out.println(map.get("Iteration"));
-          System.out.println(iteration);
+           System.out.println(iteration);
         }
         return iteration;
         }catch (Exception e) {
