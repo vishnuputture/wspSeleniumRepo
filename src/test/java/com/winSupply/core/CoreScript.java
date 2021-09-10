@@ -181,8 +181,11 @@ public class CoreScript {
 
     private void executeTestIterations() {
         while (currentIteration <= testParameters.getEndIteration()) {
-            report.addTestLogSection("Iteration: " + Integer.toString(currentIteration));
-            report.setIteration(currentIteration);
+
+                report.addTestLogSection("Iteration: " + Integer.toString(currentIteration));
+                report.updateTestLog("CurrentIteration","Iteration: " + Integer.toString(currentIteration),Status.PASS);
+                report.setIteration(currentIteration);
+
             // Evaluate each test iteration for any errors
             try {
                 executeTestcase(businessFlowData);
@@ -257,14 +260,36 @@ public class CoreScript {
     }
 
     private int getNumberOfIterations() {
-        String encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
+/*        String encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
                 "src" + Util.getFileSeparator()
                         + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator() + "Datatables");
         String datatablePath = encryptedDatatablePath+ Util.getFileSeparator() +
-                testParameters.getCurrentScenario() + ".json";
+                testParameters.getCurrentScenario() + ".json";*/
 
-        JsonDataExcess jsonDataExcess= new JsonDataExcess(datatablePath,properties.getProperty("DefaultDataTag"));
+
+        //added on 8th sept 2021, to use the correct path for json
+        //**********************************************************************************************//
+        String datatablePath = frameworkParameters.getRelativePath() + Util.getFileSeparator() + "src"
+                + Util.getFileSeparator() + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator()
+                + "Datatables";
+        TestConfigurations t = new TestConfigurations();
+        String subPath = t.currentMethodName.toString().replace("package testcases", "");
+        String encryptedDatatablePath;
+        if (subPath != null ) {
+            encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
+                    datatablePath + "/" + subPath.replace(".","") + "/" + testParameters.getCurrentScenario() + ".json");
+        }
+        else {
+            encryptedDatatablePath = WhitelistingPath.cleanStringForFilePath(
+                    datatablePath + "/" + testParameters.getCurrentScenario() + ".json");
+        }
+
+
+            //***********************************************************************************************//
+
+        JsonDataExcess jsonDataExcess= new JsonDataExcess(encryptedDatatablePath,properties.getProperty("DefaultDataTag"));
         jsonDataExcess.setCurrentRow(testParameters.getCurrentTestcase(),0);
+
 
 
 

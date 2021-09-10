@@ -134,6 +134,7 @@ public class WorkWithSalesQuote extends ReusableLib {
         System.out.println("jobNm: "+jobNm);
         salesOrder=driver.findElement(WorkWithSalesQuotesPage.salesOrderNum).getAttribute("value");
         Utility_Functions.xUpdateJson("SOSmoke",salesOrder);
+        Utility_Functions.xUpdateJsonWithArray("SOSmoke1",salesOrder);
         System.out.println("Sales Order: "+salesOrder);
         String custNumber=jsonData.getData("CustNum");
         String jobName=jsonData.getData("JobName");
@@ -201,6 +202,7 @@ public class WorkWithSalesQuote extends ReusableLib {
         click(WorkWithSalesQuotesPage.createPO,"Click Create PO Button");
         purchaseOrder=Utility_Functions.getText(driver, WorkWithSalesQuotesPage.purchaseOrdNo);
         Utility_Functions.xUpdateJson("POSmoke",purchaseOrder);
+        Utility_Functions.xUpdateJsonWithArray("POSmoke1",purchaseOrder);
         System.out.println("purchaseOrder: "+purchaseOrder);
         click(WorkWithSalesQuotesPage.backBtn,"Click Back Button");
         String RelPO=Utility_Functions.getText(driver, WorkWithSalesQuotesPage.relatedPO);

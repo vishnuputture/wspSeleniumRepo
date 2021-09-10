@@ -19,6 +19,7 @@ import com.jcraft.jsch.Session;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hamcrest.Matchers;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.NoSuchElementException;
@@ -3622,6 +3623,37 @@ public class Utility_Functions extends ReusableLib {
             JSONObject jo = (JSONObject) obj;
 
             jo.put(Key, value);
+
+            PrintWriter pw = new PrintWriter(jsonFile);
+            pw.write(jo.toJSONString());
+
+            pw.flush();
+            pw.close();
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        	e.printStackTrace();
+        }
+
+    }
+    
+    @SuppressWarnings("unchecked")
+    public static void xUpdateJsonWithArray(String Key, String value) {
+        try {
+            createJsonFile(jsonFile);
+            Object obj = new JSONParser().parse(new FileReader(jsonFile));
+            
+            JSONArray valArray = new JSONArray();
+            
+            
+
+            // typecasting obj to JSONObject
+            JSONObject jo = (JSONObject) obj;
+            valArray = (JSONArray) jo.getOrDefault(Key, valArray);
+            
+            valArray.add(value);
+
+            jo.put(Key, valArray);
 
             PrintWriter pw = new PrintWriter(jsonFile);
             pw.write(jo.toJSONString());

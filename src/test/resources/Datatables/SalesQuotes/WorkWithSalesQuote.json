@@ -1,7 +1,7 @@
 {
 	"Business_Flow": [
 		{
-			"SalesQuotesToPO": "launchApp,siteLogin,navigateToWorkingSalesQuote,createQuote,addItemToQuote,verifyQuoteDetails,convertSaleOrd,validateCustJobName,inventoryInformation,createPurchaseOrd,exitSalesQuotesToMasterPage",
+			"SalesQuotesToPO": "launchApp,siteLogin,navigateToWorkingSalesQuote,createQuote,addItemToQuote,verifyQuoteDetails,convertSaleOrd,validateCustJobName,inventoryInformation,createPurchaseOrd,exitSalesQuotesToMasterPage,signOut",
 			"CheckInventoryReceipts": "launchApp,siteLogin,navigateToInventoryReceipt,inventReceipt,exitPurchaseToMasterPage",
 			"InquiryOrdersByCustomer": "launchApp,siteLogin,navigateToOrderByCustomer,validBOQty,exitOrderByCustomer",
 			"OrderShippingConfirmation": "launchApp,siteLogin,navigateToShippingConfirmation,orderConfirmation,exitShippingConfirmation,navigateToOrderByCustomer,orderStatus,exitOrderByCustomer",
@@ -17,7 +17,9 @@
 			"CustNum": "000300",
 			"TestDescription": "TEST AUTO",
 			"Quantity": "1",
-			"InProgressStatus": "In Process"
+			"InProgressStatus": "In Process",
+			"Iteration": "2"
+
 		},
 		{
 			"TC_ID": "CheckInventoryReceipts",

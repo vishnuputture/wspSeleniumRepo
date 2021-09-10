@@ -54,6 +54,8 @@ public class AddSpecialPrice extends ReusableLib {
         commonObj.masterToOrderProcessing();
         commonObj.orderProcToSplPricing();
         commonObj.splPricingToAddPricing();
+        
+        
         commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");
     }
 
