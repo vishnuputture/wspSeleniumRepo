@@ -289,4 +289,53 @@ public class PricingMatrix extends ReusableLib {
     	}
     }
     
+    public void pgLeftRt() {
+    	String beforeCol =  Utility_Functions.getText(driver,  PricingMatrixPage.col7);
+    	
+    	click(PricingMatrixPage.getButton("btnCF12"),"Clicking on page right button");
+    	Utility_Functions.xAssertNotEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.col7), beforeCol, "Column name should be different");
+    	click(PricingMatrixPage.getButton("btnCF11"),"Clicking on page left button");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.col7), beforeCol, "Column name should be same");
+    }
+    
+    public void pgUpDn() {
+    	String beforeRow = Utility_Functions.getText(driver,  PricingMatrixPage.row5);
+    	
+    	click(PricingMatrixPage.getButton("btnPageDown"),"Clicking on page down button");
+    	
+    	Utility_Functions.xAssertNotEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.row5), beforeRow, "Row name should be different");
+    	
+    	click(PricingMatrixPage.getButton("btnPageUp"),"Clicking on page up button");
+    	
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.row5), beforeRow, "Row name should be same");
+    }
+    
+    public void validateDispList() {
+    	click(PricingMatrixPage.btnF24,"Click on more buttons");
+    	
+    	String selectedRow = Utility_Functions.getText(driver,  PricingMatrixPage.firstRow);
+    	
+    	click(PricingMatrixPage.firstRow, "Click on the first row");
+    	
+    	click(PricingMatrixPage.getButton("btnCF14"),"Click on the display list button");
+    	
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.dispListTitle).trim(), "Matrix Row/Item List", "Title should match");
+    	
+    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.selectRowTxtBox,"value"), selectedRow, "Validating selected row textbox");
+    	
+    	click(PricingMatrixPage.getButton("btnCF12"));
+    	
+    	String selectedCol = Utility_Functions.getText(driver,  PricingMatrixPage.firstCol);
+    	
+    	click(PricingMatrixPage.firstCol, "Click on the first column");
+    	
+    	click(PricingMatrixPage.getButton("btnCF14"),"Click on the display list button");
+    	
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.dispListTitle).trim(), "Matrix Column/Customer List", "Title should match");
+    	
+    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.selectColTxtBox,"value"), selectedCol, "Validating selected column textbox");
+    	
+    	
+    }
+    
 }
