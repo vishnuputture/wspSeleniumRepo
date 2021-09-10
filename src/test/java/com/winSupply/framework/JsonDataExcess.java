@@ -72,27 +72,45 @@ public class JsonDataExcess {
     }
 
     public String getData(String column) {
-        List<HashMap<String, String>> dataList = getData();
-        if (dataList == null || dataList.isEmpty()) {
-            throw new FrameworkException("The test case \"" + currentTestcase
-                    + "\" is not found in the Data file !");
+
+            List<HashMap<String, String>> dataList = getData();
+
+            if (dataList == null || dataList.isEmpty()) {
+                throw new FrameworkException("The test case \"" + currentTestcase
+                        + "\" is not found in the Data file !");
+            }
+        try {
+            return dataList.get(currentIteration - 1).get(column);
+        } catch (Exception e) {
+            return dataList.get(0).get(column);
         }
-        return dataList.get(currentIteration-1).get(column);
     }
 
     public HashMap<String, String> getData(String[] columns) {
         List<HashMap<String, String>> dataList = getData();
         HashMap<String, String> dataMap = new HashMap<>();
+
         if (dataList == null || dataList.isEmpty()) {
             throw new FrameworkException("The test case \"" + currentTestcase
                     + "\" is not found in the Data file !");
         }
+        try{
         for (String col : columns) {
             String val = dataList.get(currentIteration).get(col);
             dataMap.put(col, val);
         }
         return dataMap;
-    }
+    }catch (Exception e)
+        {
+
+            for (String col : columns) {
+                String val = dataList.get(0).get(col);
+                dataMap.put(col, val);
+            }
+            return dataMap;
+        }
+
+        }
 
     /**
      * Code Added on 8th September 2021mfor multiple iteration

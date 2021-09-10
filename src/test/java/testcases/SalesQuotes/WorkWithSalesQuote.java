@@ -9,11 +9,12 @@ public class WorkWithSalesQuote extends TestConfigurations {
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void SalesQuotesToPO(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
+            testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
+            CoreScript coreScript = new CoreScript(testParameters);
+            coreScript.driveTestExecution();
+            tearDownTestRunner(testParameters, coreScript);
+        }
+
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void CheckInventoryReceipts(SeleniumTestParameters testParameters) {

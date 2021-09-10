@@ -181,8 +181,11 @@ public class CoreScript {
 
     private void executeTestIterations() {
         while (currentIteration <= testParameters.getEndIteration()) {
-            report.addTestLogSection("Iteration: " + Integer.toString(currentIteration));
-            report.setIteration(currentIteration);
+
+                report.addTestLogSection("Iteration: " + Integer.toString(currentIteration));
+                report.updateTestLog("CurrentIteration","Iteration: " + Integer.toString(currentIteration),Status.PASS);
+                report.setIteration(currentIteration);
+
             // Evaluate each test iteration for any errors
             try {
                 executeTestcase(businessFlowData);
@@ -286,6 +289,7 @@ public class CoreScript {
 
         JsonDataExcess jsonDataExcess= new JsonDataExcess(encryptedDatatablePath,properties.getProperty("DefaultDataTag"));
         jsonDataExcess.setCurrentRow(testParameters.getCurrentTestcase(),0);
+
 
 
 
