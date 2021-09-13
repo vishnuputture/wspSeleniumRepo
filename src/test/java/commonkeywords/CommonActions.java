@@ -319,6 +319,15 @@ public class CommonActions extends ReusableLib {
 	public void navigateToSalesQuotes() {
 		click(MasterPage.salesQuotes,"Click on Sales Quotes Menu");
 	}
+	
+	/**
+	 *
+	 * This method navigate to Sales Orders Menu
+	 *
+	 */
+	public void orderProcessingToSalesOrders() {
+		click(MasterPage.salesOrdersMenu,"Click on Sales Orders Menu");
+	}
 
 	/**
 	 *
