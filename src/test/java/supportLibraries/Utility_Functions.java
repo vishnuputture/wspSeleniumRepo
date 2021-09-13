@@ -2760,6 +2760,15 @@ public class Utility_Functions extends ReusableLib {
         answer.selectByIndex(index);
 
     }
+    
+    public static String xgetSelectedDropdownValue(FrameworkDriver driver,By e) {
+
+    	 Select answer = new Select(driver.findElement(e));
+    	 
+    	 return answer.getFirstSelectedOption().getText();
+        //answer.selectByIndex(index);
+
+    }
 
     public static void xSelectDropdownByName(FrameworkDriver driver, Report report, WebElement e, String visibleName,
                                              String CustMsg) {
@@ -2920,10 +2929,22 @@ public class Utility_Functions extends ReusableLib {
         }
         dropdown.selectByValue(value);
     }
+    
+    public static void xSelectDropdownByVisibleText(FrameworkDriver driver, By e, String value) {
+        xWaitForElementPresent(driver, e, 10);
+        xWaitForElementClickable(driver, e, 10);
+        WebElement el = driver.findElement(e);
+        Select dropdown = new Select(el);
+        if (dropdown.getOptions().size() <= 0) {
+            timeWait(1);
+        }
+        dropdown.selectByVisibleText(value);
+    }
 
     public static void xSelectDropdownByValue(WebElement e, String value) {
         Select dropdown = new Select(e);
         dropdown.selectByValue(value);
+        
     }
 
     public static void xSelectRadio(FrameworkDriver driver, WebElement el) {

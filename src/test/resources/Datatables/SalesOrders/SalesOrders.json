@@ -1,0 +1,16 @@
+{
+	"Business_Flow": [
+		{
+			"CreateSalesOrder": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,saveExitSalesOrders,signOut"
+
+		}],
+	"General_Data": [
+		{
+			"TC_ID": "CreateSalesOrder",
+			"accountNo": "099599",
+			"itemNo1": "5105TCW158SS2",
+			"itemNo2": "0023PBE0520"
+			
+		}
+	]
+}

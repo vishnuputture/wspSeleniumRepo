@@ -45,6 +45,9 @@ public class Master extends ReusableLib {
     public void navigateToSalesQuotesMenu() {
         commonObj.navigateToSalesQuotes();
     }
+    
+    
+   
 
     public void navigateToWorkingSalesQuotes() {
         commonObj.navigationToWorkingSalesQuotes();
