@@ -4,17 +4,19 @@ import businesskeywords.common.Master;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import supportLibraries.Utility_Functions;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomerGroupMaintenance extends ReusableLib {
     CommonActions commonObj;
     Master mstr;
-    public static int count=0;
+    public static int count = 0;
 
     public CustomerGroupMaintenance(Helper helper) {
         super(helper);
@@ -82,9 +84,72 @@ public class CustomerGroupMaintenance extends ReusableLib {
     /**
      * This method to Add Group name and click cancel button
      */
-    public void addGroupAndCancel() {
+    public String addGroupAndCancel() {
         addGroup();
+        String groupName = Utility_Functions.xGetJsonAsString("GroupName");
         clickCancelBtn();
+        return groupName;
+    }
+
+    /**
+     * This method to Display Group Name
+     */
+    public void displayGroupName() {
+        sendKeys(CustomerGroupMaintenancePage.groupOptField1,"5");
+        String expGroupNm=getText(CustomerGroupMaintenancePage.firGroupName);
+        String expGroupN=getText(CustomerGroupMaintenancePage.groupNumber1);
+        String expGroupNo=expGroupN.trim();
+        Utility_Functions.actionKey(Keys.ENTER,driver);
+        String actGroupN=getText(CustomerGroupMaintenancePage.groupNumber);
+        String actGroupNo=actGroupN.trim();
+        String actGroupNm=getAttribute(CustomerGroupMaintenancePage.groupName,"value");
+        Utility_Functions.xAssertEquals(report,actGroupNo,expGroupNo,"Group Number: ");
+        Utility_Functions.xAssertEquals(report,actGroupNm,expGroupNm,"Group Name: ");
+        clickCancelBtn();
+    }
+
+    /**
+     * This method to find groupName by clicking down button and Enter option
+     *
+     */
+    public WebElement findGroupName(String text,int option) {
+        int cnt=0;
+        Boolean find1=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[text()='" + text + "']"));
+        System.out.println(find1);
+        while (find1==false){
+            cnt++;
+            click(CustomerGroupMaintenancePage.downBtn);
+            Utility_Functions.timeWait(2);
+            find1=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[text()='" + text + "']"));
+            System.out.println(""+"//div[text()='" + text + "']"+"");
+            System.out.println("After downButton: "+find1);
+        }
+        System.out.println("Count to find element"+cnt);
+        int size1 = driver.findElements(By.xpath("//div[text()='" + text + "']/preceding::input")).size();
+        System.out.println("size1: " + size1);
+        WebElement el1 = driver.findElements(By.xpath("//div[text()='" + text + "']/preceding::input")).get(size1 - 1);
+        sendKeys(el1, ""+option+"", "Enter "+option+" in option field to delete group Name: " + text + "");
+        for(int i=1;i<=cnt;i++){
+            click(CustomerGroupMaintenancePage.upBtn);
+        }
+        return el1;
+    }
+
+    /**
+     * This method to Add multiple Group name and delete Multiple Groups
+     */
+    public void deleteMultipleGroups() {
+        String groupName1 = addGroupAndCancel();
+        String groupName2 = addGroupAndCancel();
+        findGroupName(groupName1,4);
+        findGroupName(groupName2,4);
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        clickSubmit();
+        clickCancelBtn();
+        Boolean actGN1=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[text()='" + groupName1 + "']"));
+        Boolean actGN2=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[text()='" + groupName2 + "']"));
+        Utility_Functions.xAssertEquals(report,""+actGN1+"","false","GroupName: "+groupName1+" is deleted");
+        Utility_Functions.xAssertEquals(report,""+actGN2+"","false","GroupName: "+groupName2+" is deleted");
     }
 
     /**
@@ -197,6 +262,7 @@ public class CustomerGroupMaintenance extends ReusableLib {
         Utility_Functions.xAssertEquals(report, expFirstCust, actCust1, "Customer is added to group name");
         Utility_Functions.xAssertEquals(report, expSecCust, actCust2, "Customer is added to group name");
     }
+
     /**
      * This method to search Group Name
      */
@@ -230,40 +296,41 @@ public class CustomerGroupMaintenance extends ReusableLib {
      */
     public void deleteGroupName() {
         tillDisplayed();
-        String deletedRec=Utility_Functions.xGetJsonAsString("deletedGroup");
+        String deletedRec = Utility_Functions.xGetJsonAsString("deletedGroup");
         sendKeys(CustomerGroupMaintenancePage.searchField, deletedRec);
         Utility_Functions.actionKey(Keys.ENTER, driver);
-        Utility_Functions.xIsElementDisplayed(report, driver.findElement(CustomerGroupMaintenancePage.searchField), "GroupName: " + deletedRec + " not present");
+        Boolean actual=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[text()='" + deletedRec + "']"));
+        Utility_Functions.xAssertEquals(report,""+actual+"","false","GroupName: "+actual+" is deleted");
     }
 
     /**
      * This method to run till record is deleted as Group Number being used in SPA cannot delete
-     *
      */
-    public void tillDisplayed(){
-        clickAddGroupCustomer();
-        sendGroupName();
-        clickCancelBtn();
-        List<WebElement> list=driver.findElements(CustomerGroupMaintenancePage.groupOptField);
-        int size=list.size();
-        System.out.println("Length group name: "+size);
+    public void tillDisplayed() {
+        addGroupAndCancel();
+        List<WebElement> list = driver.findElements(CustomerGroupMaintenancePage.groupOptField);
+        int size = list.size();
+        System.out.println("Length group name: " + size);
         WebElement el = null;
-        for(int i=1;i<=size;i++){
-            System.out.println("i Value: "+i);
-            WebElement elem=driver.findElements(CustomerGroupMaintenancePage.groupOptField).get(i);
-            sendKeys(elem, "4","Enter 4 in option field to delete group Name");
+        for (int i = 1; i <= size; i++) {
+            System.out.println("i Value: " + i);
+            WebElement elem = driver.findElements(CustomerGroupMaintenancePage.groupOptField).get(i);
+            sendKeys(elem, "4", "Enter 4 in option field to delete group Name");
             el = driver.findElements(CustomerGroupMaintenancePage.getGroupName).get(count);
-            System.out.println("to be deleted record: "+el.getText());
-            count+= 3;
+            System.out.println("to be deleted record: " + el.getText());
+            count += 3;
             storeGroupNumberName("deletedGroup", el.getText());
             Utility_Functions.actionKey(Keys.ENTER, driver);
             clickSubmit();
-            String res=getText(CustomerGroupMaintenancePage.GroupNameMessage);
-            System.out.println("res message: "+res);
-            if(res.equals("Group Number being used in SPA cannot delete.")) {
-                Utility_Functions.xAssertEquals(report,res,"Group Number being used in SPA cannot delete.","");
+            String res = getText(CustomerGroupMaintenancePage.GroupNameMessage);
+            System.out.println("res message: " + res);
+            if (res.equals("Group Number being used in SPA cannot delete.")) {
+                Utility_Functions.xAssertEquals(report, res, "Group Number being used in SPA cannot delete.", "");
                 clickCancelBtn();
-            }else{clickCancelBtn();break;}
+            } else {
+                clickCancelBtn();
+                break;
+            }
         }
     }
 

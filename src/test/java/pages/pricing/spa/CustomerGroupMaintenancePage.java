@@ -27,7 +27,11 @@ public class CustomerGroupMaintenancePage extends ReusableLib {
     public static By firGroupName = By.id("D_10_6");
     public static By secGroupName = By.id("D_11_6");
     public static By groupOptField1 = By.id("I_10_3");
+    public static By groupNumber1 = By.id("D_10_38");
     public static By groupOptField2 = By.id("I_11_3");
+    public static By downBtn = By.id("down_button");
+    public static By upBtn = By.id("up_button");
+    public static By bottomPage = By.id("D_21_68");
     public static By groupOptField = By.xpath("//input[contains(@id,'I')]");
     public static By getGroupName = By.xpath("//input[contains(@id,'I')]/following::div[@class='A20']");
 

@@ -32,8 +32,8 @@ public class SPA extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_318_VerifyCustomerGroupSorting(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to verify Customer group sorting");
+    public void Tc_316_VerifyDisplayCustomer(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify added customer to GroupName");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -42,6 +42,22 @@ public class SPA extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_317_VerifyDeleteGroupName(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify delete group name");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_318_VerifyCustomerGroupSorting(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Customer group sorting");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_319_VerifyDeleteMultipleGroupName(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify delete Multiple group name");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
