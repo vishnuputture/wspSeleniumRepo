@@ -71,12 +71,27 @@ public class CustomerGroupMaintenance extends ReusableLib {
     /**
      * This method to Add Group name
      */
-    public void addGroupName() {
+    public void addGroup() {
         clickAddGroupCustomer();
         verifyGroupNameFilled();
         String result = driver.findElement(CustomerGroupMaintenancePage.groupNumber).getText().replaceAll("\\s", "");
         storeGroupNumberName("GroupNumber", result);
         sendGroupName();
+    }
+
+    /**
+     * This method to Add Group name and click cancel button
+     */
+    public void addGroupAndCancel() {
+        addGroup();
+        clickCancelBtn();
+    }
+
+    /**
+     * This method to Add Group name and click Add group customer
+     */
+    public void addGroupName() {
+        addGroup();
         clickAddGroupCustomer();
     }
 
@@ -182,17 +197,23 @@ public class CustomerGroupMaintenance extends ReusableLib {
         Utility_Functions.xAssertEquals(report, expFirstCust, actCust1, "Customer is added to group name");
         Utility_Functions.xAssertEquals(report, expSecCust, actCust2, "Customer is added to group name");
     }
+    /**
+     * This method to search Group Name
+     */
+    public void searchGroupName() {
+        String groupName = Utility_Functions.xGetJsonAsString("GroupName");
+        sendKeys(CustomerGroupMaintenancePage.searchField, groupName);
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        String actGroupName = driver.findElement(CustomerGroupMaintenancePage.searchGroup).getText();
+        Utility_Functions.xAssertEquals(report, groupName, actGroupName, "Verify GroupName is added: ");
+    }
 
     /**
      * This method to Navigate to Customer Group Browse and verify Group Name
      */
     public void verifyGroupName() {
         clickCancelBtn();
-        String groupName = Utility_Functions.xGetJsonAsString("GroupName");
-        sendKeys(CustomerGroupMaintenancePage.searchField, groupName);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-        String actGroupName = driver.findElement(CustomerGroupMaintenancePage.searchGroup).getText();
-        Utility_Functions.xAssertEquals(report, groupName, actGroupName, "Verify GroupName is added: ");
+        searchGroupName();
     }
 
     /**
@@ -220,6 +241,9 @@ public class CustomerGroupMaintenance extends ReusableLib {
      *
      */
     public void tillDisplayed(){
+        clickAddGroupCustomer();
+        sendGroupName();
+        clickCancelBtn();
         List<WebElement> list=driver.findElements(CustomerGroupMaintenancePage.groupOptField);
         int size=list.size();
         System.out.println("Length group name: "+size);

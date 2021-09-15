@@ -8,8 +8,8 @@
 					<!--<include name="Tc_161_VerifySPAScreenHeader"></include>
                     <include name="Tc_166_VerifySPAScreenInformation"></include>
                     <include name="Tc_311_VerifyAddCustomersToGroupName"></include>
-                    <include name="Tc_318_VerifyCustomerGroupSorting"></include>-->
-                    <include name="Tc_317_VerifyDeleteGroupName"></include>
+                    <include name="Tc_318_VerifyCustomerGroupSorting"></include>
+                    <include name="Tc_317_VerifyDeleteGroupName"></include>-->
 				</methods>
 			</class>
 		</classes>
