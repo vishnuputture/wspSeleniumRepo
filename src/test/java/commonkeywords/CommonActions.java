@@ -14,6 +14,7 @@ import pages.pricing.OrderByCustomerPage;
 import pages.pricing.SpecialPricePage;
 import pages.pricing.matrixcost.InventoryManagementMainMenuPage;
 import pages.pricing.matrixcost.InventoryManagementMenu2Page;
+import pages.pricing.spa.CustomerGroupMaintenancePage;
 import supportLibraries.Utility_Functions;
 
 import java.text.SimpleDateFormat;
@@ -377,5 +378,14 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void ordeprocessingtoOrderbyCustomerpage() {
 		click(OrderByCustomerPage.orderByCust,"Click Order By Customer");
+	}
+
+	/**
+	 *
+	 * This method Exit From Customer Group Maintenance
+	 *
+	 */
+	public void exitFromCustomerGroupMaintenance() {
+		click(SpecialPricePage.btnF3,"Exit Customer Group Maintenance");
 	}
 }
