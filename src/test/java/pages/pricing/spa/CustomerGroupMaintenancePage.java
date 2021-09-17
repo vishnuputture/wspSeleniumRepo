@@ -12,10 +12,13 @@ public class CustomerGroupMaintenancePage extends ReusableLib {
     public static By GroupNameMessage = By.id("D_24_2");
     public static By groupName = By.id("I_5_21");
     public static By firstCust = By.id("I_12_3");
+    public static By firstCustName = By.id("D_12_18");
     public static By secCust = By.id("I_13_3");
     public static By thrdCust = By.id("I_14_3");
+    public static By forCust = By.id("I_15_3");
     public static By firCustNo = By.id("D_12_6");
     public static By secCustNo = By.id("D_13_6");
+    public static By forCustNo = By.id("D_15_6");
     public static By selectDeSel = By.id("btnCF05");
     public static By sort = By.id("btnCF10");
     public static By submitBtn = By.id("btnCF09");

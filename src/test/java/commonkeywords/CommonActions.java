@@ -386,6 +386,10 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void exitFromCustomerGroupMaintenance() {
+		Boolean res=Utility_Functions.xIsDisplayed(driver,CustomerGroupMaintenancePage.cancelBtn);
+		if(res==true){
+			click(CustomerGroupMaintenancePage.cancelBtn,"CLick F12=Return");
+		}
 		click(SpecialPricePage.btnF3,"Exit Customer Group Maintenance");
 	}
 }

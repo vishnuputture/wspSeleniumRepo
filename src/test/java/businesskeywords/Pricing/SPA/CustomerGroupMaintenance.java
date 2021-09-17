@@ -9,6 +9,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import supportLibraries.Utility_Functions;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomerGroupMaintenance extends ReusableLib {
@@ -35,9 +37,15 @@ public class CustomerGroupMaintenance extends ReusableLib {
      * This method click Add Groups Or Add Customer
      *
      */
-    public void clickAddGroupCustomer() {
+    public String clickAddGroupCustomer() {
+        String customer = null;
+        Boolean cust=Utility_Functions.xIsDisplayed(driver,CustomerGroupMaintenancePage.secCustNo);
+        if(cust==true){
+            customer=Utility_Functions.getText(driver,CustomerGroupMaintenancePage.secCustNo);
+        }
         String text = driver.findElement(CustomerGroupMaintenancePage.addGroupsCust).getAttribute("value");
         click(CustomerGroupMaintenancePage.addGroupsCust, "Click " + text + "");
+        return customer;
     }
 
     /**
@@ -117,12 +125,20 @@ public class CustomerGroupMaintenance extends ReusableLib {
      *
      */
     public void addCustomerToGroupName() {
+        String existCustomer=getText(CustomerGroupMaintenancePage.secCustNo);
+        deleteParCustomer(existCustomer);
         clickAddGroupCustomer();
-        selectCustomers();
+        String custNm=selectOneCustomers();
+        System.out.println("custName: "+custNm);
         clickSubmit();
         clickSubmit();
         addCustCnfrmMessage();
         clickCancelBtn();
+        Utility_Functions.timeWait(2);
+        String[] custName=custNm.split("\\s",0);
+        Boolean cust=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[contains(text(),'" + custName[1] + "')]"));
+        Utility_Functions.xAssertEquals(report,""+cust+"","true","Customer: "+custNm+" is added to group");
+
     }
 
     /**
@@ -136,6 +152,23 @@ public class CustomerGroupMaintenance extends ReusableLib {
         String actCustName=Utility_Functions.getText(driver.findElement(CustomerGroupMaintenancePage.customerName));
         Utility_Functions.xAssertEquals(report,actCustName,custName,"Group Name: ");
         clickCancelBtn();
+    }
+
+    /**
+     * This method to delete particular Customer from the group
+     *
+     */
+    public void deleteParCustomer(String customer) {
+        String res[]=customer.split("\\s");
+        int size=driver.findElements(By.xpath("//div[contains(text(),'"+res[0]+"')]/preceding::input")).size();
+        System.out.println("size: "+size);
+        sendKeys(By.xpath("(//div[contains(text(),'"+res[0]+"')]/preceding::input)["+size+"]"),"4");
+        Utility_Functions.actionKey(Keys.ENTER,driver);
+        click(CustomerGroupMaintenancePage.submitBtn,"Click F9=Delete Record");
+        /*sendKeys(CustomerGroupMaintenancePage.searchField,customer);
+        Utility_Functions.actionKey(Keys.ENTER,driver);*/
+        Boolean find1=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[text()='" + res[0] + "']"));
+        Utility_Functions.xAssertEquals(report,""+find1+"","false","GroupName: "+customer+" is deleted");
     }
 
     /**
@@ -238,11 +271,25 @@ public class CustomerGroupMaintenance extends ReusableLib {
     }
 
     /**
+     * This method to select one customer by entering "1" into option field
+     *
+     */
+    public String selectOneCustomers() {
+        sendKeys(CustomerGroupMaintenancePage.firstCust, "1");
+        String customer=driver.findElement(CustomerGroupMaintenancePage.firstCustName).getText();
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        String expColor = "rgba(204, 0, 51, 1)";
+        String actColor1 = driver.findElement(CustomerGroupMaintenancePage.firCustNo).getCssValue("color");
+        Utility_Functions.xAssertEquals(report, expColor, actColor1, "Selected customer/customers records should turn into red color: ");
+        return customer;
+    }
+
+    /**
      * This method to deselect customer by entering "4" into option field
      *
      */
-    public void deSelectCustomers() {
-        sendKeys(CustomerGroupMaintenancePage.thrdCust, "4");
+    public void deSelectCustomers(By el) {
+        sendKeys(el, "4");
         Utility_Functions.actionKey(Keys.ENTER, driver);
         String expBlackClr = "rgba(0, 0, 0, 1)";
         String actColor = driver.findElement(CustomerGroupMaintenancePage.thrdCust).getCssValue("color");
@@ -301,7 +348,7 @@ public class CustomerGroupMaintenance extends ReusableLib {
     public void addCustomerToGroup() {
         clickAddGroupCustomer();
         selectCustomers();
-        deSelectCustomers();
+        deSelectCustomers(CustomerGroupMaintenancePage.thrdCust);
         sortSelectedCust();
         showAllCustomer();
         sortByCustomerColumn();
@@ -392,7 +439,9 @@ public class CustomerGroupMaintenance extends ReusableLib {
             el = driver.findElements(CustomerGroupMaintenancePage.getGroupName).get(count);
             count += 3;
             storeGroupNumberName("deletedGroup", el.getText());
+            Utility_Functions.timeWait(2);
             Utility_Functions.actionKey(Keys.ENTER, driver);
+            Utility_Functions.timeWait(3);
             clickSubmit();
             String res = getText(CustomerGroupMaintenancePage.GroupNameMessage);
             if (res.equals("Group Number being used in SPA cannot delete.")) {
