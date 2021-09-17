@@ -4,6 +4,7 @@
       "Tc_161_VerifySPAScreenHeader": "launchApp,siteLogin,validateSPAApplicationTitle,exitSPAApplication,signOut",
       "Tc_166_VerifySPAScreenInformation": "launchApp,siteLogin,validateScreenElements,exitSPAApplication,signOut",
       "Tc_311_VerifyAddCustomersToGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,addGroupName,addCustomerToGroup,verifySelectedCustomer,verifyGroupName,exitFromCustomerGroupMaintenance,signOut",
+      "Tc_315_VerifyEditCustomerGroup": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,editGroupName,addCustomerToGroupName,displayGroups,deleteCustomer,exitFromCustomerGroupMaintenance,signOut",
       "Tc_316_VerifyDisplayCustomer": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,displayGroupName,exitFromCustomerGroupMaintenance,signOut",
       "Tc_317_VerifyDeleteGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,addGroupAndCancel,deleteGroupName,exitFromCustomerGroupMaintenance,signOut",
       "Tc_318_VerifyCustomerGroupSorting": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,sortCustomerGroup,exitFromCustomerGroupMaintenance,signOut",
@@ -20,6 +21,9 @@
     },
     {
       "TC_ID": "Tc_311_VerifyAddCustomersToGroupName"
+    },
+    {
+      "TC_ID": "Tc_315_VerifyEditCustomerGroup"
     },
     {
       "TC_ID": "Tc_316_VerifyDisplayCustomer"

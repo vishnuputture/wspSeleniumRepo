@@ -32,6 +32,14 @@ public class SPA extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_315_VerifyEditCustomerGroup(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Edit customer");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_316_VerifyDisplayCustomer(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify added customer to GroupName");
         CoreScript coreScript = new CoreScript(testParameters);
