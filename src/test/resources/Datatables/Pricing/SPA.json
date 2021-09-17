@@ -6,7 +6,7 @@
       "Tc_311_VerifyAddCustomersToGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,addGroupName,addCustomerToGroup,verifySelectedCustomer,verifyGroupName,exitFromCustomerGroupMaintenance,signOut",
       "Tc_315_VerifyEditCustomerGroup": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,editGroupName,addCustomerToGroupName,displayGroups,deleteCustomer,exitFromCustomerGroupMaintenance,signOut",
       "Tc_316_VerifyDisplayCustomer": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,displayGroupName,exitFromCustomerGroupMaintenance,signOut",
-      "Tc_317_VerifyDeleteGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,addGroupAndCancel,deleteGroupName,exitFromCustomerGroupMaintenance,signOut",
+      "Tc_317_VerifyDeleteGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,deleteGroupName,exitFromCustomerGroupMaintenance,signOut",
       "Tc_318_VerifyCustomerGroupSorting": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,sortCustomerGroup,exitFromCustomerGroupMaintenance,signOut",
       "Tc_319_VerifyDeleteMultipleGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,deleteMultipleGroups,exitFromCustomerGroupMaintenance,signOut"
     }
