@@ -112,6 +112,7 @@ public class CustomerGroupMaintenance extends ReusableLib {
         String expGroupNm=getText(CustomerGroupMaintenancePage.firGroupName);
         String expGroupN=getText(CustomerGroupMaintenancePage.groupNumber1);
         String expGroupNo=expGroupN.trim();
+        Utility_Functions.timeWait(2);
         Utility_Functions.actionKey(Keys.ENTER,driver);
         String actGroupN=getText(CustomerGroupMaintenancePage.groupNumber);
         String actGroupNm=getAttribute(CustomerGroupMaintenancePage.groupName,"value");
