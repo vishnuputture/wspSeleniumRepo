@@ -13,4 +13,7 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By optionsHeader = By.id("D_6_2");
     public static By optionsSet = By.id("D_7_3");
     public static By btnExit = By.id("btnExit");
+    public static By lblExpired = By.xpath("//div[text()='Expired']");
+    public static By lblActive = By.xpath("//div[text()='Active']");
+    public static By btnHideShowExpired = By.id("btnCF07");
 }
