@@ -3584,7 +3584,14 @@ public class Utility_Functions extends ReusableLib {
         File rtnFile = null;
         try {
             FileReader fr = new FileReader(fileName);
-            return rtnFile = new File(fileName);
+            
+             rtnFile = new File(fileName);
+             if(rtnFile.length()<1) {
+            	 rtnFile.delete();
+            	 throw new Exception();
+             }
+            
+            return rtnFile;
 
         } catch (Exception e) {
 
@@ -3661,7 +3668,7 @@ public class Utility_Functions extends ReusableLib {
     @SuppressWarnings("unchecked")
     public static void xUpdateJsonWithArray(String Key, String value) {
         try {
-            createJsonFile(jsonFile);
+           createJsonFile(jsonFile);
             Object obj = new JSONParser().parse(new FileReader(jsonFile));
             
             JSONArray valArray = new JSONArray();
@@ -3685,6 +3692,7 @@ public class Utility_Functions extends ReusableLib {
         } catch (Exception e) {
             // TODO: handle exception
         	e.printStackTrace();
+        	
         }
 
     }
