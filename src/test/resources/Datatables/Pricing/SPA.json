@@ -10,7 +10,9 @@
       "Tc_316_VerifyDisplayCustomer": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,displayGroupName,exitFromCustomerGroupMaintenance,signOut",
       "Tc_317_VerifyDeleteGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,deleteGroupName,exitFromCustomerGroupMaintenance,signOut",
       "Tc_318_VerifyCustomerGroupSorting": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,sortCustomerGroup,exitFromCustomerGroupMaintenance,signOut",
-      "Tc_319_VerifyDeleteMultipleGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,deleteMultipleGroups,exitFromCustomerGroupMaintenance,signOut"
+      "Tc_319_VerifyDeleteMultipleGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,deleteMultipleGroups,exitFromCustomerGroupMaintenance,signOut",
+      "Tc_337_VerifySPASearchRecords": "launchApp,siteLogin,validateSPAApplicationTitle,addActiveContract,navAddContractToSPA,searchContract,exitSPAApplication,signOut",
+      "Tc_326_VerifySPARecordDeletion": "launchApp,siteLogin,validateSPAApplicationTitle,addActiveContract,addExpiredContract,navAddContractToSPA,contractDeletionValidation,exitSPAApplication,signOut"
     }
   ],
   "General_Data": [
@@ -25,7 +27,24 @@
       "TC_ID": "Tc_323_VerifySPAHideShowExpiredRecords"
     },
     {
-      "TC_ID": "Tc_322_VerifySPAAddRecords"
+      "TC_ID": "Tc_322_VerifySPAAddRecords",
+      "Contract_Name": "Automation Active",
+      "VendorNo": "000388",
+      "GroupNo": "5"
+	},
+	{
+      "TC_ID": "Tc_337_VerifySPASearchRecords",
+      "Contract_Name": "Automation Search",
+      "VendorNo": "000388",
+      "GroupNo": "5",
+      "InvalidSearchtext": "fhfjhfjhf"
+	},
+	{
+      "TC_ID": "Tc_326_VerifySPARecordDeletion",
+      "Contract_Name": "Automation Active Delete",
+      "Expired_Contract_Name": "Automation Expired Delete",
+      "VendorNo": "000388",
+      "GroupNo": "5"
 	},
 	{
       "TC_ID": "Tc_311_VerifyAddCustomersToGroupName"

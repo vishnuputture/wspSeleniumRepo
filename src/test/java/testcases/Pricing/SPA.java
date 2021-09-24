@@ -49,6 +49,22 @@ public class SPA extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
 }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_337_VerifySPASearchRecords(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify user is able to search records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+}
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_326_VerifySPARecordDeletion(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify user is able to delete records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+}
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_315_VerifyEditCustomerGroup(SeleniumTestParameters testParameters) {

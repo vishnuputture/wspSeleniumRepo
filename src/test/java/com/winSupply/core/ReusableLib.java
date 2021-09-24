@@ -791,6 +791,10 @@ public abstract class ReusableLib {
         report.updateTestLog("EnterData", strVal + " " + CustomMsg, Status.PASS);
     }
     
+    protected void clearText(By el) {
+    	 getElement(el).clear();
+    }
+    
     protected void sendKeysAndTab(By el, String strVal, String CustomMsg) {
     	sendKeys(el, strVal);
     	Utility_Functions.actionKey(Keys.TAB, driver);

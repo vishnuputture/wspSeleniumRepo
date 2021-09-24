@@ -23,4 +23,12 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By txtBoxVendorNo = By.id("I_6_22");
     public static By txtBoxGroupNo = By.id("I_7_22");
     public static By lblSuccess = By.xpath("//div[@id='D_24_2'][contains(text(),'Contract')]");
+    public static By lblNoRecords = By.xpath("//div[@id='D_11_20'][contains(text(),'*')]");
+    public static By txtBoxSearchCon = By.id("I_4_32");
+    public static By lblContractName = By.id("D_10_13");
+    public static By txtBoxOption = By.id("I_10_3");
+    public static By btnReturn = By.id("btnCF12");
+    public static By lblInvalidDeletionMessage = By.xpath("//div[@id='D_24_2'][contains(text(),'Delete')]");
+    public static By btnDelete = By.id("btnCF09");
+    
 }
