@@ -5,7 +5,9 @@ import com.winSupply.core.ReusableLib;
 
 import commonkeywords.CommonActions;
 
+import pages.OrderProcessingPage;
 import pages.common.MasterPage;
+import pages.pricing.spa.CustomerGroupMaintenancePage;
 
 public class Master extends ReusableLib {
     CommonActions commonObj;
@@ -45,9 +47,6 @@ public class Master extends ReusableLib {
     public void navigateToSalesQuotesMenu() {
         commonObj.navigateToSalesQuotes();
     }
-    
-    
-   
 
     public void navigateToWorkingSalesQuotes() {
         commonObj.navigationToWorkingSalesQuotes();
