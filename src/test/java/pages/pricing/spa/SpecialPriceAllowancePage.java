@@ -16,4 +16,11 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By lblExpired = By.xpath("//div[text()='Expired']");
     public static By lblActive = By.xpath("//div[text()='Active']");
     public static By btnHideShowExpired = By.id("btnCF07");
+    public static By btnAddContract = By.id("btnCF06");
+    public static By txtBoxContractname = By.id("I_4_22");
+    public static By txtBoxStartDate = By.id("I_5_22");
+    public static By txtBoxEndDate = By.id("I_5_72");
+    public static By txtBoxVendorNo = By.id("I_6_22");
+    public static By txtBoxGroupNo = By.id("I_7_22");
+    public static By lblSuccess = By.xpath("//div[@id='D_24_2'][contains(text(),'Contract')]");
 }
