@@ -29,6 +29,8 @@ import com.winSupply.framework.selenium.WebDriverUtil;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
+import supportLibraries.Utility_Functions;
+
 import org.testng.Assert;
 
 
@@ -788,6 +790,30 @@ public abstract class ReusableLib {
         sendKeys(el, strVal);
         report.updateTestLog("EnterData", strVal + " " + CustomMsg, Status.PASS);
     }
+    
+    protected void clearText(By el) {
+    	 getElement(el).clear();
+    }
+    
+    protected void sendKeysAndTab(By el, String strVal, String CustomMsg) {
+    	sendKeys(el, strVal);
+    	Utility_Functions.actionKey(Keys.TAB, driver);
+    	report.updateTestLog("EnterData and tab", strVal + " " + CustomMsg, Status.PASS);
+    }
+    
+    protected void sendKeysAndEnter(By el, String strVal, String CustomMsg) {
+    	sendKeys(el, strVal);
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	report.updateTestLog("EnterData and press enter", strVal + " " + CustomMsg, Status.PASS);
+    }
+    
+    protected void sendKeysAndFunction(By el, String strVal,Keys key, String CustomMsg) {
+    	sendKeys(el, strVal);
+    	Utility_Functions.actionKey(key, driver);
+    	report.updateTestLog("EnterData and perform action", strVal + " " + CustomMsg, Status.PASS);
+    }
+    
+    
 
     // Performs the swipe and search operation
     // Code here shouldn't be modified

@@ -87,10 +87,10 @@
 		{
 			"TC_ID": "Tc_11_ValidatePositiontoItemNumber_Beginning",
 			"Title": "Add/Maintain Special Pricing",
-			"validCustNum": "000300,099599",
-			"validItemNum": "5105TCW158SS2,AMN0159R00002P",
+			"validCustNum": "099599,000300",
+			"validItemNum": "AMN0159R00002P,5105TCW158SS2",
 			"specialPrice": "1",
-			"filterItemNum": "0001",
+			"filterItemNum": "1",
 			"success": "Record added. Add another or F12 to return."
 		},
 		{
@@ -107,8 +107,8 @@
 			"Title": "Add/Maintain Special Pricing",
 			"validCustNum": "000300,099599",
 			"validItemNum": "5105TCW158SS2,AMN0159R00002P",
-			"filteredCustNum": "099599,000300,099599",
-			"filteredItemNum": "000538042,000538044,160500160",
+			"filteredCustNum": "000300",
+			"filteredItemNum": "5105TCW158SS2",
 			"specialPrice": "1",
 			"filterItemNum": "000538",
 			"success": "Record added. Add another or F12 to return."
