@@ -1337,4 +1337,31 @@ public abstract class ReusableLib {
         return driver.findElement(ele).getAttribute("value");
 
     }
+
+    public void autoComplete(By elm,String str1,By list,String str2)
+    {
+        try {
+            sendKeys(elm,str1);
+
+            //wait for visibility
+
+            waitForVisible(list);
+            List<WebElement> listElm= driver.findElements(list);
+            for(int i=0;i<listElm.size();i++)
+            {
+                if (listElm.get(i).getText().equalsIgnoreCase(str2))
+                {
+                    listElm.get(i).click();
+                }
+            }
+
+
+        } catch (NoSuchElementException e) {
+            System.out.println(e.getStackTrace());
+        }
+        catch (Exception e) {
+            System.out.println(e.getStackTrace());
+        }
+    }
+
 }

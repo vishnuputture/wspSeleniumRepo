@@ -1,7 +1,7 @@
 {
   "Business_Flow": [
     {
-      "Tc_188_ValidateNavigationToPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle"
+      "Tc_188_NavigateSelfServicePriceSheet": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,addPriceSheetDetails"
 
     }
   ],
