@@ -126,8 +126,11 @@ public class CustomerGroupMaintenance extends ReusableLib {
      *
      */
     public void addCustomerToGroupName() {
-        String existCustomer=getText(CustomerGroupMaintenancePage.secCustNo);
-        deleteParCustomer(existCustomer);
+        Boolean bl=Utility_Functions.xIsDisplayed(driver,CustomerGroupMaintenancePage.secCustNo);
+        if(bl) {
+            String existCustomer = getText(CustomerGroupMaintenancePage.secCustNo);
+            deleteParCustomer(existCustomer);
+        }
         clickAddGroupCustomer();
         String custNm=selectOneCustomers();
         System.out.println("custName: "+custNm);
@@ -139,7 +142,6 @@ public class CustomerGroupMaintenance extends ReusableLib {
         String[] custName=custNm.split("\\s",0);
         Boolean cust=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[contains(text(),'" + custName[1] + "')]"));
         Utility_Functions.xAssertEquals(report,""+cust+"","true","Customer: "+custNm+" is added to group");
-
     }
 
     /**
