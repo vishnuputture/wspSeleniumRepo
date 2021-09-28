@@ -392,4 +392,7 @@ public class CommonActions extends ReusableLib {
 		}
 		click(SpecialPricePage.btnF3,"Exit Customer Group Maintenance");
 	}
+
+	//Self Service Price Sheet
+
 }
