@@ -1,0 +1,13 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_188_ValidateNavigationToPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle"
+
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_188_ValidateNavigationToPricingMatrix"
+    }
+  ]
+}
