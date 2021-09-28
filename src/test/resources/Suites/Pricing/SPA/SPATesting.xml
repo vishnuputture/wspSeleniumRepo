@@ -14,7 +14,10 @@
                     <include name="Tc_317_VerifyDeleteGroupName"></include>
 					<include name="Tc_318_VerifyCustomerGroupSorting"></include>
                     <include name="Tc_319_VerifyDeleteMultipleGroupName"></include>
-
+                    <include name="Tc_323_VerifySPAHideShowExpiredRecords"></include>
+                    <include name="Tc_322_VerifySPAAddRecords"></include>
+                    <include name="Tc_337_VerifySPASearchRecords"></include>
+                    <include name="Tc_326_VerifySPARecordDeletion"></include>
 				</methods>
 			</class>
 		</classes>

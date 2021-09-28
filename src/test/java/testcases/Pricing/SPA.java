@@ -23,6 +23,16 @@ public class SPA extends TestConfigurations {
         tearDownTestRunner(testParameters, coreScript);
     }
 
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_323_VerifySPAHideShowExpiredRecords(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify user is able to hide and show expired records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_311_VerifyAddCustomersToGroupName(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify added customer to GroupName");
@@ -30,6 +40,31 @@ public class SPA extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_322_VerifySPAAddRecords(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify user is able to add records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+}
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_337_VerifySPASearchRecords(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify user is able to search records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+}
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_326_VerifySPARecordDeletion(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify user is able to delete records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+}
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_315_VerifyEditCustomerGroup(SeleniumTestParameters testParameters) {

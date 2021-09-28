@@ -20,22 +20,22 @@
                     <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
                 </methods>
             </class>
-            <!--            <class name="testcases.Pricing.MatrixCostUpdate">
-                            <methods>
-                                <include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
-                                <include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
-                                <include name="Tc_142_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
-                                <include name="Tc_143_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
-                                <include name="Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button"></include>
-                                <include name="Tc_140_verify_the_functionality_of_Select_Function_Drop_Down"></include>
-                                <include name="Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons"></include>
-                                <include name="Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons"></include>
-                                <include name="Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost"></include>
-                                <include name="Tc_168_verify_the_functionality_of_PO_Cost_and_Proposed_Matrix_Cost_box_and_Save_Button"></include>
-                                <include name="Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
-                                <include name="Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
-                            </methods>
-                        </class>-->
+<!--            <class name="testcases.Pricing.MatrixCostUpdate">
+                <methods>
+                    <include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
+                    <include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
+                    <include name="Tc_142_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
+                    <include name="Tc_143_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
+                    <include name="Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button"></include>
+                    <include name="Tc_140_verify_the_functionality_of_Select_Function_Drop_Down"></include>
+                    <include name="Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons"></include>
+                    <include name="Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons"></include>
+                    <include name="Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost"></include>
+                    <include name="Tc_168_verify_the_functionality_of_PO_Cost_and_Proposed_Matrix_Cost_box_and_Save_Button"></include>
+                    <include name="Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
+                    <include name="Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
+                </methods>
+            </class>-->
             <class name="testcases.Pricing.Wise">
                 <methods>
                     <include name="Tc_19_ValidateCustomerNumber"></include>
@@ -76,6 +76,7 @@
                     <include name="Tc_30_Navigation_To_Item_Ledger_Screen"></include>
                     <include name="Tc_31_Verify_Item_Ledger_Screen"></include>
                     <include name="Tc_28_assignment_of_quantity_to_multiple_items"></include>
+
                 </methods>
             </class>
             <class name="testcases.Pricing.SPA">
@@ -86,22 +87,12 @@
                     <include name="Tc_317_VerifyDeleteGroupName"></include>
                     <include name="Tc_318_VerifyCustomerGroupSorting"></include>
                     <include name="Tc_319_VerifyDeleteMultipleGroupName"></include>
+                    <include name="Tc_322_VerifySPAAddRecords"></include>
+                    <include name="Tc_323_VerifySPAHideShowExpiredRecords"></include>
+                    <include name="Tc_326_VerifySPARecordDeletion"></include>
+                    <include name="Tc_337_VerifySPASearchRecords"></include>
                 </methods>
             </class>
-            <class name="testcases.SalesOrders.SalesOrders">
-                <methods>
-                    <include name="CreateSalesOrder"></include>
-                </methods>
-            </class><class name="testcases.SalesQuotes.WorkWithSalesQuote">
-            <methods>
-                <include name="SalesQuotesToPO"></include>
-                <include name="CheckInventoryReceipts"></include>
-                <include name="InquiryOrdersByCustomer"></include>
-                <include name="OrderShippingConfirmation"></include>
-                <include name="PrintReportInvoices"></include>
-                <include name="FinalInquiryOrderStatus"></include>
-            </methods>
-        </class>
         </classes>
     </test>
 </suite>
