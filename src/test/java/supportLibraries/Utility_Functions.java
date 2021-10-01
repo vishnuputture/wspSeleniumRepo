@@ -4712,4 +4712,19 @@ public class Utility_Functions extends ReusableLib {
         WebElement elementLocator = driver.findElement(element);
         builder.contextClick(elementLocator).perform();
     }
+
+    /**
+     *
+     * This Method to get the list of string
+     *
+     */
+    public static List<String> xGetTextVisibleListString(FrameworkDriver driver, List<WebElement> eleList) {
+        List<String> webElementsList = new ArrayList<String>();
+        for (WebElement ele:eleList) {
+            if (ele.isDisplayed()) {
+                webElementsList.add(ele.getText());
+            }
+        }
+        return webElementsList;
+    }
 }

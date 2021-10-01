@@ -12,7 +12,15 @@
       "Tc_318_VerifyCustomerGroupSorting": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,sortCustomerGroup,exitFromCustomerGroupMaintenance,signOut",
       "Tc_319_VerifyDeleteMultipleGroupName": "launchApp,siteLogin,navigateToCustomerGroupMaintenance,deleteMultipleGroups,exitFromCustomerGroupMaintenance,signOut",
       "Tc_337_VerifySPASearchRecords": "launchApp,siteLogin,validateSPAApplicationTitle,addActiveContract,navAddContractToSPA,searchContract,exitSPAApplication,signOut",
-      "Tc_326_VerifySPARecordDeletion": "launchApp,siteLogin,validateSPAApplicationTitle,addActiveContract,addExpiredContract,navAddContractToSPA,contractDeletionValidation,exitSPAApplication,signOut"
+      "Tc_326_VerifySPARecordDeletion": "launchApp,siteLogin,validateSPAApplicationTitle,addActiveContract,addExpiredContract,navAddContractToSPA,contractDeletionValidation,exitSPAApplication,signOut",
+      "Tc_324_VerifySortingContract": "launchApp,siteLogin,validateSPAApplicationTitle,sortContractRecord,showContractOrShowDate,exitSPAApplication,signOut",
+      "Tc_325_VerifyEditContract": "launchApp,siteLogin,validateSPAApplicationTitle,editAndAddMoreGroups,displayDeleteAssignedGroups,exitSPAApplication,signOut",
+      "Tc_328_VerifyCopyContract": "launchApp,siteLogin,validateSPAApplicationTitle,copyContractDetail,exitSPAApplication,signOut",
+      "Tc_336_VerifyLoadPriceSheet": "launchApp,siteLogin,validateSPAApplicationTitle,loadSpecialPricing,exitSPAApplication,signOut",
+      "Tc_334_VerifyUpdateCost": "launchApp,siteLogin,validateSPAApplicationTitle,updateCost,exitSPAApplication,signOut",
+      "Tc_332_VerifyDisplayContractDetails": "launchApp,siteLogin,validateSPAApplicationTitle,displayContractDetail,exitSPAApplication,signOut",
+      "Tc_327_VerifyAssignMFPDCode": "launchApp,siteLogin,validateSPAApplicationTitle,assignMfPdCode,exitSPAApplication,signOut",
+      "Tc_331_VerifyAssignIndividualItem": "launchApp,siteLogin,validateSPAApplicationTitle,assignIndividualItem,exitSPAApplication,signOut",
     }
   ],
   "General_Data": [
@@ -63,6 +71,36 @@
     },
     {
       "TC_ID": "Tc_319_VerifyDeleteMultipleGroupName"
+    },
+    {
+      "TC_ID": "Tc_324_VerifySortingContract"
+    },
+    {
+      "TC_ID": "Tc_325_VerifyEditContract",
+      "Contract_Name": "Automation Active",
+      "VendorNo": "000388",
+      "GroupNo": "5"
+    },
+    {
+      "TC_ID": "Tc_328_VerifyCopyContract"
+    },
+    {
+      "TC_ID": "Tc_336_VerifyLoadPriceSheet",
+      "Contract_Name": "QA Automation",
+      "VendorNo": "000388",
+      "GroupNo": "5"
+    },
+    {
+      "TC_ID": "Tc_334_VerifyUpdateCost"
+    },
+    {
+      "TC_ID": "Tc_332_VerifyDisplayContractDetails"
+    },
+    {
+      "TC_ID": "Tc_327_VerifyAssignMFPDCode"
+    },
+    {
+      "TC_ID": "Tc_331_VerifyAssignIndividualItem"
     }
   ]
 }
