@@ -31,7 +31,6 @@ public class SpecialPricingAllowance extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
     }
-
     CommonActions commonObj;
 
     public void validateHideExpiredContract() {
@@ -285,6 +284,9 @@ public class SpecialPricingAllowance extends ReusableLib {
     public List<String> optTextBox(String option, String message) {
         List<String> firstRowValues = Utility_Functions.xGetTextVisibleListString(driver, driver.findElements(SpecialPriceAllowancePage.firstRow));
         sendKeysAndEnter(SpecialPriceAllowancePage.txtBoxOption, option, message);
+        if(Utility_Functions.xIsDisplayed(driver,SpecialPriceAllowancePage.succMesg)){
+            sendKeysAndEnter(SpecialPriceAllowancePage.optInd, option, message);
+        }
         return firstRowValues;
     }
 
@@ -606,7 +608,7 @@ public class SpecialPricingAllowance extends ReusableLib {
         }
         sendKeysAndEnter(SpecialPriceAllowancePage.delSpaRec, "Y", "Delete Special Price Record");
         Boolean bl = Utility_Functions.xIsDisplayed(driver, By.xpath("//div[text()='" + deleteRec + "']"));
-        Utility_Functions.xAssertEquals(report, "" + bl + "", "" + false + "", "MF/PD Code deleted:");
+        Utility_Functions.xAssertEquals(report, "" + bl + "", "" + false + "", "Item deleted:");
     }
 
     /**
@@ -657,6 +659,7 @@ public class SpecialPricingAllowance extends ReusableLib {
 
     /**
      * This method to To Assigning MF/PD Code to the Contracts
+     *
      */
     public void assignMfPdCode() {
         optTextBox("2", "Enter 2 to Edit Contract");
@@ -668,17 +671,29 @@ public class SpecialPricingAllowance extends ReusableLib {
 
     /**
      * This method to display Item number Details
+     *
      */
     public void disItemNumberDet(String item,List<String> values) {
         int size=driver.findElements(By.xpath("//div[text()='"+item+"']/preceding::input")).size();
-        sendKeys(By.xpath("(//div[text()='"+item+"']/preceding::input)["+size+"]"),"5","Enter 5 to display");
+        sendKeysAndEnter(By.xpath("(//div[text()='"+item+"']/preceding::input)["+size+"]"),"5","Enter 5 to display");
         List<String> str=Utility_Functions.xGetTextVisibleListString(driver,driver.findElements(By.xpath("//*[(@class='A26 input') or (@class='A22')]")));
-        System.out.println("strItem: "+str);
+        Utility_Functions.xAssertEquals(report,values.get(0) , str.get(0), "Contract Name:");
+        Utility_Functions.xAssertEquals(report,values.get(1) , str.get(1), "Vendor No:");
+        Utility_Functions.xAssertEquals(report,values.get(2) , str.get(2), "Vendor Name:");
+        Utility_Functions.xAssertEquals(report,values.get(5) , str.get(4), "Item Name:");
+        Utility_Functions.xAssertEquals(report,values.get(7) , str.get(5), "PO COst:");
+        Utility_Functions.xAssertEquals(report,values.get(8) , str.get(6), "Rebate COst:");
+        Utility_Functions.xAssertEquals(report,values.get(9) , str.get(7), "Rebate Amount:");
+        Utility_Functions.xAssertEquals(report,values.get(10) , str.get(8), "Rebate Multiplier Type:");
+        Utility_Functions.xAssertEquals(report,values.get(11) , str.get(9), "Rebate Multiplier:");
+        Utility_Functions.xAssertEquals(report,values.get(13) , str.get(11), "Selling Multiplier Type:");
+        Utility_Functions.xAssertEquals(report,values.get(14) , str.get(12), "Selling Multiplier:");
         click(SpecialPriceAllowancePage.btnReturn,"Click F12=Return");
     }
 
     /**
      * This method to To Assigning Individual Item to the Contracts
+     *
      */
     public void assignIndividualItem() {
         String firstItemNo = null;
@@ -698,7 +713,7 @@ public class SpecialPricingAllowance extends ReusableLib {
             click(driver.findElement(By.xpath("//a[contains(text(),'Number')]")));
             sendKeysAndEnter(SpecialPriceAllowancePage.optInd,"1","Select Item number");
             Utility_Functions.actionKey(Keys.ENTER,driver);
-            firstItemNo=Utility_Functions.getText(driver,SpecialPriceAllowancePage.mfCOde);
+            firstItemNo=driver.findElement(SpecialPriceAllowancePage.mfCOde).getAttribute("value");
         }
         sendKeys(SpecialPriceAllowancePage.rebateMultType,"c","Enter Rebate Multiplier Type");
         sendKeys(SpecialPriceAllowancePage.rebateMult,".2","Enter Rebate Multiplier");
@@ -706,15 +721,15 @@ public class SpecialPricingAllowance extends ReusableLib {
         sendKeys(SpecialPriceAllowancePage.indSellMultType,"C","Enter Selling multiplier Type");
         sendKeys(SpecialPriceAllowancePage.indSellMult,".3","Enter Selling Multiplier");
         Utility_Functions.actionKey(Keys.ENTER,driver);
-        List<String> str=Utility_Functions.xGetTextVisibleListString(driver,driver.findElements(By.xpath("//*[(@class='A26 input') or (@class='A22')]")));
-        System.out.println("str: "+str);
+        List<String> str1=Utility_Functions.xGetTextVisibleListString(driver,driver.findElements(By.xpath("//*[(@class='A26 input') or (@class='A22')]")));
         Utility_Functions.actionKey(Keys.ENTER,driver);
         String mes = Utility_Functions.getText(driver, SpecialPriceAllowancePage.succMesg).trim();
         Utility_Functions.xAssertEquals(report, mes, "Successfully added item. Add another or F12 Return.", "Successful Message:");
         click(SpecialPriceAllowancePage.btnReturn, "Click F12=Return");
         Boolean bl=Utility_Functions.xIsDisplayed(driver,By.xpath("//div[text()='"+firstItemNo+"']"));
+        System.out.println("bl: "+bl+" Item: "+firstItemNo);
         Utility_Functions.xAssertEquals(report,""+bl+"","true","Item Number is Added to Contract");
-        disItemNumberDet(firstItemNo,str);
+        disItemNumberDet(firstItemNo,str1);
         click(SpecialPriceAllowancePage.btnReturn,"Click F12=Return");
         click(SpecialPriceAllowancePage.btnReturn,"Click F12=Return");
     }

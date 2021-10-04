@@ -4722,7 +4722,11 @@ public class Utility_Functions extends ReusableLib {
         List<String> webElementsList = new ArrayList<String>();
         for (WebElement ele:eleList) {
             if (ele.isDisplayed()) {
-                webElementsList.add(ele.getText());
+                if(ele.getText().isEmpty()){
+                    webElementsList.add(ele.getAttribute("value"));
+                }else {
+                    webElementsList.add(ele.getText());
+                }
             }
         }
         return webElementsList;
