@@ -409,5 +409,9 @@ public class CommonActions extends ReusableLib {
 
 	//Self Service Price Sheet
 
-
+	public  String getFilePath()
+	{
+		String path=System.getProperty("user.dir");
+		return path;
+	}
 }

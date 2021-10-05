@@ -11,6 +11,7 @@ import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -100,7 +101,9 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.xSendkeysAndTab(driver.findElement(SelfServicePriceSheetPage.effectiveDate),strPriceDate);
         sendKey(SelfServicePriceSheetPage.priceSheetCode,Utility_Functions.xGetJsonData("priceSheetCode"));
         click(SelfServicePriceSheetPage.choosePriceSheet);
-        Utility_Functions.xUploadFile(report,"C:\\Users\\Subha\\Downloads\\CostPriceSheetTemplate.xlsx");
+        String path=commonObj.getFilePath()+File.separator +"CostPriceSheetTemplate.xlsx";
+        System.out.println(path);
+        Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
         commonObj.validateText(SelfServicePriceSheetPage.successMessage,"Price Sheet successfully uploaded","upload Successful");
     }
@@ -138,4 +141,6 @@ public class SelfServicePriceSheet extends ReusableLib {
      }
 
     }
+
+
 }
