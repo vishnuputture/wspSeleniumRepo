@@ -775,6 +775,16 @@ public abstract class ReusableLib {
         }
     }
 
+    protected void sendKeyDate(By el, String strVal) {
+        waitForElementPresent(el);
+        if (!strVal.isEmpty() && strVal != "" && strVal != null) {
+            waitForElementClickable(el, globalWait);
+            WebElement element = getElement(el);
+            element.click();
+            element.sendKeys(strVal);
+        }
+    }
+
     protected void sendKeys(WebElement el, String strVal,String CustomMsg) {
         if (!strVal.isEmpty() && strVal != "" && strVal != null) {
             WebElement elment = el;
@@ -1362,6 +1372,11 @@ public abstract class ReusableLib {
         catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
+    }
+
+    public List<WebElement> getRowData(By by)
+    {
+        return driver.findElements(by);
     }
 
 }

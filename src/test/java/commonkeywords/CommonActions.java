@@ -143,6 +143,18 @@ public class CommonActions extends ReusableLib {
 		}
 	}
 
+	public void validateText(WebElement ele,String text,String msg) {
+		if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
+			String title = Utility_Functions.getText(driver,ele);
+			System.out.println("Text: "+title);
+			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
+		}else {
+			System.out.println("Text: Not found");
+			throw new NoSuchElementException("Could not find :"+ele);
+		}
+	}
+
+
 	public void validateElementExists(By ele, String msg) {
         if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
             System.out.println("Element: "+ ele + " exists");

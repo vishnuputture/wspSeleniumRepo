@@ -34,19 +34,21 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By manufacturer= By.xpath("//div[@class='form-group']//input[@role='searchbox']");
     public static By manufacturerList=By.xpath("//ul[@role='listbox']//li");
 
-    public static By pricesheetName= By.xpath("//input[@id='name']");
-    public static By effectiveDtae=By.xpath("//div[@class='form-group']//input[@name='date']");
+    public static By priceSheetName= By.xpath("//input[@id='name']");
+    public static By effectiveDate=By.xpath("//div[@class='form-group']//input[@name='date']");
     public static By priceSheetCode=By.xpath("//div[@class='form-group']//input[@formcontrolname='code']");
 
     public static By choosePriceSheet=By.xpath("//span[text()=' Choose Price Sheet ']");
 
     public static  By saveUpload = By.xpath("//button[text()='Save & Upload ']");
 
-    /**
-     * Constructor to initialize the {@link Helper} object and in turn the
-     * objects wrapped by it
-     *
-     * @param helper The {@link Helper} object
-     */
+
+    public static  By successMessage=By.xpath("//div[@role='alert']//div//*[contains(text(),'Sheet')]");
+    public static By uploadedDataName=By.xpath("//tbody//tr[1]//td[1]");
+    public static By uploadedDataManufacturer=By.xpath("//tbody//tr[1]//td[2]");
+    public static By uploadedDataCode=By.xpath("//tbody//tr[1]//td[3]");
+    public static By uploadedDataStatus=By.xpath("//tbody//tr[1]//td[4]");
+
+
 
 }

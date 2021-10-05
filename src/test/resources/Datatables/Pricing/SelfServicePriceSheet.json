@@ -1,13 +1,21 @@
 {
   "Business_Flow": [
     {
-      "Tc_188_NavigateSelfServicePriceSheet": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,addPriceSheetDetails"
+      "Tc_188_NavigateSelfServicePriceSheet": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,addPriceSheetDetails,validateUpload",
+      "Tc_189_NavigatePriceSheetDetails":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyUploadedSheetDetails"
 
     }
   ],
   "General_Data": [
     {
-      "TC_ID": "Tc_188_ValidateNavigationToPricingMatrix"
+      "TC_ID": "Tc_188_NavigateSelfServicePriceSheet",
+      "Manufacturer": "KOHLER CO",
+      "SheetName": "TestAutomation001B"
+    },
+    {
+      "TC_ID": "Tc_189_NavigatePriceSheetDetails",
+      "Manufacturer": "KOHLER CO",
+      "SheetName": "TestAutomation001B"
     }
   ]
 }
