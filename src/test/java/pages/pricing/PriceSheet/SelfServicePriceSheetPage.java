@@ -49,6 +49,13 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By uploadedDataCode=By.xpath("//tbody//tr[1]//td[3]");
     public static By uploadedDataStatus=By.xpath("//tbody//tr[1]//td[4]");
 
-
+    public static By firstSearchByName=By.xpath("//td");
+    public static By searchByName=By.xpath("//label[contains(text(),'Search By Name')]/parent::div/descendant::input");
+    public static By filterManufacturer=By.xpath("//label[contains(text(),'Filter By Manufacturer')]/parent::div/descendant::span");
+    public static By filterManufacturerDropField=By.xpath("//label[contains(text(),'Filter By Manufacturer')]/parent::div/descendant::input[contains(@class,'dropdown')]");
+    public static By filterByStatus=By.xpath("//input[@name='searchTerm']");
+    public static By startDate=By.id("startDate");
+    public static By endDate=By.id("endDate");
+    public static By closeIcon=By.xpath("//i[contains(@class,'dropdown-clear-icon')]");
 
 }

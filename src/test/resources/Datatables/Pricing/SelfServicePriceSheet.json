@@ -6,7 +6,8 @@
       "Tc_190_FillPriceSheetAndSave": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,fillSheetData",
       "Tc_191_PriceSheetOnHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,sheetOnHold",
       "Tc_192_PriceSheetRemoveHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,unHoldSheet",
-      "Tc_193_PriceSheetMarkAsReady": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,saveSheet,navigateToPriceSheetDetailsPage,markReady"
+      "Tc_193_PriceSheetMarkAsReady": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,saveSheet,navigateToPriceSheetDetailsPage,markReady",
+      "Tc_344_VerifySortOnPriceSheetRecords":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterPriceSheetRecords"
     }
   ],
   "General_Data": [
@@ -32,7 +33,19 @@
     },
     {
       "TC_ID": "Tc_193_PriceSheetMarkAsReady"
+    },
+    {
+      "TC_ID": "Tc_344_VerifySortOnPriceSheetRecords",
+      "SheetName": "TestAutomation001B",
+      "Manufacturer": "KOHLER CO",
+      "Available": "Available",
+      "Maintaining": "Maintaining",
+      "On-Hold": "On-Hold",
+      "Ready_to_Process": "Ready to Process",
+      "Processed": "Processed",
+      "Unavailable": "Unavailable",
+      "Start_Date": "10/06/2021",
+      "End_Date": "10/07/2021"
     }
-
   ]
 }
