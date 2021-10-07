@@ -200,8 +200,10 @@ public class SelfServicePriceSheet extends ReusableLib {
 
     }
 
-    /*###########################Vishnu#################################*/
-
+    /**
+     * This method To Search by Name
+     *
+     */
     public void searchByName(String fieldValue) {
         Utility_Functions.timeWait(7);
         Boolean bl=Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.firstSearchByName,10);
@@ -218,6 +220,10 @@ public class SelfServicePriceSheet extends ReusableLib {
         }
     }
 
+    /**
+     * This method To Filter By Manufacturer
+     *
+     */
     public void filterByManufacturer(String fieldValue) {
         if (Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.firstSearchByName,10)) {
             int size = driver.findElements(SelfServicePriceSheetPage.filterManufacturer).size();
@@ -233,6 +239,10 @@ public class SelfServicePriceSheet extends ReusableLib {
         }
     }
 
+    /**
+     * This method To Filter By Status
+     *
+     */
     public void filterByStatus(String dropOpt) {
         Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.filterByStatus,10);
         click(SelfServicePriceSheetPage.filterByStatus, "Click Filter By Status drop down");
@@ -247,6 +257,10 @@ public class SelfServicePriceSheet extends ReusableLib {
         }
     }
 
+    /**
+     * This method To search Effective date
+     *
+     */
     public void date(String startDate, String endDate) {
         Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.startDate,10);
         sendKeys(SelfServicePriceSheetPage.startDate, "" + startDate + "", "Enter Start Date: " + startDate + "");
@@ -257,6 +271,10 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.xAssertEquals(report, bl, true, "");
     }
 
+    /**
+     * This method To Filter Price sheet Records
+     *
+     */
     public void filterPriceSheetRecords() {
         searchByName(jsonData.getData("SheetName"));
         driver.navigate().refresh();
