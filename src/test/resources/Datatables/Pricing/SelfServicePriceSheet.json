@@ -1,13 +1,38 @@
 {
   "Business_Flow": [
     {
-      "Tc_188_ValidateNavigationToPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle"
-
+      "Tc_188_NavigateSelfServicePriceSheet": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,addPriceSheetDetails,validateUpload",
+      "Tc_189_NavigatePriceSheetDetails":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyUploadedSheetDetails,verifyItemUpload",
+      "Tc_190_FillPriceSheetAndSave": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,fillSheetData",
+      "Tc_191_PriceSheetOnHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,sheetOnHold",
+      "Tc_192_PriceSheetRemoveHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,unHoldSheet",
+      "Tc_193_PriceSheetMarkAsReady": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,saveSheet,navigateToPriceSheetDetailsPage,markReady"
     }
   ],
   "General_Data": [
     {
-      "TC_ID": "Tc_188_ValidateNavigationToPricingMatrix"
+      "TC_ID": "Tc_188_NavigateSelfServicePriceSheet",
+      "Manufacturer": "KOHLER CO",
+      "SheetName": "TestAutomation001B"
+    },
+    {
+      "TC_ID": "Tc_189_NavigatePriceSheetDetails",
+      "Manufacturer": "KOHLER CO",
+      "SheetName": "TestAutomation001B",
+      "WiseItem": "*99599014041,*99599014042,*99599014043,*99599014044,*99599014045"
+    },
+    {
+      "TC_ID": "Tc_190_FillPriceSheetAndSave"
+    },
+    {
+      "TC_ID": "Tc_191_PriceSheetOnHold"
+    },
+    {
+      "TC_ID": "Tc_192_PriceSheetRemoveHold"
+    },
+    {
+      "TC_ID": "Tc_193_PriceSheetMarkAsReady"
     }
+
   ]
 }

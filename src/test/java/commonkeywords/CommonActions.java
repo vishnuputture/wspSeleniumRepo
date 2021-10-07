@@ -3,6 +3,7 @@ package commonkeywords;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
+import org.openqa.selenium.WebElement;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
@@ -11,6 +12,7 @@ import pages.*;
 import pages.inventory.CostAdjustmentPage;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.OrderByCustomerPage;
+import pages.pricing.PriceSheet.PriceSheetDetails;
 import pages.pricing.SpecialPricePage;
 import pages.pricing.matrixcost.InventoryManagementMainMenuPage;
 import pages.pricing.matrixcost.InventoryManagementMenu2Page;
@@ -20,6 +22,7 @@ import supportLibraries.Utility_Functions;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -140,6 +143,18 @@ public class CommonActions extends ReusableLib {
 			throw new NoSuchElementException("Could not find :"+ele);
 		}
 	}
+
+	public void validateText(WebElement ele,String text,String msg) {
+		if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
+			String title = Utility_Functions.getText(driver,ele);
+			System.out.println("Text: "+title);
+			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
+		}else {
+			System.out.println("Text: Not found");
+			throw new NoSuchElementException("Could not find :"+ele);
+		}
+	}
+
 
 	public void validateElementExists(By ele, String msg) {
         if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
@@ -394,5 +409,12 @@ public class CommonActions extends ReusableLib {
 	}
 
 	//Self Service Price Sheet
+
+	public  String getFilePath()
+	{
+		String path=System.getProperty("user.dir");
+		return path;
+	}
+
 
 }
