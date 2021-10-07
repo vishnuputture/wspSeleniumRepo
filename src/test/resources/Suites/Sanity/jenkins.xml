@@ -93,6 +93,15 @@
                     <include name="Tc_337_VerifySPASearchRecords"></include>
                 </methods>
             </class>
+
+            <class name="testcases.Pricing.SelfServicePriceSheet">
+                <methods>
+                    <include name="Tc_344_VerifySearchByName"></include>
+                    <include name="Tc_344_VerifyFilterByManufacturer"></include>
+                    <include name="Tc_344_VerifyFilterByStatus"></include>
+                    <include name="Tc_344_VerifySortOnPriceSheetRecords"></include>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

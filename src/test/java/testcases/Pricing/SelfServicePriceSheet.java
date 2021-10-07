@@ -56,8 +56,32 @@ public class SelfServicePriceSheet extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_344_VerifySearchByName(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify SearchByName");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_344_VerifyFilterByManufacturer(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify FilterByManufacturer");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_344_VerifyFilterByStatus(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify FilterByStatus");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_344_VerifySortOnPriceSheetRecords(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to verify Sort On PriceSheet Records");
+        testParameters.setCurrentTestDescription("Test case to verify PriceSheetRecords");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

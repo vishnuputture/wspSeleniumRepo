@@ -272,6 +272,54 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     /**
+     * This method To Filter search by name
+     *
+     */
+    public void filterSearchByName() {
+        searchByName(jsonData.getData("SheetName"));
+    }
+
+    public void refreshToCancel(){
+        driver.navigate().refresh();
+    }
+
+    /**
+     * This method To Filter By Manufacturer
+     *
+     */
+    public void filterByManufacturer() {
+        Utility_Functions.timeWait(3);
+        filterByManufacturer(jsonData.getData("Manufacturer"));
+    }
+
+    public void closeIcon(){
+        click(SelfServicePriceSheetPage.closeIcon);
+    }
+
+    /**
+     * This method To Filter By Status
+     *
+     */
+    public void filterByStatus() {
+        Utility_Functions.timeWait(3);
+        filterByStatus(jsonData.getData("Available"));
+        filterByStatus(jsonData.getData("Maintaining"));
+        filterByStatus(jsonData.getData("On-Hold"));
+        filterByStatus(jsonData.getData("Ready_to_Process"));
+        filterByStatus(jsonData.getData("Processed"));
+        filterByStatus(jsonData.getData("Unavailable"));
+    }
+
+    /**
+     * This method To Filter By Status
+     *
+     */
+    public void filterByEffectiveDate() {
+        Utility_Functions.timeWait(3);
+        date(jsonData.getData("Start_Date"), jsonData.getData("End_Date"));
+    }
+
+    /**
      * This method To Filter Price sheet Records
      *
      */
