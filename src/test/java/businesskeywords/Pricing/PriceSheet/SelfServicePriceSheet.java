@@ -143,4 +143,83 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
 
+    public void verifyItemUpload()
+    {
+        List<WebElement> arr=getRowData(PriceSheetDetails.wiseItems);
+        String[] items= jsonData.getData("WiseItem").split(",");
+        for(int i=0;i<arr.size();i++)
+        {
+           Utility_Functions.xAssertEquals(report,arr.get(i).getText(),items[i],"Wise Item Present");
+        }
+    }
+
+    public void fillSheetData()
+    {
+
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE,0);
+        dt = c.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String strPriceDate= formatter.format(dt);
+
+        sendKey(PriceSheetDetails.sheetMultiplier,"0.4");
+        click(PriceSheetDetails.updateListPrice);
+        click(PriceSheetDetails.updatePOCost);
+        click(PriceSheetDetails.updateMatrixCost);
+
+
+        Utility_Functions.xSendkeysAndTab(driver.findElement(PriceSheetDetails.processedDate),strPriceDate);
+
+
+        click(PriceSheetDetails.saveButton);
+        commonObj.validateText(PriceSheetDetails.statusValue,"Maintaining","Status Matched");
+
+    }
+
+    public void saveSheet()
+    {
+        click(PriceSheetDetails.saveButton);
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus,"Maintaining","Status Matched");
+    }
+
+
+    public void sheetOnHold()
+    {
+        click(PriceSheetDetails.onHoldButton);
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus,"On-Hold","Status Matched");
+
+    }
+
+    public void unHoldSheet()
+    {
+        click(PriceSheetDetails.removeHoldButton);
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus,"Maintaining","Status Matched");
+
+    }
+
+    public void markReady()
+    {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE,0);
+        dt = c.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String strPriceDate= formatter.format(dt);
+
+        Utility_Functions.xSendkeysAndTab(driver.findElement(PriceSheetDetails.processedDate),strPriceDate);
+        click(PriceSheetDetails.markAsReadyButton);
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus,"Ready to Process","Status Matched");
+
+
+
+    }
+
+
 }

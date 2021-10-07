@@ -22,4 +22,36 @@ public class SelfServicePriceSheet extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_190_FillPriceSheetAndSave(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_191_PriceSheetOnHold(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_192_PriceSheetRemoveHold(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_193_PriceSheetMarkAsReady(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

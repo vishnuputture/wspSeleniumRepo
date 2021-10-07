@@ -24,5 +24,20 @@ public class PriceSheetDetails extends ReusableLib
 
     public static By nameValue=By.xpath("//input[@id='priceSheetName']");
 
+    public static By wiseItems=By.xpath("//*[@id='hot-data']/div[1]/div/div/div/table/tbody/tr[1]/td[1]");
 
+    public static By sheetMultiplier=By.xpath("//input[@id='sheetMultiplier']");
+    public static By updateListPrice=By.xpath("//input[@id='listPrice']");
+    public static By updatePOCost=By.xpath("//input[@id='poCost']");
+    public static By updateMatrixCost=By.xpath("//input[@id='matrixCost']");
+    public static By processedDate=By.xpath("//div[@class='date-picker form-group']/input[@id='processDate']");
+    public static By activeDay=By.xpath("//div[@class='datepicker-days']/table//tr//td[@class='active day']");
+
+    public static By saveButton=By.xpath("//button[text()='Save']");
+
+    public static By onHoldButton=By.xpath("//button[text()='Place On Hold']");
+
+    public static By removeHoldButton=By.xpath("//button[text()='Remove Hold']");
+
+    public static By markAsReadyButton=By.xpath("//button[text()='Mark As Ready']");
 }
