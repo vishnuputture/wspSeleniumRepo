@@ -54,4 +54,36 @@ public class SelfServicePriceSheet extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_194_ValidatePriceSheetProcessed(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_195_ValidatePriceSheetItemListCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_196_ValidatePriceSheetItemMatrixCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_197_ValidatePriceSheetItemPoCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

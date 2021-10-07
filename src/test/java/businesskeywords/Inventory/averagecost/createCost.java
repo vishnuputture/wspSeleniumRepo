@@ -3,10 +3,12 @@ package businesskeywords.Inventory.averagecost;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Status;
 
 import org.openqa.selenium.WebElement;
 import pages.inventory.ItemMasterPage;
 import pages.inventory.ReceiveCorrectionPage;
+import pages.pricing.PriceSheet.PriceSheetDetails;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemLedgerPage;
 
@@ -108,6 +110,48 @@ public class createCost extends ReusableLib {
             System.out.println("Text: Not found");
             throw new NoSuchElementException("Could not find :" + ItemMasterPage.messageAddSuccessful);
         }
+    }
+    
+    public void validateListPrice() {
+    	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	String temp=driver.findElement(ItemMasterPage.txtBoxListPrice).getAttribute("value").strip();
+    	if(temp.equalsIgnoreCase(jsonData.getData("ListPrice")))
+        {
+            report.updateTestLog("VerifyRecord", "Price Matched", Status.PASS);
+        }else
+        {
+            report.updateTestLog("VerifyRecord", "Price Mis-Matched", Status.FAIL);
+        }
+    	
+    }
+    
+    public void validateMatrixPrice() {	
+    	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	String temp=driver.findElement(ItemMasterPage.txtBoxMatrix).getAttribute("value").strip();
+    	if(temp.equalsIgnoreCase(jsonData.getData("MatrixCost")))
+        {
+            report.updateTestLog("VerifyRecord", "Price Matched", Status.PASS);
+        }else
+        {
+            report.updateTestLog("VerifyRecord", "Price Mis-Matched", Status.FAIL);
+        }
+    	
+    }
+    
+    public void validatePoCost() {	
+    	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	String temp=driver.findElement(ItemMasterPage.txtBoxPoCost).getAttribute("value").strip();
+    	if(temp.equalsIgnoreCase(jsonData.getData("PoCost")))
+        {
+            report.updateTestLog("VerifyRecord", "Cost Matched", Status.PASS);
+        }else
+        {
+            report.updateTestLog("VerifyRecord", "Cost Mis-Matched", Status.FAIL);
+        }
+    	
     }
     
     public void updateAvgCostItem() {

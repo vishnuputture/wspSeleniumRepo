@@ -48,6 +48,9 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By uploadedDataManufacturer=By.xpath("//tbody//tr[1]//td[2]");
     public static By uploadedDataCode=By.xpath("//tbody//tr[1]//td[3]");
     public static By uploadedDataStatus=By.xpath("//tbody//tr[1]//td[4]");
+    public static By poCostMultiplier = By.id("poCostMultiplier");
+    public static By matrixCostMultiplier = By.id("matrixCostMultiplier");
+    public static By listPrice = By.xpath("//tbody//tr[1]//td[8]");
 
 
 
