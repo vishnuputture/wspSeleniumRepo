@@ -10,7 +10,7 @@
       "Tc_344_VerifySearchByName":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterSearchByName",
       "Tc_344_VerifyFilterByManufacturer":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByManufacturer",
       "Tc_344_VerifyFilterByStatus":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByStatus",
-      "Tc_344_VerifySortOnPriceSheetRecords":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByEffectiveDate"
+      "Tc_344_VerifyFilterEffectiveDate":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByEffectiveDate"
     }
   ],
   "General_Data": [
@@ -55,7 +55,7 @@
       "Unavailable": "Unavailable"
     },
     {
-      "TC_ID": "Tc_344_VerifySortOnPriceSheetRecords",
+      "TC_ID": "Tc_344_VerifyFilterEffectiveDate",
       "Start_Date": "10/06/2021",
       "End_Date": "10/07/2021"
     }

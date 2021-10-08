@@ -80,7 +80,7 @@ public class SelfServicePriceSheet extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_344_VerifySortOnPriceSheetRecords(SeleniumTestParameters testParameters) {
+    public void Tc_344_VerifyFilterEffectiveDate(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify PriceSheetRecords");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
