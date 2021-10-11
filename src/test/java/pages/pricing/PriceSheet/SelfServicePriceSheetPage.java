@@ -52,6 +52,12 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By matrixCostMultiplier = By.id("matrixCostMultiplier");
     public static By listPrice = By.xpath("//tbody//tr[1]//td[8]");
 
-
-
+    public static By firstSearchByName=By.xpath("//tr[@class='ng-star-inserted']/td");
+    public static By searchByName=By.xpath("//label[contains(text(),'Search By Name')]/parent::div/descendant::input");
+    public static By filterManufacturer=By.xpath("//label[contains(text(),'Filter By Manufacturer')]/parent::div/descendant::span");
+    public static By filterManufacturerDropField=By.xpath("//label[contains(text(),'Filter By Manufacturer')]/parent::div/descendant::input[contains(@class,'dropdown')]");
+    public static By filterByStatus=By.xpath("//input[@name='searchTerm']");
+    public static By startDate=By.id("startDate");
+    public static By endDate=By.id("endDate");
+    public static By closeIcon=By.xpath("//i[contains(@class,'dropdown-clear-icon')]");
 }

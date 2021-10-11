@@ -54,34 +54,69 @@ public class SelfServicePriceSheet extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
     
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_194_ValidatePriceSheetProcessed(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
+	 testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+     CoreScript coreScript = new CoreScript(testParameters);
+     coreScript.driveTestExecution();
+     tearDownTestRunner(testParameters, coreScript);
+ }
     
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_195_ValidatePriceSheetItemListCost(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
+	 testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+     CoreScript coreScript = new CoreScript(testParameters);
+     coreScript.driveTestExecution();
+     tearDownTestRunner(testParameters, coreScript);
+ }
     
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_196_ValidatePriceSheetItemMatrixCost(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+	 testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+     CoreScript coreScript = new CoreScript(testParameters);
+     coreScript.driveTestExecution();
+     tearDownTestRunner(testParameters, coreScript);
+ }
+    
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_197_ValidatePriceSheetItemPoCost(SeleniumTestParameters testParameters) {
+	 testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+     CoreScript coreScript = new CoreScript(testParameters);
+     coreScript.driveTestExecution();
+     tearDownTestRunner(testParameters, coreScript);
+ }
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_344_VerifySearchByName(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify SearchByName");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_344_VerifyFilterByManufacturer(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify FilterByManufacturer");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
     
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_197_ValidatePriceSheetItemPoCost(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
+    public void Tc_344_VerifyFilterByStatus(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify FilterByStatus");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    
+   
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_344_VerifyFilterEffectiveDate(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify PriceSheetRecords");
+
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
