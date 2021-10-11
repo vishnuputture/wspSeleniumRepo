@@ -38,10 +38,12 @@
       "TC_ID": "Tc_193_PriceSheetMarkAsReady"
     },
     {
-      "TC_ID": "Tc_344_VerifySearchByName"
+      "TC_ID": "Tc_344_VerifySearchByName",
+      "SheetName": "TestAutomation001B"
     },
     {
-      "TC_ID": "Tc_344_VerifyFilterByManufacturer"
+      "TC_ID": "Tc_344_VerifyFilterByManufacturer",
+      "Manufacturer": "KOHLER CO"
     },
     {
       "TC_ID": "Tc_344_VerifyFilterByStatus",
@@ -53,7 +55,9 @@
       "Unavailable": "Unavailable"
     },
     {
-      "TC_ID": "Tc_344_VerifyFilterEffectiveDate"
+      "TC_ID": "Tc_344_VerifyFilterEffectiveDate",
+      "Start_Date": "10/06/2021",
+      "End_Date": "10/07/2021"
     }
   ]
 }
