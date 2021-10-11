@@ -203,17 +203,19 @@ public class SelfServicePriceSheet extends ReusableLib {
     /**
      * This method To Search by Name
      */
-    public void searchByName(String fieldValue) {
+    public void searchByName() {
         Utility_Functions.timeWait(7);
+        String name = Utility_Functions.getText(driver, SelfServicePriceSheetPage.firstSearchByName);
         Boolean bl = Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.firstSearchByName, 10);
         System.out.println("bl............" + bl);
         if (bl) {
-            sendKeys(SelfServicePriceSheetPage.searchByName, "" + fieldValue + "", "Search By Name");
-            Utility_Functions.waitForElementVisible(driver, By.xpath("//li[contains(text(),'" + fieldValue + "')]"), 10);
-            click(By.xpath("//li[contains(text(),'" + fieldValue + "')]"));
-            Utility_Functions.timeWait(6);
-            Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.firstSearchByName, 10);
-            Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, SelfServicePriceSheetPage.firstSearchByName), true, "");
+            //sendKeys(SelfServicePriceSheetPage.searchByName, "" + fieldValue + "", "Search By Name");
+            sendKeys(SelfServicePriceSheetPage.searchByName, name, "Search By Name");
+            Utility_Functions.timeWait(4);
+            boolean bl1 = Utility_Functions.xIsDisplayed(driver, By.xpath("//li[contains(text(),'" + name + "')]"));
+            click(By.xpath("//li[contains(text(),'" + name + "')]"));
+            Utility_Functions.timeWait(4);
+            Utility_Functions.xAssertEquals(report, bl1, true, "");
         } else {
             throw new NoSuchElementException("Pricing Sheet not found");
         }
@@ -222,16 +224,18 @@ public class SelfServicePriceSheet extends ReusableLib {
     /**
      * This method To Filter By Manufacturer
      */
-    public void filterByManufacturer(String fieldValue) {
-        if (Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.firstSearchByName, 10)) {
+    public void filterByManufacture() {
+        if (Utility_Functions.xIsDisplayed(driver, SelfServicePriceSheetPage.firstSearchByName)) {
+            String name = driver.findElements(SelfServicePriceSheetPage.firstSearchByName).get(1).getText().trim();
+            System.out.println(name);
             int size = driver.findElements(SelfServicePriceSheetPage.filterManufacturer).size();
             click(driver.findElements(SelfServicePriceSheetPage.filterManufacturer).get(size - 1));
-            sendKeys(SelfServicePriceSheetPage.filterManufacturerDropField, "" + fieldValue + "", "Filter By Manufacturer");
-            Utility_Functions.waitForElementVisible(driver, By.xpath("//li[contains(text(),'" + fieldValue + "')]"), 10);
-            click(By.xpath("//span[contains(text(),'" + fieldValue + "')]"));
+            sendKeys(SelfServicePriceSheetPage.filterManufacturerDropField, "" + name + "", "Filter By Manufacturer");
+            Utility_Functions.waitForElementVisible(driver, By.xpath("//li[contains(text(),'" + name + "')]"), 10);
+            click(By.xpath("//span[contains(text(),'" + name + "')]"));
             Utility_Functions.timeWait(6);
-            Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.firstSearchByName, 10);
-            Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, SelfServicePriceSheetPage.firstSearchByName), true, "");
+            Boolean bl1 = Utility_Functions.xIsDisplayed(driver, SelfServicePriceSheetPage.firstSearchByName);
+            Utility_Functions.xAssertEquals(report, bl1, true, "Manufacturer: " + name + " found");
         } else {
             throw new NoSuchElementException("Pricing Sheet is not found");
         }
@@ -257,7 +261,18 @@ public class SelfServicePriceSheet extends ReusableLib {
     /**
      * This method To search Effective date
      */
-    public void date(String startDate, String endDate) {
+    public void date() {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, -10);
+        dt = c.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+        String startDate = formatter.format(dt);
+        c.add(Calendar.DATE, 1);
+        dt = c.getTime();
+        SimpleDateFormat formatter1 = new SimpleDateFormat("MM/dd/yy");
+        String endDate = formatter1.format(dt);
         Utility_Functions.waitForElementVisible(driver, SelfServicePriceSheetPage.startDate, 10);
         sendKeys(SelfServicePriceSheetPage.startDate, "" + startDate + "", "Enter Start Date: " + startDate + "");
         Utility_Functions.timeWait(4);
@@ -265,18 +280,14 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.timeWait(6);
         click(driver.findElement(By.xpath("//h2[text()='SELF SERVICE PRICE SHEETS']")));
         Boolean bl = Utility_Functions.xIsDisplayed(driver, SelfServicePriceSheetPage.firstSearchByName);
-        if (bl) {
-            Utility_Functions.xAssertEquals(report, bl, true, "");
-        } else {
-            throw new NoSuchElementException("Effective date for start date:" + startDate + " and endDate:" + endDate + " not found");
-        }
+        Utility_Functions.xAssertEquals(report, bl, true, "Effective date for start date:" + startDate + " and endDate:" + endDate + " found");
     }
 
     /**
      * This method To Filter search by name
      */
     public void filterSearchByName() {
-        searchByName(jsonData.getData("SheetName"));
+        searchByName();
     }
 
     public void refreshToCancel() {
@@ -288,7 +299,7 @@ public class SelfServicePriceSheet extends ReusableLib {
      */
     public void filterByManufacturer() {
         Utility_Functions.timeWait(3);
-        filterByManufacturer(jsonData.getData("Manufacturer"));
+        filterByManufacture();
     }
 
     public void closeIcon() {
@@ -313,17 +324,17 @@ public class SelfServicePriceSheet extends ReusableLib {
      */
     public void filterByEffectiveDate() {
         Utility_Functions.timeWait(3);
-        date(jsonData.getData("Start_Date"), jsonData.getData("End_Date"));
+        date();
     }
 
     /**
      * This method To Filter Price sheet Records
      */
     public void filterPriceSheetRecords() {
-        searchByName(jsonData.getData("SheetName"));
+        searchByName();
         driver.navigate().refresh();
         Utility_Functions.timeWait(3);
-        filterByManufacturer(jsonData.getData("Manufacturer"));
+        filterByManufacturer();
         click(SelfServicePriceSheetPage.closeIcon);
         Utility_Functions.timeWait(3);
         filterByStatus(jsonData.getData("Available"));
@@ -334,6 +345,6 @@ public class SelfServicePriceSheet extends ReusableLib {
         filterByStatus(jsonData.getData("Unavailable"));
         driver.navigate().refresh();
         Utility_Functions.timeWait(3);
-        date(jsonData.getData("Start_Date"), jsonData.getData("End_Date"));
+        date();
     }
 }
