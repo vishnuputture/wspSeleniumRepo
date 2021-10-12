@@ -7,10 +7,15 @@
       "Tc_191_PriceSheetOnHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,sheetOnHold",
       "Tc_192_PriceSheetRemoveHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,unHoldSheet",
       "Tc_193_PriceSheetMarkAsReady": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,saveSheet,navigateToPriceSheetDetailsPage,markReady",
+      "Tc_194_ValidatePriceSheetProcessed": "launchApp,siteLogin,runPriceSheetBatch,validateSheetProcessed",
+      "Tc_195_ValidatePriceSheetItemListCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateListPrice",
+      "Tc_196_ValidatePriceSheetItemMatrixCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateMatrixPrice",
+      "Tc_197_ValidatePriceSheetItemPoCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validatePoCost",
       "Tc_344_VerifySearchByName":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterSearchByName",
       "Tc_344_VerifyFilterByManufacturer":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByManufacturer",
       "Tc_344_VerifyFilterByStatus":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByStatus",
       "Tc_344_VerifyFilterEffectiveDate":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByEffectiveDate"
+
     }
   ],
   "General_Data": [
@@ -38,8 +43,25 @@
       "TC_ID": "Tc_193_PriceSheetMarkAsReady"
     },
     {
-      "TC_ID": "Tc_344_VerifySearchByName",
-      "SheetName": "TestAutomation001B"
+      "TC_ID": "Tc_194_ValidatePriceSheetProcessed"
+    },
+    {
+      "TC_ID": "Tc_195_ValidatePriceSheetItemListCost",
+      "WiseItem":"*99599014041",
+      "ListPrice":"10"
+    },
+    {
+      "TC_ID": "Tc_196_ValidatePriceSheetItemMatrixCost",
+      "WiseItem":"*99599014041",
+      "MatrixCost":"4"
+    },
+    {
+      "TC_ID": "Tc_197_ValidatePriceSheetItemPoCost",
+      "WiseItem":"*99599014041",
+      "PoCost":"4"
+    }
+    {
+      "TC_ID": "Tc_344_VerifySearchByName"
     },
     {
       "TC_ID": "Tc_344_VerifyFilterByManufacturer",
@@ -59,5 +81,6 @@
       "Start_Date": "10/06/2021",
       "End_Date": "10/07/2021"
     }
+
   ]
 }

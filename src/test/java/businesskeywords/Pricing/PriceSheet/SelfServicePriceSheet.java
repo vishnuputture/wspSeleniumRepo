@@ -41,6 +41,47 @@ public class SelfServicePriceSheet extends ReusableLib {
         commonObj.validateText(SelfServicePriceSheetPage.headerTitle, "SELF SERVICE PRICE SHEETS", "Validating Landing page title");
 
     }
+    
+    public void extractSheetDetails() {
+    	 Utility_Functions.timeWait(5);
+    	 Utility_Functions.xUpdateJson("PoCostMultiplier",driver.findElement(SelfServicePriceSheetPage.poCostMultiplier).getAttribute("value"));
+    	 Utility_Functions.xUpdateJson("MatrixCostMultiplier",driver.findElement(SelfServicePriceSheetPage.matrixCostMultiplier).getAttribute("value"));
+    	 Utility_Functions.xUpdateJson("ListPrice",driver.findElement(SelfServicePriceSheetPage.listPrice).getText());
+    	 
+    	 
+    }
+    
+    public void openNewTab(){
+    	Utility_Functions.openNewTab(driver);
+    }
+    
+    public void validateSheetProcessed() {
+    	 Utility_Functions.openNewTab(driver);
+    	 String url = properties.getProperty("URLPriceSheet");
+         driver.get(url);
+         ngWaitRequestToFinish();
+         navigateToSelfServicePriceSheet();
+         //ngWaitRequestToFinish();
+         //Utility_Functions.xWaitForElementPresent(driver, driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")), 10);
+         try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         String status = driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")).getText().strip();
+         System.out.println("Status :" + status);
+         //String status = driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")).getText();
+         if(status.equalsIgnoreCase("Processed"))
+         {
+             report.updateTestLog("VerifyRecord", "status Matched", Status.PASS);
+         }else
+         {
+             report.updateTestLog("VerifyRecord", "status Mis-Matched", Status.FAIL);
+         }
+
+         
+    }
 
     public String generateDate() {
         Date dt = new Date();
@@ -86,27 +127,36 @@ public class SelfServicePriceSheet extends ReusableLib {
 
 
         click(SelfServicePriceSheetPage.addPriceSheetbtn);
-        autoComplete(SelfServicePriceSheetPage.manufacturer, "koh", SelfServicePriceSheetPage.manufacturerList, jsonData.getData("Manufacturer"));
-        sendKey(SelfServicePriceSheetPage.priceSheetName, jsonData.getData("SheetName"));
-        // sendKeyDate(SelfServicePriceSheetPage.effectiveDate,strPriceDate);
-        Utility_Functions.xSendkeysAndTab(driver.findElement(SelfServicePriceSheetPage.effectiveDate), strPriceDate);
-        sendKey(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"));
+
+        autoComplete(SelfServicePriceSheetPage.manufacturer,"koh",SelfServicePriceSheetPage.manufacturerList,jsonData.getData("Manufacturer"));
+        sendKey(SelfServicePriceSheetPage.priceSheetName,jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
+       // sendKeyDate(SelfServicePriceSheetPage.effectiveDate,strPriceDate);
+        Utility_Functions.xSendkeysAndTab(driver.findElement(SelfServicePriceSheetPage.effectiveDate),strPriceDate);
+        sendKey(SelfServicePriceSheetPage.priceSheetCode,Utility_Functions.xGetJsonData("priceSheetCode"));
+
         click(SelfServicePriceSheetPage.choosePriceSheet);
         String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
         System.out.println(path);
         Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
+        commonObj.validateText(SelfServicePriceSheetPage.successMessage,"Price Sheet successfully uploaded","upload Successful");
+        
+        Utility_Functions.xUpdateJson("priceSheetName",jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
+        
+    }
+
+    public  void validateUpload()
+    {
+      String strdate=generateDate();;
+      commonObj.validateText(SelfServicePriceSheetPage.uploadedDataName,jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"),"Name Matched");
+      commonObj.validateText(SelfServicePriceSheetPage.uploadedDataManufacturer,jsonData.getData("Manufacturer"),"Manufacturer Matched");
+      commonObj.validateText(SelfServicePriceSheetPage.uploadedDataCode,strdate+"-"+Utility_Functions.xGetJsonData("priceSheetCode"),"Code Matched");
+      commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus,"available","Status Matched");
+
         commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
     }
 
-    public void validateUpload() {
-        String strdate = generateDate();
-        ;
-        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataName, jsonData.getData("SheetName"), "Name Matched");
-        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataManufacturer, jsonData.getData("Manufacturer"), "Manufacturer Matched");
-        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataCode, strdate + "-" + Utility_Functions.xGetJsonData("priceSheetCode"), "Code Matched");
-        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus, "available", "Status Matched");
-    }
+
 
     public void navigateToPriceSheetDetailsPage() {
         click(SelfServicePriceSheetPage.uploadedDataName);
@@ -114,20 +164,24 @@ public class SelfServicePriceSheet extends ReusableLib {
 
     }
 
-    public void verifyUploadedSheetDetails() {
-        commonObj.validateText(PriceSheetDetails.codeValue, Utility_Functions.xGetJsonData("priceSheetEffDate") + "-" + Utility_Functions.xGetJsonData("priceSheetCode"), "code Matched");
-        commonObj.validateText(PriceSheetDetails.manufacturerValue, jsonData.getData("Manufacturer"), "Manufacturer Matched");
-        commonObj.validateText(PriceSheetDetails.statusValue, "Available", "Status Matched");
-        String temp = driver.findElement(PriceSheetDetails.nameValue).getAttribute("value");
-        System.out.println("The innertext is " + temp);
-        // commonObj.validateText(PriceSheetDetails.nameValue,temp,"name matched");
-        if (temp.equalsIgnoreCase(jsonData.getData("SheetName"))) {
-            report.updateTestLog("VerifyRecord", "Name Matched", Status.PASS);
-        } else {
-            report.updateTestLog("VerifyRecord", "Name Mis-Matched", Status.FAIL);
-        }
 
+    public void verifyUploadedSheetDetails()
+    {
+     commonObj.validateText(PriceSheetDetails.codeValue,Utility_Functions.xGetJsonData("priceSheetEffDate")+"-"+Utility_Functions.xGetJsonData("priceSheetCode"),"code Matched");
+     commonObj.validateText(PriceSheetDetails.manufacturerValue,jsonData.getData("Manufacturer"),"Manufacturer Matched");
+     commonObj.validateText(PriceSheetDetails.statusValue,"Available","Status Matched");
+     String temp=driver.findElement(PriceSheetDetails.nameValue).getAttribute("value");
+     System.out.println("The innertext is "+temp);
+    // commonObj.validateText(PriceSheetDetails.nameValue,temp,"name matched");
+     if(temp.equalsIgnoreCase(jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode")))
+     {
+         report.updateTestLog("VerifyRecord", "Name Matched", Status.PASS);
+     }else
+     {
+         report.updateTestLog("VerifyRecord", "Name Mis-Matched", Status.FAIL);
+     }
     }
+  
 
 
     public void verifyItemUpload() {
@@ -164,8 +218,10 @@ public class SelfServicePriceSheet extends ReusableLib {
 
     public void saveSheet() {
         click(PriceSheetDetails.saveButton);
-        Utility_Functions.timeWait(1);
-        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus, "Maintaining", "Status Matched");
+
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus,"Maintaining","Status Matched");
+
     }
 
 
