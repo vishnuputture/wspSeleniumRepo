@@ -3,6 +3,7 @@ package businesskeywords.Pricing.PriceSheet;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.Util;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -41,20 +42,20 @@ public class SelfServicePriceSheet extends ReusableLib {
         commonObj.validateText(SelfServicePriceSheetPage.headerTitle, "SELF SERVICE PRICE SHEETS", "Validating Landing page title");
 
     }
-    
+
     public void extractSheetDetails() {
     	 Utility_Functions.timeWait(5);
     	 Utility_Functions.xUpdateJson("PoCostMultiplier",driver.findElement(SelfServicePriceSheetPage.poCostMultiplier).getAttribute("value"));
     	 Utility_Functions.xUpdateJson("MatrixCostMultiplier",driver.findElement(SelfServicePriceSheetPage.matrixCostMultiplier).getAttribute("value"));
     	 Utility_Functions.xUpdateJson("ListPrice",driver.findElement(SelfServicePriceSheetPage.listPrice).getText());
-    	 
-    	 
+
+
     }
-    
+
     public void openNewTab(){
     	Utility_Functions.openNewTab(driver);
     }
-    
+
     public void validateSheetProcessed() {
     	 Utility_Functions.openNewTab(driver);
     	 String url = properties.getProperty("URLPriceSheet");
@@ -80,7 +81,7 @@ public class SelfServicePriceSheet extends ReusableLib {
              report.updateTestLog("VerifyRecord", "status Mis-Matched", Status.FAIL);
          }
 
-         
+
     }
 
     public String generateDate() {
@@ -140,9 +141,9 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
         commonObj.validateText(SelfServicePriceSheetPage.successMessage,"Price Sheet successfully uploaded","upload Successful");
-        
+
         Utility_Functions.xUpdateJson("priceSheetName",jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
-        
+
     }
 
     public  void validateUpload()
@@ -181,7 +182,7 @@ public class SelfServicePriceSheet extends ReusableLib {
          report.updateTestLog("VerifyRecord", "Name Mis-Matched", Status.FAIL);
      }
     }
-  
+
 
 
     public void verifyItemUpload() {
@@ -399,5 +400,39 @@ public class SelfServicePriceSheet extends ReusableLib {
         driver.navigate().refresh();
         Utility_Functions.timeWait(3);
         date(jsonData.getData("Start_Date"), jsonData.getData("End_Date"));
+    }
+
+    /**
+     * This method To Verify ERROR MESSAGE
+     */
+    public void verifyError(String val, String errMsg) {
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xMouseDoubleClick(driver, driver.findElement(SelfServicePriceSheetPage.listPrice));
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xSendkeysAndTab(report, driver.findElement(SelfServicePriceSheetPage.listPriceInput), val, "Enter " + val + " into List Price roe text field");
+        String color = driver.findElement(SelfServicePriceSheetPage.listPrice).getCssValue("background-color");
+        Utility_Functions.xAssertEquals(report, color, "rgba(204, 0, 0, 0.1)", "List Price Input box Color changed to RED");
+        Utility_Functions.xmouseOver(driver, SelfServicePriceSheetPage.errorIcon);
+        String error = driver.findElement(SelfServicePriceSheetPage.errorIcon).getAttribute("data-original-title");
+        Utility_Functions.timeWait(3);
+        Utility_Functions.xAssertEquals(report, error, errMsg, "Error Message: ");
+    }
+
+    /**
+     * This method To Verify List Price
+     */
+    public void verifyListPriceRow() {
+        Utility_Functions.timeWait(8);
+        Utility_Functions.xMouseDoubleClick(driver, driver.findElement(SelfServicePriceSheetPage.listPrice));
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xSendkeysAndTab(report, driver.findElement(SelfServicePriceSheetPage.listPriceInput), "0", "");
+        String color = driver.findElement(SelfServicePriceSheetPage.listPrice).getCssValue("background-color");
+        if (color.equals("rgba(255, 255, 255, 1)")) {
+            click(SelfServicePriceSheetPage.updateListPriceCheckBox, "Click Update List Price Check Box");
+        }
+        verifyError("0", "List Price cannot be 0 when Update List Price is checked.");
+        verifyError("-1", "List Price must be numeric and not negative.");
+        verifyError(" ", "List Price cannot be blank when Update List Price is checked.");
+        verifyError("12345678", "List Price must be numeric and not negative.");
     }
 }

@@ -60,4 +60,7 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By startDate=By.id("startDate");
     public static By endDate=By.id("endDate");
     public static By closeIcon=By.xpath("//i[contains(@class,'dropdown-clear-icon')]");
+    public static By updateListPriceCheckBox=By.id("listPrice");
+    public static By errorIcon=By.xpath("//i[@class='fa fa-error_outline']");
+    public static By listPriceInput=By.xpath("//textarea[@class='handsontableInput']");
 }
