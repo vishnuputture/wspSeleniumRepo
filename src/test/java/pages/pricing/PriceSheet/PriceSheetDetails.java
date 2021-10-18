@@ -32,6 +32,7 @@ public class PriceSheetDetails extends ReusableLib
     public static By updateMatrixCost=By.xpath("//input[@id='matrixCost']");
     public static By processedDate=By.xpath("//div[@class='date-picker form-group']/input[@id='processDate']");
     public static By activeDay=By.xpath("//div[@class='datepicker-days']/table//tr//td[@class='active day']");
+    public static By errorMessage=By.xpath("//div[@class='custom-error-display']");
 
     public static By saveButton=By.xpath("//button[text()='Save']");
 
@@ -40,4 +41,5 @@ public class PriceSheetDetails extends ReusableLib
     public static By removeHoldButton=By.xpath("//button[text()='Remove Hold']");
 
     public static By markAsReadyButton=By.xpath("//button[text()='Mark As Ready']");
+
 }

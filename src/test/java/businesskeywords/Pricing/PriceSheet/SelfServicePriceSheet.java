@@ -462,4 +462,33 @@ public class SelfServicePriceSheet extends ReusableLib {
         commonObj.validateText(SelfServicePriceSheetPage.successMessage,"Price Sheet successfully uploaded","upload Successful");
         Utility_Functions.xUpdateJson("priceSheetName",jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
     }
+
+    public void fillSheetDataNetPrice() {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, 0);
+        dt = c.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String strPriceDate = formatter.format(dt);
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xSendkeysAndTab(driver.findElement(PriceSheetDetails.processedDate), strPriceDate);
+        Utility_Functions.timeWait(2);
+        int size=driver.findElements(PriceSheetDetails.errorMessage).size();
+        int count = 0;
+        if(Utility_Functions.xIsDisplayed(driver,PriceSheetDetails.errorMessage)) {
+            for(int i=0;count<size;count++) {
+                if(count==size-1){
+                    Utility_Functions.xScrollIntoView(driver,driver.findElements(PriceSheetDetails.errorMessage).get(i));
+                }
+                Utility_Functions.timeWait(2);
+                Utility_Functions.xMouseDoubleClick(driver, driver.findElements(PriceSheetDetails.errorMessage).get(i));
+                Utility_Functions.timeWait(2);
+                Utility_Functions.xSendkeysAndTab(report, driver.findElement(SelfServicePriceSheetPage.listPriceInput), "2", "");
+            }
+        }
+        Utility_Functions.timeWait(2);
+        click(PriceSheetDetails.saveButton);
+        commonObj.validateText(PriceSheetDetails.statusValue, "Maintaining", "Status Matched");
+    }
 }

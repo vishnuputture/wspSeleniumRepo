@@ -18,7 +18,7 @@
       "Tc_399_VerifyListPriceInputField":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyListPriceRow",
       "TC_408_CreateValidPriceSheetWithNETPriceValue": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,addPriceSheetDetailsNetSheet,validateUpload",
       "Tc_189_NavigatePriceSheetDetails":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyUploadedSheetDetails,verifyItemUpload",
-      "Tc_363_FillPriceSheetAndSave": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,fillSheetData",
+      "Tc_363_FillPriceSheetAndSave": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,fillSheetDataNetPrice",
       "Tc_360_PriceSheetOnHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,sheetOnHold",
       "Tc_360_PriceSheetRemoveHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,unHoldSheet",
       "Tc_367_PriceSheetMarkAsReady": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,saveSheet,navigateToPriceSheetDetailsPage,markReady",
