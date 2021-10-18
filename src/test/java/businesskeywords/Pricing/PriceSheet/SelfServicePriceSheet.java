@@ -435,4 +435,31 @@ public class SelfServicePriceSheet extends ReusableLib {
         verifyError(" ", "List Price cannot be blank when Update List Price is checked.");
         verifyError("12345678", "List Price must be numeric and not negative.");
     }
+
+    public void addPriceSheetDetailsNetSheet() {
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, 1);
+        dt = c.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String strPriceDate = formatter.format(dt);
+        System.out.println(strPriceDate);
+        codeGen();
+        click(SelfServicePriceSheetPage.addPriceSheetbtn);
+        autoComplete(SelfServicePriceSheetPage.manufacturer,"koh",SelfServicePriceSheetPage.manufacturerList,jsonData.getData("Manufacturer"));
+        Utility_Functions.timeWait(5);
+        System.out.println("DOne.....");
+        sendKey(SelfServicePriceSheetPage.priceSheetName,jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
+        Utility_Functions.xSendkeysAndTab(driver.findElement(SelfServicePriceSheetPage.effectiveDate),strPriceDate);
+        sendKey(SelfServicePriceSheetPage.priceSheetCode,Utility_Functions.xGetJsonData("priceSheetCode"));
+        click(SelfServicePriceSheetPage.netPrice);
+        click(SelfServicePriceSheetPage.choosePriceSheet);
+        String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
+        System.out.println(path);
+        Utility_Functions.xUploadFile(report, path);
+        click(SelfServicePriceSheetPage.saveUpload);
+        commonObj.validateText(SelfServicePriceSheetPage.successMessage,"Price Sheet successfully uploaded","upload Successful");
+        Utility_Functions.xUpdateJson("priceSheetName",jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
+    }
 }

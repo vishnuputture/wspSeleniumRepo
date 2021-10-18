@@ -49,6 +49,7 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By uploadedDataCode=By.xpath("//tbody//tr[1]//td[3]");
     public static By uploadedDataStatus=By.xpath("//tbody//tr[1]//td[4]");
     public static By poCostMultiplier = By.id("poCostMultiplier");
+    public static By netPrice = By.id("netPrice");
     public static By matrixCostMultiplier = By.id("matrixCostMultiplier");
     public static By listPrice = By.xpath("//tbody//tr[1]//td[8]");
 
@@ -63,4 +64,5 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By updateListPriceCheckBox=By.id("listPrice");
     public static By errorIcon=By.xpath("//i[@class='fa fa-error_outline']");
     public static By listPriceInput=By.xpath("//textarea[@class='handsontableInput']");
+
 }

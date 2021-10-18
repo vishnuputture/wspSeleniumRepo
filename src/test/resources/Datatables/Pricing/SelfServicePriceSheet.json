@@ -15,6 +15,17 @@
       "Tc_344_VerifyFilterByManufacturer":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByManufacturer",
       "Tc_344_VerifyFilterByStatus":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByStatus",
       "Tc_344_VerifyFilterEffectiveDate":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByEffectiveDate",
+      "Tc_399_VerifyListPriceInputField":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyListPriceRow",
+      "TC_408_CreateValidPriceSheetWithNETPriceValue": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,addPriceSheetDetailsNetSheet,validateUpload",
+      "Tc_189_NavigatePriceSheetDetails":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyUploadedSheetDetails,verifyItemUpload",
+      "Tc_363_FillPriceSheetAndSave": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,fillSheetData",
+      "Tc_360_PriceSheetOnHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,sheetOnHold",
+      "Tc_360_PriceSheetRemoveHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,unHoldSheet",
+      "Tc_367_PriceSheetMarkAsReady": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,saveSheet,navigateToPriceSheetDetailsPage,markReady",
+      "Tc_367_ValidatePriceSheetProcessed": "launchApp,siteLogin,runPriceSheetBatch,validateSheetProcessed",
+      "Tc_195_ValidatePriceSheetItemListCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateListPrice",
+      "Tc_196_ValidatePriceSheetItemMatrixCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateMatrixPrice",
+      "Tc_197_ValidatePriceSheetItemPoCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validatePoCost",
       "Tc_399_VerifyListPriceInputField":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyListPriceRow"
     }
   ],
@@ -83,6 +94,11 @@
     },
     {
       "TC_ID": "Tc_399_VerifyListPriceInputField"
+    },
+    {
+      "TC_ID": "TC_408_CreateValidPriceSheetWithNETPriceValue",
+      "Manufacturer": "KOHLER CO",
+      "SheetName": "TestAutomation001B"
     }
   ]
 }

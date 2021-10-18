@@ -126,4 +126,12 @@ public class SelfServicePriceSheet extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_408_CreateValidPriceSheetWithNETPriceValue(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify List Price field with multiple values");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
