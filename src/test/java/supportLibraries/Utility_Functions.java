@@ -504,6 +504,8 @@ public class Utility_Functions extends ReusableLib {
         return dropdown.getFirstSelectedOption().getText();
     }
 
+
+
     /**
      * Funtion ot Get properties value from DBQueries property fiile
      *
@@ -2733,8 +2735,8 @@ public class Utility_Functions extends ReusableLib {
 
     public static void xSelectDropdownByIndex(FrameworkDriver driver, WebElement e, Integer index) {
         try {
-            xWaitForElementPresent(driver, e, 10);
-            xWaitForElementClickable(driver, e, 10);
+            xWaitForElementPresent(driver, e, 15);
+            xWaitForElementClickable(driver, e, 15);
             Select answer = new Select(e);
 
             if (answer.getOptions().size() < 1) {

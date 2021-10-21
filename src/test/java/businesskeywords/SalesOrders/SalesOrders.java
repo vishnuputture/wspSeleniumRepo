@@ -3,7 +3,9 @@ package businesskeywords.SalesOrders;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Status;
 import commonkeywords.CommonActions;
+import org.apache.hc.client5.http.auth.StandardAuthScheme;
 import pages.SalesOrders.*;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
 
@@ -64,6 +66,39 @@ public class SalesOrders extends ReusableLib{
 	    	
 	    	
 	    }
+
+	    public void navigateToShipmentsTab()
+		{
+			click(SalesOrdersPage.shipmentTab,"Navigating to Shipment tab");
+		}
+
+		public void changeShipmentStatus()
+		{
+            Utility_Functions.timeWait(20);
+			Utility_Functions.xSelectDropdownByIndex(driver,driver.findElement(SalesOrdersPage.shipmentStatus),1);
+			Utility_Functions.xScrollIntoView(driver,driver.findElement(SalesOrdersPage.printAndExitbtn));
+			click(SalesOrdersPage.printAndExitbtn,"Click on Print&Exit button");
+			Utility_Functions.xScrollIntoView(driver,driver.findElement(SalesOrdersPage.invoiceImage));
+			click(SalesOrdersPage.invoiceImage,"clicking invoice image");
+			click(SalesOrdersPage.continuebtn,"Click on continue button");
+			click(SalesOrdersPage.btnExitSalesOrderSummary,"Exiting Sales Order Summary Page");
+
+		}
+
+		public void loadLastOrder()
+		{
+        click(SalesOrdersPage.loadSalesOrder,"click on load icon");
+        String status=Utility_Functions.xgetSelectedDropdownValue(driver,SalesOrdersPage.orderStatus);
+        if(status.equalsIgnoreCase("closed"))
+		{
+			report.updateTestLog("verifyRecord","Status is closed", Status.PASS);
+		}
+        else
+		{
+			report.updateTestLog("verifyRecord","Status is not  closed", Status.FAIL);
+		}
+		}
+
 	    
 	    public void saveExitSalesOrders() {
 	    	click(SalesOrdersPage.btnSaveExit,"saving and exiting");

@@ -69,7 +69,7 @@ public class WebDriverFactory {
     			options.addArguments("--disable-features=EnableEphemeralFlashPermission");
 
 //    	    options.addArguments("--disable-web-security");
-    			options.addArguments("--allow-running-insecure-content");
+//    			options.addArguments("--allow-running-insecure-content");
 
     			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 

@@ -23,4 +23,21 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By salesOrderField = By.id("inOrderNum");
 	public static By btnSaveExit = By.id("btnSaveExit");
 	public static By btnExit = By.id("btnExitBill");
+
+	//shipment tab
+
+	public static By shipmentTab = By.xpath("//span[text()='Shipments'][@istab='true']");
+
+	public static By shipmentStatus=By.id("inShipmentStatus.1");
+	public static By printAndExitbtn= By.id("btnSavePrint");
+
+	//image invoice
+	public static  By invoiceImage=By.id("ImgInvoice");
+	public static By continuebtn=By.id("btnContinue");
+
+	public static By btnExitSalesOrderSummary=By.id("btnExit");
+
+    // Order INformation Page (Landing Page)
+	public static By loadSalesOrder= By.xpath("//div[@id='lblSalesOrderNumber']//following-sibling::div[2]/i");
+	public  static By orderStatus=By.xpath("//select[@id='SelectOrderStatusDescription']");
 }
