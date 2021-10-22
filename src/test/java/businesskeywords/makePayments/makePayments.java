@@ -1,11 +1,15 @@
 package businesskeywords.makePayments;
 
+import com.aventstack.extentreports.gherkin.model.Scenario;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import pages.makePayments.InvoicePage;
 import pages.makePayments.MakePaymentLandingPage;
 import pages.makePayments.SchedulePaymentPage;
+import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
 public class makePayments extends ReusableLib {
@@ -45,7 +49,35 @@ public class makePayments extends ReusableLib {
     {
         Utility_Functions.xHoverElementclicks(driver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext),driver);
         click(MakePaymentLandingPage.schedulePayment);
-        commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments,"Scheduled Payments","User in invoice Page");
+        commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments,"Scheduled Payments","User in Scheduled Payments Page");
+    }
 
+    public void clickAddNewSchedulePayment(){
+        click(SchedulePaymentPage.addNewPayment,"Click Add New Schedule Payment Button");
+    }
+
+    public void clickDisagree(){
+        click(SchedulePaymentPage.disagreeExit,"Click DisAgree & Exit");
+    }
+
+    public void clickAgree(){
+        click(SchedulePaymentPage.agreeEnrol,"Click Agree & Enroll");
+    }
+
+    public void disablingTermsConditionAndEnroll(){
+        clickAddNewSchedulePayment();
+        clickAgree();
+        commonObj.validateText(SchedulePaymentPage.errorTerms,"Please agree to the Terms of Use and Terms and Conditions of Sale","Error Message");
+    }
+
+    public void disablingTermsConditionAndExit(){
+        clickAddNewSchedulePayment();
+        clickDisagree();
+        commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
+    }
+
+    public void clickHereLink(){
+        click(SchedulePaymentPage.clickHere,"Click on click here link");
+        commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
     }
 }
