@@ -2642,10 +2642,21 @@ public class Utility_Functions extends ReusableLib {
 
     public static void xScrollWindowOnce(FrameworkDriver driver) {
         for (int timeout = 0; ; timeout++) {
-            if (timeout >= 5) {
+            if (timeout >= 2) {
                 break;
             }
             JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+            js.executeScript("window.scrollBy(0,200)", "");
+            timeWait(2);
+        }
+    }
+
+    public static void xScrollWindowOnce(WebDriver driver) {
+        for (int timeout = 0; ; timeout++) {
+            if (timeout >= 2) {
+                break;
+            }
+            JavascriptExecutor js = (JavascriptExecutor)driver;
             js.executeScript("window.scrollBy(0,200)", "");
             timeWait(2);
         }

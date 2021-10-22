@@ -3,7 +3,9 @@
     {
        "Tc_CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut",
       "Tc_NavigateToMakePayments": "launchMakePayments,logInToMakePayments,navigateToInvoice",
-      "Tc_NavigateToSchedulePayments": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments"
+      "Tc_NavigateToSchedulePayments": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments",
+      "Tc_SortByInvoiceNumber": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoiceNumber",
+      "Tc_SortByInvoiceTotal": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoiceTotal"
     }],
   "General_Data": [
     {
@@ -20,6 +22,16 @@
     },
     {
       "TC_ID": "Tc_NavigateToSchedulePayments",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_SortByInvoiceNumber",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_SortByInvoiceTotal",
       "userName": "bhabani.mishra@numerique.biz",
       "userPassword": "Win2021"
     }

@@ -16,4 +16,14 @@ public class InvoicePage extends ReusableLib {
     }
 
     public static By headerTitleInvoice= By.xpath("//h1[text()='Invoices']");
+
+    public static By rowItemCount=By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]");
+
+
+    public static By tableInvoiceHeader=By.xpath("//div[contains(@class,'invoice-table-header-invoice-num')]");
+    public static By tableInvoiceNumbers=By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]//a");
+
+    public static By tableTotalHeader=By.xpath("//div[contains(@class,'invoice-table-header-align-right')][1]");
+    public static By tableInvoiceTotal=By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]//div[7]");
+
 }
