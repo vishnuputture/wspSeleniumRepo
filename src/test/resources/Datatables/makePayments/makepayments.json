@@ -3,7 +3,9 @@
     {
        "Tc_CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut",
       "Tc_NavigateToMakePayments": "launchMakePayments,logInToMakePayments,navigateToInvoice",
-      "Tc_NavigateToSchedulePayments": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments"
+      "Tc_NavigateToSchedulePayments": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments",
+      "Tc_140_disabling_Terms_Condition_CheckBox_Enroll": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndEnroll",
+      "Tc_142_enabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit"
     }],
   "General_Data": [
     {
@@ -20,6 +22,16 @@
     },
     {
       "TC_ID": "Tc_NavigateToSchedulePayments",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_140_disabling_Terms_Condition_CheckBox_Enroll",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_142_enabling_Terms_Condition_CheckBox_Exit",
       "userName": "bhabani.mishra@numerique.biz",
       "userPassword": "Win2021"
     }

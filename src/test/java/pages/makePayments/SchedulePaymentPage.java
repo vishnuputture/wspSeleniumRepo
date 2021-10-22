@@ -16,4 +16,12 @@ public class SchedulePaymentPage extends ReusableLib {
     }
 
     public static By headerTitleSchedulePayments= By.xpath("//h1[text()='Scheduled Payments']");
+    public static By addNewPayment=By.xpath("//button[text()='Add New Scheduled Payment']");
+    public static By checkBox=By.xpath("//span[text()='By enrolling, you agree to the ']");
+    public static By agreeEnrol=By.xpath("//button[text()='Agree & Enroll']");
+    public static By disagreeExit=By.xpath("//button[text()='Disagree & Exit']");
+    public static By scheduleTab=By.xpath("//h2[text()='Schedule']");
+    public static By errorTerms=By.xpath("//span[@class='agree-error ng-star-inserted']");
+    public static By invoiceTitle=By.xpath("//h1[text()='Invoices']");
+
 }
