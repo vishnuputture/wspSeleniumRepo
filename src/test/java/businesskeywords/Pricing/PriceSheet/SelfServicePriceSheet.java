@@ -70,7 +70,9 @@ public class SelfServicePriceSheet extends ReusableLib {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-         String status = driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")).getText().strip();
+
+         //removed strip method below after gettext()
+         String status = driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")).getText();
          System.out.println("Status :" + status);
          //String status = driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")).getText();
          if(status.equalsIgnoreCase("Processed"))
