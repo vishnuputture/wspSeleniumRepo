@@ -1,5 +1,7 @@
 package businesskeywords.common;
 
+import org.openqa.selenium.Keys;
+
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
@@ -8,6 +10,7 @@ import commonkeywords.CommonActions;
 import pages.OrderProcessingPage;
 import pages.common.MasterPage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
+import supportLibraries.Utility_Functions;
 
 public class Master extends ReusableLib {
     CommonActions commonObj;
@@ -50,6 +53,11 @@ public class Master extends ReusableLib {
 
     public void navigateToWorkingSalesQuotes() {
         commonObj.navigationToWorkingSalesQuotes();
+    }
+    
+    public void runPriceSheetBatch() {
+    	sendKeys(MasterPage.sqlTxtBox,"call is202cl");
+    	Utility_Functions.actionKey(Keys.ENTER, driver);
     }
 
 

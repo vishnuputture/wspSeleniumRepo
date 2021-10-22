@@ -3190,6 +3190,7 @@ public class Utility_Functions extends ReusableLib {
 
     }
 
+
     public static void xSendKeysIfAvlb(FrameworkDriver driver, Report report, WebElement el, String strVal,
                                        String CustomMsg) {
         if (xIsDisplayed(el) && strVal.length() != 0) {
@@ -4730,5 +4731,18 @@ public class Utility_Functions extends ReusableLib {
             }
         }
         return webElementsList;
+    }
+    
+    public static void openNewTab(FrameworkDriver driver) {
+    	((JavascriptExecutor)driver.getWebDriver()).executeScript("window.open('about:blank','_blank');");
+    	
+    	Set<String> handles = driver.getWindowHandles();
+        String currentWindowHandle = driver.getWindowHandle();
+        Utility_Functions.xUpdateJson("ParentWindow", currentWindowHandle);
+        for (String handle : handles) {
+            if (!currentWindowHandle.equals(handle)) {
+                driver.switchTo().window(handle);
+            }
+        }
     }
 }

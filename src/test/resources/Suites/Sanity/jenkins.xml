@@ -4,7 +4,7 @@
     <test name="SanityCheck">
 
         <classes>
-            <class name="testcases.Inventory.AverageCost">
+            <!--<class name="testcases.Inventory.AverageCost">
                 <methods>
                     <include name="Tc_21_SearchItemData"></include>
                     <include name="Tc_22_UpdateItemData"></include>
@@ -20,7 +20,7 @@
                     <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
                 </methods>
             </class>
-<!--            <class name="testcases.Pricing.MatrixCostUpdate">
+&lt;!&ndash;            <class name="testcases.Pricing.MatrixCostUpdate">
                 <methods>
                     <include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
                     <include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
@@ -35,7 +35,7 @@
                     <include name="Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
                     <include name="Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
                 </methods>
-            </class>-->
+            </class>&ndash;&gt;
             <class name="testcases.Pricing.Wise">
                 <methods>
                     <include name="Tc_19_ValidateCustomerNumber"></include>
@@ -91,6 +91,15 @@
                     <include name="Tc_323_VerifySPAHideShowExpiredRecords"></include>
                     <include name="Tc_326_VerifySPARecordDeletion"></include>
                     <include name="Tc_337_VerifySPASearchRecords"></include>
+                </methods>
+            </class>-->
+
+            <class name="testcases.Pricing.SelfServicePriceSheet">
+                <methods>
+                    <include name="Tc_344_VerifySearchByName"></include>
+                    <include name="Tc_344_VerifyFilterByManufacturer"></include>
+                    <include name="Tc_344_VerifyFilterByStatus"></include>
+                    <include name="Tc_344_VerifyFilterEffectiveDate"></include>
                 </methods>
             </class>
         </classes>
