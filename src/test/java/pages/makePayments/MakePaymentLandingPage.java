@@ -28,5 +28,7 @@ public class MakePaymentLandingPage extends ReusableLib {
 
     public static By invoices=By.xpath("//a[text()='Make Payments ']/following-sibling::div//li[1]/a");
 
+    public static By schedulePayment=By.xpath("//a[text()='Make Payments ']/following-sibling::div//li[3]/a");
+
 
 }

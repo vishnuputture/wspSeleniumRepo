@@ -5,6 +5,7 @@ import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
 import pages.makePayments.InvoicePage;
 import pages.makePayments.MakePaymentLandingPage;
+import pages.makePayments.SchedulePaymentPage;
 import supportLibraries.Utility_Functions;
 
 public class makePayments extends ReusableLib {
@@ -37,6 +38,14 @@ public class makePayments extends ReusableLib {
         Utility_Functions.xHoverElementclicks(driver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext),driver);
         click(MakePaymentLandingPage.invoices);
         commonObj.validateText(InvoicePage.headerTitleInvoice,"Invoices","User in invoice Page");
+
+    }
+
+    public void navigateToSchedulePayments()
+    {
+        Utility_Functions.xHoverElementclicks(driver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext),driver);
+        click(MakePaymentLandingPage.schedulePayment);
+        commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments,"Scheduled Payments","User in invoice Page");
 
     }
 }
