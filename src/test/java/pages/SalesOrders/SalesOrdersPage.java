@@ -30,7 +30,9 @@ public class SalesOrdersPage extends ReusableLib {
 
 	public static By shipmentStatus=By.id("inShipmentStatus.1");
 	public static By printAndExitbtn= By.id("btnSavePrint");
+
 	public static By btnContinue = By.id("Continue");
+
 
 	//image invoice
 	public static  By invoiceImage=By.id("ImgInvoice");

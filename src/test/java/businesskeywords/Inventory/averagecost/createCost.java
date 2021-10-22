@@ -115,7 +115,7 @@ public class createCost extends ReusableLib {
     public void validateListPrice() {
     	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	String temp=driver.findElement(ItemMasterPage.txtBoxListPrice).getAttribute("value").strip();
+    	String temp=driver.findElement(ItemMasterPage.txtBoxListPrice).getAttribute("value").trim();
     	if(temp.equalsIgnoreCase(jsonData.getData("ListPrice")))
         {
             report.updateTestLog("VerifyRecord", "Price Matched", Status.PASS);
@@ -129,7 +129,7 @@ public class createCost extends ReusableLib {
     public void validateMatrixPrice() {	
     	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	String temp=driver.findElement(ItemMasterPage.txtBoxMatrix).getAttribute("value").strip();
+    	String temp=driver.findElement(ItemMasterPage.txtBoxMatrix).getAttribute("value").trim();
     	if(temp.equalsIgnoreCase(jsonData.getData("MatrixCost")))
         {
             report.updateTestLog("VerifyRecord", "Price Matched", Status.PASS);
@@ -143,7 +143,7 @@ public class createCost extends ReusableLib {
     public void validatePoCost() {	
     	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
-    	String temp=driver.findElement(ItemMasterPage.txtBoxPoCost).getAttribute("value").strip();
+    	String temp=driver.findElement(ItemMasterPage.txtBoxPoCost).getAttribute("value").trim();
     	if(temp.equalsIgnoreCase(jsonData.getData("PoCost")))
         {
             report.updateTestLog("VerifyRecord", "Cost Matched", Status.PASS);
