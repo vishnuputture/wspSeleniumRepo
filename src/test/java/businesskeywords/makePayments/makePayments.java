@@ -4,6 +4,7 @@ import com.aventstack.extentreports.gherkin.model.Scenario;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import pages.makePayments.InvoicePage;
 import pages.makePayments.MakePaymentLandingPage;
@@ -72,6 +73,11 @@ public class makePayments extends ReusableLib {
     public void disablingTermsConditionAndExit(){
         clickAddNewSchedulePayment();
         clickDisagree();
+        commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
+    }
+
+    public void clickHereLink(){
+        click(SchedulePaymentPage.clickHere,"Click on click here link");
         commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
     }
 }
