@@ -105,4 +105,69 @@ public class SPA extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_324_VerifySortingContract(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Sort Contract record");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_325_VerifyEditContract(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Edit Contract/Job Name");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_328_VerifyCopyContract(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Copy Contract/Job Name");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_336_VerifyLoadPriceSheet(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Load Special Price");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_334_VerifyUpdateCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Load Special Price");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_332_VerifyDisplayContractDetails(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Display Contract Details");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_327_VerifyAssignMFPDCode(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Assign MF/PD Code");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_331_VerifyAssignIndividualItem(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Assign Individual Item");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
 }

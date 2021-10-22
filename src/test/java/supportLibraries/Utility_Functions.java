@@ -3192,6 +3192,7 @@ public class Utility_Functions extends ReusableLib {
 
     }
 
+
     public static void xSendKeysIfAvlb(FrameworkDriver driver, Report report, WebElement el, String strVal,
                                        String CustomMsg) {
         if (xIsDisplayed(el) && strVal.length() != 0) {
@@ -4713,5 +4714,37 @@ public class Utility_Functions extends ReusableLib {
         Actions builder = new Actions(driver.getWebDriver());
         WebElement elementLocator = driver.findElement(element);
         builder.contextClick(elementLocator).perform();
+    }
+
+    /**
+     *
+     * This Method to get the list of string
+     *
+     */
+    public static List<String> xGetTextVisibleListString(FrameworkDriver driver, List<WebElement> eleList) {
+        List<String> webElementsList = new ArrayList<String>();
+        for (WebElement ele:eleList) {
+            if (ele.isDisplayed()) {
+                if(ele.getText().isEmpty()){
+                    webElementsList.add(ele.getAttribute("value"));
+                }else {
+                    webElementsList.add(ele.getText());
+                }
+            }
+        }
+        return webElementsList;
+    }
+    
+    public static void openNewTab(FrameworkDriver driver) {
+    	((JavascriptExecutor)driver.getWebDriver()).executeScript("window.open('about:blank','_blank');");
+    	
+    	Set<String> handles = driver.getWindowHandles();
+        String currentWindowHandle = driver.getWindowHandle();
+        Utility_Functions.xUpdateJson("ParentWindow", currentWindowHandle);
+        for (String handle : handles) {
+            if (!currentWindowHandle.equals(handle)) {
+                driver.switchTo().window(handle);
+            }
+        }
     }
 }
