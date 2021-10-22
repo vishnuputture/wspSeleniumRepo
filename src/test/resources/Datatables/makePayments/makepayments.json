@@ -1,13 +1,13 @@
 {
   "Business_Flow": [
     {
-      "CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,signOut"
+      "CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut"
 
     }],
   "General_Data": [
     {
       "TC_ID": "CreateSalesOrderInvoice",
-      "accountNo": "099599",
+      "accountNo": "000233",
       "itemNo1": "5105TCW158SS2",
       "itemNo2": "0023PBE0520",
       "Iteration": "1"

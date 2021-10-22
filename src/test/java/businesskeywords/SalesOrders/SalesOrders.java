@@ -39,7 +39,7 @@ public class SalesOrders extends ReusableLib{
 	    	sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to account number");
 	    	Utility_Functions.actionKey(Keys.ENTER, driver);
 	    	
-	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.deliveryTypeDropDown), "Delivery", "Validating selected delivery type");
+	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.deliveryTypeDropDown), "Pick Up", "Validating selected delivery type");
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.directShipDropDown), "No", "Validating selected direct ship value");
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.shipCompleteDropDown), "No", "Validating selected ship complete value");
 	    	Utility_Functions.xSelectDropdownByVisibleText(driver, SalesOrdersPage.shipViaDropDown, "DIRECT SHIP");
@@ -74,10 +74,17 @@ public class SalesOrders extends ReusableLib{
 
 		public void changeShipmentStatus()
 		{
-            Utility_Functions.timeWait(20);
+            Utility_Functions.timeWait(5);
 			Utility_Functions.xSelectDropdownByIndex(driver,driver.findElement(SalesOrdersPage.shipmentStatus),1);
+			Utility_Functions.timeWait(5);
 			Utility_Functions.xScrollIntoView(driver,driver.findElement(SalesOrdersPage.printAndExitbtn));
 			click(SalesOrdersPage.printAndExitbtn,"Click on Print&Exit button");
+			Utility_Functions.timeWait(5);
+			Utility_Functions.xScrollIntoView(driver,driver.findElement(SalesOrdersPage.printAndExitbtn));
+			//click(SalesOrdersPage.printAndExitbtn,"Click on Print&Exit button");
+			Utility_Functions.xClickHiddenElement(driver, SalesOrdersPage.printAndExitbtn);
+			click(SalesOrdersPage.btnContinue,"Click on continue button");
+			Utility_Functions.timeWait(5);
 			Utility_Functions.xScrollIntoView(driver,driver.findElement(SalesOrdersPage.invoiceImage));
 			click(SalesOrdersPage.invoiceImage,"clicking invoice image");
 			click(SalesOrdersPage.continuebtn,"Click on continue button");
@@ -88,7 +95,9 @@ public class SalesOrders extends ReusableLib{
 		public void loadLastOrder()
 		{
         click(SalesOrdersPage.loadSalesOrder,"click on load icon");
+        
         String status=Utility_Functions.xgetSelectedDropdownValue(driver,SalesOrdersPage.orderStatus);
+        Utility_Functions.xUpdateJson("CreatedSalesOrder", driver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
         if(status.equalsIgnoreCase("closed"))
 		{
 			report.updateTestLog("verifyRecord","Status is closed", Status.PASS);
