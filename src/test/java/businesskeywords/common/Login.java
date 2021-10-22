@@ -50,4 +50,10 @@ public class Login extends ReusableLib {
             Utility_Functions.actionKey(Keys.ENTER, driver);
         }
     }
+
+    public void launchSelfServicePriceSheet(){
+        String url = properties.getProperty("URLPriceSheet");
+        driver.get(url);
+        ngWaitRequestToFinish();
+    }
 }
