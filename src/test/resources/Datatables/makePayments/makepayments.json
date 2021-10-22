@@ -1,9 +1,9 @@
 {
   "Business_Flow": [
     {
-
-      "Tc_CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut",
-      "Tc_NavigateToMakePayments": "launchMakePayments,logInToMakePayments,navigateToInvoice"
+       "Tc_CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut",
+      "Tc_NavigateToMakePayments": "launchMakePayments,logInToMakePayments,navigateToInvoice",
+      "Tc_NavigateToSchedulePayments": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments"
     }],
   "General_Data": [
     {
@@ -15,6 +15,11 @@
     },
     {
       "TC_ID": "Tc_NavigateToMakePayments",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_NavigateToSchedulePayments",
       "userName": "bhabani.mishra@numerique.biz",
       "userPassword": "Win2021"
     }
