@@ -1,11 +1,15 @@
 {
   "Business_Flow": [
     {
-       "Tc_CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut",
+      "Tc_CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut",
       "Tc_NavigateToMakePayments": "launchMakePayments,logInToMakePayments,navigateToInvoice",
       "Tc_NavigateToSchedulePayments": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments",
       "Tc_SortByInvoiceNumber": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoiceNumber",
       "Tc_SortByInvoiceTotal": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoiceTotal",
+      "Tc_SortByInvoiceDiscount": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoiceDiscount",
+      "Tc_SortByInvoiceAmtDue": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoiceDiscount",
+      "Tc_SortByInvoiceDate": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoiceDate",
+      "Tc_SortByInvoicePaymentDueDate": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoicePaymentDue",
       "Tc_139_clickHere_Link_SchedulePage": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,clickHereLink",
       "Tc_140_disabling_Terms_Condition_CheckBox_Enroll": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndEnroll",
       "Tc_142_disabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit"
@@ -39,19 +43,39 @@
       "userPassword": "Win2021"
     },
     {
+      "TC_ID": "Tc_SortByInvoiceDiscount",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_SortByInvoiceAmtDue",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_SortByInvoiceDate",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_SortByInvoicePaymentDueDate",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
       "TC_ID": "Tc_139_clickHere_Link_SchedulePage",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_140_disabling_Terms_Condition_CheckBox_Enroll",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_142_disabling_Terms_Condition_CheckBox_Exit",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     }
   ]
 }

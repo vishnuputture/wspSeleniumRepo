@@ -151,4 +151,112 @@ public class makePayments extends ReusableLib {
         }
 
     }
+
+    public void sortInvoiceDiscount()
+    {
+        for(int i=0;i<2;i++) {
+
+            click(InvoicePage.tableDiscountHeader);
+            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDiscount);
+
+            for(int j=0;j<invoiceList.size();j++)
+            {
+                String temp= invoiceList.get(j).getText();
+                //        System.out.println(temp);
+                int k=j+1;
+
+                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[8]")).getText();
+                //         System.out.println(inv);
+                if(temp.equalsIgnoreCase(inv))
+                {
+                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
+                }else
+                {
+                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                }
+            }
+        }
+
+    }
+
+    public void sortInvoiceAmtDue()
+    {
+        for(int i=0;i<2;i++) {
+
+            click(InvoicePage.tableAmtDueHeader);
+            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceAmtDue);
+
+            for(int j=0;j<invoiceList.size();j++)
+            {
+                String temp= invoiceList.get(j).getText();
+                //        System.out.println(temp);
+                int k=j+1;
+
+                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[8]")).getText();
+                //         System.out.println(inv);
+                if(temp.equalsIgnoreCase(inv))
+                {
+                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
+                }else
+                {
+                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                }
+            }
+        }
+
+    }
+
+    public void sortInvoiceDate()
+    {
+        for(int i=0;i<2;i++) {
+
+            click(InvoicePage.tableDateHeader);
+            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDate);
+
+            for(int j=0;j<invoiceList.size();j++)
+            {
+                String temp= invoiceList.get(j).getText();
+                //        System.out.println(temp);
+                int k=j+1;
+
+                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[5]")).getText();
+                //         System.out.println(inv);
+                if(temp.equalsIgnoreCase(inv))
+                {
+                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
+                }else
+                {
+                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                }
+            }
+        }
+
+    }
+
+    public void sortInvoicePaymentDue()
+    {
+        for(int i=0;i<2;i++) {
+
+            click(InvoicePage.tableDateHeader);
+            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDate);
+
+            for(int j=0;j<invoiceList.size();j++)
+            {
+                String temp= invoiceList.get(j).getText();
+                //        System.out.println(temp);
+                int k=j+1;
+
+                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[5]")).getText();
+                //         System.out.println(inv);
+                if(temp.equalsIgnoreCase(inv))
+                {
+                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
+                }else
+                {
+                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                }
+            }
+        }
+
+    }
 }
