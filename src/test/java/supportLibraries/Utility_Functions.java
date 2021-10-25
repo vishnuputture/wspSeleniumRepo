@@ -2748,6 +2748,22 @@ public class Utility_Functions extends ReusableLib {
         }
 
     }
+    
+    public static int xGetSelectOptionCount(FrameworkDriver driver, WebElement e) {
+    	try {
+            xWaitForElementPresent(driver, e, 15);
+            xWaitForElementClickable(driver, e, 15);
+            Select answer = new Select(e);
+
+            if (answer.getOptions().size() < 1) {
+                timeWait(1);
+            }
+            return answer.getOptions().size();
+        } catch (Exception e2) {
+            System.out.println(" Get dropdown count: Error " + xExptnsMsg(e2.getMessage()));
+            return 0;
+        }
+    }
 
     /*
      * ******************************************************************* Function

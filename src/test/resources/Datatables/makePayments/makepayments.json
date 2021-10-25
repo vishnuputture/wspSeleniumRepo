@@ -3,6 +3,10 @@
     {
        "Tc_CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut",
       "Tc_NavigateToMakePayments": "launchMakePayments,logInToMakePayments,navigateToInvoice",
+      "Tc_ValidateMakePaymentsStatusFilter": "launchMakePayments,logInToMakePayments,navigateToInvoice,validateInvoiceStatusFilter",
+      "Tc_ValidateMakePaymentsDateFilter": "launchMakePayments,logInToMakePayments,navigateToInvoice,validateInvoiceDateFilter",
+      "Tc_ValidateMakePaymentsCustomDateFilter": "launchMakePayments,logInToMakePayments,navigateToInvoice,validateInvoiceCustomDateFilter",
+      "Tc_ValidateMakePaymentsInvoiceSearchFilter": "launchMakePayments,logInToMakePayments,navigateToInvoice,validateInvoiceSearchFilter",
       "Tc_NavigateToSchedulePayments": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments"
     }],
   "General_Data": [
@@ -15,6 +19,26 @@
     },
     {
       "TC_ID": "Tc_NavigateToMakePayments",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_ValidateMakePaymentsStatusFilter",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_ValidateMakePaymentsDateFilter",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_ValidateMakePaymentsCustomDateFilter",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_ValidateMakePaymentsInvoiceSearchFilter",
       "userName": "bhabani.mishra@numerique.biz",
       "userPassword": "Win2021"
     },

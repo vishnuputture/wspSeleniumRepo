@@ -72,8 +72,8 @@ public class WebDriverFactory {
 //    			options.addArguments("--allow-running-insecure-content");
 
     			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-    			Proxy proxy = new Proxy();
-    			proxy.setHttpProxy("10.10.0.32:8080");
+    			//Proxy proxy = new Proxy();
+    			//proxy.setHttpProxy("10.10.0.32:8080");
 
     			try {
     				/*String path=null;
@@ -91,7 +91,7 @@ public class WebDriverFactory {
     				//System.setProperty("webdriver.chrome.driver", path);
     				
     				//driver = new ChromeDriver(capabilities);
-    			options.setCapability("proxy", proxy);
+    			//options.setCapability("proxy", proxy);
     			options.addArguments("--disable-web-security");
     			options.addArguments("--allow-running-insecure-content");
     			options.addArguments(" --ignore-certificate-errors");
