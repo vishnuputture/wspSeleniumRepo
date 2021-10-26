@@ -8,7 +8,10 @@
       "Tc_SortByInvoiceTotal": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoiceTotal",
       "Tc_139_clickHere_Link_SchedulePage": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,clickHereLink",
       "Tc_140_disabling_Terms_Condition_CheckBox_Enroll": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndEnroll",
-      "Tc_142_disabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit"
+      "Tc_141_EnableTermsConditionCheckBoxAndEnroll": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,enableCheckBoxAndEnroll",
+      "Tc_142_disabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit",
+      "Tc_143_enablingTermsConditionCheckBoxExit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,enableCheckBoxAndExit",
+      "Tc_149_CalenderValidation": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,verifyCalenderFunction"
     }],
   "General_Data": [
     {
@@ -20,23 +23,23 @@
     },
     {
       "TC_ID": "Tc_NavigateToMakePayments",
-      "userName": "bhabani.mishra@numerique.biz",
-      "userPassword": "Win2021"
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
     },
     {
       "TC_ID": "Tc_NavigateToSchedulePayments",
-      "userName": "bhabani.mishra@numerique.biz",
-      "userPassword": "Win2021"
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
     },
     {
       "TC_ID": "Tc_SortByInvoiceNumber",
-      "userName": "bhabani.mishra@numerique.biz",
-      "userPassword": "Win2021"
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
     },
     {
       "TC_ID": "Tc_SortByInvoiceTotal",
-      "userName": "bhabani.mishra@numerique.biz",
-      "userPassword": "Win2021"
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
     },
     {
       "TC_ID": "Tc_139_clickHere_Link_SchedulePage",
@@ -49,7 +52,22 @@
       "userPassword": "Qwerty@1"
     },
     {
+      "TC_ID": "Tc_141_EnableTermsConditionCheckBoxAndEnroll",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
       "TC_ID": "Tc_142_disabling_Terms_Condition_CheckBox_Exit",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_143_enablingTermsConditionCheckBoxExit",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_149_CalenderValidation",
       "userName": "vishnuprasad@numerique.biz",
       "userPassword": "Qwerty@1"
     }

@@ -61,8 +61,32 @@ public class makePayments extends TestConfigurations {
     }
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_141_EnableTermsConditionCheckBoxAndEnroll(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify page title Enable Terms Condition CheckBox And Enroll");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_142_disabling_Terms_Condition_CheckBox_Exit(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify page title when disabling Terms and Condition CheckBox and Exit");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_143_enablingTermsConditionCheckBoxExit(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify page title when Enabling Terms Condition CheckBox Exit");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_149_CalenderValidation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Calender");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
