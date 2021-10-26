@@ -119,8 +119,48 @@ public class makePayments extends TestConfigurations {
     }
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_145_FieldVerificationStartDateEndDate(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Field Verification of StartDate & EndDate");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_149_CalenderValidation(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Validate Calender");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_152_ValidateOutStandingBalance(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate OutStandingBalance");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_153_ValidateOtherAmount(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate OtherAmount");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_205_ValidateOneTimeSchedule(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate OneTimeSchedule");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_208_ValidateOneTimeScheduleDateField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate OneTimeSchedule");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

@@ -151,6 +151,46 @@ public class makePayments extends ReusableLib {
         }
     }
 
+    public void dateValidation(){
+        commonObj.validateText(SchedulePaymentPage.calenderTab, "date", "Validating Date Tab");
+        Utility_Functions.xScrollIntoView(driver, SchedulePaymentPage.startDate);
+        click(SchedulePaymentPage.startDate, "Click Date");
+        Utility_Functions.timeWait(3);
+        LocalDate currentDate = LocalDate.now();
+        Month currentMonth = currentDate.getMonth();
+        String month = currentMonth.toString().toLowerCase();
+        String actCurrentMonth = Utility_Functions.getText(driver, SchedulePaymentPage.calenderDatePicker).toLowerCase();
+        if (actCurrentMonth.contains(month)) {
+            click(SchedulePaymentPage.calenderArrPicker, "click < icon from calender");
+            Utility_Functions.timeWait(2);
+            commonObj.validateText(SchedulePaymentPage.calenderDatePicker, actCurrentMonth, "Not Move to Previous Month");
+            driver.findElements(SchedulePaymentPage.calenderArrPicker).get(1).click();
+            Utility_Functions.timeWait(2);
+            String actNextMonth = Utility_Functions.getText(driver, SchedulePaymentPage.calenderDatePicker).toLowerCase();
+            if (actNextMonth.contains(month)) {
+                throw new NoSuchElementException("Calender not moved");
+            } else {
+                click(SchedulePaymentPage.calenderArrPicker);
+            }
+            int size = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
+            int length = driver.findElements(SchedulePaymentPage.totalDay).size();
+            driver.findElements(SchedulePaymentPage.calenderArrPicker).get(1).click();
+            Utility_Functions.timeWait(2);
+            int size1 = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
+            int length1 = driver.findElements(SchedulePaymentPage.totalDay).size();
+            int totalSize = size + size1;
+            int totalLength = length + length1;
+            int total = totalLength - totalSize;
+            if (total == 30) {
+                commonObj.validateText(SchedulePaymentPage.scheduleTab, "Schedule", "Calender showing 30 dates which are in Enable State");
+            } else {
+                throw new NoSuchElementException("Calender having invalid data");
+            }
+        } else {
+            throw new NoSuchElementException("Element not found");
+        }
+    }
+
     public void endDateValidation() {
         Utility_Functions.timeWait(2);
         Utility_Functions.xScrollIntoView(driver, SchedulePaymentPage.endDateTab);
@@ -192,6 +232,207 @@ public class makePayments extends ReusableLib {
         click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
         startDateValidation();
         endDateValidation();
+    }
+
+    public void validateErrorDate(){
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.startError,"Start date required","Error message: Start Date is required");
+        commonObj.validateText(SchedulePaymentPage.endError,"End date required","End message: End Date is required");
+    }
+
+    public void clickNoEndDate(){
+        click(SchedulePaymentPage.noEndDate,"Click No End Date CheckBox");
+        Utility_Functions.timeWait(2);
+        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.endDateDisabled);
+        Utility_Functions.xAssertEquals(report,bl,true,"End Date field disabled");
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.startError,"Start date required","Error message: Start Date is required");
+    }
+
+    public void selectStartDate(){
+        Utility_Functions.timeWait(2);
+        click(SchedulePaymentPage.startDate,"Click Start Date");
+        Utility_Functions.timeWait(2);
+        int size = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
+        driver.findElements(SchedulePaymentPage.totalDay).get(size).click();
+    }
+
+    public void selectStartDateClickSaveCont(){
+        selectStartDate();
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.endError,"End date required","End message: End Date is required");
+    }
+
+    public void selectEndDate(){
+        Utility_Functions.timeWait(2);
+        click(SchedulePaymentPage.endDate,"Click End Date");
+        Utility_Functions.timeWait(2);
+        int size = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
+        driver.findElements(SchedulePaymentPage.totalDay).get(size+1).click();
+    }
+
+    public void selectEndDateClickSaveCont(){
+        selectEndDate();
+        Utility_Functions.timeWait(2);
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.startError,"Start date required","End message: Start Date is required");
+    }
+
+    public String date(String dateFormat, int amt){
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, amt);
+        dt = c.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+        String strDate = formatter.format(dt);
+        System.out.println(strDate);
+        return strDate;
+    }
+
+    public void invalidDate(){
+        clearText(SchedulePaymentPage.endDateField);
+        sendKeys(SchedulePaymentPage.startDateField,"14/12/2021","Enter invalid date format in start date field");
+        sendKeys(SchedulePaymentPage.endDateField,"14/12/2021","Enter invalid date format in End date field");
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.startError,"Please enter a valid start date","End message: Please enter a valid start date");
+    }
+
+    public void startDateError(By ele,String dateFormat,int amt,String errorMsg){
+        clearText(SchedulePaymentPage.startDateField);
+        String date=date(dateFormat,amt);
+        sendKeys(SchedulePaymentPage.startDateField,date,"Enter valid date format in start date field");
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(ele,errorMsg,"Error message: "+errorMsg+"");
+    }
+
+    public void endDateError(By ele,String dateFormat,int amt,String errorMsg){
+        String date1=date(dateFormat,amt);
+        sendKeys(SchedulePaymentPage.endDateField,date1,"Enter valid date format in End date field");
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(ele,errorMsg,"Error message: "+errorMsg+"");
+    }
+
+    public void validateStartEndDateField(){
+        enableCheckBoxAndEnroll();
+        Utility_Functions.timeWait(3);
+        click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
+        validateErrorDate();
+        clickNoEndDate();
+        click(SchedulePaymentPage.noEndDate,"Click No End Date CheckBox");
+        selectStartDateClickSaveCont();
+        clearText(SchedulePaymentPage.startDateField);
+        click(SchedulePaymentPage.saveAndContinue);
+     //   selectEndDateClickSaveCont();
+        invalidDate();
+        selectStartDate();
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.endError,"Please enter a valid end date","End message: Please enter a valid end date");
+        clearText(SchedulePaymentPage.startDateField);
+        sendKeys(SchedulePaymentPage.startDateField,"13/12/2021","Enter valid date format in start date field");
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.startError,"Please enter a valid start date","Error message: Please enter a valid start date");
+        startDateError(SchedulePaymentPage.startError,"MM/dd/yyyy",0,"Start date must be after today");
+        selectStartDate();
+        endDateError(SchedulePaymentPage.startError,"MM/dd/yyyy",-1,"End date cannot precede start date");
+        endDateError(SchedulePaymentPage.endError,"MM/dd/yyyy",1,"End date cannot be the same as start date");
+        startDateError(SchedulePaymentPage.startError,"MM/dd/yyyy",70,"Start date must be within 60 days from today");
+        String stDate=date("MM/dd/yyyy",1);
+        sendKeys(SchedulePaymentPage.startDateField,stDate,"Enter valid date format in start date field");
+        selectEndDate();
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(3);
+        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
+        Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
+    }
+
+    public void validateOutStandingBalance() {
+        enableCheckBoxAndEnroll();
+        Utility_Functions.timeWait(3);
+        click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
+        String stDate=date("MM/dd/yyyy",1);
+        sendKeys(SchedulePaymentPage.startDateField,stDate,"Enter valid date format in start date field");
+        selectEndDate();
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(3);
+        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
+        Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
+        click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
+        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue button");
+        commonObj.validateText(SchedulePaymentPage.chooseSupError,"Please select a supplier","Error message: Please select a supplier");
+        commonObj.validateText(SchedulePaymentPage.otherAmtError,"Other amount required","Error message: Other amount required");
+        click(SchedulePaymentPage.chooseSupplier);
+        click(SchedulePaymentPage.supplier,"Select Supplier from the supplier drop down");
+        click(SchedulePaymentPage.outstandingBalance,"Click Outstanding Amount");
+        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.creditCardTab,"Credit Card","Payment Info tab is open");
+    }
+
+    public void validateOtherAmt() {
+        enableCheckBoxAndEnroll();
+        Utility_Functions.timeWait(3);
+        click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
+        String stDate=date("MM/dd/yyyy",1);
+        sendKeys(SchedulePaymentPage.startDateField,stDate,"Enter valid date format in start date field");
+        selectEndDate();
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(3);
+        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
+        Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
+        click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
+        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue button");
+        commonObj.validateText(SchedulePaymentPage.chooseSupError,"Please select a supplier","Error message: Please select a supplier");
+        commonObj.validateText(SchedulePaymentPage.otherAmtError,"Other amount required","Error message: Other amount required");
+        click(SchedulePaymentPage.chooseSupplier);
+        click(SchedulePaymentPage.supplier,"Select Supplier from the supplier drop down");
+        click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
+        sendKeys(SchedulePaymentPage.dollarAmountInput,"1","Enter amount $1 into other amount field");
+        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue Button");
+        int size=driver.findElements(SchedulePaymentPage.editLink).size();
+        driver.findElements(SchedulePaymentPage.editLink).get(size-1).click();
+        click(SchedulePaymentPage.otherAmount,"Click Edit link and select Other Amount radio button");
+        sendKeys(SchedulePaymentPage.dollarAmountInput,"5","Enter amount $5 into other amount field");
+        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.creditCardTab,"credit card","Payment Info tab is open");
+    }
+
+    public void validateOneTimePaySession(){
+        enableCheckBoxAndEnroll();
+        Utility_Functions.timeWait(3);
+        click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        click(SchedulePaymentPage.oneTimeSchedule, "Click Schedule: One-Time Payment");
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.dateError,"Date required","Error message: Date required");
+        sendKeys(SchedulePaymentPage.startDateField,"13/12/2021","Enter invalid date format in date field");
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.dateError,"Please enter a valid date","Error message: Please enter a valid date");
+        startDateError(SchedulePaymentPage.dateError,"MM/dd/yyyy",0,"Date must be after today");
+        selectStartDate();
+        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Utility_Functions.timeWait(3);
+        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
+        Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
+    }
+
+    public void validateOneTimePayDateField(){
+        enableCheckBoxAndEnroll();
+        Utility_Functions.timeWait(5);
+        click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        click(SchedulePaymentPage.oneTimeSchedule, "Click Schedule: One-Time Payment");
+        dateValidation();
     }
 
     public void clickHereLink() {

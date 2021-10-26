@@ -15,7 +15,12 @@
       "Tc_141_EnableTermsConditionCheckBoxAndEnroll": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,enableCheckBoxAndEnroll",
       "Tc_142_disabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit",
       "Tc_143_enablingTermsConditionCheckBoxExit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,enableCheckBoxAndExit",
-      "Tc_149_CalenderValidation": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,verifyCalenderFunction"
+      "Tc_145_FieldVerificationStartDateEndDate": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateStartEndDateField",
+      "Tc_149_CalenderValidation": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,verifyCalenderFunction",
+      "Tc_152_ValidateOutStandingBalance": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateOutStandingBalance",
+      "Tc_153_ValidateOtherAmount": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateOtherAmt",
+      "Tc_205_ValidateOneTimeSchedule": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateOneTimePaySession",
+      "Tc_208_ValidateOneTimeScheduleDateField": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateOneTimePayDateField"
     }],
   "General_Data": [
     {
@@ -91,7 +96,32 @@
       "userPassword": "Qwerty@1"
     },
     {
+      "TC_ID": "Tc_145_FieldVerificationStartDateEndDate",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
       "TC_ID": "Tc_149_CalenderValidation",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_152_ValidateOutStandingBalance",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_153_ValidateOtherAmount",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_205_ValidateOneTimeSchedule",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_208_ValidateOneTimeScheduleDateField",
       "userName": "vishnuprasad@numerique.biz",
       "userPassword": "Qwerty@1"
     }
