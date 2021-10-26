@@ -45,6 +45,39 @@ public class makePayments extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_SortByInvoiceDiscount(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to create a sales order invoice for make payments");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_SortByInvoiceAmtDue(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to create a sales order invoice for make payments");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_SortByInvoiceDate(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to create a sales order invoice for make payments");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_SortByInvoicePaymentDueDate(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to create a sales order invoice for make payments");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_139_clickHere_Link_SchedulePage(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify Click Here Link On Schedule Page");
@@ -52,6 +85,7 @@ public class makePayments extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+    
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_140_disabling_Terms_Condition_CheckBox_Enroll(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify error message when disabling Terms and Condition CheckBox");
