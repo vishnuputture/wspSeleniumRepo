@@ -23,7 +23,7 @@
       "Tc_208_ValidateOneTimeScheduleDateField": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateOneTimePayDateField",
       "Tc_MakeSinglePaymentByBankAcc": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentBA",
       "Tc_MakeSinglePaymentByCC": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentCC",
-      "Tc_211_addNewBankAcc": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateAddNewBankAcc"
+      "Tc_211_addNewBankAcc": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateAddNewBankAcc",
       "Tc_MakeMultiPaymentByBA": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeMultiPaymentBA"
     }],
   "General_Data": [
