@@ -12,7 +12,8 @@
       "Tc_SortByInvoicePaymentDueDate": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,sortInvoicePaymentDue",
       "Tc_139_clickHere_Link_SchedulePage": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,clickHereLink",
       "Tc_140_disabling_Terms_Condition_CheckBox_Enroll": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndEnroll",
-      "Tc_142_disabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit"
+      "Tc_142_disabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit",
+      "Tc_MakeSinglePaymentByBankAcc": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentBA"
     }],
   "General_Data": [
     {
@@ -20,7 +21,7 @@
       "accountNo": "000233",
       "itemNo1": "5105TCW158SS2",
       "itemNo2": "0023PBE0520",
-      "Iteration": "1"
+      "Iteration": "10"
     },
     {
       "TC_ID": "Tc_NavigateToMakePayments",
@@ -74,6 +75,11 @@
     },
     {
       "TC_ID": "Tc_142_disabling_Terms_Condition_CheckBox_Exit",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_MakeSinglePaymentByBankAcc",
       "userName": "bhabani.mishra@numerique.biz",
       "userPassword": "Win2021"
     }

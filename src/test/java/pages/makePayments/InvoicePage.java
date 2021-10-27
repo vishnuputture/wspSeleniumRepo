@@ -37,4 +37,11 @@ public class InvoicePage extends ReusableLib {
 
     public static By tablePaymentDueHeader=By.xpath("//div[contains(@class,'invoice-table-header-invoice-date')]");
     public static By tableInvoicePaymentDue=By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]//div[6]");
+
+    public static By supplierCheckBox=By.xpath("//label[@for='supplier-checkbox0']");
+    public static By invoiceCheckBox= By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')][1]//label");
+
+    public  static By makePaymentBtn= By.xpath("//button[contains(.,'Make Payment')]");
+
+
 }

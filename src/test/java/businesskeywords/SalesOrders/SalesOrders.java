@@ -100,6 +100,7 @@ public class SalesOrders extends ReusableLib{
         
         String status=Utility_Functions.xgetSelectedDropdownValue(driver,SalesOrdersPage.orderStatus);
         Utility_Functions.xUpdateJson("CreatedSalesOrder", driver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
+        Utility_Functions.timeWait(2);
 
         if(status.equalsIgnoreCase("closed"))
 		{

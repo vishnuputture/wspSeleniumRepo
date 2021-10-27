@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 
 import pages.makePayments.InvoicePage;
+import pages.makePayments.MakeAPaymentPage;
 import pages.makePayments.MakePaymentLandingPage;
 import pages.makePayments.SchedulePaymentPage;
 import pages.pricing.SpecialPricePage;
@@ -40,6 +41,7 @@ public class makePayments extends ReusableLib {
 
     public void logInToMakePayments()
     {
+        Utility_Functions.xWaitForElementClickable(driver,MakePaymentLandingPage.signIn,10);
         commonObj.validateText(MakePaymentLandingPage.signIn,"Sign In","validating make payment dropdown");
         click(MakePaymentLandingPage.signIn);
         sendKey(MakePaymentLandingPage.userEmail,jsonData.getData("userName"));
@@ -259,4 +261,35 @@ public class makePayments extends ReusableLib {
         }
 
     }
+
+    public void makeSinglePaymentBA()
+    {
+            click(InvoicePage.supplierCheckBox);
+
+            List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
+
+            for(int j=0;j<1;j++)
+            {
+                int k=j+1;
+                driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
+            }
+
+            click(InvoicePage.makePaymentBtn);
+            Utility_Functions.timeWait(3);
+            commonObj.validateText(MakeAPaymentPage.pageTitle,"Make a Payment","User navigated To Make a Payment Page");
+       //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
+            click(MakeAPaymentPage.bankAccPay);
+            click((MakeAPaymentPage.saveContinuebtn));
+            Utility_Functions.timeWait(2);
+            click(MakeAPaymentPage.submitPaymentbtn);
+            Utility_Functions.timeWait(3);
+            commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
+            scrollToView();
+            String txt=driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+            Utility_Functions.xUpdateJson("MPInvoiceNumber",txt);
+
+
+        }
+
+
 }
