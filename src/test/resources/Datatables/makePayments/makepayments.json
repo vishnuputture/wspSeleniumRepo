@@ -13,7 +13,8 @@
       "Tc_139_clickHere_Link_SchedulePage": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,clickHereLink",
       "Tc_140_disabling_Terms_Condition_CheckBox_Enroll": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndEnroll",
       "Tc_142_disabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit",
-      "Tc_MakeSinglePaymentByBankAcc": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentBA"
+      "Tc_MakeSinglePaymentByBankAcc": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentBA",
+      "Tc_MakeSinglePaymentByCC": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentCC"
     }],
   "General_Data": [
     {
@@ -80,6 +81,11 @@
     },
     {
       "TC_ID": "Tc_MakeSinglePaymentByBankAcc",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_MakeSinglePaymentByCC",
       "userName": "bhabani.mishra@numerique.biz",
       "userPassword": "Win2021"
     }
