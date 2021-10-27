@@ -125,6 +125,14 @@ public class makePayments extends TestConfigurations {
     }
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_141_EnableTermsConditionCheckBoxAndEnroll(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify page title Enable Terms Condition CheckBox And Enroll");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_142_disabling_Terms_Condition_CheckBox_Exit(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify page title when disabling Terms and Condition CheckBox and Exit");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -142,6 +150,70 @@ public class makePayments extends TestConfigurations {
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_MakeSinglePaymentByCC(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to create a sales order invoice for make payments");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_143_enablingTermsConditionCheckBoxExit(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify page title when Enabling Terms Condition CheckBox Exit");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_145_FieldVerificationStartDateEndDate(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Field Verification of StartDate & EndDate");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_149_CalenderValidation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Calender");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_152_ValidateOutStandingBalance(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate OutStandingBalance");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_153_ValidateOtherAmount(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate OtherAmount");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_205_ValidateOneTimeSchedule(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate OneTimeSchedule");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_208_ValidateOneTimeScheduleDateField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate OneTimeSchedule");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_211_addNewBankAcc(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Add New Bank Acc");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
