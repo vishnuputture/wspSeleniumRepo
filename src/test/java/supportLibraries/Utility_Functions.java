@@ -504,6 +504,8 @@ public class Utility_Functions extends ReusableLib {
         return dropdown.getFirstSelectedOption().getText();
     }
 
+
+
     /**
      * Funtion ot Get properties value from DBQueries property fiile
      *
@@ -2640,10 +2642,21 @@ public class Utility_Functions extends ReusableLib {
 
     public static void xScrollWindowOnce(FrameworkDriver driver) {
         for (int timeout = 0; ; timeout++) {
-            if (timeout >= 5) {
+            if (timeout >= 2) {
                 break;
             }
             JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+            js.executeScript("window.scrollBy(0,200)", "");
+            timeWait(2);
+        }
+    }
+
+    public static void xScrollWindowOnce(WebDriver driver) {
+        for (int timeout = 0; ; timeout++) {
+            if (timeout >= 2) {
+                break;
+            }
+            JavascriptExecutor js = (JavascriptExecutor)driver;
             js.executeScript("window.scrollBy(0,200)", "");
             timeWait(2);
         }
@@ -2733,8 +2746,8 @@ public class Utility_Functions extends ReusableLib {
 
     public static void xSelectDropdownByIndex(FrameworkDriver driver, WebElement e, Integer index) {
         try {
-            xWaitForElementPresent(driver, e, 10);
-            xWaitForElementClickable(driver, e, 10);
+            xWaitForElementPresent(driver, e, 15);
+            xWaitForElementClickable(driver, e, 15);
             Select answer = new Select(e);
 
             if (answer.getOptions().size() < 1) {
@@ -2745,6 +2758,22 @@ public class Utility_Functions extends ReusableLib {
             System.out.println(" Select by DropDownIndex: Error " + xExptnsMsg(e2.getMessage()));
         }
 
+    }
+    
+    public static int xGetSelectOptionCount(FrameworkDriver driver, WebElement e) {
+    	try {
+            xWaitForElementPresent(driver, e, 15);
+            xWaitForElementClickable(driver, e, 15);
+            Select answer = new Select(e);
+
+            if (answer.getOptions().size() < 1) {
+                timeWait(1);
+            }
+            return answer.getOptions().size();
+        } catch (Exception e2) {
+            System.out.println(" Get dropdown count: Error " + xExptnsMsg(e2.getMessage()));
+            return 0;
+        }
     }
 
     /*

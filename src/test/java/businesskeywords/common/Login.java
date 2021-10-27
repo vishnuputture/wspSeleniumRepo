@@ -56,4 +56,10 @@ public class Login extends ReusableLib {
         driver.get(url);
         ngWaitRequestToFinish();
     }
+
+    public void launchMakePayments(){
+        String url = properties.getProperty("URLMakePayments");
+         driver.get(url);
+    //    ngWaitRequestToFinish();
+    }
 }

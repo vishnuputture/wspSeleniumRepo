@@ -69,9 +69,10 @@ public class WebDriverFactory {
     			options.addArguments("--disable-features=EnableEphemeralFlashPermission");
 
 //    	    options.addArguments("--disable-web-security");
-    			options.addArguments("--allow-running-insecure-content");
+//    			options.addArguments("--allow-running-insecure-content");
 
     			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
 
     			try {
     				/*String path=null;
@@ -90,6 +91,7 @@ public class WebDriverFactory {
     				
     				//driver = new ChromeDriver(capabilities);
 
+
     			options.addArguments("--disable-web-security");
     			options.addArguments("--allow-running-insecure-content");
     			options.addArguments(" --ignore-certificate-errors");
@@ -102,6 +104,7 @@ public class WebDriverFactory {
     				ChromeDriverService service = builder
     					.build();
     				driver = new ChromeDriver(service, options);
+    				
     			} catch (Exception e) {
     				e.printStackTrace();
     				System.out.println(e);
