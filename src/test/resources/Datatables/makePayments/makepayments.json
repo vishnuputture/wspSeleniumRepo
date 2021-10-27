@@ -24,6 +24,7 @@
       "Tc_MakeSinglePaymentByBankAcc": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentBA",
       "Tc_MakeSinglePaymentByCC": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentCC",
       "Tc_211_addNewBankAcc": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateAddNewBankAcc"
+      "Tc_MakeMultiPaymentByBA": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeMultiPaymentBA"
     }],
   "General_Data": [
     {
@@ -146,6 +147,13 @@
       "AccountName": "QATesting",
       "AccountType":"Personal Savings",
       "BankRoutingNumber": "998000057"
+    },
+    {
+      "TC_ID": "Tc_MakeMultiPaymentByBA",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021",
+      "invoiceCount": "3"
     }
+
   ]
 }
