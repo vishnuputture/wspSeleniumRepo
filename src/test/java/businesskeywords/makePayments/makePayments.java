@@ -322,6 +322,38 @@ public class makePayments extends ReusableLib {
 
     }
 
+    public void makeMultiPaymentBA()
+    {
+        click(InvoicePage.supplierCheckBox);
+
+        List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
+        int count= Integer.parseInt(jsonData.getData("invoiceCount"));
+        for(int j=0;j<count;j++)
+        {
+            int k=j+1;
+            driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
+        }
+
+        click(InvoicePage.makePaymentBtn);
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(MakeAPaymentPage.pageTitle,"Make a Payment","User navigated To Make a Payment Page");
+        //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
+        click(MakeAPaymentPage.bankAccPay);
+        click((MakeAPaymentPage.saveContinuebtn));
+        Utility_Functions.timeWait(2);
+        click(MakeAPaymentPage.submitPaymentbtn);
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
+        scrollToView();
+        String txt=driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+        Utility_Functions.xUpdateJson("MPInvoiceNumberBA",txt);
+
+
+    }
+
+
+
+
 
 
 }
