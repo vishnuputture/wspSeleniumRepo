@@ -65,6 +65,7 @@ public class makePayments extends ReusableLib {
     public void navigateToSchedulePayments() {
         Utility_Functions.xHoverElementclicks(driver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext), driver);
         click(MakePaymentLandingPage.schedulePayment);
+        Utility_Functions.timeWait(3);
         commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments, "Scheduled Payments", "User in Scheduled Payments Page");
     }
 
@@ -94,6 +95,7 @@ public class makePayments extends ReusableLib {
 
     public void enableCheckBoxAndEnroll() {
         clickAddNewSchedulePayment();
+        Utility_Functions.timeWait(3);
         Utility_Functions.xmouseOver(driver, SchedulePaymentPage.checkBox);
         Utility_Functions.xMouseClick(driver, SchedulePaymentPage.checkBox);
         clickAgree();
@@ -321,7 +323,7 @@ public class makePayments extends ReusableLib {
 
     public void validateStartEndDateField(){
         enableCheckBoxAndEnroll();
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(5);
         click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
         click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
         validateErrorDate();
