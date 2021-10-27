@@ -300,6 +300,11 @@ public class makePayments extends ReusableLib {
         return strDate;
     }
 
+    public void clickHereLink() {
+        click(SchedulePaymentPage.clickHere, "Click on click here link");
+        commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
+    }
+
     public void invalidDate(){
         clearText(SchedulePaymentPage.endDateField);
         sendKeys(SchedulePaymentPage.startDateField,"14/12/2021","Enter invalid date format in start date field");
@@ -384,8 +389,7 @@ public class makePayments extends ReusableLib {
         commonObj.validateText(SchedulePaymentPage.creditCardTab,"Credit Card","Payment Info tab is open");
     }
 
-    public void validateOtherAmt() {
-        enableCheckBoxAndEnroll();
+    public void gotoPaymentToSession(){
         Utility_Functions.timeWait(3);
         click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
         click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
@@ -396,15 +400,25 @@ public class makePayments extends ReusableLib {
         Utility_Functions.timeWait(3);
         Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
         Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
-        click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
-        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue button");
-        commonObj.validateText(SchedulePaymentPage.chooseSupError,"Please select a supplier","Error message: Please select a supplier");
-        commonObj.validateText(SchedulePaymentPage.otherAmtError,"Other amount required","Error message: Other amount required");
+    }
+
+    public void chooseSupplier(){
         click(SchedulePaymentPage.chooseSupplier);
         click(SchedulePaymentPage.supplier,"Select Supplier from the supplier drop down");
         click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
         sendKeys(SchedulePaymentPage.dollarAmountInput,"1","Enter amount $1 into other amount field");
         click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.creditCardTab,"credit card","Payment Info tab is open");
+    }
+
+    public void validateOtherAmt() {
+        enableCheckBoxAndEnroll();
+        gotoPaymentToSession();
+        click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
+        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue button");
+        commonObj.validateText(SchedulePaymentPage.chooseSupError,"Please select a supplier","Error message: Please select a supplier");
+        commonObj.validateText(SchedulePaymentPage.otherAmtError,"Other amount required","Error message: Other amount required");
+        chooseSupplier();
         int size=driver.findElements(SchedulePaymentPage.editLink).size();
         driver.findElements(SchedulePaymentPage.editLink).get(size-1).click();
         click(SchedulePaymentPage.otherAmount,"Click Edit link and select Other Amount radio button");
@@ -441,9 +455,52 @@ public class makePayments extends ReusableLib {
         dateValidation();
     }
 
-    public void clickHereLink() {
-        click(SchedulePaymentPage.clickHere, "Click on click here link");
-        commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
+    public void validateErrorMessBankField(){
+        click(SchedulePaymentPage.nameOnAcc,"Click Name on Account");
+        click(SchedulePaymentPage.accName,"Click Account Name");
+        commonObj.validateText(SchedulePaymentPage.nameOnAccError,"Please enter a name on account.","Error Message: Please enter a name on account.");
+        click(SchedulePaymentPage.selAccType,"Click Account Type");
+        click(SchedulePaymentPage.nameOnAcc);
+        commonObj.validateText(SchedulePaymentPage.accNameError,"Please enter an account name.","Error Message: Please enter an account name.");
+        commonObj.validateText(SchedulePaymentPage.accTypeError,"Please select an account type.","Error Message: Please select an account type.");
+        sendKeys(SchedulePaymentPage.bankRoutNo,"22");
+        commonObj.validateText(SchedulePaymentPage.rout9DitErr,"Please enter 9 digit valid routing number.","Error Message: Please enter 9 digit valid routing number.");
+        clearText(SchedulePaymentPage.bankRoutNo);
+        sendKeys(SchedulePaymentPage.accNo,"22");
+        commonObj.validateText(SchedulePaymentPage.accNoError,"Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.","Error Message: Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.");
+        clearText(SchedulePaymentPage.accNo);
+        commonObj.validateText(SchedulePaymentPage.accNoError,"Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.","Error Message: Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.");
+    }
+
+
+    public void addBankAcc(){
+        String accNo=String.valueOf(Utility_Functions.xRandomFunction());
+        System.out.println("accNo..."+accNo);
+        click(SchedulePaymentPage.newBankAcc,"Click + Add a New Bank Account");
+        Utility_Functions.timeWait(3);
+        sendKeys(SchedulePaymentPage.nameOnAcc,jsonData.getData("NameOnAccount"),"Enter Name On Account");
+        sendKeys(SchedulePaymentPage.accName,jsonData.getData("AccountName"),"Enter Account Name");
+        click(SchedulePaymentPage.selAccType,"Click Account Type");
+        click(By.xpath("//option[text()='"+jsonData.getData("AccountType")+"']"),"Click "+jsonData.getData("AccountType")+" Option");
+        sendKeys(SchedulePaymentPage.bankRoutNo,jsonData.getData("BankRoutingNumber"),"Enter Bank Routing Number");
+        sendKeys(SchedulePaymentPage.accNo,accNo,"Enter Account Number");
+        click(SchedulePaymentPage.bankTermsCheckBox,"Click bank terms and condition check box");
+        click(SchedulePaymentPage.saveButton,"Click Save Button");
+        Utility_Functions.timeWait(5);
+        Utility_Functions.xScrollIntoView(driver,By.xpath("//label[text()='"+jsonData.getData("NameOnAccount")+"']"));
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//label[text()='"+jsonData.getData("NameOnAccount")+"']"),jsonData.getData("NameOnAccount"),"Bank Account Saved");
+    }
+
+    public void validateAddNewBankAcc(){
+        enableCheckBoxAndEnroll();
+        gotoPaymentToSession();
+        chooseSupplier();
+        click(SchedulePaymentPage.newBankAcc,"Click + Add a New Bank Account");
+        Utility_Functions.timeWait(3);
+        validateErrorMessBankField();
+        click(SchedulePaymentPage.cancelButton);
+        addBankAcc();
     }
 
     /*********************************-----Payment Schedule END------*************************************************************************/

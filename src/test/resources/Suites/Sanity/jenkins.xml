@@ -107,7 +107,7 @@
                     <include name="Tc_153_ValidateOtherAmount"></include>
                     <include name="Tc_205_ValidateOneTimeSchedule"></include>
                     <include name="Tc_208_ValidateOneTimeScheduleDateField"></include>
-
+                    <include name="Tc_211_addNewBankAcc"></include>
                 </methods>
             </class>
         </classes>

@@ -53,4 +53,19 @@ public class SchedulePaymentPage extends ReusableLib {
     public static By editLink=By.xpath("//a[text()='Edit']");
     public static By creditCardTab=By.xpath("//li[text()=' Credit Card ']");
     public static By saveSubPayInfo=By.xpath("//button[@class='win-btn win-btn-primary schedule-payment-supplier-amount-save-continue']");
+    public static By newBankAcc=By.xpath("//a[text()='+ Add a New Bank Account']");
+    public static By nameOnAcc=By.xpath("//input[@title='Name on account']");
+    public static By accName=By.xpath("//input[@title='Account Name']");
+    public static By selAccType=By.xpath("//select[@title='Select Account Type']");
+    public static By bankRoutNo=By.xpath("//input[@title='Bank Routing Number']");
+    public static By accNo=By.xpath("//input[@title='Account Number']");
+    public static By bankTermsCheckBox=By.xpath("//div[contains(@class,'co_bank_terms-box')]");
+    public static By cancelButton=By.xpath("//button[text()='Cancel']");
+    public static By saveButton=By.xpath("//button[text()='Save']");
+    public static By nameOnAccError=By.id("co_bank_account_name_err");
+    public static By accNameError=By.id("co_bank_name_err");
+    public static By accTypeError=By.id("co_bank_accounttype_err");
+    public static By accNoError=By.xpath("//div[contains(text(),'valid account number.')]");
+    public static By rout9DitErr=By.xpath("//div[contains(text(),'valid routing number.')]");
+
 }

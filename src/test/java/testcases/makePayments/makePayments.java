@@ -180,4 +180,12 @@ public class makePayments extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_211_addNewBankAcc(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Add New Bank Acc");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
