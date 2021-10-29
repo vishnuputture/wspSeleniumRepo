@@ -164,6 +164,14 @@ public class makePayments extends TestConfigurations {
     }
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_144_validateMakeRegPayment(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to validate Make A Regular Payment link");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_145_FieldVerificationStartDateEndDate(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Field Verification of StartDate & EndDate");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -222,6 +230,46 @@ public class makePayments extends TestConfigurations {
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_MakeMultiPaymentByBA(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to create a sales order invoice for make payments");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_155_validateReviewSession(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Review Schedule Session");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_156_validateCancelButtonOnReviewSession(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Review Schedule Session");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_159_validateEnrollButtonOnReviewSession(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Review Schedule Session");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_160_validateEditSavedSchedulePayment(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Edit Saved Schedule Payment");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_161_validateStopSavedSchedulePayment(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Edit Saved Schedule Payment");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

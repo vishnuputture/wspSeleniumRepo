@@ -39,6 +39,8 @@ public class SchedulePaymentPage extends ReusableLib {
     public static By endDateField=By.xpath("//input[@placeholder='mm/dd/yyyy' and contains(@class,'win-end')]");
     public static By noEndDate=By.xpath("//label[@for='noEndDateOne']");
     public static By saveAndContinue=By.xpath("//button[text()='Save and Continue']");
+    public static By paymentTOSave=By.xpath("//button[contains(@class,'supplier-amount-save-continue')]");
+    public static By bankSave=By.xpath("//button[contains(@class,'payment-method-save-continue')]");
     public static By startError=By.id("SchedulePaymentsCustomStartDateError");
     public static By dateError=By.id("SchedulePaymentsCustomDateError");
     public static By endError=By.id("SchedulePaymentsCustomEndDateError");
@@ -67,5 +69,15 @@ public class SchedulePaymentPage extends ReusableLib {
     public static By accTypeError=By.id("co_bank_accounttype_err");
     public static By accNoError=By.xpath("//div[contains(text(),'valid account number.')]");
     public static By rout9DitErr=By.xpath("//div[contains(text(),'valid routing number.')]");
-
+    public static By makeARegPay=By.xpath("//a[text()='make a regular payment']");
+    public static By firEnding=By.xpath("(//div[@class='flex-container ng-star-inserted']/p)[2]");
+    public static By nextPayment=By.xpath("//div[text()='Next Payment Scheduled']/parent::div/span");
+    public static By endDatePay=By.xpath("//div[text()='End Date']/parent::div/span");
+    public static By payAmount=By.xpath("//div[text()='Payment Amount']/parent::div/span");
+    public static By payMethod=By.xpath("//div[text()='Payment Method']/parent::div/span");
+    public static By isBankPresent=By.xpath("//label[@for='bank+0']");
+    public static By reviewCancel=By.xpath("//button[contains(@class,'review-schedule-cancel')]");
+    public static By reviewEnroll=By.xpath("//button[contains(@class,'review-schedule-enroll-save')]");
+    public static By editButton=By.xpath("//button[text()='Edit']");
+    public static By stopButton=By.xpath("//button[text()='Stop']");
 }
