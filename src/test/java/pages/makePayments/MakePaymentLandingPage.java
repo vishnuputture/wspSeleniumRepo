@@ -29,6 +29,17 @@ public class MakePaymentLandingPage extends ReusableLib {
     public static By invoices=By.xpath("//a[text()='Make Payments ']/following-sibling::div//li[1]/a");
 
     public static By schedulePayment=By.xpath("//a[text()='Make Payments ']/following-sibling::div//li[3]/a");
+    public static By invoiceStatusDropDown = By.id("invoice-status-select");
+    public static By invoiceDatesDropDown = By.id("invoice-dates-select");
+    public static By txtBoxInvoiceSearch = By.id("invoice-search");
+    public static By btnTableExpand = By.xpath("//i[@class='fa fa-plus ng-star-inserted']");
+    public static By btnTableContract = By.xpath("//i[@class='fa fa-minus ng-star-inserted']");
+    public static By txtRecordCount = By.xpath("//span[@class='win-invoice-table-supplier-label-selected-invoices']");
+    public static By lblNoRecords = By.xpath("//div[contains(text(),' No records match your search.')]");
+    public static By recordRow = By.xpath("//div[@class='win-invoice-table-supplier-open-item win-highlight-row ng-star-inserted']");
+    public static By dateFilterTo = By.xpath("//span[text()='To:']/following-sibling::input");
+    public static By dateFilterFrom = By.xpath("//span[text()='From:']/following-sibling::input");
+    public static By dateFilterApply = By.xpath("//span[text()='Apply']");
 
 
 }

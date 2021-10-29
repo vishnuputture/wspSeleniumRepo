@@ -114,7 +114,7 @@
                     <include name="Tc_155_validateReviewSession"></include>
                     <include name="Tc_156_validateCancelButtonOnReviewSession"></include>
                     <include name="Tc_160_validateEditSavedSchedulePayment"></include>-->
-                    <include name="Tc_159_validateEnrollButtonOnReviewSession"></include>
+                    <!--<include name="Tc_159_validateEnrollButtonOnReviewSession"></include>-->
 
                     <include name="Tc_161_validateStopSavedSchedulePayment"></include>
 
