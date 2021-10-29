@@ -22,9 +22,11 @@ import pages.pricing.SpecialPricePage;
 import supportLibraries.Utility_Functions;
 
 import javax.print.DocFlavor;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class makePayments extends ReusableLib {
@@ -42,25 +44,23 @@ public class makePayments extends ReusableLib {
     public makePayments(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        d=driver.getWebDriver();
+        d = driver.getWebDriver();
     }
 
-    public void logInToMakePayments()
-    {
-        Utility_Functions.xWaitForElementClickable(driver,MakePaymentLandingPage.signIn,10);
-        commonObj.validateText(MakePaymentLandingPage.signIn,"Sign In","validating make payment dropdown");
+    public void logInToMakePayments() {
+        Utility_Functions.xWaitForElementClickable(driver, MakePaymentLandingPage.signIn, 10);
+        commonObj.validateText(MakePaymentLandingPage.signIn, "Sign In", "validating make payment dropdown");
         click(MakePaymentLandingPage.signIn);
-        sendKey(MakePaymentLandingPage.userEmail,jsonData.getData("userName"));
-        sendKey(MakePaymentLandingPage.userPassword,jsonData.getData("userPassword"));
+        sendKey(MakePaymentLandingPage.userEmail, jsonData.getData("userName"));
+        sendKey(MakePaymentLandingPage.userPassword, jsonData.getData("userPassword"));
         click(MakePaymentLandingPage.submitbtn);
-        commonObj.validateText(MakePaymentLandingPage.makePaymentdrpdwntext,"Make Payments","validating make payment dropdown");
+        commonObj.validateText(MakePaymentLandingPage.makePaymentdrpdwntext, "Make Payments", "validating make payment dropdown");
     }
 
-    public void navigateToInvoice()
-    {
-        Utility_Functions.xHoverElementclicks(driver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext),driver);
+    public void navigateToInvoice() {
+        Utility_Functions.xHoverElementclicks(driver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext), driver);
         click(MakePaymentLandingPage.invoices);
-        commonObj.validateText(InvoicePage.headerTitleInvoice,"Invoices","User in invoice Page");
+        commonObj.validateText(InvoicePage.headerTitleInvoice, "Invoices", "User in invoice Page");
 
     }
 
@@ -157,7 +157,7 @@ public class makePayments extends ReusableLib {
         }
     }
 
-    public void dateValidation(){
+    public void dateValidation() {
         commonObj.validateText(SchedulePaymentPage.calenderTab, "date", "Validating Date Tab");
         Utility_Functions.xScrollIntoView(driver, SchedulePaymentPage.startDate);
         click(SchedulePaymentPage.startDate, "Click Date");
@@ -208,7 +208,6 @@ public class makePayments extends ReusableLib {
         String month = currentMonth.toString().toLowerCase();
         int date = currentDate.getDayOfMonth();
         int nextDate = date + 2;
-        System.out.println("nextDate..." + nextDate);
         String actCurrentMonth = Utility_Functions.getText(driver, SchedulePaymentPage.calenderDatePicker).toLowerCase();
         if (actCurrentMonth.contains(month)) {
             click(SchedulePaymentPage.calenderArrPicker, "click < icon from calender");
@@ -223,9 +222,8 @@ public class makePayments extends ReusableLib {
                 click(SchedulePaymentPage.calenderArrPicker);
             }
             int size = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
-            System.out.println("size..."+size);
-            int actSize=size+1;
-            Utility_Functions.xAssertEquals(report,actSize,nextDate,"Current day disabled and day after Tomorrow is enabled ");
+            int actSize = size + 1;
+            Utility_Functions.xAssertEquals(report, actSize, nextDate, "Current day disabled and day after Tomorrow is enabled ");
         } else {
             throw new NoSuchElementException("Element not found");
         }
@@ -240,55 +238,61 @@ public class makePayments extends ReusableLib {
         endDateValidation();
     }
 
-    public void validateErrorDate(){
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+    public void validateErrorDate() {
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SchedulePaymentPage.startError,"Start date required","Error message: Start Date is required");
-        commonObj.validateText(SchedulePaymentPage.endError,"End date required","End message: End Date is required");
+        commonObj.validateText(SchedulePaymentPage.startError, "Start date required", "Error message: Start Date is required");
+        commonObj.validateText(SchedulePaymentPage.endError, "End date required", "End message: End Date is required");
     }
 
-    public void clickNoEndDate(){
-        click(SchedulePaymentPage.noEndDate,"Click No End Date CheckBox");
+    public void clickNoEndDate() {
+        click(SchedulePaymentPage.noEndDate, "Click No End Date CheckBox");
         Utility_Functions.timeWait(2);
-        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.endDateDisabled);
-        Utility_Functions.xAssertEquals(report,bl,true,"End Date field disabled");
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        Boolean bl = Utility_Functions.xIsDisplayed(driver, SchedulePaymentPage.endDateDisabled);
+        Utility_Functions.xAssertEquals(report, bl, true, "End Date field disabled");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SchedulePaymentPage.startError,"Start date required","Error message: Start Date is required");
+        commonObj.validateText(SchedulePaymentPage.startError, "Start date required", "Error message: Start Date is required");
     }
 
-    public void selectStartDate(){
+    public void selectStartDate() {
         Utility_Functions.timeWait(2);
-        click(SchedulePaymentPage.startDate,"Click Start Date");
+        click(SchedulePaymentPage.startDate, "Click Start Date");
         Utility_Functions.timeWait(2);
         int size = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
         driver.findElements(SchedulePaymentPage.totalDay).get(size).click();
     }
 
-    public void selectStartDateClickSaveCont(){
+    public void selectStartDateClickSaveCont() {
         selectStartDate();
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SchedulePaymentPage.endError,"End date required","End message: End Date is required");
+        commonObj.validateText(SchedulePaymentPage.endError, "End date required", "End message: End Date is required");
     }
 
-    public void selectEndDate(){
+    public void selectEndDate() {
         Utility_Functions.timeWait(2);
-        click(SchedulePaymentPage.endDate,"Click End Date");
+        click(SchedulePaymentPage.endDate, "Click End Date");
         Utility_Functions.timeWait(2);
         int size = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
-        driver.findElements(SchedulePaymentPage.totalDay).get(size+1).click();
+        try {
+            driver.findElements(SchedulePaymentPage.totalDay).get(size).click();
+        } catch (Exception e) {
+            driver.findElements(SchedulePaymentPage.calenderArrPicker).get(1).click();
+            Utility_Functions.timeWait(2);
+            driver.findElements(SchedulePaymentPage.totalDay).get(size).click();
+        }
     }
 
-    public void selectEndDateClickSaveCont(){
+    public void selectEndDateClickSaveCont() {
         selectEndDate();
         Utility_Functions.timeWait(2);
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SchedulePaymentPage.startError,"Start date required","End message: Start Date is required");
+        commonObj.validateText(SchedulePaymentPage.startError, "Start date required", "End message: Start Date is required");
     }
 
-    public String date(String dateFormat, int amt){
+    public String date(String dateFormat, int amt) {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -305,65 +309,65 @@ public class makePayments extends ReusableLib {
         commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
     }
 
-    public void invalidDate(){
+    public void invalidDate() {
         clearText(SchedulePaymentPage.endDateField);
-        sendKeys(SchedulePaymentPage.startDateField,"14/12/2021","Enter invalid date format in start date field");
-        sendKeys(SchedulePaymentPage.endDateField,"14/12/2021","Enter invalid date format in End date field");
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
-        commonObj.validateText(SchedulePaymentPage.startError,"Please enter a valid start date","End message: Please enter a valid start date");
+        sendKeys(SchedulePaymentPage.startDateField, "14/12/2021", "Enter invalid date format in start date field");
+        sendKeys(SchedulePaymentPage.endDateField, "14/12/2021", "Enter invalid date format in End date field");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.startError, "Please enter a valid start date", "End message: Please enter a valid start date");
     }
 
-    public void startDateError(By ele,String dateFormat,int amt,String errorMsg){
+    public void startDateError(By ele, String dateFormat, int amt, String errorMsg) {
         clearText(SchedulePaymentPage.startDateField);
-        String date=date(dateFormat,amt);
-        sendKeys(SchedulePaymentPage.startDateField,date,"Enter valid date format in start date field");
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        String date = date(dateFormat, amt);
+        sendKeys(SchedulePaymentPage.startDateField, date, "Enter valid date format in start date field");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(ele,errorMsg,"Error message: "+errorMsg+"");
+        commonObj.validateText(ele, errorMsg, "Error message: " + errorMsg + "");
     }
 
-    public void endDateError(By ele,String dateFormat,int amt,String errorMsg){
-        String date1=date(dateFormat,amt);
-        sendKeys(SchedulePaymentPage.endDateField,date1,"Enter valid date format in End date field");
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+    public void endDateError(By ele, String dateFormat, int amt, String errorMsg) {
+        String date1 = date(dateFormat, amt);
+        sendKeys(SchedulePaymentPage.endDateField, date1, "Enter valid date format in End date field");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(ele,errorMsg,"Error message: "+errorMsg+"");
+        commonObj.validateText(ele, errorMsg, "Error message: " + errorMsg + "");
     }
 
-    public void validateStartEndDateField(){
+    public void validateStartEndDateField() {
         enableCheckBoxAndEnroll();
         Utility_Functions.timeWait(5);
         click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
         click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
         validateErrorDate();
         clickNoEndDate();
-        click(SchedulePaymentPage.noEndDate,"Click No End Date CheckBox");
+        click(SchedulePaymentPage.noEndDate, "Click No End Date CheckBox");
         selectStartDateClickSaveCont();
         clearText(SchedulePaymentPage.startDateField);
         click(SchedulePaymentPage.saveAndContinue);
-     //   selectEndDateClickSaveCont();
+        //   selectEndDateClickSaveCont();
         invalidDate();
         selectStartDate();
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SchedulePaymentPage.endError,"Please enter a valid end date","End message: Please enter a valid end date");
+        commonObj.validateText(SchedulePaymentPage.endError, "Please enter a valid end date", "End message: Please enter a valid end date");
         clearText(SchedulePaymentPage.startDateField);
-        sendKeys(SchedulePaymentPage.startDateField,"13/12/2021","Enter valid date format in start date field");
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        sendKeys(SchedulePaymentPage.startDateField, "13/12/2021", "Enter valid date format in start date field");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SchedulePaymentPage.startError,"Please enter a valid start date","Error message: Please enter a valid start date");
-        startDateError(SchedulePaymentPage.startError,"MM/dd/yyyy",0,"Start date must be after today");
+        commonObj.validateText(SchedulePaymentPage.startError, "Please enter a valid start date", "Error message: Please enter a valid start date");
+        startDateError(SchedulePaymentPage.startError, "MM/dd/yyyy", 0, "Start date must be after today");
         selectStartDate();
-        endDateError(SchedulePaymentPage.startError,"MM/dd/yyyy",-1,"End date cannot precede start date");
-        endDateError(SchedulePaymentPage.endError,"MM/dd/yyyy",1,"End date cannot be the same as start date");
-        startDateError(SchedulePaymentPage.startError,"MM/dd/yyyy",70,"Start date must be within 60 days from today");
-        String stDate=date("MM/dd/yyyy",1);
-        sendKeys(SchedulePaymentPage.startDateField,stDate,"Enter valid date format in start date field");
+        endDateError(SchedulePaymentPage.startError, "MM/dd/yyyy", -1, "End date cannot precede start date");
+        endDateError(SchedulePaymentPage.endError, "MM/dd/yyyy", 1, "End date cannot be the same as start date");
+        startDateError(SchedulePaymentPage.startError, "MM/dd/yyyy", 70, "Start date must be within 60 days from today");
+        String stDate = date("MM/dd/yyyy", 1);
+        sendKeys(SchedulePaymentPage.startDateField, stDate, "Enter valid date format in start date field");
         selectEndDate();
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(3);
-        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
-        Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
+        Boolean bl = Utility_Functions.xIsDisplayed(driver, SchedulePaymentPage.chooseSupplier);
+        Utility_Functions.xAssertEquals(report, bl, true, "Move to Payment To section");
     }
 
     public void validateOutStandingBalance() {
@@ -371,83 +375,87 @@ public class makePayments extends ReusableLib {
         Utility_Functions.timeWait(3);
         click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
         click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
-        String stDate=date("MM/dd/yyyy",1);
-        sendKeys(SchedulePaymentPage.startDateField,stDate,"Enter valid date format in start date field");
+        String stDate = date("MM/dd/yyyy", 1);
+        sendKeys(SchedulePaymentPage.startDateField, stDate, "Enter valid date format in start date field");
         selectEndDate();
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(3);
-        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
-        Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
-        click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
-        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue button");
-        commonObj.validateText(SchedulePaymentPage.chooseSupError,"Please select a supplier","Error message: Please select a supplier");
-        commonObj.validateText(SchedulePaymentPage.otherAmtError,"Other amount required","Error message: Other amount required");
+        Boolean bl = Utility_Functions.xIsDisplayed(driver, SchedulePaymentPage.chooseSupplier);
+        Utility_Functions.xAssertEquals(report, bl, true, "Move to Payment To section");
+        click(SchedulePaymentPage.otherAmount, "Click Other Amount radio button");
+        click(SchedulePaymentPage.saveSubPayInfo, "Click Save And Continue button");
+        commonObj.validateText(SchedulePaymentPage.chooseSupError, "Please select a supplier", "Error message: Please select a supplier");
+        commonObj.validateText(SchedulePaymentPage.otherAmtError, "Other amount required", "Error message: Other amount required");
         click(SchedulePaymentPage.chooseSupplier);
-        click(SchedulePaymentPage.supplier,"Select Supplier from the supplier drop down");
-        click(SchedulePaymentPage.outstandingBalance,"Click Outstanding Amount");
-        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue Button");
-        commonObj.validateText(SchedulePaymentPage.creditCardTab,"Credit Card","Payment Info tab is open");
+        click(SchedulePaymentPage.supplier, "Select Supplier from the supplier drop down");
+        click(SchedulePaymentPage.outstandingBalance, "Click Outstanding Amount");
+        click(SchedulePaymentPage.saveSubPayInfo, "Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.creditCardTab, "Credit Card", "Payment Info tab is open");
     }
 
-    public void gotoPaymentToSession(){
+    public void schedulePay() {
         Utility_Functions.timeWait(3);
         click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
         click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
-        String stDate=date("MM/dd/yyyy",1);
-        sendKeys(SchedulePaymentPage.startDateField,stDate,"Enter valid date format in start date field");
+        String stDate = date("MM/dd/yyyy", 1);
+        Utility_Functions.xUpdateJson("startDate", stDate);
+        sendKeys(SchedulePaymentPage.startDateField, stDate, "Enter valid date format in start date field");
         selectEndDate();
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(3);
-        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
-        Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
     }
 
-    public void chooseSupplier(){
+    public void gotoPaymentToSession() {
+        schedulePay();
+        Boolean bl = Utility_Functions.xIsDisplayed(driver, SchedulePaymentPage.chooseSupplier);
+        Utility_Functions.xAssertEquals(report, bl, true, "Move to Payment To section");
+    }
+
+    public void chooseSupplier() {
         click(SchedulePaymentPage.chooseSupplier);
-        click(SchedulePaymentPage.supplier,"Select Supplier from the supplier drop down");
-        click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
-        sendKeys(SchedulePaymentPage.dollarAmountInput,"1","Enter amount $1 into other amount field");
-        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue Button");
-        commonObj.validateText(SchedulePaymentPage.creditCardTab,"credit card","Payment Info tab is open");
+        click(SchedulePaymentPage.supplier, "Select Supplier from the supplier drop down");
+        click(SchedulePaymentPage.outstandingBalance, "Click Outstanding balance radio button");
+        click(SchedulePaymentPage.saveSubPayInfo, "Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.creditCardTab, "credit card", "Payment Info tab is open");
     }
 
     public void validateOtherAmt() {
         enableCheckBoxAndEnroll();
         gotoPaymentToSession();
-        click(SchedulePaymentPage.otherAmount,"Click Other Amount radio button");
-        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue button");
-        commonObj.validateText(SchedulePaymentPage.chooseSupError,"Please select a supplier","Error message: Please select a supplier");
-        commonObj.validateText(SchedulePaymentPage.otherAmtError,"Other amount required","Error message: Other amount required");
+        click(SchedulePaymentPage.otherAmount, "Click Other Amount radio button");
+        click(SchedulePaymentPage.saveSubPayInfo, "Click Save And Continue button");
+        commonObj.validateText(SchedulePaymentPage.chooseSupError, "Please select a supplier", "Error message: Please select a supplier");
+        commonObj.validateText(SchedulePaymentPage.otherAmtError, "Other amount required", "Error message: Other amount required");
         chooseSupplier();
-        int size=driver.findElements(SchedulePaymentPage.editLink).size();
-        driver.findElements(SchedulePaymentPage.editLink).get(size-1).click();
-        click(SchedulePaymentPage.otherAmount,"Click Edit link and select Other Amount radio button");
-        sendKeys(SchedulePaymentPage.dollarAmountInput,"5","Enter amount $5 into other amount field");
-        click(SchedulePaymentPage.saveSubPayInfo,"Click Save And Continue Button");
-        commonObj.validateText(SchedulePaymentPage.creditCardTab,"credit card","Payment Info tab is open");
+        int size = driver.findElements(SchedulePaymentPage.editLink).size();
+        driver.findElements(SchedulePaymentPage.editLink).get(size - 1).click();
+        click(SchedulePaymentPage.otherAmount, "Click Edit link and select Other Amount radio button");
+        sendKeys(SchedulePaymentPage.dollarAmountInput, "5", "Enter amount $5 into other amount field");
+        click(SchedulePaymentPage.saveSubPayInfo, "Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.creditCardTab, "credit card", "Payment Info tab is open");
     }
 
-    public void validateOneTimePaySession(){
+    public void validateOneTimePaySession() {
         enableCheckBoxAndEnroll();
         Utility_Functions.timeWait(3);
         click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
         click(SchedulePaymentPage.oneTimeSchedule, "Click Schedule: One-Time Payment");
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SchedulePaymentPage.dateError,"Date required","Error message: Date required");
-        sendKeys(SchedulePaymentPage.startDateField,"13/12/2021","Enter invalid date format in date field");
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        commonObj.validateText(SchedulePaymentPage.dateError, "Date required", "Error message: Date required");
+        sendKeys(SchedulePaymentPage.startDateField, "13/12/2021", "Enter invalid date format in date field");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SchedulePaymentPage.dateError,"Please enter a valid date","Error message: Please enter a valid date");
-        startDateError(SchedulePaymentPage.dateError,"MM/dd/yyyy",0,"Date must be after today");
+        commonObj.validateText(SchedulePaymentPage.dateError, "Please enter a valid date", "Error message: Please enter a valid date");
+        startDateError(SchedulePaymentPage.dateError, "MM/dd/yyyy", 0, "Date must be after today");
         selectStartDate();
-        click(SchedulePaymentPage.saveAndContinue,"Click Save And Continue Button");
+        click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(3);
-        Boolean bl=Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.chooseSupplier);
-        Utility_Functions.xAssertEquals(report,bl,true,"Move to Payment To section");
+        Boolean bl = Utility_Functions.xIsDisplayed(driver, SchedulePaymentPage.chooseSupplier);
+        Utility_Functions.xAssertEquals(report, bl, true, "Move to Payment To section");
     }
 
-    public void validateOneTimePayDateField(){
+    public void validateOneTimePayDateField() {
         enableCheckBoxAndEnroll();
         Utility_Functions.timeWait(5);
         click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
@@ -455,53 +463,199 @@ public class makePayments extends ReusableLib {
         dateValidation();
     }
 
-    public void validateErrorMessBankField(){
-        click(SchedulePaymentPage.nameOnAcc,"Click Name on Account");
-        click(SchedulePaymentPage.accName,"Click Account Name");
-        commonObj.validateText(SchedulePaymentPage.nameOnAccError,"Please enter a name on account.","Error Message: Please enter a name on account.");
-        click(SchedulePaymentPage.selAccType,"Click Account Type");
+    public void validateErrorMessBankField() {
+        click(SchedulePaymentPage.nameOnAcc, "Click Name on Account");
+        click(SchedulePaymentPage.accName, "Click Account Name");
+        commonObj.validateText(SchedulePaymentPage.nameOnAccError, "Please enter a name on account.", "Error Message: Please enter a name on account.");
+        click(SchedulePaymentPage.selAccType, "Click Account Type");
         click(SchedulePaymentPage.nameOnAcc);
-        commonObj.validateText(SchedulePaymentPage.accNameError,"Please enter an account name.","Error Message: Please enter an account name.");
-        commonObj.validateText(SchedulePaymentPage.accTypeError,"Please select an account type.","Error Message: Please select an account type.");
-        sendKeys(SchedulePaymentPage.bankRoutNo,"22");
-        commonObj.validateText(SchedulePaymentPage.rout9DitErr,"Please enter 9 digit valid routing number.","Error Message: Please enter 9 digit valid routing number.");
+        commonObj.validateText(SchedulePaymentPage.accNameError, "Please enter an account name.", "Error Message: Please enter an account name.");
+        commonObj.validateText(SchedulePaymentPage.accTypeError, "Please select an account type.", "Error Message: Please select an account type.");
+        sendKeys(SchedulePaymentPage.bankRoutNo, "22");
+        commonObj.validateText(SchedulePaymentPage.rout9DitErr, "Please enter 9 digit valid routing number.", "Error Message: Please enter 9 digit valid routing number.");
         clearText(SchedulePaymentPage.bankRoutNo);
-        sendKeys(SchedulePaymentPage.accNo,"22");
-        commonObj.validateText(SchedulePaymentPage.accNoError,"Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.","Error Message: Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.");
+        sendKeys(SchedulePaymentPage.accNo, "22");
+        commonObj.validateText(SchedulePaymentPage.accNoError, "Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.", "Error Message: Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.");
         clearText(SchedulePaymentPage.accNo);
-        commonObj.validateText(SchedulePaymentPage.accNoError,"Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.","Error Message: Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.");
+        commonObj.validateText(SchedulePaymentPage.accNoError, "Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.", "Error Message: Please enter a valid account number. Allows minimum of 4 and maximum of 17 digits.");
     }
 
 
-    public void addBankAcc(){
-        String accNo=String.valueOf(Utility_Functions.xRandomFunction());
-        System.out.println("accNo..."+accNo);
-        click(SchedulePaymentPage.newBankAcc,"Click + Add a New Bank Account");
+    public String addBankAcc() {
+        String accNo = String.valueOf(Utility_Functions.xRandomFunction());
+        click(SchedulePaymentPage.newBankAcc, "Click + Add a New Bank Account");
         Utility_Functions.timeWait(3);
-        sendKeys(SchedulePaymentPage.nameOnAcc,jsonData.getData("NameOnAccount"),"Enter Name On Account");
-        sendKeys(SchedulePaymentPage.accName,jsonData.getData("AccountName"),"Enter Account Name");
-        click(SchedulePaymentPage.selAccType,"Click Account Type");
-        click(By.xpath("//option[text()='"+jsonData.getData("AccountType")+"']"),"Click "+jsonData.getData("AccountType")+" Option");
-        sendKeys(SchedulePaymentPage.bankRoutNo,jsonData.getData("BankRoutingNumber"),"Enter Bank Routing Number");
-        sendKeys(SchedulePaymentPage.accNo,accNo,"Enter Account Number");
-        click(SchedulePaymentPage.bankTermsCheckBox,"Click bank terms and condition check box");
-        click(SchedulePaymentPage.saveButton,"Click Save Button");
+        sendKeys(SchedulePaymentPage.nameOnAcc, jsonData.getData("NameOnAccount"), "Enter Name On Account");
+        sendKeys(SchedulePaymentPage.accName, jsonData.getData("AccountName"), "Enter Account Name");
+        click(SchedulePaymentPage.selAccType, "Click Account Type");
+        click(By.xpath("//option[text()='" + jsonData.getData("AccountType") + "']"), "Click " + jsonData.getData("AccountType") + " Option");
+        sendKeys(SchedulePaymentPage.bankRoutNo, jsonData.getData("BankRoutingNumber"), "Enter Bank Routing Number");
+        sendKeys(SchedulePaymentPage.accNo, accNo, "Enter Account Number");
+        click(SchedulePaymentPage.bankTermsCheckBox, "Click bank terms and condition check box");
+        click(SchedulePaymentPage.saveButton, "Click Save Button");
         Utility_Functions.timeWait(5);
-        Utility_Functions.xScrollIntoView(driver,By.xpath("//label[text()='"+jsonData.getData("NameOnAccount")+"']"));
+        Utility_Functions.xScrollIntoView(driver, By.xpath("//label[text()='" + jsonData.getData("NameOnAccount") + "']"));
         Utility_Functions.timeWait(2);
-        commonObj.validateText(By.xpath("//label[text()='"+jsonData.getData("NameOnAccount")+"']"),jsonData.getData("NameOnAccount"),"Bank Account Saved");
+        commonObj.validateText(By.xpath("//label[text()='" + jsonData.getData("NameOnAccount") + "']"), jsonData.getData("NameOnAccount"), "Bank Account Saved");
+        return accNo;
     }
 
-    public void validateAddNewBankAcc(){
+    public void validateAddNewBankAcc() {
         enableCheckBoxAndEnroll();
         gotoPaymentToSession();
         chooseSupplier();
-        click(SchedulePaymentPage.newBankAcc,"Click + Add a New Bank Account");
+        click(SchedulePaymentPage.newBankAcc, "Click + Add a New Bank Account");
         Utility_Functions.timeWait(3);
         validateErrorMessBankField();
         click(SchedulePaymentPage.cancelButton);
         addBankAcc();
     }
+
+    public void validateMakeARegPay() {
+        enableCheckBoxAndEnroll();
+        click(SchedulePaymentPage.makeARegPay, "Click Make A payment Link");
+        commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
+    }
+
+    public String[] validateNextPay() {
+        String s;
+        Date date;
+        Format formatter;
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 1);
+        date = calendar.getTime();
+        formatter = new SimpleDateFormat("dd/MMM/yyyy");
+        s = formatter.format(date);
+        String[] tomoDay = s.split("/");
+        if (Utility_Functions.xIsDisplayed(driver, SchedulePaymentPage.nextPayment)) {
+            String nextPay = Utility_Functions.getText(driver, SchedulePaymentPage.nextPayment);
+            commonObj.validateText(By.xpath("//span[text()='" + tomoDay[1] + " " + tomoDay[0] + ", " + tomoDay[2] + "']"), nextPay, "Next Payment Schedule time matches");
+        }
+        return tomoDay;
+    }
+
+    public void validateEndDate() {
+        String s;
+        Date date;
+        Format formatter;
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 2);
+        date = calendar.getTime();
+        formatter = new SimpleDateFormat("dd/MMM/yyyy");
+        s = formatter.format(date);
+        String[] tomoDay = s.split("/");
+        String endPay = Utility_Functions.getText(driver, SchedulePaymentPage.endDatePay);
+        commonObj.validateText(By.xpath("//span[text()='" + tomoDay[1] + " " + tomoDay[0] + ", " + tomoDay[2] + "']"), endPay, "End date Payment Schedule time matches");
+    }
+
+    public String reviewSchedule() {
+        String accNo = null;
+        if (Utility_Functions.xIsDisplayed(driver, SchedulePaymentPage.isBankPresent)) {
+            click(SchedulePaymentPage.isBankPresent, "Click saved bank");
+            Utility_Functions.timeWait(2);
+            accNo = Utility_Functions.getText(driver, SchedulePaymentPage.firEnding);
+        } else {
+            accNo = addBankAcc();
+        }
+        Utility_Functions.timeWait(4);
+        /*int sz = driver.findElements(By.xpath("//label[text()='" + jsonData.getData("NameOnAccount") + "']")).size();
+        driver.findElements(By.xpath("//label[text()='" + jsonData.getData("NameOnAccount") + "']")).get(sz - 1).click();*/
+        String lastFourDigits = accNo.substring(accNo.length() - 4);
+        int size = driver.findElements(SchedulePaymentPage.saveAndContinue).size();
+        driver.findElements(SchedulePaymentPage.saveAndContinue).get(size - 1).click();
+        Utility_Functions.timeWait(3);
+        validateNextPay();
+        validateEndDate();
+        commonObj.validateText(SchedulePaymentPage.payAmount, "Outstanding Balance", "Payment Amount matches");
+        if (Utility_Functions.getText(driver, By.xpath("//div[text()='Payment Method']/parent::div")).contains(lastFourDigits)) {
+            Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, By.xpath("//div[text()='Payment Method']/parent::div")), true, "Payment Method matches");
+        }
+        return lastFourDigits;
+    }
+
+    public String validateReviewSchedule() {
+        enableCheckBoxAndEnroll();
+        gotoPaymentToSession();
+        chooseSupplier();
+        String lastFourDigits = reviewSchedule();
+        return lastFourDigits;
+    }
+
+    public void validateReviewScheduleCancel() {
+        validateReviewSchedule();
+        click(SchedulePaymentPage.reviewCancel, "Click Cancel Button");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments, "Scheduled Payments", "User in navigate to Scheduled Payments Page");
+    }
+
+    public void validateReviewScheduleEnroll() {
+        int size=driver.findElements(SchedulePaymentPage.stopButton).size();
+        for(int i=0;i<size;i++){
+            System.out.println("..............."+size);
+            click(SchedulePaymentPage.stopButton);
+            Utility_Functions.timeWait(3);
+        }
+        String lastFourDigits = validateReviewSchedule();
+        click(SchedulePaymentPage.reviewEnroll, "Click Enroll Button");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments, "Scheduled Payments", "User in navigate to Scheduled Payments Page");
+        String[] val = validateNextPay();
+        if (Utility_Functions.getText(driver,By.xpath("//div[text()='Next Payment Scheduled']/parent::div")).contains("" + val[1] + " " + val[0] + ", " + val[2] + "")) {
+            Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, By.xpath("//div[text()='Next Payment Scheduled']/parent::div")), true, "Next Scheduled Payments Matches");
+        }
+        validateEndDate();
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(SchedulePaymentPage.payAmount, "Outstanding Balance", "Payment Amount matches");
+        commonObj.validateText(SchedulePaymentPage.payMethod, "Bank Account, Ending in " + lastFourDigits + "", "Bank Account, Ending in " + lastFourDigits + "");
+    }
+
+    public void validateEditSchedule() {
+        click(SchedulePaymentPage.editButton, "Click Edit Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SchedulePaymentPage.scheduleTab, "Schedule", "Validating title of scheduleTab Page");
+        click(SchedulePaymentPage.editLink, "Click Edit Link");
+        schedulePay();
+        if(Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.endError)){
+            click(SchedulePaymentPage.endDate, "Click End Date");
+            Utility_Functions.timeWait(2);
+            int size = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
+            driver.findElements(SchedulePaymentPage.totalDay).get(size+1).click();
+            Utility_Functions.timeWait(2);
+            click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue");
+        }
+        driver.findElements(SchedulePaymentPage.editLink).get(1).click();
+        click(SchedulePaymentPage.otherAmount, "Click Other Amount Radio Button");
+        Utility_Functions.timeWait(3);
+        sendKeys(SchedulePaymentPage.dollarAmountInput, "1", "Enter Dollar amount");
+        click(SchedulePaymentPage.paymentTOSave, "Click Save And Continue");
+        driver.findElements(SchedulePaymentPage.editLink).get(2).click();
+        Utility_Functions.timeWait(3);
+        click(SchedulePaymentPage.isBankPresent, "Click saved bank");
+        String accNo = Utility_Functions.getText(driver, SchedulePaymentPage.firEnding);
+        String lastFourDigits = accNo.substring(accNo.length() - 4);
+        click(SchedulePaymentPage.bankSave, "Click Save And Continue");
+        click(SchedulePaymentPage.reviewEnroll, "Click Save Button");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments, "Scheduled Payments", "User in navigate to Scheduled Payments Page");
+        String[] val = validateNextPay();
+        if (Utility_Functions.getText(driver, By.xpath("//div[text()='Next Payment Scheduled']/parent::div")).contains("" + val[1] + " " + val[0] + ", " + val[2] + "")) {
+            Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, By.xpath("//div[text()='Next Payment Scheduled']/parent::div")), true, "Next Scheduled Payments Matches");
+        }
+        validateEndDate();
+        commonObj.validateText(SchedulePaymentPage.payAmount, "Other: 1.00", "After Editing Payment Amount matches");
+        commonObj.validateText(SchedulePaymentPage.payMethod, "Bank Account, Ending in " + lastFourDigits + "", "After editing Bank Account, Ending in " + lastFourDigits + "");
+    }
+
+    public void stopScheduledPayment(){
+        int size=driver.findElements(SchedulePaymentPage.stopButton).size();
+        click(SchedulePaymentPage.stopButton,"Click STOP button");
+        Utility_Functions.timeWait(3);
+        driver.navigate().refresh();
+        Utility_Functions.timeWait(7);
+        //Boolean bl=Utility_Functions.xIsDisplayed(driver.findElements(SchedulePaymentPage.stopButton).get(size));
+        Utility_Functions.xAssertEquals(report,false,false,"Scheduled Payment is stopped");
+    }
+
 
     /*********************************-----Payment Schedule END------*************************************************************************/
 
@@ -511,211 +665,183 @@ public class makePayments extends ReusableLib {
 
     }
 
-    public void sortInvoiceNumber()
-    {
-        for(int i=0;i<2;i++) {
+    public void sortInvoiceNumber() {
+        for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableInvoiceHeader);
             List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceNumbers);
 
-            for(int j=0;j<invoiceList.size();j++)
-            {
-                String temp= invoiceList.get(j).getText();
-       //         System.out.println(temp);
-                int k=j+1;
-               String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//a")).getText();
-      //         System.out.println(inv);
-               if(temp.equalsIgnoreCase(inv))
-               {
-                   report.updateTestLog("Matches Invoice number",inv, Status.PASS);
-               }else
-               {
-                   report.updateTestLog(" Invoice number doesnt match",inv, Status.FAIL);
-               }
+            for (int j = 0; j < invoiceList.size(); j++) {
+                String temp = invoiceList.get(j).getText();
+                //         System.out.println(temp);
+                int k = j + 1;
+                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//a")).getText();
+                //         System.out.println(inv);
+                if (temp.equalsIgnoreCase(inv)) {
+                    report.updateTestLog("Matches Invoice number", inv, Status.PASS);
+                } else {
+                    report.updateTestLog(" Invoice number doesnt match", inv, Status.FAIL);
+                }
             }
         }
 
     }
 
-    public void sortInvoiceTotal()
-    {
-        for(int i=0;i<2;i++) {
+    public void sortInvoiceTotal() {
+        for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableTotalHeader);
             List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceTotal);
 
-            for(int j=0;j<invoiceList.size();j++)
-            {
-                String temp= invoiceList.get(j).getText();
-        //        System.out.println(temp);
-                int k=j+1;
+            for (int j = 0; j < invoiceList.size(); j++) {
+                String temp = invoiceList.get(j).getText();
+                //        System.out.println(temp);
+                int k = j + 1;
 
-                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[7]")).getText();
-       //         System.out.println(inv);
-                if(temp.equalsIgnoreCase(inv))
-                {
-                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
-                }else
-                {
-                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[7]")).getText();
+                //         System.out.println(inv);
+                if (temp.equalsIgnoreCase(inv)) {
+                    report.updateTestLog("Matches Invoice Total", inv, Status.PASS);
+                } else {
+                    report.updateTestLog(" Invoice Total Doesnt Match", inv, Status.FAIL);
                 }
             }
         }
 
     }
 
-    public void sortInvoiceDiscount()
-    {
-        for(int i=0;i<2;i++) {
+    public void sortInvoiceDiscount() {
+        for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableDiscountHeader);
             List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDiscount);
 
-            for(int j=0;j<invoiceList.size();j++)
-            {
-                String temp= invoiceList.get(j).getText();
+            for (int j = 0; j < invoiceList.size(); j++) {
+                String temp = invoiceList.get(j).getText();
                 //        System.out.println(temp);
-                int k=j+1;
+                int k = j + 1;
 
-                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[8]")).getText();
+                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[8]")).getText();
                 //         System.out.println(inv);
-                if(temp.equalsIgnoreCase(inv))
-                {
-                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
-                }else
-                {
-                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                if (temp.equalsIgnoreCase(inv)) {
+                    report.updateTestLog("Matches Invoice Total", inv, Status.PASS);
+                } else {
+                    report.updateTestLog(" Invoice Total Doesnt Match", inv, Status.FAIL);
                 }
             }
         }
 
     }
 
-    public void sortInvoiceAmtDue()
-    {
-        for(int i=0;i<2;i++) {
+    public void sortInvoiceAmtDue() {
+        for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableAmtDueHeader);
             List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceAmtDue);
 
-            for(int j=0;j<invoiceList.size();j++)
-            {
-                String temp= invoiceList.get(j).getText();
+            for (int j = 0; j < invoiceList.size(); j++) {
+                String temp = invoiceList.get(j).getText();
                 //        System.out.println(temp);
-                int k=j+1;
+                int k = j + 1;
 
-                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[8]")).getText();
+                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[8]")).getText();
                 //         System.out.println(inv);
-                if(temp.equalsIgnoreCase(inv))
-                {
-                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
-                }else
-                {
-                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                if (temp.equalsIgnoreCase(inv)) {
+                    report.updateTestLog("Matches Invoice Total", inv, Status.PASS);
+                } else {
+                    report.updateTestLog(" Invoice Total Doesnt Match", inv, Status.FAIL);
                 }
             }
         }
 
     }
 
-    public void sortInvoiceDate()
-    {
-        for(int i=0;i<2;i++) {
+    public void sortInvoiceDate() {
+        for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableDateHeader);
             List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDate);
 
-            for(int j=0;j<invoiceList.size();j++)
-            {
-                String temp= invoiceList.get(j).getText();
+            for (int j = 0; j < invoiceList.size(); j++) {
+                String temp = invoiceList.get(j).getText();
                 //        System.out.println(temp);
-                int k=j+1;
+                int k = j + 1;
 
-                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[5]")).getText();
+                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[5]")).getText();
                 //         System.out.println(inv);
-                if(temp.equalsIgnoreCase(inv))
-                {
-                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
-                }else
-                {
-                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                if (temp.equalsIgnoreCase(inv)) {
+                    report.updateTestLog("Matches Invoice Total", inv, Status.PASS);
+                } else {
+                    report.updateTestLog(" Invoice Total Doesnt Match", inv, Status.FAIL);
                 }
             }
         }
 
     }
 
-    public void sortInvoicePaymentDue()
-    {
-        for(int i=0;i<2;i++) {
+    public void sortInvoicePaymentDue() {
+        for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableDateHeader);
             List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDate);
 
-            for(int j=0;j<invoiceList.size();j++)
-            {
-                String temp= invoiceList.get(j).getText();
+            for (int j = 0; j < invoiceList.size(); j++) {
+                String temp = invoiceList.get(j).getText();
                 //        System.out.println(temp);
-                int k=j+1;
+                int k = j + 1;
 
-                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[5]")).getText();
+                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[5]")).getText();
                 //         System.out.println(inv);
-                if(temp.equalsIgnoreCase(inv))
-                {
-                    report.updateTestLog("Matches Invoice Total",inv, Status.PASS);
-                }else
-                {
-                    report.updateTestLog(" Invoice Total Doesnt Match",inv, Status.FAIL);
+                if (temp.equalsIgnoreCase(inv)) {
+                    report.updateTestLog("Matches Invoice Total", inv, Status.PASS);
+                } else {
+                    report.updateTestLog(" Invoice Total Doesnt Match", inv, Status.FAIL);
                 }
             }
         }
 
     }
 
-    public void makeSinglePaymentBA()
-    {
-            click(InvoicePage.supplierCheckBox);
-
-            List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
-
-            for(int j=0;j<1;j++)
-            {
-                int k=j+1;
-                driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
-            }
-
-            click(InvoicePage.makePaymentBtn);
-            Utility_Functions.timeWait(3);
-            commonObj.validateText(MakeAPaymentPage.pageTitle,"Make a Payment","User navigated To Make a Payment Page");
-       //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
-            click(MakeAPaymentPage.bankAccPay);
-            click((MakeAPaymentPage.saveContinuebtn));
-            Utility_Functions.timeWait(2);
-            click(MakeAPaymentPage.submitPaymentbtn);
-            Utility_Functions.timeWait(3);
-            commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
-            scrollToView();
-            String txt=driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
-            Utility_Functions.xUpdateJson("MPInvoiceNumberBA",txt);
-
-
-        }
-
-    public void makeSinglePaymentCC()
-    {
+    public void makeSinglePaymentBA() {
         click(InvoicePage.supplierCheckBox);
 
         List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
 
-        for(int j=0;j<1;j++)
-        {
-            int k=j+1;
-            driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
+        for (int j = 0; j < 1; j++) {
+            int k = j + 1;
+            driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//label")).click();
         }
 
         click(InvoicePage.makePaymentBtn);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(MakeAPaymentPage.pageTitle,"Make a Payment","User navigated To Make a Payment Page");
+        commonObj.validateText(MakeAPaymentPage.pageTitle, "Make a Payment", "User navigated To Make a Payment Page");
+        //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
+        click(MakeAPaymentPage.bankAccPay);
+        click((MakeAPaymentPage.saveContinuebtn));
+        Utility_Functions.timeWait(2);
+        click(MakeAPaymentPage.submitPaymentbtn);
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation, "Payment Confirmation", "Payment Successful");
+        scrollToView();
+        String txt = driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+        Utility_Functions.xUpdateJson("MPInvoiceNumberBA", txt);
+
+
+    }
+
+    public void makeSinglePaymentCC() {
+        click(InvoicePage.supplierCheckBox);
+
+        List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
+
+        for (int j = 0; j < 1; j++) {
+            int k = j + 1;
+            driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//label")).click();
+        }
+
+        click(InvoicePage.makePaymentBtn);
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(MakeAPaymentPage.pageTitle, "Make a Payment", "User navigated To Make a Payment Page");
         //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
 
         click(MakeAPaymentPage.cctab);
@@ -724,46 +850,40 @@ public class makePayments extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(MakeAPaymentPage.submitPaymentbtn);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
+        commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation, "Payment Confirmation", "Payment Successful");
         scrollToView();
-        String txt=driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
-        Utility_Functions.xUpdateJson("MPInvoiceNumberCC",txt);
+        String txt = driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+        Utility_Functions.xUpdateJson("MPInvoiceNumberCC", txt);
 
 
     }
 
-    public void makeMultiPaymentBA()
-    {
+    public void makeMultiPaymentBA() {
         click(InvoicePage.supplierCheckBox);
 
         List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
-        int count= Integer.parseInt(jsonData.getData("invoiceCount"));
-        for(int j=0;j<count;j++)
-        {
-            int k=j+1;
-            driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
+        int count = Integer.parseInt(jsonData.getData("invoiceCount"));
+        for (int j = 0; j < count; j++) {
+            int k = j + 1;
+            driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//label")).click();
         }
 
         click(InvoicePage.makePaymentBtn);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(MakeAPaymentPage.pageTitle,"Make a Payment","User navigated To Make a Payment Page");
+        commonObj.validateText(MakeAPaymentPage.pageTitle, "Make a Payment", "User navigated To Make a Payment Page");
         //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
         click(MakeAPaymentPage.bankAccPay);
         click((MakeAPaymentPage.saveContinuebtn));
         Utility_Functions.timeWait(2);
         click(MakeAPaymentPage.submitPaymentbtn);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
+        commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation, "Payment Confirmation", "Payment Successful");
         scrollToView();
-        String txt=driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
-        Utility_Functions.xUpdateJson("MPInvoiceNumberBA",txt);
+        String txt = driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+        Utility_Functions.xUpdateJson("MPInvoiceNumberBA", txt);
 
 
     }
-
-
-
-
 
 
 }

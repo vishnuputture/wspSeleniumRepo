@@ -15,6 +15,7 @@
       "Tc_141_EnableTermsConditionCheckBoxAndEnroll": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,enableCheckBoxAndEnroll",
       "Tc_142_disabling_Terms_Condition_CheckBox_Exit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,disablingTermsConditionAndExit",
       "Tc_143_enablingTermsConditionCheckBoxExit": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,enableCheckBoxAndExit",
+      "Tc_144_validateMakeRegPayment": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateMakeARegPay",
       "Tc_145_FieldVerificationStartDateEndDate": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateStartEndDateField",
       "Tc_149_CalenderValidation": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,verifyCalenderFunction",
       "Tc_152_ValidateOutStandingBalance": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateOutStandingBalance",
@@ -24,7 +25,12 @@
       "Tc_MakeSinglePaymentByBankAcc": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentBA",
       "Tc_MakeSinglePaymentByCC": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeSinglePaymentCC",
       "Tc_211_addNewBankAcc": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateAddNewBankAcc",
-      "Tc_MakeMultiPaymentByBA": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeMultiPaymentBA"
+      "Tc_MakeMultiPaymentByBA": "launchMakePayments,logInToMakePayments,navigateToInvoice,scrollToView,makeMultiPaymentBA",
+      "Tc_155_validateReviewSession": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateReviewSchedule",
+      "Tc_156_validateCancelButtonOnReviewSession": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateReviewScheduleCancel",
+      "Tc_159_validateEnrollButtonOnReviewSession": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateReviewScheduleEnroll",
+      "Tc_160_validateEditSavedSchedulePayment": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateEditSchedule",
+      "Tc_161_validateStopSavedSchedulePayment": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,stopScheduledPayment"
     }],
   "General_Data": [
     {
@@ -100,6 +106,11 @@
       "userPassword": "Qwerty@1"
     },
     {
+      "TC_ID": "Tc_144_validateMakeRegPayment",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
       "TC_ID": "Tc_145_FieldVerificationStartDateEndDate",
       "userName": "vishnuprasad@numerique.biz",
       "userPassword": "Qwerty@1"
@@ -153,7 +164,43 @@
       "userName": "bhabani.mishra@numerique.biz",
       "userPassword": "Win2021",
       "invoiceCount": "3"
+    },
+    {
+      "TC_ID": "Tc_155_validateReviewSession",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1",
+      "NameOnAccount": "AutomationTesting",
+      "AccountName": "QATesting",
+      "AccountType":"Personal Savings",
+      "BankRoutingNumber": "998000057"
+    },
+    {
+      "TC_ID": "Tc_156_validateCancelButtonOnReviewSession",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1",
+      "NameOnAccount": "AutomationTesting",
+      "AccountName": "QATesting",
+      "AccountType":"Personal Savings",
+      "BankRoutingNumber": "998000057"
+    },
+    {
+      "TC_ID": "Tc_159_validateEnrollButtonOnReviewSession",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1",
+      "NameOnAccount": "AutomationTesting",
+      "AccountName": "QATesting",
+      "AccountType":"Personal Savings",
+      "BankRoutingNumber": "998000057"
+    },
+    {
+      "TC_ID": "Tc_160_validateEditSavedSchedulePayment",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_161_validateStopSavedSchedulePayment",
+      "userName": "vishnuprasad@numerique.biz",
+      "userPassword": "Qwerty@1"
     }
-
   ]
 }
