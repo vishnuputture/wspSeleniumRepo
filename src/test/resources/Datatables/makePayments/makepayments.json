@@ -34,7 +34,10 @@
       "Tc_156_validateCancelButtonOnReviewSession": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateReviewScheduleCancel",
       "Tc_159_validateEnrollButtonOnReviewSession": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateReviewScheduleEnroll",
       "Tc_160_validateEditSavedSchedulePayment": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateEditSchedule",
-      "Tc_161_validateStopSavedSchedulePayment": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,stopScheduledPayment"
+      "Tc_161_validateStopSavedSchedulePayment": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,stopScheduledPayment",
+      "Tc_162_NavigateToFixedPayments": "launchMakePayments,logInToMakePayments,navigateToFixedPayments",
+      "Tc_163_FixedPaymentByBA": "launchMakePayments,logInToMakePayments,navigateToFixedPayments,scrollToView,makeFixedPaymentByBA,fixedPayConfirmation",
+      "Tc_164_FixedPaymentByCC": "launchMakePayments,logInToMakePayments,navigateToFixedPayments,scrollToView,makeFixedPaymentByCC,fixedPayConfirmation"
     }],
   "General_Data": [
     {
@@ -225,6 +228,21 @@
       "TC_ID": "Tc_161_validateStopSavedSchedulePayment",
       "userName": "vishnuprasad@numerique.biz",
       "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_162_NavigateToFixedPayments",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_163_FixedPaymentByBA",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
+    },
+    {
+      "TC_ID": "Tc_164_FixedPaymentByCC",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     }
   ]
 }

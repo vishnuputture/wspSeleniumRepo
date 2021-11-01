@@ -79,6 +79,7 @@ public class SalesOrders extends ReusableLib{
 			Utility_Functions.xSelectDropdownByIndex(driver,driver.findElement(SalesOrdersPage.shipmentStatus),1);
 			Utility_Functions.timeWait(5);
 			Utility_Functions.xScrollIntoView(driver,driver.findElement(SalesOrdersPage.printAndExitbtn));
+			Utility_Functions.waitForElementVisible(driver,SalesOrdersPage.printAndExitbtn,5);
 			click(SalesOrdersPage.printAndExitbtn,"Click on Print&Exit button");
 			Utility_Functions.timeWait(5);
 			Utility_Functions.xScrollIntoView(driver,driver.findElement(SalesOrdersPage.printAndExitbtn));
