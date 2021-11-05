@@ -39,6 +39,11 @@ public class Master extends ReusableLib {
         commonObj.masterToSalesAnalysis();
     }
 
+    public void goToPly() {
+		sendKeys(MasterPage.sqlTxtBox,"ply","Go to PLY application");
+		Utility_Functions.actionKey(Keys.ENTER, driver);
+	}
+    
     public void navigateToSPAApplication() {
         commonObj.salesAnalysisToSPAApplication();
     }

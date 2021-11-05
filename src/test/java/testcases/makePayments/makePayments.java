@@ -297,4 +297,20 @@ public class makePayments extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+    
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_165_ValidateFixedPaymentRecordBA(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Edit Saved Schedule Payment");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+    
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_165_ValidateFixedPaymentRecordCC(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Validate Edit Saved Schedule Payment");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
