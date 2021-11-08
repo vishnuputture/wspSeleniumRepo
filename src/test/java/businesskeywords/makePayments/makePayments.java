@@ -1128,18 +1128,18 @@ public class makePayments extends ReusableLib {
         click(FixedPaymentPage.cntBtn);
         commonObj.validateText(FixedPaymentPage.paymentTotal, "Payment Total", "Validating Total Payment");
         click(FixedPaymentPage.submitPaymentbtn);
-        Utility_Functions.timeWait(4);
+        Utility_Functions.timeWait(10);
     }
 
 
 
-    public void fixedPayConfirmation()
+    public void fixedPayConfirmationCC()
        {
         Utility_Functions.waitForElementVisible(driver,FixedPaymentPage.paymentConfirmationHeader,5);
 
         String fixedNo=driver.findElement(FixedPaymentPage.fixedConfirmationNumber).getText();
 
-        Utility_Functions.xUpdateJson("FixedPaymntConfirmNo",fixedNo);
+        Utility_Functions.xUpdateJson("FixedPaymntConfirmNoCC",fixedNo);
 
         if(fixedNo!="")
         {
@@ -1150,6 +1150,26 @@ public class makePayments extends ReusableLib {
         }
 
     }
+    
+    public void fixedPayConfirmationBA()
+    {
+     Utility_Functions.waitForElementVisible(driver,FixedPaymentPage.paymentConfirmationHeader,5);
+
+     String fixedNo=driver.findElement(FixedPaymentPage.fixedConfirmationNumber).getText();
+
+     Utility_Functions.xUpdateJson("FixedPaymntConfirmNoBA",fixedNo);
+
+     if(fixedNo!="")
+     {
+         report.updateTestLog("Payment Confirmation Number",fixedNo,Status.PASS);
+     }else
+     {
+         report.updateTestLog("Payment Confirmation Number",fixedNo,Status.FAIL);
+     }
+
+ }
+    
+   
 
     }
 
