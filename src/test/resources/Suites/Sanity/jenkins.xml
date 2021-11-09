@@ -94,12 +94,30 @@
                 </methods>
             </class>-->
 
-            <class name="testcases.Pricing.SelfServicePriceSheet">
+            <class name="testcases.makePayments.makePayments">
                 <methods>
-                    <include name="Tc_344_VerifySearchByName"></include>
-                    <include name="Tc_344_VerifyFilterByManufacturer"></include>
-                    <include name="Tc_344_VerifyFilterByStatus"></include>
-                    <include name="Tc_344_VerifyFilterEffectiveDate"></include>
+                    <!--<include name="Tc_139_clickHere_Link_SchedulePage"></include>
+                    <include name="Tc_140_disabling_Terms_Condition_CheckBox_Enroll"></include>
+                    <include name="Tc_141_EnableTermsConditionCheckBoxAndEnroll"></include>
+                    <include name="Tc_142_disabling_Terms_Condition_CheckBox_Exit"></include>
+                    <include name="Tc_143_enablingTermsConditionCheckBoxExit"></include>
+                    <include name="Tc_145_FieldVerificationStartDateEndDate"></include>
+                    <include name="Tc_149_CalenderValidation"></include>
+                    <include name="Tc_152_ValidateOutStandingBalance"></include>
+                    <include name="Tc_153_ValidateOtherAmount"></include>
+                    <include name="Tc_205_ValidateOneTimeSchedule"></include>
+                    <include name="Tc_208_ValidateOneTimeScheduleDateField"></include>
+                    <include name="Tc_211_addNewBankAcc"></include>-->
+
+                    <!--<include name="Tc_144_validateMakeRegPayment"></include>
+                    <include name="Tc_145_FieldVerificationStartDateEndDate"></include>
+                    <include name="Tc_155_validateReviewSession"></include>
+                    <include name="Tc_156_validateCancelButtonOnReviewSession"></include>
+                    <include name="Tc_160_validateEditSavedSchedulePayment"></include>-->
+                    <!--<include name="Tc_159_validateEnrollButtonOnReviewSession"></include>-->
+
+                    <include name="Tc_161_validateStopSavedSchedulePayment"></include>
+
                 </methods>
             </class>
         </classes>
