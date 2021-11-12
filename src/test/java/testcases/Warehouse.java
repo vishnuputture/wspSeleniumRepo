@@ -111,6 +111,59 @@ public class Warehouse extends TestConfigurations {
         tearDownTestRunner(testParameters, coreScript);
     }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_ApplyFilterDriver(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Apply Filter Driver");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_ManifestListUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Manifest List Screen UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_235_ManifestListHelpIcon(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify ManifestList Help Icon");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_236_ManifestListPagination(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify ManifestList Pagination");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_238_ManifestListPageCount(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify ManifestList Page Count");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_240_CreateManifestUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Create new Manifest Ui");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_ApplyFilterTruck(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Apply Filter");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

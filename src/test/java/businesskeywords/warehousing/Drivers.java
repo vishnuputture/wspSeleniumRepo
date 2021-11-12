@@ -45,10 +45,12 @@ public class Drivers extends ReusableLib {
      *
      */
     public void navigateToDriversScreen(){
+        selectCompany();
         click(TruckPage.menuIconTruck);
         click(DriversPage.subMenuDriver, "Navigate to Drivers page");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
+        commonObj.validateText(DriversPage.driversHeader,"Drivers","Drivers Screen Header is present");
     }
 
     /**
@@ -70,8 +72,6 @@ public class Drivers extends ReusableLib {
      *
      */
     public void verifyAvailFieldDrivers() {
-        selectCompany();
-        navigateToDriversScreen();
         String[] actText={"Driver Name","Alias","Rank","Status","CDL","CDL Expiration","Accept Adjustment"};
         List<WebElement> els=driver.findElements(By.xpath("//th"));
         int i=0;
@@ -100,8 +100,6 @@ public class Drivers extends ReusableLib {
      *
      */
     public void helpIcon() {
-        selectCompany();
-        navigateToDriversScreen();
         click(TruckPage.helpIcon);
         Utility_Functions.timeWait(3);
     }
@@ -124,8 +122,6 @@ public class Drivers extends ReusableLib {
      */
     public void pagination() {
         int size=2;
-        selectCompany();
-        navigateToDriversScreen();
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.timeWait(2);
         if(Utility_Functions.xIsDisplayed(driver,DriversPage.onePage)){
@@ -158,7 +154,7 @@ public class Drivers extends ReusableLib {
         if(driverCount==pageNum) {
             Utility_Functions.xAssertEquals(report, "" + driverCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " driver Count");
         }else{
-            commonObj.validateElementExists(DriversPage.driverNameCount,"Total Drivers added count is "+driverCount+"");
+            commonObj.validateElementExists(DriversPage.driverNameCount,"Total count is "+driverCount+"");
         }
     }
 
@@ -167,16 +163,14 @@ public class Drivers extends ReusableLib {
      *
      */
     public void funPageCount() {
-        selectCompany();
-        navigateToDriversScreen();
         Utility_Functions.xScrollWindow(driver);
         if(Utility_Functions.xIsDisplayed(driver,DriversPage.onePage)){
             int driverCount = driver.findElements(DriversPage.driverNameCount).size();
-            commonObj.validateText(DriversPage.onePage,"of 1","One page is available having drivers count "+driverCount+"");
+            commonObj.validateText(DriversPage.onePage,"of 1","One page is available having count "+driverCount+"");
         }else {
             int driverCount = driver.findElements(DriversPage.driverNameCount).size();
             System.out.println("........." + driverCount + ".......");
-            Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Driver Count is 10 by default");
+            Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Count is 10 by default");
             valPageCount(10);
             valPageCount(15);
             valPageCount(30);
@@ -185,16 +179,17 @@ public class Drivers extends ReusableLib {
         }
     }
 
+    public void navigateToAddNewDriver(){
+        click(DriversPage.addNewDriver, "Click on add new driver button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(DriversPage.newDriverHeader,"Add New Driver","Verify Add new Driver Header");
+    }
+
     /**
      * Keyword to verify the UI of Add New Driver Screen
      *
      */
     public void uiAddNewDriver() {
-        selectCompany();
-        navigateToDriversScreen();
-        click(DriversPage.addNewDriver, "Click on add new driver button");
-        Utility_Functions.timeWait(2);
-        commonObj.validateText(DriversPage.newDriverHeader,"Add New Driver","Verify Add new Driver Header");
         String[] actText={"First Name","Last Name","Alias","Rank","Status","Accept Adjustments","Employee","Username","Has CDL?"};
         List<WebElement> els=driver.findElements(DriversPage.addNewDriverLabel);
         int i=0;
@@ -215,9 +210,6 @@ public class Drivers extends ReusableLib {
      *
      */
     public void addNewDriver() {
-        selectCompany();
-        navigateToDriversScreen();
-        click(DriversPage.addNewDriver, "Click on add new driver button");
         sendKeys(DriversPage.firstName, jsonData.getData("firstName"), "Entering first name");
         String lastName=genText();
         sendKeys(DriversPage.lastname, lastName, "Entering last name");
@@ -232,7 +224,50 @@ public class Drivers extends ReusableLib {
         Utility_Functions.xAssertEquals(report,actText,expTest,"Driver successfully added pop up message");
         System.out.println("//a[text()='"+jsonData.getData("firstName")+" "+lastName+"']");
         String actTx=""+jsonData.getData("firstName")+" "+lastName+"";
+        Utility_Functions.timeWait(3);
         String expTx=driver.findElement(By.xpath("//a[text()='"+jsonData.getData("firstName")+" "+lastName+"']")).getText();
         Utility_Functions.xAssertEquals(report,actTx,expTx,"Driver successfully added");
+    }
+
+    /**
+     * Keyword to select search filter drop down
+     *
+     */
+    public By getDropDownVal(String option) {
+        return  By.xpath("//option[contains(text(),'"+option+"')]");
+    }
+
+    public String selectFilter(By by,String label,String option) {
+        click(by);
+        Utility_Functions.timeWait(1);
+        String name=Utility_Functions.getText(driver,getDropDownVal(option));
+        System.out.println(name);
+        Utility_Functions.timeWait(1);
+        click(getDropDownVal(option),"Select "+option+" "+label+" drop Down");
+        return name;
+    }
+
+    public By getTruck(String label){
+        return By.xpath("//table/tbody/tr[1]/td[count(//table/thead/tr/th[contains(text(),'"+label+"')]/preceding-sibling::th)+1]");
+    }
+
+    /**
+     * Keyword to Apply filter
+     *
+     */
+    public void applyFilter() {
+        String driverFirstName=Utility_Functions.getText(driver,DriversPage.driverFirstName);
+        String rank=Utility_Functions.getText(driver,getTruck("Rank"));
+        String status=Utility_Functions.getText(driver,getTruck("Status"));
+        click(TruckPage.filterSearch,"Click search filter icon");
+        Utility_Functions.timeWait(1);
+        selectFilter(DriversPage.driverNameSelect,"Driver Name",driverFirstName);
+        selectFilter(DriversPage.rankSelect,"Rank",rank);
+        selectFilter(DriversPage.statusSelect,"Status",status);
+        click(TruckPage.applyFilter,"Click Apply Filters");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(DriversPage.driverFirstName,driverFirstName,"After filter Driver Name: ");
+        commonObj.validateText(getTruck("Rank"),rank,"After filter rank: ");
+        commonObj.validateText(getTruck("Status"),status,"After filter status: ");
     }
 }

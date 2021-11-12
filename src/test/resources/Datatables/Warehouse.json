@@ -1,20 +1,26 @@
 {
 	"Business_Flow": [
 		{
-			"Tc_TruckUI": "navigateToShippingManifest,verifyAvailFieldTruck",
-			"Tc_TrucksHelpIcon": "navigateToShippingManifest,helpIconTruck",
-			"Tc_TrucksPagination": "navigateToShippingManifest,paginationTruck",
-			"Tc_TrucksPageCount": "navigateToShippingManifest,funPageCountTruck",
-			"Tc_AddNewTruckScreenUI": "navigateToShippingManifest,uiAddNewTruck",
-			"Tc_AddTruck": "navigateToShippingManifest,addNewTruck",
-			"Tc_searchFiltersTruckUi": "navigateToShippingManifest,searchFiltersTruckUI",
-			"Tc_DriversUI": "navigateToShippingManifest,verifyAvailFieldDrivers",
-			"Tc_197_DriversHelpIcon": "navigateToShippingManifest,helpIcon",
-			"Tc_198_DriversPagination": "navigateToShippingManifest,pagination",
-			"Tc_200_DriversPageCount": "navigateToShippingManifest,funPageCount",
-			"Tc_209_AddNewDriverScreenUI": "navigateToShippingManifest,uiAddNewDriver",
-			"Tc_AddNewDriver": "navigateToShippingManifest,addNewDriver"
-
+			"Tc_TruckUI": "navigateToShippingManifest,navigateToTrucksScreen,verifyAvailFieldTruck",
+			"Tc_TrucksHelpIcon": "navigateToShippingManifest,navigateToTrucksScreen,helpIconTruck",
+			"Tc_TrucksPagination": "navigateToShippingManifest,navigateToTrucksScreen,paginationTruck",
+			"Tc_TrucksPageCount": "navigateToShippingManifest,navigateToTrucksScreen,funPageCountTruck",
+			"Tc_AddNewTruckScreenUI": "navigateToShippingManifest,navigateToTrucksScreen,navigateToAddNewTruck,uiAddNewTruck",
+			"Tc_AddTruck": "navigateToShippingManifest,navigateToTrucksScreen,navigateToAddNewTruck,addNewTruck",
+			"Tc_searchFiltersTruckUi": "navigateToShippingManifest,navigateToTrucksScreen,searchFiltersTruckUI",
+			"Tc_ApplyFilterTruck": "navigateToShippingManifest,navigateToTrucksScreen,applyFilter",
+			"Tc_DriversUI": "navigateToShippingManifest,navigateToDriversScreen,verifyAvailFieldDrivers",
+			"Tc_197_DriversHelpIcon": "navigateToShippingManifest,navigateToDriversScreen,helpIcon",
+			"Tc_198_DriversPagination": "navigateToShippingManifest,navigateToDriversScreen,pagination",
+			"Tc_200_DriversPageCount": "navigateToShippingManifest,navigateToDriversScreen,funPageCount",
+			"Tc_209_AddNewDriverScreenUI": "navigateToShippingManifest,navigateToDriversScreen,navigateToAddNewDriver,uiAddNewDriver",
+			"Tc_AddNewDriver": "navigateToShippingManifest,navigateToDriversScreen,navigateToAddNewDriver,addNewDriver",
+			"Tc_ApplyFilterDriver": "navigateToShippingManifest,navigateToDriversScreen,applyFilter",
+			"Tc_ManifestListUI": "navigateToShippingManifest,navigateToManifestsScreen,verifyManifestListUI",
+			"Tc_235_ManifestListHelpIcon": "navigateToShippingManifest,navigateToManifestsScreen,helpIconManifest",
+			"Tc_236_ManifestListPagination": "navigateToShippingManifest,navigateToManifestsScreen,paginationManifest",
+			"Tc_238_ManifestListPageCount": "navigateToShippingManifest,navigateToManifestsScreen,funPageCount",
+			"Tc_240_CreateManifestUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,uiCreateManifest"
 		}
 	],
 	"General_Data": [
@@ -54,6 +60,10 @@
 			"Title": "Search Filters Truck Ui"
 		},
 		{
+			"TC_ID": "Tc_ApplyFilterTruck",
+			"Title": "Apply Filter"
+		},
+		{
 			"TC_ID": "Tc_DriversUI",
 			"Title": "UI of Drivers Screen"
 		},
@@ -78,6 +88,32 @@
 			"Title": "Add New Driver",
 			"firstName": "QA",
 			"alias": "Testing"
+		},
+		{
+			"TC_ID": "Tc_ApplyFilterDriver",
+			"Title": "Apply filter Driver",
+			"firstName": "QA",
+			"alias": "Testing"
+		},
+		{
+			"TC_ID": "Tc_ManifestListUI",
+			"Title": "Verify Manifest List Screen UI"
+		},
+		{
+			"TC_ID": "Tc_235_ManifestListHelpIcon",
+			"Title": "Verify ManifestList Help Icon"
+		},
+		{
+			"TC_ID": "Tc_236_ManifestListPagination",
+			"Title": "Verify ManifestList Pagination"
+		},
+		{
+			"TC_ID": "Tc_238_ManifestListPageCount",
+			"Title": "Verify ManifestList Page Count"
+		},
+		{
+			"TC_ID": "Tc_240_CreateManifestUI",
+			"Title": "Verify Create new Manifest Ui"
 		}
 	]
 }

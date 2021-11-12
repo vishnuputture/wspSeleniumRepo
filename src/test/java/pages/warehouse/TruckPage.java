@@ -33,5 +33,11 @@ public class TruckPage {
     public static By clearFilters=By.xpath("//button[contains(text(),'Clear All Filters') and contains(@class,'red')]");
     public static By searchFilterPanelTitle=By.xpath("//h1[@class='panel-title']");
     public static By filtersCrossIcon=By.xpath("//span[@class='pi pi-times']");
+    public static By truckFilter=By.id("trucks");
+    public static By licensePlateNoFilter=By.id("licensePlate");
+    public static By statusFilter=By.id("status");
+    public static By cdlRequiredFilter=By.id("cdlRequired");
+    public static By applyFilter=By.xpath("//button[contains(text(),'Apply Filters')]");
+    public static By truckFirstName=By.xpath("//th[contains(text(),'Truck Name')]/ancestor::table/descendant::td/a");
 
 }
