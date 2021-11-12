@@ -15,7 +15,7 @@
 			"Tc_200_DriversPageCount": "navigateToShippingManifest,navigateToDriversScreen,funPageCount",
 			"Tc_209_AddNewDriverScreenUI": "navigateToShippingManifest,navigateToDriversScreen,navigateToAddNewDriver,uiAddNewDriver",
 			"Tc_AddNewDriver": "navigateToShippingManifest,navigateToDriversScreen,navigateToAddNewDriver,addNewDriver",
-			"Tc_ApplyFilterDriver": "navigateToShippingManifest,navigateToDriversScreen,applyFilter",
+			"Tc_ApplyFilterDriver": "navigateToShippingManifest,navigateToDriversScreen,applyFilterDriver",
 			"Tc_ManifestListUI": "navigateToShippingManifest,navigateToManifestsScreen,verifyManifestListUI",
 			"Tc_235_ManifestListHelpIcon": "navigateToShippingManifest,navigateToManifestsScreen,helpIconManifest",
 			"Tc_236_ManifestListPagination": "navigateToShippingManifest,navigateToManifestsScreen,paginationManifest",

@@ -120,6 +120,14 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_ApplyFilterTruck(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Apply Filter");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_ManifestListUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Manifest List Screen UI");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -154,14 +162,6 @@ public class Warehouse extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_240_CreateManifestUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Create new Manifest Ui");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
-
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_ApplyFilterTruck(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Apply Filter");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

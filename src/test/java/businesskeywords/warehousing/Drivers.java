@@ -255,7 +255,7 @@ public class Drivers extends ReusableLib {
      * Keyword to Apply filter
      *
      */
-    public void applyFilter() {
+    public void applyFilterDriver() {
         String driverFirstName=Utility_Functions.getText(driver,DriversPage.driverFirstName);
         String rank=Utility_Functions.getText(driver,getTruck("Rank"));
         String status=Utility_Functions.getText(driver,getTruck("Status"));
