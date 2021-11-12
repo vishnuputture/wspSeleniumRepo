@@ -11,11 +11,10 @@ import pages.warehouse.DriversPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Trucks extends ReusableLib {
+public class Drivers extends ReusableLib {
     CommonActions commonObj;
 
     /**
@@ -24,19 +23,13 @@ public class Trucks extends ReusableLib {
      *
      * @param helper The {@link Helper} object
      */
-    public Trucks(Helper helper) {
+    public Drivers(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
     }
 
-    public void navigateToShippingManifest() {
-        //driver.get(jsonData.getData("Url"));
-        driver.get("http://wservicedev.winwholesale.com/shipping-manifest-manager/#/truck-list/warehousing");
-        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-    }
-
     /**
-     * Keyword to select Company
+     * Keyword to Select Company
      *
      */
     public void selectCompany(){
@@ -48,12 +41,23 @@ public class Trucks extends ReusableLib {
     }
 
     /**
+     * Keyword to Navigate to Drivers Screen
+     *
+     */
+    public void navigateToDriversScreen(){
+        click(TruckPage.menuIconTruck);
+        click(DriversPage.subMenuDriver, "Navigate to Drivers page");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        Utility_Functions.timeWait(3);
+    }
+
+    /**
      * Keyword to Generate Random Text
      *
      */
     public String genText(){
         String userName = "";
-        for(int i=0; i<=10;i++) {
+        for(int i=0; i<=16;i++) {
             Random random = new Random();
             char randomizedCharacter = (char) (random.nextInt(26) + 'A');
             userName = userName+randomizedCharacter;
@@ -62,29 +66,20 @@ public class Trucks extends ReusableLib {
     }
 
     /**
-     * Keyword to Navigate to Trucks Screen
+     * Keyword to verify the availability of field again Drivers Screen
      *
      */
-    public void navigateToTrucksScreen(){
-        click(TruckPage.menuIconTruck);
-        click(TruckPage.subMenuTruck, "Navigate to trucks page");
-        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        Utility_Functions.timeWait(3);
-    }
-
-    /**
-     * Keyword to verify the availability of field again Truck Screen
-     */
-    public void verifyAvailFieldTruck() {
+    public void verifyAvailFieldDrivers() {
         selectCompany();
-        navigateToTrucksScreen();
-        String[] actText={"Truck Name","License Plate Number","License Plate Expiration","Status","CDL Required","Year","Make","Model"};
+        navigateToDriversScreen();
+        String[] actText={"Driver Name","Alias","Rank","Status","CDL","CDL Expiration","Accept Adjustment"};
         List<WebElement> els=driver.findElements(By.xpath("//th"));
         int i=0;
         for(WebElement el:els){
             Utility_Functions.xAssertEquals(report,el.getText().trim(),actText[i],"");
             i++;
         }
+        Utility_Functions.timeWait(2);
         commonObj.validateElementExists(TruckPage.helpIcon,"Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch,"Search filter icon is present");
         int size=driver.findElements(TruckPage.pagination).size();
@@ -104,9 +99,9 @@ public class Trucks extends ReusableLib {
      * Keyword to Verify functionality of Help (?)icon
      *
      */
-    public void helpIconTruck() {
+    public void helpIcon() {
         selectCompany();
-        navigateToTrucksScreen();
+        navigateToDriversScreen();
         click(TruckPage.helpIcon);
         Utility_Functions.timeWait(3);
     }
@@ -127,10 +122,10 @@ public class Trucks extends ReusableLib {
      * Keyword to Verify functionality of Pagination
      *
      */
-    public void paginationTruck() {
+    public void pagination() {
         int size=2;
         selectCompany();
-        navigateToTrucksScreen();
+        navigateToDriversScreen();
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.timeWait(2);
         if(Utility_Functions.xIsDisplayed(driver,DriversPage.onePage)){
@@ -159,11 +154,11 @@ public class Trucks extends ReusableLib {
     public void valPageCount(int pageNum) {
         Utility_Functions.xScrollWindow(driver);
         click(By.xpath("//span[text()='"+pageNum+"']"),"Click on '"+pageNum+"' Present below the Left corner of the page");
-        int truckCount=driver.findElements(DriversPage.driverNameCount).size();
-        if(truckCount==pageNum) {
-            Utility_Functions.xAssertEquals(report, "" + truckCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " driver Count");
+        int driverCount=driver.findElements(DriversPage.driverNameCount).size();
+        if(driverCount==pageNum) {
+            Utility_Functions.xAssertEquals(report, "" + driverCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " driver Count");
         }else{
-            commonObj.validateElementExists(DriversPage.driverNameCount,"Total Truck added count is "+truckCount+"");
+            commonObj.validateElementExists(DriversPage.driverNameCount,"Total Drivers added count is "+driverCount+"");
         }
     }
 
@@ -171,16 +166,17 @@ public class Trucks extends ReusableLib {
      * Keyword to Verify functionality of Page Count
      *
      */
-    public void funPageCountTruck() {
+    public void funPageCount() {
         selectCompany();
-        navigateToTrucksScreen();
+        navigateToDriversScreen();
         Utility_Functions.xScrollWindow(driver);
         if(Utility_Functions.xIsDisplayed(driver,DriversPage.onePage)){
-            int truckCount = driver.findElements(DriversPage.driverNameCount).size();
-            commonObj.validateText(DriversPage.onePage,"of 1","One page is available having drivers count "+truckCount+"");
+            int driverCount = driver.findElements(DriversPage.driverNameCount).size();
+            commonObj.validateText(DriversPage.onePage,"of 1","One page is available having drivers count "+driverCount+"");
         }else {
-            int truckCount = driver.findElements(DriversPage.driverNameCount).size();
-            Utility_Functions.xAssertEquals(report, "" + truckCount + "", "10", "The Driver Count is 10 by default");
+            int driverCount = driver.findElements(DriversPage.driverNameCount).size();
+            System.out.println("........." + driverCount + ".......");
+            Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Driver Count is 10 by default");
             valPageCount(10);
             valPageCount(15);
             valPageCount(30);
@@ -190,80 +186,53 @@ public class Trucks extends ReusableLib {
     }
 
     /**
-     * Keyword to verify the UI of Add New Truck Screen
+     * Keyword to verify the UI of Add New Driver Screen
      *
      */
-    public void uiAddNewTruck() {
+    public void uiAddNewDriver() {
         selectCompany();
-        navigateToTrucksScreen();
-        click(TruckPage.addNewTruckBtn, "Click on add new Truck button");
+        navigateToDriversScreen();
+        click(DriversPage.addNewDriver, "Click on add new driver button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.addNewTruckHeader,"Add New Truck","Verify Add new Truck Header");
-        String[] actText={"Truck Name","License Plate Number","License Plate Expiration","Status","CDL Required","Year","Make","Model","VIN","Truck Weight - Unloaded"};
-        List<WebElement> els=driver.findElements(TruckPage.newTruckLabel);
+        commonObj.validateText(DriversPage.newDriverHeader,"Add New Driver","Verify Add new Driver Header");
+        String[] actText={"First Name","Last Name","Alias","Rank","Status","Accept Adjustments","Employee","Username","Has CDL?"};
+        List<WebElement> els=driver.findElements(DriversPage.addNewDriverLabel);
         int i=0;
         for(WebElement el:els){
             Utility_Functions.xAssertEquals(report,el.getText().trim(),actText[i],"");
             i++;
         }
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.saveBtnDis,"Save Truck","Save Button is Exist and button is disabled");
+        commonObj.validateText(DriversPage.saveDriverDis,"Save Driver","Save Button is Exist and button is disabled");
         commonObj.validateElementExists(DriversPage.crossIcon,"Cross icon is present");
         click(DriversPage.crossIcon,"Click Cross Icon");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(DriversPage.driversHeader,"Drivers","Verify Drivers screen Header");
+    }
+
+    /**
+     * Keyword to Add new Driver
+     *
+     */
+    public void addNewDriver() {
+        selectCompany();
+        navigateToDriversScreen();
+        click(DriversPage.addNewDriver, "Click on add new driver button");
+        sendKeys(DriversPage.firstName, jsonData.getData("firstName"), "Entering first name");
+        String lastName=genText();
+        sendKeys(DriversPage.lastname, lastName, "Entering last name");
+        sendKeys(DriversPage.alias, jsonData.getData("alias"), "Entering alias name");
+        sendKeys(DriversPage.username, genText(), "Entering username name");
+        click(DriversPage.saveDriver, "Saving record");
         Utility_Functions.timeWait(3);
-        commonObj.validateText(TruckPage.trucksHeader,"Trucks","Verify Trucks screen Header");
-    }
-
-    /**
-     * Keyword to Add Truck
-     *
-     */
-    public void addNewTruck() {
-        selectCompany();
-        navigateToTrucksScreen();
-        click(TruckPage.addNewTruckBtn, "Click on add new truck button");
-        String truckName=genText();
-        int licensePlateNo=Utility_Functions.xRandomFunction();
-        sendKeys(TruckPage.truckNameInput, truckName, "Entering truck name");
-        sendKeys(TruckPage.licensePlateNumberInput, ""+licensePlateNo+"", "Entering license plate number");
-        click(TruckPage.newTruckPlateExpInput);
-        click(TruckPage.licensePlateExpSelect, "Select License Plate Expiration Date");
-        sendKeys(TruckPage.yearInput, jsonData.getData("MakeYear"), "Entering year");
-        sendKeys(TruckPage.makeInput, jsonData.getData("Make"), "Entering make");
-        sendKeys(TruckPage.modelInput, jsonData.getData("Model"), "Entering model");
-        sendKeys(TruckPage.vinInput, jsonData.getData("Vin"), "Entering vin number");
-        sendKeys(TruckPage.emptyTruckWeightInput, jsonData.getData("EmptyWeight"), "Entering empty truck weight");
-        sendKeys(TruckPage.weightLimitInput, jsonData.getData("WeightLimit"), "Entering weight limit");
-        click(TruckPage.saveBtn, "Saving record");
+        click(DriversPage.cdlSort);
         Utility_Functions.timeWait(2);
-        String actText="Truck "+truckName+" successfully created.";
-        String expTest=Utility_Functions.getText(driver,By.xpath("//span[contains(text(),'"+truckName+"')]"));
-        Utility_Functions.xAssertEquals(report,actText,expTest,"Truck successfully added pop up message");
-        System.out.println("//a[text()='"+truckName+"']");
-        String actTx=""+truckName+"";
-        String expTx=driver.findElement(By.xpath("//a[text()='"+truckName+"']")).getText();
-        Utility_Functions.xAssertEquals(report,actTx,expTx,"Truck successfully added");
-    }
-
-    /**
-     * Keyword to verify UI of Search Filters
-     *
-     */
-    public void searchFiltersTruckUI() {
-        selectCompany();
-        navigateToTrucksScreen();
-        click(TruckPage.filterSearch,"Click Search Filter icon");
-        Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.searchFilterPanelTitle,"Search Filters","Search Filters panel title is present");
-        String[] actText = {"Truck Name", "License Plate Number","Status", "CDL Required"};
-        List<WebElement> els = driver.findElements(TruckPage.searchFiltersLabel);
-        int i = 0;
-        for (WebElement el : els) {
-            Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
-            i++;
-        }
-        commonObj.validateElementExists(TruckPage.filtersCrossIcon,"Cross icon is present");
-        commonObj.validateText(TruckPage.applyFiltersDis,"Apply Filters","Apply Filters button exist and button is disabled");
-        commonObj.validateText(TruckPage.clearFilters,"Clear All Filters","Clear All Filters button is exist and text is in red color");
+        String actText="Driver "+jsonData.getData("firstName")+" "+lastName+" ("+jsonData.getData("alias")+") successfully created.";
+        String expTest=Utility_Functions.getText(driver,By.xpath("//span[contains(text(),'"+jsonData.getData("firstName")+" "+lastName+"')]"));
+        Utility_Functions.xAssertEquals(report,actText,expTest,"Driver successfully added pop up message");
+        System.out.println("//a[text()='"+jsonData.getData("firstName")+" "+lastName+"']");
+        String actTx=""+jsonData.getData("firstName")+" "+lastName+"";
+        String expTx=driver.findElement(By.xpath("//a[text()='"+jsonData.getData("firstName")+" "+lastName+"']")).getText();
+        Utility_Functions.xAssertEquals(report,actTx,expTx,"Driver successfully added");
     }
 }

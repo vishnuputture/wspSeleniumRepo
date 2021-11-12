@@ -1,0 +1,26 @@
+package pages.warehouse;
+
+import org.openqa.selenium.By;
+
+public class DriversPage {
+
+    public static By subMenuDriver=By.xpath("//a[contains(text(),'Drivers')]");
+    public static By driversHeader=By.xpath("//h2[contains(text(),'Drivers')]");
+    public static By pageArrow=By.xpath("//a[@class='page-link']");
+    public static By onePage=By.xpath("//span[text()='of 1']");
+    public static By lastPage=By.xpath("//li[contains(@class,'disabled')]");
+    public static By driverNameCount=By.xpath("//td[@class='text-break']");
+    public static By addNewDriver=By.xpath("//button[contains(text(),'New Driver')]");
+    public static By newDriverHeader=By.xpath("//h2[starts-with(@class,'modal-title text')]");
+    public static By firstName=By.id("firstname");
+    public static By lastname=By.id("lastname");
+    public static By alias=By.id("alias");
+    public static By username=By.id("username");
+    public static By saveDriver=By.xpath("//button[contains(text(),'Save Driver')]");
+    public static By saveDriverDis=By.xpath("//button[@disabled and contains(text(),'Save Driver')]");
+    public static By cdlSort=By.xpath("//th[contains(text(),'CDL Expiration')]");
+    public static By addNewDriverLabel=By.xpath("//div[contains(@class,'input-field col')]//label[@for and @class='win-label']");
+    public static By crossIcon=By.xpath("//i[@class='fa fa-times' and @aria-hidden='true']");
+
+
+}

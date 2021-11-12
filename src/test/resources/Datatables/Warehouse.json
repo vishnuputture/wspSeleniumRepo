@@ -1,10 +1,83 @@
 {
 	"Business_Flow": [
 		{
-			"Tc_AddTruck": "addNewtruck"
+			"Tc_TruckUI": "navigateToShippingManifest,verifyAvailFieldTruck",
+			"Tc_TrucksHelpIcon": "navigateToShippingManifest,helpIconTruck",
+			"Tc_TrucksPagination": "navigateToShippingManifest,paginationTruck",
+			"Tc_TrucksPageCount": "navigateToShippingManifest,funPageCountTruck",
+			"Tc_AddNewTruckScreenUI": "navigateToShippingManifest,uiAddNewTruck",
+			"Tc_AddTruck": "navigateToShippingManifest,addNewTruck",
+			"Tc_searchFiltersTruckUi": "navigateToShippingManifest,searchFiltersTruckUI",
+			"Tc_DriversUI": "navigateToShippingManifest,verifyAvailFieldDrivers",
+			"Tc_197_DriversHelpIcon": "navigateToShippingManifest,helpIcon",
+			"Tc_198_DriversPagination": "navigateToShippingManifest,pagination",
+			"Tc_200_DriversPageCount": "navigateToShippingManifest,funPageCount",
+			"Tc_209_AddNewDriverScreenUI": "navigateToShippingManifest,uiAddNewDriver",
+			"Tc_AddNewDriver": "navigateToShippingManifest,addNewDriver"
 
 		}
 	],
 	"General_Data": [
+		{
+			"TC_ID": "Tc_TruckUI",
+			"Title": "UI of Trucks Screen"
+		},
+		{
+			"TC_ID": "Tc_TrucksHelpIcon",
+			"Title": "Verify functionality of Help (?)icon"
+		},
+		{
+			"TC_ID": "Tc_TrucksPagination",
+			"Title": "Verify functionality of Pagination"
+		},
+		{
+			"TC_ID": "Tc_TrucksPageCount",
+			"Title": "Verify functionality of Page Count"
+		},
+		{
+			"TC_ID": "Tc_AddNewTruckScreenUI",
+			"Title": "Verify functionality Add New Truck Screen UI"
+		},
+		{
+			"TC_ID": "Tc_AddTruck",
+			"Title": "Add New Truck",
+			"LicensePlateNum": "12345",
+			"MakeYear": "2020",
+			"Make": "Win-supply",
+			"Model": "TlV10",
+			"Vin": "T102345",
+			"EmptyWeight": "15TN",
+			"WeightLimit": "22TN"
+		},
+		{
+			"TC_ID": "Tc_searchFiltersTruckUi",
+			"Title": "Search Filters Truck Ui"
+		},
+		{
+			"TC_ID": "Tc_DriversUI",
+			"Title": "UI of Drivers Screen"
+		},
+		{
+			"TC_ID": "Tc_197_DriversHelpIcon",
+			"Title": "Verify functionality of Help (?)icon"
+		},
+		{
+			"TC_ID": "Tc_198_DriversPagination",
+			"Title": "Verify functionality of Pagination"
+		},
+		{
+			"TC_ID": "Tc_200_DriversPageCount",
+			"Title": "Verify functionality of Page Count"
+		},
+		{
+			"TC_ID": "Tc_209_AddNewDriverScreenUI",
+			"Title": "UI of Add New Driver Screen"
+		},
+		{
+			"TC_ID": "Tc_AddNewDriver",
+			"Title": "Add New Driver",
+			"firstName": "QA",
+			"alias": "Testing"
+		}
 	]
 }
