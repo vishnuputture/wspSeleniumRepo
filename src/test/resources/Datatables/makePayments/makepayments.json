@@ -36,8 +36,10 @@
       "Tc_160_validateEditSavedSchedulePayment": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,validateEditSchedule",
       "Tc_161_validateStopSavedSchedulePayment": "launchMakePayments,logInToMakePayments,navigateToSchedulePayments,stopScheduledPayment",
       "Tc_162_NavigateToFixedPayments": "launchMakePayments,logInToMakePayments,navigateToFixedPayments",
-      "Tc_163_FixedPaymentByBA": "launchMakePayments,logInToMakePayments,navigateToFixedPayments,scrollToView,makeFixedPaymentByBA,fixedPayConfirmation",
-      "Tc_164_FixedPaymentByCC": "launchMakePayments,logInToMakePayments,navigateToFixedPayments,scrollToView,makeFixedPaymentByCC,fixedPayConfirmation"
+      "Tc_163_FixedPaymentByBA": "launchMakePayments,logInToMakePayments,navigateToFixedPayments,scrollToView,makeFixedPaymentByBA,fixedPayConfirmationBA",
+      "Tc_164_FixedPaymentByCC": "launchMakePayments,logInToMakePayments,navigateToFixedPayments,scrollToView,makeFixedPaymentByCC,fixedPayConfirmationCC",
+      "Tc_165_ValidateFixedPaymentRecordBA": "launchApp,siteLogin,navigateToSalesAnalysis,goToPly,fixedPaymentValidationBA",
+      "Tc_166_ValidateFixedPaymentRecordCC": "launchApp,siteLogin,navigateToSalesAnalysis,goToPly,fixedPaymentValidationCC"
     }],
   "General_Data": [
     {
@@ -51,6 +53,12 @@
       "TC_ID": "Tc_NavigateToMakePayments",
       "userName": "vishnuprasad@numerique.biz",
       "userPassword": "Qwerty@1"
+    },
+    {
+      "TC_ID": "Tc_165_ValidateFixedPaymentRecordBA"
+    },
+    {
+      "TC_ID": "Tc_166_ValidateFixedPaymentRecordCC"
     },
     {
       "TC_ID": "Tc_ValidateMakePaymentsStatusFilter",
