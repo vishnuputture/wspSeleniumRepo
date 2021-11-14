@@ -1,10 +1,119 @@
 {
 	"Business_Flow": [
 		{
-			"Tc_AddTruck": "addNewtruck"
-
+			"Tc_TruckUI": "navigateToShippingManifest,navigateToTrucksScreen,verifyAvailFieldTruck",
+			"Tc_TrucksHelpIcon": "navigateToShippingManifest,navigateToTrucksScreen,helpIconTruck",
+			"Tc_TrucksPagination": "navigateToShippingManifest,navigateToTrucksScreen,paginationTruck",
+			"Tc_TrucksPageCount": "navigateToShippingManifest,navigateToTrucksScreen,funPageCountTruck",
+			"Tc_AddNewTruckScreenUI": "navigateToShippingManifest,navigateToTrucksScreen,navigateToAddNewTruck,uiAddNewTruck",
+			"Tc_AddTruck": "navigateToShippingManifest,navigateToTrucksScreen,navigateToAddNewTruck,addNewTruck",
+			"Tc_searchFiltersTruckUi": "navigateToShippingManifest,navigateToTrucksScreen,searchFiltersTruckUI",
+			"Tc_ApplyFilterTruck": "navigateToShippingManifest,navigateToTrucksScreen,applyFilter",
+			"Tc_DriversUI": "navigateToShippingManifest,navigateToDriversScreen,verifyAvailFieldDrivers",
+			"Tc_197_DriversHelpIcon": "navigateToShippingManifest,navigateToDriversScreen,helpIcon",
+			"Tc_198_DriversPagination": "navigateToShippingManifest,navigateToDriversScreen,pagination",
+			"Tc_200_DriversPageCount": "navigateToShippingManifest,navigateToDriversScreen,funPageCount",
+			"Tc_209_AddNewDriverScreenUI": "navigateToShippingManifest,navigateToDriversScreen,navigateToAddNewDriver,uiAddNewDriver",
+			"Tc_AddNewDriver": "navigateToShippingManifest,navigateToDriversScreen,navigateToAddNewDriver,addNewDriver",
+			"Tc_ApplyFilterDriver": "navigateToShippingManifest,navigateToDriversScreen,applyFilterDriver",
+			"Tc_ManifestListUI": "navigateToShippingManifest,navigateToManifestsScreen,verifyManifestListUI",
+			"Tc_235_ManifestListHelpIcon": "navigateToShippingManifest,navigateToManifestsScreen,helpIconManifest",
+			"Tc_236_ManifestListPagination": "navigateToShippingManifest,navigateToManifestsScreen,paginationManifest",
+			"Tc_238_ManifestListPageCount": "navigateToShippingManifest,navigateToManifestsScreen,funPageCount",
+			"Tc_240_CreateManifestUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,uiCreateManifest"
 		}
 	],
 	"General_Data": [
+		{
+			"TC_ID": "Tc_TruckUI",
+			"Title": "UI of Trucks Screen"
+		},
+		{
+			"TC_ID": "Tc_TrucksHelpIcon",
+			"Title": "Verify functionality of Help (?)icon"
+		},
+		{
+			"TC_ID": "Tc_TrucksPagination",
+			"Title": "Verify functionality of Pagination"
+		},
+		{
+			"TC_ID": "Tc_TrucksPageCount",
+			"Title": "Verify functionality of Page Count"
+		},
+		{
+			"TC_ID": "Tc_AddNewTruckScreenUI",
+			"Title": "Verify functionality Add New Truck Screen UI"
+		},
+		{
+			"TC_ID": "Tc_AddTruck",
+			"Title": "Add New Truck",
+			"LicensePlateNum": "12345",
+			"MakeYear": "2020",
+			"Make": "Win-supply",
+			"Model": "TlV10",
+			"Vin": "T102345",
+			"EmptyWeight": "15TN",
+			"WeightLimit": "22TN"
+		},
+		{
+			"TC_ID": "Tc_searchFiltersTruckUi",
+			"Title": "Search Filters Truck Ui"
+		},
+		{
+			"TC_ID": "Tc_ApplyFilterTruck",
+			"Title": "Apply Filter"
+		},
+		{
+			"TC_ID": "Tc_DriversUI",
+			"Title": "UI of Drivers Screen"
+		},
+		{
+			"TC_ID": "Tc_197_DriversHelpIcon",
+			"Title": "Verify functionality of Help (?)icon"
+		},
+		{
+			"TC_ID": "Tc_198_DriversPagination",
+			"Title": "Verify functionality of Pagination"
+		},
+		{
+			"TC_ID": "Tc_200_DriversPageCount",
+			"Title": "Verify functionality of Page Count"
+		},
+		{
+			"TC_ID": "Tc_209_AddNewDriverScreenUI",
+			"Title": "UI of Add New Driver Screen"
+		},
+		{
+			"TC_ID": "Tc_AddNewDriver",
+			"Title": "Add New Driver",
+			"firstName": "QA",
+			"alias": "Testing"
+		},
+		{
+			"TC_ID": "Tc_ApplyFilterDriver",
+			"Title": "Apply filter Driver",
+			"firstName": "QA",
+			"alias": "Testing"
+		},
+		{
+			"TC_ID": "Tc_ManifestListUI",
+			"Title": "Verify Manifest List Screen UI"
+		},
+		{
+			"TC_ID": "Tc_235_ManifestListHelpIcon",
+			"Title": "Verify ManifestList Help Icon"
+		},
+		{
+			"TC_ID": "Tc_236_ManifestListPagination",
+			"Title": "Verify ManifestList Pagination"
+		},
+		{
+			"TC_ID": "Tc_238_ManifestListPageCount",
+			"Title": "Verify ManifestList Page Count"
+		},
+		{
+			"TC_ID": "Tc_240_CreateManifestUI",
+			"Title": "Verify Create new Manifest Ui"
+		}
 	]
 }

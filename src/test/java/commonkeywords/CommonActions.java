@@ -3,6 +3,7 @@ package commonkeywords;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
+import com.winSupply.framework.Status;
 import org.openqa.selenium.WebElement;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
@@ -159,7 +160,8 @@ public class CommonActions extends ReusableLib {
 	public void validateElementExists(By ele, String msg) {
         if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
             System.out.println("Element: "+ ele + " exists");
-
+			report.updateTestLog("Validate ", msg + "" + "",
+					Status.PASS);
         }else {
             System.out.println("Element: Not found");
             throw new NoSuchElementException("Could not find :"+ele);
