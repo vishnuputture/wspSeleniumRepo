@@ -34,6 +34,7 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By btnContinue = By.id("Continue");
 
 	public static By shipmentDeliveryTypeDropDown = By.id("slbShipType.1");
+	public static By  elementForContextClick= By.xpath("//select[@id='slbShipType.1']/parent::div");
 	public static By directShipDropdown = By.xpath("//*[contains(@id,'slbDirectShip')]");
 	public static By contextOptionLineDetails = By.xpath("//td[text()='Line Details']");
 	public static By shipmentItemName = By.id("outItemNumb.1");

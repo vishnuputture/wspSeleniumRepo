@@ -20,7 +20,10 @@
 			"Tc_235_ManifestListHelpIcon": "navigateToShippingManifest,navigateToManifestsScreen,helpIconManifest",
 			"Tc_236_ManifestListPagination": "navigateToShippingManifest,navigateToManifestsScreen,paginationManifest",
 			"Tc_238_ManifestListPageCount": "navigateToShippingManifest,navigateToManifestsScreen,funPageCount",
-			"Tc_240_CreateManifestUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,uiCreateManifest"
+			"Tc_240_CreateManifestUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,uiCreateManifest",
+			"Tc_241_collapseExpandSession": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,verifyAreaExpanded",
+			"TC_243_CreateManifest": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,createManifest",
+			"TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,navigateToManifestsScreen,searchFiltersManifestUI"
 		}
 	],
 	"General_Data": [
@@ -114,6 +117,18 @@
 		{
 			"TC_ID": "Tc_240_CreateManifestUI",
 			"Title": "Verify Create new Manifest Ui"
+		},
+		{
+			"TC_ID": "Tc_241_collapseExpandSession",
+			"Title": "Verify collapse and expand icon"
+		},
+		{
+			"TC_ID": "TC_243_CreateManifest",
+			"Title": "Verify Create new Manifest"
+		},
+		{
+			"TC_ID": "TC_258_ManifestSearchFilterUI",
+			"Title": "Verify Manifest Search Filter UI"
 		}
 	]
 }

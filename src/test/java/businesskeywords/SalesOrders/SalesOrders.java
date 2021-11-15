@@ -93,7 +93,7 @@ public class SalesOrders extends ReusableLib{
 
 		public void deleteItemFromShipment(){
 			Utility_Functions.timeWait(5);
-			Utility_Functions.contextClickOnElement(driver,SalesOrdersPage.shipmentDeliveryTypeDropDown);
+			Utility_Functions.contextClickOnElement(driver,SalesOrdersPage.elementForContextClick);
 			click(SalesOrdersPage.contextOptionLineDetails,"Removing item from shipment");
 			Utility_Functions.contextClickOnElement(driver,SalesOrdersPage.shipmentItemName);
 			Utility_Functions.timeWait(5);

@@ -17,5 +17,13 @@ public class ManifestsPage {
     public static By addStopBtn=By.xpath("//span[text()='Add Stop']");
     public static By addPOBtn=By.xpath("//span[text()='Add PO']");
     public static By createManifestBtn=By.xpath("//span[text()='Create Manifest']");
+    public static By newManifestDeliveryDate=By.id("newManifestDeliveryDate");
+    public static By newManifestStartTime=By.id("newManifestStartTime");
+    public static By notes=By.id("notes");
+    public static By truckEle=By.xpath("//select[@name='truck']");
+    public static By driverEle=By.xpath("//select[@name='driver']");
+    public static By createStatus=By.xpath("//span[contains(text(),'Created')]");
+    public static By addOrderNo=By.xpath("//input[@placeholder='Enter Order Number']");
+    public static By orderAddedMessage=By.xpath("//span[contains(@class,'ui-messages-summary')]");
 
 }

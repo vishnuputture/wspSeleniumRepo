@@ -259,7 +259,7 @@ public class Trucks extends ReusableLib {
         }
         commonObj.validateElementExists(TruckPage.filtersCrossIcon,"Cross icon is present");
         commonObj.validateText(TruckPage.applyFiltersDis,"Apply Filters","Apply Filters button exist and button is disabled");
-        commonObj.validateText(TruckPage.clearFilters,"Clear All Filters","Clear All Filters button is exist and text is in red color");
+       // commonObj.validateText(TruckPage.clearFilters,"Clear All Filters","Clear All Filters button is exist and text is in red color");
     }
 
     /**

@@ -166,4 +166,28 @@ public class Warehouse extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_241_collapseExpandSession(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify collapse and expand icon");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_243_CreateManifest(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Create new Manifest");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_258_ManifestSearchFilterUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Manifest Search Filter UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
