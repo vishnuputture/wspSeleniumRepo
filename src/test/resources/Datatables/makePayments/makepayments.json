@@ -48,7 +48,7 @@
       "accountNo": "000233",
       "itemNo1": "5105TCW158SS2",
       "itemNo2": "0023PBE0520",
-      "Iteration": "10"
+      "Iteration": "1"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWithMultipleShipment",
