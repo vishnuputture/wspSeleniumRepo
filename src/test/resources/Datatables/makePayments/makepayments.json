@@ -2,6 +2,7 @@
   "Business_Flow": [
     {
       "Tc_CreateSalesOrderInvoice": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatus,loadLastOrder,saveExitSalesOrders,signOut",
+      "Tc_CreateSalesOrderWithMultipleShipment": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut",
       "Tc_NavigateToMakePayments": "launchMakePayments,logInToMakePayments,navigateToInvoice",
       "Tc_ValidateMakePaymentsStatusFilter": "launchMakePayments,logInToMakePayments,navigateToInvoice,validateInvoiceStatusFilter",
       "Tc_ValidateMakePaymentsDateFilter": "launchMakePayments,logInToMakePayments,navigateToInvoice,validateInvoiceDateFilter",
@@ -48,6 +49,13 @@
       "itemNo1": "5105TCW158SS2",
       "itemNo2": "0023PBE0520",
       "Iteration": "10"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWithMultipleShipment",
+      "accountNo": "000150",
+      "itemNo1": "5105TCW158SS2",
+      "itemNo2": "AMN0159R00002P",
+      "Iteration": "1"
     },
     {
       "TC_ID": "Tc_NavigateToMakePayments",

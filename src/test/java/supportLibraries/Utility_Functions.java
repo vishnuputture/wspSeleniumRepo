@@ -2343,6 +2343,11 @@ public class Utility_Functions extends ReusableLib {
         return true;
     }
 
+    public static void contextClickOnElement(FrameworkDriver driver,By e){
+        Actions builder = new Actions(driver.getWebDriver());
+        builder.contextClick(driver.findElement(e)).perform();
+    }
+
     public static int xRandomFunction() {
         Random random = new Random();
         int value = random.nextInt(9999999) + 1000000;
@@ -2963,6 +2968,17 @@ public class Utility_Functions extends ReusableLib {
         xWaitForElementPresent(driver, e, 10);
         xWaitForElementClickable(driver, e, 10);
         WebElement el = driver.findElement(e);
+        Select dropdown = new Select(el);
+        if (dropdown.getOptions().size() <= 0) {
+            timeWait(1);
+        }
+        dropdown.selectByVisibleText(value);
+    }
+
+    public static void xSelectDropdownByVisibleText(FrameworkDriver driver, WebElement el, String value) {
+        xWaitForElementPresent(driver, el, 10);
+        xWaitForElementClickable(driver, el, 10);
+        //WebElement el = driver.findElement(e);
         Select dropdown = new Select(el);
         if (dropdown.getOptions().size() <= 0) {
             timeWait(1);

@@ -6,6 +6,8 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import commonkeywords.CommonActions;
 import org.apache.hc.client5.http.auth.StandardAuthScheme;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pages.SalesOrders.*;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
 
@@ -13,6 +15,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 
 import supportLibraries.Utility_Functions;
+
+import java.util.List;
 
 public class SalesOrders extends ReusableLib{
 
@@ -44,6 +48,13 @@ public class SalesOrders extends ReusableLib{
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.shipCompleteDropDown), "No", "Validating selected ship complete value");
 	    	Utility_Functions.xSelectDropdownByVisibleText(driver, SalesOrdersPage.shipViaDropDown, "DIRECT SHIP");
 	    }
+
+		public void createSalesOrderCOD(){
+			sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to COD account number");
+			Utility_Functions.actionKey(Keys.ENTER, driver);
+		}
+
+
 	    
 	    public void navigateToItemsTab() {
 	    	click(SalesOrdersPage.itemsTab,"Navigating to items tab");
@@ -62,6 +73,7 @@ public class SalesOrders extends ReusableLib{
 	    	Utility_Functions.actionKey(Keys.ENTER, driver);
 	    	
 	    	Utility_Functions.xUpdateJsonWithArray("SalesOrderNo",driver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
+			Utility_Functions.xUpdateJson("SalesOrder",driver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 	    	
 	    	
 	    	
@@ -70,6 +82,49 @@ public class SalesOrders extends ReusableLib{
 	    public void navigateToShipmentsTab()
 		{
 			click(SalesOrdersPage.shipmentTab,"Navigating to Shipment tab");
+		}
+		public void changeShipmentDeliveryType(){
+			Utility_Functions.timeWait(5);
+			Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.shipmentDeliveryTypeDropDown,"Delivery");
+			//Utility_Functions.timeWait(5);
+			//Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.directShipDropdown,"Yes");
+
+		}
+
+		public void deleteItemFromShipment(){
+			Utility_Functions.timeWait(5);
+			Utility_Functions.contextClickOnElement(driver,SalesOrdersPage.shipmentDeliveryTypeDropDown);
+			click(SalesOrdersPage.contextOptionLineDetails,"Removing item from shipment");
+			Utility_Functions.contextClickOnElement(driver,SalesOrdersPage.shipmentItemName);
+			Utility_Functions.timeWait(5);
+			click(SalesOrdersPage.contextOptionDeleteItem,"Removing item from shipment");
+			click(SalesOrdersPage.updateShipmentBtn,"Updating shipment after removing item");
+			Utility_Functions.timeWait(5);
+			click(SalesOrdersPage.maintainShipmentBtn, "Clicking on maintain shipment button");
+
+
+		}
+
+		public void createShipment(){
+
+			Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.createShipmentDeliveryTypeDropDown,"Delivery");
+			Utility_Functions.timeWait(5);
+			//Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.directShipDropdown,"Yes");
+			//Utility_Functions.timeWait(5);
+			click(SalesOrdersPage.selectItemCheckBox);
+			sendKeys(SalesOrdersPage.qtyToShiptxtBox,"1");
+			click(SalesOrdersPage.btnCreateShipment,"Creating new shipment");
+			Utility_Functions.timeWait(5);
+			List<WebElement> ele = driver.findElements(SalesOrdersPage.directShipDropdown);
+
+			/*for (WebElement e:ele) {
+				Utility_Functions.xSelectDropdownByVisibleText(driver,e,"Yes");
+				Utility_Functions.timeWait(5);
+			}*/
+			for(int i=0; i<ele.size();i++){
+				Utility_Functions.xSelectDropdownByVisibleText(driver,driver.findElement(By.id("slbDirectShip."+(i+1))),"Yes");
+				Utility_Functions.timeWait(5);
+			}
 		}
 
 		public void changeShipmentStatus()
@@ -119,6 +174,18 @@ public class SalesOrders extends ReusableLib{
 	    	click(SalesOrdersPage.btnExit," exiting sales order");
 	    	
 	    }
+
+	public void saveExitSalesOrdersCreateShipment() {
+		click(SalesOrdersPage.btnSaveExit,"saving and exiting");
+		Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.paymentMethodDropdown,"Cash");
+		click(SalesOrdersPage.btnApplyPayment,"Applying  payment method");
+		Utility_Functions.timeWait(5);
+		//Utility_Functions.xClickHiddenElement(driver,SalesOrdersPage.btnSaveExit);
+		click(SalesOrdersPage.btnSaveExitPayment,"saving and exiting");
+		//driver.findElement(SalesOrdersPage.btnSaveExitPayment).sendKeys(Keys.ENTER);
+		click(SalesOrdersPage.btnExit," exiting sales order");
+
+	}
 	    
 	    
 }
