@@ -43,7 +43,7 @@ public class SalesOrders extends ReusableLib{
 	    	sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to account number");
 	    	Utility_Functions.actionKey(Keys.ENTER, driver);
 	    	
-	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.deliveryTypeDropDown), "Pick Up", "Validating selected delivery type");
+	    	//Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.deliveryTypeDropDown), "Pick Up", "Validating selected delivery type");
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.directShipDropDown), "No", "Validating selected direct ship value");
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.shipCompleteDropDown), "No", "Validating selected ship complete value");
 	    	Utility_Functions.xSelectDropdownByVisibleText(driver, SalesOrdersPage.shipViaDropDown, "DIRECT SHIP");
@@ -115,16 +115,16 @@ public class SalesOrders extends ReusableLib{
 			sendKeys(SalesOrdersPage.qtyToShiptxtBox,"1");
 			click(SalesOrdersPage.btnCreateShipment,"Creating new shipment");
 			Utility_Functions.timeWait(5);
-			List<WebElement> ele = driver.findElements(SalesOrdersPage.directShipDropdown);
+			//List<WebElement> ele = driver.findElements(SalesOrdersPage.directShipDropdown);
 
 			/*for (WebElement e:ele) {
 				Utility_Functions.xSelectDropdownByVisibleText(driver,e,"Yes");
 				Utility_Functions.timeWait(5);
 			}*/
-			for(int i=0; i<ele.size();i++){
+			/*for(int i=0; i<ele.size();i++){
 				Utility_Functions.xSelectDropdownByVisibleText(driver,driver.findElement(By.id("slbDirectShip."+(i+1))),"Yes");
 				Utility_Functions.timeWait(5);
-			}
+			}*/
 		}
 
 		public void changeShipmentStatus()
