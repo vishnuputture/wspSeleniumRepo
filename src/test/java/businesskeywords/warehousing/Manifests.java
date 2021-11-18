@@ -10,6 +10,7 @@ import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.ManifestsPage;
 import pages.warehouse.TruckPage;
+import software.amazon.awssdk.services.route53domains.model.UnsupportedTldException;
 import supportLibraries.Utility_Functions;
 
 import java.util.List;
@@ -228,5 +229,47 @@ public class Manifests extends ReusableLib {
         commonObj.validateElementExists(TruckPage.filtersCrossIcon,"Cross icon is present");
         commonObj.validateText(TruckPage.applyFiltersDis,"Apply Filters","Apply Filters button exist and button is disabled");
         //commonObj.validateText(TruckPage.clearFilters,"Clear All Filters","Clear All Filters button is exist and text is in red color");
+    }
+
+    public By getRowVal(String label){
+        return By.xpath("//table/tbody/tr[1]/td[count(//table/thead/tr/th[contains(text(),'"+label+"')]/preceding-sibling::th)+1]");
+    }
+
+    /**
+     * Keyword to verify UI of Search Filters
+     *
+     */
+    public void navigateToManifestOrder() {
+        String manNo=Utility_Functions.getText(driver,getRowVal("Manifest Number")).trim();
+        Utility_Functions.xmouseOver(driver,ManifestsPage.orderColLink);
+        Utility_Functions.timeWait(2);
+        String salesOrderCount= Utility_Functions.getText(driver,ManifestsPage.soPoOrders);
+        String PurchaseOrder=driver.findElements(ManifestsPage.soPoOrders).get(1).getText();
+        click(ManifestsPage.orderColLink,"Click on order number link from orders column");
+        Utility_Functions.timeWait(4);
+        String header=Utility_Functions.getText(driver,ManifestsPage.manifestOrderHeader).trim();
+        Utility_Functions.xAssertEquals(report,header,"MANIFEST #: "+manNo+" - ORDERS","Manifest Orders Header: ");
+    }
+
+    public By btn(String button){
+        return By.xpath("//button[text()='"+button+"']");
+    }
+
+    public By lbl(String label){
+        int size=driver.findElements(By.xpath("//*[text()='"+label+"']")).size();
+        return By.xpath("(//*[text()='"+label+"'])["+size+"]");
+    }
+
+    /**
+     * Keyword to verify UI of Search Filters
+     *
+     */
+    public void manifestOrderUI() {
+        commonObj.validateText(lbl("Warehouse Manager Notes"),"Warehouse Manager Notes","Label matches");
+        commonObj.validateText(lbl("Notes to Driver"),"Notes to Driver","Label matches");
+        commonObj.validateText(btn("Save Notes"),"Save Notes","Button matches");
+        commonObj.validateText(lbl("STOPS & ORDERS "),"STOPS & ORDERS","Label matches");
+        commonObj.validateElementExists(DriversPage.crossIcon,"Cross icon is present");
+        commonObj.validateElementExists(ManifestsPage.colExpIconManifestOrder,"Collapse icon is present");
     }
 }

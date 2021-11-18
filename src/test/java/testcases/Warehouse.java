@@ -190,4 +190,12 @@ public class Warehouse extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_295_ManifestOrderUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Manifest Orders UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

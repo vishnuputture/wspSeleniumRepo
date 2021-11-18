@@ -25,5 +25,10 @@ public class ManifestsPage {
     public static By createStatus=By.xpath("//span[contains(text(),'Created')]");
     public static By addOrderNo=By.xpath("//input[@placeholder='Enter Order Number']");
     public static By orderAddedMessage=By.xpath("//span[contains(@class,'ui-messages-summary')]");
+    public static By orderColLink=By.xpath("//a[@class='ng-star-inserted']");
+    public static By soPoOrders=By.xpath("//span[@class='float-right']");
+    public static By manifestOrderHeader=By.xpath("//label[contains(@class,'align-top header')]");
+    public static By colExpIconManifestOrder=By.id("stopOrders");
+
 
 }

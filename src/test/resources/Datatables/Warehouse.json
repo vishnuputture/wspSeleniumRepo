@@ -23,7 +23,8 @@
 			"Tc_240_CreateManifestUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,uiCreateManifest",
 			"Tc_241_collapseExpandSession": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,verifyAreaExpanded",
 			"TC_243_CreateManifest": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,createManifest",
-			"TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,navigateToManifestsScreen,searchFiltersManifestUI"
+			"TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,navigateToManifestsScreen,searchFiltersManifestUI",
+			"TC_295_ManifestOrderUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,manifestOrderUI"
 		}
 	],
 	"General_Data": [
@@ -129,6 +130,10 @@
 		{
 			"TC_ID": "TC_258_ManifestSearchFilterUI",
 			"Title": "Verify Manifest Search Filter UI"
+		},
+		{
+			"TC_ID": "TC_295_ManifestOrderUI",
+			"Title": "Verify Manifest Orders UI"
 		}
 	]
 }
