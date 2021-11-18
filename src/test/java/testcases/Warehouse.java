@@ -182,6 +182,13 @@ public class Warehouse extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_244_CreateManifestMultipleShipments(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Create new Manifest");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_258_ManifestSearchFilterUI(SeleniumTestParameters testParameters) {

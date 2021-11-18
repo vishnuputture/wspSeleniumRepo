@@ -52,7 +52,7 @@
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWithMultipleShipment",
-      "accountNo": "000150",
+      "accountNo": "099599",
       "itemNo1": "5105TCW158SS2",
       "itemNo2": "AMN0159R00002P",
       "Iteration": "1"

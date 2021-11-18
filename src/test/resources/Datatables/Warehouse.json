@@ -22,7 +22,8 @@
 			"Tc_238_ManifestListPageCount": "navigateToShippingManifest,navigateToManifestsScreen,funPageCount",
 			"Tc_240_CreateManifestUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,uiCreateManifest",
 			"Tc_241_collapseExpandSession": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,verifyAreaExpanded",
-			"TC_243_CreateManifest": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,createManifest",
+			"TC_243_CreateManifest": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,createManifest",
+			"TC_244_CreateManifestMultipleShipments": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut,navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,createManifestMultiShip",
 			"TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,navigateToManifestsScreen,searchFiltersManifestUI"
 		}
 	],
@@ -124,7 +125,19 @@
 		},
 		{
 			"TC_ID": "TC_243_CreateManifest",
-			"Title": "Verify Create new Manifest"
+			"Title": "Verify Create new Manifest",
+			"accountNo": "099599",
+			"itemNo1": "5105TCW158SS2",
+			"itemNo2": "AMN0159R00002P",
+			"Iteration": "1"
+		},
+		{
+			"TC_ID": "TC_244_CreateManifestMultipleShipments",
+			"Title": "Verify Create new Manifest",
+			"accountNo": "099599",
+			"itemNo1": "5105TCW158SS2",
+			"itemNo2": "AMN0159R00002P",
+			"Iteration": "1"
 		},
 		{
 			"TC_ID": "TC_258_ManifestSearchFilterUI",

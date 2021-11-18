@@ -199,12 +199,49 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(2);
         Utility_Functions.xScrollIntoView(driver,ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
-        sendKeys(ManifestsPage.addOrderNo, "000552-01", "Enter Order number");
+        sendKeys(ManifestsPage.addOrderNo, Utility_Functions.xGetJsonData("SalesOrder")+"-01", "Enter shipment number");
+        //sendKeys(ManifestsPage.addOrderNo, "000552-01", "Enter Order number");
         click(ManifestsPage.addButton, "Click Add button");
-        commonObj.validateText(ManifestsPage.orderAddedMessage, "Order 000552-01 successfully added to manifest", "Order is added");
+        commonObj.validateText(ManifestsPage.orderAddedMessage, "Order "+Utility_Functions.xGetJsonData("SalesOrder")+"-01 successfully added to manifest", "Order is added");
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
         Utility_Functions.timeWait(5);
         String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
+        commonObj.validateText(ManifestsPage.createStatus,"Created","Manifest is created and Manifest number is :"+maniNo+"");
+    }
+
+    /**
+     * Keyword to create manifest with multiple shipments
+     *
+     */
+    public void createManifestMultiShip() {
+        click(ManifestsPage.newManifestDeliveryDate);
+        click(TruckPage.licensePlateExpSelect, "Select Delivery Date");
+        click(ManifestsPage.newManifestStartTime, "Select Start Date");
+        click(ManifestsPage.truckEle);
+        Utility_Functions.timeWait(3);
+        click(truckDriverDrop("Truck (Optional)"),"Select truck from the drop down");
+        click(ManifestsPage.notes);
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xMouseClick(driver,ManifestsPage.driverEle);
+        Utility_Functions.timeWait(2);
+        click(truckDriverDrop("Driver (Optional)"), "Select driver from the drop down");
+        Utility_Functions.timeWait(2);
+        sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xScrollIntoView(driver,ManifestsPage.addOrderNo);
+        Utility_Functions.timeWait(2);
+        sendKeys(ManifestsPage.addOrderNo, Utility_Functions.xGetJsonData("SalesOrder")+"-01", "Enter first shipment number");
+        click(ManifestsPage.addButton, "Click Add button");
+        commonObj.validateText(ManifestsPage.orderAddedMessage, "Order "+Utility_Functions.xGetJsonData("SalesOrder")+"-01 successfully added to manifest", "Order is added");
+        Utility_Functions.timeWait(2);
+        sendKeys(ManifestsPage.addOrderNo, Utility_Functions.xGetJsonData("SalesOrder")+"-02", "Enter first shipment number");
+        click(ManifestsPage.addButton, "Click Add button");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(ManifestsPage.orderAddedMessage, "Order "+Utility_Functions.xGetJsonData("SalesOrder")+"-02 successfully added to manifest", "Order is added");
+        click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+        Utility_Functions.timeWait(5);
+        String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
+        Utility_Functions.xUpdateJson("ManifestNo",maniNo);
         commonObj.validateText(ManifestsPage.createStatus,"Created","Manifest is created and Manifest number is :"+maniNo+"");
     }
 
