@@ -29,6 +29,19 @@ public class ManifestsPage {
     public static By soPoOrders=By.xpath("//span[@class='float-right']");
     public static By manifestOrderHeader=By.xpath("//label[contains(@class,'align-top header')]");
     public static By colExpIconManifestOrder=By.id("stopOrders");
-
+    public static By manageNote=By.id("managerNotes");
+    public static By successMsg=By.xpath("//span[@class='ui-growl-title']");
+    public static By editNote=By.xpath("//a[text()='Edit Notes']");
+    public static By updateStatusDrop=By.xpath("//p[contains(text(),'Update Status')]");
+    public static By updateStatusSO=By.xpath("//div[contains(text(),'Delivered')]");
+    public static By soStatus=By.xpath("//p[@class='order-detail']");
+    public static By deliveredGreenIcon=By.xpath("//win-status-icon[@ng-reflect-status='DELIVERED']");
+    public static By notDeliveredRedIcon=By.xpath("//win-status-icon[@ng-reflect-status='NOT DELIVERED']");
+    public static By generatedIcon=By.xpath("//i[@class='fa fa-generate']");
+    public static By orderNoHeader=By.xpath("//h2[contains(text(),'ORDER NUMBERs')]");
+    public static By salesDetails=By.xpath("//span[@class='win-blue']");
+    public static By expandAll=By.xpath("//a[text()='EXPAND ALL']");
+    public static By closePopUp=By.xpath("//div[contains(@class,'ui-growl-icon-close')]");
+    public static By deliveredInput=By.id("quantityAdjusted0");
 
 }

@@ -182,6 +182,31 @@ public class Warehouse extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_SOUpdateStatus(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Functionality Update status drop down");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_OrderNumberSO_UI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Order Number UI: Sales Order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_SaveAdjustment(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Save Adjustment");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_244_CreateManifestMultipleShipments(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Create new Manifest");
@@ -201,6 +226,14 @@ public class Warehouse extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_295_ManifestOrderUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Manifest Orders UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_297_SaveNoteExpandCollapse(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Functionality of save note button");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
