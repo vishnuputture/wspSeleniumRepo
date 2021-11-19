@@ -237,6 +237,7 @@ public class Trucks extends ReusableLib {
         String actTx=""+truckName+"";
         Utility_Functions.timeWait(3);
         String expTx=driver.findElement(By.xpath("//a[text()='"+truckName+"']")).getText();
+        Utility_Functions.xUpdateJson("TruckName",truckName);
         Utility_Functions.xAssertEquals(report,actTx,expTx,"Truck successfully added");
     }
 

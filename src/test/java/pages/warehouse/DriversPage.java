@@ -9,7 +9,7 @@ public class DriversPage {
     public static By pageArrow=By.xpath("//a[@class='page-link']");
     public static By onePage=By.xpath("//span[text()='of 1']");
     public static By lastPage=By.xpath("//li[contains(@class,'disabled')]");
-    public static By driverNameCount=By.xpath("//td[@class='text-break']");
+    public static By driverNameCount=By.xpath("//tbody[@class='ui-table-tbody']/tr");
     public static By addNewDriver=By.xpath("//button[contains(text(),'New Driver')]");
     public static By newDriverHeader=By.xpath("//h2[starts-with(@class,'modal-title text')]");
     public static By firstName=By.id("firstname");
@@ -24,7 +24,6 @@ public class DriversPage {
     public static By driverNameSelect=By.id("driverNameSelect");
     public static By rankSelect=By.id("rankSelect");
     public static By statusSelect=By.id("statusSelect");
-    public static By cdlSelect=By.id("cdlSelect");
     public static By driverFirstName=By.xpath("//th[contains(text(),'Driver Name')]/ancestor::table/descendant::td/a");
 
 }

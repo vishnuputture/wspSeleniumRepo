@@ -34,14 +34,21 @@ public class ManifestsPage {
     public static By editNote=By.xpath("//a[text()='Edit Notes']");
     public static By updateStatusDrop=By.xpath("//p[contains(text(),'Update Status')]");
     public static By updateStatusSO=By.xpath("//div[contains(text(),'Delivered')]");
+    public static By updateStatusPO=By.xpath("//div[contains(text(),'Picked Up')]");
     public static By soStatus=By.xpath("//p[@class='order-detail']");
     public static By deliveredGreenIcon=By.xpath("//win-status-icon[@ng-reflect-status='DELIVERED']");
     public static By notDeliveredRedIcon=By.xpath("//win-status-icon[@ng-reflect-status='NOT DELIVERED']");
     public static By generatedIcon=By.xpath("//i[@class='fa fa-generate']");
     public static By orderNoHeader=By.xpath("//h2[contains(text(),'ORDER NUMBERs')]");
+    public static By orderNoHeaderPO=By.xpath("//h2[contains(text(),'PURCHASE ORDER NUMBER')]");
+    public static By poDetails=By.xpath("//h3[text()='PO DETAIL']");
     public static By salesDetails=By.xpath("//span[@class='win-blue']");
     public static By expandAll=By.xpath("//a[text()='EXPAND ALL']");
     public static By closePopUp=By.xpath("//div[contains(@class,'ui-growl-icon-close')]");
+    public static By addPoRowCount=By.xpath("//tr[contains(@class,'ui-selectable-row')]");
+    public static By pickUpCount=By.xpath("//input[@ng-reflect-name='tempQuantityPickedup0']");
+    public static By pickedUpStatus=By.xpath("//p[text()='Picked Up']");
+    public static By notPickedUpStatus=By.xpath("//p[text()='Not Picked Up']");
     public static By deliveredInput=By.id("quantityAdjusted0");
 
 }

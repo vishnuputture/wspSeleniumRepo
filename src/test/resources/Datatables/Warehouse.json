@@ -26,13 +26,17 @@
 			"Tc_OrderNumberSO_UI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,orderNumberUISO",
 			"Tc_SaveAdjustment": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,SaveAdjReturnToOrderBtn",
 			"TC_SOUpdateStatus": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,updateStatusSO",
+			"Tc_CreateManifestPO": "navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,createManifestPO",
+			"Tc_OrderNumberPO_UI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,orderNumberUIPO",
+			"Tc_SaveAdjustmentPO": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,saveAdjReturnToOrderBtnPO",
+			"TC_POUpdateStatus": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,updateStatusPO",
 			"TC_244_CreateManifestMultipleShipments": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut,navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,createManifestMultiShip",
 			"TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,navigateToManifestsScreen,searchFiltersManifestUI",
 			"TC_295_ManifestOrderUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,manifestOrderUI",
 			"TC_297_SaveNoteExpandCollapse": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,saveNote"
 		}
 	],
-	"General_Data": [
+	"General_Data":[
 		{
 			"TC_ID": "Tc_TruckUI",
 			"Title": "UI of Trucks Screen"
@@ -137,16 +141,32 @@
 			"Iteration": "1"
 		},
 		{
-			"TC_ID": "TC_SOUpdateStatus",
-			"Title": "Verify Functionality Update status drop down"
-		},
-		{
 			"TC_ID": "Tc_OrderNumberSO_UI",
 			"Title": "Verify Order Number UI: Sales Order"
 		},
 		{
 			"TC_ID": "Tc_SaveAdjustment",
 			"Title": "Verify Save Adjustment Button"
+		},
+		{
+			"TC_ID": "TC_SOUpdateStatus",
+			"Title": "Verify Functionality Update status drop down"
+		},
+		{
+			"TC_ID": "Tc_CreateManifestPO",
+			"Title": "Verify Functionality ADD PO"
+		},
+		{
+			"TC_ID": "Tc_OrderNumberPO_UI",
+			"Title": "Verify Order Number PO UI"
+		},
+		{
+			"TC_ID": "Tc_SaveAdjustmentPO",
+			"Title": "Save Adjustment UI PO"
+		},
+		{
+			"TC_ID": "TC_POUpdateStatus",
+			"Title": "PO Update Status"
 		},
 		{
 			"TC_ID": "TC_244_CreateManifestMultipleShipments",

@@ -244,6 +244,46 @@ public class Manifests extends ReusableLib {
     }
 
     /**
+     * Keyword to create manifest Add PO
+     */
+    public void createManifestPO() {
+        click(ManifestsPage.newManifestDeliveryDate);
+        click(TruckPage.licensePlateExpSelect, "Select Delivery Date");
+        click(ManifestsPage.newManifestStartTime, "Select Start Date");
+        click(ManifestsPage.truckEle);
+        Utility_Functions.timeWait(3);
+        String truckName=Utility_Functions.xGetJsonData("TruckName");
+        System.out.println("truckName...."+truckName);
+        click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'"+truckName+"')]")), "Select truck from the drop down");
+        click(ManifestsPage.notes);
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
+        Utility_Functions.timeWait(2);
+        click(truckDriverDrop("Driver (Optional)"), "Select driver from the drop down");
+        Utility_Functions.timeWait(2);
+        sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xScrollIntoView(driver, ManifestsPage.addOrderNo);
+        Utility_Functions.timeWait(2);
+        click(ManifestsPage.addPOBtn,"CLick Add PO button");
+        Utility_Functions.timeWait(5);
+        /*String poNo=Utility_Functions.getText(driver,driver.findElement(By.xpath("//tr[contains(@class,'ui-selectable-row')]/td")));
+        System.out.println("poNo....."+poNo);
+        Utility_Functions.xUpdateJson("PONumber",poNo);
+        System.out.println("poNo....."+poNo);*/
+        click(ManifestsPage.addPoRowCount,"Select PO");
+        Utility_Functions.timeWait(3);
+        click(btn(" Add to Manifest "),"Click Add to Manifest Button");
+        Utility_Functions.timeWait(5);
+        //commonObj.validateText(ManifestsPage.orderAddedMessage, "Order " + Utility_Functions.xGetJsonData("PONumber") + " successfully added to manifest", "Order is added");
+        click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+        Utility_Functions.timeWait(5);
+        String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
+        Utility_Functions.xUpdateJson("ManifestNo", maniNo);
+        commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
+    }
+
+    /**
      * Keyword to verify UI of Search Filters
      */
     public void searchFiltersManifestUI() {
@@ -337,6 +377,7 @@ public class Manifests extends ReusableLib {
 
     /**
      * Keyword to verify functionality of update status button for Sales order
+     *
      */
     public void updateStatusSO() {
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
@@ -345,9 +386,39 @@ public class Manifests extends ReusableLib {
         commonObj.validateText(ManifestsPage.soStatus, "Delivered", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
-        click(driver.findElements(ManifestsPage.updateStatusSO).get(1), "Click Delivered");
+        click(driver.findElements(ManifestsPage.updateStatusSO).get(1), "Click Not Delivered");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.soStatus, "Not Delivered", "Verify the status: ");
+        commonObj.validateElementExists(ManifestsPage.notDeliveredRedIcon, "Stop icon changed to Red color Cross mark");
+    }
+
+    /**
+     * Keyword to verify functionality of update status button for Purchase order
+     *
+     */
+    public void inProgressStatus() {
+        updateStatusSO();
+        click(DriversPage.crossIcon,"CLick Close icon");
+
+    }
+
+    /**
+     * Keyword to verify functionality of update status button for Purchase order
+     *
+     */
+    public void updateStatusPO() {
+        Utility_Functions.timeWait(3);
+        click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
+        Utility_Functions.timeWait(3);
+        click(driver.findElements(ManifestsPage.updateStatusPO).get(0), "Click Picked Up");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(ManifestsPage.pickedUpStatus, "Picked Up", "Verify the status: ");
+        commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
+        click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
+        Utility_Functions.timeWait(2);
+        click(driver.findElements(ManifestsPage.updateStatusPO).get(1), "Click Not Picked Up");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(ManifestsPage.notPickedUpStatus, "Not Picked Up", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.notDeliveredRedIcon, "Stop icon changed to Red color Cross mark");
     }
 
@@ -358,6 +429,15 @@ public class Manifests extends ReusableLib {
     public void navigateToOrderNumberSO() {
         click(btn(" Packing List "),"Click Packing List Button");
         commonObj.validateText(ManifestsPage.orderNoHeader,"ORDER NUMBERs "+Utility_Functions.xGetJsonData("SalesOrder") +"-01","Order numbers header: ");
+    }
+
+    /**
+     * Keyword to Navigate To Order Number Page Purchase Order
+     *
+     */
+    public void navigateToOrderNumberPO() {
+        click(btn(" PO Item Details "),"Click PO Item Details Button");
+        commonObj.validateElementExists(ManifestsPage.orderNoHeaderPO,"Order numbers header: ");
     }
 
     /**
@@ -378,6 +458,22 @@ public class Manifests extends ReusableLib {
     }
 
     /**
+     * Keyword to verify UI of Order Number Purchase order page
+     *
+     */
+    public void orderNumberUIPO() {
+        commonObj.validateText(head("ITEM DETAILS"),"ITEM DETAILS","Sub Header: is present");
+        commonObj.validateText(lbl("Order Date:"),"Order Date:","");
+        commonObj.validateText(lbl("Requested:"),"Requested:","");
+        commonObj.validateText(lbl("Total Number of Units:"),"Total Number of Units:","");
+        commonObj.validateText(head("PICKUP FROM:"),"PICKUP FROM:","PICKUP FROM: is present");
+        commonObj.validateText(head("SHIP TO:"),"SHIP TO:","SHIP TO: is present");
+        commonObj.validateElementExists(btn("Return to Orders"),"Return to Orders button present");
+        commonObj.validateElementExists(ManifestsPage.poDetails,"PO DETAIL is present");
+        commonObj.validateElementExists(ManifestsPage.expandAll,"Expand All link is present");
+    }
+
+    /**
      * Keyword to verify Save Adjustment and Return to Orders Button
      *
      */
@@ -392,6 +488,28 @@ public class Manifests extends ReusableLib {
         commonObj.validateText(ManifestsPage.successMsg,"Delivered quantity cannot be greater than shipped quantity.","Error message popUp: ");
         click(ManifestsPage.closePopUp);
         sendKeys(ManifestsPage.deliveredInput,"0","Update delivered count");
+        click(btn("Save Adjustments"),"Click Save Adjustments");
+        Utility_Functions.timeWait(5);
+        Utility_Functions.xScrollWindowTop(driver);
+        Utility_Functions.xScrollWindowTop(driver);
+        click(driver.findElements(btn("Return to Orders")).get(1),"Click Return To Order");
+        Utility_Functions.timeWait(3);
+        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader,"Navigate back to manifest Order page");
+    }
+
+    /**
+     * Keyword to verify Save Adjustment and Return to Orders Button
+     *
+     */
+    public void saveAdjReturnToOrderBtnPO() {
+        Utility_Functions.timeWait(2);
+        click(driver.findElements(DriversPage.crossIcon).get(1),"Click Cross icon(Close icon)");
+        Utility_Functions.timeWait(3);
+        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader,"Navigate back to manifest Order page");
+        navigateToOrderNumberPO();
+        Utility_Functions.timeWait(4);
+        click(ManifestsPage.expandAll,"Click Expand All Link");
+        sendKeys(ManifestsPage.pickUpCount,"0","Update Pick Up count");
         click(btn("Save Adjustments"),"Click Save Adjustments");
         Utility_Functions.timeWait(5);
         Utility_Functions.xScrollWindowTop(driver);

@@ -184,14 +184,6 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_SOUpdateStatus(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Verify Functionality Update status drop down");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
-
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_OrderNumberSO_UI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Order Number UI: Sales Order");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -208,12 +200,58 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_SOUpdateStatus(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Functionality Update status drop down");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreateManifestPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Functionality ADD PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_OrderNumberPO_UI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Order Number PO UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_SaveAdjustmentPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Save adjustment button PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_POUpdateStatus(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("TC_POUpdateStatus");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_244_CreateManifestMultipleShipments(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Create new Manifest");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+
+
+
+
+
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_258_ManifestSearchFilterUI(SeleniumTestParameters testParameters) {
