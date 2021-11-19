@@ -62,14 +62,14 @@ public class SalesOrders extends ReusableLib{
 	    }
 	    
 	    public void addItemsToSalesorder() {
-	    	sendKeys(SalesOrdersPage.qtyOrdered,"1","Entering ordered quantity");
+	    	sendKeys(SalesOrdersPage.qtyOrdered,"2","Entering ordered quantity");
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo1"),"Entering item Number");
-	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
+	    	sendKeys(SalesOrdersPage.qtyToShip,"2","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, driver);
 	    	
-	    	sendKeys(SalesOrdersPage.qtyOrdered,"1","Entering ordered quantity");
+	    	sendKeys(SalesOrdersPage.qtyOrdered,"2","Entering ordered quantity");
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo2"),"Entering item Number");
-	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
+	    	sendKeys(SalesOrdersPage.qtyToShip,"2","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, driver);
 	    	
 	    	Utility_Functions.xUpdateJsonWithArray("SalesOrderNo",driver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));

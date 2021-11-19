@@ -257,7 +257,6 @@ public class Drivers extends ReusableLib {
      *
      */
     public void applyFilterDriver() {
-        //String driverFirstName=Utility_Functions.getText(driver,DriversPage.driverFirstName);
         String rank=Utility_Functions.getText(driver,getTruck("Rank"));
         String status=Utility_Functions.getText(driver,getTruck("Status"));
         click(TruckPage.filterSearch,"Click search filter icon");

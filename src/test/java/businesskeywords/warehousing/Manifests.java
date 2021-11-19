@@ -506,13 +506,20 @@ public class Manifests extends ReusableLib {
         commonObj.validateText(ManifestsPage.successMsg,"Delivered quantity cannot be greater than shipped quantity.","Error message popUp: ");
         Utility_Functions.timeWait(2);
         click(ManifestsPage.closePopUp);
-        sendKeys(ManifestsPage.deliveredInput,"0","Update delivered count");
+        sendKeys(ManifestsPage.deliveredInput,"1","Update delivered count");
         click(btn("Save Adjustments"),"Click Save Adjustments");
         Utility_Functions.timeWait(5);
         Utility_Functions.xScrollWindowTop(driver);
         Utility_Functions.xScrollWindowTop(driver);
         click(driver.findElements(btn("Return to Orders")).get(1),"Click Return To Order");
         Utility_Functions.timeWait(3);
+
+        /*click(btn(" Packing List "),"Click Packing List Button");
+        commonObj.validateText(ManifestsPage.orderNoHeader,"ORDER NUMBERs "+Utility_Functions.xGetJsonData("SalesOrder") +"-01","Order numbers header: ");
+        click(ManifestsPage.expandAll,"Click Expand All Link");
+        commonObj.validateText(ManifestsPage.deliveredInput,driver.findElement(ManifestsPage.deliveredInput).getAttribute("ng-reflect-model"),"");
+        click(driver.findElements(btn("Return to Orders")).get(1),"Click Return To Order");
+        Utility_Functions.timeWait(3);*/
         commonObj.validateElementExists(ManifestsPage.manifestOrderHeader,"Navigate back to manifest Order page");
     }
 

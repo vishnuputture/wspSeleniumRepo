@@ -136,7 +136,6 @@
                     <include name="TC_243_CreateManifest"></include>
                     <include name="Tc_SaveAdjustment"></include>
                     <include name="TC_SOUpdateStatus"></include>
-
                 </methods>
             </class>
         </classes>
