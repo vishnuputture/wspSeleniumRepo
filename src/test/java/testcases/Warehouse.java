@@ -247,11 +247,13 @@ public class Warehouse extends TestConfigurations {
         tearDownTestRunner(testParameters, coreScript);
     }
 
-
-
-
-
-
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_InProgressStatus(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Verify In-Progress Status");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_258_ManifestSearchFilterUI(SeleniumTestParameters testParameters) {

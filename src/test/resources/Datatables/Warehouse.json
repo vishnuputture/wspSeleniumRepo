@@ -30,7 +30,8 @@
 			"Tc_OrderNumberPO_UI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,orderNumberUIPO",
 			"Tc_SaveAdjustmentPO": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,saveAdjReturnToOrderBtnPO",
 			"TC_POUpdateStatus": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,updateStatusPO",
-			"TC_244_CreateManifestMultipleShipments": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut,navigateToShippingManifest,navigateToManifestsScreen,navigateToCreateManifest,createManifestMultiShip",
+			"TC_244_CreateManifestMultipleShipments": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut,navigateToShippingManifest,navigateToTrucksScreen,navigateToAddNewTruck,addNewTruck,navigateToDriversScreen,navigateToAddNewDriver,addNewDriver,navigateToManifestsScreen,navigateToCreateManifest,createManifestMultiShip",
+			"Tc_InProgressStatus": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,inProgressStatus",
 			"TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,navigateToManifestsScreen,searchFiltersManifestUI",
 			"TC_295_ManifestOrderUI": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,manifestOrderUI",
 			"TC_297_SaveNoteExpandCollapse": "navigateToShippingManifest,navigateToManifestsScreen,navigateToManifestOrder,saveNote"
@@ -175,6 +176,10 @@
 			"itemNo1": "5105TCW158SS2",
 			"itemNo2": "AMN0159R00002P",
 			"Iteration": "1"
+		},
+		{
+			"TC_ID": "Tc_InProgressStatus",
+			"Title": "Verify In-Progress Status"
 		},
 		{
 			"TC_ID": "TC_258_ManifestSearchFilterUI",

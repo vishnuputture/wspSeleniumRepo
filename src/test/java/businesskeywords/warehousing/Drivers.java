@@ -226,6 +226,7 @@ public class Drivers extends ReusableLib {
         String actTx=""+jsonData.getData("firstName")+" "+lastName+"";
         Utility_Functions.timeWait(3);
         String expTx=driver.findElement(By.xpath("//a[text()='"+jsonData.getData("firstName")+" "+lastName+"']")).getText();
+        Utility_Functions.xUpdateJson("Driver",expTx);
         Utility_Functions.xAssertEquals(report,actTx,expTx,"Driver successfully added");
     }
 
@@ -256,17 +257,17 @@ public class Drivers extends ReusableLib {
      *
      */
     public void applyFilterDriver() {
-        String driverFirstName=Utility_Functions.getText(driver,DriversPage.driverFirstName);
+        //String driverFirstName=Utility_Functions.getText(driver,DriversPage.driverFirstName);
         String rank=Utility_Functions.getText(driver,getTruck("Rank"));
         String status=Utility_Functions.getText(driver,getTruck("Status"));
         click(TruckPage.filterSearch,"Click search filter icon");
         Utility_Functions.timeWait(1);
-        selectFilter(DriversPage.driverNameSelect,"Driver Name",driverFirstName);
+        selectFilter(DriversPage.driverNameSelect,"Driver Name",Utility_Functions.xGetJsonData("Driver"));
         selectFilter(DriversPage.rankSelect,"Rank",rank);
         selectFilter(DriversPage.statusSelect,"Status",status);
         click(TruckPage.applyFilter,"Click Apply Filters");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(DriversPage.driverFirstName,driverFirstName,"After filter Driver Name: ");
+        commonObj.validateText(DriversPage.driverFirstName,Utility_Functions.xGetJsonData("Driver"),"After filter Driver Name: ");
         commonObj.validateText(getTruck("Rank"),rank,"After filter rank: ");
         commonObj.validateText(getTruck("Status"),status,"After filter status: ");
     }

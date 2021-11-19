@@ -121,13 +121,22 @@
 
             <class name="testcases.Warehouse">
                 <methods>
-                    <include name="Tc_TruckUI"></include>
+                   <!-- <include name="Tc_TruckUI"></include>
                     <include name="Tc_AddNewTruckScreenUI"></include>
                     <include name="Tc_AddTruck"></include>
                     <include name="Tc_searchFiltersTruckUi"></include>
                     <include name="Tc_AddNewDriver"></include>
                     <include name="Tc_ApplyFilterDriver"></include>
-                    <include name="Tc_ApplyFilterTruck"></include>
+                    <include name="Tc_ApplyFilterTruck"></include>-->
+
+                    <include name="Tc_TruckUI"></include>
+                    <include name="Tc_AddTruck"></include>
+                    <include name="Tc_AddNewDriver"></include>
+                    <include name="Tc_ApplyFilterDriver"></include>
+                    <include name="TC_243_CreateManifest"></include>
+                    <include name="Tc_SaveAdjustment"></include>
+                    <include name="TC_SOUpdateStatus"></include>
+
                 </methods>
             </class>
         </classes>

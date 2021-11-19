@@ -187,19 +187,22 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.newManifestStartTime, "Select Start Date");
         click(ManifestsPage.truckEle);
         Utility_Functions.timeWait(3);
-        click(truckDriverDrop("Truck (Optional)"), "Select truck from the drop down");
+        String truckName=Utility_Functions.xGetJsonData("TruckName");
+        System.out.println("truckName...."+truckName);
+        click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'"+truckName+"')]")), "Select truck from the drop down");
         click(ManifestsPage.notes);
         Utility_Functions.timeWait(2);
         Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
         Utility_Functions.timeWait(2);
-        click(truckDriverDrop("Driver (Optional)"), "Select driver from the drop down");
+        String driverName=Utility_Functions.xGetJsonData("Driver");
+        System.out.println("driverName...."+driverName);
+        click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'"+driverName+"')]")), "Select Driver from the drop down");
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
         Utility_Functions.timeWait(2);
         Utility_Functions.xScrollIntoView(driver, ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.addOrderNo, Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Enter shipment number");
-        //sendKeys(ManifestsPage.addOrderNo, "000552-01", "Enter Order number");
         click(ManifestsPage.addButton, "Click Add button");
         commonObj.validateText(ManifestsPage.orderAddedMessage, "Order " + Utility_Functions.xGetJsonData("SalesOrder") + "-01 successfully added to manifest", "Order is added");
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
@@ -258,9 +261,9 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.notes);
         Utility_Functions.timeWait(2);
         Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
-        Utility_Functions.timeWait(2);
-        click(truckDriverDrop("Driver (Optional)"), "Select driver from the drop down");
-        Utility_Functions.timeWait(2);
+        String driverName=Utility_Functions.xGetJsonData("Driver");
+        System.out.println("driverName...."+driverName);
+        click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'"+driverName+"')]")), "Select Driver from the drop down");
         sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
         Utility_Functions.timeWait(2);
         Utility_Functions.xScrollIntoView(driver, ManifestsPage.addOrderNo);
@@ -385,11 +388,20 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.soStatus, "Delivered", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
+        click(driver.findElements(DriversPage.crossIcon).get(1),"CLick Close icon");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(ManifestsPage.manStatus,"Delivered","Verify status: ");
+        click(ManifestsPage.orderColLink, "Click on order number link from orders column");
+        Utility_Functions.timeWait(4);
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         click(driver.findElements(ManifestsPage.updateStatusSO).get(1), "Click Not Delivered");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.soStatus, "Not Delivered", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.notDeliveredRedIcon, "Stop icon changed to Red color Cross mark");
+        commonObj.validateElementExists(ManifestsPage.warningIcon, "In progress Icon is present");
+        click(driver.findElements(DriversPage.crossIcon).get(1),"CLick Close icon");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(ManifestsPage.manStatus,"Not Delivered","Verify status: ");
     }
 
     /**
@@ -397,9 +409,15 @@ public class Manifests extends ReusableLib {
      *
      */
     public void inProgressStatus() {
-        updateStatusSO();
-        click(DriversPage.crossIcon,"CLick Close icon");
-
+        click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
+        click(ManifestsPage.updateStatusSO, "Click Delivered");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(ManifestsPage.soStatus, "Delivered", "Verify the status: ");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(ManifestsPage.warningIcon, "In progress Icon is present");
+        click(driver.findElements(DriversPage.crossIcon).get(1),"CLick Close icon");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(ManifestsPage.inProgressStatus,"In Process","Verify status: ");
     }
 
     /**
@@ -486,6 +504,7 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.expandAll,"Click Expand All Link");
         sendKeys(ManifestsPage.deliveredInput,"1000","Update delivered count");
         commonObj.validateText(ManifestsPage.successMsg,"Delivered quantity cannot be greater than shipped quantity.","Error message popUp: ");
+        Utility_Functions.timeWait(2);
         click(ManifestsPage.closePopUp);
         sendKeys(ManifestsPage.deliveredInput,"0","Update delivered count");
         click(btn("Save Adjustments"),"Click Save Adjustments");
