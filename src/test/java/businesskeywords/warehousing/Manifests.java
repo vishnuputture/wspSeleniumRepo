@@ -514,12 +514,16 @@ public class Manifests extends ReusableLib {
         click(driver.findElements(btn("Return to Orders")).get(1),"Click Return To Order");
         Utility_Functions.timeWait(3);
 
-        /*click(btn(" Packing List "),"Click Packing List Button");
+        click(btn(" Packing List "),"Click Packing List Button");
         commonObj.validateText(ManifestsPage.orderNoHeader,"ORDER NUMBERs "+Utility_Functions.xGetJsonData("SalesOrder") +"-01","Order numbers header: ");
         click(ManifestsPage.expandAll,"Click Expand All Link");
-        commonObj.validateText(ManifestsPage.deliveredInput,driver.findElement(ManifestsPage.deliveredInput).getAttribute("ng-reflect-model"),"");
+        Utility_Functions.timeWait(3);
+        Utility_Functions.xScrollIntoView(driver,ManifestsPage.deliveredInput);
+        Utility_Functions.timeWait(2);
+        String actVal=driver.findElement(ManifestsPage.deliveredInput).getAttribute("ng-reflect-model");
+        Utility_Functions.xAssertEquals(report,"1",actVal,"");
         click(driver.findElements(btn("Return to Orders")).get(1),"Click Return To Order");
-        Utility_Functions.timeWait(3);*/
+        Utility_Functions.timeWait(3);
         commonObj.validateElementExists(ManifestsPage.manifestOrderHeader,"Navigate back to manifest Order page");
     }
 
