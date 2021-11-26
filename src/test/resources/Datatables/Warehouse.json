@@ -34,14 +34,15 @@
 			"Tc_NotDeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,searchFiltersNotDlvrdOrdrsdUI",
 			"Tc_NotDeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,notDeliveredOrdersUI",
 			"Tc_VerifyNotDeliveredOrders": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,pagination,funPageCountNotDelivered,verifyNotDeliveredOrders",
-			"Tc_CloseManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,closeManifest",
+			"Tc_CloseManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,closeAllManifest",
+			"Tc_DeleteManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifest",
 			"Tc_CreateManifestNotDeliveredOrd": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,createManNotDeliveredOrder",
 			"Tc_AddToManifestNotDelOrd": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,addToManifestNotDelOrd",
 			"Tc_CreateManifestPO": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifestPO",
 			"Tc_OrderNumberPO_UI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,orderNumberUIPO",
 			"Tc_SaveAdjustmentPO": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,saveAdjReturnToOrderBtnPO",
 			"TC_POUpdateStatus": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusPO",
-			"TC_244_CreateManifestMultipleShipments": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut,navigateToShippingManifest,selectCompany,navigateToTrucksScreen,navigateToAddNewTruck,addNewTruck,navigateToDriversScreen,navigateToAddNewDriver,addNewDriver,navigateToManifestsScreen,navigateToCreateManifest,createManifestMultiShip",
+			"TC_244_CreateManifestMultipleShipments": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut,navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifestMultiShip",
 			"Tc_InProgressStatus": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,inProgressStatus",
 			"TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,searchFiltersManifestUI",
 			"TC_295_ManifestOrderUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,manifestOrderUI",
@@ -211,6 +212,10 @@
 		{
 			"TC_ID": "Tc_CloseManifest",
 			"Title": "Verify Close Manifest"
+		},
+		{
+			"TC_ID": "Tc_DeleteManifest",
+			"Title": "Verify Delete Manifest"
 		},
 		{
 			"TC_ID": "Tc_CreateManifestNotDeliveredOrd",

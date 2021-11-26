@@ -48,26 +48,29 @@ public class NotDeliveredOrders extends ReusableLib {
      * Keyword to verify UI of Not Delivered Orders
      */
     public void notDeliveredOrdersUI() {
-        String[] actText={"Order Number","Date Not Delivered","Customer PO Number","Delivered To","Driver","Manifest Number","Actions"};
+        String[] actText={"Order Number","Date Not Delivered","Customer PO Number","Deliver To","Driver","Manifest Number","Actions"};
         List<WebElement> els=driver.findElements(By.xpath("//th"));
         int i=0;
         for(WebElement el:els){
-            Utility_Functions.xAssertEquals(report,el.getText().trim(),actText[i],"");
-            i++;
+            if(i==7){break;}else {
+                Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
+                i++;
+            }
         }
         commonObj.validateElementExists(TruckPage.helpIcon,"Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch,"Search filter icon is present");
-        commonObj.validateElementExists(DeliveredOrdersPage.exportButton,"Export button is present");
-        int size=driver.findElements(TruckPage.pagination).size();
-        Utility_Functions.xAssertEquals(report,size,4,"Next page and previous page arrow icon is present");
         String page=Utility_Functions.getText(driver,TruckPage.currentPage);
         commonObj.validateElementExists(TruckPage.currentPage,"Current Page "+page+" "+Utility_Functions.getText(driver,TruckPage.outOf)+"");
         List<WebElement> elm=driver.findElements(TruckPage.show);
         String[] acText={"10","15","30"};
         int j=0;
         for(WebElement el:elm){
-            Utility_Functions.xAssertEquals(report,el.getText().trim(),acText[j],"");
-            j++;
+            if(j==3){
+                break;
+            }else {
+                Utility_Functions.xAssertEquals(report, el.getText().trim(), acText[j], "");
+                j++;
+            }
         }
     }
 

@@ -19,10 +19,12 @@ public class ManifestsPage {
     public static By createManifestBtn=By.xpath("//span[text()='Create Manifest']");
     public static By newManifestDeliveryDate=By.id("newManifestDeliveryDate");
     public static By newManifestStartTime=By.id("newManifestStartTime");
+    public static By hour=By.id("hours");
     public static By notes=By.id("notes");
     public static By truckEle=By.xpath("//select[@name='truck']");
     public static By driverEle=By.xpath("//select[@name='driver']");
     public static By createStatus=By.xpath("//span[contains(text(),'Created')]");
+    public static By mobileIcon=By.xpath("//i[@class='fa fa-generate']");
     public static By addOrderNo=By.xpath("//input[@placeholder='Enter Order Number']");
     public static By orderAddedMessage=By.xpath("//span[contains(@class,'ui-messages-summary')]");
     public static By orderColLink=By.xpath("//a[@class='ng-star-inserted']");
@@ -53,8 +55,11 @@ public class ManifestsPage {
     public static By notPickedUpStatus=By.xpath("//p[text()='Not Picked Up']");
     public static By inProgressStatus=By.xpath("//span[contains(text(),'In Process')]");
     public static By manStatus=By.xpath("//span[@class='manifest-status-text']");
+    public static By closedStatus=By.xpath("//span[contains(text(),'Closed')]");
     public static By closeIcon=By.xpath("//i[@class='fa fa-check-circle-o']");
     public static By closeManifestMsg=By.xpath("//h2[text()='CLOSE MANIFEST']");
+    public static By deleteManifest=By.xpath("//span[text()='Delete Manifest']");
+    public static By delButton=By.xpath("//h2[text()='DELETE MANIFEST']/ancestor::div[@class='modal-content']/descendant::button");
     public static By deliveredInput=By.id("quantityAdjusted0");
 
 }

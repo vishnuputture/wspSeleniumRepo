@@ -132,6 +132,8 @@ public class Drivers extends ReusableLib {
      */
     public void valPageCount(int pageNum) {
         Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.timeWait(4);
         click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
         int driverCount = driver.findElements(DriversPage.driverNameCount).size();
         if (driverCount == pageNum) {

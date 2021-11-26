@@ -172,6 +172,8 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.newManifestDeliveryDate);
         click(TruckPage.licensePlateExpSelect, "Select Delivery Date");
         click(ManifestsPage.newManifestStartTime, "Select Start Date");
+        int hour=Utility_Functions.genRandNum(12);
+        sendKeys(ManifestsPage.hour,""+hour+"");
         click(ManifestsPage.truckEle);
         Utility_Functions.timeWait(3);
         String truckName = Utility_Functions.xGetJsonData("TruckName");
@@ -194,6 +196,7 @@ public class Manifests extends ReusableLib {
         String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
         Utility_Functions.xUpdateJson("ManFest",maniNo);
         commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
+        commonObj.validateElementExists(ManifestsPage.mobileIcon,"Generate icon is present");
     }
 
     /**
@@ -349,7 +352,7 @@ public class Manifests extends ReusableLib {
     public void manifestOrderUI() {
         commonObj.validateText(lbl("Warehouse Manager Notes"), "Warehouse Manager Notes", "Label matches");
         commonObj.validateText(lbl("Notes to Driver"), "Notes to Driver", "Label matches");
-        commonObj.validateText(btn("Save Notes"), "Save Notes", "Button matches");
+        //commonObj.validateText(btn("Save Notes"), "Save Notes", "Button matches");
         commonObj.validateText(lbl("STOPS & ORDERS "), "STOPS & ORDERS", "Label matches");
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
         commonObj.validateElementExists(ManifestsPage.colExpIconManifestOrder, "Collapse icon is present");
@@ -429,13 +432,15 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(3);
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         Utility_Functions.timeWait(3);
-        click(ManifestsPage.updateStatusPOPick, "Click Picked Up");
+        Utility_Functions.xHoverElementClk(driver.findElement(ManifestsPage.updateStatusPOPick),driver);
+       // click(ManifestsPage.updateStatusPOPick, "Click Picked Up");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.pickedUpStatus, "Picked Up", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         Utility_Functions.timeWait(2);
-        click(ManifestsPage.updateStatusPONotPick, "Click Not Picked Up");
+        Utility_Functions.xHoverElementClk(driver.findElement(ManifestsPage.updateStatusPONotPick),driver);
+        //click(ManifestsPage.updateStatusPONotPick, "Click Not Picked Up");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.notPickedUpStatus, "Not Picked Up", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.notDeliveredRedIcon, "Stop icon changed to Red color Cross mark");
@@ -558,5 +563,49 @@ public class Manifests extends ReusableLib {
         click(TruckPage.yesButtonPopUp,"Click Yes button");
         commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
         commonObj.validateText(ManifestsPage.manStatus, "Closed", "Verify status: ");
+    }
+
+    /**
+     * Keyword to verify delete Manifest
+     */
+    public void deleteManifest() {
+        String man=Utility_Functions.getText(driver,truckObj.getTruck("Manifest Number"));
+        click(truckObj.getTruck("Manifest Number"),"Click Manifest Number Hyper Link");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(By.xpath("//h2[text()=' Manifest #: "+man+" ']"),"Manifest #: "+man+"","Manifest Number Screen Header: ");
+        click(ManifestsPage.deleteManifest,"Click Delete Manifest");
+        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
+        click(driver.findElements(ManifestsPage.delButton).get(0), "Click No Button");
+        commonObj.validateText(By.xpath("//h2[text()=' Manifest #: "+man+" ']"),"Manifest #: "+man+"","Manifest Number Screen Header: ");
+        click(ManifestsPage.deleteManifest,"Click Delete Manifest");
+        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
+        click(driver.findElements(ManifestsPage.delButton).get(1), "Click Yes Button");
+        Utility_Functions.timeWait(3);
+        String exp = "Manifest #"+man+" successfully deleted.";
+        commonObj.validateText(TruckPage.deletePopUp, exp, "Deleted Manifest Successful message is present");
+    }
+
+    /**
+     * Keyword to verify Close All Manifest
+     */
+    public void closeAllManifest() {
+        Utility_Functions.timeWait(2);
+        if(Utility_Functions.xIsDisplayed(driver,ManifestsPage.closeIcon)) {
+            int size = driver.findElements(ManifestsPage.closeIcon).size();
+            for (int i = 0; i < size; i++) {
+                Utility_Functions.timeWait(3);
+                click(ManifestsPage.closeIcon,"Click CLose manifest icon");
+                commonObj.validateText(ManifestsPage.closeManifestMsg,"CLOSE MANIFEST","CLOSE MANIFEST popup window is present");
+                Utility_Functions.timeWait(2);
+                click(TruckPage.noButtonPopUp,"Click No button");
+                Utility_Functions.timeWait(2);
+                commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
+                click(ManifestsPage.closeIcon,"Click CLose manifest icon");
+                Utility_Functions.timeWait(2);
+                click(TruckPage.yesButtonPopUp,"Click Yes button");
+                commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
+                commonObj.validateText(ManifestsPage.closedStatus, "Closed", "Verify status: ");
+            }
+        }
     }
 }

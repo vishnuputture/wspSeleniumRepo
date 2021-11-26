@@ -280,6 +280,14 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_DeleteManifest(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Delete manifest");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_CreateManifestNotDeliveredOrd(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Create Manifest NotDelivered Order");
         CoreScript coreScript = new CoreScript(testParameters);
