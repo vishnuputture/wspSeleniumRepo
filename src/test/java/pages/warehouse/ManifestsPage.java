@@ -34,7 +34,8 @@ public class ManifestsPage {
     public static By editNote=By.xpath("//a[text()='Edit Notes']");
     public static By updateStatusDrop=By.xpath("//p[contains(text(),'Update Status')]");
     public static By updateStatusSO=By.xpath("//div[contains(text(),'Delivered')]");
-    public static By updateStatusPO=By.xpath("//div[contains(text(),'Picked Up')]");
+    public static By updateStatusPOPick=By.xpath("//div[text()=' Picked Up ']");
+    public static By updateStatusPONotPick=By.xpath("//div[text()=' Not Picked Up ']");
     public static By soStatus=By.xpath("//p[@class='order-detail']");
     public static By warningIcon=By.xpath("//i[contains(@class,'win-status-warning')]");
     public static By deliveredGreenIcon=By.xpath("//win-status-icon[@ng-reflect-status='DELIVERED']");
@@ -52,6 +53,8 @@ public class ManifestsPage {
     public static By notPickedUpStatus=By.xpath("//p[text()='Not Picked Up']");
     public static By inProgressStatus=By.xpath("//span[contains(text(),'In Process')]");
     public static By manStatus=By.xpath("//span[@class='manifest-status-text']");
+    public static By closeIcon=By.xpath("//i[@class='fa fa-check-circle-o']");
+    public static By closeManifestMsg=By.xpath("//h2[text()='CLOSE MANIFEST']");
     public static By deliveredInput=By.id("quantityAdjusted0");
 
 }

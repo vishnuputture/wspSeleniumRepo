@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
+import pages.warehouse.DeliveredOrdersPage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.ManifestsPage;
 import pages.warehouse.TruckPage;
@@ -33,22 +34,11 @@ public class Manifests extends ReusableLib {
     }
 
     /**
-     * Keyword to Select Company
-     */
-    public void selectCompany() {
-        click(SelfServicePriceSheetPage.companySelector);
-        click(SelfServicePriceSheetPage.companyLabel);
-        sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
-        click(SelfServicePriceSheetPage.selectButton);
-        Utility_Functions.timeWait(5);
-    }
-
-    /**
      * Keyword to Navigate to Manifests Screen
      */
     public void navigateToManifestsScreen() {
-        selectCompany();
         click(TruckPage.menuIconTruck);
+        truckObj.callSelectCompany();
         click(ManifestsPage.subMenuManifest, "Navigate to Manifest List page");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
@@ -178,37 +168,46 @@ public class Manifests extends ReusableLib {
         return driver.findElement(By.xpath("//label[text()='" + label + "']/parent::div/descendant::option[@class='ng-star-inserted']"));
     }
 
-    /**
-     * Keyword to create manifest
-     */
-    public void createManifest() {
+    public void fillDetails() {
         click(ManifestsPage.newManifestDeliveryDate);
         click(TruckPage.licensePlateExpSelect, "Select Delivery Date");
         click(ManifestsPage.newManifestStartTime, "Select Start Date");
         click(ManifestsPage.truckEle);
         Utility_Functions.timeWait(3);
-        String truckName=Utility_Functions.xGetJsonData("TruckName");
-        System.out.println("truckName...."+truckName);
-        click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'"+truckName+"')]")), "Select truck from the drop down");
+        String truckName = Utility_Functions.xGetJsonData("TruckName");
+        System.out.println("truckName...." + truckName);
+        click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
         click(ManifestsPage.notes);
         Utility_Functions.timeWait(2);
         Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
         Utility_Functions.timeWait(2);
-        String driverName=Utility_Functions.xGetJsonData("Driver");
-        System.out.println("driverName...."+driverName);
-        click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'"+driverName+"')]")), "Select Driver from the drop down");
+        String driverName = Utility_Functions.xGetJsonData("Driver");
+        System.out.println("driverName...." + driverName);
+        click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
         Utility_Functions.timeWait(2);
+    }
+
+    public void verifyManifestNum() {
+        Utility_Functions.timeWait(5);
+        String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
+        Utility_Functions.xUpdateJson("ManFest",maniNo);
+        commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
+    }
+
+    /**
+     * Keyword to create manifest
+     */
+    public void createManifest() {
+        fillDetails();
         Utility_Functions.xScrollIntoView(driver, ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.addOrderNo, Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Enter shipment number");
         click(ManifestsPage.addButton, "Click Add button");
         commonObj.validateText(ManifestsPage.orderAddedMessage, "Order " + Utility_Functions.xGetJsonData("SalesOrder") + "-01 successfully added to manifest", "Order is added");
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
-        Utility_Functions.timeWait(5);
-        String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
-        commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
+        verifyManifestNum();
     }
 
     /**
@@ -255,28 +254,28 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.newManifestStartTime, "Select Start Date");
         click(ManifestsPage.truckEle);
         Utility_Functions.timeWait(3);
-        String truckName=Utility_Functions.xGetJsonData("TruckName");
-        System.out.println("truckName...."+truckName);
-        click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'"+truckName+"')]")), "Select truck from the drop down");
+        String truckName = Utility_Functions.xGetJsonData("TruckName");
+        System.out.println("truckName...." + truckName);
+        click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
         click(ManifestsPage.notes);
         Utility_Functions.timeWait(2);
         Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
-        String driverName=Utility_Functions.xGetJsonData("Driver");
-        System.out.println("driverName...."+driverName);
-        click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'"+driverName+"')]")), "Select Driver from the drop down");
+        String driverName = Utility_Functions.xGetJsonData("Driver");
+        System.out.println("driverName...." + driverName);
+        click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
         sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
         Utility_Functions.timeWait(2);
         Utility_Functions.xScrollIntoView(driver, ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
-        click(ManifestsPage.addPOBtn,"CLick Add PO button");
+        click(ManifestsPage.addPOBtn, "CLick Add PO button");
         Utility_Functions.timeWait(5);
         /*String poNo=Utility_Functions.getText(driver,driver.findElement(By.xpath("//tr[contains(@class,'ui-selectable-row')]/td")));
         System.out.println("poNo....."+poNo);
         Utility_Functions.xUpdateJson("PONumber",poNo);
         System.out.println("poNo....."+poNo);*/
-        click(ManifestsPage.addPoRowCount,"Select PO");
+        click(ManifestsPage.addPoRowCount, "Select PO");
         Utility_Functions.timeWait(3);
-        click(btn(" Add to Manifest "),"Click Add to Manifest Button");
+        click(btn(" Add to Manifest "), "Click Add to Manifest Button");
         Utility_Functions.timeWait(5);
         //commonObj.validateText(ManifestsPage.orderAddedMessage, "Order " + Utility_Functions.xGetJsonData("PONumber") + " successfully added to manifest", "Order is added");
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
@@ -317,6 +316,7 @@ public class Manifests extends ReusableLib {
     public void navigateToManifestOrder() {
         Utility_Functions.timeWait(4);
         String manNo = Utility_Functions.getText(driver, getRowVal("Manifest Number")).trim();
+        Utility_Functions.xUpdateJson("ManifestNumber",manNo);
         if (Utility_Functions.xIsDisplayed(driver, ManifestsPage.generatedIcon)) {
             click(ManifestsPage.generatedIcon);
         }
@@ -379,34 +379,36 @@ public class Manifests extends ReusableLib {
     }
 
     /**
-     * Keyword to verify functionality of update status button for Sales order
-     *
+     * Keyword to verify functionality of update status(Delivered) button for Sales order
      */
-    public void updateStatusSO() {
+    public void updateStatusDeliveredSO() {
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         click(ManifestsPage.updateStatusSO, "Click Delivered");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.soStatus, "Delivered", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
-        click(driver.findElements(DriversPage.crossIcon).get(1),"CLick Close icon");
+        click(driver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
         Utility_Functions.timeWait(5);
-        commonObj.validateText(ManifestsPage.manStatus,"Delivered","Verify status: ");
-        click(ManifestsPage.orderColLink, "Click on order number link from orders column");
-        Utility_Functions.timeWait(4);
+        commonObj.validateText(ManifestsPage.manStatus, "Delivered", "Verify status: ");
+    }
+
+    /**
+     * Keyword to verify functionality of update status(Not Delivered) button for Sales order
+     */
+    public void updateStatusNotDeliveredSO() {
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         click(driver.findElements(ManifestsPage.updateStatusSO).get(1), "Click Not Delivered");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.soStatus, "Not Delivered", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.notDeliveredRedIcon, "Stop icon changed to Red color Cross mark");
-        commonObj.validateElementExists(ManifestsPage.warningIcon, "In progress Icon is present");
-        click(driver.findElements(DriversPage.crossIcon).get(1),"CLick Close icon");
+        //commonObj.validateElementExists(ManifestsPage.warningIcon, "In progress Icon is present");
+        click(driver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
         Utility_Functions.timeWait(5);
-        commonObj.validateText(ManifestsPage.manStatus,"Not Delivered","Verify status: ");
+        commonObj.validateText(ManifestsPage.manStatus, "Not Delivered", "Verify status: ");
     }
 
     /**
      * Keyword to verify functionality of update status button for Purchase order
-     *
      */
     public void inProgressStatus() {
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
@@ -415,26 +417,25 @@ public class Manifests extends ReusableLib {
         commonObj.validateText(ManifestsPage.soStatus, "Delivered", "Verify the status: ");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(ManifestsPage.warningIcon, "In progress Icon is present");
-        click(driver.findElements(DriversPage.crossIcon).get(1),"CLick Close icon");
+        click(driver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
         Utility_Functions.timeWait(5);
-        commonObj.validateText(ManifestsPage.inProgressStatus,"In Process","Verify status: ");
+        commonObj.validateText(ManifestsPage.inProgressStatus, "In Process", "Verify status: ");
     }
 
     /**
      * Keyword to verify functionality of update status button for Purchase order
-     *
      */
     public void updateStatusPO() {
         Utility_Functions.timeWait(3);
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         Utility_Functions.timeWait(3);
-        click(driver.findElements(ManifestsPage.updateStatusPO).get(0), "Click Picked Up");
+        click(ManifestsPage.updateStatusPOPick, "Click Picked Up");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.pickedUpStatus, "Picked Up", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         Utility_Functions.timeWait(2);
-        click(driver.findElements(ManifestsPage.updateStatusPO).get(1), "Click Not Picked Up");
+        click(ManifestsPage.updateStatusPONotPick, "Click Not Picked Up");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.notPickedUpStatus, "Not Picked Up", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.notDeliveredRedIcon, "Stop icon changed to Red color Cross mark");
@@ -442,112 +443,120 @@ public class Manifests extends ReusableLib {
 
     /**
      * Keyword to Navigate To Order Number Page Sales Order
-     *
      */
     public void navigateToOrderNumberSO() {
-        click(btn(" Packing List "),"Click Packing List Button");
-        commonObj.validateText(ManifestsPage.orderNoHeader,"ORDER NUMBERs "+Utility_Functions.xGetJsonData("SalesOrder") +"-01","Order numbers header: ");
+        click(btn(" Packing List "), "Click Packing List Button");
+        commonObj.validateText(ManifestsPage.orderNoHeader, "ORDER NUMBERs " + Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Order numbers header: ");
     }
 
     /**
      * Keyword to Navigate To Order Number Page Purchase Order
-     *
      */
     public void navigateToOrderNumberPO() {
-        click(btn(" PO Item Details "),"Click PO Item Details Button");
-        commonObj.validateElementExists(ManifestsPage.orderNoHeaderPO,"Order numbers header: ");
+        click(btn(" PO Item Details "), "Click PO Item Details Button");
+        commonObj.validateElementExists(ManifestsPage.orderNoHeaderPO, "Order numbers header: ");
     }
 
     /**
      * Keyword to verify UI of Order Number sales order page
-     *
      */
     public void orderNumberUISO() {
-        commonObj.validateText(head("PACKING LIST"),"PACKING LIST","Sub Header: is present");
-        commonObj.validateText(lbl("Order Date:"),"Order Date:","");
-        commonObj.validateText(lbl("Requested:"),"Requested:","");
-        commonObj.validateText(lbl("Customer PO:"),"Customer PO:","");
-        commonObj.validateText(lbl("Total Number of Units:"),"Total Number of Units:","");
-        commonObj.validateText(head("SOLD TO:"),"SOLD TO:","SOLD TO: is present");
-        commonObj.validateText(head("SHIP TO:"),"SHIP TO:","SHIP TO: is present");
-        commonObj.validateElementExists(btn("Return to Orders"),"Return to Orders button present");
-        commonObj.validateElementExists(btn("Save Adjustments"),"Save Adjustments is present");
-        commonObj.validateElementExists(ManifestsPage.expandAll,"Expand All link is present");
+        commonObj.validateText(head("PACKING LIST"), "PACKING LIST", "Sub Header: is present");
+        commonObj.validateText(lbl("Order Date:"), "Order Date:", "");
+        commonObj.validateText(lbl("Requested:"), "Requested:", "");
+        commonObj.validateText(lbl("Customer PO:"), "Customer PO:", "");
+        commonObj.validateText(lbl("Total Number of Units:"), "Total Number of Units:", "");
+        commonObj.validateText(head("SOLD TO:"), "SOLD TO:", "SOLD TO: is present");
+        commonObj.validateText(head("SHIP TO:"), "SHIP TO:", "SHIP TO: is present");
+        commonObj.validateElementExists(btn("Return to Orders"), "Return to Orders button present");
+        commonObj.validateElementExists(btn("Save Adjustments"), "Save Adjustments is present");
+        commonObj.validateElementExists(ManifestsPage.expandAll, "Expand All link is present");
     }
 
     /**
      * Keyword to verify UI of Order Number Purchase order page
-     *
      */
     public void orderNumberUIPO() {
-        commonObj.validateText(head("ITEM DETAILS"),"ITEM DETAILS","Sub Header: is present");
-        commonObj.validateText(lbl("Order Date:"),"Order Date:","");
-        commonObj.validateText(lbl("Requested:"),"Requested:","");
-        commonObj.validateText(lbl("Total Number of Units:"),"Total Number of Units:","");
-        commonObj.validateText(head("PICKUP FROM:"),"PICKUP FROM:","PICKUP FROM: is present");
-        commonObj.validateText(head("SHIP TO:"),"SHIP TO:","SHIP TO: is present");
-        commonObj.validateElementExists(btn("Return to Orders"),"Return to Orders button present");
-        commonObj.validateElementExists(ManifestsPage.poDetails,"PO DETAIL is present");
-        commonObj.validateElementExists(ManifestsPage.expandAll,"Expand All link is present");
+        commonObj.validateText(head("ITEM DETAILS"), "ITEM DETAILS", "Sub Header: is present");
+        commonObj.validateText(lbl("Order Date:"), "Order Date:", "");
+        commonObj.validateText(lbl("Requested:"), "Requested:", "");
+        commonObj.validateText(lbl("Total Number of Units:"), "Total Number of Units:", "");
+        commonObj.validateText(head("PICKUP FROM:"), "PICKUP FROM:", "PICKUP FROM: is present");
+        commonObj.validateText(head("SHIP TO:"), "SHIP TO:", "SHIP TO: is present");
+        commonObj.validateElementExists(btn("Return to Orders"), "Return to Orders button present");
+        commonObj.validateElementExists(ManifestsPage.poDetails, "PO DETAIL is present");
+        commonObj.validateElementExists(ManifestsPage.expandAll, "Expand All link is present");
     }
 
     /**
      * Keyword to verify Save Adjustment and Return to Orders Button
-     *
      */
     public void saveAdjReturnToOrderBtn() {
-        click(driver.findElements(DriversPage.crossIcon).get(1),"Click Cross icon(Close icon)");
+        click(driver.findElements(DriversPage.crossIcon).get(1), "Click Cross icon(Close icon)");
         Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader,"Navigate back to manifest Order page");
-        click(btn(" Packing List "),"Click Packing List Button");
-        commonObj.validateText(ManifestsPage.orderNoHeader,"ORDER NUMBERs "+Utility_Functions.xGetJsonData("SalesOrder") +"-01","Order numbers header: ");
-        click(ManifestsPage.expandAll,"Click Expand All Link");
-        sendKeys(ManifestsPage.deliveredInput,"1000","Update delivered count");
-        commonObj.validateText(ManifestsPage.successMsg,"Delivered quantity cannot be greater than shipped quantity.","Error message popUp: ");
+        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
+        click(btn(" Packing List "), "Click Packing List Button");
+        commonObj.validateText(ManifestsPage.orderNoHeader, "ORDER NUMBERs " + Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Order numbers header: ");
+        click(ManifestsPage.expandAll, "Click Expand All Link");
+        sendKeys(ManifestsPage.deliveredInput, "1000", "Update delivered count");
+        commonObj.validateText(ManifestsPage.successMsg, "Delivered quantity cannot be greater than shipped quantity.", "Error message popUp: ");
         Utility_Functions.timeWait(2);
         click(ManifestsPage.closePopUp);
-        sendKeys(ManifestsPage.deliveredInput,"1","Update delivered count");
-        click(btn("Save Adjustments"),"Click Save Adjustments");
+        sendKeys(ManifestsPage.deliveredInput, "1", "Update delivered count");
+        click(btn("Save Adjustments"), "Click Save Adjustments");
         Utility_Functions.timeWait(5);
         Utility_Functions.xScrollWindowTop(driver);
         Utility_Functions.xScrollWindowTop(driver);
-        click(driver.findElements(btn("Return to Orders")).get(1),"Click Return To Order");
+        click(driver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
         Utility_Functions.timeWait(3);
 
-        click(btn(" Packing List "),"Click Packing List Button");
-        commonObj.validateText(ManifestsPage.orderNoHeader,"ORDER NUMBERs "+Utility_Functions.xGetJsonData("SalesOrder") +"-01","Order numbers header: ");
-        click(ManifestsPage.expandAll,"Click Expand All Link");
+        click(btn(" Packing List "), "Click Packing List Button");
+        commonObj.validateText(ManifestsPage.orderNoHeader, "ORDER NUMBERs " + Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Order numbers header: ");
+        click(ManifestsPage.expandAll, "Click Expand All Link");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver,ManifestsPage.deliveredInput);
+        Utility_Functions.xScrollIntoView(driver, ManifestsPage.deliveredInput);
         Utility_Functions.timeWait(2);
-        String actVal=driver.findElement(ManifestsPage.deliveredInput).getAttribute("ng-reflect-model");
-        Utility_Functions.xAssertEquals(report,"1",actVal,"");
-        click(driver.findElements(btn("Return to Orders")).get(1),"Click Return To Order");
+        String actVal = driver.findElement(ManifestsPage.deliveredInput).getAttribute("ng-reflect-model");
+        Utility_Functions.xAssertEquals(report, "1", actVal, "");
+        click(driver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
         Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader,"Navigate back to manifest Order page");
+        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
     }
 
     /**
      * Keyword to verify Save Adjustment and Return to Orders Button
-     *
      */
     public void saveAdjReturnToOrderBtnPO() {
         Utility_Functions.timeWait(2);
-        click(driver.findElements(DriversPage.crossIcon).get(1),"Click Cross icon(Close icon)");
+        click(driver.findElements(DriversPage.crossIcon).get(1), "Click Cross icon(Close icon)");
         Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader,"Navigate back to manifest Order page");
+        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
         navigateToOrderNumberPO();
         Utility_Functions.timeWait(4);
-        click(ManifestsPage.expandAll,"Click Expand All Link");
-        sendKeys(ManifestsPage.pickUpCount,"0","Update Pick Up count");
-        click(btn("Save Adjustments"),"Click Save Adjustments");
+        click(ManifestsPage.expandAll, "Click Expand All Link");
+        sendKeys(ManifestsPage.pickUpCount, "0", "Update Pick Up count");
+        click(btn("Save Adjustments"), "Click Save Adjustments");
         Utility_Functions.timeWait(5);
         Utility_Functions.xScrollWindowTop(driver);
         Utility_Functions.xScrollWindowTop(driver);
-        click(driver.findElements(btn("Return to Orders")).get(1),"Click Return To Order");
+        click(driver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
         Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader,"Navigate back to manifest Order page");
+        commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
     }
 
-
+    /**
+     * Keyword to verify Close Manifest
+     */
+    public void closeManifest() {
+        Utility_Functions.timeWait(2);
+        click(ManifestsPage.closeIcon,"Click CLose manifest icon");
+        commonObj.validateText(ManifestsPage.closeManifestMsg,"CLOSE MANIFEST","CLOSE MANIFEST popup window is present");
+        click(TruckPage.noButtonPopUp,"Click No button");
+        commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
+        click(ManifestsPage.closeIcon,"Click CLose manifest icon");
+        commonObj.validateText(ManifestsPage.closeManifestMsg,"CLOSE MANIFEST","CLOSE MANIFEST popup window is present");
+        click(TruckPage.yesButtonPopUp,"Click Yes button");
+        commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
+        commonObj.validateText(ManifestsPage.manStatus, "Closed", "Verify status: ");
+    }
 }

@@ -24,6 +24,10 @@ public class DriversPage {
     public static By driverNameSelect=By.id("driverNameSelect");
     public static By rankSelect=By.id("rankSelect");
     public static By statusSelect=By.id("statusSelect");
+    public static By updateDriverHeader=By.xpath("//h2[text()='Update Driver']");
+    public static By deleteButtonDisable=By.xpath("//button[contains(text(),'Delete') and @disabled]");
+    public static By statusDriver=By.id("status");
+    public static By inActive=By.xpath("//select[@id='status' and @name]/option[contains(text(),'Inactive')]");
     public static By driverFirstName=By.xpath("//th[contains(text(),'Driver Name')]/ancestor::table/descendant::td/a");
 
 }

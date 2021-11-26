@@ -39,5 +39,12 @@ public class TruckPage {
     public static By cdlRequiredFilter=By.id("cdlRequired");
     public static By applyFilter=By.xpath("//button[contains(text(),'Apply Filters')]");
     public static By truckFirstName=By.xpath("//th[contains(text(),'Truck Name')]/ancestor::table/descendant::td/a");
-
+    public static By updateTruckHeader=By.xpath("//h2[text()='Update Truck']");
+    public static By deletePopUp=By.xpath("//span[@class='ui-growl-title']");
+    public static By deleteButton=By.xpath("//button[contains(text(),'Delete')]");
+    public static By saveTruckButton=By.xpath("//button[contains(text(),'Save')]");
+    public static By statusDrop=By.xpath("//select[@id='status' and @name='status']");
+    public static By deleteConfPopUp=By.xpath("//h2[contains(text(),'DELETE')]");
+    public static By noButtonPopUp=By.id("button2");
+    public static By yesButtonPopUp=By.id("button1");
 }

@@ -160,6 +160,14 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreateSalesOrderWISE(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Create Sales Order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_240_CreateManifestUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Create new Manifest Ui");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -200,8 +208,88 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_SOUpdateStatus(SeleniumTestParameters testParameters) {
+    public void TC_SOUpdateStatusDelivered(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Functionality Update status drop down");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_DeliveredOrdersSearchFilterUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Delivered Orders Search Filter UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_DeliveredOrdersUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Delivered Orders UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_VerifyDeliveredOrders(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify filter Delivered Orders");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_SOUpdateStatusNotDelivered(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Functionality Update status drop down");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_NotDeliveredOrdersSearchFilterUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Not Delivered Orders Search Filter UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_NotDeliveredOrdersUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Not Delivered Orders UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_VerifyNotDeliveredOrders(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Not Delivered Orders");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CloseManifest(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Close manifest");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreateManifestNotDeliveredOrd(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Create Manifest NotDelivered Order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_AddToManifestNotDelOrd(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Add to manifest for NotDelivered Order");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -274,6 +362,54 @@ public class Warehouse extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_297_SaveNoteExpandCollapse(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Functionality of save note button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_DeleteTruck(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Delete Truck button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_DeleteDriver(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Delete Driver button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_UpdateTruckUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Update Truck Screen UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_UpdateTruck(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Update Truck");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_UpdateDriverUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Update Driver screen UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_UpdateDriver(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Update Truck");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
