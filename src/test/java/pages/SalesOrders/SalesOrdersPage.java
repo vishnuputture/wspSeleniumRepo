@@ -33,6 +33,24 @@ public class SalesOrdersPage extends ReusableLib {
 
 	public static By btnContinue = By.id("Continue");
 
+	public static By shipmentDeliveryTypeDropDown = By.id("slbShipType.1");
+	public static By  elementForContextClick= By.xpath("//select[@id='slbShipType.1']/parent::div");
+	public static By directShipDropdown = By.xpath("//*[contains(@id,'slbDirectShip')]");
+	public static By contextOptionLineDetails = By.xpath("//td[text()='Line Details']");
+	public static By shipmentItemName = By.id("outItemNumb.1");
+	public static By contextOptionDeleteItem = By.xpath("//td[text()='Delete Item From Shipment']");
+	public static By updateShipmentBtn = By.id("btnSave");
+	public static By maintainShipmentBtn = By.id("btnCreateNewShipment");
+	public static By createShipmentDeliveryTypeDropDown = By.id("slbDeliveryType");
+	public static By selectItemCheckBox = By.id("cbxSelectLine.1");
+	public static By qtyToShiptxtBox = By.id("inQtySchedule.1");
+	public static By btnCreateShipment = By.id("btnAddGoToNew");
+	//public static By btnSaveExitShipment = By.id("btnSaveExit");
+
+	//payments tab
+	public static By paymentMethodDropdown = By.id("PIpaymentMethod1");
+	public static By btnApplyPayment = By.id("applyPmtBtn1");
+	public static By btnSaveExitPayment = By.id("btnSaveExit");
 
 	//image invoice
 	public static  By invoiceImage=By.id("ImgInvoice");
