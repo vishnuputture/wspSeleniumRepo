@@ -130,24 +130,12 @@
                     <include name="Tc_DriversUI"></include>
                     <include name="Tc_209_AddNewDriverScreenUI"></include>
                     <include name="Tc_UpdateDriverUI"></include>
-                    <include name="Tc_ManifestListUI"></include>
-                    <include name="Tc_240_CreateManifestUI"></include>
-                    <include name="Tc_OrderNumberSO_UI"></include>
-                    <include name="Tc_NotDeliveredOrdersUI"></include>
-                    <include name="Tc_DeliveredOrdersUI"></include>
-                    <include name="Tc_DeliveredOrdersSearchFilterUI"></include>
-                    <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
-                    <include name="TC_295_ManifestOrderUI"></include>
                     <include name="Tc_TrucksHelpIcon"></include>
                     <include name="Tc_TrucksPagination"></include>
                     <include name="Tc_TrucksPageCount"></include>
                     <include name="Tc_197_DriversHelpIcon"></include>
                     <include name="Tc_198_DriversPagination"></include>
                     <include name="Tc_200_DriversPageCount"></include>
-                    <include name="Tc_235_ManifestListHelpIcon"></include>
-                    <include name="Tc_236_ManifestListPagination"></include>
-                    <include name="Tc_238_ManifestListPageCount"></include>
-                    <include name="Tc_241_collapseExpandSession"></include>
 
                     <include name="Tc_AddTruck"></include>
                     <include name="Tc_AddNewDriver"></include>
@@ -167,6 +155,18 @@
                     <include name="Tc_AddNewDriver"></include>
                     <include name="Tc_CreateSalesOrderWISE"></include>
                     <include name="TC_243_CreateManifest"></include>
+                    <include name="Tc_ManifestListUI"></include>
+                    <include name="Tc_240_CreateManifestUI"></include>
+                    <include name="Tc_NotDeliveredOrdersUI"></include>
+                    <include name="Tc_DeliveredOrdersUI"></include>
+                    <include name="Tc_DeliveredOrdersSearchFilterUI"></include>
+                    <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
+                    <include name="TC_295_ManifestOrderUI"></include>
+                    <include name="Tc_235_ManifestListHelpIcon"></include>
+                    <include name="Tc_236_ManifestListPagination"></include>
+                    <include name="Tc_238_ManifestListPageCount"></include>
+                    <include name="Tc_241_collapseExpandSession"></include>
+                    <include name="Tc_OrderNumberSO_UI"></include>
                    <!-- <include name="Tc_SaveAdjustment"></include>-->
 
                     <include name="TC_SOUpdateStatusDelivered"></include>

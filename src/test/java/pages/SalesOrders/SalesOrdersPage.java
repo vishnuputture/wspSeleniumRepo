@@ -45,6 +45,7 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By selectItemCheckBox = By.id("cbxSelectLine.1");
 	public static By qtyToShiptxtBox = By.id("inQtySchedule.1");
 	public static By btnCreateShipment = By.id("btnAddGoToNew");
+	public static By backOrder=By.id("inQtyBO.1");
 	//public static By btnSaveExitShipment = By.id("btnSaveExit");
 
 	//payments tab
