@@ -145,7 +145,7 @@ public class SpecialPricingAllowance extends ReusableLib {
         if (Utility_Functions.xWaitForElementPresent(driver, SpecialPriceAllowancePage.lblInvalidDeletionMessage, 5)) {
             String deleteMessage = Utility_Functions.getText(driver, SpecialPriceAllowancePage.lblInvalidDeletionMessage);
             System.out.println("Text: " + deleteMessage);
-            Utility_Functions.xAssertEquals(report, "Contract Active - Delete not allowed.", deleteMessage.trim(), "Validating deletion message");
+            Utility_Functions.xAssertEquals(report, "Contract \"End Date\" is less than 1 year old - Delete not allowed.", deleteMessage.trim(), "Validating deletion message");
         } else {
             System.out.println("Text: Not found");
             throw new NoSuchElementException("Could not find :" + SpecialPriceAllowancePage.lblInvalidDeletionMessage);
