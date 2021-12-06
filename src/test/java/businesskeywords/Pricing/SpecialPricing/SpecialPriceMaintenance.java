@@ -35,6 +35,12 @@ public class SpecialPriceMaintenance extends ReusableLib {
         commonObj = new CommonActions(helper);
     }
 
+    public void validateSpPriceMntncTitle(){
+        commonObj.masterToOrderProcessing();
+        commonObj.orderProcToSplPricing();
+        commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
+    }
+
     /**
      * This method is invoked to delete special price record created during the test case and exit the maintenance page
      */
@@ -43,11 +49,12 @@ public class SpecialPriceMaintenance extends ReusableLib {
         try {
             commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
         } catch (NoSuchElementException e) {
-            commonObj.masterToOrderProcessing();
+            validateSpPriceMntncTitle();
+            /*commonObj.masterToOrderProcessing();
             commonObj.orderProcToSplPricing();
             //commonObj.splPricingToAddPricing();
 
-            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
+            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");*/
         }
 
         String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";
@@ -66,11 +73,12 @@ public class SpecialPriceMaintenance extends ReusableLib {
         try {
             commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
         } catch (NoSuchElementException e) {
-            commonObj.masterToOrderProcessing();
+            validateSpPriceMntncTitle();
+           /* commonObj.masterToOrderProcessing();
             commonObj.orderProcToSplPricing();
             //commonObj.splPricingToAddPricing();
 
-            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
+            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");*/
         }
         sendKeys(SpecialPricePage.posToCustNo, "0");
         Utility_Functions.actionKey(Keys.ENTER, driver);
@@ -91,10 +99,11 @@ public class SpecialPriceMaintenance extends ReusableLib {
         try {
             commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
         } catch (NoSuchElementException e) {
-            commonObj.masterToOrderProcessing();
+            validateSpPriceMntncTitle();
+           /* commonObj.masterToOrderProcessing();
             commonObj.orderProcToSplPricing();
 
-            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
+            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");*/
         }
         sendKeys(SpecialPricePage.posToCustNo, "0");
         Utility_Functions.actionKey(Keys.ENTER, driver);
@@ -120,10 +129,11 @@ public class SpecialPriceMaintenance extends ReusableLib {
         try {
             commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
         } catch (NoSuchElementException e) {
-            commonObj.masterToOrderProcessing();
+            validateSpPriceMntncTitle();
+           /* commonObj.masterToOrderProcessing();
             commonObj.orderProcToSplPricing();
             //commonObj.splPricingToAddPricing();
-            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
+            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");*/
         }
         Utility_Functions.xAssertEquals(report, jsonData.getData("filterValue"), getValue(SpecialPricePage.filterTxtBox), "Validating default filter value");
     }
@@ -258,11 +268,12 @@ public class SpecialPriceMaintenance extends ReusableLib {
         try {
             commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
         } catch (NoSuchElementException e) {
-            commonObj.masterToOrderProcessing();
+            validateSpPriceMntncTitle();
+           /* commonObj.masterToOrderProcessing();
             commonObj.orderProcToSplPricing();
             //commonObj.splPricingToAddPricing();
 
-            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
+            commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");*/
         }
 
         String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";

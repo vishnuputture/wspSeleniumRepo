@@ -18,6 +18,7 @@ import java.util.List;
 public class AddSpecialPrice extends ReusableLib {
 
     CommonActions commonObj;
+    AddSpecialPricingPage pageObj;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -30,6 +31,7 @@ public class AddSpecialPrice extends ReusableLib {
 
         super(helper);
         commonObj = new CommonActions(helper);
+        pageObj = new AddSpecialPricingPage(helper);
     }
 
     /**
@@ -65,13 +67,14 @@ public class AddSpecialPrice extends ReusableLib {
 
     public void enterInvalidcustNum() {
 
-        commonObj.masterToOrderProcessing();
+       /* commonObj.masterToOrderProcessing();
         commonObj.orderProcToSplPricing();
         commonObj.splPricingToAddPricing();
-        commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");
-
-        sendKeys(AddSpecialPricingPage.custNumTxtBox, jsonData.getData("InvalidCustNum"), "Entering invalid customer number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");*/
+        validateAddSpecialPriceTitle();
+        pageObj.enterCustNumber(jsonData.getData("InvalidCustNum"),"Entering invalid customer number");
+       /* sendKeys(AddSpecialPricingPage.custNumTxtBox, jsonData.getData("InvalidCustNum"), "Entering invalid customer number");
+        Utility_Functions.actionKey(Keys.ENTER, driver);*/
 
         commonObj.validateText(AddSpecialPricingPage.validationLbl, "Customer Number does not exist", "Validating message for invalid customer number");
 
@@ -83,13 +86,15 @@ public class AddSpecialPrice extends ReusableLib {
 
     public void enterInvaliditemNum() {
 
-        commonObj.masterToOrderProcessing();
+       /* commonObj.masterToOrderProcessing();
         commonObj.orderProcToSplPricing();
         commonObj.splPricingToAddPricing();
-        commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");
-        sendKeys(AddSpecialPricingPage.custNumTxtBox, Utility_Functions.xGetJsonAsString("CustomerNo"), "Entering customer number");
+        commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");*/
+        validateAddSpecialPriceTitle();
+        /*sendKeys(AddSpecialPricingPage.custNumTxtBox, Utility_Functions.xGetJsonAsString("CustomerNo"), "Entering customer number");
         sendKeys(AddSpecialPricingPage.itemNumTxtBox, jsonData.getData("InvalidItemNum"), "Entering invalid item number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, driver);*/
+        pageObj.enterCustItemNumber(Utility_Functions.xGetJsonAsString("CustomerNo"),"Entering customer number",jsonData.getData("InvalidItemNum"),"Entering invalid item number");
 
         commonObj.validateText(AddSpecialPricingPage.validationLbl, "Item Number does not exist", "Validating message for invalid item number");
 
@@ -106,11 +111,12 @@ public class AddSpecialPrice extends ReusableLib {
         try {
             commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");
         } catch (NoSuchElementException e) {
-            commonObj.masterToOrderProcessing();
+           /* commonObj.masterToOrderProcessing();
             commonObj.orderProcToSplPricing();
             commonObj.splPricingToAddPricing();
 
-            commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");
+            commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");*/
+            validateAddSpecialPriceTitle();
         }
         String custNo = Utility_Functions.xGetJsonAsString("CustomerNo");
         String itemNo = Utility_Functions.xGetJsonAsString("ItemNo");
@@ -157,7 +163,7 @@ public class AddSpecialPrice extends ReusableLib {
      * Has a date method which takes a calendar date and generates a date in MM/dd/yy format and attaches it to the record for expiry date
      */
 
-    public void addSpecialPriceRecord() {
+   /* public void addSpecialPriceRecord() {
         sendKeys(AddSpecialPricingPage.custNumTxtBox, jsonData.getData("validCustNum"), "Entering customer number");
         sendKeys(AddSpecialPricingPage.itemNumTxtBox, jsonData.getData("itemNum"), "Entering item number");
         sendKeys(AddSpecialPricingPage.specialPriceTxtBox, jsonData.getData("specialPrice"), "Entering special price");
@@ -182,7 +188,7 @@ public class AddSpecialPrice extends ReusableLib {
             System.out.println("Text: Not found");
             throw new NoSuchElementException("Could not find :" + AddSpecialPricingPage.successLbl);
         }
-    }
+    }*/
 
     /**
      * This methods is invoked to navigate nack to master page from special price page

@@ -3,6 +3,8 @@ package pages.pricing;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import org.openqa.selenium.By;
+import supportLibraries.Utility_Functions;
+import org.openqa.selenium.Keys;
 
 public class AddSpecialPricingPage extends ReusableLib {
 
@@ -18,6 +20,15 @@ public class AddSpecialPricingPage extends ReusableLib {
 	 public static By expDateTxtBox= By.xpath(("//input[@id='I_9_64']"));
 	 public static By validationLbl=By.xpath("//div[@id='D_24_2']");
 	 public static By successLbl=By.xpath("//div[@id='D_24_2'][contains(text(),'Record')]");
-	 
+
+	 public void enterCustNumber(String dataStr, String message){
+		sendKeys(custNumTxtBox,dataStr,message);
+		 Utility_Functions.actionKey(Keys.ENTER, driver);
+	 }
+	 public void enterCustItemNumber(String custNoStr, String custMessage,String itemNoStr, String itemMessage){
+		 sendKeys(custNumTxtBox,custNoStr,custMessage);
+		 sendKeys(itemNumTxtBox,itemNoStr,itemMessage);
+		 Utility_Functions.actionKey(Keys.ENTER, driver);
+	 }
 	 
 }
