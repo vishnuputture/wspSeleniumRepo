@@ -265,12 +265,14 @@ public class PricingMatrix extends ReusableLib {
     }
     
     public void moreKeysValidation() {
-    	String[] firstSet = {"btnCF01","btnCF02","btnCF04","btnCF05","btnCF07","btnCF11","btnCF12","btnCF24","btnPageDown","btnPageUp","btnSubmit","btnExit"};
-    	String[] secondSet = {"btnCF13","btnCF14","btnCF15","btnCF24","btnPageDown","btnPageUp","btnSubmit","btnExit"};
+    	/*String[] firstSet = {"btnCF01","btnCF02","btnCF04","btnCF05","btnCF07","btnCF11","btnCF12","btnCF24","btnPageDown","btnPageUp","btnSubmit","btnExit"};
+    	String[] secondSet = {"btnCF13","btnCF14","btnCF15","btnCF24","btnPageDown","btnPageUp","btnSubmit","btnExit"};*/
+		String[] firstSet = {"btnCF01","btnCF02","btnCF04","btnCF05","btnCF07","btnCF11","btnCF12","btnPageDown","btnPageUp","btnSubmit","btnExit"};
+		String[] secondSet = {"btnCF13","btnCF14","btnPageDown","btnPageUp","btnSubmit","btnExit"};
     	//String[] commonSet = {}
     	
     	for(int i=0; i<=1;i++) {
-    		click(PricingMatrixPage.btnF24,"Click on more buttons");
+    		//click(PricingMatrixPage.btnF24,"Click on more buttons");
     		String[] buttonSet;
     		if(i==0) {
     			 buttonSet = secondSet;
@@ -311,7 +313,7 @@ public class PricingMatrix extends ReusableLib {
     }
     
     public void validateDispList() {
-    	click(PricingMatrixPage.btnF24,"Click on more buttons");
+    	//click(PricingMatrixPage.btnF24,"Click on more buttons");
     	
     	String selectedRow = Utility_Functions.getText(driver,  PricingMatrixPage.firstRow);
     	
@@ -326,8 +328,8 @@ public class PricingMatrix extends ReusableLib {
     	click(PricingMatrixPage.getButton("btnCF12"));
     	
     	String selectedCol = Utility_Functions.getText(driver,  PricingMatrixPage.firstCol);
-    	
-    	click(PricingMatrixPage.firstCol, "Click on the first column");
+
+    	Utility_Functions.xMouseClick(driver,PricingMatrixPage.firstCol);
     	
     	click(PricingMatrixPage.getButton("btnCF14"),"Click on the display list button");
     	
