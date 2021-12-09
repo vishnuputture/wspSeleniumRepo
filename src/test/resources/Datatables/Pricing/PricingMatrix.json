@@ -11,6 +11,7 @@
       "Tc_197_ValidatePgLeftRightPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,pgLeftRt",
       "Tc_198_ValidatePgUpDownPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,pgUpDn",
       "Tc_200_ValidateDisplayListPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,validateDispList"
+
       
     }
   ],

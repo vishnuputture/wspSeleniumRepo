@@ -17,11 +17,8 @@
 			"Tc_3_ValidateDefaultFiltersSplPricing": "launchApp,siteLogin,validateSplPriceFilterValue",
 			"Tc_12_ValidatePositiontoItemNumber_End": "launchApp,siteLogin,delAllPriceRecord,addAndExitMultipleSpecialPrice,sortByItemNum,positionCustItemEnd,delAllPriceRecord",
 			"Tc_24_InsertPAPRecordToDelete":"launchApp,siteLogin,getCustItemData,insertSpecialPricePAPRecord,exitInsertSql,deleteSpecialPricePAPRecord,cleanUp",
-			"Tc_21_E2E": "launchApp,cleanUp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql",
+			"Tc_21_E2E": "launchApp,cleanUp,siteLogin,getCustItemData,addAndExitSpecialPrice,exitSplPricePage,retrieveAndValidateRetrievedSpPrice,exitSql"
 
-
-			"TC_177_verify_the_functionality_of_adding_a_Row_to_Pricing_Matrix": "launchApp,siteLogin,navigateToPricingMatrixPage,addRowAndValidateRowAdded,exitPricingMatrix,signOut",
-			"TC_179_verify_the_functionality_of_copying_Row_to_Pricing_Matrix": "launchApp,siteLogin,navigateToPricingMatrixPage,copyRowPricingMtx,exitPricingMatrix,signOut"
 		}
 	],
 	"General_Data": [
@@ -144,8 +141,8 @@
 		{
 			"TC_ID": "Tc_24_InsertPAPRecordToDelete",
 			"Title": "Add/Maintain Special Pricing",
-			"Date1": "20210918",
-			"Date2": "20210920",
+			"Date1": "20211209",
+			"Date2": "20211231",
 			"success": "Record added. Add another or F12 to return.",
 			"error": "Customer Number does not exist"
 		},
@@ -155,64 +152,6 @@
 			"specialPrice": "100",
 			"success": "Record added. Add another or F12 to return.",
 			"error": "Customer Number does not exist"
-		},
-		{
-			"TC_ID": "Tc_137_verify_Item_number_by_navigating_to_Item_Ledger",
-			"Title": "Item Number validation"
-		},
-		{
-			"TC_ID": "Tc_142_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected",
-			"Title": "Avg Cost: Update Matrix cost update Po field and validate in Item Master Page"
-		},
-		{
-			"TC_ID": "Tc_143_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected",
-			"Title": "Last Cost: Update Matrix cost update Po field and validate in Item Master Page"
-		},
-		{
-			"TC_ID": "Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost",
-			"Title": "Searching Item number on the page"
-		},
-		{
-			"TC_ID": "Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button",
-			"Title": "CheckBox validation"
-		},
-		{
-			"TC_ID": "Tc_140_verify_the_functionality_of_Select_Function_Drop_Down",
-			"Title": "verify Select Functionality"
-		},
-		{
-			"TC_ID": "Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons",
-			"Title": "verify Functionality of Exclude M/C Report"
-		},
-		{
-			"TC_ID": "Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons",
-			"Title": "verify Functionality of No Action"
-		},
-		{
-			"TC_ID": "TC_177_verify_the_functionality_of_adding_a_Row_to_Pricing_Matrix",
-			"Title": "Adding a Row to Pricing Matrix"
-		},
-		{
-			"TC_ID": "TC_179_verify_the_functionality_of_copying_Row_to_Pricing_Matrix",
-			"Title": "Copying Row to Pricing Matrix"
-		},
-		{
-			"TC_ID": "Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected",
-			"Title": "Last Cost: POCost values verification on Item Master"
-		},
-		{
-			"TC_ID": "Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected",
-			"Title": "Average Cost: POCost values verification on Item Master"
-		},
-		{
-			"TC_ID": "Tc_168_verify_the_functionality_of_PO_Cost_and_Proposed_Matrix_Cost_box_and_Save_Button",
-			"Title": "PO Cost And Average COst field with different value",
-			"11_integer_value": "12345678912",
-			"Enter_0": "0"
-		},
-		{
-			"TC_ID": "Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page",
-			"Title": "Matrix Cost Update UI validation"
 		}
 	]
 }
