@@ -5,10 +5,10 @@
 		<classes>
 			<class name="testcases.Pricing.SPA" >
 				<methods>
-					<!--<include name="Tc_161_VerifySPAScreenHeader"></include>
-                    <include name="Tc_166_VerifySPAScreenInformation"></include>-->
+					<include name="Tc_161_VerifySPAScreenHeader"></include>
+                    <include name="Tc_166_VerifySPAScreenInformation"></include>
 
-                    <!--<include name="Tc_311_VerifyAddCustomersToGroupName"></include>
+                    <include name="Tc_311_VerifyAddCustomersToGroupName"></include>
                     <include name="Tc_315_VerifyEditCustomerGroup"></include>
 					<include name="Tc_316_VerifyDisplayCustomer"></include>
                     <include name="Tc_317_VerifyDeleteGroupName"></include>
@@ -17,7 +17,7 @@
                     <include name="Tc_323_VerifySPAHideShowExpiredRecords"></include>
                     <include name="Tc_322_VerifySPAAddRecords"></include>
                     <include name="Tc_337_VerifySPASearchRecords"></include>
-                    <include name="Tc_326_VerifySPARecordDeletion"></include>-->
+                    <include name="Tc_326_VerifySPARecordDeletion"></include>
 
 					<include name="Tc_324_VerifySortingContract"></include>
 					<include name="Tc_325_VerifyEditContract"></include>
