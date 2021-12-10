@@ -40,6 +40,93 @@
                 </methods>
             </class>
 
+            <class name="testcases.Warehouse">
+                <methods>
+                    <!-- ############ UI Of the page ############ -->
+
+                    <include name="Tc_TruckUI"></include>
+                    <include name="Tc_searchFiltersTruckUi"></include>
+                    <include name="Tc_AddNewTruckScreenUI"></include>
+                    <include name="Tc_UpdateTruckUI"></include>
+                    <include name="Tc_DriversUI"></include>
+                    <include name="Tc_209_AddNewDriverScreenUI"></include>
+                    <include name="Tc_UpdateDriverUI"></include>
+                    <include name="Tc_TrucksHelpIcon"></include>
+                    <include name="Tc_TrucksPagination"></include>
+                    <include name="Tc_TrucksPageCount"></include>
+                    <include name="Tc_197_DriversHelpIcon"></include>
+                    <include name="Tc_198_DriversPagination"></include>
+                    <include name="Tc_200_DriversPageCount"></include>
+
+                    <include name="Tc_AddTruck"></include>
+                    <include name="Tc_AddNewDriver"></include>
+                    <include name="Tc_CreateManifestPO"></include>
+                    <include name="Tc_DeleteManifest"></include>
+                    <include name="Tc_DeleteTruck"></include>
+                    <include name="Tc_DeleteDriver"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="RefactorCheck1">
+        <classes>
+            <class name="testcases.Warehouse">
+                <methods>
+                    <include name="Tc_AddTruck"></include>
+                    <include name="Tc_AddNewDriver"></include>
+                    <include name="Tc_CreateSalesOrderWISE"></include>
+                    <include name="TC_243_CreateManifest"></include>
+                    <include name="Tc_ManifestListUI"></include>
+                    <include name="Tc_240_CreateManifestUI"></include>
+                    <include name="Tc_NotDeliveredOrdersUI"></include>
+                    <include name="Tc_DeliveredOrdersUI"></include>
+                    <include name="Tc_DeliveredOrdersSearchFilterUI"></include>
+                    <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
+                    <include name="TC_295_ManifestOrderUI"></include>
+                    <include name="Tc_235_ManifestListHelpIcon"></include>
+                    <include name="Tc_236_ManifestListPagination"></include>
+                    <include name="Tc_238_ManifestListPageCount"></include>
+                    <include name="Tc_241_collapseExpandSession"></include>
+                    <include name="Tc_OrderNumberSO_UI"></include>
+                    <!-- <include name="Tc_SaveAdjustment"></include>-->
+
+                    <include name="TC_SOUpdateStatusDelivered"></include>
+                    <include name="Tc_VerifyDeliveredOrders"></include>
+                    <include name="Tc_DeleteTruck"></include>
+                    <include name="Tc_DeleteDriver"></include>
+
+                    <include name="TC_SOUpdateStatusNotDelivered"></include>
+                    <include name="Tc_VerifyNotDeliveredOrders"></include>
+                    <include name="Tc_CreateManifestNotDeliveredOrd"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="RefactorCheck2">
+        <classes>
+            <class name="testcases.Warehouse">
+                <methods>
+                    <include name="Tc_CreateSalesOrderWISE"></include>
+                    <include name="TC_243_CreateManifest"></include>
+                    <include name="TC_SOUpdateStatusNotDelivered"></include>
+                    <include name="Tc_AddToManifestNotDelOrd"></include>
+
+                    <include name="Tc_CreateManifestPO"></include>
+                    <include name="Tc_OrderNumberPO_UI"></include>
+                    <!--<include name="Tc_SaveAdjustmentPO"></include>-->
+                    <include name="TC_POUpdateStatus"></include>
+                    <include name="Tc_CloseManifest"></include>
+
+                    <include name="TC_244_CreateManifestMultipleShipments"></include>
+                    <include name="Tc_InProgressStatus"></include>
+                    <include name="TC_258_ManifestSearchFilterUI"></include>
+                    <include name="TC_297_SaveNoteExpandCollapse"></include>
+
+                    <include name="Tc_UpdateTruck"></include>
+                    <include name="Tc_UpdateDriver"></include>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
