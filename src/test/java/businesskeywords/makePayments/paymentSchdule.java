@@ -410,11 +410,14 @@ public class paymentSchdule extends ReusableLib {
         click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SchedulePaymentPage.dateError, "Date required", "Error message: Date required");
+        Utility_Functions.xScrollIntoView(driver,SchedulePaymentPage.startDateField);
         sendKeys(SchedulePaymentPage.startDateField, "13/12/2021", "Enter invalid date format in date field");
         click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SchedulePaymentPage.dateError, "Please enter a valid date", "Error message: Please enter a valid date");
+        Utility_Functions.xScrollIntoView(driver,SchedulePaymentPage.startDateField);
         startDateError(SchedulePaymentPage.dateError, "MM/dd/yyyy", 0, "Date must be after today");
+        Utility_Functions.xScrollIntoView(driver,SchedulePaymentPage.startDateField);
         selectStartDate();
         click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(3);
@@ -480,6 +483,7 @@ public class paymentSchdule extends ReusableLib {
 
     public void validateMakeARegPay() {
         enableCheckBoxAndEnroll();
+        Utility_Functions.timeWait(5);
         click(SchedulePaymentPage.makeARegPay, "Click Make A payment Link");
         commonObj.validateText(SchedulePaymentPage.invoiceTitle, "Invoices", "Validating title of Invoices Page");
     }
