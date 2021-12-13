@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
     <test name="RefactorCheck">
-
         <classes>
             <class name="testcases.Pricing.Wise">
                 <methods>
@@ -25,6 +24,10 @@
                     <include name="Tc_21_E2E"></include>
                 </methods>
             </class>
+        </classes>
+    </test>
+    <test name="RefactorCheck1">
+        <classes>
             <class name="testcases.Pricing.PricingMatrix">
                 <methods>
                     <include name="Tc_188_ValidateNavigationToPricingMatrix"></include>
@@ -39,6 +42,10 @@
                     <include name="Tc_200_ValidateDisplayListPricingMatrix"></include>
                 </methods>
             </class>
+        </classes>
+    </test>
+    <test name="RefactorCheck2">
+        <classes>
             <class name="testcases.Inventory.AverageCost" >
                 <methods>
                     <include name="Tc_21_SearchItemData"></include>
@@ -55,6 +62,10 @@
                     <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
                 </methods>
             </class>
+        </classes>
+    </test>
+    <test name="RefactorCheck3">
+        <classes>
             <class name="testcases.Inventory.CycleCostAdjust" >
                 <methods>
                     <include name="Tc_26_Navigation_to_Cycle_Count_Adjustments"></include>
@@ -64,7 +75,10 @@
                     <include name="Tc_31_Verify_Item_Ledger_Screen"></include>
                 </methods>
             </class>
-
+        </classes>
+    </test>
+    <test name="RefactorCheck4">
+        <classes>
             <class name="testcases.SalesQuotes.WorkWithSalesQuote">
                 <methods>
                     <include name="SalesQuotesToPO"></include>
@@ -76,7 +90,10 @@
 
                 </methods>
             </class>
-
+        </classes>
+    </test>
+    <test name="RefactorCheck5">
+        <classes>
             <class name="testcases.Pricing.SPA" >
                 <methods>
                     <include name="Tc_161_VerifySPAScreenHeader"></include>
@@ -102,7 +119,11 @@
                     <include name="Tc_334_VerifyUpdateCost"></include>
                     <!--<include name="Tc_336_VerifyLoadPriceSheet"></include>-->
                 </methods>
-            </class> 
+            </class>
+        </classes>
+    </test>
+    <test name="RefactorCheck6">
+        <classes>
             <class name="testcases.Warehouse">
                 <methods>
                     <!-- ############ UI Of the page ############ -->
@@ -130,7 +151,7 @@
             </class>
         </classes>
     </test>
-    <test name="RefactorCheck1">
+    <test name="RefactorCheck6">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
@@ -162,6 +183,10 @@
                     <include name="Tc_CreateManifestNotDeliveredOrd"></include>
                 </methods>
             </class>
+        </classes>
+    </test>
+    <test name="RefactorCheck7">
+        <classes>
             <class name="testcases.Warehouse">
                 <methods>
                     <include name="Tc_CreateSalesOrderWISE"></include>
@@ -188,7 +213,7 @@
     </test>
 
 
-    <!--<test name="RefactorCheck3">
+    <!--<test name="RefactorCheck8">
         <classes>
             <class name="testcases.makePayments.makePayments">
                 <methods>
