@@ -30,16 +30,38 @@
                 <methods>
                     <include name="Tc_27_Verify_assignment_quantity_to_Item"></include>
                     <include name="Tc_29_Negative_Quantity_to_Item"></include>
-                    <!--<include name="Tc_30_Navigation_To_Item_Ledger_Screen"></include>-->
-                    <include name="Tc_31_Verify_Item_Ledger_Screen"></include>
                 </methods>
             </class>
-            <class name="testcases.Warehouse">
+            <class name="testcases.SalesQuotes.WorkWithSalesQuote">
+                <methods>
+                    <include name="SalesQuotesToPO"></include>
+                    <include name="CheckInventoryReceipts"></include>
+                    <include name="InquiryOrdersByCustomer"></include>
+                    <include name="OrderShippingConfirmation"></include>
+                </methods>
+            </class>
+            <class name="testcases.Pricing.SPA">
+                <methods>
+                    <include name="Tc_311_VerifyAddCustomersToGroupName"></include>
+                    <include name="Tc_315_VerifyEditCustomerGroup"></include>
+                    <include name="Tc_316_VerifyDisplayCustomer"></include>
+                    <include name="Tc_317_VerifyDeleteGroupName"></include>
+                </methods>
+            </class>
+            <!--<class name="testcases.Warehouse">
                 <methods>
                     <include name="Tc_AddTruck"></include>
                     <include name="Tc_AddNewDriver"></include>
                     <include name="Tc_CreateSalesOrderWISE"></include>
                     <include name="TC_243_CreateManifest"></include>
+                </methods>
+            </class>-->
+            <class name="testcases.makePayments.makePayments">
+                <methods>
+                    <include name="Tc_CreateSalesOrderInvoice"></include>
+                    <include name="Tc_CreateSalesOrderWithMultipleShipment"></include>
+                    <include name="Tc_NavigateToMakePayments"></include>
+                    <include name="Tc_ValidateMakePaymentsStatusFilter"></include>
                 </methods>
             </class>
         </classes>

@@ -108,8 +108,6 @@ public class NotDeliveredOrders extends ReusableLib {
             drv.valPageCount(10);
             drv.valPageCount(15);
             drv.valPageCount(30);
-            drv.valPageCount(30);
-            drv.valPageCount(10);
         }
     }
 
@@ -121,6 +119,7 @@ public class NotDeliveredOrders extends ReusableLib {
      * Keyword to verify Delivered Orders
      */
     public void verifyNotDeliveredOrders() {
+        Utility_Functions.timeWait(8);
         click(TruckPage.filterSearch, "Click search filter icon");
         Utility_Functions.timeWait(1);
         sendKeys(filterField("Order Number"), Utility_Functions.xGetJsonData("SalesOrder")+"-01", "Enter Order Number");
@@ -152,6 +151,7 @@ public class NotDeliveredOrders extends ReusableLib {
         click(NotDeliveredOrdersPage.addToManifestButton,"CLick Add To Manifest button");
         Utility_Functions.timeWait(7);
         commonObj.validateText(NotDeliveredOrdersPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
+        Utility_Functions.timeWait(7);
         click(NotDeliveredOrdersPage.newManifestBtn,"Click New Manifest Button");
         manFest.fillDetails();
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
@@ -168,7 +168,7 @@ public class NotDeliveredOrders extends ReusableLib {
         click(NotDeliveredOrdersPage.addToManifestButton,"CLick Add To Manifest button");
         Utility_Functions.timeWait(5);
         commonObj.validateText(NotDeliveredOrdersPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.timeWait(7);
         String manifestNo=Utility_Functions.getText(driver,NotDeliveredOrdersPage.selManNo);
         click(truck.getTruck("Status"),"Select "+manifestNo+" manifest number");
         Utility_Functions.timeWait(2);

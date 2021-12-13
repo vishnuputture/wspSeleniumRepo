@@ -99,6 +99,7 @@ public class DeliveredOrders extends ReusableLib {
      * Keyword to verify Delivered Orders
      */
     public void verifyDeliveredOrders() {
+        Utility_Functions.timeWait(8);
         click(TruckPage.filterSearch, "Click search filter icon");
         Utility_Functions.timeWait(1);
         sendKeys(filterField("Order Number"), Utility_Functions.xGetJsonData("SalesOrder"), "Enter Order Number");

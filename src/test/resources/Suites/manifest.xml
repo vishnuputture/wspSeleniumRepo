@@ -119,9 +119,9 @@
         </methods>
     </class>-->
 
-            <class name="testcases.Warehouse">
+            <!--<class name="testcases.Warehouse">
                 <methods>
-                    <!-- ############ UI Of the page ############ -->
+                    &lt;!&ndash; ############ UI Of the page ############ &ndash;&gt;
 
                     <include name="Tc_TruckUI"></include>
                     <include name="Tc_searchFiltersTruckUi"></include>
@@ -144,10 +144,10 @@
                     <include name="Tc_DeleteTruck"></include>
                     <include name="Tc_DeleteDriver"></include>
                 </methods>
-            </class>
+            </class>-->
         </classes>
     </test>
-    <test name="SanityCheck1">
+    <!--<test name="SanityCheck1">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
@@ -167,7 +167,7 @@
                     <include name="Tc_238_ManifestListPageCount"></include>
                     <include name="Tc_241_collapseExpandSession"></include>
                     <include name="Tc_OrderNumberSO_UI"></include>
-                   <!-- <include name="Tc_SaveAdjustment"></include>-->
+                   &lt;!&ndash; <include name="Tc_SaveAdjustment"></include>&ndash;&gt;
 
                     <include name="TC_SOUpdateStatusDelivered"></include>
                     <include name="Tc_VerifyDeliveredOrders"></include>
@@ -181,6 +181,7 @@
             </class>
         </classes>
     </test>
+    -->
 
     <test name="SanityCheck2">
         <classes>
