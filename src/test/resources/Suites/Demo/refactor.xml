@@ -151,7 +151,7 @@
             </class>
         </classes>
     </test>
-    <test name="RefactorCheck6">
+    <test name="RefactorCheck7">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
@@ -185,7 +185,7 @@
             </class>
         </classes>
     </test>
-    <test name="RefactorCheck7">
+    <test name="RefactorCheck8">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
@@ -213,7 +213,7 @@
     </test>
 
 
-    <!--<test name="RefactorCheck8">
+    <!--<test name="RefactorCheck9">
         <classes>
             <class name="testcases.makePayments.makePayments">
                 <methods>
