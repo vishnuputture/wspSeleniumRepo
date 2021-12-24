@@ -1,0 +1,53 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_50_SuggestedPOUI": "navigateToSPO,selectCompany,verifySpoUI",
+      "Tc_51_CreateNewWorksheetTemplateUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,createNewWorksheetTemplateUI",
+      "Tc_54_CreateWorksheet_MCPCVCVNPO": "navigateToSPO,selectCompany,createWorksheet,filterCreatedWorksheet",
+      "Tc_62_Pagination": "launchApp,siteLogin,assignVendorNumber,signOut,navigateToSPO,selectCompany,helpIconSPO,paginationSPO,funPageCountSPO",
+      "Tc_73_RefreshWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyRefreshIcon,verifyRefreshIcon",
+      "Tc_74_DeleteWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyTrashIcon",
+      "Tc_86_verifySavedWorkSheetAvailablePopup": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifySavedWorkSheet",
+      "Tc_148_searchFilterUI": "navigateToSPO,selectCompany,searchFilterUI",
+      "Tc_164_verifyDiscountMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,verifyMultiAvailability,launchApp,siteLogin,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,verifyDiscountAvailability"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_50_SuggestedPOUI",
+      "Title": "Test case UI of Suggested Purchase Order Page"
+    },
+    {
+      "TC_ID": "Tc_51_CreateNewWorksheetTemplateUI",
+      "Title": "Test case UI of Create New Worksheet Template Page"
+    },
+    {
+      "TC_ID": "Tc_54_CreateWorksheet_MCPCVCVNPO",
+      "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination"
+    },
+    {
+      "TC_ID": "Tc_62_Pagination",
+      "Title": "Test case Suggested Purchase Order Pagination"
+    },
+    {
+      "TC_ID": "Tc_73_RefreshWorkSheet",
+      "Title": "Test case to Refresh Worksheet"
+    },
+    {
+      "TC_ID": "Tc_86_verifySavedWorkSheetAvailablePopup",
+      "Title": "Test case to Verify Saved WorkSheet Available Popup"
+    },
+    {
+      "TC_ID": "Tc_74_DeleteWorkSheet",
+      "Title": "Test case to delete Worksheet"
+    },
+    {
+      "TC_ID": "Tc_148_searchFilterUI",
+      "Title": "Test case UI of search filter"
+    },
+    {
+      "TC_ID": "Tc_164_verifyDiscountMultiplier",
+      "Title": "Test case verify Discount or multiplier option"
+    }
+  ]
+}

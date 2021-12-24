@@ -24,5 +24,7 @@ public class ItemMasterPage extends ReusableLib{
     public static By txtBoxListPrice = By.id("inListPrice");
     public static By txtBoxMatrix = By.id("inMatrix");
     public static By txtBoxPoCost = By.id("inPOCost");
-
+    public static By manufacturerCode = By.id("inManufacturerCode");
+    public static By productCode = By.id("inProductCode");
+    public static By vendorCode = By.id("inVendorCode");
 }
