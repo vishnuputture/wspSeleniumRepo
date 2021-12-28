@@ -162,7 +162,7 @@ public class Spo extends ReusableLib {
      */
     public void selectCompany() {
         winLogin();
-        if(!Utility_Functions.xIsDisplayed(driver,SpoPage.spoPageTitle)) {
+        if (!Utility_Functions.xIsDisplayed(driver, SpoPage.spoPageTitle)) {
             click(SelfServicePriceSheetPage.companySelector);
             click(SelfServicePriceSheetPage.companyLabel);
             sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
@@ -253,7 +253,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to Verify functionality of Page Count
-     *
      */
     public void funPageCountSPO() {
         if (Utility_Functions.xIsDisplayed(driver, SpoPage.onePage)) {
@@ -272,7 +271,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to Verify UI of Search Filter UI
-     *
      */
     public void searchFilterUI() {
         click(TruckPage.filterSearch, "Click Search Filter icon");
@@ -292,7 +290,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to Verify functionality of refresh icon
-     *
      */
     public void verifyRefreshIcon() {
         click(SpoPage.refreshIcon, "Click Refresh Icon");
@@ -308,7 +305,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to verify worksheet option header
-     *
      */
     public void verifyWsOptionHeader() {
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
@@ -321,7 +317,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to click Work sheet name hyperlink
-     *
      */
     public void clickWorkSheetName() {
         click(SpoPage.worksheetNameLink, "Click Worksheet name hyperlink");
@@ -338,7 +333,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to Verify functionality of Trash icon
-     *
      */
     public void verifyTrashIcon() {
         clickWorkSheetName();
@@ -354,10 +348,11 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(SpoPage.deleteSavedWorksheetPopup, "Delete Saved Worksheet Popup message present");
         clickButtonWithSize("Yes");
-        Utility_Functions.timeWait(5);
-        commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
+        Utility_Functions.timeWait(3);
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
         commonObj.validateText(SpoPage.popUp, "" + worksheetName + " worksheet successfully deleted.", "" + worksheetName + " worksheet successfully deleted. pop up message is present");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, SpoPage.savedTag), false, "Saved Worksheet is deleted and not present on SPO page");
     }
 
@@ -368,7 +363,6 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to click a button
      * if Multiple index found and target element must be last one
-     *
      */
     public void clickButtonWithSize(String button) {
         int size = driver.findElements(By.xpath("//button[text()='" + button + "']")).size() - 1;
@@ -376,23 +370,34 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
     }
 
+    public void discountError(){
+        if (Utility_Functions.xIsDisplayed(driver, SpoPage.isInvalidDisc)) {
+            commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
+            sendKeys(SpoPage.isInvalidDisc, "1", "Enter Discount");
+            clickButton("Refresh Worksheet");
+            Utility_Functions.timeWait(2);
+        }
+    }
+
     /**
      * Keyword to Functionality of refresh button
-     *
      */
     public void functionalRefreshButton() {
         clickButton("Refresh Worksheet");
+        discountError();
         Utility_Functions.timeWait(4);
         if (!Utility_Functions.xIsDisplayed(driver, SpoPage.exclamationWarn)) {
             sendKeys(SpoPage.leadTime, "20", "Lead time 10 is present already once again Modify lead time field");
             clickButton("Refresh Worksheet");
             Utility_Functions.timeWait(4);
+            discountError();
         }
         commonObj.validateElementExists(SpoPage.exclamationWarn, "ARE YOU SURE? popup is present");
         Utility_Functions.timeWait(4);
         clickButton("No");
         clickButton("Refresh Worksheet");
-        Utility_Functions.timeWait(4);
+        Utility_Functions.timeWait(2);
+        discountError();
         commonObj.validateElementExists(SpoPage.exclamationWarn, "ARE YOU SURE? popup is present");
         Utility_Functions.timeWait(4);
         clickButton("Yes");
@@ -404,7 +409,6 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to verify Start New Worksheet Button
      * On Saved worksheet Available popup
-     *
      */
     public void verifyStartNewWorkSheet() {
         click(worksheetName("Last Updated:"), "Click Worksheet hyper link");
@@ -418,7 +422,6 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to verify functionality of Cancel button
      * On Saved worksheet Available popup
-     *
      */
     public void verifyCancelSavedWSPopup() {
         click(worksheetName("Last Updated:"), "Click Worksheet hyper link");
@@ -446,9 +449,9 @@ public class Spo extends ReusableLib {
         functionalRefreshButton();
         click(SpoPage.saveWorksheetBtn, "Click Save Worksheet button");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollIntoView(driver,SpoPage.closeIcon);
+        Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(driver,SpoPage.closeIcon);
+        Utility_Functions.xMouseClick(driver, SpoPage.closeIcon);
         //click(SpoPage.closeIcon, "Click Close Icon");
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
@@ -456,7 +459,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to verify saved work sheet
-     *
      */
     public void verifySavedWorkSheet() {
         if (!Utility_Functions.xIsDisplayed(driver, SpoPage.trashIcon)) {
@@ -470,9 +472,11 @@ public class Spo extends ReusableLib {
         modifyLeadTimeField();
         verifyOpenNewWSBtn();
         String leadTimeAct = getAttribute(SpoPage.leadTime, "ng-reflect-model");
-        if(leadTimeAct.equals("10")) {
+        if (leadTimeAct.equals("10")) {
             Utility_Functions.xAssertEquals(report, leadTimeAct, "10", "Modified lead time is present");
-        }else{Utility_Functions.xAssertEquals(report, leadTimeAct, "15", "Modified lead time is present");}
+        } else {
+            Utility_Functions.xAssertEquals(report, leadTimeAct, "15", "Modified lead time is present");
+        }
         click(SpoPage.closeIcon, "Click Close Icon");
         Utility_Functions.timeWait(4);
         verifyStartNewWorkSheet();
@@ -486,7 +490,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to navigate to Create WorkSheet
-     *
      */
     public void navigateToCreateWorksheet() {
         click(SpoPage.newWorksheetBtn, "Click New Worksheet Button");
@@ -501,7 +504,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to validate Time Of the Day/night Fields
-     *
      */
     public void validateTimeOfDayNightDropDown(String field, int optionCount) {
         int size = driver.findElements(By.xpath("//div[@class='col-3']//select[@id='" + field + "1']/option")).size();
@@ -527,7 +529,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to validate Time Of the Day/night Fields
-     *
      */
     public void validateTimeOfDayNight() {
         commonObj.validateElementExists(labels("Time of the day/night"), "Time of the day/night field exist");
@@ -543,7 +544,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to Verify UI of Search Filter UI
-     *
      */
     public void createNewWorksheetTemplateUI() {
         String[] field = {"Name Your Worksheet", "Assigned User", "Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number", "Months Supply to Order", "Multiplier", "Lead Time (Days)", ""};
@@ -569,7 +569,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to select days
-     *
      */
     public void selectDays() {
         Utility_Functions.xScrollIntoView(driver, SpoPage.dayOfTheWeek);
@@ -584,15 +583,13 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to click button
-     *
      */
     public void clickButton(String buttonName) {
-        click(By.xpath("//button[contains(text(),'" + buttonName + "')]"),"Click "+buttonName+" button");
+        click(By.xpath("//button[contains(text(),'" + buttonName + "')]"), "Click " + buttonName + " button");
     }
 
     /**
      * Keyword to verify functionality create Worksheet Button
-     *
      */
     public void createWorksheetButtonFunctionality() {
         Utility_Functions.timeWait(4);
@@ -603,7 +600,6 @@ public class Spo extends ReusableLib {
 
     /**
      * Keyword to Create WorkSheet
-     *
      */
     public void createWorksheet() {
         navigateToCreateWorksheet();
@@ -613,18 +609,23 @@ public class Spo extends ReusableLib {
         sendKeys(worksheetInputFields("Vendor Code"), Utility_Functions.xGetJsonData("VendorCode"), "Enter Vendor Code");
         sendKeysAndTab(worksheetInputFields("Vendor Number"), Utility_Functions.xGetJsonData("VendorNumber"), "Enter Vendor Number");
         sendKeys(worksheetInputFields("Manufacturer Code"), Utility_Functions.xGetJsonData("ManufacturerCode"), "Enter Manufacturer code");
-        String vend = getAttribute(worksheetInputFields("Vendor Number"), "value");
+        String vend = driver.findElement(worksheetInputFields("Vendor Number")).getAttribute("value");
         Utility_Functions.xUpdateJson("VendorNoForHeader", vend);
         sendKeys(worksheetInputFields("Product Code"), Utility_Functions.xGetJsonData("ProductCode"), "Enter Product Code");
         selectDays();
         Utility_Functions.timeWait(2);
         clickButton("Find Products");
+        Utility_Functions.timeWait(2);
+        if (Utility_Functions.xIsDisplayed(driver, SpoPage.isInvalidDisc)) {
+            commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
+            sendKeys(SpoPage.isInvalidDisc, "1", "Enter Discount");
+            clickButton("Find Products");
+        }
         createWorksheetButtonFunctionality();
     }
 
     /**
      * Keyword to Filter Created worksheet
-     *
      */
     public void filterCreatedWorksheet() {
         Utility_Functions.timeWait(4);
@@ -641,7 +642,7 @@ public class Spo extends ReusableLib {
      * This method to choose Multiplier
      */
     public void chooseMultiplierOpt() {
-        sendKeys(pages.PurchaseOrders.OptionsConstantsPage.discMultOpt,"1","Enter 1 into field");
+        sendKeys(pages.PurchaseOrders.OptionsConstantsPage.discMultOpt, "1", "Enter 1 into field");
         Utility_Functions.actionKey(Keys.ENTER, driver);
     }
 
@@ -657,13 +658,13 @@ public class Spo extends ReusableLib {
      * This method validates Multiplier availability
      */
     public void verifyMultiAvailability() {
-        commonObj.validateText(SpoPage.multiplier,"Multiplier:","Multiplier is present below the Cost Option Column");
+        commonObj.validateText(SpoPage.multiplier, "Multiplier:", "Multiplier is present below the Cost Option Column");
     }
 
     /**
      * This method validates Discount availability
      */
     public void verifyDiscountAvailability() {
-        commonObj.validateText(SpoPage.discount,"Discount:","Discount is present below the Cost Option Column");
+        commonObj.validateText(SpoPage.discount, "Discount:", "Discount is present below the Cost Option Column");
     }
 }

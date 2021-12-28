@@ -51,8 +51,9 @@ public class SpoPage extends ReusableLib {
     public static By deleteSavedWorksheetPopup=By.xpath("//i[contains(@class,'fa-question')]");
     public static By exclamationWarn=By.xpath("//i[contains(@class,'fa-exclamation-triangle')]");
     public static By saveWorksheetBtn=By.xpath("//span[text()='Save Worksheet']");
-    public static By startNewWorkSheet=By.xpath("//button[text()='Start New Worksheet ']");
     public static By leadTime=By.id("leadTime");
     public static By multiplier=By.xpath("//span[text()='Multiplier: ']");
     public static By discount=By.xpath("//span[text()='Discount: ']");
+    public static By isInvalidDisc=By.xpath("//label[text()='Discount']/following-sibling::input[contains(@class,'invalid')]");
+    public static By discountError=By.xpath("//label[text()='Discount']/following-sibling::div");
 }

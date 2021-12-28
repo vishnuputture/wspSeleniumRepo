@@ -3,8 +3,8 @@
     {
       "Tc_50_SuggestedPOUI": "navigateToSPO,selectCompany,verifySpoUI",
       "Tc_51_CreateNewWorksheetTemplateUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,createNewWorksheetTemplateUI",
-      "Tc_54_CreateWorksheet_MCPCVCVNPO": "navigateToSPO,selectCompany,createWorksheet,filterCreatedWorksheet",
-      "Tc_62_Pagination": "launchApp,siteLogin,assignVendorNumber,signOut,navigateToSPO,selectCompany,helpIconSPO,paginationSPO,funPageCountSPO",
+      "Tc_54_CreateWorksheet_MCPCVCVNPO": "launchApp,siteLogin,assignVendorNumber,signOut,navigateToSPO,selectCompany,createWorksheet,filterCreatedWorksheet",
+      "Tc_62_Pagination": "navigateToSPO,selectCompany,helpIconSPO,paginationSPO,funPageCountSPO",
       "Tc_73_RefreshWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyRefreshIcon,verifyRefreshIcon",
       "Tc_74_DeleteWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyTrashIcon",
       "Tc_86_verifySavedWorkSheetAvailablePopup": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifySavedWorkSheet",
