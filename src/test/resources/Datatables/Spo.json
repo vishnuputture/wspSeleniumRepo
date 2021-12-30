@@ -3,13 +3,21 @@
     {
       "Tc_50_SuggestedPOUI": "navigateToSPO,selectCompany,verifySpoUI",
       "Tc_51_CreateNewWorksheetTemplateUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,createNewWorksheetTemplateUI",
-      "Tc_54_CreateWorksheet_MCPCVCVNPO": "launchApp,siteLogin,assignVendorNumber,signOut,navigateToSPO,selectCompany,createWorksheet,filterCreatedWorksheet",
-      "Tc_62_Pagination": "navigateToSPO,selectCompany,helpIconSPO,paginationSPO,funPageCountSPO",
+      "Tc_52_VerifyCancelButtonCreateWSTemp": "navigateToSPO,selectCompany,navigateToCreateWorksheet,verifyDefaultValues,verifyCancelBtn",
+      "Tc_54_CreateWorksheet_MCPCVCVNPO": "launchApp,siteLogin,assignVendorNumber,signOut,navigateToSPO,selectCompany,findProduct,createWorksheet,filterCreatedWorksheet",
+      "Tc_62_PaginationSPO": "navigateToSPO,selectCompany,helpIconSPO,paginationSPO,funPageCountSPO",
+      "Tc_70_wsItemScreenUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,wsItemsScreenUI",
+      "Tc_71_PaginationWsItemScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,pagination,funPageCount,wsItemsScreenBtn",
       "Tc_73_RefreshWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyRefreshIcon,verifyRefreshIcon",
       "Tc_74_DeleteWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyTrashIcon",
       "Tc_86_verifySavedWorkSheetAvailablePopup": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifySavedWorkSheet",
+      "Tc_87_VerifyAddItemsToWS": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,navigateToAddItemToWS,addItemsToWS,addSelectedItemsWorksheetBtn,backToWSBtn,verifyAddedItem,createWorksheet,filterCreatedWorksheet",
+      "Tc_88_AddItemToWSUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,navigateToAddItemToWS,addItemsToWSUI",
+      "Tc_89_PaginationAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,navigateToAddItemToWS,searchVN,pagination,funPageCount",
       "Tc_148_searchFilterUI": "navigateToSPO,selectCompany,searchFilterUI",
-      "Tc_164_verifyDiscountMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,verifyMultiAvailability,launchApp,siteLogin,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,verifyDiscountAvailability"
+      "Tc_156_CreateWSMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductMultiplier,createWorksheet,filterCreatedWorksheet",
+      "Tc_164_verifyDiscountMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,verifyMultiAvailability,launchApp,siteLogin,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,verifyDiscountAvailability",
+      "Tc_VerifyWSItemsSearchFilter": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,wsItemSearchFilter"
     }
   ],
   "General_Data": [
@@ -22,32 +30,64 @@
       "Title": "Test case UI of Create New Worksheet Template Page"
     },
     {
+      "TC_ID": "Tc_52_VerifyCancelButtonCreateWSTemp",
+      "Title": "verify Cancel button on create worksheet template"
+    },
+    {
       "TC_ID": "Tc_54_CreateWorksheet_MCPCVCVNPO",
       "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination"
     },
     {
-      "TC_ID": "Tc_62_Pagination",
+      "TC_ID": "Tc_62_PaginationSPO",
       "Title": "Test case Suggested Purchase Order Pagination"
+    },
+    {
+      "TC_ID": "Tc_70_wsItemScreenUI",
+      "Title": "Test case to verify the UI of 'Worksheet Items' screen"
+    },
+    {
+      "TC_ID": "Tc_71_PaginationWsItemScreen",
+      "Title": "Test case to functionality of pagination,cancel and back buttons on worksheet items screen"
     },
     {
       "TC_ID": "Tc_73_RefreshWorkSheet",
       "Title": "Test case to Refresh Worksheet"
     },
     {
+      "TC_ID": "Tc_74_DeleteWorkSheet",
+      "Title": "Test case to delete Worksheet"
+    },
+    {
       "TC_ID": "Tc_86_verifySavedWorkSheetAvailablePopup",
       "Title": "Test case to Verify Saved WorkSheet Available Popup"
     },
     {
-      "TC_ID": "Tc_74_DeleteWorkSheet",
-      "Title": "Test case to delete Worksheet"
+      "TC_ID": "Tc_87_VerifyAddItemsToWS",
+      "Title": "Test case to Verify adding additional items to the worksheet"
+    },
+    {
+      "TC_ID": "Tc_88_AddItemToWSUI",
+      "Title": "Test case to Verify UI of 'Add Items To This Worksheet' screen"
+    },
+    {
+      "TC_ID": "Tc_89_PaginationAddItemToWSScreen",
+      "Title": "Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen"
     },
     {
       "TC_ID": "Tc_148_searchFilterUI",
       "Title": "Test case UI of search filter"
     },
     {
+      "TC_ID": "Tc_156_CreateWSMultiplier",
+      "Title": "Test case to verify Create WS with Multiplier"
+    },
+    {
       "TC_ID": "Tc_164_verifyDiscountMultiplier",
       "Title": "Test case verify Discount or multiplier option"
+    },
+    {
+      "TC_ID": "Tc_VerifyWSItemsSearchFilter",
+      "Title": "Test case Verify WS Items Search Filter"
     }
   ]
 }

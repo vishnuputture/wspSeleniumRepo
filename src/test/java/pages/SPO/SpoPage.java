@@ -56,4 +56,30 @@ public class SpoPage extends ReusableLib {
     public static By discount=By.xpath("//span[text()='Discount: ']");
     public static By isInvalidDisc=By.xpath("//label[text()='Discount']/following-sibling::input[contains(@class,'invalid')]");
     public static By discountError=By.xpath("//label[text()='Discount']/following-sibling::div");
+    public static By supplyToOrder=By.id("supplyToOrder");
+    public static By optionsConstants=By.id("optionsConstants");
+    public static By cancelPopup=By.id("cancelConfirmation");
+    public static By selectedMonth=By.xpath("//div[contains(@ng-reflect-ng-class,'sales-history-grid-selected')]");
+    public static By excludeAsteriskItem=By.xpath("//span/preceding-sibling::input[@type='checkbox']");
+    public static By addItemToWSLink=By.xpath("//i[@class='fa fa-plus']/parent::a");
+    public static By addItemHeader=By.xpath("//div[@id='addItemstoWorksheetModalId']/descendant::h2");
+    public static By autoSuggestion=By.xpath("//li[contains(@class,'ui-autocomplete-list')]/span");
+    public static By searchBtn=By.xpath("//span[text()='Search']");
+    public static By buttonDisabled=By.xpath("//button[@disabled]/span");
+    public static By asteriskItem=By.xpath("//label[contains(text(),'Asterisk Items')]/preceding-sibling::input[@id='excludeAsteriskItems']");
+    public static By jobItem=By.xpath("//label[contains(text(),'Job Items')]/preceding-sibling::input[@id='jobItems']");
+    public static By iovItem=By.xpath("//label[contains(text(),'IOV Items')]/preceding-sibling::input[@id='iovItems']");
+    public static By selectItem=By.xpath("//input[@name='selectItem']");
+    public static By selectAllCheckBox=By.id("selectAllItems");
+    public static By addSelectedItemToWSBtn=By.xpath("//span[text()='Add Selected Items to Worksheet ']");
+    public static By itemNumSearch=By.xpath("//p-autocomplete[@id='itemNumber']/descendant::input");
+    public static By itemDescription=By.xpath("//p-autocomplete[@id='itemDescription']/descendant::input");
+    public static By manufacturerCode=By.id("manufacturerCode");
+    public static By productCode=By.id("productCode");
+    public static By vendorName=By.id("vendorName");
+    public static By lastOrdered=By.id("lastOrdered");
+    public static By unitCost=By.id("unitCost");
+    public static By unitWeight=By.id("unitWeight");
+    public static By showStockedAtWss=By.id("showStockedAtWss");
+
 }

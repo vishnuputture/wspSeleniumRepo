@@ -5,10 +5,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Settings;
 import commonkeywords.CommonActions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import pages.PurchaseOrders.VendorInformationPage;
 import pages.SPO.SpoPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
@@ -19,11 +16,13 @@ import pages.inventory.OptionsConstantsPage;
 import pages.makePayments.SchedulePaymentPage;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
+import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
@@ -62,6 +61,7 @@ public class Spo extends ReusableLib {
     public void getMfPdVn() {
         click(CostAdjustmentPage.searchIcon, "Click Search Icon");
         Utility_Functions.timeWait(2);
+        Utility_Functions.xUpdateJson("ItemNoMaster", Utility_Functions.getText(driver,CustomerGroupMaintenancePage.secGroupName));
         sendKeys(CostAdjustmentPage.optBox, "1", "Select Item Number");
         Utility_Functions.actionKey(Keys.ENTER, driver);
         String manufacturerCode = getAttribute(ItemMasterPage.manufacturerCode, "value");
@@ -178,7 +178,6 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         String[] actText = {"Worksheet Name\nLast Updated", "Items Below Order Point", "Cost Option", "Total Suggested PO Cost", "Freight Minimum", "Percentage of Target Met", "Order Minimum", "Assigned User"};
         List<WebElement> els = driver.findElements(By.xpath("//th"));
-
         for (int i = 0; i < 8; i++) {
             Utility_Functions.xAssertEquals(report, els.get(i).getText().trim(), actText[i], "");
             i++;
@@ -370,7 +369,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
     }
 
-    public void discountError(){
+    public void discountError() {
         if (Utility_Functions.xIsDisplayed(driver, SpoPage.isInvalidDisc)) {
             commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
             sendKeys(SpoPage.isInvalidDisc, "1", "Enter Discount");
@@ -411,12 +410,16 @@ public class Spo extends ReusableLib {
      * On Saved worksheet Available popup
      */
     public void verifyStartNewWorkSheet() {
-        click(worksheetName("Last Updated:"), "Click Worksheet hyper link");
-        Utility_Functions.timeWait(3);
+        clickLastUpdateWS();
         commonObj.validateElementExists(SpoPage.exclamationWarn, "Open Saved Worksheet popup is present");
         clickButton("Start New Worksheet");
         Utility_Functions.timeWait(8);
         verifyWsOptionHeader();
+    }
+
+    public void clickLastUpdateWS(){
+        click(worksheetName("Last Updated:"), "Click Worksheet hyper link");
+        Utility_Functions.timeWait(4);
     }
 
     /**
@@ -424,8 +427,7 @@ public class Spo extends ReusableLib {
      * On Saved worksheet Available popup
      */
     public void verifyCancelSavedWSPopup() {
-        click(worksheetName("Last Updated:"), "Click Worksheet hyper link");
-        Utility_Functions.timeWait(3);
+        clickLastUpdateWS();
         commonObj.validateElementExists(SpoPage.exclamationWarn, "Open Saved Worksheet popup is present");
         clickButtonWithSize("Cancel");
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
@@ -437,8 +439,7 @@ public class Spo extends ReusableLib {
      */
     public void verifyOpenNewWSBtn() {
         Utility_Functions.timeWait(3);
-        click(worksheetName("Last Updated:"), "Click Worksheet hyper link");
-        Utility_Functions.timeWait(4);
+        clickLastUpdateWS();
         clickButton("Open Saved Worksheet");
         Utility_Functions.timeWait(10);
         verifyWsOptionHeader();
@@ -452,21 +453,24 @@ public class Spo extends ReusableLib {
         Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
         Utility_Functions.timeWait(2);
         Utility_Functions.xMouseClick(driver, SpoPage.closeIcon);
-        //click(SpoPage.closeIcon, "Click Close Icon");
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
     }
 
-    /**
-     * Keyword to verify saved work sheet
-     */
-    public void verifySavedWorkSheet() {
+    public void verifyTrashIconPresence() {
         if (!Utility_Functions.xIsDisplayed(driver, SpoPage.trashIcon)) {
             clickWorkSheetName();
             click(SpoPage.closeIcon, "Click Close Icon");
             Utility_Functions.timeWait(2);
             commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
         }
+    }
+
+    /**
+     * Keyword to verify saved work sheet
+     */
+    public void verifySavedWorkSheet() {
+        verifyTrashIconPresence();
         verifyCancelSavedWSPopup();
         verifyOpenNewWSBtn();
         modifyLeadTimeField();
@@ -581,47 +585,123 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.selectedDays, "Monday, Tuesday, Wednesday", "Multiple days selected");
     }
 
+    public By button(String buttonName) {
+        return By.xpath("//button[contains(text(),'" + buttonName + "')]");
+    }
+
     /**
      * Keyword to click button
      */
     public void clickButton(String buttonName) {
-        click(By.xpath("//button[contains(text(),'" + buttonName + "')]"), "Click " + buttonName + " button");
+        click(button(buttonName), "Click " + buttonName + " button");
     }
 
     /**
      * Keyword to verify functionality create Worksheet Button
      */
-    public void createWorksheetButtonFunctionality() {
+    public void createWorksheet() {
         Utility_Functions.timeWait(4);
         clickButton("Create Worksheet");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.popUp, Utility_Functions.xGetJsonData("WorksheetTempName") + " worksheet successfully created.", Utility_Functions.xGetJsonData("WorksheetTempName") + " worksheet successfully created. pop message is present");
     }
 
+    public void handleDiscountFieldIfPresent() {
+        if (Utility_Functions.xIsDisplayed(driver, SpoPage.isInvalidDisc)) {
+            commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
+            sendKeys(SpoPage.isInvalidDisc, "1", "Enter Discount");
+            clickButton("Find Products");
+            Utility_Functions.timeWait(5);
+        }
+    }
+
     /**
      * Keyword to Create WorkSheet
      */
-    public void createWorksheet() {
-        navigateToCreateWorksheet();
+    public void findProductMultiplier() {
         String name = Utility_Functions.xGenerateAlphaNumericString();
         Utility_Functions.xUpdateJson("WorksheetTempName", name);
         sendKeys(SpoPage.worksheetSheetTemplateName, name, "Name Your Worksheet");
+        getMFVNPC();
+        commonObj.validateElementExists(worksheetInputFields("Multiplier"),"'Multiplier' field is present");
+        selectPreviousMonth("6");
+        selectPreviousMonth("24");
+        selectDays();
+        Utility_Functions.timeWait(2);
+        clickButton("Find Products");
+        Utility_Functions.timeWait(5);
+    }
+
+    /**
+     * Keyword to Previous select month
+     */
+    public void selectPreviousMonth(String month) {
+        sendKeys(SpoPage.trailingMonths,month,"Enter '"+month+"' into Trailing month");
+        int size=driver.findElements(SpoPage.selectedMonth).size();
+        Utility_Functions.xAssertEquals(report,size/2,month,"");
+    }
+
+    /**
+     * Keyword to Create WorkSheet
+     */
+    public void findProduct() {
+        String name = Utility_Functions.xGenerateAlphaNumericString();
+        Utility_Functions.xUpdateJson("WorksheetTempName", name);
+        sendKeys(SpoPage.worksheetSheetTemplateName, name, "Name Your Worksheet");
+        getMFVNPC();
+        selectDays();
+        Utility_Functions.timeWait(2);
+        clickButton("Find Products");
+        Utility_Functions.timeWait(5);
+        handleDiscountFieldIfPresent();
+    }
+
+    public void getMFVNPC() {
         sendKeys(worksheetInputFields("Vendor Code"), Utility_Functions.xGetJsonData("VendorCode"), "Enter Vendor Code");
         sendKeysAndTab(worksheetInputFields("Vendor Number"), Utility_Functions.xGetJsonData("VendorNumber"), "Enter Vendor Number");
         sendKeys(worksheetInputFields("Manufacturer Code"), Utility_Functions.xGetJsonData("ManufacturerCode"), "Enter Manufacturer code");
         String vend = driver.findElement(worksheetInputFields("Vendor Number")).getAttribute("value");
         Utility_Functions.xUpdateJson("VendorNoForHeader", vend);
         sendKeys(worksheetInputFields("Product Code"), Utility_Functions.xGetJsonData("ProductCode"), "Enter Product Code");
-        selectDays();
-        Utility_Functions.timeWait(2);
+    }
+
+    /**
+     * This method to verify cancel and back button on Worksheet item screen
+     */
+    public void wsItemsScreenBtn() {
+        clickButton("Back");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(SpoPage.spoPageTitle, "CREATE NEW WORKSHEET TEMPLATE", "Worksheet items Header is present");
         clickButton("Find Products");
-        Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.isInvalidDisc)) {
-            commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
-            sendKeys(SpoPage.isInvalidDisc, "1", "Enter Discount");
-            clickButton("Find Products");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(By.xpath("//h3"), "worksheet items exclude all asterisk items from this worksheet", "Page subtitle 'WORKSHEET ITEMS' is present");
+        verifyCancelBtn();
+    }
+
+    public void wsItemsScreenColumn() {
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(SpoPage.spoPageTitle, "CREATE NEW WORKSHEET TEMPLATE", "Worksheet items Header is present");
+        String[] actText = {"Item Number", "Item Description", "Last Ordered", "Unit Cost", "Unit Weight", "Stocked at Home WSS"};
+        List<WebElement> els = driver.findElements(By.xpath("//th"));
+        for (int i = 1; i <= 6; i++) {
+            Utility_Functions.xAssertEquals(report, els.get(i).getText().trim(), actText[i - 1], "");
+            i++;
         }
-        createWorksheetButtonFunctionality();
+    }
+
+    /**
+     * This method to UI Of worksheet item screen
+     */
+    public void wsItemsScreenUI() {
+        wsItemsScreenColumn();
+        commonObj.validateText(By.xpath("//h3"), "WORKSHEET ITEMS", "Page subtitle 'WORKSHEET ITEMS' is present");
+        commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
+        commonObj.validateElementExists(SpoPage.excludeAsteriskItem, "'Exclude all asterisk items from this worksheet' check box present");
+        Utility_Functions.xScrollIntoView(driver, SpoPage.addItemToWSLink);
+        commonObj.validateText(SpoPage.addItemToWSLink, "Add Items to this Worksheet", "'+ Add Items to this Worksheet link is present'");
+        commonObj.validateElementExists(button("Cancel"), "Cancel button is present");
+        commonObj.validateElementExists(button("Back"), "Back button is present");
+        commonObj.validateElementExists(button("Create Worksheet"), "Create Worksheet button is present");
     }
 
     /**
@@ -666,5 +746,233 @@ public class Spo extends ReusableLib {
      */
     public void verifyDiscountAvailability() {
         commonObj.validateText(SpoPage.discount, "Discount:", "Discount is present below the Cost Option Column");
+    }
+
+    /**
+     * This method to verify default value on create worksheet template
+     */
+    public void verifyDefaultValues() {
+        String supplyToOrder = driver.findElement(SpoPage.supplyToOrder).getAttribute("placeholder");
+        String trailingMonths = driver.findElement(SpoPage.trailingMonths).getAttribute("ng-reflect-model");
+        Utility_Functions.xScrollIntoView(driver, SpoPage.optionsConstants);
+        String discount = driver.findElement(SpoPage.optionsConstants).getAttribute("placeholder");
+        String leadTime = driver.findElement(SpoPage.leadTime).getAttribute("placeholder");
+        Utility_Functions.xScrollIntoView(driver, SpoPage.hourDropDown);
+        String hour = driver.findElement(SpoPage.hourDropDown).getAttribute("ng-reflect-model");
+        Utility_Functions.xAssertEquals(report, supplyToOrder, "1.00", "Months Supply to Order '1.00' value is set by default");
+        Utility_Functions.xAssertEquals(report, trailingMonths, "3", "Previous 3 Months of History From Current by default");
+        Utility_Functions.xAssertEquals(report, discount, "0", "Discount ");
+        Utility_Functions.xAssertEquals(report, leadTime, "15", "Lead Time (Days) ");
+        Utility_Functions.xAssertEquals(report, hour, "05", "Time of the day/night '5:00 AM' value is set by default ");
+    }
+
+    /**
+     * This method to verify Cancel button on create worksheet template
+     */
+    public void verifyCancelBtn() {
+        clickButton("Cancel");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(SpoPage.cancelPopup, "Cancel confirmation popup is present");
+        clickButton("No");
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(By.xpath("//h2"), "CREATE NEW WORKSHEET TEMPLATE", "Validating  CREATE NEW WORKSHEET TEMPLATE page title");
+        clickButton("Cancel");
+        Utility_Functions.timeWait(2);
+        clickButton("Yes");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
+    }
+
+    /**
+     * This method to Navigate to Add item to WS screen
+     */
+    public void navigateToAddItemToWS() {
+        Utility_Functions.timeWait(4);
+        Utility_Functions.xScrollIntoView(driver, SpoPage.addItemToWSLink);
+        Utility_Functions.timeWait(1);
+        click(SpoPage.addItemToWSLink, "Click '+ Add Items to this worksheet link'");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SpoPage.addItemHeader, "ADD ITEMS TO THIS WORKSHEET", "Header 'ADD ITEMS TO THIS WORKSHEET' is present");
+    }
+
+    /**
+     * This method to Verify Functionality of Back To Worksheet button
+     */
+    public void backToWSBtn() {
+        clickButton("Return to Worksheet");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//h2"), "CREATE NEW WORKSHEET TEMPLATE", "Validating  CREATE NEW WORKSHEET TEMPLATE page title");
+    }
+
+    /**
+     * This method to select Item from the list
+     */
+    public void selectItem() {
+        int sz = driver.findElements(SpoPage.selectItem).size();
+        if (sz == 0) {
+            addItemsToWS();
+        }
+        Utility_Functions.xScrollIntoView(driver, driver.findElements(SpoPage.selectItem).get(sz - 1));
+        click(driver.findElements(SpoPage.selectItem).get(sz - 1), "Select item from the list");
+        String item1 = driver.findElement(By.xpath("(//input[@name='selectItem'])[" + sz + "]/parent::td/following-sibling::td")).getText();
+        Utility_Functions.xUpdateJson("SelectItem1", item1);
+    }
+
+    public void searchVN() {
+        int size = driver.findElements(worksheetInputFields("VN")).size() - 1;
+        sendKeys(driver.findElements(worksheetInputFields("VN")).get(size), "B", "Search VN");
+        Utility_Functions.timeWait(4);
+        click(SpoPage.autoSuggestion, "Select VN from the suggestion");
+        Utility_Functions.timeWait(2);
+        click(SpoPage.searchBtn, "Click Search Button");
+        Utility_Functions.timeWait(7);
+    }
+
+    /**
+     * This method to verify of 'Create Worksheet' button
+     * with adding additional items to the worksheet with selecting checkbox
+     */
+    public void addItemsToWS() {
+        searchVN();
+        String bl = driver.findElement(SpoPage.selectAllCheckBox).getAttribute("ng-reflect-model");
+        Utility_Functions.xAssertEquals(report, bl, "true", "All check boxes are enabled by default");
+        click(SpoPage.selectAllCheckBox, "Click checkbox");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(SpoPage.buttonDisabled, "'Add Selected Items to Worksheet' button is disabled");
+        String bl1 = driver.findElement(SpoPage.selectAllCheckBox).getAttribute("ng-reflect-model");
+        Utility_Functions.xAssertEquals(report, bl1, "false", "All check boxes are disabled");
+        selectItem();
+    }
+
+    public void selectSecItem() {
+        int sz = driver.findElements(SpoPage.selectItem).size();
+        if (sz > 1) {
+            Utility_Functions.xScrollIntoView(driver, driver.findElements(SpoPage.selectItem).get(sz - 2));
+            click(driver.findElements(SpoPage.selectItem).get(sz - 2), "Select item from the list");
+            Utility_Functions.timeWait(3);
+            String item2 = driver.findElement(By.xpath("(//input[@name='selectItem'])[" + (sz - 1) + "]/parent::td/following-sibling::td")).getText();
+            Utility_Functions.xUpdateJson("SelectItem2", item2);
+            Utility_Functions.xUpdateJson("MFCode", Utility_Functions.getText(driver, getColumnData("MF")));
+            Utility_Functions.xUpdateJson("PDCode", Utility_Functions.getText(driver, getColumnData("PD")));
+            Utility_Functions.xUpdateJson("VNCode", Utility_Functions.getText(driver, getColumnData("VN")));
+            click(SpoPage.addSelectedItemToWSBtn, "Click 'Add Selected Items to Worksheet' Button");
+            Utility_Functions.timeWait(4);
+            commonObj.validateText(SpoPage.popUp, "1 item added successfully. 1 item already existed.", "'1 item added successfully. 1 item already existed.' popup message is Present");
+            Utility_Functions.timeWait(7);
+            click(SpoPage.addSelectedItemToWSBtn, "Again select same item and Click 'Add Selected Items to Worksheet' Button");
+            Utility_Functions.timeWait(1);
+            commonObj.validateText(SpoPage.popUp, "zero items added. 2 items already existed.", "'zero items added. 2 items already existed.' message is Present");
+        }
+    }
+
+    public By getColumnData(String colName) {
+        return By.xpath("//table/tbody/tr[1]/td[count(//table/thead/tr/th[contains(text(),'" + colName + "')]/preceding-sibling::th)+1]/span");
+    }
+
+    /**
+     * This method to verify of 'Add Selected Items to Worksheet ' button
+     */
+    public void addSelectedItemsWorksheetBtn() {
+        click(SpoPage.addSelectedItemToWSBtn, "Click 'Add Selected Items to Worksheet' Button");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(SpoPage.popUp, "1 item added successfully.", "'1 item added successfully.' popup message is Present");
+        Utility_Functions.timeWait(7);
+        click(SpoPage.addSelectedItemToWSBtn, "Again select same item and Click 'Add Selected Items to Worksheet' Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SpoPage.popUp, "Zero items added. 1 item already existed.", "'Zero items added. 1 item already existed.' message is Present");
+        selectSecItem();
+    }
+
+    public By getItemNo(String label) {
+        return By.xpath("//table/tbody/tr[1]/td[count(//table/thead/tr/th[contains(text(),'" + label + "')]/preceding-sibling::th)]");
+    }
+
+    public void searchItem(String item) {
+        Utility_Functions.timeWait(4);
+        click(TruckPage.filterSearch, "Click Search Filter icon");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
+        sendKeys(SpoPage.itemNumSearch, Utility_Functions.xGetJsonData(item), "Enter Selected Item");
+        Utility_Functions.timeWait(2);
+        sendKeys(SpoPage.manufacturerCode, Utility_Functions.xGetJsonData("MFCode"), "Enter Selected MF");
+        Utility_Functions.timeWait(2);
+        sendKeys(SpoPage.productCode, Utility_Functions.xGetJsonData("PDCode"), "Enter Selected PD");
+        Utility_Functions.timeWait(2);
+        sendKeys(SpoPage.vendorName, Utility_Functions.xGetJsonData("VNCode"), "Enter Selected VN");
+        Utility_Functions.timeWait(2);
+        click(SpoPage.manufacturerCode);
+        Utility_Functions.timeWait(2);
+        click(TruckPage.applyFilter, "Click Apply Filters");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(getItemNo("Item Number"), Utility_Functions.xGetJsonData(item), "Selected Item is added to the worksheet");
+    }
+
+    /**
+     * This method to verify Added item to Worksheet
+     */
+    public void verifyAddedItem() {
+        searchItem("SelectItem1");
+        searchItem("SelectItem2");
+    }
+
+    public void validateColumn() {
+        String[] actText = {"Item Number", "Item Description", "Qty on Hand", "Qty Available", "Qty on PO", "Qty on SO", "MF", "PD", "VN"};
+        List<WebElement> els = driver.findElements(By.xpath("//th"));
+        for (int i = 9; i <= 17; i++) {
+            Utility_Functions.xAssertEquals(report, els.get(i).getText().trim(), actText[i - 9], "");
+            i++;
+        }
+    }
+
+    /**
+     * This method to UI of Add items to this worksheet screen
+     */
+    public void addItemsToWSUI() {
+        commonObj.validateText(SpoPage.spoPageTitle, "CREATE NEW WORKSHEET TEMPLATE", "Worksheet items Header is present");
+        commonObj.validateElementExists(worksheetInputFields("Enter Search Terms"), "'Enter Search Terms' input text field present");
+        commonObj.validateElementExists(worksheetInputFields("MF"), "'MF' input text field present");
+        commonObj.validateElementExists(worksheetInputFields("PD"), "'PD' input text field present");
+        commonObj.validateElementExists(worksheetInputFields("VN"), "'VN' input text field present");
+        commonObj.validateElementExists(SpoPage.searchBtn, "'Search' button is present");
+        commonObj.validateElementExists(button("Return to Worksheet"), "'Return to Worksheet' button is present");
+        commonObj.validateElementExists(SpoPage.addSelectedItemToWSBtn, "'Add Selected Items to Worksheet' button is present");
+        commonObj.validateElementExists(SpoPage.asteriskItem, "'Asterisk Items' Check Box is present");
+        commonObj.validateElementExists(SpoPage.jobItem, "'Job Items' Check Box is present");
+        commonObj.validateElementExists(SpoPage.iovItem, "'IOV Items' Check Box is present");
+        validateColumn();
+    }
+
+    /**
+     * This method to verify Worksheet item search filter
+     */
+    public void wsItemSearchFilter() {
+        ArrayList<String> str = new ArrayList<>();
+        for (int i = 1; i < 7; i++) {
+            String val = driver.findElements(By.xpath("//td")).get(i).getText().trim();
+            str.add(val);
+        }
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("document.body.style.zoom='85%'");
+        Utility_Functions.timeWait(2);
+        click(TruckPage.filterSearch, "Click Search Filter icon");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
+        sendKeys(SpoPage.itemNumSearch, str.get(0), "Enter Selected Item");
+        Utility_Functions.timeWait(2);
+        sendKeys(SpoPage.itemDescription, str.get(1), "Enter item Description");
+        Utility_Functions.timeWait(2);
+        sendKeys(SpoPage.lastOrdered, str.get(2), "Enter last Ordered");
+        Utility_Functions.timeWait(2);
+        sendKeys(SpoPage.unitCost, str.get(3), "Enter unitCost");
+        Utility_Functions.timeWait(2);
+        sendKeys(SpoPage.unitWeight, str.get(4), "Enter unitWeight");
+        Utility_Functions.timeWait(2);
+        if (str.get(5).equals("Yes")) {
+            click(SpoPage.showStockedAtWss, "Click Show Stock At Wss check box");
+            Utility_Functions.timeWait(2);
+        }
+        click(TruckPage.applyFilter, "Click Apply Filters");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(getItemNo("Item Number"), str.get(0), "Selected Item is added to the worksheet");
     }
 }
