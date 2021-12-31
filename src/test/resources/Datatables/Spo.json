@@ -4,20 +4,32 @@
       "Tc_50_SuggestedPOUI": "navigateToSPO,selectCompany,verifySpoUI",
       "Tc_51_CreateNewWorksheetTemplateUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,createNewWorksheetTemplateUI",
       "Tc_52_VerifyCancelButtonCreateWSTemp": "navigateToSPO,selectCompany,navigateToCreateWorksheet,verifyDefaultValues,verifyCancelBtn",
-      "Tc_54_CreateWorksheet_MCPCVCVNPO": "launchApp,siteLogin,assignVendorNumber,signOut,navigateToSPO,selectCompany,findProduct,createWorksheet,filterCreatedWorksheet",
       "Tc_62_PaginationSPO": "navigateToSPO,selectCompany,helpIconSPO,paginationSPO,funPageCountSPO",
-      "Tc_70_wsItemScreenUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,wsItemsScreenUI",
-      "Tc_71_PaginationWsItemScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,pagination,funPageCount,wsItemsScreenBtn",
+      "Tc_66_CreateWS_MFPDVNPODiscount": "launchApp,siteLogin,assignVendorNumber,backToMaster,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
+      "Tc_67_CreateWS_MFPDVNListPriceDiscount": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
+      "Tc_68_CreateWS_MFPDVNLastCostDiscount": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
+      "Tc_70_wsItemScreenUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,wsItemsScreenUI",
+      "Tc_71_PaginationWsItemScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,pagination,funPageCount,wsItemsScreenBtn",
       "Tc_73_RefreshWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyRefreshIcon,verifyRefreshIcon",
       "Tc_74_DeleteWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyTrashIcon",
       "Tc_86_verifySavedWorkSheetAvailablePopup": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifySavedWorkSheet",
       "Tc_87_VerifyAddItemsToWS": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,navigateToAddItemToWS,addItemsToWS,addSelectedItemsWorksheetBtn,backToWSBtn,verifyAddedItem,createWorksheet,filterCreatedWorksheet",
-      "Tc_88_AddItemToWSUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,navigateToAddItemToWS,addItemsToWSUI",
-      "Tc_89_PaginationAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,navigateToAddItemToWS,searchVN,pagination,funPageCount",
+      "Tc_88_AddItemToWSUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,addItemsToWSUI",
+      "Tc_89_PaginationAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,searchVN,pagination,funPageCount",
+      "Tc_102_VerifyEditWSTempUI": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyEditWSTempFields",
+      "Tc_106_WSCalculationSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyWSCalculation",
+      "Tc_110_PaginationWSDetailsPage": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,pagination,funPageCount",
+      "Tc_116_VerifyAssignedUserCanBeChanged": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyAssignedUserChange",
+      "Tc_117_VerifySalesOptionEditable": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifySalesOptionEditable",
+      "Tc_118_DayToRunSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDayToRunEditable",
       "Tc_148_searchFilterUI": "navigateToSPO,selectCompany,searchFilterUI",
       "Tc_156_CreateWSMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductMultiplier,createWorksheet,filterCreatedWorksheet",
       "Tc_164_verifyDiscountMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,verifyMultiAvailability,launchApp,siteLogin,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,verifyDiscountAvailability",
-      "Tc_VerifyWSItemsSearchFilter": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,wsItemSearchFilter"
+      "Tc_175_CreateWS_MFPDVNListPriceMultiplier": "launchApp,siteLogin,assignVendorNumber,backToMaster,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
+      "Tc_176_CreateWS_MFPDVNPOMultiplier": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
+      "Tc_177_CreateWS_MFPDVNLastCostMultiplier": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
+      "Tc_VerifyWSItemsSearchFilter": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,wsItemSearchFilter",
+      "Tc_VerifyTrashIconEditWSTemp": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp"
     }
   ],
   "General_Data": [
@@ -34,12 +46,23 @@
       "Title": "verify Cancel button on create worksheet template"
     },
     {
-      "TC_ID": "Tc_54_CreateWorksheet_MCPCVCVNPO",
-      "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination"
-    },
-    {
       "TC_ID": "Tc_62_PaginationSPO",
       "Title": "Test case Suggested Purchase Order Pagination"
+    },
+    {
+      "TC_ID": "Tc_66_CreateWS_MFPDVNPODiscount",
+      "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination",
+      "CostOption": "PO Cost"
+    },
+    {
+      "TC_ID": "Tc_67_CreateWS_MFPDVNListPriceDiscount",
+      "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+ListPrice combination",
+      "CostOption": "List Price"
+    },
+    {
+      "TC_ID": "Tc_68_CreateWS_MFPDVNLastCostDiscount",
+      "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+Last Cost combination",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_70_wsItemScreenUI",
@@ -74,6 +97,32 @@
       "Title": "Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen"
     },
     {
+      "TC_ID": "Tc_102_VerifyEditWSTempUI",
+      "Title": "Test case to Verify Edit Worksheet Template UI"
+    },
+    {
+      "TC_ID": "Tc_106_WSCalculationSection",
+      "Title": "Test case to Verify Worksheet Calculation Section",
+      "CostOption": "List Price"
+    },
+    {
+      "TC_ID": "Tc_110_PaginationWSDetailsPage",
+      "Title": "Test case to Verify Pagination WorkSheet Details Page"
+    },
+    {
+      "TC_ID": "Tc_116_VerifyAssignedUserCanBeChanged",
+      "Title": "Test case to Verify Assigned User Can Be Changed"
+    },
+    {
+      "TC_ID": "Tc_117_VerifySalesOptionEditable",
+      "Title": "Test case to Verify Sales Option Editable",
+      "CostOption": "List Price"
+    },
+    {
+      "TC_ID": "Tc_118_DayToRunSection",
+      "Title": "Test case to Verify Day To Run Section Editable"
+    },
+    {
       "TC_ID": "Tc_148_searchFilterUI",
       "Title": "Test case UI of search filter"
     },
@@ -86,8 +135,27 @@
       "Title": "Test case verify Discount or multiplier option"
     },
     {
+      "TC_ID": "Tc_175_CreateWS_MFPDVNListPriceMultiplier",
+      "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+List Price combination",
+      "CostOption": "List Price"
+    },
+    {
+      "TC_ID": "Tc_176_CreateWS_MFPDVNPOMultiplier",
+      "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination",
+      "CostOption": "PO Cost"
+    },
+    {
+      "TC_ID": "Tc_177_CreateWS_MFPDVNLastCostMultiplier",
+      "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+Last Cost combination",
+      "CostOption": "Last Cost"
+    },
+    {
       "TC_ID": "Tc_VerifyWSItemsSearchFilter",
       "Title": "Test case Verify WS Items Search Filter"
+    },
+    {
+      "TC_ID": "Tc_VerifyTrashIconEditWSTemp",
+      "Title": "Test case to Verify Delete icon"
     }
   ]
 }

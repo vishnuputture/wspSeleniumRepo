@@ -32,7 +32,23 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_54_CreateWorksheet_MCPCVCVNPO(SeleniumTestParameters testParameters) {
+    public void Tc_62_PaginationSPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case Suggested Purchase Order Pagination");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_66_CreateWS_MFPDVNPODiscount(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+List Price combination");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_67_CreateWS_MFPDVNListPriceDiscount(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -40,8 +56,8 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_62_PaginationSPO(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case Suggested Purchase Order Pagination");
+    public void Tc_68_CreateWS_MFPDVNLastCostDiscount(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -105,7 +121,63 @@ public class Spo extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_89_PaginationAddItemToWSScreen(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen\"");
+        testParameters.setCurrentTestDescription("Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_102_VerifyEditWSTempUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Edit Worksheet Template UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_106_WSCalculationSection(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Worksheet Calculation Section");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_110_PaginationWSDetailsPage(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Pagination WorkSheet Details Page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_116_VerifyAssignedUserCanBeChanged(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Assigned User Can Be Changed");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_117_VerifySalesOptionEditable(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Sales Option Editable");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_118_DayToRunSection(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Day To Run Section Editable");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_VerifyTrashIconEditWSTemp(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Delete icon ");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -130,6 +202,30 @@ public class Spo extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_164_verifyDiscountMultiplier(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case verify Discount or multiplier option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_175_CreateWS_MFPDVNListPriceMultiplier(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+List Price combination");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_176_CreateWS_MFPDVNPOMultiplier(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_177_CreateWS_MFPDVNLastCostMultiplier(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+PO Cost combination");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

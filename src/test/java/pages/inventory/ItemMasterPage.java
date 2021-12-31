@@ -13,6 +13,8 @@ public class ItemMasterPage extends ReusableLib{
     public static By pageTitle=By.xpath("//div[@id='Title']");
     public static By addItemAction = By.xpath("//div[@title='F8 - Add Item']");
     public static By txtBoxDescription = By.xpath("//input[@title='Description Blank']");
+    public static By itemDesc1=By.id("inItemDesc1");
+    public static By itemDesc2=By.id("InItemDesc2");
     public static By txtBoxUOM = By.xpath("//input[@id='inSellingUOM']");
     public static By btnSave = By.xpath("//input[@id='btnSaveChanges']");
     public static By txtBoxSearch = By.xpath("//input[@id='inItemNumber']");
@@ -24,6 +26,7 @@ public class ItemMasterPage extends ReusableLib{
     public static By txtBoxListPrice = By.id("inListPrice");
     public static By txtBoxMatrix = By.id("inMatrix");
     public static By txtBoxPoCost = By.id("inPOCost");
+    public static By inCostsLast= By.id("inCostsLast");
     public static By manufacturerCode = By.id("inManufacturerCode");
     public static By productCode = By.id("inProductCode");
     public static By vendorCode = By.id("inVendorCode");
