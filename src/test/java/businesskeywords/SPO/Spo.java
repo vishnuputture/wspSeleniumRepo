@@ -141,7 +141,7 @@ public class Spo extends ReusableLib {
      * This method to navigate to Edit Worksheet Template page
      */
     public void navigateEditWSTemp() {
-        click(SpoPage.editWsTempBtn, "Click dit Worksheet template Button");
+        click(SpoPage.editWsTempBtn, "Click Edit Worksheet template Button");
         Utility_Functions.timeWait(3);
         commonObj.validateText(By.xpath("//h2"), "EDIT WORKSHEET TEMPLATE", "Validating EDIT WORKSHEET TEMPLATE page title");
     }
@@ -153,6 +153,10 @@ public class Spo extends ReusableLib {
         commonObj.masterToPurchaseOrder();
         commonObj.navigateToOptionAndConstantsMenu();
         commonObj.navigateToBuyingDiscountGroup();
+    }
+
+    public void navigateWSItem() {
+        clickButton("Next");
     }
 
     /**
@@ -430,7 +434,7 @@ public class Spo extends ReusableLib {
         }
     }
 
-    public void yesButton(){
+    public void yesButton() {
         commonObj.validateElementExists(SpoPage.exclamationWarn, "ARE YOU SURE? popup is present");
         Utility_Functions.timeWait(4);
         clickButton("Yes");
@@ -439,7 +443,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(4);
     }
 
-    public void noButton(){
+    public void noButton() {
         commonObj.validateElementExists(SpoPage.exclamationWarn, "ARE YOU SURE? popup is present");
         Utility_Functions.timeWait(4);
         clickButton("No");
@@ -916,6 +920,15 @@ public class Spo extends ReusableLib {
     }
 
     /**
+     * This method to Verify Functionality of Back To Worksheet button
+     */
+    public void backToWSBtnEditWs() {
+        clickButton("Return to Worksheet");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//h2"), "EDIT WORKSHEET TEMPLATE", "Validating EDIT WORKSHEET TEMPLATE page title");
+    }
+
+    /**
      * This method to select Item from the list
      */
     public void selectItem() {
@@ -968,8 +981,12 @@ public class Spo extends ReusableLib {
             Utility_Functions.xUpdateJson("VNCode", Utility_Functions.getText(driver, getColumnData("VN")));
             click(SpoPage.addSelectedItemToWSBtn, "Click 'Add Selected Items to Worksheet' Button");
             Utility_Functions.timeWait(4);
-            commonObj.validateText(SpoPage.popUp, "1 item added successfully. 1 item already existed.", "'1 item added successfully. 1 item already existed.' popup message is Present");
-            Utility_Functions.timeWait(7);
+            String pop = getText(SpoPage.popUp);
+            if (pop.equals("1 item added successfully. 1 item already existed.")) {
+                Utility_Functions.xAssertEquals(report, pop, "1 item added successfully. 1 item already existed.", "'1 item added successfully. 1 item already existed.' popup message is Present");
+                //commonObj.validateText(SpoPage.popUp, "1 item added successfully. 1 item already existed.", "'1 item added successfully. 1 item already existed.' popup message is Present");
+                Utility_Functions.timeWait(7);
+            }
             click(SpoPage.addSelectedItemToWSBtn, "Again select same item and Click 'Add Selected Items to Worksheet' Button");
             Utility_Functions.timeWait(1);
             commonObj.validateText(SpoPage.popUp, "zero items added. 2 items already existed.", "'zero items added. 2 items already existed.' message is Present");
@@ -986,8 +1003,12 @@ public class Spo extends ReusableLib {
     public void addSelectedItemsWorksheetBtn() {
         click(SpoPage.addSelectedItemToWSBtn, "Click 'Add Selected Items to Worksheet' Button");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(SpoPage.popUp, "1 item added successfully.", "'1 item added successfully.' popup message is Present");
-        Utility_Functions.timeWait(7);
+        String pop = getText(SpoPage.popUp);
+        if (pop.equals("1 item added successfully.")) {
+            Utility_Functions.xAssertEquals(report, pop, "1 item added successfully.", "'1 item added successfully.' popup message is Present");
+            //commonObj.validateText(SpoPage.popUp, "1 item added successfully.", "'1 item added successfully.' popup message is Present");
+            Utility_Functions.timeWait(7);
+        }
         click(SpoPage.addSelectedItemToWSBtn, "Again select same item and Click 'Add Selected Items to Worksheet' Button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.popUp, "Zero items added. 1 item already existed.", "'Zero items added. 1 item already existed.' message is Present");
@@ -1013,7 +1034,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(SpoPage.manufacturerCode);
         Utility_Functions.timeWait(2);
-        click(TruckPage.applyFilter, "Click Apply Filters");
+        Utility_Functions.xClickHiddenElement(driver,TruckPage.applyFilter);
         Utility_Functions.timeWait(2);
         commonObj.validateText(getItemNo("Item Number"), Utility_Functions.xGetJsonData(item), "Selected Item is added to the worksheet");
     }
@@ -1312,5 +1333,17 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         filterCreatedWorksheet();
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, SpoPage.savedTag), false, "Saved Worksheet is deleted and not present on SPO page");
+    }
+
+    /**
+     * This method to verify Save Worksheet
+     */
+    public void verifySavedWS() throws AWTException {
+        clickButton("Save");
+        Utility_Functions.timeWait(4);
+        String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
+        commonObj.validateText(SpoPage.popUp, worksheetName+" worksheet updated successfully.", worksheetName+" worksheet updated successfully. popup is present");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
 }
