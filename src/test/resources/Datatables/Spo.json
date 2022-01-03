@@ -21,7 +21,8 @@
       "Tc_110_PaginationWSDetailsPage": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,pagination,funPageCount",
       "Tc_116_VerifyAssignedUserCanBeChanged": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyAssignedUserChange",
       "Tc_117_VerifySalesOptionEditable": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifySalesOptionEditable",
-      "Tc_118_DayToRunSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyDayToRunEditable",
+      "Tc_118_DayToRunSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDayToRunEditable",
+      "Tc_120_EditWSTrashIcon": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDeleteSavedWS",
       "Tc_148_searchFilterUI": "navigateToSPO,selectCompany,searchFilterUI",
       "Tc_156_CreateWSMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductMultiplier,createWorksheet,filterCreatedWorksheet",
       "Tc_164_verifyDiscountMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,verifyMultiAvailability,launchApp,siteLogin,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,verifyDiscountAvailability",
@@ -121,6 +122,10 @@
     {
       "TC_ID": "Tc_118_DayToRunSection",
       "Title": "Test case to Verify Day To Run Section Editable"
+    },
+    {
+      "TC_ID": "Tc_120_EditWSTrashIcon",
+      "Title": "Test case to Verify Delete Worksheet"
     },
     {
       "TC_ID": "Tc_148_searchFilterUI",

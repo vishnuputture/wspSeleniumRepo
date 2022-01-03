@@ -176,6 +176,14 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_120_EditWSTrashIcon(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Delete Worksheet");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_VerifyTrashIconEditWSTemp(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Delete icon ");
         CoreScript coreScript = new CoreScript(testParameters);
