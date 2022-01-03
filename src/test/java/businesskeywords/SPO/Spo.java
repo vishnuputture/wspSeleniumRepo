@@ -1034,7 +1034,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(SpoPage.manufacturerCode);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver,TruckPage.applyFilter);
+        Utility_Functions.xClickHiddenElement(driver, TruckPage.applyFilter);
         Utility_Functions.timeWait(2);
         commonObj.validateText(getItemNo("Item Number"), Utility_Functions.xGetJsonData(item), "Selected Item is added to the worksheet");
     }
@@ -1338,12 +1338,86 @@ public class Spo extends ReusableLib {
     /**
      * This method to verify Save Worksheet
      */
-    public void verifySavedWS() throws AWTException {
+    public void verifySavedWS() {
         clickButton("Save");
         Utility_Functions.timeWait(4);
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
-        commonObj.validateText(SpoPage.popUp, worksheetName+" worksheet updated successfully.", worksheetName+" worksheet updated successfully. popup is present");
+        commonObj.validateText(SpoPage.popUp, worksheetName + " worksheet updated successfully.", worksheetName + " worksheet updated successfully. popup is present");
         Utility_Functions.timeWait(4);
+        commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
+    }
+
+    /**
+     * This method to verify Save Worksheet button
+     */
+    public void verifySavedWSBtn() {
+        Utility_Functions.xScrollIntoView(driver, SpoPage.orderQuantity);
+        sendKeys(SpoPage.orderQuantity, "10", "Modify Order Quantity");
+        click(SpoPage.saveWorksheetBtn, "Click Save Worksheet button");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(SpoPage.popUp, "Worksheet saved successfully.", "Worksheet saved successfully. popup is present");
+        Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xMouseClick(driver, SpoPage.closeIcon);
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
+        commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
+    }
+
+    /**
+     * Keyword to Verify Duplicate WS
+     */
+    public void verifyDuplicateWS() {
+        sendKeys(SpoPage.worksheetSheetTemplateName, Utility_Functions.xGetJsonData("WorksheetTempName"), "Name Your Worksheet");
+        getMFVNPC();
+        selectDays();
+        Utility_Functions.timeWait(2);
+        clickButton("Find Products");
+        Utility_Functions.timeWait(5);
+        errorRepeatSteps();
+        Utility_Functions.xScrollIntoView(driver, SpoPage.invalidWSName);
+        commonObj.validateText(SpoPage.invalidWSName, "Worksheet with this name already exists.", "Duplicate Worksheet can not create");
+        handleDiscountFieldIfPresent();
+        Utility_Functions.xScrollIntoView(driver, SpoPage.invalidWSName);
+        commonObj.validateText(SpoPage.invalidWSName, "Worksheet with this name already exists.", "Duplicate Worksheet can not create");
+    }
+
+    /**
+     * Keyword to Modify Order Quantity
+     */
+    public void modifyOrderQty() {
+        Utility_Functions.xScrollIntoView(driver, SpoPage.orderQuantity);
+        sendKeys(SpoPage.orderQuantity, "99999999", "Modify First item Order Quantity to 999999");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(SpoPage.yellowModCol,"Border color changed to Yellow after Order quantity modification");
+        String itemNo=driver.findElements(SpoPage.itemNoCol).get(1).getText();
+        sendKeys(By.id(itemNo), "999999", "Modify Second item Order Quantity to 999999");
+    }
+
+    /**
+     * Keyword to Click Convert to PO Button
+     */
+    public void clickConcertPOBtn() {
+        Utility_Functions.timeWait(2);
+        click(SpoPage.convertPOBtn, "Click Convert Po Button");
+    }
+
+    /**
+     * Keyword to Click Convert to PO Button
+     */
+    public void verifyOrderExceedError() {
+        modifyOrderQty();
+        clickConcertPOBtn();
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SpoPage.popUp, "Worksheet Order Total exceeds Maximum of 9,999,999.99 for PO Conversion. Please modify and try again.", "'Worksheet Order Total exceeds Maximum of $9,999,999.99 for PO Conversion. Please modify and try again.' error message is present");
+        if (Utility_Functions.xIsDisplayed(driver, SpoPage.xIcon)) {
+            click(SpoPage.xIcon);
+        }
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xScrollIntoView(driver,SpoPage.closeIcon);
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xClickHiddenElement(driver,SpoPage.closeIcon);
+        Utility_Functions.timeWait(5);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
 }

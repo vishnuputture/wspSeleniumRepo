@@ -46,6 +46,7 @@ public class SpoPage extends ReusableLib {
     public static By worksheetNameLink=By.xpath("//span[contains(text(),'Last Updated:')]/preceding::a[@class='header-name-link']");
     public static By worksheetNameHeader=By.id("modalLabel");
     public static By vendorNumber=By.id("vendorNumber");
+    public static By orderQuantity=By.xpath("//input[contains(@class,'dollar')]");
     public static By assignedUser=By.id("assignedUser");
     public static By vendorNoHeader=By.xpath("//i[contains(@class,'sticky-note')]/ancestor::h3");
     public static By closeIcon=By.xpath("//button[@class='close']/descendant::i[@class='fa fa-times']");
@@ -58,8 +59,11 @@ public class SpoPage extends ReusableLib {
     public static By multiplier=By.xpath("//span[text()='Multiplier: ']");
     public static By discount=By.xpath("//span[text()='Discount: ']");
     public static By xIcon=By.xpath("//div[@class='ui-growl-icon-close pi pi-times']");
+    public static By yellowModCol=By.xpath("//input[contains(@style,'solid yellow')]");
+    public static By itemNoCol=By.xpath("//div[contains(@class,'item-number')]");
     public static By backBtn=By.id("btnCF12");
     public static By isInvalidDisc=By.xpath("//label[text()='Discount']/following-sibling::input[contains(@class,'invalid')]");
+    public static By invalidWSName=By.xpath("//div[contains(@class,'invalid-feedback')]");
     public static By discountError=By.xpath("//label[text()='Discount']/following-sibling::div");
     public static By supplyToOrder=By.id("supplyToOrder");
     public static By optionsConstants=By.id("optionsConstants");
@@ -81,6 +85,7 @@ public class SpoPage extends ReusableLib {
     public static By itemNumSearch=By.xpath("//p-autocomplete[@id='itemNumber']/descendant::input");
     public static By itemDescription=By.xpath("//p-autocomplete[@id='itemDescription']/descendant::input");
     public static By toggleSlider=By.xpath("//div[@class='toggle-ball']");
+    public static By convertPOBtn=By.xpath("//span[text()='Convert to PO']");
     public static By manufacturerCode=By.id("manufacturerCode");
     public static By productCode=By.id("productCode");
     public static By vendorName=By.id("vendorName");
