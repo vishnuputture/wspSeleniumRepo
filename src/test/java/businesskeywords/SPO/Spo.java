@@ -521,6 +521,7 @@ public class Spo extends ReusableLib {
     public void verifyTrashIconPresence() throws AWTException {
         if (!Utility_Functions.xIsDisplayed(driver, SpoPage.trashIcon)) {
             clickWorkSheetName();
+            Utility_Functions.timeWait(3);
             click(SpoPage.closeIcon, "Click Close Icon");
             Utility_Functions.timeWait(2);
             commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
