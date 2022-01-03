@@ -1295,7 +1295,7 @@ public class Spo extends ReusableLib {
     /**
      * This method to verify Delete saved Worksheet popup
      */
-    public void verifyDeleteSavedWS() {
+    public void verifyDeleteSavedWS() throws AWTException {
         click(SpoPage.trashIcon, "Click Trash Icon");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(SpoPage.deleteSavedWorksheetPopup, "Delete Saved Worksheet Popup message present");
@@ -1310,6 +1310,7 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.popUp, "" + worksheetName + " worksheet successfully deleted.", "" + worksheetName + " worksheet successfully deleted. pop up message is present");
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
+        filterCreatedWorksheet();
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, SpoPage.savedTag), false, "Saved Worksheet is deleted and not present on SPO page");
     }
 }
