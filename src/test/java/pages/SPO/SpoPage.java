@@ -75,6 +75,7 @@ public class SpoPage extends ReusableLib {
     public static By jobItem=By.xpath("//label[contains(text(),'Job Items')]/preceding-sibling::input[@id='jobItems']");
     public static By iovItem=By.xpath("//label[contains(text(),'IOV Items')]/preceding-sibling::input[@id='iovItems']");
     public static By selectItem=By.xpath("//input[@name='selectItem']");
+    public static By activateList=By.xpath("//label[text()='Activate List']");
     public static By selectAllCheckBox=By.id("selectAllItems");
     public static By addSelectedItemToWSBtn=By.xpath("//span[text()='Add Selected Items to Worksheet ']");
     public static By itemNumSearch=By.xpath("//p-autocomplete[@id='itemNumber']/descendant::input");

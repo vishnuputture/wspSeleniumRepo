@@ -130,7 +130,7 @@ public class Spo extends ReusableLib {
     /**
      * This method to navigate to Worksheet option Page
      */
-    public void navigateWSOption() {
+    public void navigateWSOption() throws AWTException {
         verifyTrashIconPresence();
         click(worksheetName("Saved"), "Click Worksheet hyper link");
         Utility_Functions.timeWait(6);
@@ -343,26 +343,45 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.vendorNoHeader, "Vendor: " + Utility_Functions.xGetJsonData("VendorNumber") + " - " + Utility_Functions.xGetJsonData("VendorCode").replace("- ", "") + "", "VENDOR: " + Utility_Functions.xGetJsonData("VendorNumber") + " - " + Utility_Functions.xGetJsonData("VendorCode").replace("-", "") + " is present");
     }
 
+    public void isWSActive() {
+        Utility_Functions.xScrollIntoView(driver, SpoPage.toggleSlider);
+        if (Utility_Functions.xIsDisplayed(driver, SpoPage.activateList)) {
+            click(SpoPage.toggleSlider, "Activate Worksheet");
+            updatedMessage();
+            clickButton("Cancel");
+            Utility_Functions.timeWait(6);
+            commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
+        }
+    }
+
     /**
      * Keyword to click Work sheet name hyperlink
      */
-    public void clickWorkSheetName() {
+    public void clickWorkSheetName() throws AWTException {
         click(SpoPage.worksheetNameLink, "Click Worksheet name hyperlink");
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
         Utility_Functions.timeWait(4);
-        if (Utility_Functions.getText(driver, SpoPage.popUp).equals("")) {
+        if (Utility_Functions.xIsDisplayed(driver, SpoPage.popUp)) {
+            if (Utility_Functions.getText(driver, SpoPage.popUp).equals("")) {
+                click(SpoPage.worksheetNameLink, "Click Worksheet name hyperlink");
+                Utility_Functions.timeWait(4);
+            }
+            commonObj.validateText(SpoPage.popUp, "" + worksheetName + " updated successfully.", "" + worksheetName + " updated successfully. pop up message is present");
+            Utility_Functions.timeWait(4);
+            verifyWsOptionHeader();
+        } else {
+            Utility_Functions.timeWait(4);
+            isWSActive();
+            filterCreatedWorksheet();
             click(SpoPage.worksheetNameLink, "Click Worksheet name hyperlink");
             Utility_Functions.timeWait(4);
         }
-        commonObj.validateText(SpoPage.popUp, "" + worksheetName + " updated successfully.", "" + worksheetName + " updated successfully. pop up message is present");
-        Utility_Functions.timeWait(4);
-        verifyWsOptionHeader();
     }
 
     /**
      * Keyword to Verify functionality of Trash icon
      */
-    public void verifyTrashIcon() {
+    public void verifyTrashIcon() throws AWTException {
         clickWorkSheetName();
         click(SpoPage.closeIcon, "Click Close Icon");
         Utility_Functions.timeWait(2);
@@ -400,15 +419,31 @@ public class Spo extends ReusableLib {
 
     public void discountError() {
         if (Utility_Functions.xIsDisplayed(driver, SpoPage.isInvalidDisc)) {
-            Utility_Functions.xScrollIntoView(driver,SpoPage.discountError);
+            Utility_Functions.xScrollIntoView(driver, SpoPage.discountError);
             commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
             Utility_Functions.timeWait(2);
             sendKeys(SpoPage.isInvalidDisc, "-1", "Enter negative value into Discount Text box");
-            if(Utility_Functions.xIsDisplayed(driver,button("Refresh Worksheet"))) {
+            if (Utility_Functions.xIsDisplayed(driver, button("Refresh Worksheet"))) {
                 clickButton("Refresh Worksheet");
             }
             Utility_Functions.timeWait(2);
         }
+    }
+
+    public void yesButton(){
+        commonObj.validateElementExists(SpoPage.exclamationWarn, "ARE YOU SURE? popup is present");
+        Utility_Functions.timeWait(4);
+        clickButton("Yes");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(SpoPage.popUp, "Worksheet updated successfully.", "Worksheet updated successfully. popup is present");
+        Utility_Functions.timeWait(4);
+    }
+
+    public void noButton(){
+        commonObj.validateElementExists(SpoPage.exclamationWarn, "ARE YOU SURE? popup is present");
+        Utility_Functions.timeWait(4);
+        clickButton("No");
+        Utility_Functions.timeWait(2);
     }
 
     /**
@@ -424,19 +459,11 @@ public class Spo extends ReusableLib {
             Utility_Functions.timeWait(4);
             discountError();
         }
-        commonObj.validateElementExists(SpoPage.exclamationWarn, "ARE YOU SURE? popup is present");
-        Utility_Functions.timeWait(4);
-        clickButton("No");
-        Utility_Functions.timeWait(2);
+        noButton();
         clickButton("Refresh Worksheet");
         Utility_Functions.timeWait(2);
         discountError();
-        commonObj.validateElementExists(SpoPage.exclamationWarn, "ARE YOU SURE? popup is present");
-        Utility_Functions.timeWait(4);
-        clickButton("Yes");
-        Utility_Functions.timeWait(4);
-        commonObj.validateText(SpoPage.popUp, "Worksheet updated successfully.", "Worksheet updated successfully. popup is present");
-        Utility_Functions.timeWait(4);
+        yesButton();
     }
 
     /**
@@ -491,7 +518,7 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
     }
 
-    public void verifyTrashIconPresence() {
+    public void verifyTrashIconPresence() throws AWTException {
         if (!Utility_Functions.xIsDisplayed(driver, SpoPage.trashIcon)) {
             clickWorkSheetName();
             click(SpoPage.closeIcon, "Click Close Icon");
@@ -503,7 +530,7 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to verify saved work sheet
      */
-    public void verifySavedWorkSheet() {
+    public void verifySavedWorkSheet() throws AWTException {
         verifyTrashIconPresence();
         verifyCancelSavedWSPopup();
         verifyOpenNewWSBtn();
@@ -682,7 +709,7 @@ public class Spo extends ReusableLib {
     }
 
     public void costOption() {
-        Utility_Functions.xScrollIntoView(driver,SpoPage.costOption);
+        Utility_Functions.xScrollIntoView(driver, SpoPage.costOption);
         String cost = jsonData.getData("CostOption");
         int size = driver.findElements(SpoPage.costOption).size() - 1;
         click(driver.findElements(SpoPage.costOption).get(size), "Click Cost Option Drop Down");
@@ -789,14 +816,16 @@ public class Spo extends ReusableLib {
      */
     public void filterCreatedWorksheet() throws AWTException {
         Utility_Functions.timeWait(7);
-        click(TruckPage.filterSearch, "Click Search Filter icon");
-        Utility_Functions.timeWait(2);
-        commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
-        sendKeys(SpoPage.worksheetNameFilter, Utility_Functions.xGetJsonData("WorksheetTempName"), "Enter created worksheet");
-        Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver, TruckPage.applyFilter);
-        Utility_Functions.timeWait(2);
-        commonObj.validateText(SpoPage.filteredWorksheet, Utility_Functions.xGetJsonData("WorksheetTempName"), "Created Work sheet present");
+        if (Utility_Functions.xIsDisplayed(driver, TruckPage.filterSearch)) {
+            click(TruckPage.filterSearch, "Click Search Filter icon");
+            Utility_Functions.timeWait(2);
+            commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
+            sendKeys(SpoPage.worksheetNameFilter, Utility_Functions.xGetJsonData("WorksheetTempName"), "Enter created worksheet");
+            Utility_Functions.timeWait(2);
+            Utility_Functions.xClickHiddenElement(driver, TruckPage.applyFilter);
+            Utility_Functions.timeWait(2);
+            commonObj.validateText(SpoPage.filteredWorksheet, Utility_Functions.xGetJsonData("WorksheetTempName"), "Created Work sheet present");
+        }
     }
 
     /**
@@ -1120,8 +1149,8 @@ public class Spo extends ReusableLib {
         return By.xpath("//input[@disabled]/preceding-sibling::label[text()='" + label + "']");
     }
 
-    public By actDeActToggle(Boolean bl){
-        return By.xpath("//input[@id='isListActivated' and @ng-reflect-model='"+bl+"']/following-sibling::div");
+    public By actDeActToggle(Boolean bl) {
+        return By.xpath("//input[@id='isListActivated' and @ng-reflect-model='" + bl + "']/following-sibling::div");
     }
 
     /**
@@ -1140,9 +1169,9 @@ public class Spo extends ReusableLib {
         }
         commonObj.validateElementExists(SpoPage.trailingMonths, "Trailing Month section present");
         validateTimeOfDayNight();
-        commonObj.validateElementExists(actDeActToggle(true),"By default list is activated");
-        commonObj.validateElementExists(button("Cancel"),"Cancel Button is present");
-        commonObj.validateElementExists(button("Next "),"Next button is present");
+        commonObj.validateElementExists(actDeActToggle(true), "By default list is activated");
+        commonObj.validateElementExists(button("Cancel"), "Cancel Button is present");
+        commonObj.validateElementExists(button("Next "), "Next button is present");
         commonObj.validateText(SpoPage.selectedDays, "Monday, Tuesday, Wednesday", "'Day of the week' is present");
     }
 
@@ -1150,18 +1179,18 @@ public class Spo extends ReusableLib {
      * This method to verify Assigned User can be changed
      */
     public void verifyAssignedUserChange() throws AWTException {
-        sendKeysAndTab(SpoPage.assignedUser,"AutomationTesting","Edit Assigned User");
+        sendKeysAndTab(SpoPage.assignedUser, "AutomationTesting", "Edit Assigned User");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.popUp, "Worksheet updated successfully.", "Worksheet updated successfully. popup is present");
         Utility_Functions.timeWait(2);
-        click(button("Cancel"),"Click Cancel Button");
+        click(button("Cancel"), "Click Cancel Button");
         Utility_Functions.timeWait(6);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         filterCreatedWorksheet();
         navigateWSOption();
         navigateEditWSTemp();
-        String user=driver.findElement(SpoPage.assignedUser).getAttribute("value");
-        Utility_Functions.xAssertEquals(report,user,"AutomationTesting","Assigned User is updated ");
+        String user = driver.findElement(SpoPage.assignedUser).getAttribute("value");
+        Utility_Functions.xAssertEquals(report, user, "AutomationTesting", "Assigned User is updated ");
     }
 
     /**
@@ -1171,18 +1200,18 @@ public class Spo extends ReusableLib {
         filterCreatedWorksheet();
         navigateWSOption();
         navigateEditWSTemp();
-        String monSupply=driver.findElement(SpoPage.supplyToOrder).getAttribute("value");
-        String discount=driver.findElement(SpoPage.discountOrMultiplier).getAttribute("value");
-        String leadTime=driver.findElement(SpoPage.leadTime).getAttribute("value");
-        String trailMon=driver.findElement(SpoPage.trailingMonths).getAttribute("value");
-        Utility_Functions.xAssertEquals(report,monSupply,"3","Months Supply to Order is updated");
-        Utility_Functions.xAssertEquals(report,discount,"1","Discount to Order is updated");
-        Utility_Functions.xAssertEquals(report,leadTime,"20","leadTime to Order is updated");
-        Utility_Functions.xAssertEquals(report,trailMon,"24","trail Month to Order is updated");
+        String monSupply = driver.findElement(SpoPage.supplyToOrder).getAttribute("value");
+        String discount = driver.findElement(SpoPage.discountOrMultiplier).getAttribute("value");
+        String leadTime = driver.findElement(SpoPage.leadTime).getAttribute("value");
+        String trailMon = driver.findElement(SpoPage.trailingMonths).getAttribute("value");
+        Utility_Functions.xAssertEquals(report, monSupply, "3", "Months Supply to Order is updated");
+        Utility_Functions.xAssertEquals(report, discount, "1", "Discount to Order is updated");
+        Utility_Functions.xAssertEquals(report, leadTime, "20", "leadTime to Order is updated");
+        Utility_Functions.xAssertEquals(report, trailMon, "24", "trail Month to Order is updated");
     }
 
-    public void updatedMessage(){
-        if(Utility_Functions.xIsDisplayed(driver,SpoPage.popUp)) {
+    public void updatedMessage() {
+        if (Utility_Functions.xIsDisplayed(driver, SpoPage.popUp)) {
             commonObj.validateText(SpoPage.popUp, "Worksheet updated successfully.", "Worksheet updated successfully. popup is present");
             Utility_Functions.timeWait(2);
         }
@@ -1194,16 +1223,16 @@ public class Spo extends ReusableLib {
     public void verifySalesOptionEditable() throws AWTException {
         costOption();
         discountError();
-        sendKeysAndTab(SpoPage.supplyToOrder,"3","Edit 'Months Supply to Order' field");
+        sendKeysAndTab(SpoPage.supplyToOrder, "3", "Edit 'Months Supply to Order' field");
         Utility_Functions.timeWait(2);
         updatedMessage();
-        sendKeysAndTab(SpoPage.leadTime,"20","Edit 'Lead Time (Days)' field");
+        sendKeysAndTab(SpoPage.leadTime, "20", "Edit 'Lead Time (Days)' field");
         Utility_Functions.timeWait(2);
         updatedMessage();
         sendKeys(SpoPage.trailingMonths, "24", "Enter '24' into Trailing month");
         int size = driver.findElements(SpoPage.selectedMonth).size();
-        Utility_Functions.xAssertEquals(report, ""+size+"", "24", "Total "+size+" columns highlighted ");
-        click(button("Cancel"),"Click Cancel Button");
+        Utility_Functions.xAssertEquals(report, "" + size + "", "24", "Total " + size + " columns highlighted ");
+        click(button("Cancel"), "Click Cancel Button");
         Utility_Functions.timeWait(6);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
@@ -1213,25 +1242,25 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
     }
 
-    public By isRadioSelected(Boolean bl){
-        return By.xpath("//input[@id='exampleRadios1' and @ng-reflect-value='"+bl+"']");
+    public By isRadioSelected(Boolean bl) {
+        return By.xpath("//input[@id='exampleRadios1' and @ng-reflect-value='" + bl + "']");
     }
 
-    public By toggleActivate(Boolean bl){
-        return By.xpath("//input[@id='isListActivated' and @ng-reflect-model='"+bl+"']");
+    public By toggleActivate(Boolean bl) {
+        return By.xpath("//input[@id='isListActivated' and @ng-reflect-model='" + bl + "']");
     }
 
-    public void radioAndToggleBtn(){
-        if(Utility_Functions.xIsDisplayed(driver,isRadioSelected(false))){
-            click(SpoPage.runEachOtherWeek,"Click Run Each Other Week Radio Button");
-        }else{
-            click(SpoPage.runEachWeek,"Click Run Each Week Radio Button");
+    public void radioAndToggleBtn() {
+        if (Utility_Functions.xIsDisplayed(driver, isRadioSelected(false))) {
+            click(SpoPage.runEachOtherWeek, "Click Run Each Other Week Radio Button");
+        } else {
+            click(SpoPage.runEachWeek, "Click Run Each Week Radio Button");
         }
         updatedMessage();
         click(SpoPage.toggleSlider);
         Utility_Functions.timeWait(6);
-        if(Utility_Functions.xIsDisplayed(driver,toggleActivate(false))){
-            click(SpoPage.toggleSlider,"Click Activate List toggle Button");
+        if (Utility_Functions.xIsDisplayed(driver, toggleActivate(false))) {
+            click(SpoPage.toggleSlider, "Click Activate List toggle Button");
         }
         updatedMessage();
     }
@@ -1240,7 +1269,7 @@ public class Spo extends ReusableLib {
      * This method to verify Day to run Section can be changed
      */
     public void verifyDayToRunEditable() {
-        Utility_Functions.xScrollIntoView(driver,SpoPage.hourDropDown);
+        Utility_Functions.xScrollIntoView(driver, SpoPage.hourDropDown);
         click(SpoPage.hourDropDown);
         Utility_Functions.timeWait(2);
         selectDayToRun("10");
