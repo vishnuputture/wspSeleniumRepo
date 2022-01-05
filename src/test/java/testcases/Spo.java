@@ -64,6 +64,14 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_VerifyDuplicateWS(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Duplicate Worksheet can not create");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_70_wsItemScreenUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify the UI of 'Worksheet Items' screen");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -170,6 +178,46 @@ public class Spo extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_118_DayToRunSection(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Day To Run Section Editable");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_120_EditWSTrashIcon(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Delete Worksheet");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_121_SaveWsButton(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Save Button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_131_VerifyAddDuplicateItemToWS(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Duplicate item can not added to Worksheet");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_133_VerifySaveWorksheetBtn(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Save Worksheet Button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_140_VerifyTotalOrderExceedForConvertPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Total Order Exceed For Convert PO");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

@@ -8,6 +8,7 @@
       "Tc_66_CreateWS_MFPDVNPODiscount": "launchApp,siteLogin,assignVendorNumber,backToMaster,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
       "Tc_67_CreateWS_MFPDVNListPriceDiscount": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
       "Tc_68_CreateWS_MFPDVNLastCostDiscount": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
+      "Tc_VerifyDuplicateWS": "navigateToSPO,selectCompany,navigateToCreateWorksheet,verifyDuplicateWS,verifyCancelBtn,filterCreatedWorksheet",
       "Tc_70_wsItemScreenUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,wsItemsScreenUI",
       "Tc_71_PaginationWsItemScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,pagination,funPageCount,wsItemsScreenBtn",
       "Tc_73_RefreshWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyRefreshIcon,verifyRefreshIcon",
@@ -22,6 +23,11 @@
       "Tc_116_VerifyAssignedUserCanBeChanged": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyAssignedUserChange",
       "Tc_117_VerifySalesOptionEditable": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifySalesOptionEditable",
       "Tc_118_DayToRunSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDayToRunEditable",
+      "Tc_120_EditWSTrashIcon": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDeleteSavedWS",
+      "Tc_121_SaveWsButton": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifySavedWS",
+      "Tc_131_VerifyAddDuplicateItemToWS": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,navigateWSItem,navigateToAddItemToWS,addItemsToWS,addSelectedItemsWorksheetBtn,backToWSBtnEditWs,verifyAddedItem",
+      "Tc_133_VerifySaveWorksheetBtn": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifySavedWSBtn",
+      "Tc_140_VerifyTotalOrderExceedForConvertPO": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyOrderExceedError",
       "Tc_148_searchFilterUI": "navigateToSPO,selectCompany,searchFilterUI",
       "Tc_156_CreateWSMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductMultiplier,createWorksheet,filterCreatedWorksheet",
       "Tc_164_verifyDiscountMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,verifyMultiAvailability,launchApp,siteLogin,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,verifyDiscountAvailability",
@@ -66,6 +72,11 @@
     {
       "TC_ID": "Tc_68_CreateWS_MFPDVNLastCostDiscount",
       "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+Last Cost combination",
+      "CostOption": "Last Cost"
+    },
+    {
+      "TC_ID": "Tc_VerifyDuplicateWS",
+      "Title": "Test case to Verify Duplicate Worksheet can not create",
       "CostOption": "Last Cost"
     },
     {
@@ -125,6 +136,26 @@
     {
       "TC_ID": "Tc_118_DayToRunSection",
       "Title": "Test case to Verify Day To Run Section Editable"
+    },
+    {
+      "TC_ID": "Tc_120_EditWSTrashIcon",
+      "Title": "Test case to Verify Delete Worksheet"
+    },
+    {
+      "TC_ID": "Tc_121_SaveWsButton",
+      "Title": "Test case to Verify Save Button"
+    },
+    {
+      "TC_ID": "Tc_131_VerifyAddDuplicateItemToWS",
+      "Title": "Test case to Verify Duplicate item can not added to Worksheet"
+    },
+    {
+      "TC_ID": "Tc_133_VerifySaveWorksheetBtn",
+      "Title": "Test case to Verify Save Worksheet Button"
+    },
+    {
+      "TC_ID": "Tc_140_VerifyTotalOrderExceedForConvertPO",
+      "Title": "Test case to Verify Total Order Exceed For Convert PO"
     },
     {
       "TC_ID": "Tc_148_searchFilterUI",
