@@ -344,6 +344,17 @@ public class Spo extends ReusableLib {
     }
 
     /**
+     * Keyword to verify WS expand and contract functionality
+     */
+    public void verifyExpandContract(){
+        click(SpoPage.btnMinus,"Click on minus button to contract the section");
+        commonObj.validateElementExists(SpoPage.contractedSection, "Search filters and worksheet calculation section is compressed");
+        click(SpoPage.btnPlus,"Click on plus button to expand the section");
+        commonObj.validateElementExists(SpoPage.expandedSection, "Search filters and worksheet calculation section is expanded");
+
+    }
+
+    /**
      * Keyword to click Work sheet name hyperlink
      */
     public void clickWorkSheetName() {

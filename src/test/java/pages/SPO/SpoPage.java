@@ -91,4 +91,8 @@ public class SpoPage extends ReusableLib {
     public static By monthSupply=By.id("monthSupply");
     public static By runEachWeek=By.id("exampleRadios1");
     public static By runEachOtherWeek=By.id("exampleRadios2");
+    public static By btnMinus = By.xpath("//a[@data-toggle='collapse'][@aria-expanded='true']");
+    public static By btnPlus = By.xpath("//a[@data-toggle='collapse'][@aria-expanded='false']");
+    public static By expandedSection = By.xpath("//div[@id='collapseList1'][@class='panel-collapse collapse show']");
+    public static By contractedSection = By.xpath("//div[@id='collapseList1'][@class='panel-collapse collapse']");
 }

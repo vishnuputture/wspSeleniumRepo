@@ -238,4 +238,12 @@ public class Spo extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_97_WSExpandContractSection(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case Verify WS minus and plus button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
