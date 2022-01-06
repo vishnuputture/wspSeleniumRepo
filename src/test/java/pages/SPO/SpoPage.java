@@ -101,4 +101,17 @@ public class SpoPage extends ReusableLib {
     public static By btnPlus = By.xpath("//a[@data-toggle='collapse'][@aria-expanded='false']");
     public static By expandedSection = By.xpath("//div[@id='collapseList1'][@class='panel-collapse collapse show']");
     public static By contractedSection = By.xpath("//div[@id='collapseList1'][@class='panel-collapse collapse']");
+    public static By btnRefreshWorksheet = By.xpath("//button[text()=' Refresh Worksheet ']");
+    public static By btnConfirm = By.xpath("//button[text()='Yes']");
+    public static By refreshMessage = By.xpath("//span[text()='Worksheet updated successfully.']");
+    public static By pageBlocker = By.xpath("//p-blockui/div/i");
+    public static By btnExpand = By.xpath("//button[text()=' Expand All ']");
+    public static By btnCollapse = By.xpath("//button[text()=' Collapse All ']");
+    public static By itemExpanded = By.xpath("//div[@class='wrapper ng-star-inserted']");
+    public static By disableFieldsChkbox=By.id("disableAllFieldsExceptOrderQty");
+    public static By btnItemExpand = By.xpath("//i[@class='fa fa-plus-square fa-2x fa-minus-square-color']");
+    public static By vendorPartNo = By.id("vendorPartNumber");
+    public static By unitOfMeasure = By.id("unitOfMeasure");
+    public static By conversionFactor = By.id("conversionFactor");
+
 }

@@ -36,7 +36,10 @@
       "Tc_177_CreateWS_MFPDVNLastCostMultiplier": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
       "Tc_VerifyWSItemsSearchFilter": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,wsItemSearchFilter",
       "Tc_VerifyTrashIconEditWSTemp": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp",
-      "Tc_97_WSExpandContractSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyExpandContract"
+      "Tc_97_WSExpandContractSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyExpandContract",
+      "Tc_107_WSVerifyRefreshFunction": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyRefreshFunction",
+      "Tc_108_WSVerifyItemExpandCollapse": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,validateExpandCollapse",
+      "Tc_124_WSVerifyDisableAllFields": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,validateDisableFields"
     }
   ],
   "General_Data": [
@@ -46,6 +49,15 @@
     },
     {
       "TC_ID": "Tc_97_WSExpandContractSection"
+    },
+    {
+      "TC_ID": "Tc_107_WSVerifyRefreshFunction"
+    },
+    {
+      "TC_ID": "Tc_108_WSVerifyItemExpandCollapse"
+    },
+    {
+      "TC_ID": "Tc_124_WSVerifyDisableAllFields"
     },
     {
       "TC_ID": "Tc_51_CreateNewWorksheetTemplateUI",

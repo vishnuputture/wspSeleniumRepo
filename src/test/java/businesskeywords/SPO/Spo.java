@@ -4,6 +4,7 @@ import businesskeywords.Pricing.SPA.SpecialPricingAllowance;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Settings;
+import com.winSupply.framework.Status;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.*;
 import pages.PurchaseOrders.VendorInformationPage;
@@ -367,6 +368,56 @@ public class Spo extends ReusableLib {
         click(SpoPage.btnPlus,"Click on plus button to expand the section");
         commonObj.validateElementExists(SpoPage.expandedSection, "Search filters and worksheet calculation section is expanded");
 
+    }
+
+    /**
+     * Keyword to validate refresh functionality
+     */
+    public void verifyRefreshFunction(){
+        Utility_Functions.xScrollIntoView(driver, SpoPage.costOption);
+        String cost = jsonData.getData("CostOption");
+        int size = driver.findElements(SpoPage.costOption).size() - 1;
+        click(driver.findElements(SpoPage.costOption).get(size), "Click Cost Option Drop Down");
+        Utility_Functions.timeWait(2);
+        click(By.xpath("//option[contains(text(),'List Price')]"), "Select List Price option");
+        Utility_Functions.timeWait(2);
+        sendKeys(SpoPage.discountOrMultiplier,"10","Enter discount");
+        click(SpoPage.btnRefreshWorksheet,"Click on refresh worksheet button");
+        Utility_Functions.timeWait(2);
+        if(waitForElementDisappear(SpoPage.pageBlocker,10)){
+            click(SpoPage.btnConfirm,"Click on yes button");
+        }
+        commonObj.validateElementExists(SpoPage.refreshMessage, "Refresh successful message is displayed");
+    }
+
+    /**
+     * Keyword to validate expand collapse function
+     */
+    public void validateExpandCollapse(){
+        click(SpoPage.btnExpand,"Click on expand all button");
+        commonObj.validateElementExists(SpoPage.itemExpanded, "Item section is expanded");
+        click(SpoPage.btnCollapse,"Click on collapse all button");
+        if(!xWaitForElementPresent(driver,SpoPage.itemExpanded,2)){
+            report.updateTestLog("Validate collapse", "The items section is collapsed", Status.PASS);
+        }else{
+            report.updateTestLog("Validate collapse", "The items section is expanded", Status.FAIL);
+        }
+    }
+
+    /**
+     * Keyword to validate disable all fields
+     */
+    public void validateDisableFields(){
+        click(SpoPage.disableFieldsChkbox,"Uncheck disable fields checkbox");
+        click(SpoPage.btnItemExpand,"Click item expand button");
+        Utility_Functions.timeWait(2);
+        if(waitForElementDisappear(SpoPage.pageBlocker,10)) {
+            if (driver.findElement(SpoPage.vendorPartNo).isEnabled() && driver.findElement(SpoPage.unitOfMeasure).isEnabled() && driver.findElement(SpoPage.conversionFactor).isEnabled()) {
+                report.updateTestLog("Validate fields are enabled", "The item fields are enabled", Status.PASS);
+            } else {
+                report.updateTestLog("Validate fields are enabled", "The item fields are disabled", Status.FAIL);
+            }
+        }
     }
 
     /**
