@@ -25,9 +25,16 @@
       "Tc_118_DayToRunSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDayToRunEditable",
       "Tc_120_EditWSTrashIcon": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDeleteSavedWS",
       "Tc_121_SaveWsButton": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifySavedWS",
+      "Tc_129_VerifyOrderWeightTotal": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,orderWeightTotal",
       "Tc_131_VerifyAddDuplicateItemToWS": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,navigateWSItem,navigateToAddItemToWS,addItemsToWS,addSelectedItemsWorksheetBtn,backToWSBtnEditWs,verifyAddedItem",
-      "Tc_133_VerifySaveWorksheetBtn": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifySavedWSBtn",
+      "Tc_133_VerifySaveWorksheetBtn": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,navigateWSOption,verifySavedWSBtn",
+      "Tc_138_CalculationMethodOptions": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyCalculationMethodOptions,navigateBackToSPOPage",
+      "Tc_139_VerifyConvertToPOOrderQuantitiesZero": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyOrderQuantityZero,navigateBackToSPOPage",
       "Tc_140_VerifyTotalOrderExceedForConvertPO": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyOrderExceedError",
+      "Tc_141_VerifyOrderMinimum": "launchApp,siteLogin,navigateToVendorInformation,assignOrderMinFreightMin,signOut,navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyOrderMinimum",
+      "Tc_144_VerifyUnitTotalWeight": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyUnitWeight",
+      "Tc_145_VerifyTotalCost": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyTotalCostCalculation",
+      "Tc_146_VerifyNotAStandardPackage": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,stdPackageQty",
       "Tc_148_searchFilterUI": "navigateToSPO,selectCompany,searchFilterUI",
       "Tc_156_CreateWSMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductMultiplier,createWorksheet,filterCreatedWorksheet",
       "Tc_164_verifyDiscountMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,verifyMultiAvailability,launchApp,siteLogin,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,verifyDiscountAvailability",
@@ -141,6 +148,10 @@
       "Title": "Test case to Verify Save Button"
     },
     {
+      "TC_ID": "Tc_129_VerifyOrderWeightTotal",
+      "Title": "Test case to Verify Order total and Total Weight"
+    },
+    {
       "TC_ID": "Tc_131_VerifyAddDuplicateItemToWS",
       "Title": "Test case to Verify Duplicate item can not added to Worksheet"
     },
@@ -149,8 +160,36 @@
       "Title": "Test case to Verify Save Worksheet Button"
     },
     {
+      "TC_ID": "Tc_138_CalculationMethodOptions",
+      "Title": "Test case to Verify the options available in \"Calculation Method\" dropdown box"
+    },
+    {
+      "TC_ID": "Tc_139_VerifyConvertToPOOrderQuantitiesZero",
+      "Title": "Test case to Verify cannot convert to PO when all items order quantities is zero.",
+      "CostOption": "List Price"
+    },
+    {
       "TC_ID": "Tc_140_VerifyTotalOrderExceedForConvertPO",
       "Title": "Test case to Verify Total Order Exceed For Convert PO"
+    },
+    {
+      "TC_ID": "Tc_141_VerifyOrderMinimum",
+      "Title": "Test case to Verify Order Minimum",
+      "OrderMinimum": "1000",
+      "FreightMinimum": "1000",
+      "CostOption": "List Price"
+    },
+    {
+      "TC_ID": "Tc_144_VerifyUnitTotalWeight",
+      "Title": "Test case to Verify Unit weight and Total Weight"
+    },
+    {
+      "TC_ID": "Tc_145_VerifyTotalCost",
+      "Title": "Test case to Verify the Dependency of \"Total Cost\""
+    },
+    {
+      "TC_ID": "Tc_146_VerifyNotAStandardPackage",
+      "Title": "Verify \"NOT A STANDARD PACKAGE QTY\" Popup"
     },
     {
       "TC_ID": "Tc_148_searchFilterUI",

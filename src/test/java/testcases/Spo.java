@@ -200,6 +200,14 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_129_VerifyOrderWeightTotal(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Order total and Total Weight");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_131_VerifyAddDuplicateItemToWS(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Duplicate item can not added to Worksheet");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -216,8 +224,56 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_138_CalculationMethodOptions(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify the options available in \"Calculation Method\" dropdown box");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_139_VerifyConvertToPOOrderQuantitiesZero(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify cannot convert to PO when all items order quantities is zero.");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_140_VerifyTotalOrderExceedForConvertPO(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Total Order Exceed For Convert PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_141_VerifyOrderMinimum(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Order Minimum");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_144_VerifyUnitTotalWeight(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Unit weight and Total Weight");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_145_VerifyTotalCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify the Dependency of \"Total Cost\"");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_146_VerifyNotAStandardPackage(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify \"NOT A STANDARD PACKAGE QTY\" Popup");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
