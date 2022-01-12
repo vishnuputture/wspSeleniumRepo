@@ -14,6 +14,7 @@ public class makePayments extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_CreateSalesOrderWithMultipleShipment(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to create a sales order invoice for make payments");
