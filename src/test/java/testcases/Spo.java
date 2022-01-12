@@ -64,6 +64,14 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_69_VerifyWssCostDiscountFIndProduct(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify the functionality of Find Products button with WSS Cost");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_VerifyDuplicateWS(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Duplicate Worksheet can not create");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -81,6 +89,14 @@ public class Spo extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_71_PaginationWsItemScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to functionality of pagination,cancel and back buttons on worksheet items screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_PageCountAddItemToWSScreen(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to functionality of pagination,cancel and back buttons on worksheet items screen");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -136,6 +152,14 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_PageCountAddItemToWSPage(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_102_VerifyEditWSTempUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Edit Worksheet Template UI");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -154,6 +178,14 @@ public class Spo extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_110_PaginationWSDetailsPage(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Pagination WorkSheet Details Page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_PageCountWSDetailsPage(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Page count on WorkSheet Details Page");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -200,6 +232,14 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_129_VerifyOrderWeightTotal(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Order total and Total Weight");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_131_VerifyAddDuplicateItemToWS(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Duplicate item can not added to Worksheet");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -216,8 +256,56 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_138_CalculationMethodOptions(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify the options available in \"Calculation Method\" dropdown box");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_139_VerifyConvertToPOOrderQuantitiesZero(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify cannot convert to PO when all items order quantities is zero.");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_140_VerifyTotalOrderExceedForConvertPO(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Total Order Exceed For Convert PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_141_VerifyOrderMinimum(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Order Minimum");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_144_VerifyUnitTotalWeight(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Unit weight and Total Weight");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_145_VerifyTotalCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify the Dependency of \"Total Cost\"");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_146_VerifyNotAStandardPackage(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify \"NOT A STANDARD PACKAGE QTY\" Popup");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -250,6 +338,14 @@ public class Spo extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_164_verifyDiscountMultiplier(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case verify Discount or multiplier option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_166_VerifyErrorMsgAgainstFields(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify Error Message Against Fields");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
