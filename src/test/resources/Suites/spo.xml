@@ -17,6 +17,7 @@
                     <include name="Tc_70_wsItemScreenUI"></include>
 
                     <include name="Tc_71_PaginationWsItemScreen"></include>
+                    <include name="Tc_PageCountAddItemToWSScreen"></include>
                     <include name="Tc_73_RefreshWorkSheet"></include>
                     <include name="Tc_74_DeleteWorkSheet"></include>
                     <include name="Tc_86_verifySavedWorkSheetAvailablePopup"></include>
@@ -28,7 +29,7 @@
                     <include name="Tc_106_WSCalculationSection"></include>
 
                     <include name="Tc_110_PaginationWSDetailsPage"></include>
-                    <include name="Tc_110_PaginationWSDetailsPage"></include>
+                    <include name="Tc_PageCountWSDetailsPage"></include>
                     <include name="Tc_116_VerifyAssignedUserCanBeChanged"></include>
                     <include name="Tc_117_VerifySalesOptionEditable"></include>
                     <include name="Tc_118_DayToRunSection"></include>
