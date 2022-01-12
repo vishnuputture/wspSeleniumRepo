@@ -614,6 +614,10 @@ public class Spo extends ReusableLib {
         commonObj.validateElementExists(labels("Run every other week"), "Run every other week radio button exist");
     }
 
+    public By wsFields(String field){
+      return  By.xpath("//label[text()='" + field + "']/parent::div/descendant::input");
+    }
+
     /**
      * Keyword to Verify UI of Search Filter UI
      */
@@ -621,7 +625,8 @@ public class Spo extends ReusableLib {
         String[] field = {"Name Your Worksheet", "Assigned User", "Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number", "Months Supply to Order", "Multiplier", "Lead Time (Days)", ""};
         int i = 0;
         while (Utility_Functions.xIsDisplayed(driver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
-            commonObj.validateElementExists(By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"), "" + field[i] + " text box field present");
+            String text=field[i];
+            commonObj.validateElementExists(wsFields(text), "" + text + " text box field present");
             i++;
         }
         commonObj.validateElementExists(SpoPage.costOption, "Cost Option drop down present");
@@ -747,10 +752,18 @@ public class Spo extends ReusableLib {
     public void findProductWS() {
         String name = Utility_Functions.xGenerateAlphaNumericString();
         sendKeys(SpoPage.worksheetSheetTemplateName, name, "Name Your Worksheet");
+        fillMandatoryField();
+        clickFindProduct();
+    }
+
+    public void fillMandatoryField() {
         getMFVNPC();
         costOption();
         selectDays();
         Utility_Functions.timeWait(2);
+    }
+
+    public void clickFindProduct(){
         clickButton("Find Products");
         Utility_Functions.timeWait(5);
         handleDiscountFieldIfPresent();
@@ -764,14 +777,8 @@ public class Spo extends ReusableLib {
         String name = Utility_Functions.xGenerateAlphaNumericString();
         Utility_Functions.xUpdateJson("WorksheetTempName", name);
         sendKeys(SpoPage.worksheetSheetTemplateName, name, "Name Your Worksheet");
-        getMFVNPC();
-        costOption();
-        selectDays();
-        Utility_Functions.timeWait(2);
-        clickButton("Find Products");
-        Utility_Functions.timeWait(5);
-        handleDiscountFieldIfPresent();
-        errorRepeatSteps();
+        fillMandatoryField();
+        clickFindProduct();
     }
 
     public void getMFVNPC() {
@@ -781,6 +788,24 @@ public class Spo extends ReusableLib {
         String vend = driver.findElement(worksheetInputFields("Vendor Number")).getAttribute("value");
         Utility_Functions.xUpdateJson("VendorNoForHeader", vend);
         sendKeys(worksheetInputFields("Product Code"), Utility_Functions.xGetJsonData("ProductCode"), "Enter Product Code");
+    }
+
+    /**
+     * This method to select day to run radio button
+     */
+    public By runWsRadioBtn(String text) {
+        return By.xpath("//label[contains(text(),'" + text + "')]/preceding-sibling::input[@name='selectedBiWeeklyFlag']");
+    }
+
+    /**
+     * This method to select day to run radio button
+     */
+    public void runWSRadioBtn() {
+        if (driver.findElement(runWsRadioBtn("Run each week")).isSelected()) {
+            click(runWsRadioBtn("Run each week"));
+        } else {
+            click(runWsRadioBtn("Run every other week"));
+        }
     }
 
     /**
@@ -822,19 +847,23 @@ public class Spo extends ReusableLib {
         commonObj.validateElementExists(button("Create Worksheet"), "Create Worksheet button is present");
     }
 
+    public void clickSearch(){
+        click(TruckPage.filterSearch, "Click Search Filter icon");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
+        sendKeys(SpoPage.worksheetNameFilter, Utility_Functions.xGetJsonData("WorksheetTempName"), "Enter created worksheet");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xClickHiddenElement(driver, TruckPage.applyFilter);
+        Utility_Functions.timeWait(6);
+    }
+
     /**
      * Keyword to Filter Created worksheet
      */
     public void filterCreatedWorksheet() throws AWTException {
         Utility_Functions.timeWait(7);
         if (Utility_Functions.xIsDisplayed(driver, TruckPage.filterSearch)) {
-            click(TruckPage.filterSearch, "Click Search Filter icon");
-            Utility_Functions.timeWait(2);
-            commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
-            sendKeys(SpoPage.worksheetNameFilter, Utility_Functions.xGetJsonData("WorksheetTempName"), "Enter created worksheet");
-            Utility_Functions.timeWait(2);
-            Utility_Functions.xClickHiddenElement(driver, TruckPage.applyFilter);
-            Utility_Functions.timeWait(2);
+            clickSearch();
             commonObj.validateText(SpoPage.filteredWorksheet, Utility_Functions.xGetJsonData("WorksheetTempName"), "Created Work sheet present");
         }
     }
@@ -1294,6 +1323,21 @@ public class Spo extends ReusableLib {
     }
 
     /**
+     * This method to verify Create Worksheet Fields
+     */
+    public void verifyWSFields() {
+        String[] field = {"Name Your Worksheet", "Assigned User", "Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number", "Months Supply to Order", "Multiplier", "Lead Time (Days)", ""};
+        int i = 0;
+        while (Utility_Functions.xIsDisplayed(driver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
+            String text=field[i];
+            sendKeysAndTab(wsFields(text),"WzxctfdfghQQwe","Click "+text+" Input field");
+            Utility_Functions.timeWait(5);
+            commonObj.validateText(driver.findElements(SpoPage.invalidWSName).get(i),"Invalid "+text+".", "Invalid "+text+". is present");
+            i++;
+        }
+    }
+
+    /**
      * This method to verify Day to run Section can be changed
      */
     public void verifyDayToRunEditable() {
@@ -1319,17 +1363,24 @@ public class Spo extends ReusableLib {
         radioAndToggleBtn();
     }
 
+    public void clickTrashIcon(){
+        try {
+            click(SpoPage.trashIcon, "Click Trash Icon");
+        }catch (Exception e){
+            Utility_Functions.xClickHiddenElement(driver,SpoPage.trashIcon);
+        }
+        Utility_Functions.timeWait(3);
+    }
+
     /**
      * This method to verify Delete saved Worksheet popup
      */
     public void verifyDeleteSavedWS() throws AWTException {
-        click(SpoPage.trashIcon, "Click Trash Icon");
-        Utility_Functions.timeWait(3);
+        clickTrashIcon();
         commonObj.validateElementExists(SpoPage.deleteSavedWorksheetPopup, "Delete Saved Worksheet Popup message present");
         clickButtonWithSize("No");
         commonObj.validateText(By.xpath("//h2"), "EDIT WORKSHEET TEMPLATE", "Validating EDIT WORKSHEET TEMPLATE page title");
-        click(SpoPage.trashIcon, "Click Trash Icon");
-        Utility_Functions.timeWait(3);
+        clickTrashIcon();
         commonObj.validateElementExists(SpoPage.deleteSavedWorksheetPopup, "Delete Saved Worksheet Popup message present");
         clickButtonWithSize("Yes");
         Utility_Functions.timeWait(3);
@@ -1337,8 +1388,8 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.popUp, "" + worksheetName + " worksheet successfully deleted.", "" + worksheetName + " worksheet successfully deleted. pop up message is present");
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
-        filterCreatedWorksheet();
-        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, SpoPage.savedTag), false, "Saved Worksheet is deleted and not present on SPO page");
+        clickSearch();
+        commonObj.validateText(By.xpath("//td"),"No Results Found","'No Results Found message' is present");
     }
 
     /**
@@ -1691,11 +1742,11 @@ public class Spo extends ReusableLib {
         double totalWeight = getData("lbs");
         int size = driver.findElements(SpoPage.minFreightOrder).size();
         String order = driver.findElements(SpoPage.minFreightOrder).get(size - 3).getText().trim();
-        order=order.replace(",","");
-        Utility_Functions.xAssertEquals(report, orderTotal+"0", order, "order Total matches");
-        int sz=driver.findElements(SpoPage.calHead).size();
-        String weight = driver.findElements(SpoPage.calHead).get(sz-2).getText();
-        Utility_Functions.xAssertEquals(report, weight, totalWeight+"00", "Total Weight matches");
+        order = order.replace(",", "");
+        Utility_Functions.xAssertEquals(report, orderTotal + "0", order, "order Total matches");
+        int sz = driver.findElements(SpoPage.calHead).size();
+        String weight = driver.findElements(SpoPage.calHead).get(sz - 2).getText();
+        Utility_Functions.xAssertEquals(report, weight, totalWeight + "00", "Total Weight matches");
     }
 
     /**
@@ -1707,22 +1758,22 @@ public class Spo extends ReusableLib {
         Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
         sendKeys(SpoPage.orderQuantity, "200", "Modify Order Quantity");
         Utility_Functions.timeWait(3);
-        click(SpoPage.plusIcon,"Click on '+'");
+        click(SpoPage.plusIcon, "Click on '+'");
         Utility_Functions.timeWait(4);
-        int stdPack=100;
-        int lbsPack=200;
-        sendKeys(SpoPage.standardPackage,""+stdPack+"","Enter Std Package Qty");
+        int stdPack = 100;
+        int lbsPack = 200;
+        sendKeys(SpoPage.standardPackage, "" + stdPack + "", "Enter Std Package Qty");
         Utility_Functions.timeWait(4);
-        sendKeys(SpoPage.standardPackageWeight,""+lbsPack+"","Enter Lbs/Std Package Qty");
+        sendKeys(SpoPage.standardPackageWeight, "" + lbsPack + "", "Enter Lbs/Std Package Qty");
         Utility_Functions.timeWait(4);
-        int unitWeight=lbsPack/stdPack;
-        String unitWeightEx=getText(By.xpath("//div[text()='"+unitWeight+".000 lbs ']")).trim().replace(" lbs","");
-        Utility_Functions.xAssertEquals(report,unitWeightEx,""+unitWeight+""+".000","Unit Weight Matches");
-        int totWeight=200*unitWeight;
-        String totalWeight=getText(SpoPage.totalWeight).trim().replace(" lbs","");
-        Utility_Functions.xAssertEquals(report,totalWeight,""+totWeight+""+".000","Total Weight Matches");
-        int sz=driver.findElements(SpoPage.calHead).size();
-        String weight = driver.findElements(SpoPage.calHead).get(sz-2).getText();
-        Utility_Functions.xAssertEquals(report, weight, ""+totWeight+""+".00", "Current LBS matches");
+        int unitWeight = lbsPack / stdPack;
+        String unitWeightEx = getText(By.xpath("//div[text()='" + unitWeight + ".000 lbs ']")).trim().replace(" lbs", "");
+        Utility_Functions.xAssertEquals(report, unitWeightEx, "" + unitWeight + "" + ".000", "Unit Weight Matches");
+        int totWeight = 200 * unitWeight;
+        String totalWeight = getText(SpoPage.totalWeight).trim().replace(" lbs", "");
+        Utility_Functions.xAssertEquals(report, totalWeight, "" + totWeight + "" + ".000", "Total Weight Matches");
+        int sz = driver.findElements(SpoPage.calHead).size();
+        String weight = driver.findElements(SpoPage.calHead).get(sz - 2).getText();
+        Utility_Functions.xAssertEquals(report, weight, "" + totWeight + "" + ".000", "Current LBS matches");
     }
 }

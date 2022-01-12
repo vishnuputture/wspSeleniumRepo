@@ -8,6 +8,7 @@
       "Tc_66_CreateWS_MFPDVNPODiscount": "launchApp,siteLogin,assignVendorNumber,backToMaster,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
       "Tc_67_CreateWS_MFPDVNListPriceDiscount": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
       "Tc_68_CreateWS_MFPDVNLastCostDiscount": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
+      "Tc_69_VerifyWssCostDiscountFIndProduct": "navigateToSPO,selectCompany,navigateToCreateWorksheet,fillMandatoryField,runWSRadioBtn,clickFindProduct",
       "Tc_VerifyDuplicateWS": "navigateToSPO,selectCompany,navigateToCreateWorksheet,verifyDuplicateWS,verifyCancelBtn,filterCreatedWorksheet",
       "Tc_70_wsItemScreenUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,wsItemsScreenUI",
       "Tc_71_PaginationWsItemScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,pagination,funPageCount,wsItemsScreenBtn",
@@ -19,7 +20,8 @@
       "Tc_89_PaginationAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,searchVN,pagination,funPageCount",
       "Tc_102_VerifyEditWSTempUI": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyEditWSTempFields",
       "Tc_106_WSCalculationSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyWSCalculation",
-      "Tc_110_PaginationWSDetailsPage": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,pagination,funPageCount",
+      "Tc_110_PaginationWSDetailsPage": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,pagination",
+      "Tc_PageCountWSDetailsPage": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,funPageCount",
       "Tc_116_VerifyAssignedUserCanBeChanged": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyAssignedUserChange",
       "Tc_117_VerifySalesOptionEditable": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifySalesOptionEditable",
       "Tc_118_DayToRunSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDayToRunEditable",
@@ -35,9 +37,11 @@
       "Tc_144_VerifyUnitTotalWeight": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyUnitWeight",
       "Tc_145_VerifyTotalCost": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyTotalCostCalculation",
       "Tc_146_VerifyNotAStandardPackage": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,stdPackageQty",
+      "Tc_VerifyTrashIconEditWSTemp": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,navigateWSItem,verifyDeleteSavedWS",
       "Tc_148_searchFilterUI": "navigateToSPO,selectCompany,searchFilterUI",
       "Tc_156_CreateWSMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductMultiplier,createWorksheet,filterCreatedWorksheet",
       "Tc_164_verifyDiscountMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,verifyMultiAvailability,launchApp,siteLogin,navigateToDiscountMultiplier,chooseDiscountOpt,signOut,navigateToSPO,selectCompany,verifyDiscountAvailability",
+      "Tc_166_VerifyErrorMsgAgainstFields": "navigateToSPO,selectCompany,navigateToCreateWorksheet,verifyWSFields",
       "Tc_175_CreateWS_MFPDVNListPriceMultiplier": "launchApp,siteLogin,assignVendorNumber,backToMaster,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut,navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
       "Tc_176_CreateWS_MFPDVNPOMultiplier": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
       "Tc_177_CreateWS_MFPDVNLastCostMultiplier": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,launchApp,siteLogin,validateItemMasterTitle,verifyUnitCost,signOut",
@@ -75,6 +79,11 @@
       "TC_ID": "Tc_68_CreateWS_MFPDVNLastCostDiscount",
       "Title": "Test case verify the functionality of 'Create Worksheet' button with MC+PC+VC+VN+Last Cost combination",
       "CostOption": "Last Cost"
+    },
+    {
+      "TC_ID": "Tc_69_VerifyWssCostDiscountFIndProduct",
+      "Title": "Test case verify the functionality of Find Products button with WSS Cost",
+      "CostOption": "WSS Cost"
     },
     {
       "TC_ID": "Tc_VerifyDuplicateWS",
@@ -125,6 +134,10 @@
     {
       "TC_ID": "Tc_110_PaginationWSDetailsPage",
       "Title": "Test case to Verify Pagination WorkSheet Details Page"
+    },
+    {
+      "TC_ID": "Tc_PageCountWSDetailsPage",
+      "Title": "Test case to Verify Page count on WorkSheet Details Page"
     },
     {
       "TC_ID": "Tc_116_VerifyAssignedUserCanBeChanged",
@@ -202,6 +215,10 @@
     {
       "TC_ID": "Tc_164_verifyDiscountMultiplier",
       "Title": "Test case verify Discount or multiplier option"
+    },
+    {
+      "TC_ID": "Tc_166_VerifyErrorMsgAgainstFields",
+      "Title": "Test case verify Error Message Against Fields"
     },
     {
       "TC_ID": "Tc_175_CreateWS_MFPDVNListPriceMultiplier",

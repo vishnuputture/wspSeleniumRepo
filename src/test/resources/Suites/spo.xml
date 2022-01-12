@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression" parallel="none" thread-count="1">
+    <test name="SanityCheck">
+        <classes>
+            <class name="testcases.Spo">
+                <methods>
+                    <include name="Tc_50_SuggestedPOUI"></include>
+                    <include name="Tc_51_CreateNewWorksheetTemplateUI"></include>
+                    <include name="Tc_52_VerifyCancelButtonCreateWSTemp"></include>
+                    <include name="Tc_62_PaginationSPO"></include>
+                    <include name="Tc_66_CreateWS_MFPDVNPODiscount"></include>
+                    <include name="Tc_67_CreateWS_MFPDVNListPriceDiscount"></include>
+                    <include name="Tc_68_CreateWS_MFPDVNLastCostDiscount"></include>
+                    <include name="Tc_69_VerifyWssCostDiscountFIndProduct"></include>
+                    <include name="Tc_VerifyDuplicateWS"></include>
+                    <include name="Tc_70_wsItemScreenUI"></include>
+
+                    <include name="Tc_71_PaginationWsItemScreen"></include>
+                    <include name="Tc_73_RefreshWorkSheet"></include>
+                    <include name="Tc_74_DeleteWorkSheet"></include>
+                    <include name="Tc_86_verifySavedWorkSheetAvailablePopup"></include>
+                    <include name="Tc_87_VerifyAddItemsToWS"></include>
+                    <include name="Tc_88_AddItemToWSUI"></include>
+                    <include name="Tc_89_PaginationAddItemToWSScreen"></include>
+                    <include name="Tc_102_VerifyEditWSTempUI"></include>
+                    <include name="Tc_106_WSCalculationSection"></include>
+                    <include name="Tc_110_PaginationWSDetailsPage"></include>
+
+                    <include name="Tc_110_PaginationWSDetailsPage"></include>
+                    <include name="Tc_116_VerifyAssignedUserCanBeChanged"></include>
+                    <include name="Tc_117_VerifySalesOptionEditable"></include>
+                    <include name="Tc_118_DayToRunSection"></include>
+                    <include name="Tc_120_EditWSTrashIcon"></include>
+                    <include name="Tc_121_SaveWsButton"></include>
+                    <include name="Tc_129_VerifyOrderWeightTotal"></include>
+                    <include name="Tc_131_VerifyAddDuplicateItemToWS"></include>
+                    <include name="Tc_133_VerifySaveWorksheetBtn"></include>
+                    <include name="Tc_138_CalculationMethodOptions"></include>
+
+                    <include name="Tc_139_VerifyConvertToPOOrderQuantitiesZero"></include>
+                    <include name="Tc_140_VerifyTotalOrderExceedForConvertPO"></include>
+                    <include name="Tc_141_VerifyOrderMinimum"></include>
+                    <include name="Tc_144_VerifyUnitTotalWeight"></include>
+                    <include name="Tc_145_VerifyTotalCost"></include>
+                    <include name="Tc_146_VerifyNotAStandardPackage"></include>
+                    <include name="Tc_VerifyTrashIconEditWSTemp"></include>
+                    <include name="Tc_148_searchFilterUI"></include>
+                    <include name="Tc_156_CreateWSMultiplier"></include>
+                    <include name="Tc_164_verifyDiscountMultiplier"></include>
+
+                    <include name="Tc_166_VerifyErrorMsgAgainstFields"></include>
+                    <include name="Tc_175_CreateWS_MFPDVNListPriceMultiplier"></include>
+                    <include name="Tc_176_CreateWS_MFPDVNPOMultiplier"></include>
+                    <include name="Tc_177_CreateWS_MFPDVNLastCostMultiplier"></include>
+                    <include name="Tc_VerifyWSItemsSearchFilter"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

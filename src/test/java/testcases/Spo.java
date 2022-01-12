@@ -64,6 +64,14 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_69_VerifyWssCostDiscountFIndProduct(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify the functionality of Find Products button with WSS Cost");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_VerifyDuplicateWS(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Duplicate Worksheet can not create");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -154,6 +162,14 @@ public class Spo extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_110_PaginationWSDetailsPage(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Pagination WorkSheet Details Page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_PageCountWSDetailsPage(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Page count on WorkSheet Details Page");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -306,6 +322,14 @@ public class Spo extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_164_verifyDiscountMultiplier(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case verify Discount or multiplier option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_166_VerifyErrorMsgAgainstFields(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case verify Error Message Against Fields");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
