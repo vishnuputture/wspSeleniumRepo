@@ -106,20 +106,20 @@ public class Drivers extends ReusableLib {
      */
     public void pagination() {
         int size = 2;
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
         Utility_Functions.timeWait(2);
         if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
         } else {
             click(driver.findElements(DriversPage.pageArrow).get(2));
-            Utility_Functions.xScrollWindow(driver);
+            Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             while (!Utility_Functions.xIsDisplayed(driver, DriversPage.lastPage)) {
                 size++;
                 click(driver.findElements(DriversPage.pageArrow).get(2));
-                Utility_Functions.xScrollWindow(driver);
+                Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             }
             click(driver.findElements(DriversPage.pageArrow).get(0));
-            Utility_Functions.xScrollWindow(driver);
+            Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
             selectPage(3, "" + size + "", "Right double Arrow (>>)");
@@ -153,7 +153,6 @@ public class Drivers extends ReusableLib {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having count " + driverCount + "");
         } else {
             int driverCount = driver.findElements(DriversPage.driverNameCount).size();
-            System.out.println("........." + driverCount + ".......");
             Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Count is 10 by default");
             valPageCount(10);
             valPageCount(15);

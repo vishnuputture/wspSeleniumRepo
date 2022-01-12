@@ -5,6 +5,8 @@ import com.winSupply.core.ReusableLib;
 
 import com.winSupply.framework.Status;
 import org.openqa.selenium.WebElement;
+import pages.PurchaseOrders.OptionsConstantsPage;
+import pages.PurchaseOrders.VendorInformationPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
@@ -13,7 +15,6 @@ import pages.*;
 import pages.inventory.CostAdjustmentPage;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.OrderByCustomerPage;
-import pages.pricing.PriceSheet.PriceSheetDetails;
 import pages.pricing.SpecialPricePage;
 import pages.pricing.matrixcost.InventoryManagementMainMenuPage;
 import pages.pricing.matrixcost.InventoryManagementMenu2Page;
@@ -23,7 +24,6 @@ import supportLibraries.Utility_Functions;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -302,6 +302,7 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void navigateToOptionsAndConstantsMenu() {
 		click(MasterPage.optionAndConstantsMenu,"Click Options And Constants Menu");
+		validateText(MasterPage.optionConstPageTitle,"Inventory Management - Options and Constants","Lands on Inventory Management - Options and Constants");
 	}
 
 	/**
@@ -420,5 +421,53 @@ public class CommonActions extends ReusableLib {
 		return path;
 	}
 
+    //Suggested PO
 
+	/**
+	 * This method Navigation  to "Vendor Information(O-943)"
+	 *
+	 */
+	public  void navigateToVendorInf()
+	{
+		click(VendorInformationPage.vendorData,"Click on Revision Vendor Data");
+	}
+
+	/**
+	 * This method Navigation  to Option And Constants Menu
+	 *
+	 */
+	public void navigateToOptionAndConstantsMenu()
+	{
+		click(OptionsConstantsPage.optionAndConstantsMenu,"Click on Option And Constants Menu");
+		validateText(OptionsConstantsPage.optionConstantHeader, "Purchase Orders - Options and Constants", "Validating Purchase Orders - Options and Constants page title");
+	}
+
+	/**
+	 * This method Navigation  to Buying Discount Groups
+	 *
+	 */
+	public  void navigateToBuyingDiscountGroup()
+	{
+		click(OptionsConstantsPage.buyingDiscountMenu,"Click on Buying Discount Groups Menu");
+		validateText(OptionsConstantsPage.buyingDiscPageHeader, "Buying Discount Groups (X-XXX-XX)", "Validating Buying Discount Groups (X-XXX-XX) page title");
+	}
+
+	/**
+	 * This method Navigation  to Discount or Multiplier page
+	 *
+	 */
+	public  void navigateToDiscountMultiplier()
+	{
+		click(OptionsConstantsPage.discountMultiplier,"Click on Discount or Multiplier Menu");
+		validateText(OptionsConstantsPage.processingOptionHeader, "Processing Options", "Validating Processing Options page title");
+	}
+
+	/**
+	 * This method Navigation to Mf/Vendor Code
+	 *
+	 */
+	public  void navigateToMfVendorCode() {
+		click(pages.inventory.OptionsConstantsPage.mfVendorCode, "Navigate to MF/Vendor Codes");
+		validateText(pages.inventory.OptionsConstantsPage.mfVendorCodePageTitle, "Mf / Vendor Code Revisions", "Lands On  Mf / Vendor Code Revisions Program");
+	}
 }
