@@ -388,10 +388,10 @@ public class Spo extends ReusableLib {
      * Keyword to Verify functionality of Trash icon
      */
     public void verifyTrashIcon() throws AWTException {
-        clickWorkSheetName();
+        /*clickWorkSheetName();
         click(SpoPage.closeIcon, "Click Close Icon");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
+        commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");*/
         click(SpoPage.trashIcon, "Click Trash Icon");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(SpoPage.deleteSavedWorksheetPopup, "Delete Saved Worksheet Popup message present");
@@ -614,8 +614,8 @@ public class Spo extends ReusableLib {
         commonObj.validateElementExists(labels("Run every other week"), "Run every other week radio button exist");
     }
 
-    public By wsFields(String field){
-      return  By.xpath("//label[text()='" + field + "']/parent::div/descendant::input");
+    public By wsFields(String field) {
+        return By.xpath("//label[text()='" + field + "']/parent::div/descendant::input");
     }
 
     /**
@@ -625,7 +625,7 @@ public class Spo extends ReusableLib {
         String[] field = {"Name Your Worksheet", "Assigned User", "Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number", "Months Supply to Order", "Multiplier", "Lead Time (Days)", ""};
         int i = 0;
         while (Utility_Functions.xIsDisplayed(driver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
-            String text=field[i];
+            String text = field[i];
             commonObj.validateElementExists(wsFields(text), "" + text + " text box field present");
             i++;
         }
@@ -731,7 +731,7 @@ public class Spo extends ReusableLib {
         }
         Utility_Functions.timeWait(2);
         click(By.xpath("//option[contains(text(),'" + cost + "')]"), "Select " + cost + " option");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.timeWait(4);
     }
 
     public void errorRepeatSteps() {
@@ -760,10 +760,10 @@ public class Spo extends ReusableLib {
         getMFVNPC();
         costOption();
         selectDays();
-        Utility_Functions.timeWait(2);
+        Utility_Functions.timeWait(4);
     }
 
-    public void clickFindProduct(){
+    public void clickFindProduct() {
         clickButton("Find Products");
         Utility_Functions.timeWait(5);
         handleDiscountFieldIfPresent();
@@ -847,7 +847,7 @@ public class Spo extends ReusableLib {
         commonObj.validateElementExists(button("Create Worksheet"), "Create Worksheet button is present");
     }
 
-    public void clickSearch(){
+    public void clickSearch() {
         click(TruckPage.filterSearch, "Click Search Filter icon");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
@@ -1329,13 +1329,13 @@ public class Spo extends ReusableLib {
         String[] field = {"Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number"};
         int i = 0;
         while (Utility_Functions.xIsDisplayed(driver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
-            String text=field[i];
-            sendKeysAndTab(wsFields(text),"WzxctfdfghQQwe","Click "+text+" Input field");
+            String text = field[i];
+            sendKeysAndTab(wsFields(text), "WzxctfdfghQQwe", "Click " + text + " Input field");
             Utility_Functions.timeWait(5);
-            String val=driver.findElements(SpoPage.invalidWSName).get(i).getText().trim();
-            Utility_Functions.xAssertEquals(report,val,"Invalid "+text+".", "Invalid "+text+". is present");
+            String val = driver.findElements(SpoPage.invalidWSName).get(i).getText().trim();
+            Utility_Functions.xAssertEquals(report, val, "Invalid " + text + ".", "Invalid " + text + ". is present");
             i++;
-            if(text.equals("Vendor Number")){
+            if (text.equals("Vendor Number")) {
                 break;
             }
         }
@@ -1367,11 +1367,11 @@ public class Spo extends ReusableLib {
         radioAndToggleBtn();
     }
 
-    public void clickTrashIcon(){
+    public void clickTrashIcon() {
         try {
             click(SpoPage.trashIcon, "Click Trash Icon");
-        }catch (Exception e){
-            Utility_Functions.xClickHiddenElement(driver,SpoPage.trashIcon);
+        } catch (Exception e) {
+            Utility_Functions.xClickHiddenElement(driver, SpoPage.trashIcon);
         }
         Utility_Functions.timeWait(3);
     }
@@ -1393,7 +1393,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         clickSearch();
-        commonObj.validateText(By.xpath("//td"),"No Results Found","'No Results Found message' is present");
+        commonObj.validateText(By.xpath("//td"), "No Results Found", "'No Results Found message' is present");
     }
 
     /**
@@ -1779,5 +1779,22 @@ public class Spo extends ReusableLib {
         int sz = driver.findElements(SpoPage.calHead).size();
         String weight = driver.findElements(SpoPage.calHead).get(sz - 2).getText();
         Utility_Functions.xAssertEquals(report, weight, "" + totWeight + "" + ".000", "Current LBS matches");
+    }
+
+    public void deleteAllWS() throws AWTException {
+        navigateToSPO();
+        selectCompany();
+        Utility_Functions.timeWait(10);
+        while (driver.findElement(By.xpath("//a[@class='header-name-link']")).isDisplayed()) {
+            int size = driver.findElements(By.xpath("//a[@class='header-name-link']")).size();
+            for (int i = 0; i < size; i++) {
+                Utility_Functions.xScrollWindowTop(driver);
+                Utility_Functions.timeWait(3);
+                click(driver.findElements(By.xpath("//a[@class='header-name-link']")).get(i));
+                Utility_Functions.timeWait(7);
+                navigateEditWSTemp();
+                verifyDeleteSavedWS();
+            }
+        }
     }
 }

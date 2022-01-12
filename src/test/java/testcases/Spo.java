@@ -72,7 +72,7 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_VerifyDuplicateWS(SeleniumTestParameters testParameters) {
+    public void Tc_VerifyCreateDuplicateWS(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Duplicate Worksheet can not create");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -112,7 +112,7 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_74_DeleteWorkSheet(SeleniumTestParameters testParameters) {
+    public void Tc_74_DeleteSavedWorkSheet(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to delete Worksheet");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

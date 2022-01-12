@@ -13,18 +13,18 @@
                     <include name="Tc_67_CreateWS_MFPDVNListPriceDiscount"></include>
                     <include name="Tc_68_CreateWS_MFPDVNLastCostDiscount"></include>
                     <include name="Tc_69_VerifyWssCostDiscountFIndProduct"></include>
-                    <include name="Tc_VerifyDuplicateWS"></include>
+                    <include name="Tc_VerifyCreateDuplicateWS"></include>
                     <include name="Tc_70_wsItemScreenUI"></include>
 
                     <include name="Tc_71_PaginationWsItemScreen"></include>
                     <include name="Tc_PageCountAddItemToWSScreen"></include>
                     <include name="Tc_73_RefreshWorkSheet"></include>
-                    <include name="Tc_74_DeleteWorkSheet"></include>
+                    <include name="Tc_74_DeleteSavedWorkSheet"></include>
                     <include name="Tc_86_verifySavedWorkSheetAvailablePopup"></include>
                     <include name="Tc_87_VerifyAddItemsToWS"></include>
                     <include name="Tc_88_AddItemToWSUI"></include>
                     <include name="Tc_89_PaginationAddItemToWSScreen"></include>
-                    <include name="Tc_PageCountAddItemToWSScreen"></include>
+                    <include name="Tc_PageCountAddItemToWSPage"></include>
                     <include name="Tc_102_VerifyEditWSTempUI"></include>
                     <include name="Tc_106_WSCalculationSection"></include>
 
