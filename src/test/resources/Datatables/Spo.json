@@ -11,13 +11,15 @@
       "Tc_69_VerifyWssCostDiscountFIndProduct": "navigateToSPO,selectCompany,navigateToCreateWorksheet,fillMandatoryField,runWSRadioBtn,clickFindProduct",
       "Tc_VerifyDuplicateWS": "navigateToSPO,selectCompany,navigateToCreateWorksheet,verifyDuplicateWS,verifyCancelBtn,filterCreatedWorksheet",
       "Tc_70_wsItemScreenUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,wsItemsScreenUI",
-      "Tc_71_PaginationWsItemScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,pagination,funPageCount,wsItemsScreenBtn",
+      "Tc_71_PaginationWsItemScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,pagination,wsItemsScreenBtn",
+      "Tc_PageCountAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,funPageCount,wsItemsScreenBtn",
       "Tc_73_RefreshWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyRefreshIcon,verifyRefreshIcon",
       "Tc_74_DeleteWorkSheet": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifyTrashIcon",
       "Tc_86_verifySavedWorkSheetAvailablePopup": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifySavedWorkSheet",
       "Tc_87_VerifyAddItemsToWS": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,navigateToAddItemToWS,addItemsToWS,addSelectedItemsWorksheetBtn,backToWSBtn,verifyAddedItem,createWorksheet,filterCreatedWorksheet",
       "Tc_88_AddItemToWSUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,addItemsToWSUI",
-      "Tc_89_PaginationAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,searchVN,pagination,funPageCount",
+      "Tc_89_PaginationAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,searchVN,pagination",
+      "Tc_PageCountAddItemToWSPage": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,searchVN,funPageCount",
       "Tc_102_VerifyEditWSTempUI": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyEditWSTempFields",
       "Tc_106_WSCalculationSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyWSCalculation",
       "Tc_110_PaginationWSDetailsPage": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,pagination",
@@ -99,6 +101,10 @@
       "Title": "Test case to functionality of pagination,cancel and back buttons on worksheet items screen"
     },
     {
+      "TC_ID": "Tc_PageCountAddItemToWSScreen",
+      "Title": "Test case to functionality of Page count on worksheet items screen"
+    },
+    {
       "TC_ID": "Tc_73_RefreshWorkSheet",
       "Title": "Test case to Refresh Worksheet"
     },
@@ -121,6 +127,10 @@
     {
       "TC_ID": "Tc_89_PaginationAddItemToWSScreen",
       "Title": "Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen"
+    },
+    {
+      "TC_ID": "Tc_PageCountAddItemToWSPage",
+      "Title": "Test case to Verify Page count on 'ADD ITEMS TO THIS WORKSHEET' screen"
     },
     {
       "TC_ID": "Tc_102_VerifyEditWSTempUI",

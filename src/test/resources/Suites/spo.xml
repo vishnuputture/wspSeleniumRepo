@@ -23,10 +23,11 @@
                     <include name="Tc_87_VerifyAddItemsToWS"></include>
                     <include name="Tc_88_AddItemToWSUI"></include>
                     <include name="Tc_89_PaginationAddItemToWSScreen"></include>
+                    <include name="Tc_PageCountAddItemToWSScreen"></include>
                     <include name="Tc_102_VerifyEditWSTempUI"></include>
                     <include name="Tc_106_WSCalculationSection"></include>
-                    <include name="Tc_110_PaginationWSDetailsPage"></include>
 
+                    <include name="Tc_110_PaginationWSDetailsPage"></include>
                     <include name="Tc_110_PaginationWSDetailsPage"></include>
                     <include name="Tc_116_VerifyAssignedUserCanBeChanged"></include>
                     <include name="Tc_117_VerifySalesOptionEditable"></include>
@@ -36,8 +37,8 @@
                     <include name="Tc_129_VerifyOrderWeightTotal"></include>
                     <include name="Tc_131_VerifyAddDuplicateItemToWS"></include>
                     <include name="Tc_133_VerifySaveWorksheetBtn"></include>
-                    <include name="Tc_138_CalculationMethodOptions"></include>
 
+                    <include name="Tc_138_CalculationMethodOptions"></include>
                     <include name="Tc_139_VerifyConvertToPOOrderQuantitiesZero"></include>
                     <include name="Tc_140_VerifyTotalOrderExceedForConvertPO"></include>
                     <include name="Tc_141_VerifyOrderMinimum"></include>
@@ -47,8 +48,8 @@
                     <include name="Tc_VerifyTrashIconEditWSTemp"></include>
                     <include name="Tc_148_searchFilterUI"></include>
                     <include name="Tc_156_CreateWSMultiplier"></include>
-                    <include name="Tc_164_verifyDiscountMultiplier"></include>
 
+                    <include name="Tc_164_verifyDiscountMultiplier"></include>
                     <include name="Tc_166_VerifyErrorMsgAgainstFields"></include>
                     <include name="Tc_175_CreateWS_MFPDVNListPriceMultiplier"></include>
                     <include name="Tc_176_CreateWS_MFPDVNPOMultiplier"></include>

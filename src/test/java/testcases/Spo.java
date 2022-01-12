@@ -96,6 +96,14 @@ public class Spo extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_PageCountAddItemToWSScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to functionality of pagination,cancel and back buttons on worksheet items screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_73_RefreshWorkSheet(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Refresh Worksheet");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -137,6 +145,14 @@ public class Spo extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_89_PaginationAddItemToWSScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_PageCountAddItemToWSPage(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

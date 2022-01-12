@@ -1326,14 +1326,18 @@ public class Spo extends ReusableLib {
      * This method to verify Create Worksheet Fields
      */
     public void verifyWSFields() {
-        String[] field = {"Name Your Worksheet", "Assigned User", "Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number", "Months Supply to Order", "Multiplier", "Lead Time (Days)", ""};
+        String[] field = {"Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number"};
         int i = 0;
         while (Utility_Functions.xIsDisplayed(driver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
             String text=field[i];
             sendKeysAndTab(wsFields(text),"WzxctfdfghQQwe","Click "+text+" Input field");
             Utility_Functions.timeWait(5);
-            commonObj.validateText(driver.findElements(SpoPage.invalidWSName).get(i),"Invalid "+text+".", "Invalid "+text+". is present");
+            String val=driver.findElements(SpoPage.invalidWSName).get(i).getText().trim();
+            Utility_Functions.xAssertEquals(report,val,"Invalid "+text+".", "Invalid "+text+". is present");
             i++;
+            if(text.equals("Vendor Number")){
+                break;
+            }
         }
     }
 
