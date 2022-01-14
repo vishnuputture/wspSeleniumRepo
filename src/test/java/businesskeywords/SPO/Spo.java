@@ -220,6 +220,7 @@ public class Spo extends ReusableLib {
         }
         commonObj.validateElementExists(SpoPage.helpIcon, "Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
+        Utility_Functions.timeWait(4);
         int size = driver.findElements(SpoPage.pagination).size();
         Utility_Functions.xAssertEquals(report, size, 8, "Next page and previous page arrow icon is present");
         String page = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
