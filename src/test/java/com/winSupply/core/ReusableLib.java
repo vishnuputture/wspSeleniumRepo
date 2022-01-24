@@ -99,7 +99,7 @@ public abstract class ReusableLib {
     /**
      * The {@link FrameworkDriver} object
      */
-    protected FrameworkDriver driver;
+    protected static FrameworkDriver driver;
 
     protected WebDriverUtil driverUtil;
     /**

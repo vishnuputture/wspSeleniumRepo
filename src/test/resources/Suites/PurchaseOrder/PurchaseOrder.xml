@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression" parallel="none" thread-count="1">
+	<test name="PurchaseOrder">
+
+		<classes>
+			<class name="testcases.PO.POEntry">
+				<methods>
+					<include name="Tc_203_PurchaseOrderHeadingUI"></include>
+					<include name="Tc_205_Purchase_Order_DetailsUI"></include>
+					<include name="Tc_206_Field_Verification_for_Vendor_and_Order_Number"></include>
+					<include name="Tc_207_Functionality_of_F12_Vendor_Notes"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite> <!-- Suite -->

@@ -724,7 +724,7 @@ public class Utility_Functions extends ReusableLib {
     }
 
     // implicit wait
-    public static void impWait(FrameworkDriver driver, int time) {
+    public static void impWait(int time) {
         driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 

@@ -1,0 +1,30 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_203_PurchaseOrderHeadingUI": "launchApp,siteLogin,validatePOHeadingTitle,validatePOEntryUI",
+      "Tc_204_ORDER_IN_USE_popup_when_user_IAD_particular_Order_No": "",
+      "Tc_205_Purchase_Order_DetailsUI": "launchApp,siteLogin,validatePOHeadingTitle,findVendor,validatePODetailsUI",
+      "Tc_206_Field_Verification_for_Vendor_and_Order_Number": "launchApp,siteLogin,validatePOHeadingTitle,validateVendorNo,validateOrderNo",
+      "Tc_207_Functionality_of_F12_Vendor_Notes": "launchApp,siteLogin,addVendornotes,deleteVendornotes",
+      "Tc_208_Create_line_item_by_changing_Customer_number":"",
+      "Tc_209_Verify_the_functionality_of_Type_Shipment_S": "",
+      "Tc_210_Verify_the_error_message": "",
+      "Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount": "",
+      "Tc_212_Calculation_of_Extended_amount_for_Last_Cost_with_and_without_Discount": "",
+      "Tc_213_Verification_for_addition_of_duplicate_line_item_number": "",
+      "Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected": "",
+      "Tc_215_Verify_the_functionality_of_Ship_Date_and_Line_item_have_different_Ship_Date": "",
+      "Tc_216_Verify_the_functionality_of_Freight_Charges": "",
+      "Tc_217_Verify_the_functionality_of_Cost_Option":""
+        }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_207_Functionality_of_F12_Vendor_Notes",
+      "validVendorNo": "019351",
+      "vendorNotes1": "Test Vendor Note"
+
+
+    }
+  ]
+}
