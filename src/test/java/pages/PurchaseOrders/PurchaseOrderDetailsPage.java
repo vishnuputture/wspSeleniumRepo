@@ -38,6 +38,13 @@ public class PurchaseOrderDetailsPage  extends ReusableLib {
    public static By sendViaFax=By.id("D_3_33");
    public static By tyPOD=By.id("I_8_3");
 
+  public static By firstItemNumber=By.id("I_11_3");
+  public static By secondItemNumber= By.id("I_12_3");
+  public static By errorMsgPOD=By.id("D_24_2");
+  public static By getExtendedAmountPOD=By.id("I_8_68");
 
+  public static By getLineItemsList=By.xpath("//div[string-length(normalize-space(text()))>75 ]");
+
+  public static By amountHeader=By.id("D_1_65");
 }
 

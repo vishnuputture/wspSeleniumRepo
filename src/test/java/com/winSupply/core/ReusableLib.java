@@ -1273,7 +1273,7 @@ public abstract class ReusableLib {
 
     }
 
-    protected String getText(By by) {
+    public String getText(By by) {
         waitForVisible(by);
         return getElement(by).getText();
 

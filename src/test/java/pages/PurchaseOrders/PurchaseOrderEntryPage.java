@@ -25,4 +25,9 @@ public class PurchaseOrderEntryPage extends ReusableLib {
     public static By vendorNoInput=By.id("I_4_16");
     public static By orderNoInput=By.id("I_4_56");
     public static By customerNoInput=By.id("I_5_16");
+
+    public static By costOption=By.id("I_20_19");
+    public static By costOptionLink=By.id("D_20_2");
+
+    public static By actionInpput=By.id("I_2_61");
 }

@@ -10,6 +10,11 @@
 					<include name="Tc_205_Purchase_Order_DetailsUI"></include>
 					<include name="Tc_206_Field_Verification_for_Vendor_and_Order_Number"></include>
 					<include name="Tc_207_Functionality_of_F12_Vendor_Notes"></include>
+					<include name="Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount"></include>
+					<include name="Tc_212_Calculation_of_Extended_amount_for_Last_Cost_with_and_without_Discount"></include>
+					<include name="Tc_213_Verification_for_addition_of_duplicate_line_item_number"></include>
+					<include name="Tc_217_Verify_the_functionality_of_Cost_Option"></include>
+
 				</methods>
 			</class>
 		</classes>

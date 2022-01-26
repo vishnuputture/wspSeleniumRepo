@@ -71,7 +71,7 @@ public class POEntry extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-
+*/
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Calculation of Extended amount for List Price with Discount");
@@ -95,7 +95,7 @@ public class POEntry extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-
+/*
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify error message inquiring line item that does not exist and NMRQ: Verify error\n" +
@@ -121,7 +121,7 @@ public class POEntry extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-
+*/
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_217_Verify_the_functionality_of_Cost_Option(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify the functionality of Cost Option");
@@ -132,7 +132,7 @@ public class POEntry extends TestConfigurations {
 
     }
 
-*/
+
 
 
 
