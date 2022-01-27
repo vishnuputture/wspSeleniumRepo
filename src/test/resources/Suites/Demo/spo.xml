@@ -11,7 +11,7 @@
                     <include name="Tc_VerifyCreateDuplicateWS"></include>
                     <include name="Tc_131_VerifyAddDuplicateItemToWS"></include>
                     <include name="Tc_74_DeleteSavedWorkSheet"></include>
-                    <include name="Tc_74_DeleteSavedWorkSheet"></include>
+                    <include name="Tc_120_EditWSTrashIcon"></include>
                     
                 </methods>
             </class>
