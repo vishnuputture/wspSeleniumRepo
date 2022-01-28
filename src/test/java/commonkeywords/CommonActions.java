@@ -6,6 +6,7 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.OptionsConstantsPage;
+import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.PurchaseOrders.VendorInformationPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
@@ -27,6 +28,7 @@ import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 
 public class CommonActions extends ReusableLib {
@@ -370,6 +372,17 @@ public class CommonActions extends ReusableLib {
 	}
 
 	/**
+	 * This method navigate to VendorNotes from Purchase Order Menu
+	 */
+
+	public void navigateToVendorNotes(){
+		masterToPurchaseOrder();
+		navigateToPurchaseOrderEntry();
+		sendKeys(PurchaseOrderEntryPage.vendorNoInput, String.valueOf(Keys.F12));
+
+	}
+
+	/**
 	 *
 	 *
 	 * This method navigates from Purchase Order Menu to Inventory Receipt Program
@@ -440,6 +453,15 @@ public class CommonActions extends ReusableLib {
 	{
 		click(OptionsConstantsPage.optionAndConstantsMenu,"Click on Option And Constants Menu");
 		validateText(OptionsConstantsPage.optionConstantHeader, "Purchase Orders - Options and Constants", "Validating Purchase Orders - Options and Constants page title");
+	}
+
+	/**
+	 * This method Navigation to Purchase Order Entry from PurchaseOrder Main Menu
+	 */
+	public  void navigateToPurchaseOrderEntry()
+		{
+          click(PurchaseOrderEntryPage.po_entry,"Click Entry- Purchase Order ");
+		  validateText(PurchaseOrderEntryPage.poHeaderTitle,"Purchase Order Headings","Validating Entry - Purchase Order");
 	}
 
 	/**

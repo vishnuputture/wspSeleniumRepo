@@ -99,7 +99,7 @@ public abstract class ReusableLib {
     /**
      * The {@link FrameworkDriver} object
      */
-    protected FrameworkDriver driver;
+    protected static FrameworkDriver driver;
 
     protected WebDriverUtil driverUtil;
     /**
@@ -1273,7 +1273,7 @@ public abstract class ReusableLib {
 
     }
 
-    protected String getText(By by) {
+    public String getText(By by) {
         waitForVisible(by);
         return getElement(by).getText();
 
