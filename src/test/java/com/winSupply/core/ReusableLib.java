@@ -152,9 +152,10 @@ public abstract class ReusableLib {
      *
      */
     protected void click(By el) {
+        By loadingAnime=By.id("_pui_loading_animation");
+        waitForElementDisappear(loadingAnime,globalWait);
         waitForElementClickable(el, globalWait);
         getElement(el).click();
-        By loadingAnime=By.id("_pui_loading_animation");
         waitForElementDisappear(loadingAnime,globalWait);
 
     }

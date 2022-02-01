@@ -120,7 +120,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
-        c.add(Calendar.DATE, 1);
+        c.add(Calendar.DATE, 2);
         dt = c.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strPriceDate = formatter.format(dt);
@@ -246,14 +246,15 @@ public class SelfServicePriceSheet extends ReusableLib {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
-        c.add(Calendar.DATE, 0);
+        c.add(Calendar.DATE, 1);
         dt = c.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strPriceDate = formatter.format(dt);
 
         Utility_Functions.xSendkeysAndTab(driver.findElement(PriceSheetDetails.processedDate), strPriceDate);
+        Utility_Functions.timeWait(3);
         click(PriceSheetDetails.markAsReadyButton);
-        Utility_Functions.timeWait(1);
+        Utility_Functions.timeWait(5);
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus, "Ready to Process", "Status Matched");
 
 

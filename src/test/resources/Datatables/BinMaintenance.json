@@ -1,0 +1,107 @@
+{
+	"Business_Flow": [
+		{
+			"Tc_748_ItemBinMaintenanceUI": "navigateToBinMain,selectCompany,binMaintenanceUI",
+			"Tc_749_MainMenuOptions": "navigateToBinMain,selectCompany,verifyAvailMenuIcon",
+			"Tc_753_verifyApplyClearAllFilter": "navigateToBinMain,selectCompany,verifyApplyClearAllFilter",
+			"Tc_758_verifyFilterCheckBox": "navigateToBinMain,selectCompany,verifyExcludeAstJobZZ98Item",
+			"Tc_759_verifyContainsCheckBox": "navigateToBinMain,selectCompany,verifyContainsCheckBox",
+			"Tc_761_verifySuggestedMatchesPopUp": "navigateToBinMain,selectCompany,verifySuggestedMatchesPopUp",
+			"Tc_763_verifyItemNoNegValue": "navigateToBinMain,selectCompany,verifyItemNoField",
+			"Tc_764_verifyItemDescriptionFilter": "navigateToBinMain,selectCompany,verifyItemDescriptionFilter",
+			"Tc_765_verifyItemDescriptionField": "navigateToBinMain,selectCompany,verifyItemDescriptionField",
+			"Tc_750_VerifyUIItemNumbersAreAvailable": "navigateToBinMain,selectCompany,verifyUIItemNumbersAreAvailable",
+			"Tc_791_verifyPageCountItemMaintenance": "navigateToBinMain,selectCompany,enableContainsFilter,funPageCountItemMaintenance",
+			"Tc_793_verifyPaginationItemMaintenance": "navigateToBinMain,selectCompany,enableContainsFilter,paginationItemMaintenance",
+			"Tc_795_verifySelectAllCheckBox": "navigateToBinMain,selectCompany,enableContainsFilter,verifySelectAllCheckBox",
+			"Tc_801_verifyLabelButton": "navigateToBinMain,selectCompany,enableContainsFilter,verifyLabelButton",
+			"Tc_805_verifyItemDetailsMaster": "navigateToBinMain,selectCompany,enableContainsFilter,verifyItemDetailsMaster,signOut",
+			"Tc_808_verifyItemDetailsUI": "navigateToBinMain,selectCompany,enableContainsFilter,verifyItemDetailsUI",
+			"Tc_809_verifyPaginationItemDetails": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,paginationItemMaintenance",
+			"Tc_810_verifyPageCountItemDetails": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,funPageCountItemMaintenance",
+			"Tc_811_verifySelectDeselectItem": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifySelectDeselectItem"
+		}
+	],
+	"General_Data":[
+		{
+			"TC_ID": "Tc_748_ItemBinMaintenanceUI",
+			"Title": "UI of Item Bin Maintenance"
+		},
+		{
+			"TC_ID": "Tc_749_MainMenuOptions",
+			"Title": "UI of Main Menu options"
+		},
+		{
+			"TC_ID": "Tc_753_verifyApplyClearAllFilter",
+			"Title": "Verify Apply Filter Clear All Filter"
+		},
+		{
+			"TC_ID": "Tc_758_verifyFilterCheckBox",
+			"Title": "Verify Apply Filter CheckBox"
+		},
+		{
+			"TC_ID": "Tc_759_verifyContainsCheckBox",
+			"Title": "Verify Filter Contains CheckBox",
+			"itemNo": "100"
+		},
+		{
+			"TC_ID": "Tc_761_verifySuggestedMatchesPopUp",
+			"Title": "Verify Suggested Matches PopUp Message",
+			"itemNo": "1"
+		},
+		{
+			"TC_ID": "Tc_763_verifyItemNoNegValue",
+			"Title": "Verify the negative Scenarios for Item Number input field",
+			"negativeValue": "-1",
+			"alphaNumeric": "Aws123H&"
+		},
+		{
+			"TC_ID": "Tc_764_verifyItemDescriptionFilter",
+			"Title": "Verify the functionality of Item Description field"
+		},
+		{
+			"TC_ID": "Tc_765_verifyItemDescriptionField",
+			"Title": "Verify the functionality of Item Description field"
+		},
+		{
+			"TC_ID": "Tc_750_VerifyUIItemNumbersAreAvailable",
+			"Title": "Verify the UI of the page when Item Numbers are available"
+		},
+		{
+			"TC_ID": "Tc_791_verifyPageCountItemMaintenance",
+			"Title": "Verify the functionality of Pagination"
+		},
+		{
+			"TC_ID": "Tc_793_verifyPaginationItemMaintenance",
+			"Title": "Verify the functionality of Page count"
+		},
+		{
+			"TC_ID": "Tc_795_verifySelectAllCheckBox",
+			"Title": "Verify the functionality of Select All Items Checkbox"
+		},
+		{
+			"TC_ID": "Tc_801_verifyLabelButton",
+			"Title": "Verify the functionality of Labels button"
+		},
+		{
+			"TC_ID": "Tc_805_verifyItemDetailsMaster",
+			"Title": "Verify the particular Item Number's Details"
+		},
+		{
+			"TC_ID": "Tc_808_verifyItemDetailsUI",
+			"Title": "Verify the particular Item Number's Details"
+		},
+		{
+			"TC_ID": "Tc_809_verifyPaginationItemDetails",
+			"Title": "Verify the functionality of Pagination"
+		},
+		{
+			"TC_ID": "Tc_810_verifyPageCountItemDetails",
+			"Title": "Verify the functionality of Page count"
+		},
+		{
+			"TC_ID": "Tc_811_verifySelectDeselectItem",
+			"Title": "Verify Select/Deselect Items"
+		}
+	]
+}
