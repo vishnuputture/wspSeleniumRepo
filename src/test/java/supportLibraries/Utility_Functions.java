@@ -16,6 +16,7 @@ import com.jayway.jsonpath.spi.mapper.MappingProvider;
 
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+import com.winSupply.framework.selenium.SeleniumReport;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hamcrest.Matchers;
@@ -724,7 +725,7 @@ public class Utility_Functions extends ReusableLib {
     }
 
     // implicit wait
-    public static void impWait(FrameworkDriver driver, int time) {
+    public static void impWait(int time) {
         driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 
@@ -1208,7 +1209,7 @@ public class Utility_Functions extends ReusableLib {
 
     }
 
-    public static void xAssertEquals(Object expValue, Object Actual) {
+    public static void xAssertEquals(SeleniumReport report, Object expValue, Object Actual) {
         Assert.assertEquals(Actual, expValue);
     }
 
