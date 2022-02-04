@@ -158,4 +158,68 @@ public class BinMaintenance extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_812_verifySecondaryOptionsBinType(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Secondary Options BinType");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_813_verifyUpdateBinType(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Update BinType message");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_814_verifyBinItemDeleteIcon(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Bin Item Delete Icon");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_815_verifyBinItemEditIcon(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Edit Item details");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_819_verifyBinMinMax(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Bin min and bin max");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_824_verifyEditBinPopUp(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Edit bin popup");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_827_verifyCreateBinButton(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Create bin button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_831_verifyCreateDuplicateBin(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Create Duplicate bin");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

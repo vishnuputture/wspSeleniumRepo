@@ -19,7 +19,15 @@
 			"Tc_808_verifyItemDetailsUI": "navigateToBinMain,selectCompany,enableContainsFilter,verifyItemDetailsUI",
 			"Tc_809_verifyPaginationItemDetails": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,paginationItemMaintenance",
 			"Tc_810_verifyPageCountItemDetails": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,funPageCountItemMaintenance",
-			"Tc_811_verifySelectDeselectItem": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifySelectDeselectItem"
+			"Tc_811_verifySelectDeselectItem": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifySelectDeselectItem",
+			"Tc_812_verifySecondaryOptionsBinType": "navigateToBinMain,selectCompany,verifySecondaryOptionsBinType",
+			"Tc_813_verifyUpdateBinType": "navigateToBinMain,selectCompany,verifyUpdateBinType",
+			"Tc_814_verifyBinItemDeleteIcon": "navigateToBinMain,selectCompany,verifyBinItemDeleteIcon",
+			"Tc_815_verifyBinItemEditIcon": "navigateToBinMain,selectCompany,verifyBinItemEditIcon",
+			"Tc_819_verifyBinMinMax": "navigateToBinMain,selectCompany,verifyBinMinMax",
+			"Tc_824_verifyEditBinPopUp": "navigateToBinMain,selectCompany,verifyEditBinPopUp",
+			"Tc_827_verifyCreateBinButton": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifyCreateBinButton",
+			"Tc_831_verifyCreateDuplicateBin": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifyCreateDuplicateBin"
 		}
 	],
 	"General_Data":[
@@ -102,6 +110,38 @@
 		{
 			"TC_ID": "Tc_811_verifySelectDeselectItem",
 			"Title": "Verify Select/Deselect Items"
+		},
+		{
+			"TC_ID": "Tc_812_verifySecondaryOptionsBinType",
+			"Title": "verify Secondary Options BinType"
+		},
+		{
+			"TC_ID": "Tc_813_verifyUpdateBinType",
+			"Title": "verify Update BinType message"
+		},
+		{
+			"TC_ID": "Tc_813_verifyBinItemDeleteIcon",
+			"Title": "verify Delete item message"
+		},
+		{
+			"TC_ID": "Tc_815_verifyBinItemEditIcon",
+			"Title": "verify Edit Item details"
+		},
+		{
+			"TC_ID": "Tc_819_verifyBinMinMax",
+			"Title": "verify Bin min and bin max"
+		},
+		{
+			"TC_ID": "Tc_824_verifyEditBinPopUp",
+			"Title": "verify Edit bin popup"
+		},
+		{
+			"TC_ID": "Tc_827_verifyCreateBinButton",
+			"Title": "verify Create bin button"
+		},
+		{
+			"TC_ID": "Tc_831_verifyCreateDuplicateBin",
+			"Title": "verify Create Duplicate bin"
 		}
 	]
 }

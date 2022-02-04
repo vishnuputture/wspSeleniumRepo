@@ -16,6 +16,7 @@ import pages.SalesOrders.SalesOrdersPage;
 import pages.common.MasterPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemMasterPage;
+import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import pages.warehouse.BinMaintenance.BinMaintenancePage;
@@ -25,6 +26,7 @@ import software.amazon.awssdk.services.fsx.model.BackupNotFoundException;
 import supportLibraries.Utility_Functions;
 import testcases.PO.Spo;
 
+import javax.swing.event.CaretListener;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -49,10 +51,18 @@ public class binMaintenance extends ReusableLib {
     }
 
     /**
-     * Keyword to Navigate to Suggested PO
+     * Keyword to Navigate to Bin Maintenance
      */
     public void navigateToBinMain() {
-        String url = properties.getProperty("binMaintenanceURL");
+        String url;
+        if (System.getProperty("urlProd") == null) {
+            url = properties.getProperty("binMaintenanceURL");
+        } else {
+            String prodUrl = System.getProperty("urlProd");
+            System.out.println("Taken URL from Config File......" + properties.getProperty(prodUrl));
+            url = properties.getProperty(prodUrl);
+
+        }
         driver.get(url);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
@@ -119,6 +129,14 @@ public class binMaintenance extends ReusableLib {
 
     public By getColumnData(String colName) {
         return By.xpath("//table/tbody/tr[1]/td[count(//table/thead/tr/th[contains(text(),'" + colName + "')]/preceding-sibling::th)+1]/span");
+    }
+
+    public By getStatus(String binLocation) {
+        return By.xpath("//td[contains(text(),'" + binLocation + "')]/following-sibling::td/span");
+    }
+
+    public By getZone(String binLocation) {
+        return By.xpath("//td[contains(text(),'" + binLocation + "')]/following-sibling::td");
     }
 
     /**
@@ -535,5 +553,255 @@ public class binMaintenance extends ReusableLib {
             Boolean count = Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.highlightRow);
             Utility_Functions.xAssertEquals(report, count, false, "item is Deselected");
         }
+    }
+
+    /**
+     * Keyword to Verify secondary options from Bin Type Dropdown
+     */
+    public void verifySecondaryOptionsBinType() {
+        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        click(BinMaintenancePage.binType, "Click Bin Type drop down");
+        click(tabs("Primary"), "Click Primary option");
+        click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(3);
+        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+            validateItemHeader();
+        }
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.primaryOpt), "Secondary", "Select secondary option from the drop down ");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster, "Cannot set primary bin to secondary", "Error toaster 'Cannot set primary bin to secondary' is present");
+        int size = driver.findElements(BinMaintenancePage.primaryOpt).size();
+        if (size == 2) {
+            size = size - 1;
+        }
+        Utility_Functions.xAssertEquals(report, size, 1, "Only one primary Bin Type is present as expected");
+    }
+
+    /**
+     * Keyword to Verify Update Bin Type
+     */
+    public void verifyUpdateBinType() {
+        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        click(BinMaintenancePage.binType, "Click Bin Type drop down");
+        click(tabs("Secondary"), "Click Secondary option");
+        click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(3);
+        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+            validateItemHeader();
+        }
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.secondaryOpt), "Temporary", "Select Temporary option from the drop down ");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Updated.", "'Bin-item is successfully Updated.' is present");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.temporaryOpt), "Secondary", "And then Select Secondary option from the drop down ");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Updated.", "'Bin-item is successfully Updated.' is present");
+    }
+
+    public void isPrimaryItemDelete() {
+        if (getText(BinMaintenancePage.toaster).equals("Cannot delete primary if secondary/temporary bin exists")) {
+            commonObj.validateText(BinMaintenancePage.toaster, "Cannot delete primary if secondary/temporary bin exists", "'Cannot delete primary if secondary/temporary bin exists' is present");
+            click(driver.findElements(BinMaintenancePage.deleteIcon).get(1), "Click delete icon");
+            Utility_Functions.timeWait(2);
+            commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
+            click(button("Yes"), "Click 'Yes' Button");
+            Utility_Functions.timeWait(3);
+        }
+    }
+
+    /**
+     * Keyword to Verify Bin Item Delete Icon
+     */
+    public void verifyBinItemDeleteIcon() {
+        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        click(BinMaintenancePage.binType, "Click Bin Type drop down");
+        click(tabs("Primary"), "Click Primary option");
+        click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(3);
+        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+            validateItemHeader();
+        }
+        click(BinMaintenancePage.deleteIcon, "Click delete icon");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
+        click(button("No"), "Click 'No' Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
+        click(BinMaintenancePage.deleteIcon, "Click delete icon");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
+        click(button("Yes"), "Click 'Yes' Button");
+        Utility_Functions.timeWait(3);
+        isPrimaryItemDelete();
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Deleted.", "'Bin-item is successfully Deleted.' is present");
+    }
+
+    public void clickEditButton() {
+        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        click(BinMaintenancePage.binType, "Click Bin Type drop down");
+        click(tabs("Primary"), "Click Primary option");
+        click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(3);
+        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+            validateItemHeader();
+        }
+        click(BinMaintenancePage.editIcon, "Click Edit Icon");
+        Utility_Functions.timeWait(2);
+    }
+
+    /**
+     * Keyword to Verify Bin Item Edit Icon
+     */
+    public void verifyBinItemEditIcon() {
+        clickEditButton();
+        click(BinMaintenancePage.cancelIcon, "Click Cancel Icon");
+        click(BinMaintenancePage.editIcon, "Click Edit Icon");
+        Utility_Functions.timeWait(2);
+        sendKeys(BinMaintenancePage.editTextBox, "1", "Enter Bin min as 1");
+        sendKeys(driver.findElements(BinMaintenancePage.editTextBox).get(1), "10", "Enter Bin max as 10");
+        Utility_Functions.timeWait(3);
+        click(BinMaintenancePage.saveIcon, "Click Save icon");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin Item updated successfully.", "'Bin Item updated successfully.' is present");
+        commonObj.validateText(By.xpath("//div[text()=' 1 ']"), "1", "Bin min updated to 1");
+        commonObj.validateText(By.xpath("//div[text()=' 10 ']"), "10", "Bin min updated to 10");
+    }
+
+    /**
+     * Keyword to Verify Bin Item Edit Icon
+     */
+    public void verifyBinMinMax() {
+        clickEditButton();
+        clearText(BinMaintenancePage.editTextBox);
+        Utility_Functions.xClearAndSendKeys(driver, driver.findElements(BinMaintenancePage.editTextBox).get(1), "");
+        sendKeys(BinMaintenancePage.editTextBox, "ASDD#$", "Enter special character and alphabets into Bin min as ASDD#$");
+        sendKeys(driver.findElements(BinMaintenancePage.editTextBox).get(1), "Auto#$", "Enter special character and alphabets into Bin Max as 'Auto#$'");
+        sendKeys(BinMaintenancePage.editTextBox, "10011111111111", "Enter more than 10 number into Bin min");
+        sendKeys(driver.findElements(BinMaintenancePage.editTextBox).get(1), "12345678901", "Enter 10 into Bin Max");
+        click(BinMaintenancePage.saveIcon, "Click Save icon");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin Item updated successfully.", "'Bin Item updated successfully.' is present");
+        commonObj.validateText(By.xpath("//div[text()=' 1234567890 ']"), "1234567890", "Bin min holds max 10 number");
+        commonObj.validateText(By.xpath("//div[text()=' 1001111111 ']"), "1001111111", "Bin min holds max 10 number");
+        click(BinMaintenancePage.editIcon, "Click Edit Icon");
+        Utility_Functions.timeWait(2);
+        sendKeys(BinMaintenancePage.editTextBox, "10", "Enter number 10 into Bin min");
+        sendKeys(driver.findElements(BinMaintenancePage.editTextBox).get(1), "5", "Enter number 5 into Bin Max");
+        Utility_Functions.timeWait(2);
+        click(BinMaintenancePage.saveIcon, "Click Save icon");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin Max qty must be greater than Bin Min qty", "'Bin Max qty must be greater than Bin Min qty' is present");
+    }
+
+    public void clickEditBin(String binLoc) {
+        System.out.println("binLocation "+binLoc);
+        click(button(" Edit Bin "), "Click Edit Button");
+        Utility_Functions.timeWait(3);
+        System.out.println("EDIT BIN - " + binLoc);
+        commonObj.validateText(By.xpath("//h2[text()='EDIT BIN - "+binLoc+"']"), "EDIT BIN - " + binLoc, "'EDIT BIN - " + binLoc + "' Popup is present");
+    }
+
+    public String navigateToEditBinPopUp() {
+        String binLocation = getText(BinMaintenancePage.getItemVal).trim();
+        Utility_Functions.timeWait(2);
+        click(BinMaintenancePage.primaryOpt);
+        Utility_Functions.timeWait(3);
+        clickEditBin(binLocation);
+        return binLocation;
+    }
+
+    public void changeStatus(String binLocation, String status) {
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.zoneIdDropDown), "Test", "Select Test option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
+        Utility_Functions.timeWait(2);
+        click(driver.findElements(button("Save ")).get(1),"Click Save button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.toaster, "Selected Bins updated successfully.", "'Selected Bins updated successfully.' is present");
+        if (status.equals("No Change")) {
+            commonObj.validateText(getStatus(binLocation), "Damaged", "For bin location: " + binLocation + "No change in status");
+        } else {
+            commonObj.validateText(getStatus(binLocation), status, "For bin location: " + binLocation + " status changed to " + status);
+        }
+    }
+
+    /**
+     * Keyword to Verify Edit bin Popup
+     */
+    public void verifyEditBinPopUp() {
+        clickEditButton();
+        String binLocation = navigateToEditBinPopUp();
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.binConditionId), "No Change", "Select No Change option from the drop down ");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        changeStatus(binLocation, "Good");
+        clickEditBin(binLocation);
+        changeStatus(binLocation, "Defective");
+        clickEditBin(binLocation);
+        changeStatus(binLocation, "Damaged");
+        clickEditBin(binLocation);
+        changeStatus(binLocation, "No Change");
+    }
+
+    public void enterRequiredData(){
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.createBinCondition), "Good", "Select 'Good' option from the drop down ");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(1), "Test", "Select 'Test' option from the drop down ");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(2), "RF Gun", "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(3), "RF Gun", "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.timeWait(2);
+    }
+
+    public void createBin(){
+        click(button("Create Bin"),"Click 'Create Bin' button");
+        Utility_Functions.timeWait(2);
+        int binLoc=Utility_Functions.xRandomFunction();
+        Utility_Functions.xUpdateJson("itemLocation",""+binLoc+"");
+        sendKeys(BinMaintenancePage.createBinLabel,""+binLoc+"","Enter Bin Location");
+        enterRequiredData();
+        click(driver.findElement(button("Save ")),"Click Save button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully","'Bin and Bin-item are created successfully' is present");
+        commonObj.validateElementExists(By.xpath("//td[contains(text(),'"+binLoc+"')]"),binLoc+" Bin location is created");
+        commonObj.validateText(getStatus(""+binLoc+""), "Good", "For bin location: " + binLoc + " status is Good");
+        commonObj.validateText(getZone(""+binLoc+""), "TS", "For bin location: " + binLoc + " Zone is TS");
+    }
+
+    /**
+     * Keyword to Verify Create Bin Button
+     */
+    public void verifyCreateBinButton() {
+        String itemLedger=getText(BinMaintenancePage.goToItemBinLedger);
+        click(button("Create Bin"),"Click 'Create Bin' button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.createBinPopup,"CREATE BIN AND ASSIGN","CREATE BIN AND ASSIGN popup is present");
+        commonObj.validateText(By.xpath("//div[text()='"+itemLedger+"']"),itemLedger,"Item Number "+itemLedger+" is present");
+        String[] labels={"Special Handling","Available to Sell","Staging Area"};
+        for(String label:labels){
+            commonObj.validateText(By.xpath("//input[@type='checkbox']/following-sibling::label[text()='"+label+"']"),label,label+" checkbox is present");
+        }
+        String[] textLabels={" Bin Location","Condition","Zones","Picking","Receiving"};
+        for(String textLabel:textLabels){
+            commonObj.validateText(By.xpath("//label[text()='"+textLabel+"']"),textLabel.trim(),textLabel+" text box is present");
+        }
+        click(driver.findElements((button("Cancel "))).get(1),"Click Cancel button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
+        createBin();
+    }
+
+    /**
+     * Keyword to Verify Create duplicate Bin
+     */
+    public void verifyCreateDuplicateBin() {
+        click(button("Create Bin"),"Click 'Create Bin' button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.createBinPopup,"CREATE BIN AND ASSIGN","CREATE BIN AND ASSIGN popup is present");
+        sendKeys(BinMaintenancePage.createBinLabel,Utility_Functions.xGetJsonData("itemLocation"),"Enter Bin Location");
+        Utility_Functions.timeWait(2);
+        enterRequiredData();
+        click(driver.findElement(button("Save ")),"Click Save button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.toaster,"Bin Location already exists","'Bin Location already exists' is present");
     }
 }
