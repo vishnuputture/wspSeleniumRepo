@@ -27,7 +27,12 @@
 			"Tc_819_verifyBinMinMax": "navigateToBinMain,selectCompany,verifyBinMinMax",
 			"Tc_824_verifyEditBinPopUp": "navigateToBinMain,selectCompany,verifyEditBinPopUp",
 			"Tc_827_verifyCreateBinButton": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifyCreateBinButton",
-			"Tc_831_verifyCreateDuplicateBin": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifyCreateDuplicateBin"
+			"Tc_831_verifyCreateDuplicateBin": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifyCreateDuplicateBin",
+			"Tc_836_verifyAddBinButton": "navigateToBinMain,selectCompany,filterSecAndNavBinMainDetails,verifyAddBinButton",
+			"Tc_837_verifyDuplicateAddBin": "navigateToBinMain,selectCompany,filterSecAndNavBinMainDetails,verifyDuplicateAddBin",
+			"Tc_858_verifyZoneUI": "navigateToBinMain,selectCompany,navigateZonePage,verifyZoneUI",
+			"Tc_864_verifyNewZone": "navigateToBinMain,selectCompany,navigateZonePage,verifyNewZone",
+			"Tc_869_verifyDeleteZOne": "navigateToBinMain,selectCompany,navigateZonePage,clickDeleteZoneIcon"
 		}
 	],
 	"General_Data":[
@@ -142,6 +147,26 @@
 		{
 			"TC_ID": "Tc_831_verifyCreateDuplicateBin",
 			"Title": "verify Create Duplicate bin"
+		},
+		{
+			"TC_ID": "Tc_836_verifyAddBinButton",
+			"Title": "verify ADD Bin Button"
+		},
+		{
+			"TC_ID": "Tc_836_verifyDuplicateAddBin",
+			"Title": "verify ADD Duplicate Bin"
+		},
+		{
+			"TC_ID": "Tc_858_verifyZoneUI",
+			"Title": "verify ADD Zone UI"
+		},
+		{
+			"TC_ID": "Tc_864_verifyNewZone",
+			"Title": "verify New Zone Popup"
+		},
+		{
+			"TC_ID": "Tc_869_verifyDeleteZOne",
+			"Title": "verify delete Zone"
 		}
 	]
 }

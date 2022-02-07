@@ -222,4 +222,44 @@ public class BinMaintenance extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_836_verifyAddBinButton(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify ADD Bin Button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_836_verifyDuplicateAddBin(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify ADD Duplicate Bin");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_858_verifyZoneUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Zone UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_864_verifyNewZone(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify New Zone Popup");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_869_verifyDeleteZOne(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify delete Zone");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

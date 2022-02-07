@@ -1,5 +1,6 @@
 package businesskeywords.warehousing.BinMaintanence;
 
+import bsh.UtilTargetError;
 import businesskeywords.common.Login;
 import businesskeywords.warehousing.Drivers;
 import businesskeywords.warehousing.Manifests;
@@ -55,10 +56,10 @@ public class binMaintenance extends ReusableLib {
      */
     public void navigateToBinMain() {
         String url;
-        if (System.getProperty("urlProd") == null) {
+        if (System.getProperty("url") == null) {
             url = properties.getProperty("binMaintenanceURL");
         } else {
-            String prodUrl = System.getProperty("urlProd");
+            String prodUrl = System.getProperty("url");
             System.out.println("Taken URL from Config File......" + properties.getProperty(prodUrl));
             url = properties.getProperty(prodUrl);
 
@@ -137,6 +138,18 @@ public class binMaintenance extends ReusableLib {
 
     public By getZone(String binLocation) {
         return By.xpath("//td[contains(text(),'" + binLocation + "')]/following-sibling::td");
+    }
+
+    public By getBinLocation(String binType) {
+        return By.xpath("//select[@ng-reflect-model='" + binType + "']/ancestor::td//preceding-sibling::td");
+    }
+
+    public By deleteBinLocationByType(String binType) {
+        return By.xpath("//select[@ng-reflect-model='" + binType + "']/ancestor::tr/descendant::i[@title='Delete']");
+    }
+
+    public By deleteBinLocation(String binLocation) {
+        return By.xpath("//td[contains(text(),'" + binLocation + "')]/ancestor::tr/descendant::i[@title='Delete']");
     }
 
     /**
@@ -411,6 +424,24 @@ public class binMaintenance extends ReusableLib {
             Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
             Utility_Functions.timeWait(2);
             selectPage(0, "1", "Left double Arrow (<<)");
+        }
+    }
+
+    /**
+     * Keyword to Verify functionality of Zone drop down
+     */
+    public void verifyZoneDropDown() {
+        int size = driver.findElements(BinMaintenancePage.zoneDropFilter).size();
+        for (int i = 1; i < size; i++) {
+            String option = driver.findElements(BinMaintenancePage.zoneIdDropDown).get(i).getText().trim();
+            Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.zoneIdDropDown), option, "Select '" + option + "' option from the drop down ");
+            click(BinMaintenancePage.applyFilter, "Click apply filter");
+            Utility_Functions.timeWait(3);
+            String itemCount = Utility_Functions.getText(driver, BinMaintenancePage.itemCount);
+            commonObj.validateElementExists(BinMaintenancePage.itemCount, "Total item present on Item Maintenance Tab: " + itemCount);
+            validateItemHeader();
+            //commonObj.validateElementExists(By.xpath("//td[contains(text(),'')]"));
+
         }
     }
 
@@ -693,11 +724,11 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void clickEditBin(String binLoc) {
-        System.out.println("binLocation "+binLoc);
+        System.out.println("binLocation " + binLoc);
         click(button(" Edit Bin "), "Click Edit Button");
         Utility_Functions.timeWait(3);
         System.out.println("EDIT BIN - " + binLoc);
-        commonObj.validateText(By.xpath("//h2[text()='EDIT BIN - "+binLoc+"']"), "EDIT BIN - " + binLoc, "'EDIT BIN - " + binLoc + "' Popup is present");
+        commonObj.validateText(By.xpath("//h2[text()='EDIT BIN - " + binLoc + "']"), "EDIT BIN - " + binLoc, "'EDIT BIN - " + binLoc + "' Popup is present");
     }
 
     public String navigateToEditBinPopUp() {
@@ -713,7 +744,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.zoneIdDropDown), "Test", "Select Test option from the drop down ");
         Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
         Utility_Functions.timeWait(2);
-        click(driver.findElements(button("Save ")).get(1),"Click Save button");
+        click(driver.findElements(button("Save ")).get(1), "Click Save button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Selected Bins updated successfully.", "'Selected Bins updated successfully.' is present");
         if (status.equals("No Change")) {
@@ -741,7 +772,7 @@ public class binMaintenance extends ReusableLib {
         changeStatus(binLocation, "No Change");
     }
 
-    public void enterRequiredData(){
+    public void enterRequiredData() {
         Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.createBinCondition), "Good", "Select 'Good' option from the drop down ");
         Utility_Functions.timeWait(2);
         Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(1), "Test", "Select 'Test' option from the drop down ");
@@ -752,39 +783,39 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
     }
 
-    public void createBin(){
-        click(button("Create Bin"),"Click 'Create Bin' button");
+    public void createBin() {
+        click(button("Create Bin"), "Click 'Create Bin' button");
         Utility_Functions.timeWait(2);
-        int binLoc=Utility_Functions.xRandomFunction();
-        Utility_Functions.xUpdateJson("itemLocation",""+binLoc+"");
-        sendKeys(BinMaintenancePage.createBinLabel,""+binLoc+"","Enter Bin Location");
+        int binLoc = Utility_Functions.xRandomFunction();
+        Utility_Functions.xUpdateJson("itemLocation", "" + binLoc + "");
+        sendKeys(BinMaintenancePage.createBinLabel, "" + binLoc + "", "Enter Bin Location");
         enterRequiredData();
-        click(driver.findElement(button("Save ")),"Click Save button");
+        click(driver.findElement(button("Save ")), "Click Save button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully","'Bin and Bin-item are created successfully' is present");
-        commonObj.validateElementExists(By.xpath("//td[contains(text(),'"+binLoc+"')]"),binLoc+" Bin location is created");
-        commonObj.validateText(getStatus(""+binLoc+""), "Good", "For bin location: " + binLoc + " status is Good");
-        commonObj.validateText(getZone(""+binLoc+""), "TS", "For bin location: " + binLoc + " Zone is TS");
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully", "'Bin and Bin-item are created successfully' is present");
+        commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLoc + "')]"), binLoc + " Bin location is created");
+        commonObj.validateText(getStatus("" + binLoc + ""), "Good", "For bin location: " + binLoc + " status is Good");
+        commonObj.validateText(getZone("" + binLoc + ""), "TS", "For bin location: " + binLoc + " Zone is TS");
     }
 
     /**
      * Keyword to Verify Create Bin Button
      */
     public void verifyCreateBinButton() {
-        String itemLedger=getText(BinMaintenancePage.goToItemBinLedger);
-        click(button("Create Bin"),"Click 'Create Bin' button");
+        String itemLedger = getText(BinMaintenancePage.goToItemBinLedger);
+        click(button("Create Bin"), "Click 'Create Bin' button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(BinMaintenancePage.createBinPopup,"CREATE BIN AND ASSIGN","CREATE BIN AND ASSIGN popup is present");
-        commonObj.validateText(By.xpath("//div[text()='"+itemLedger+"']"),itemLedger,"Item Number "+itemLedger+" is present");
-        String[] labels={"Special Handling","Available to Sell","Staging Area"};
-        for(String label:labels){
-            commonObj.validateText(By.xpath("//input[@type='checkbox']/following-sibling::label[text()='"+label+"']"),label,label+" checkbox is present");
+        commonObj.validateText(BinMaintenancePage.createBinPopup, "CREATE BIN AND ASSIGN", "CREATE BIN AND ASSIGN popup is present");
+        commonObj.validateText(By.xpath("//div[text()='" + itemLedger + "']"), itemLedger, "Item Number " + itemLedger + " is present");
+        String[] labels = {"Special Handling", "Available to Sell", "Staging Area"};
+        for (String label : labels) {
+            commonObj.validateText(By.xpath("//input[@type='checkbox']/following-sibling::label[text()='" + label + "']"), label, label + " checkbox is present");
         }
-        String[] textLabels={" Bin Location","Condition","Zones","Picking","Receiving"};
-        for(String textLabel:textLabels){
-            commonObj.validateText(By.xpath("//label[text()='"+textLabel+"']"),textLabel.trim(),textLabel+" text box is present");
+        String[] textLabels = {" Bin Location", "Condition", "Zones", "Picking", "Receiving"};
+        for (String textLabel : textLabels) {
+            commonObj.validateText(By.xpath("//label[text()='" + textLabel + "']"), textLabel.trim(), textLabel + " text box is present");
         }
-        click(driver.findElements((button("Cancel "))).get(1),"Click Cancel button");
+        click(driver.findElements((button("Cancel "))).get(1), "Click Cancel button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
         createBin();
@@ -794,14 +825,183 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify Create duplicate Bin
      */
     public void verifyCreateDuplicateBin() {
-        click(button("Create Bin"),"Click 'Create Bin' button");
+        click(button("Create Bin"), "Click 'Create Bin' button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(BinMaintenancePage.createBinPopup,"CREATE BIN AND ASSIGN","CREATE BIN AND ASSIGN popup is present");
-        sendKeys(BinMaintenancePage.createBinLabel,Utility_Functions.xGetJsonData("itemLocation"),"Enter Bin Location");
+        commonObj.validateText(BinMaintenancePage.createBinPopup, "CREATE BIN AND ASSIGN", "CREATE BIN AND ASSIGN popup is present");
+        sendKeys(BinMaintenancePage.createBinLabel, Utility_Functions.xGetJsonData("itemLocation"), "Enter Bin Location");
         Utility_Functions.timeWait(2);
         enterRequiredData();
-        click(driver.findElement(button("Save ")),"Click Save button");
+        click(driver.findElement(button("Save ")), "Click Save button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(BinMaintenancePage.toaster,"Bin Location already exists","'Bin Location already exists' is present");
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin Location already exists", "'Bin Location already exists' is present");
+    }
+
+    public void addBinCancelBtn() {
+        click(button("Add Bin"), "Click 'Add Bin' button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.addBinPopup, "ADD BIN", "ADD BIN popup is present");
+        Utility_Functions.timeWait(2);
+        click(BinMaintenancePage.addCancel, "Click Cancel Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
+    }
+
+    public void addBinSaveBtn(String binLct) {
+        click(button("Add Bin"), "Click 'Add Bin' button");
+        Utility_Functions.timeWait(2);
+        sendKeys(BinMaintenancePage.addBinLoc, binLct, "Enter Bin Location");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.addBinZoneDrop), "Test", "Select 'Test' option from the drop down ");
+        Utility_Functions.timeWait(2);
+        click(BinMaintenancePage.addSave, "Click Save button");
+        Utility_Functions.timeWait(2);
+    }
+
+    public void filterSecAndNavBinMainDetails() {
+        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        click(BinMaintenancePage.binType, "Click Bin Type drop down");
+        click(tabs("Primary"), "Click Primary option");
+        click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(3);
+        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+            validateItemHeader();
+        }
+    }
+
+    /**
+     * Keyword to Verify ADD Bin Button
+     */
+    public void verifyAddBinButton() {
+        String binLct = getText(getBinLocation("Secondary"));
+        click(deleteBinLocation(binLct), "Delete BinLocation: " + binLct);
+        Utility_Functions.timeWait(2);
+        click(button("Yes"));
+        Utility_Functions.timeWait(3);
+        addBinCancelBtn();
+        addBinSaveBtn(binLct);
+        commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is created successfully.", "'Bin-item is created successfully.' is present");
+        commonObj.validateText(By.xpath("//td[contains(text(),'" + binLct + "')]"), binLct, binLct + " Bin location is added");
+        commonObj.validateText(getZone("" + binLct + ""), "TS", "For bin location: " + binLct + " Zone is TS");
+        Utility_Functions.timeWait(2);
+    }
+
+    /**
+     * Keyword to Verify Duplicate ADD Bin
+     */
+    public void verifyDuplicateAddBin() {
+        String binLct = getText(getBinLocation("Secondary"));
+        Utility_Functions.timeWait(3);
+        addBinSaveBtn(binLct);
+        commonObj.validateText(BinMaintenancePage.toaster, "Item Bin association alredy exists", "'Item Bin association alredy exists' is present");
+    }
+
+    /**
+     * Keyword to Navigate to Zone Page
+     */
+    public void navigateZonePage() {
+        click(BinMaintenancePage.inboxIcon, "Click Inbox Icon");
+        Utility_Functions.timeWait(2);
+        click(BinMaintenancePage.zone, "Navigate to zone page");
+        commonObj.validateText(BinMaintenancePage.zoneHeader, "Zones", "Zones header is present");
+    }
+
+    /**
+     * Keyword to Verify Zone UI
+     */
+    public void verifyZoneUI() {
+        String[] labels = {"Zone Name", "Abbreviation", "Bins"};
+        for (String label : labels) {
+            commonObj.validateText(By.xpath("//*[contains(text(),'" + label + "')]"), label, label + " is present");
+        }
+        commonObj.validateText(button(" New Zone "), "New Zone", "'+ New Zone' button is present");
+        commonObj.validateElementExists(BinMaintenancePage.collapsedIcon, "Collapsed icon is present");
+    }
+
+    public void validateAlreadyExistZoneAbrv() {
+        Utility_Functions.timeWait(2);
+        if (!Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.toaster)) {
+            click(button(" Cancel "));
+            Utility_Functions.timeWait(2);
+            clickDeleteZoneIcon();
+            createZoneAgain();
+            Utility_Functions.timeWait(3);
+        }
+    }
+
+    public String createZoneAgain() {
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.zoneHeader, "Zones", "Zones header is present");
+        click(button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.timeWait(2);
+        String zoneName = Utility_Functions.xGetJsonData("zoneName");
+        String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
+        sendKeys(BinMaintenancePage.zoneName, zoneName , "Enter Zone Name");
+        sendKeys(BinMaintenancePage.zoneAbv, zoneAbv , "Enter Zone Abbreviation as " + zoneAbv + "Q");
+        Utility_Functions.timeWait(3);
+        click(button("Save "), "Click 'Save' Button");
+        return zoneAbv;
+    }
+
+    public String createZone() {
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.zoneHeader, "Zones", "Zones header is present");
+        click(button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.timeWait(2);
+        int zoneName = Utility_Functions.xRandomFunction();
+        String zoneAbv = Integer.toString(zoneName).substring(0, 1);
+        Utility_Functions.xUpdateJson("zoneName", "" + zoneName + "autoqa");
+        Utility_Functions.xUpdateJson("zoneAbv", zoneAbv + "Q");
+        sendKeys(BinMaintenancePage.zoneName, zoneName + "AutoQA", "Enter Zone Name");
+        sendKeys(BinMaintenancePage.zoneAbv, zoneAbv + "Q", "Enter Zone Abbreviation as " + zoneAbv + "Q");
+        Utility_Functions.timeWait(3);
+        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.timeWait(2);
+        return zoneAbv;
+    }
+
+    /**
+     * Keyword to Verify New Zone
+     */
+    public void verifyNewZone() {
+        Utility_Functions.timeWait(3);
+        click(button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.timeWait(2);
+        click(button(" Cancel "), "Click Cancel button");
+        String zoneAbv = createZone();
+        validateAlreadyExistZoneAbrv();
+        String zName = Utility_Functions.xGetJsonData("zoneName").toLowerCase();
+        commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " created successfully.", "'Zone " + zName + " created successfully.' message is present");
+        Utility_Functions.xAssertEquals(report, driver.findElement(By.xpath("//input[@ng-reflect-model='" + zName + "']")).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
+        Utility_Functions.xAssertEquals(report, driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
+    }
+
+    /**
+     * Keyword to Verify Edit Zone icon
+     */
+    public String clickEditZoneIcon() {
+        String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
+        WebElement expand = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/a"));
+        WebElement editIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"));
+        Utility_Functions.xScrollIntoView(driver, expand);
+        Utility_Functions.timeWait(2);
+        click(expand, "Expand Zone detail");
+        Utility_Functions.timeWait(2);
+        click(editIcon, "Click Edit icon");
+        Utility_Functions.timeWait(2);
+        return zoneAbv;
+    }
+
+    /**
+     * Keyword to Verify delete Zone icon
+     */
+    public void clickDeleteZoneIcon() {
+        String zoneAbv = clickEditZoneIcon();
+        WebElement deleteIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
+        Utility_Functions.timeWait(2);
+        click(deleteIcon, "Click Delete Icon");
+        Utility_Functions.timeWait(2);
+        click(TruckPage.yesButtonPopUp, "Click Yes Button");
+        Utility_Functions.timeWait(3);
+        Utility_Functions.xAssertEquals(report, driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']")).isDisplayed(), false, zoneAbv + " Not present on Zone page");
     }
 }

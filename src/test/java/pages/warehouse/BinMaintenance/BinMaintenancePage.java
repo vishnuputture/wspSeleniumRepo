@@ -18,8 +18,14 @@ public class BinMaintenancePage {
     public static  By binConditionId=By.id("binConditionId");
     public static  By createBinLabel=By.id("createBinLabel");
     public static  By createBinCondition=By.id("createBinCondition");
+    public static  By addSave=By.id("addSave");
+    public static  By addCancel=By.id("addCancel");
+    public static  By binStart=By.id("binStart");
+    public static  By zoneName=By.id("zoneName");
+    public static  By zoneAbv=By.id("zoneAbv");
     public static  By menuIcon=By.xpath("//i[contains(@class,'bars menu-icon')]");
     public static  By inboxIcon=By.xpath("//i[@class='menu-icon fa fa-inbox']");
+    public static  By zone=By.xpath("//a[contains(text(),'Zones')]");
     public static  By shippingManifestIcon=By.xpath("//i[contains(@class,'fa fa-truck')]");
     public static  By printIcon=By.xpath("//i[@class='menu-icon fa fa-print']");
     public static  By logOutIcon=By.xpath("//i[contains(@class,'menu-icon log-out-icon')]");
@@ -49,4 +55,13 @@ public class BinMaintenancePage {
     public static  By zoneIdDropDown=By.xpath("//select[@name='zoneId']");
     public static  By goToItemBinLedger=By.xpath("//a[@title='Go To Item Bin Ledger']");
     public static  By createBinPopup=By.xpath("//h2[text()='CREATE BIN AND ASSIGN']");
+    public static  By addBinPopup=By.xpath("//h2[text()='ADD BIN']");
+    public static  By addBinLoc=By.xpath("//p-autocomplete[@id='addBinLabel']/descendant::input");
+    public static  By zoneDropFilter=By.xpath("//win-select[@id='zoneList']/descendant::li");
+    public static  By addBinZoneDrop=By.xpath("//label[text()='Zone']/parent::div/descendant::select[contains(@class,'drop')]");
+    public static  By zoneHeader=By.xpath("//h2[text()='Zones']");
+    public static  By collapsedIcon=By.xpath("//a[@class='collapse-btn collapsed']");
+    public static  By newZonePopUp=By.xpath("//h2[text()='New Zone']");
+    public static  By deleteZonePopUp=By.xpath("//h2[text()='DELETE ZONE']");
+    public static  By zoneAbExistError=By.xpath("//div[@class='invalid-feedback']");
 }
