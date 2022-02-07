@@ -57,6 +57,8 @@ public class BinMaintenancePage {
     public static  By btnShowRowsCount=By.xpath("//nav[@id='binMaintenancePagination']//following::a[contains(@class,'count')]");
     public static  By pagination=By.className("pagination");
     public static  By toastMsg=By.className("ui-toast-summary");
+    public static  By tdZoneFirstRow=By.xpath("//tbody//tr[1]/td[2]");
+    public static  By tdStatusFirstRow=By.xpath("//tbody//tr[1]//span[contains(@class,'win-badge-success')]");
 
     /******************************************** Create New Bin popup elements ********************************************/
 
@@ -67,5 +69,21 @@ public class BinMaintenancePage {
     public static By btnCancelCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Cancel')]");
     public static By btnSaveCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Save')]");
     public static By lstDropdownsCreateNewBinPopup = By.id("createBinCondition");
+
+    /******************************************** Edit Bin(s) popup elements ********************************************/
+
+    public static By hdrEditBinPopup = By.xpath("//div[@class='modal-header']/h2[contains(text(),'EDIT ')]");
+    public static By btnCancelEditBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Cancel')]");
+    public static By btnSaveEdiBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Save')]");
+    public static By ddnZoneEditBinPopup = By.xpath("//form//label[contains(text(),'Zone')]//following-sibling::select");
+    public static By ddnConditionEditBinPopup = By.xpath("//form//label[contains(text(),'Condition')]//following-sibling::select");
+    public static By ddnReceivingEditBinPopup = By.xpath("//form//label[contains(text(),'Receiving')]//following-sibling::select");
+    public static By ddnPickingEditBinPopup = By.xpath("//form//label[contains(text(),'Picking')]//following-sibling::select");
+    public static By chkbxSpclHndlngEditBinPopup = By.xpath("//form//label[contains(text(),'Special Handling')]/preceding-sibling::input");
+    public static By chkbxAvToSellEditBinPopup = By.xpath("//form//label[contains(text(),'Available to Sell')]/preceding-sibling::input");
+    public static By chkbxStgAreaEditBinPopup = By.xpath("//form//label[contains(text(),'Staging Area')]/preceding-sibling::input");
+
+
+
 
 }

@@ -6,13 +6,13 @@
 		<classes>
 			<class name="testcases.BinMaintenance">
 				<methods>
-					<!--<include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"></include>
+					<include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"></include>
 					<include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"></include>
 					<include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"></include>
 					<include name="Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable"></include>
 					<include name="Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable"></include>
 					<include name="Tc_766_verifyUIOfCreateNewBinPopup"></include>
-					<include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"></include>-->
+					<include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"></include>
 					<include name="Tc_780_verifyEditBinsButtonFunctionality"></include>
 				</methods>
 			</class>

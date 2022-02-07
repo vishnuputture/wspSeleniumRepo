@@ -17,7 +17,7 @@
 			"Tc_765_verifyItemDescriptionField": "navigateToBinMain,selectCompany,verifyItemDescriptionField",
 			"Tc_766_verifyUIOfCreateNewBinPopup": "navigateToBinMain,selectCompany,clickBinMaintenanceTab,clickCreateNewBinBtn,verifyCreateNewBinPopFields",
 			"Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification": "navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,clickCreateNewBinBtn,vrfyCreateDuplicateBinErrorAndFields",
-			"Tc_780_verifyEditBinsButtonFunctionality": "navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter",
+			"Tc_780_verifyEditBinsButtonFunctionality": "navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,selectFirstBinRecordAndClickEditBinBtn,vrfyUIOfEditBinPopup,selectRandomDropdownValueAndVerifyAfterSave",
 			"Tc_750_VerifyUIItemNumbersAreAvailable": "navigateToBinMain,selectCompany,verifyUIItemNumbersAreAvailable",
 			"Tc_791_verifyPageCountItemMaintenance": "navigateToBinMain,selectCompany,enableContainsFilter,funPageCountItemMaintenance",
 			"Tc_793_verifyPaginationItemMaintenance": "navigateToBinMain,selectCompany,enableContainsFilter,paginationItemMaintenance",

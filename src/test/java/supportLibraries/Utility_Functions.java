@@ -1593,6 +1593,32 @@ public class Utility_Functions extends ReusableLib {
      * }
      */
 
+    /*
+     * ******************************************************************* Function
+     * Name: Click on random element from the list and return the test value
+     * ******************************************************************
+     */
+    public static String xClickOnRandomElement(List<WebElement> list) {
+        String text = null;
+        boolean isStatus = false;
+        Random random = new Random();
+        if (list.isEmpty()) {
+            System.out.println("List is Empty:::");
+            return null;
+        } else {
+            while (!isStatus) {
+                for (WebElement elememt : list) {
+                    int randomValue = random.nextInt(list.size());
+                    text = list.get(randomValue).getText().trim();
+                    list.get(randomValue).click();
+                    isStatus = true;
+                    break;
+                }
+            }
+            return text;
+        }
+    }
+
     public static String xClickRandomElement(List<WebElement> list) {
         String text = null;
         boolean isStatus = false;
@@ -2825,6 +2851,35 @@ public class Utility_Functions extends ReusableLib {
 
         report.updateTestLog("SelectDropDownByName", CustMsg + "-- " + visibleName, Status.PASS);
 
+    }
+
+    /*
+     * ******************************************************************* Function
+     * Name: xSelectDropdownByNameRandomValue Author : winSupply Team Purpose : Select Random value in dropdown
+     * Parameters: driver, e
+     * ******************************************************************
+     */
+
+    public static String xSelectDropdownByNameRandomValue(FrameworkDriver driver, By e) {
+        xWaitForElementPresent(driver, e, 10);
+        xWaitForElementClickable(driver, e, 10);
+        WebElement wb = driver.findElement(e);
+        Select dropdown = new Select(wb);
+        if (dropdown.getOptions().size() <= 0) {
+            timeWait(1);
+        }
+        String selectedOption = dropdown.getFirstSelectedOption().getText().trim();
+        String selectOption = "";
+        List<WebElement> lstOptions = dropdown.getOptions();
+        for(int i=0; i<lstOptions.size(); i++){
+            String option = lstOptions.get(i).getText().trim();
+            if(option.equalsIgnoreCase(selectedOption)){
+                dropdown.selectByVisibleText(option);
+                selectOption = option;
+                break;
+            }
+        }
+        return selectOption;
     }
 
     public static void xSelectDropdownByName(FrameworkDriver driver, WebElement e, String visibleName) {
