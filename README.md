@@ -55,6 +55,30 @@ https://www.eclipse.org/downloads
 	
 	This a directory containing multiple classes classified on the basis of different modules. These classes have the actual implementations of the TestNG annotations. 
 	This is one of the entry points to the test scripts.
+`AverageCost` - This class contains testcases for testing the inventory Average cost adjustment module
+
+`CycleCostAdjust` - This class contains testcases for testing the inventory cycle cost adjustment feature.
+
+`ReceiptCorrection` - This class contains testcases for testing the inventory receipt correction feature.
+
+`MakePayments` - This class contains testcases for testing the user is able to Make account related changes and make payment after successfull purchase
+
+`SPO` - This class contains testcases for testing the functionality of creating worksheets and assigning vendor codes to them for future purchase orders
+
+
+`MatrixCostUpdate` - This class contains testcases for testing the maintenance of matrix cost feature
+
+`PricingMatrix`  - This class contains testcases for testing the features related to Pricing Matrix
+
+`SelfServicePriceSheet` - This class contains testcases for testing the features related to self service price sheet
+
+`SPA` - This class contains testcases for testing the features related to Special Price Allowance
+
+`WISE` - This class contains testcases for testing the features related to Special Pricing
+
+`SalesOrders` - This class contains testcases for testing the features related to creation and updatation of sales orders
+
+`WareHouse` - This class contains testcases for testing the features related to Manifest and related functionalities
 	
 **MiddleLayerDataFiles**
 	
