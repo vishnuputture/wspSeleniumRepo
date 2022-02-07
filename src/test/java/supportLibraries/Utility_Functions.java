@@ -349,6 +349,18 @@ public class Utility_Functions extends ReusableLib {
 
     /*
      * ******************************************************************* Function
+     * Name: inputData Author : winSupply Team
+     * returns list of webelements
+     * ******************************************************************
+     */
+
+    public static List<WebElement> findElementsByXpath(FrameworkDriver driver, By ele) {
+
+        return driver.findElements(ele);
+    }
+
+    /*
+     * ******************************************************************* Function
      * Name: findWebElementByClassName Author : CBRE SF Automation Purpose : Element
      * finder by ClassName
      * ******************************************************************

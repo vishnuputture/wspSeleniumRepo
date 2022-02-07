@@ -6,6 +6,9 @@ import businesskeywords.warehousing.Manifests;
 import businesskeywords.warehousing.Trucks;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Report;
+import com.winSupply.framework.Status;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -79,6 +82,27 @@ public class binMaintenance extends ReusableLib {
     }
 
     /**
+     * Keyword to click [Bin Maintenance] tab
+     */
+    public void clickBinMaintenanceTab() {
+        click(tabs("Bin Maintenance"), "Click on [Bin Maintenance] tab");
+        waitForElementDisappear(BinMaintenancePage.loadingSpinner, globalWait);
+    }
+
+    /**
+     * Keyword to verify UI of Item-Bin Maintenance > Bin Maintenance tab when no search filters applied
+     */
+    public void binMaintenanceUIDefault() {
+        clickBinMaintenanceTab();
+        commonObj.validateText(By.xpath("//h2"), "Item-Bin Maintenance", "Item-Bin Maintenance Header is present");
+        commonObj.validateText(tabs("Item Maintenance"), "Item Maintenance", "Item Maintenance tab is present");
+        commonObj.validateText(tabs("Bin Maintenance"), "Bin Maintenance", "Bin Maintenance tab is present");
+        commonObj.validateText(tabs("Apply filters to see results."), "Apply filters to see results.", "label [Apply filters to see results.] is present");
+        verifyIcons();
+        verifySearchFilterFields();
+    }
+
+    /**
      * Keyword to verify Availability of icons present at left corner of the page
      */
     public void verifyIcons() {
@@ -96,6 +120,19 @@ public class binMaintenance extends ReusableLib {
     public void verifySearchFilterFields() {
         SearchCheckBox();
         String[] field = {"Item Number", "Item Description", "Zone", "Bin Condition", "IOV", "Bin Type", "MF", "PD", "VN", "Total On Hand Qty"};
+        for (String label : field) {
+            commonObj.validateElementExists(By.xpath("//label[contains(text(),'" + label + "')]/parent::div/descendant::input"), label + " is present");
+        }
+        commonObj.validateElementExists(BinMaintenancePage.applyFilter, "Apply filter button is present");
+        commonObj.validateElementExists(BinMaintenancePage.clearFilter, "Clear All filter button is present");
+    }
+
+    /**
+     * Keyword to verify Availability of fields on the search filter after clicking [Bin Maintenance] tab
+     */
+    public void verifyBinMaintenanceTabSearchFilterFields() {
+        SearchCheckBox();
+        String[] field = {"Item Number", "Item Description", "Zone", "Bin Condition", "IOV", "Bin Type", "Bin Start", "Bin Stop", "MF", "PD", "VN"};
         for (String label : field) {
             commonObj.validateElementExists(By.xpath("//label[contains(text(),'" + label + "')]/parent::div/descendant::input"), label + " is present");
         }
@@ -351,11 +388,23 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.timeWait(2);
         click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
-        int ItemCount = driver.findElements(BinMaintenancePage.itemCountSP).size();
-        if (ItemCount == pageNum) {
-            Utility_Functions.xAssertEquals(report, "" + ItemCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Item Count");
-        } else {
-            commonObj.validateElementExists(BinMaintenancePage.itemCountSP, "Total Item count is " + ItemCount + "");
+        String itemMaintenanceSelected = Utility_Functions.getText(driver, BinMaintenancePage.itemMaintenanceTab, "aria-selected");
+        String binMaintenanceSelected = Utility_Functions.getText(driver, BinMaintenancePage.binMaintenanceTab, "aria-selected");
+
+        if(itemMaintenanceSelected.equalsIgnoreCase("true")){
+            int ItemCount = driver.findElements(BinMaintenancePage.itemCountSP).size();
+            if (ItemCount == pageNum) {
+                Utility_Functions.xAssertEquals(report, "" + ItemCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Item Count");
+            } else {
+                commonObj.validateElementExists(BinMaintenancePage.itemCountSP, "Total Item count is " + ItemCount + "");
+            }
+        }else if(binMaintenanceSelected.equalsIgnoreCase("true")){
+            int BinCount = driver.findElements(BinMaintenancePage.binsCountSP).size();
+            if (BinCount == pageNum) {
+                Utility_Functions.xAssertEquals(report, "" + BinCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Bin Count");
+            } else {
+                commonObj.validateElementExists(BinMaintenancePage.binsCountSP, "Total Bin count is " + BinCount + "");
+            }
         }
     }
 
@@ -368,6 +417,25 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
             int itemCount = driver.findElements(BinMaintenancePage.itemCountSP).size();
+            commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having Item count " + itemCount + "");
+        } else {
+            valPageCount(10);
+            valPageCount(15);
+            valPageCount(30);
+            valPageCount(30);
+            valPageCount(10);
+        }
+    }
+
+    /**
+     * Keyword to Verify functionality of Page Count
+     */
+    public void funPageCountBinMaintenance() {
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.timeWait(2);
+        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
+            int itemCount = driver.findElements(BinMaintenancePage.binsCountSP).size();
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having Item count " + itemCount + "");
         } else {
             valPageCount(10);
@@ -803,5 +871,132 @@ public class binMaintenance extends ReusableLib {
         click(driver.findElement(button("Save ")),"Click Save button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster,"Bin Location already exists","'Bin Location already exists' is present");
+    }
+
+    /**
+     * Keyword to verify UI of Item-Bin Maintenance > Bin Maintenance tab when Bins are available
+     */
+    public void binMaintenanceUIwithFilters() {
+        commonObj.validateElementExists(BinMaintenancePage.lblBinCount, "Bins count label is present below left top page header");
+        commonObj.validateElementExists(button(" Select All Bins "), "[Select All Bins] is present on top right side of table");
+        String[] field = {"Bin", "Zone", "Status", "Available to Sell", "Items"};
+        for (String label : field) {
+            commonObj.validateElementExists(By.xpath("//thead/tr/th[contains(text(),'" + label + "')]"), "Table header ["+label + "] is present");
+        }
+        commonObj.validateElementExists(button("Delete Bin"), "[Delete Bin] button is present on bottom of page");
+        commonObj.validateElementExists(button(" Edit  Bin(s) "), "[Edit Bin(s)] button is present on bottom of page");
+        commonObj.validateElementExists(button("Create New Bin"), "[Create New Bin] button is present on bottom of page");
+        commonObj.validateElementExists(button(" Export to Excel"), "[Export to Excel] button is present on bottom of page");
+        commonObj.validateElementExists(button(" Labels "), "[Labels] button is present on bottom of page");
+        verifyPresenceOfShowRowsCountsLabel();
+        commonObj.validateElementExists(BinMaintenancePage.pagination, "[Pagination] buttons are present below the table");
+    }
+
+    /**
+     * Keyword to Verify presence of Show Rows count label below Bins table
+     */
+    public void verifyPresenceOfShowRowsCountsLabel(){
+        commonObj.validateElementExists(BinMaintenancePage.lblShowRowsCount, "Show Rows Count label is present below the table");
+        String[] rowsCount = {"10", "15", "30"};
+        for (String count : rowsCount) {
+            commonObj.validateElementExists(By.xpath("//nav[@id='binMaintenancePagination']//following::span[text()='" + count + "']"), "Rows Count "+count + " is present");
+        }
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.btnShowRowsCount);
+        if(lstElement.get(0).getAttribute("class").contains("selected-count")){
+            report.updateTestLog("Verify show rows count", "Verify show rows count [10] is set by default",Status.PASS);
+        }
+    }
+
+    /**
+     * Keyword to click [Create New Bin] button
+     */
+    public void clickCreateNewBinBtn() {
+        click(button("Create New Bin"), "Click on [Create New Bin] button");
+        waitForVisible(BinMaintenancePage.hdrCreateNewBinPopup);
+    }
+
+    public void vrfyPresenceOfChbxInCreateNewBinPopup() {
+        commonObj.validateText(validateCheckBox("Special Handling"), "Special Handling", "[Special Handling] check box is present");
+        commonObj.validateText(validateCheckBox("Available to Sell"), "Available to Sell", "[Available to Sell] check box is present");
+        commonObj.validateText(validateCheckBox("Staging Area"), "Staging Area", "[Staging Area] check box is present");
+
+        String attrAvaiToSell = getAttribute(BinMaintenancePage.chbxAvailableToSell, "ng-reflect-model");
+        String attrSpclHndlng = getAttribute(BinMaintenancePage.chbxSpecialHandling, "ng-reflect-model");
+
+        if(attrAvaiToSell.equalsIgnoreCase("true"))
+            report.updateTestLog("Verify Available To Sell chbx", "[Available to Sell] checkbox is selected by default",Status.PASS);
+        else
+            report.updateTestLog("Verify Available To Sell chbx", "[Available to Sell] checkbox is selected by default",Status.FAIL);
+        if(attrSpclHndlng.isEmpty() || attrSpclHndlng.equalsIgnoreCase("false"))
+            report.updateTestLog("Verify Special Handling chbx", "[Special Handling] checkbox is not selected by default",Status.PASS);
+        else
+            report.updateTestLog("Verify Special Handling chbx", "[Special Handling] checkbox is not selected by default",Status.FAIL);
+    }
+
+    /**
+     * Keyword to verify presence of fields on [CREATE NEW BIN] popup]
+     */
+    public void verifyCreateNewBinPopFields() {
+        commonObj.validateText(BinMaintenancePage.hdrCreateNewBinPopup, "create new bin", "[CREATE NEW BIN] header is present");
+        vrfyPresenceOfChbxInCreateNewBinPopup();
+        commonObj.validateElementExists(BinMaintenancePage.tbxBinLocation, "[Bin Location] textbox is present");
+
+        String[] field = {"Condition", "Zones", "Picking", "Receiving"};
+        for (String label : field) {
+            commonObj.validateElementExists(By.xpath("//label[contains(text(),'" + label + "')]//following-sibling::select"), "Dropdown ["+label + "] is present");
+        }
+        commonObj.validateElementExists(BinMaintenancePage.btnCancelCreateNewBinpopup, "[Cancel] button is present");
+        commonObj.validateElementExists(BinMaintenancePage.btnSaveCreateNewBinpopup, "[Save] button is present");
+    }
+
+    /**
+     * Keyword to verify Create Duplicate Bin error
+     */
+    public void vrfyCreateDuplicateBinErrorAndFields(){
+        boolean isSaveEnabled = getElement(BinMaintenancePage.btnSaveCreateNewBinpopup).isEnabled();
+        if(!isSaveEnabled)
+            report.updateTestLog("Verify Save Btn state", "[Save] button is disabled",Status.PASS);
+        else
+            report.updateTestLog("Verify Save Btn state", "[Save] button is disabled",Status.FAIL);
+
+        vrfyBinLocationTextbox();
+        selectDropdownsCreateNewBinPopup("Good", "Default", "Automatic", "Manual");
+        click(BinMaintenancePage.btnSaveCreateNewBinpopup,"Click [Save] button");
+        waitForVisible(BinMaintenancePage.toastMsg);
+        commonObj.validateText(BinMaintenancePage.toastMsg, "Bin Location already exists","Duplicate Bin error message");
+        click(BinMaintenancePage.btnCancelCreateNewBinpopup,"Click [Cancel] button");
+        waitForElementDisappear(BinMaintenancePage.hdrCreateNewBinPopup, globalWait);
+    }
+
+    /**
+     * Keyword to verify [Bin Location] textbox
+     */
+    public void vrfyBinLocationTextbox(){
+        sendKeys(BinMaintenancePage.tbxBinLocation,"!@#$%^&*()_+=~", "entering Special Characters in Bin Location textbox");
+        Utility_Functions.timeWait(2);
+        String textActual = getValue(BinMaintenancePage.tbxBinLocation);
+        Utility_Functions.xAssertEquals(report, "", textActual, "Special Characters are NOT accepted in Bin Location textbox");
+
+        sendKeys(BinMaintenancePage.tbxBinLocation,"TEST123", "entering Alphanumeric Characters in Bin Location textbox");
+        Utility_Functions.timeWait(2);
+        textActual = getValue(BinMaintenancePage.tbxBinLocation);
+        Utility_Functions.xAssertEquals(report, "TEST123", textActual, "Alphanumeric Characters are accepted in Bin Location textbox");
+
+        sendKeys(BinMaintenancePage.tbxBinLocation, "AUTOMATION", "enter existing Bin [AUTOMATION] in Bin Location textbox");
+        Utility_Functions.timeWait(2);
+        textActual = getValue(BinMaintenancePage.tbxBinLocation);
+        Utility_Functions.xAssertEquals(report, "AUTOMATION", textActual, "existing Bin [AUTOMATION] is accepted in Bin Location textbox");
+    }
+
+    /**
+     * Keyword to select dropdown values in Create New Bin popup
+     */
+    public void selectDropdownsCreateNewBinPopup(String condition, String zones, String picking, String receiving){
+        String[] texts = {condition, zones, picking, receiving};
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.lstDropdownsCreateNewBinPopup);
+        for(int i=0; i<lstElement.size(); i++){
+            Utility_Functions.xSelectDropdownByName(driver, report, lstElement.get(i), texts[i], "selected value ["+texts[i]+"] in drodpown");
+            Utility_Functions.timeWait(1);
+        }
     }
 }

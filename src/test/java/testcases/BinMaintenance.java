@@ -222,4 +222,68 @@ public class BinMaintenance extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify UI of Bin Maintenance Tab when no data present");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify UI of Bin Maintenance Tab when Bins are available");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Functionality of Row Count of Bin Maintenance Tab when Bins are available");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Pagination for Bin Maintenance table when Bins are available");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Select All Bins for Bin Maintenance table when Bins are available");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_766_verifyUIOfCreateNewBinPopup(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify UI of Create New Bin popup");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Duplicate Bin error and field verification");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_780_verifyEditBinsButtonFunctionality(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify functionality of Edit Bin(s) button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

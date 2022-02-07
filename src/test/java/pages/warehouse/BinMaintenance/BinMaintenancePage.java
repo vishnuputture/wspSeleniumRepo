@@ -30,10 +30,11 @@ public class BinMaintenancePage {
     public static  By buttonDis=By.xpath("//button[@disabled]");
     public static  By matchesHeader=By.xpath("//h2[text()='SUGGESTED MATCHES']");
     public static  By itemBinManItemDet=By.xpath("//h2[text()='Item-Bin Maintenance - Item Details']");
-    public static  By itemCount=By.xpath("//span[contains(text(),' Items ')]");
-    public static  By selectAllCheckbox=By.xpath("//input[@type='checkbox']/following-sibling::button[contains(text(),'elect All Items')]");
+    public static  By itemCount=By.xpath("//span[contains(text(),' Items ') or contains(text(),' Bins ')]");
+    public static  By selectAllCheckbox=By.xpath(" //input[@type='checkbox']/following-sibling::button[contains(text(),'elect All Items') or contains(text(),'elect All Bins')]");
     public static  By selectAllPop=By.xpath("//label[contains(text(),'elect All Items')]/parent::div/input");
     public static  By itemCountSP=By.xpath("//tbody/tr/td[contains(@class,'pl-3 pr-3')]");
+    public static  By binsCountSP=By.xpath("//tbody/tr/td[@class='pl-3']");
     public static  By highlightRow=By.xpath("//tr[contains(@class,'ui-state-highlight')]");
     public static  By toaster=By.xpath("//div[@class='ui-toast-summary']");
     public static  By primaryOpt=By.xpath("//select[@ng-reflect-model='Primary']");
@@ -49,4 +50,22 @@ public class BinMaintenancePage {
     public static  By zoneIdDropDown=By.xpath("//select[@name='zoneId']");
     public static  By goToItemBinLedger=By.xpath("//a[@title='Go To Item Bin Ledger']");
     public static  By createBinPopup=By.xpath("//h2[text()='CREATE BIN AND ASSIGN']");
+
+    public static  By loadingSpinner=By.xpath("//i[contains(@class,'fa fa-spinner')]");
+    public static  By lblBinCount=By.xpath("//h2//following-sibling::div/span[contains(text(),' Bins')]");
+    public static  By lblShowRowsCount=By.xpath("//span[text()='Show: ']");
+    public static  By btnShowRowsCount=By.xpath("//nav[@id='binMaintenancePagination']//following::a[contains(@class,'count')]");
+    public static  By pagination=By.className("pagination");
+    public static  By toastMsg=By.className("ui-toast-summary");
+
+    /******************************************** Create New Bin popup elements ********************************************/
+
+    public static By hdrCreateNewBinPopup = By.xpath("//h2[text()='CREATE NEW BIN']");
+    public static By chbxAvailableToSell = By.xpath("//label[text()='Available to Sell']//preceding-sibling::input[@type='checkbox']");
+    public static By chbxSpecialHandling = By.xpath("//label[text()='Special Handling']//preceding-sibling::input[@type='checkbox']");
+    public static By tbxBinLocation = By.xpath("//label[contains(text(),'Bin Location')]//following-sibling::input");
+    public static By btnCancelCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Cancel')]");
+    public static By btnSaveCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Save')]");
+    public static By lstDropdownsCreateNewBinPopup = By.id("createBinCondition");
+
 }
