@@ -2853,6 +2853,16 @@ public class Utility_Functions extends ReusableLib {
 
     }
 
+    public static void xSelectDropdownByName(FrameworkDriver driver, Report report, By e, String visibleName,
+                                             String CustMsg) {
+        if (visibleName != "") {
+            xSelectDropdownByName(driver, e, visibleName);
+        }
+
+        report.updateTestLog("SelectDropDownByName", CustMsg + "-- " + visibleName, Status.PASS);
+
+    }
+
     /*
      * ******************************************************************* Function
      * Name: xSelectDropdownByNameRandomValue Author : winSupply Team Purpose : Select Random value in dropdown

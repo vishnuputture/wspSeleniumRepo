@@ -51,24 +51,31 @@ public class BinMaintenancePage {
     public static  By goToItemBinLedger=By.xpath("//a[@title='Go To Item Bin Ledger']");
     public static  By createBinPopup=By.xpath("//h2[text()='CREATE BIN AND ASSIGN']");
 
-    public static  By loadingSpinner=By.xpath("//i[contains(@class,'fa fa-spinner')]");
     public static  By lblBinCount=By.xpath("//h2//following-sibling::div/span[contains(text(),' Bins')]");
     public static  By lblShowRowsCount=By.xpath("//span[text()='Show: ']");
     public static  By btnShowRowsCount=By.xpath("//nav[@id='binMaintenancePagination']//following::a[contains(@class,'count')]");
     public static  By pagination=By.className("pagination");
     public static  By toastMsg=By.className("ui-toast-summary");
-    public static  By tdZoneFirstRow=By.xpath("//tbody//tr[1]/td[2]");
-    public static  By tdStatusFirstRow=By.xpath("//tbody//tr[1]//span[contains(@class,'win-badge-success')]");
+    public static  By tdBinFirstRow=By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr[1]//a[contains(@class,'win-text-primar')]");
+    public static  By tdZoneFirstRow=By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr[1]/td[2]");
+    public static  By tdStatusFirstRow=By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr[1]//span[contains(@class,'bin-status win-badge')]");
+    public static  By tdAvaibaleToSellFirstRow=By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr[1]/td[4]");
+    public static  By tdItemsFirstRow=By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr[1]/td[5]");
 
     /******************************************** Create New Bin popup elements ********************************************/
 
     public static By hdrCreateNewBinPopup = By.xpath("//h2[text()='CREATE NEW BIN']");
     public static By chbxAvailableToSell = By.xpath("//label[text()='Available to Sell']//preceding-sibling::input[@type='checkbox']");
     public static By chbxSpecialHandling = By.xpath("//label[text()='Special Handling']//preceding-sibling::input[@type='checkbox']");
+    public static By chbxStagingArea = By.xpath("//label[text()='Staging Area']//preceding-sibling::input[@type='checkbox']");
     public static By tbxBinLocation = By.xpath("//label[contains(text(),'Bin Location')]//following-sibling::input");
     public static By btnCancelCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Cancel')]");
     public static By btnSaveCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Save')]");
     public static By lstDropdownsCreateNewBinPopup = By.id("createBinCondition");
+    public static By ddnZoneCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Zones')]//following-sibling::select");
+    public static By ddnConditionCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Condition')]//following-sibling::select");
+    public static By ddnReceivingCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Receiving')]//following-sibling::select");
+    public static By ddnPickingCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Picking')]//following-sibling::select");
 
     /******************************************** Edit Bin(s) popup elements ********************************************/
 

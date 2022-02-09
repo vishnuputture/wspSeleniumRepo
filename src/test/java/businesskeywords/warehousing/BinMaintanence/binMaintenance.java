@@ -86,7 +86,7 @@ public class binMaintenance extends ReusableLib {
      */
     public void clickBinMaintenanceTab() {
         click(tabs("Bin Maintenance"), "Click on [Bin Maintenance] tab");
-        waitForElementDisappear(BinMaintenancePage.loadingSpinner, globalWait);
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
     }
 
     /**
@@ -1089,11 +1089,96 @@ public class binMaintenance extends ReusableLib {
         String receiving = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnReceivingEditBinPopup);
         String picking = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnPickingEditBinPopup);
         click(BinMaintenancePage.btnSaveEdiBinPopup,"Click [Save] button");
-        waitForElementDisappear(BinMaintenancePage.loadingSpinner, globalWait);
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
 
         String actual = getText(BinMaintenancePage.tdZoneFirstRow);
         Utility_Functions.xAssertEquals(report, zone, actual, "Verify [Zone] value in records table");
         actual = getText(BinMaintenancePage.tdStatusFirstRow);
         Utility_Functions.xAssertEquals(report, condition, actual, "Verify [Status] value in records table");
+    }
+
+    /**
+     * Keyword to create a New Bin and verify data in table
+     */
+    public void createNewBinAndVerifyData(){
+        clickCreateNewBinBtn();
+        String binLocation = "TEST"+Utility_Functions.xRandomFunction(99999);
+        jsonData.putData("BinLocation", binLocation);
+        String condition = jsonData.getData("BinCondition");
+        String zones = jsonData.getData("BinZones");
+        String picking = jsonData.getData("BinPicking");
+        String receiving = jsonData.getData("BinReceiving");
+        String availableToSell = jsonData.getData("BinAvailableToSell");
+        String specialHandling = jsonData.getData("BinSpecialHandling");
+        String stagingArea = jsonData.getData("BinStagingArea");
+        String items = jsonData.getData("BinItems");
+
+        selectDropdownOptionCreateNewBinPopup(binLocation, condition, zones, picking, receiving);
+        selectUnselectChbxCreateNewBinPopup(BinMaintenancePage.chbxSpecialHandling, specialHandling);
+        selectUnselectChbxCreateNewBinPopup(BinMaintenancePage.chbxAvailableToSell, availableToSell);
+        click(BinMaintenancePage.chbxStagingArea);
+        Utility_Functions.timeWait(1);
+        selectUnselectChbxCreateNewBinPopup(BinMaintenancePage.chbxStagingArea, stagingArea);
+
+        click(BinMaintenancePage.btnSaveCreateNewBinpopup,"Click [Save] button");
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        waitForVisible(BinMaintenancePage.toastMsg);
+        commonObj.validateText(BinMaintenancePage.toastMsg, "Bin "+binLocation+" created successfully.","Bin Creates Successfully message is displayed");
+        Utility_Functions.timeWait(2);
+        vrfyFirstRowValueInBinTable(binLocation, condition, zones, availableToSell, items);
+    }
+
+    /**
+     * Keyword to enter data in [Create New Bin] popup
+     */
+    public void selectDropdownOptionCreateNewBinPopup(String binLocation, String condition, String zones, String picking, String receiving){
+        sendKeys(BinMaintenancePage.tbxBinLocation,binLocation, "Entering ["+binLocation+"] in Bin Location textbox");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnConditionCreateBinPopup, condition, "Selected option ["+condition+"] in Condition dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnZoneCreateBinPopup, zones, "Selected option ["+zones+"] in Zoned dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnPickingCreateBinPopup, picking, "Selected option ["+picking+"] in Picking dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnReceivingCreateBinPopup, receiving, "Selected option ["+receiving+"] in Receiving dropdown");
+    }
+
+    /**
+     * Keyword to select/unselect checkbox in [Create New Bin] popup
+     */
+    public void selectUnselectChbxCreateNewBinPopup(By checkbox, String desiredState){
+        String state = "";
+        if(!isDisplayed(checkbox))
+            report.updateTestLog("Select/Unselect checkbox", "Checkbox is NOT present",Status.FAIL);
+        else{
+            switch(desiredState){
+                case "Yes":
+                    state = getAttribute(checkbox, "ng-reflect-model");
+                    if (state.equalsIgnoreCase("false"))
+                        click(checkbox,"enabled checkbox");
+                    else
+                        report.updateTestLog("Select/Unselect checkbox", "Checkbox is already enabled",Status.PASS);
+                    break;
+                case "No":
+                    state = getAttribute(checkbox, "ng-reflect-model");
+                    if (state.equalsIgnoreCase("true"))
+                        click(checkbox,"enabled checkbox");
+                    else
+                        report.updateTestLog("Select/Unselect checkbox", "Checkbox is already not enabled",Status.PASS);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Keyword to verify data in first row from records table - Bin Maintenance
+     */
+    public void vrfyFirstRowValueInBinTable(String binLocation, String condition, String zones, String avlToSell, String items){
+        String actual = getText(BinMaintenancePage.tdBinFirstRow);
+        Utility_Functions.xAssertEquals(report, binLocation, actual, "Verify [Bin] value in records table");
+        actual = getText(BinMaintenancePage.tdZoneFirstRow);
+        Utility_Functions.xAssertEquals(report, zones, actual, "Verify [Zone] value in records table");
+        actual = getText(BinMaintenancePage.tdStatusFirstRow);
+        Utility_Functions.xAssertEquals(report, condition, actual, "Verify [Status] value in records table");
+        actual = getText(BinMaintenancePage.tdAvaibaleToSellFirstRow);
+        Utility_Functions.xAssertEquals(report, avlToSell, actual, "Verify [Available to Sell] value in records table");
+        actual = getText(BinMaintenancePage.tdItemsFirstRow);
+        Utility_Functions.xAssertEquals(report, items, actual, "Verify [Items] value in records table");
     }
 }

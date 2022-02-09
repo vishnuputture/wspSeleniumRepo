@@ -272,6 +272,30 @@ public class BinMaintenance extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_767_verifyCreateNewBinWithConditionGood(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify creation of New Bin with Condition as Good");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_768_verifyCreateNewBinWithConditionDamaged(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify creation of New Bin with Condition as Damaged");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_769_verifyCreateNewBinWithConditionDefective(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify creation of New Bin with Condition as Defective");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify Duplicate Bin error and field verification");
         CoreScript coreScript = new CoreScript(testParameters);
