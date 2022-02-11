@@ -152,6 +152,18 @@ public class binMaintenance extends ReusableLib {
         return By.xpath("//td[contains(text(),'" + binLocation + "')]/ancestor::tr/descendant::i[@title='Delete']");
     }
 
+    public By zoneDisabledFields(String label, String text) {
+        return By.xpath("//label[contains(text(),'" + label + "')]/following-sibling::input[@disabled and contains(@ng-reflect-model,'" + text + "')]");
+    }
+
+    public By saveButtonEditedZone(String zoneName) {
+        return By.xpath("//input[@ng-reflect-model='" + zoneName + "']/ancestor::div/following-sibling::div[@ng-reflect-ng-class='show']/descendant::button");
+    }
+
+    public By pickSequence(String zoneName) {
+        return By.xpath("//input[@ng-reflect-model='" + zoneName + "']/ancestor::div/following-sibling::div[@ng-reflect-ng-class='show']/descendant::input");
+    }
+
     /**
      * Keyword to verify Availability of Menu Icon
      */
@@ -935,8 +947,8 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
         String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
-        sendKeys(BinMaintenancePage.zoneName, zoneName , "Enter Zone Name");
-        sendKeys(BinMaintenancePage.zoneAbv, zoneAbv , "Enter Zone Abbreviation as " + zoneAbv + "Q");
+        sendKeys(BinMaintenancePage.zoneName, zoneName, "Enter Zone Name");
+        sendKeys(BinMaintenancePage.zoneAbv, zoneAbv, "Enter Zone Abbreviation as " + zoneAbv + "Q");
         Utility_Functions.timeWait(3);
         click(button("Save "), "Click 'Save' Button");
         return zoneAbv;
@@ -975,19 +987,29 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xAssertEquals(report, driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
     }
 
-    /**
-     * Keyword to Verify Edit Zone icon
-     */
-    public String clickEditZoneIcon() {
+    public String expandZone() {
+        Utility_Functions.timeWait(3);
         String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
         WebElement expand = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/a"));
-        WebElement editIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"));
         Utility_Functions.xScrollIntoView(driver, expand);
         Utility_Functions.timeWait(2);
         click(expand, "Expand Zone detail");
         Utility_Functions.timeWait(2);
+        return zoneAbv;
+    }
+
+    public void clickEditIcon(String zoneAbv) {
+        WebElement editIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"));
         click(editIcon, "Click Edit icon");
         Utility_Functions.timeWait(2);
+    }
+
+    /**
+     * Keyword to Verify Edit Zone icon
+     */
+    public String clickEditZoneIcon() {
+        String zoneAbv = expandZone();
+        clickEditIcon(zoneAbv);
         return zoneAbv;
     }
 
@@ -996,12 +1018,251 @@ public class binMaintenance extends ReusableLib {
      */
     public void clickDeleteZoneIcon() {
         String zoneAbv = clickEditZoneIcon();
+        String zoneName = Utility_Functions.xGetJsonData("zoneName");
         WebElement deleteIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
         Utility_Functions.timeWait(2);
         click(deleteIcon, "Click Delete Icon");
         Utility_Functions.timeWait(2);
         click(TruckPage.yesButtonPopUp, "Click Yes Button");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xAssertEquals(report, driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']")).isDisplayed(), false, zoneAbv + " Not present on Zone page");
+        commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zoneName + " deleted successfully.", "'Zone " + zoneName + " deleted successfully.' is present");
     }
+
+    public void verifyDuplicateZoneName(String zoneName) {
+        clearText(BinMaintenancePage.zoneAbv);
+        Utility_Functions.timeWait(2);
+        sendKeys(BinMaintenancePage.zoneName, zoneName, "Enter Zone Name");
+        Utility_Functions.timeWait(2);
+        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneName + " already exists']"), "Zone " + zoneName + " already exists", "'Zone " + zoneName + " already exists' error message is present");
+    }
+
+    public void verifyDuplicateZoneAbv(String zoneAbv) {
+        clearText(BinMaintenancePage.zoneName);
+        Utility_Functions.timeWait(2);
+        sendKeys(BinMaintenancePage.zoneName, "pk123456789", "Enter Zone Name");
+        Utility_Functions.timeWait(2);
+        sendKeys(BinMaintenancePage.zoneAbv, zoneAbv, "Clear Zone name field and Enter Zone Abbreviation as " + zoneAbv + "Q");
+        Utility_Functions.timeWait(2);
+        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneAbv + " already exists']"), "Zone " + zoneAbv + " already exists", "'Zone " + zoneAbv + " already exists' error message is present");
+    }
+
+    public String verifySaveButtonDisZoneName() {
+        String zoneName = Utility_Functions.xGetJsonData("zoneName");
+        sendKeys(BinMaintenancePage.zoneName, zoneName + "AutoQA", "Enter Zone Name");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        return zoneName;
+    }
+
+    public String verifySaveButtonDisZoneAvr() {
+        String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
+        sendKeys(BinMaintenancePage.zoneAbv, zoneAbv, "Clear Zone name field and Enter Zone Abbreviation as " + zoneAbv + "Q");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        return zoneAbv;
+    }
+
+    public void verifyBlankSpaceCreateZone() {
+        clearText(BinMaintenancePage.zoneName);
+        Utility_Functions.timeWait(2);
+        clearText(BinMaintenancePage.zoneAbv);
+        sendKeys(BinMaintenancePage.zoneName, "  ", "Enter 2 Blank space into Zone Name text field");
+        sendKeys(BinMaintenancePage.zoneAbv, "  ", "Enter 2 Blank space into Zone Abbreviation text field");
+        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.toaster, "Error while creating Zone.", "'Error while creating Zone.' error message is present");
+    }
+
+    /**
+     * Keyword to Verify duplicate Zone
+     */
+    public void verifyDuplicateZone() {
+        click(button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        String zoneName = verifySaveButtonDisZoneName();
+        clearText(BinMaintenancePage.zoneName);
+        String zoneAbv = verifySaveButtonDisZoneAvr();
+        sendKeys(BinMaintenancePage.zoneName, zoneName, "Enter Zone Name");
+        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneName + " already exists']"), "Zone " + zoneName + " already exists", "'Zone " + zoneName + " already exists' error message is present");
+        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneAbv + " already exists']"), "Zone " + zoneAbv + " already exists", "'Zone " + zoneAbv + " already exists' error message is present");
+        verifyDuplicateZoneName(zoneName);
+        verifyDuplicateZoneAbv(zoneAbv);
+        verifyBlankSpaceCreateZone();
+    }
+
+    public void isZoneFieldDisabled(String label, String text) {
+        commonObj.validateElementExists(zoneDisabledFields(label, text), label + " field is disabled");
+    }
+
+    public void isZoneFieldsEditable(String label, String text) {
+        boolean isDisabled = false;
+        try {
+            isDisabled = driver.findElement(zoneDisabledFields(label, text)).isDisplayed();
+            throw new Exception("Zone Field should Enable");
+        } catch (Exception e) {
+            Utility_Functions.xAssertEquals(report, isDisabled, false, label + " field is Enabled");
+        }
+    }
+
+    public void editZoneField(String zoneName) {
+        Utility_Functions.timeWait(2);
+        String zName = zoneName + "a";
+        Utility_Functions.xUpdateJson("zoneName", zName);
+        sendKeys(By.xpath("//input[@ng-reflect-model='" + zoneName + "']"), zName, "Edit Zone Name");
+        Utility_Functions.timeWait(2);
+        click(saveButtonEditedZone(zName), "Click 'Save' Button");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " updated successfully.", "'Zone " + zName + " updated successfully.' message is present");
+        commonObj.validateElementExists(zoneDisabledFields("Zone Name", zName), "Zone Name field is modified and disabled");
+    }
+
+    /**
+     * Keyword to Verify Edit Zone
+     */
+    public void verifyEditZone() {
+        String zoneAvr = expandZone();
+        String zoneName = Utility_Functions.xGetJsonData("zoneName");
+        isZoneFieldDisabled("Zone Name", zoneName);
+        isZoneFieldDisabled("Abbreviation", zoneAvr);
+        Boolean bl1 = driver.findElement(BinMaintenancePage.pickSequence).isEnabled();
+        Utility_Functions.xAssertEquals(report, bl1, false, "Pick Sequence field is disabled");
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        clickEditIcon(zoneAvr);
+        isZoneFieldsEditable("Zone Name", zoneName);
+        isZoneFieldsEditable("Abbreviation", zoneAvr);
+        editZoneField(zoneName);
+    }
+
+    public void validatePickSeqField(String zoneName, String validVal, String inValidVal) {
+        Utility_Functions.timeWait(2);
+        sendKeys(pickSequence(zoneName), validVal, "Enter '" + validVal + "' into Pick Sequence text field");
+        boolean bl = Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.pickSeqError);
+        Utility_Functions.xAssertEquals(report, bl, false, "Error message is disappeared");
+        sendKeys(pickSequence(zoneName), "100000");
+        sendKeys(pickSequence(zoneName), inValidVal, "Enter '" + inValidVal + "' into Pick Sequence text field");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(BinMaintenancePage.pickSeqError, "Please enter a pick sequence between 1-999.", "'Please enter a pick sequence between 1-999.' is present");
+    }
+
+    /**
+     * Keyword to Verify Pick sequence
+     */
+    public void verifyPickSequence() {
+        String zoneAvr = expandZone();
+        String zoneName = Utility_Functions.xGetJsonData("zoneName");
+        clickEditIcon(zoneAvr);
+        validatePickSeqField(zoneName, "1", "1000");
+        clearText(pickSequence(zoneName));
+        commonObj.validateText(BinMaintenancePage.pickSeqError, "Please enter a pick sequence between 1-999.", "'Please enter a pick sequence between 1-999.' is present");
+        validatePickSeqField(zoneName, "-1", "0");
+        validatePickSeqField(zoneName, "2.5", "#$%%FGH");
+    }
+
+    /**
+     * Keyword to Navigate to Item Bin Ledger
+     */
+    public void navigateItemBinLedgerPage() {
+        click(BinMaintenancePage.inboxIcon, "Click Inbox Icon");
+        Utility_Functions.timeWait(2);
+        click(BinMaintenancePage.itemBinLedger, "Navigate to item Bin Ledger page");
+        commonObj.validateText(BinMaintenancePage.itemBinLedgerHeader, "ITEM-BIN LEDGER", "ITEM-BIN LEDGER header is present");
+    }
+
+    /**
+     * Keyword to verify Availability of fields on the search filter Item Bin Ledger
+     */
+    public void verifySearchFilterLedger() {
+        Utility_Functions.timeWait(3);
+        String[] field = {"Item Number", "Bin Location", "Source", "Reference", "Start Order Date", "End Order Date", "User"};
+        for (String label : field) {
+            commonObj.validateElementExists(By.xpath("//label[contains(text(),'" + label + "')]/parent::div/descendant::input"), label + " is present");
+        }
+        commonObj.validateElementExists(BinMaintenancePage.applyFilter, "Apply filter button is present");
+        commonObj.validateElementExists(BinMaintenancePage.clearFilter, "Clear All filter button is present");
+    }
+
+    /**
+     * Keyword to UI of Item Bin Ledger Page
+     */
+    public void itemBinLedgerPageUI() {
+        commonObj.validateText(tabs("Item Number is missing."), "Item Number is missing.", "'Item Number is missing.' message is present");
+        verifyIcons();
+        verifySearchFilterLedger();
+        commonObj.validateElementExists(BinMaintenancePage.excelBtn, "Export to Excel button is present");
+    }
+
+    /**
+     * Keyword to verify Apply Clear Filter
+     */
+    public void verifyApplyClearFilter() {
+        Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(tabs("Item Number is missing."), "Item Number is missing.", "'Item Number is missing.' message is present");
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis,"Apply Filter button is disabled");
+        click(TruckPage.filtersCrossIcon,"Click 'x' icon");
+        Utility_Functions.timeWait(2);
+        try {
+            Utility_Functions.xIsDisplayed(driver,TruckPage.searchFilterPanelTitle);
+        }catch (Exception e){
+            Utility_Functions.xAssertEquals(report,false,false,"Search Filter is disappeared");
+        }
+    }
+
+    /**
+     * Keyword to verify Apply Clear Filter
+     */
+    public void verifyItemNumberField() {
+        Utility_Functions.timeWait(3);
+        String itemNumber=jsonData.getData("itemNumber");
+        sendKeys(BinMaintenancePage.itemNumber, itemNumber, "Enter " + itemNumber + " into Item number text field");
+        click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(3);
+        click(By.xpath("//a[contains(text(),'"+itemNumber+"')]"), "Click Item Number");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "'Item-Bin Maintenance - Item Details' header is present");
+        click(button("Back"), "Click on back button");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//h2"), "ITEM-BIN LEDGER", "Navigate back to 'ITEM-BIN LEDGER' Page");
+        click(TruckPage.filterSearch, "Click Search icon");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
+        commonObj.validateText(tabs("Item Number is missing."),"Item Number is missing.", "'Item Number is missing.' message is present");
+    }
+
+    public void verifyItemNumber(String value){
+        sendKeys(BinMaintenancePage.itemNumber, value, "Enter '"+value+"' into Item number text field");
+        click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster,"Not a valid item number.","'Not a valid item number.' error message is present");
+        Utility_Functions.timeWait(2);
+    }
+
+    /**
+     * Keyword to verify Neg ItemNumber Field
+     */
+    public void verifyNegItemNumberField() {
+        Utility_Functions.timeWait(3);
+        verifyItemNumber("-10");
+        verifyItemNumber("^%$DF123");
+        verifyItemNumber("0");
+        verifyItemNumber("1.123");
+    }
+
+    /**
+     * Keyword to verify Bin Location
+     */
+    public void verifyBinLocation() {
+        createBin();
+
+    }
+
+
 }

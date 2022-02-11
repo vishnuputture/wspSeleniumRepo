@@ -232,8 +232,16 @@ public class BinMaintenance extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_836_verifyDuplicateAddBin(SeleniumTestParameters testParameters) {
+    public void Tc_837_verifyDuplicateAddBin(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify ADD Duplicate Bin");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_857_ItemBinLedgerPageUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Item Bin Ledger Page UI");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -248,8 +256,64 @@ public class BinMaintenance extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_860_verifyApplyClearFilter(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Apply Clear Filter");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_861_verifyItemNumberField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Item Number Field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_862_verifyNegItemNumberField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify NegItem Number Field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_863_verifyBinLocation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Bin Location");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_864_verifyNewZone(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify New Zone Popup");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_865_verifyDuplicateZone(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify duplicate Zone");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_866_verifyEditZone(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Edit Zone");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_868_verifyPickSequence(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Pick Sequence");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

@@ -20,9 +20,10 @@ public class BinMaintenancePage {
     public static  By createBinCondition=By.id("createBinCondition");
     public static  By addSave=By.id("addSave");
     public static  By addCancel=By.id("addCancel");
-    public static  By binStart=By.id("binStart");
+    public static  By pickSequence=By.id("PickSequence");
     public static  By zoneName=By.id("zoneName");
     public static  By zoneAbv=By.id("zoneAbv");
+    public static  By excelBtn=By.id("excelBtn");
     public static  By menuIcon=By.xpath("//i[contains(@class,'bars menu-icon')]");
     public static  By inboxIcon=By.xpath("//i[@class='menu-icon fa fa-inbox']");
     public static  By zone=By.xpath("//a[contains(text(),'Zones')]");
@@ -64,4 +65,8 @@ public class BinMaintenancePage {
     public static  By newZonePopUp=By.xpath("//h2[text()='New Zone']");
     public static  By deleteZonePopUp=By.xpath("//h2[text()='DELETE ZONE']");
     public static  By zoneAbExistError=By.xpath("//div[@class='invalid-feedback']");
+    public static  By pickSeqError=By.xpath("//div[@class='seqerror-text']");
+    public static  By itemBinLedger=By.xpath("//a[contains(text(),'Item-Bin Ledger')]");
+    public static  By itemBinLedgerHeader=By.xpath("//h2[text()='ITEM-BIN LEDGER']");
+
 }
