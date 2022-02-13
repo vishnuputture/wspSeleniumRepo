@@ -17,7 +17,11 @@
 					<include name="Tc_769_verifyCreateNewBinWithConditionDefective"></include>
 					<include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"></include>
 					<include name="Tc_780_verifyEditBinsButtonFunctionality"></include>
-
+					<include name="Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins"></include>
+					<include name="Tc_784_verifyBinWithItemsCannotBeDeleted"></include>
+					<include name="Tc_785_verifyBinWithoutItemsCanBeDeleted"></include>
+					<include name="Tc_786_verifyPrintBinLabelsFunctionality"></include>
+					<include name="Tc_789_verifyPrintBinItemsLabelFunctionality"></include>
 				</methods>
 			</class>
 		</classes>

@@ -51,6 +51,14 @@ public class BinMaintenancePage {
     public static  By goToItemBinLedger=By.xpath("//a[@title='Go To Item Bin Ledger']");
     public static  By createBinPopup=By.xpath("//h2[text()='CREATE BIN AND ASSIGN']");
 
+    /******************************************** Bin Maintenance table elements ********************************************/
+
+    public static By lstBinColumnData = By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr/td[1]");
+    public static By lstZonesColumnData = By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr/td[2]");
+    public static By lstStatusColumnData = By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr//span[contains(@class,'bin-status win-badge')]");
+    public static By lstAvailableToSellColumnData = By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr/td[4]");
+    public static By lstItemsColumnData = By.xpath("//p-tabpanel[@header='Bin Maintenance']//tbody//tr/td[5]");
+
     public static  By lblBinCount=By.xpath("//h2//following-sibling::div/span[contains(text(),' Bins')]");
     public static  By lblShowRowsCount=By.xpath("//span[text()='Show: ']");
     public static  By btnShowRowsCount=By.xpath("//nav[@id='binMaintenancePagination']//following::a[contains(@class,'count')]");
@@ -89,8 +97,29 @@ public class BinMaintenancePage {
     public static By chkbxSpclHndlngEditBinPopup = By.xpath("//form//label[contains(text(),'Special Handling')]/preceding-sibling::input");
     public static By chkbxAvToSellEditBinPopup = By.xpath("//form//label[contains(text(),'Available to Sell')]/preceding-sibling::input");
     public static By chkbxStgAreaEditBinPopup = By.xpath("//form//label[contains(text(),'Staging Area')]/preceding-sibling::input");
+    public static By ddnSpclHndlngEditBinPopup = By.xpath("//form//label[contains(text(),'Special Handling')]//following-sibling::select");
+    public static By ddnAvailToSellEditBinPopup = By.xpath("//form//label[contains(text(),'Available to Sell')]//following-sibling::select");
+    public static By ddnStgAreaEditBinPopup = By.xpath("//form//label[contains(text(),'Staging Area')]//following-sibling::select");
 
+    /******************************************** Delete Bin Location popup elements ********************************************/
 
+    public static By hdrDeleteBinLocationPopup = By.xpath("//h2[contains(text(),'DELETE BIN Location')]");
+    public static By btnNoDeleteBinBinPopup = By.xpath("//div[contains(@class,'modal-footer')]/button[text()='No']");
+    public static By btnYesDeleteBinBinPopup = By.xpath("//div[contains(@class,'modal-footer')]/button[text()='Yes']");
+
+    /******************************************** Print Labels popup elements ********************************************/
+
+    public static By hdrPrintLabelsPopup = By.xpath("//h2[text()='Print Labels']");
+    public static By btnCancelPrintLabelsPopup = By.xpath("//print-modal//button[text()='Cancel ']");
+    public static By btnPrintLabelsPopup = By.xpath("//print-modal//button[text()='Print']");
+    public static By lblBinLocationPrintLabelsPopup = By.id("binLocation0");
+    public static By itemLabelsTabPopup = By.xpath("//a[text()='Item Labels']");
+    public static By binLabelsTabPopup = By.xpath("//a[text()='Bin Labels']");
+    public static By ddnPrinterPrintLabelPopup = By.xpath("//div[@id='binLabels']//select[@id='selectPrinter1']");
+    public static By chkbxSelectAllBinsPrintLabelPopup = By.xpath("//label[text()='Select All Bins']/preceding-sibling::input");
+    public static By chkbxSelectAllItemsPrintLabelPopup = By.xpath("//label[text()='Select All Items']/preceding-sibling::input");
+    public static By lstQtyItemLabelsPopup = By.xpath("//div[@id='itemLabels']//input[@type='number']");
+    public static By lstBinItemLabelsPopup = By.xpath("//span[starts-with(@id,'itemDescription')]");
 
 
 }

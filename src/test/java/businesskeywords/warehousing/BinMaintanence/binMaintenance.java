@@ -176,6 +176,10 @@ public class binMaintenance extends ReusableLib {
         return By.xpath("//td[contains(text(),'" + binLocation + "')]/following-sibling::td");
     }
 
+    public By editBinsButton(int binCount) {
+        return By.xpath("//button[contains(text(),'Edit " + binCount + " Bin(s)')]");
+    }
+
     /**
      * Keyword to verify Availability of Menu Icon
      */
@@ -1008,96 +1012,6 @@ public class binMaintenance extends ReusableLib {
     }
 
     /**
-     * Keyword to select one records from [Bin Maintenance] table and click on [Edit Bin(s)] button
-     */
-    public void selectFirstBinRecordAndClickEditBinBtn(){
-        String binLocation = selectFirstRecordBinMaintenance();
-        click(editBinsButton(1),"Click [Edit "+1+" Bin(s)] button");
-        waitForVisible(BinMaintenancePage.hdrEditBinPopup);
-        commonObj.validateText(BinMaintenancePage.hdrEditBinPopup, "EDIT BIN - "+binLocation,"Verify Edit 1 Bin Popup");
-    }
-
-    /**
-     * Keyword to click on records from [Bin Maintenance] table for selection
-     */
-    public String selectFirstRecordBinMaintenance() {
-        String selectedBin = "";
-        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.binsCountSP);
-
-        if (!lstElement.isEmpty()) {
-            selectedBin = Utility_Functions.xClickgetTextofFirstElementfromList(lstElement);
-            report.updateTestLog("select one row", "Selected row with bin ["+selectedBin+"]",Status.PASS);
-        }else
-            report.updateTestLog("Click on Table Records", "No records available to click!",Status.FAIL);
-        return selectedBin;
-    }
-
-    /**
-     * Keyword to click on records from [Bin Maintenance] table for selection
-     */
-    public void selectMultiRecordsBinMaintenance(int count){
-        int flag = 0;
-        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.binsCountSP);
-        if(!lstElement.isEmpty()){
-            if(count<lstElement.size()){
-                for(int i=0; i<=count; i++){
-                    click(lstElement.get(i));
-                    Utility_Functions.timeWait(1);
-                    flag++;
-                }
-            }else{
-                for(int i=0; i<lstElement.size(); i++){
-                    click(lstElement.get(i));
-                    Utility_Functions.timeWait(1);
-                    flag++;
-                }
-            }
-        }else
-            report.updateTestLog("Click on Table Records", "No records available to clik!",Status.FAIL);
-
-        if(count == flag){
-            report.updateTestLog("Select records from table", "Clicked on ["+flag+"] rows from Bin Maintenance table",Status.PASS);
-        }
-    }
-
-    public By editBinsButton(int binCount) {
-        return By.xpath("//button[contains(text(),'Edit " + binCount + " Bin(s)')]");
-    }
-
-    /**
-     * Keyword to click on [Edit Bin(s)] button in Bin Maintenance when multi records selected
-     */
-    public void vrfyUIOfEditBinPopup(){
-        commonObj.validateElementExists(BinMaintenancePage.chkbxSpclHndlngEditBinPopup, "[Special Handling] checkbox is present");
-        commonObj.validateElementExists(BinMaintenancePage.chkbxAvToSellEditBinPopup, "[Available to Sell] checkbox is present");
-        commonObj.validateElementExists(BinMaintenancePage.chkbxStgAreaEditBinPopup, "[Staging Area] checkbox is present");
-
-        String[] field = {"Zone", "Condition", "Receiving", "Picking"};
-        for (String label : field) {
-            commonObj.validateElementExists(By.xpath("//form//label[contains(text(),'" + label + "')]//following-sibling::select"), "Dropdown ["+label + "] is present");
-        }
-        commonObj.validateElementExists(BinMaintenancePage.btnCancelEditBinPopup, "[Cancel] button is present");
-        commonObj.validateElementExists(BinMaintenancePage.btnSaveEdiBinPopup, "[Save] button is present");
-    }
-
-    /**
-     * Keyword to select value in Edit Bin popup and verify in table
-     */
-    public void selectRandomDropdownValueAndVerifyAfterSave(){
-        String zone = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnZoneEditBinPopup);
-        String condition = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnConditionEditBinPopup);
-        String receiving = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnReceivingEditBinPopup);
-        String picking = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnPickingEditBinPopup);
-        click(BinMaintenancePage.btnSaveEdiBinPopup,"Click [Save] button");
-        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
-
-        String actual = getText(BinMaintenancePage.tdZoneFirstRow);
-        Utility_Functions.xAssertEquals(report, zone, actual, "Verify [Zone] value in records table");
-        actual = getText(BinMaintenancePage.tdStatusFirstRow);
-        Utility_Functions.xAssertEquals(report, condition, actual, "Verify [Status] value in records table");
-    }
-
-    /**
      * Keyword to create a New Bin and verify data in table
      */
     public void createNewBinAndVerifyData(){
@@ -1180,5 +1094,320 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xAssertEquals(report, avlToSell, actual, "Verify [Available to Sell] value in records table");
         actual = getText(BinMaintenancePage.tdItemsFirstRow);
         Utility_Functions.xAssertEquals(report, items, actual, "Verify [Items] value in records table");
+    }
+
+    /**
+     * Keyword to select one records from [Bin Maintenance] table and click on [Edit Bin(s)] button
+     */
+    public void selectFirstBinRecordAndClickEditBinBtn(){
+        String binLocation = selectFirstRecordBinMaintenance();
+        click(editBinsButton(1),"Click [Edit "+1+" Bin(s)] button");
+        waitForVisible(BinMaintenancePage.hdrEditBinPopup);
+        commonObj.validateText(BinMaintenancePage.hdrEditBinPopup, "EDIT BIN - "+binLocation,"Verify Edit 1 Bin Popup");
+    }
+
+    /**
+     * Keyword to click on first row in [Bin Maintenance] table for selection
+     */
+    public String selectFirstRecordBinMaintenance() {
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        String selectedBin = "";
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.binsCountSP);
+
+        if (!lstElement.isEmpty()) {
+            selectedBin = Utility_Functions.xClickgetTextofFirstElementfromList(lstElement);
+            report.updateTestLog("select one row", "Selected row with bin ["+selectedBin+"]",Status.PASS);
+        }else
+            report.updateTestLog("Click on Table Records", "No records available to click!",Status.FAIL);
+        return selectedBin;
+    }
+
+    /**
+     * Keyword to verify fields present in Edit Single Bin popup
+     */
+    public void vrfyUIOfEditBinPopup(){
+        commonObj.validateElementExists(BinMaintenancePage.chkbxSpclHndlngEditBinPopup, "[Special Handling] checkbox is present");
+        commonObj.validateElementExists(BinMaintenancePage.chkbxAvToSellEditBinPopup, "[Available to Sell] checkbox is present");
+        commonObj.validateElementExists(BinMaintenancePage.chkbxStgAreaEditBinPopup, "[Staging Area] checkbox is present");
+
+        String[] field = {"Zone", "Condition", "Receiving", "Picking"};
+        for (String label : field) {
+            commonObj.validateElementExists(By.xpath("//form//label[contains(text(),'" + label + "')]//following-sibling::select"), "Dropdown ["+label + "] is present");
+        }
+        commonObj.validateElementExists(BinMaintenancePage.btnCancelEditBinPopup, "[Cancel] button is present");
+        commonObj.validateElementExists(BinMaintenancePage.btnSaveEdiBinPopup, "[Save] button is present");
+    }
+
+    /**
+     * Keyword to verify fields present in Edit Multiple Bins popup
+     */
+    public void vrfyUIOfEditMultipleBinsPopup(){
+        String[] field = {"Zone", "Condition", "Receiving", "Picking", "Special Handling", "Available to Sell", "Staging Area"};
+        for (String label : field) {
+            commonObj.validateElementExists(By.xpath("//form//label[contains(text(),'" + label + "')]//following-sibling::select"), "Dropdown ["+label + "] is present");
+        }
+        commonObj.validateElementExists(BinMaintenancePage.btnCancelEditBinPopup, "[Cancel] button is present");
+        commonObj.validateElementExists(BinMaintenancePage.btnSaveEdiBinPopup, "[Save] button is present");
+    }
+
+    /**
+     * Keyword to select value in Edit Bin popup and verify in table for first row
+     */
+    public void selectRandomDropdownValueAndVerifyAfterSave(){
+        String zone = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnZoneEditBinPopup);
+        String condition = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnConditionEditBinPopup);
+        String receiving = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnReceivingEditBinPopup);
+        String picking = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnPickingEditBinPopup);
+        click(BinMaintenancePage.btnSaveEdiBinPopup,"Click [Save] button");
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+
+        String actual = getText(BinMaintenancePage.tdZoneFirstRow);
+        Utility_Functions.xAssertEquals(report, zone, actual, "Verify [Zone] value in records table");
+        actual = getText(BinMaintenancePage.tdStatusFirstRow);
+        Utility_Functions.xAssertEquals(report, condition, actual, "Verify [Status] value in records table");
+    }
+
+    /**
+     * Keyword to click on records from [Bin Maintenance] table for selection
+     */
+    public void selectMultipleRecordAndClickEditBinBtn(){
+        int count = Integer.parseInt(jsonData.getData("CountOfRecordsToSelect"));
+        selectMultiRecordsBinMaintenance(count);
+        click(editBinsButton(count),"Click [Edit "+count+" Bin(s)] button");
+        waitForVisible(BinMaintenancePage.hdrEditBinPopup);
+        commonObj.validateText(BinMaintenancePage.hdrEditBinPopup, "EDIT MULTIPLE BINS","Verify Edit Multiple Bins Popup");
+    }
+
+    /**
+     * Keyword to click on records from [Bin Maintenance] table for selection
+     */
+    public void selectMultiRecordsBinMaintenance(int count){
+        int flag = 0;
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.binsCountSP);
+        if(!lstElement.isEmpty()){
+            if(count<lstElement.size()){
+                for(int i=0; i<count; i++){
+                    click(lstElement.get(i));
+                    Utility_Functions.timeWait(1);
+                    flag++;
+                }
+            }else{
+                for(int i=0; i<lstElement.size()/2; i++){
+                    click(lstElement.get(i));
+                    Utility_Functions.timeWait(1);
+                    flag++;
+                }
+            }
+        }else
+            report.updateTestLog("Click on Table Records", "No records available to clik!",Status.FAIL);
+
+        if(count == flag){
+            report.updateTestLog("Select records from table", "Clicked on ["+flag+"] rows from Bin Maintenance table",Status.PASS);
+        }
+    }
+
+    /**
+     * Keyword to enter data in [Edit Multiple Bins] popup and verify after saving the details
+     */
+    public void enterDataInEditMultipleBinPopupAndVerifyAfterSave(){
+        int rowCount = Integer.parseInt(jsonData.getData("CountOfRecordsToSelect"));
+        String condition = jsonData.getData("BinCondition");
+        String zones = jsonData.getData("BinZones");
+        String picking = jsonData.getData("BinPicking");
+        String receiving = jsonData.getData("BinReceiving");
+        String availableToSell = jsonData.getData("BinAvailableToSell");
+        String specialHandling = jsonData.getData("BinSpecialHandling");
+        String stagingArea = jsonData.getData("BinStagingArea");
+
+        selectDropdownOptionEditMultipleBinsPopup(condition, zones, picking, receiving, specialHandling, availableToSell, stagingArea);
+        click(BinMaintenancePage.btnSaveEdiBinPopup,"Click [Save] button");
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        commonObj.validateText(BinMaintenancePage.toastMsg, "Selected Bins updated successfully.","Bins Updated Successfully message is displayed");
+        Utility_Functions.timeWait(2);
+
+        vrfyRowValueInBinTable(BinMaintenancePage.lstZonesColumnData, zones, rowCount);
+        vrfyRowValueInBinTable(BinMaintenancePage.lstStatusColumnData, condition, rowCount);
+        vrfyRowValueInBinTable(BinMaintenancePage.lstAvailableToSellColumnData, availableToSell, rowCount);
+    }
+
+    /**
+     * Keyword to enter data in [Edit Multiple Bins] popup
+     */
+    public void selectDropdownOptionEditMultipleBinsPopup(String condition, String zones, String picking, String receiving, String specialHandling, String availableToSell, String stagingArea){
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnConditionEditBinPopup, condition, "Selected option ["+condition+"] in Condition dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnZoneEditBinPopup, zones, "Selected option ["+zones+"] in Zoned dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnPickingEditBinPopup, picking, "Selected option ["+picking+"] in Picking dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnReceivingEditBinPopup, receiving, "Selected option ["+receiving+"] in Receiving dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnSpclHndlngEditBinPopup, specialHandling, "Selected option ["+specialHandling+"] in Special Handling dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnAvailToSellEditBinPopup, availableToSell, "Selected option ["+availableToSell+"] in Available To Sell dropdown");
+        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnStgAreaEditBinPopup, stagingArea, "Selected option ["+stagingArea+"] in Staging Area dropdown");
+    }
+
+    /**
+     * Keyword to verify data under column of records table - Bin Maintenance
+     */
+    public void vrfyRowValueInBinTable(By element, String expectedText, int rowCount){
+        int flag = 0;
+        List<WebElement> lstElements = getListElement(element);
+        List<String> lstText = Utility_Functions.xGetTextVisibleListString(driver, lstElements);
+
+        for(String text : lstText){
+            if (text.equalsIgnoreCase(expectedText))
+                flag++;
+            if(flag==rowCount){
+                report.updateTestLog("Verify rows data", "Validated table rows data",Status.PASS);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Keyword to select a Bin with Items and click [Delete Bin] button and verify notification msg
+     */
+    public void tryDeleteBinWithItems(){
+        selectBinWithItems();
+        click(button("Delete Bin"), "Click on [Delete Bin] button");
+        waitForVisible(BinMaintenancePage.toastMsg);
+        commonObj.validateText(BinMaintenancePage.toastMsg, "Remove quantities from bin before deleting.","Remove Items before deleting Bins message is displayed");
+    }
+
+    /**
+     * Keyword to select a bin having items from records table - Bin Maintenance
+     */
+    public String selectBinWithItems(){
+        String bin = "";
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        List<WebElement> lstElements = getListElement(BinMaintenancePage.lstItemsColumnData);
+        List<WebElement> lstBin = getListElement(BinMaintenancePage.lstBinColumnData);
+        //List<String> lstBinText = Utility_Functions.xGetTextVisibleListString(driver, lstBin);
+        for(WebElement element : lstElements){
+            String itemCount = element.getText().trim();
+            if(!itemCount.equalsIgnoreCase("0")){
+                element.click();
+                bin = lstBin.get(lstElements.indexOf(element)).getText().trim();
+                break;
+            }
+        }
+        return bin;
+    }
+
+    /**
+     * Keyword to select first record from [Bin Maintenance] table and click on [Delete Bin] button
+     */
+    public void selectFirstBinRecordAndClickDeleteBinBtn(){
+        String binLocation = selectFirstRecordBinMaintenance();
+        click(button("Delete Bin"), "Click on [Delete Bin] button");
+        waitForVisible(BinMaintenancePage.hdrDeleteBinLocationPopup);
+        Utility_Functions.timeWait(1);
+        click(BinMaintenancePage.btnNoDeleteBinBinPopup, "Click on [No] button in DELETE BIN LOCATION popup");
+        waitForElementDisappear(BinMaintenancePage.hdrDeleteBinLocationPopup, globalWait);
+        Utility_Functions.timeWait(1);
+        click(button("Delete Bin"), "Click on [Delete Bin] button");
+        waitForVisible(BinMaintenancePage.hdrDeleteBinLocationPopup);
+        Utility_Functions.timeWait(1);
+        click(BinMaintenancePage.btnYesDeleteBinBinPopup, "Click on [Yes] button in DELETE BIN LOCATION popup");
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        waitForVisible(BinMaintenancePage.toastMsg);
+        commonObj.validateText(BinMaintenancePage.toastMsg, "Selected Bins deleted successfully.","Bins deleted message is displayed");
+    }
+
+    /**
+     * Keyword to select first record from [Bin Maintenance] table and click on [Labels] button
+     */
+    public void selectFirstBinRecordAndClickLabelsBtn(){
+        String binLocation = selectFirstRecordBinMaintenance();
+        click(button(" Labels "), "Click on [Labels] button");
+        waitForVisible(BinMaintenancePage.hdrPrintLabelsPopup);
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(BinMaintenancePage.lblBinLocationPrintLabelsPopup, binLocation,"Selected Bin Location is displayed in Print Labels popup");
+    }
+
+    /**
+     * Keyword to verify fields present in [Print Labels] popup
+     */
+    public void vrfyUIOfPrintLabelsPopup(){
+        commonObj.validateElementExists(BinMaintenancePage.hdrPrintLabelsPopup, "[PRINT LABELS] header is present");
+        commonObj.validateElementExists(BinMaintenancePage.itemLabelsTabPopup, "[Item Labels] tab is present");
+        commonObj.validateElementExists(BinMaintenancePage.binLabelsTabPopup, "[Bin Labels] tab is present");
+        commonObj.validateElementExists(BinMaintenancePage.ddnPrinterPrintLabelPopup, "[Printer] dropdown is present");
+        commonObj.validateElementExists(BinMaintenancePage.chkbxSelectAllBinsPrintLabelPopup, "[Select All Bins] checkbox is present");
+        commonObj.validateElementExists(BinMaintenancePage.btnCancelPrintLabelsPopup, "[Cancel] button is present");
+        commonObj.validateElementExists(BinMaintenancePage.btnPrintLabelsPopup, "[Print] button is present");
+    }
+
+    /**
+     * Keyword to click [Print] button in [Print Labels] popup
+     */
+    public void clickPrintAndVerifyToastMsg(){
+        click(BinMaintenancePage.btnPrintLabelsPopup, "Click on [Print] button");
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        waitForVisible(BinMaintenancePage.toastMsg);
+        commonObj.validateText(BinMaintenancePage.toastMsg, "Labels sent to printer.","[Labels sent to printer.] message is displayed");
+    }
+
+    /**
+     * Keyword to select a Bin with Items and click [Labels] button
+     */
+    public void selectBinWithItemsAndClickLabels(){
+        String binLocation = selectBinWithItems();
+        click(button(" Labels "), "Click on [Labels] button");
+        waitForVisible(BinMaintenancePage.hdrPrintLabelsPopup);
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(BinMaintenancePage.lblBinLocationPrintLabelsPopup, binLocation,"Selected Bin Location is displayed in Print Labels popup");
+    }
+
+    /**
+     * Keyword to verify UI of Print Labels - Items Labels popup
+     */
+    public void verifyUIofItemsLabelsPopup(){
+        click(BinMaintenancePage.itemLabelsTabPopup, "Click on [Item Labels] tab button");
+        waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        clickAllItemsAndVrfyItsQtyInPrintItemLabelsPopup("1");
+        clickAllItemsAndVrfyItsQtyInPrintItemLabelsPopup("");
+        enableDisableSelectAllItemsAndVrfyItemsQty("No");
+        enableDisableSelectAllItemsAndVrfyItemsQty("Yes");
+    }
+
+    /**
+     * Keyword to select all items and verify default qty in Print Items Labels popup
+     */
+    public void clickAllItemsAndVrfyItsQtyInPrintItemLabelsPopup(String qty) {
+        List<WebElement> lstItems = getListElement(BinMaintenancePage.lstBinItemLabelsPopup);
+        for (WebElement element : lstItems) {
+            click(element, "Click on item no [" + lstItems.indexOf(element) + 1 + "] from list of items to print labels");
+            Utility_Functions.timeWait(1);
+        }
+        List<WebElement> lstQtyTbx = getListElement(BinMaintenancePage.lstQtyItemLabelsPopup);
+        validateListValue(lstQtyTbx, qty);
+    }
+
+    /**
+     * Keyword to enable/disable Select All Items checkbox and verify default qty in Print Items Labels popup
+     * @Parameter stateExpected e.g., Yes or No
+     */
+    public void enableDisableSelectAllItemsAndVrfyItemsQty(String stateExpected){
+        selectUnselectChbxCreateNewBinPopup(BinMaintenancePage.chkbxSelectAllItemsPrintLabelPopup, stateExpected);
+        Utility_Functions.timeWait(1);
+        List<WebElement> lstQtyTbx = getListElement(BinMaintenancePage.lstQtyItemLabelsPopup);
+        if(stateExpected.equalsIgnoreCase("Yes"))
+            validateListValue(lstQtyTbx, "1");
+        else
+            validateListValue(lstQtyTbx, "");
+    }
+
+    /**
+     * Keyword to verify Items Qty value in Print Labels popup
+     */
+    public  void validateListValue(List<WebElement> lstElement, String valueExpected) {
+        int flag = 0;
+        List<String> lstElementValue = Utility_Functions.xGetTextVisibleListString(driver, lstElement);
+        for (String value : lstElementValue) {
+            if (value.equalsIgnoreCase(valueExpected))
+                flag++;
+        }
+        if (flag == lstElementValue.size())
+            report.updateTestLog("Verify List Value", "Verify value equals "+valueExpected, Status.PASS);
+        else
+            report.updateTestLog("Verify List Value", "Verify value equals "+valueExpected, Status.FAIL);
     }
 }

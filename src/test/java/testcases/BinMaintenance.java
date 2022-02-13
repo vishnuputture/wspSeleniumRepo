@@ -310,4 +310,44 @@ public class BinMaintenance extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify functionality of Edit Bin(s) button when Multiple records are selected");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_784_verifyBinWithItemsCannotBeDeleted(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify that Bins containing Item No cannot be deleted");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_785_verifyBinWithoutItemsCanBeDeleted(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify that Bins without Items can be deleted");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_786_verifyPrintBinLabelsFunctionality(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify the functionality of Print Labels for Bin Labels");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_789_verifyPrintBinItemsLabelFunctionality(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify the functionality of Print Labels for items in Bin");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

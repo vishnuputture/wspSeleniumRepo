@@ -21,6 +21,11 @@
       "Tc_769_verifyCreateNewBinWithConditionDefective":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,createNewBinAndVerifyData",
       "Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,clickCreateNewBinBtn,vrfyCreateDuplicateBinErrorAndFields",
       "Tc_780_verifyEditBinsButtonFunctionality":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,selectFirstBinRecordAndClickEditBinBtn,vrfyUIOfEditBinPopup,selectRandomDropdownValueAndVerifyAfterSave",
+      "Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,selectMultipleRecordAndClickEditBinBtn,vrfyUIOfEditMultipleBinsPopup,enterDataInEditMultipleBinPopupAndVerifyAfterSave",
+      "Tc_784_verifyBinWithItemsCannotBeDeleted":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,tryDeleteBinWithItems",
+      "Tc_785_verifyBinWithoutItemsCanBeDeleted":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,createNewBinAndVerifyData,selectFirstBinRecordAndClickDeleteBinBtn",
+      "Tc_786_verifyPrintBinLabelsFunctionality":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,selectFirstBinRecordAndClickLabelsBtn,vrfyUIOfPrintLabelsPopup,clickPrintAndVerifyToastMsg",
+      "Tc_789_verifyPrintBinItemsLabelFunctionality":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,selectBinWithItemsAndClickLabels,verifyUIofItemsLabelsPopup,clickPrintAndVerifyToastMsg",
       "Tc_750_VerifyUIItemNumbersAreAvailable":"navigateToBinMain,selectCompany,verifyUIItemNumbersAreAvailable",
       "Tc_791_verifyPageCountItemMaintenance":"navigateToBinMain,selectCompany,enableContainsFilter,funPageCountItemMaintenance",
       "Tc_793_verifyPaginationItemMaintenance":"navigateToBinMain,selectCompany,enableContainsFilter,paginationItemMaintenance",
@@ -149,6 +154,38 @@
     {
       "TC_ID":"Tc_780_verifyEditBinsButtonFunctionality",
       "Title":"NMRQ :Functionality of Edit Bin(s) button"
+    },
+    {
+      "TC_ID":"Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins",
+      "CountOfRecordsToSelect":"2",
+      "BinCondition":"Good",
+      "BinZones":"Default",
+      "BinPicking":"Automatic",
+      "BinReceiving":"Manual",
+      "BinAvailableToSell":"Yes",
+      "BinSpecialHandling":"Yes",
+      "BinStagingArea":"No"
+    },
+    {
+      "TC_ID":"Tc_784_verifyBinWithItemsCannotBeDeleted"
+    },
+    {
+      "TC_ID":"Tc_785_verifyBinWithoutItemsCanBeDeleted",
+      "BinLocation":"",
+      "BinCondition":"Good",
+      "BinZones":"Default",
+      "BinPicking":"Automatic",
+      "BinReceiving":"Manual",
+      "BinAvailableToSell":"Yes",
+      "BinSpecialHandling":"Yes",
+      "BinStagingArea":"No",
+      "BinItems":"0"
+    },
+    {
+      "TC_ID":"Tc_786_verifyPrintBinLabelsFunctionality"
+    },
+    {
+      "TC_ID":"Tc_789_verifyPrintBinItemsLabelFunctionality"
     },
     {
       "TC_ID":"Tc_750_VerifyUIItemNumbersAreAvailable",
