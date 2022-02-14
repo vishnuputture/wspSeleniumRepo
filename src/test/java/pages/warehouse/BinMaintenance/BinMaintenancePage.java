@@ -68,5 +68,5 @@ public class BinMaintenancePage {
     public static  By pickSeqError=By.xpath("//div[@class='seqerror-text']");
     public static  By itemBinLedger=By.xpath("//a[contains(text(),'Item-Bin Ledger')]");
     public static  By itemBinLedgerHeader=By.xpath("//h2[text()='ITEM-BIN LEDGER']");
-
+    public static  By binLocationFilter=By.xpath("//input[@placeholder='Bin Location']");
 }

@@ -35,7 +35,7 @@
       "Tc_860_verifyApplyClearFilter": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyApplyClearFilter",
       "Tc_861_verifyItemNumberField": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyItemNumberField",
       "Tc_862_verifyNegItemNumberField": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyNegItemNumberField",
-      "Tc_863_verifyBinLocation": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyBinLocation",
+      "Tc_863_verifyBinLocation": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,navigateToItemBinMain,verifyBinLocation",
       "Tc_864_verifyNewZone": "navigateToBinMain,selectCompany,navigateZonePage,verifyNewZone",
       "Tc_865_verifyDuplicateZone": "navigateToBinMain,selectCompany,navigateZonePage,verifyDuplicateZone",
       "Tc_866_verifyEditZone": "navigateToBinMain,selectCompany,navigateZonePage,verifyEditZone",
@@ -187,7 +187,8 @@
     },
     {
       "TC_ID": "Tc_863_verifyBinLocation",
-      "Title": "verify Bin Location"
+      "Title": "verify Bin Location",
+      "itemNumber": "*99599013999"
     },
     {
       "TC_ID": "Tc_864_verifyNewZone",

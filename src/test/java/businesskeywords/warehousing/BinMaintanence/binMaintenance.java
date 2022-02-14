@@ -1206,42 +1206,51 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
         Utility_Functions.timeWait(2);
         commonObj.validateText(tabs("Item Number is missing."), "Item Number is missing.", "'Item Number is missing.' message is present");
-        commonObj.validateElementExists(BinMaintenancePage.buttonDis,"Apply Filter button is disabled");
-        click(TruckPage.filtersCrossIcon,"Click 'x' icon");
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Apply Filter button is disabled");
+        click(TruckPage.filtersCrossIcon, "Click 'x' icon");
         Utility_Functions.timeWait(2);
         try {
-            Utility_Functions.xIsDisplayed(driver,TruckPage.searchFilterPanelTitle);
-        }catch (Exception e){
-            Utility_Functions.xAssertEquals(report,false,false,"Search Filter is disappeared");
+            Utility_Functions.xIsDisplayed(driver, TruckPage.searchFilterPanelTitle);
+        } catch (Exception e) {
+            Utility_Functions.xAssertEquals(report, false, false, "Search Filter is disappeared");
         }
     }
 
-    /**
-     * Keyword to verify Apply Clear Filter
-     */
-    public void verifyItemNumberField() {
+    public String navigateToItemBinMain() {
         Utility_Functions.timeWait(3);
-        String itemNumber=jsonData.getData("itemNumber");
+        String itemNumber = jsonData.getData("itemNumber");
         sendKeys(BinMaintenancePage.itemNumber, itemNumber, "Enter " + itemNumber + " into Item number text field");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        click(By.xpath("//a[contains(text(),'"+itemNumber+"')]"), "Click Item Number");
+        click(By.xpath("//a[contains(text(),'" + itemNumber + "')]"), "Click Item Number");
         Utility_Functions.timeWait(4);
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "'Item-Bin Maintenance - Item Details' header is present");
+        return itemNumber;
+    }
+
+    public void backAndClearFilter() {
         click(button("Back"), "Click on back button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h2"), "ITEM-BIN LEDGER", "Navigate back to 'ITEM-BIN LEDGER' Page");
         click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
-        commonObj.validateText(tabs("Item Number is missing."),"Item Number is missing.", "'Item Number is missing.' message is present");
+        commonObj.validateText(tabs("Item Number is missing."), "Item Number is missing.", "'Item Number is missing.' message is present");
     }
 
-    public void verifyItemNumber(String value){
-        sendKeys(BinMaintenancePage.itemNumber, value, "Enter '"+value+"' into Item number text field");
+    /**
+     * Keyword to verify Apply Clear Filter
+     */
+    public void verifyItemNumberField() {
+        navigateToItemBinMain();
+        backAndClearFilter();
+    }
+
+    public void verifyItemNumber(String value) {
+        sendKeys(BinMaintenancePage.itemNumber, value, "Enter '" + value + "' into Item number text field");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        commonObj.validateText(BinMaintenancePage.toaster,"Not a valid item number.","'Not a valid item number.' error message is present");
+        commonObj.validateText(BinMaintenancePage.toaster, "Not a valid item number.", "'Not a valid item number.' error message is present");
         Utility_Functions.timeWait(2);
     }
 
@@ -1261,8 +1270,12 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyBinLocation() {
         createBin();
-
+        backAndClearFilter();
+        String binLocation=Utility_Functions.xGetJsonData("itemLocation");
+        Utility_Functions.timeWait(2);
+        sendKeys(BinMaintenancePage.binLocationFilter,binLocation,"Enter Bin location");
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        navigateToItemBinMain();
+        commonObj.validateText(By.xpath("//td[contains(text(),'"+binLocation+"')]"),binLocation,binLocation+" is present");
     }
-
-
 }
