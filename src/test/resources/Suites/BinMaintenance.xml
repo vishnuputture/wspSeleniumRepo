@@ -16,6 +16,8 @@
                     <include name="Tc_764_verifyItemDescriptionFilter"></include>
                     <include name="Tc_765_verifyItemDescriptionField"></include>
                     <include name="Tc_750_VerifyUIItemNumbersAreAvailable"></include>
+                    <include name="Tc_787_verifyOnHand"></include>
+                    <include name="Tc_790_verifyClearAllButton"></include>
                     <include name="Tc_791_verifyPageCountItemMaintenance"></include>
                     <include name="Tc_793_verifyPaginationItemMaintenance"></include>
                     <include name="Tc_795_verifySelectAllCheckBox"></include>

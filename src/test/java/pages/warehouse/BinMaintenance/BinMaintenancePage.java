@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 public class BinMaintenancePage {
 
     public static  By itemMaintenanceTab= By.id("ui-tabpanel-0-label");
-    public static  By binMaintenanceTab= By.id("ui-tabpanel-1-label");
+    public static  By onHand= By.id("ltgteg");
     public static  By itemNumberContains=By.id("itemNumberContains");
     public static  By excludeAsteriskItems=By.id("excludeAsteriskItems");
     public static  By includeJobItems=By.id("includeJobItems");
@@ -65,9 +65,10 @@ public class BinMaintenancePage {
     public static  By collapsedIcon=By.xpath("//a[@class='collapse-btn collapsed']");
     public static  By newZonePopUp=By.xpath("//h2[text()='New Zone']");
     public static  By deleteZonePopUp=By.xpath("//h2[text()='DELETE ZONE']");
-    public static  By zoneAbExistError=By.xpath("//div[@class='invalid-feedback']");
+    public static  By isCheckBoxEnabled=By.xpath("//input[@id and @ng-reflect-model='false']");
     public static  By pickSeqError=By.xpath("//div[@class='seqerror-text']");
     public static  By itemBinLedger=By.xpath("//a[contains(text(),'Item-Bin Ledger')]");
     public static  By itemBinLedgerHeader=By.xpath("//h2[text()='ITEM-BIN LEDGER']");
     public static  By binLocationFilter=By.xpath("//input[@placeholder='Bin Location']");
+    public static  By onHandFilter=By.xpath("//input[@placeholder='Quantity']");
 }

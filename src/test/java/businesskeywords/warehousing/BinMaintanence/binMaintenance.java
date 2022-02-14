@@ -353,6 +353,42 @@ public class binMaintenance extends ReusableLib {
         commonObj.validateElementExists(BinMaintenancePage.itemCount, "Total item present on Item Maintenance Tab: " + itemCount);
     }
 
+    public void verifyClearAllButton() {
+        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        click(BinMaintenancePage.excludeAsteriskItems, "Enable Exclude * Items");
+        click(BinMaintenancePage.includeJobItems, "Enable Exclude Job Items");
+        click(BinMaintenancePage.excludeZZ98Items, "Enable Exclude ZZ98 Items");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
+        Utility_Functions.timeWait(2);
+        commonObj.validateElementExists(BinMaintenancePage.isCheckBoxEnabled,"All filters are cleared");
+    }
+
+    public void verifyOnHand() {
+        String symbl=getAttribute(BinMaintenancePage.onHand,"ng-reflect-model");
+        Utility_Functions.xAssertEquals(report,symbl,"=","By default On Hand Symbol '='");
+        click(BinMaintenancePage.onHand);
+        Utility_Functions.timeWait(3);
+        String[] syms={"=","<",">"};
+        for (String sym:syms) {
+            if(Utility_Functions.xIsDisplayed(driver,TruckPage.filterSearch)){
+                click(TruckPage.filterSearch, "Click Search icon");
+                Utility_Functions.timeWait(2);
+            }
+            if(!(sym.equals("="))) {
+                click(BinMaintenancePage.onHand);
+            }
+            commonObj.validateText(tabs(sym),sym,sym+" is present");
+            click(tabs(sym),sym+ "is selected");
+            sendKeys(BinMaintenancePage.onHandFilter,"-1","Enter on hand quantity");
+            click(BinMaintenancePage.applyFilter,"Click Apply filter");
+            Utility_Functions.timeWait(4);
+            if(Utility_Functions.xIsDisplayed(driver,By.xpath("//td[text()='-1']"))) {
+                commonObj.validateText(By.xpath("//td[text()='-1']"), "-1", "On Hand is filtered");
+            }
+        }
+    }
+
     /**
      * Keyword to Verify the UI of the page when Item Numbers are available
      */

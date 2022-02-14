@@ -88,6 +88,22 @@ public class BinMaintenance extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_787_verifyOnHand(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify On Hand Filter");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_790_verifyClearAllButton(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify the Clear all filter button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_791_verifyPageCountItemMaintenance(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify the functionality of Pagination");
         CoreScript coreScript = new CoreScript(testParameters);

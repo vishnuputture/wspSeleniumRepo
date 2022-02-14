@@ -11,6 +11,8 @@
       "Tc_764_verifyItemDescriptionFilter": "navigateToBinMain,selectCompany,verifyItemDescriptionFilter",
       "Tc_765_verifyItemDescriptionField": "navigateToBinMain,selectCompany,verifyItemDescriptionField",
       "Tc_750_VerifyUIItemNumbersAreAvailable": "navigateToBinMain,selectCompany,verifyUIItemNumbersAreAvailable",
+      "Tc_787_verifyOnHand": "navigateToBinMain,selectCompany,verifyOnHand",
+      "Tc_790_verifyClearAllButton": "navigateToBinMain,selectCompany,verifyClearAllButton",
       "Tc_791_verifyPageCountItemMaintenance": "navigateToBinMain,selectCompany,enableContainsFilter,funPageCountItemMaintenance",
       "Tc_793_verifyPaginationItemMaintenance": "navigateToBinMain,selectCompany,enableContainsFilter,paginationItemMaintenance",
       "Tc_795_verifySelectAllCheckBox": "navigateToBinMain,selectCompany,enableContainsFilter,verifySelectAllCheckBox",
@@ -87,6 +89,14 @@
     {
       "TC_ID": "Tc_750_VerifyUIItemNumbersAreAvailable",
       "Title": "Verify the UI of the page when Item Numbers are available"
+    },
+    {
+      "TC_ID": "Tc_787_verifyOnHand",
+      "Title": "Verify On Hand Filter"
+    },
+    {
+      "TC_ID": "Tc_790_verifyClearAllButton",
+      "Title": "Verify the Clear all filter button"
     },
     {
       "TC_ID": "Tc_791_verifyPageCountItemMaintenance",
