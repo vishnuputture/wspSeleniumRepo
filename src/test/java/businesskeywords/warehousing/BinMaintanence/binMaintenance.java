@@ -141,7 +141,7 @@ public class binMaintenance extends ReusableLib {
     }
 
     public By getBinLocation(String binType) {
-        return By.xpath("//select[@ng-reflect-model='" + binType + "']/ancestor::td//preceding-sibling::td");
+        return By.xpath("//select[contains(@ng-reflect-model,'" + binType + "')]/ancestor::td//preceding-sibling::td");
     }
 
     public By deleteBinLocationByType(String binType) {
@@ -588,10 +588,10 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifySelectDeselectItem() {
         {
-            click(By.xpath("//tr[1]"), "Select item from the list");
+            click(getBinLocation(""), "Select item from the list");
             Utility_Functions.timeWait(2);
             Utility_Functions.xAssertEquals(report, driver.findElements(BinMaintenancePage.highlightRow).size(), 1, "One record is Selected");
-            click(By.xpath("//tr[1]"), "Select item from the list");
+            click(getBinLocation(""), "Select item from the list");
             Utility_Functions.timeWait(2);
             Boolean count = Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.highlightRow);
             Utility_Functions.xAssertEquals(report, count, false, "item is Deselected");
@@ -756,7 +756,13 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.zoneIdDropDown), "Test", "Select Test option from the drop down ");
         Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
         Utility_Functions.timeWait(2);
-        click(driver.findElements(button("Save ")).get(1), "Click Save button");
+        try {
+            click(driver.findElements(button("Save ")).get(1), "Click Save button");
+        }catch (Exception e){
+            click(BinMaintenancePage.stagingArea);
+            Utility_Functions.timeWait(2);
+            click(driver.findElements(button("Save ")).get(1), "Click Save button");
+        }
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Selected Bins updated successfully.", "'Selected Bins updated successfully.' is present");
         if (status.equals("No Change")) {
@@ -775,13 +781,11 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.binConditionId), "No Change", "Select No Change option from the drop down ");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
-        changeStatus(binLocation, "Good");
-        clickEditBin(binLocation);
-        changeStatus(binLocation, "Defective");
-        clickEditBin(binLocation);
-        changeStatus(binLocation, "Damaged");
-        clickEditBin(binLocation);
-        changeStatus(binLocation, "No Change");
+        String[] statuses={"Good","Defective","Damaged","No Change"};
+        for(String status:statuses){
+            changeStatus(binLocation, status);
+            clickEditBin(binLocation);
+        }
     }
 
     public void enterRequiredData() {
@@ -934,7 +938,7 @@ public class binMaintenance extends ReusableLib {
         if (!Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.toaster)) {
             click(button(" Cancel "));
             Utility_Functions.timeWait(2);
-            clickDeleteZoneIcon();
+            deleteZoneIcon();
             createZoneAgain();
             Utility_Functions.timeWait(3);
         }
@@ -1026,6 +1030,19 @@ public class binMaintenance extends ReusableLib {
         click(TruckPage.yesButtonPopUp, "Click Yes Button");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zoneName + " deleted successfully.", "'Zone " + zoneName + " deleted successfully.' is present");
+    }
+
+
+    public void deleteZoneIcon() {
+        String zoneAbv = clickEditZoneIcon();
+        String zoneName = Utility_Functions.xGetJsonData("zoneName");
+        WebElement deleteIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
+        Utility_Functions.timeWait(2);
+        click(deleteIcon, "Click Delete Icon");
+        Utility_Functions.timeWait(2);
+        click(TruckPage.yesButtonPopUp, "Click Yes Button");
+        Utility_Functions.timeWait(3);
+        commonObj.validateElementExists(BinMaintenancePage.toaster, getText(BinMaintenancePage.toaster) + " is present");
     }
 
     public void verifyDuplicateZoneName(String zoneName) {
@@ -1271,11 +1288,11 @@ public class binMaintenance extends ReusableLib {
     public void verifyBinLocation() {
         createBin();
         backAndClearFilter();
-        String binLocation=Utility_Functions.xGetJsonData("itemLocation");
+        String binLocation = Utility_Functions.xGetJsonData("itemLocation");
         Utility_Functions.timeWait(2);
-        sendKeys(BinMaintenancePage.binLocationFilter,binLocation,"Enter Bin location");
+        sendKeys(BinMaintenancePage.binLocationFilter, binLocation, "Enter Bin location");
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
         navigateToItemBinMain();
-        commonObj.validateText(By.xpath("//td[contains(text(),'"+binLocation+"')]"),binLocation,binLocation+" is present");
+        commonObj.validateText(By.xpath("//td[contains(text(),'" + binLocation + "')]"), binLocation, binLocation + " is present");
     }
 }

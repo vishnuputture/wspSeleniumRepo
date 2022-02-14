@@ -24,6 +24,7 @@ public class BinMaintenancePage {
     public static  By zoneName=By.id("zoneName");
     public static  By zoneAbv=By.id("zoneAbv");
     public static  By excelBtn=By.id("excelBtn");
+    public static  By stagingArea=By.id("stagingArea");
     public static  By menuIcon=By.xpath("//i[contains(@class,'bars menu-icon')]");
     public static  By inboxIcon=By.xpath("//i[@class='menu-icon fa fa-inbox']");
     public static  By zone=By.xpath("//a[contains(text(),'Zones')]");
