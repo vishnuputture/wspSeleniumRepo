@@ -63,7 +63,7 @@ public class BinMaintenancePage {
     public static  By addBinZoneDrop=By.xpath("//label[text()='Zone']/parent::div/descendant::select[contains(@class,'drop')]");
     public static  By zoneHeader=By.xpath("//h2[text()='Zones']");
     public static  By collapsedIcon=By.xpath("//a[@class='collapse-btn collapsed']");
-    public static  By newZonePopUp=By.xpath("//h2[text()='New Zone']");
+    public static  By toasterCloseIcon=By.xpath("//a[contains(@class,'toast-close-icon')]");
     public static  By deleteZonePopUp=By.xpath("//h2[text()='DELETE ZONE']");
     public static  By isCheckBoxEnabled=By.xpath("//input[@id and @ng-reflect-model='false']");
     public static  By pickSeqError=By.xpath("//div[@class='seqerror-text']");

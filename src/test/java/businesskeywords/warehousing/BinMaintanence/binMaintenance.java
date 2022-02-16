@@ -1300,11 +1300,13 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void verifyItemNumber(String value) {
+        Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.itemNumber, value, "Enter '" + value + "' into Item number text field");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Not a valid item number.", "'Not a valid item number.' error message is present");
         Utility_Functions.timeWait(2);
+        click(BinMaintenancePage.toasterCloseIcon,"Close error toaster");
     }
 
     /**
