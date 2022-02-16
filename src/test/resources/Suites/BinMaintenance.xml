@@ -48,6 +48,24 @@
                     <include name="Tc_866_verifyEditZone"></include>
                     <include name="Tc_868_verifyPickSequence"></include>
                     <include name="Tc_869_verifyDeleteZOne"></include>
+
+
+                    <include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"></include>
+                    <include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"></include>
+                    <include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"></include>
+                    <include name="Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable"></include>
+                    <include name="Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable"></include>
+                    <include name="Tc_766_verifyUIOfCreateNewBinPopup"></include>
+                    <include name="Tc_767_verifyCreateNewBinWithConditionGood"></include>
+                    <include name="Tc_768_verifyCreateNewBinWithConditionDamaged"></include>
+                    <include name="Tc_769_verifyCreateNewBinWithConditionDefective"></include>
+                    <include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"></include>
+                    <include name="Tc_780_verifyEditBinsButtonFunctionality"></include>
+                    <include name="Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins"></include>
+                    <include name="Tc_784_verifyBinWithItemsCannotBeDeleted"></include>
+                    <include name="Tc_785_verifyBinWithoutItemsCanBeDeleted"></include>
+                    <include name="Tc_786_verifyPrintBinLabelsFunctionality"></include>
+                    <include name="Tc_789_verifyPrintBinItemsLabelFunctionality"></include>
                 </methods>
             </class>
         </classes>
