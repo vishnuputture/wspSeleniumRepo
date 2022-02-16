@@ -1,0 +1,224 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_748_ItemBinMaintenanceUI": "navigateToBinMain,selectCompany,binMaintenanceUI",
+      "Tc_749_MainMenuOptions": "navigateToBinMain,selectCompany,verifyAvailMenuIcon",
+      "Tc_753_verifyApplyClearAllFilter": "navigateToBinMain,selectCompany,verifyApplyClearAllFilter",
+      "Tc_758_verifyFilterCheckBox": "navigateToBinMain,selectCompany,verifyExcludeAstJobZZ98Item",
+      "Tc_759_verifyContainsCheckBox": "navigateToBinMain,selectCompany,verifyContainsCheckBox",
+      "Tc_761_verifySuggestedMatchesPopUp": "navigateToBinMain,selectCompany,verifySuggestedMatchesPopUp",
+      "Tc_763_verifyItemNoNegValue": "navigateToBinMain,selectCompany,verifyItemNoField",
+      "Tc_764_verifyItemDescriptionFilter": "navigateToBinMain,selectCompany,verifyItemDescriptionFilter",
+      "Tc_765_verifyItemDescriptionField": "navigateToBinMain,selectCompany,verifyItemDescriptionField",
+      "Tc_750_VerifyUIItemNumbersAreAvailable": "navigateToBinMain,selectCompany,verifyUIItemNumbersAreAvailable",
+      "Tc_787_verifyOnHand": "navigateToBinMain,selectCompany,verifyOnHand",
+      "Tc_790_verifyClearAllButton": "navigateToBinMain,selectCompany,verifyClearAllButton",
+      "Tc_791_verifyPageCountItemMaintenance": "navigateToBinMain,selectCompany,enableContainsFilter,funPageCountItemMaintenance",
+      "Tc_793_verifyPaginationItemMaintenance": "navigateToBinMain,selectCompany,enableContainsFilter,paginationItemMaintenance",
+      "Tc_795_verifySelectAllCheckBox": "navigateToBinMain,selectCompany,enableContainsFilter,verifySelectAllCheckBox",
+      "Tc_801_verifyLabelButton": "navigateToBinMain,selectCompany,enableContainsFilter,verifyLabelButton",
+      "Tc_805_verifyItemDetailsMaster": "navigateToBinMain,selectCompany,enableContainsFilter,verifyItemDetailsMaster,signOut",
+      "Tc_808_verifyItemDetailsUI": "navigateToBinMain,selectCompany,enableContainsFilter,verifyItemDetailsUI",
+      "Tc_809_verifyPaginationItemDetails": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,paginationItemMaintenance",
+      "Tc_810_verifyPageCountItemDetails": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,funPageCountItemMaintenance",
+      "Tc_811_verifySelectDeselectItem": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifySelectDeselectItem",
+      "Tc_812_verifySecondaryOptionsBinType": "navigateToBinMain,selectCompany,verifySecondaryOptionsBinType",
+      "Tc_813_verifyUpdateBinType": "navigateToBinMain,selectCompany,verifyUpdateBinType",
+      "Tc_814_verifyBinItemDeleteIcon": "navigateToBinMain,selectCompany,verifyBinItemDeleteIcon",
+      "Tc_815_verifyBinItemEditIcon": "navigateToBinMain,selectCompany,verifyBinItemEditIcon",
+      "Tc_819_verifyBinMinMax": "navigateToBinMain,selectCompany,verifyBinMinMax",
+      "Tc_824_verifyEditBinPopUp": "navigateToBinMain,selectCompany,verifyEditBinPopUp",
+      "Tc_827_verifyCreateBinButton": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifyCreateBinButton",
+      "Tc_831_verifyCreateDuplicateBin": "navigateToBinMain,selectCompany,enableContainsFilter,validateItemHeader,verifyCreateDuplicateBin",
+      "Tc_836_verifyAddBinButton": "navigateToBinMain,selectCompany,filterSecAndNavBinMainDetails,verifyAddBinButton",
+      "Tc_837_verifyDuplicateAddBin": "navigateToBinMain,selectCompany,filterSecAndNavBinMainDetails,verifyDuplicateAddBin",
+      "Tc_857_ItemBinLedgerPageUI": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,itemBinLedgerPageUI",
+      "Tc_858_verifyZoneUI": "navigateToBinMain,selectCompany,navigateZonePage,verifyZoneUI",
+      "Tc_860_verifyApplyClearFilter": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyApplyClearFilter",
+      "Tc_861_verifyItemNumberField": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyItemNumberField",
+      "Tc_862_verifyNegItemNumberField": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyNegItemNumberField",
+      "Tc_863_verifyBinLocation": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,navigateToItemBinMain,verifyBinLocation",
+      "Tc_864_verifyNewZone": "navigateToBinMain,selectCompany,navigateZonePage,verifyNewZone",
+      "Tc_865_verifyDuplicateZone": "navigateToBinMain,selectCompany,navigateZonePage,verifyDuplicateZone",
+      "Tc_866_verifyEditZone": "navigateToBinMain,selectCompany,navigateZonePage,verifyEditZone",
+      "Tc_868_verifyPickSequence": "navigateToBinMain,selectCompany,navigateZonePage,verifyPickSequence",
+      "Tc_869_verifyDeleteZOne": "navigateToBinMain,selectCompany,navigateZonePage,clickDeleteZoneIcon"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_748_ItemBinMaintenanceUI",
+      "Title": "UI of Item Bin Maintenance"
+    },
+    {
+      "TC_ID": "Tc_749_MainMenuOptions",
+      "Title": "UI of Main Menu options"
+    },
+    {
+      "TC_ID": "Tc_753_verifyApplyClearAllFilter",
+      "Title": "Verify Apply Filter Clear All Filter"
+    },
+    {
+      "TC_ID": "Tc_758_verifyFilterCheckBox",
+      "Title": "Verify Apply Filter CheckBox"
+    },
+    {
+      "TC_ID": "Tc_759_verifyContainsCheckBox",
+      "Title": "Verify Filter Contains CheckBox",
+      "itemNo": "100"
+    },
+    {
+      "TC_ID": "Tc_761_verifySuggestedMatchesPopUp",
+      "Title": "Verify Suggested Matches PopUp Message",
+      "itemNo": "1"
+    },
+    {
+      "TC_ID": "Tc_763_verifyItemNoNegValue",
+      "Title": "Verify the negative Scenarios for Item Number input field",
+      "negativeValue": "-1",
+      "alphaNumeric": "Aws123H&"
+    },
+    {
+      "TC_ID": "Tc_764_verifyItemDescriptionFilter",
+      "Title": "Verify the functionality of Item Description field"
+    },
+    {
+      "TC_ID": "Tc_765_verifyItemDescriptionField",
+      "Title": "Verify the functionality of Item Description field"
+    },
+    {
+      "TC_ID": "Tc_750_VerifyUIItemNumbersAreAvailable",
+      "Title": "Verify the UI of the page when Item Numbers are available"
+    },
+    {
+      "TC_ID": "Tc_787_verifyOnHand",
+      "Title": "Verify On Hand Filter"
+    },
+    {
+      "TC_ID": "Tc_790_verifyClearAllButton",
+      "Title": "Verify the Clear all filter button"
+    },
+    {
+      "TC_ID": "Tc_791_verifyPageCountItemMaintenance",
+      "Title": "Verify the functionality of Pagination"
+    },
+    {
+      "TC_ID": "Tc_793_verifyPaginationItemMaintenance",
+      "Title": "Verify the functionality of Page count"
+    },
+    {
+      "TC_ID": "Tc_795_verifySelectAllCheckBox",
+      "Title": "Verify the functionality of Select All Items Checkbox"
+    },
+    {
+      "TC_ID": "Tc_801_verifyLabelButton",
+      "Title": "Verify the functionality of Labels button"
+    },
+    {
+      "TC_ID": "Tc_805_verifyItemDetailsMaster",
+      "Title": "Verify the particular Item Number's Details"
+    },
+    {
+      "TC_ID": "Tc_808_verifyItemDetailsUI",
+      "Title": "Verify the particular Item Number's Details"
+    },
+    {
+      "TC_ID": "Tc_809_verifyPaginationItemDetails",
+      "Title": "Verify the functionality of Pagination"
+    },
+    {
+      "TC_ID": "Tc_810_verifyPageCountItemDetails",
+      "Title": "Verify the functionality of Page count"
+    },
+    {
+      "TC_ID": "Tc_811_verifySelectDeselectItem",
+      "Title": "Verify Select/Deselect Items"
+    },
+    {
+      "TC_ID": "Tc_812_verifySecondaryOptionsBinType",
+      "Title": "verify Secondary Options BinType"
+    },
+    {
+      "TC_ID": "Tc_813_verifyUpdateBinType",
+      "Title": "verify Update BinType message"
+    },
+    {
+      "TC_ID": "Tc_813_verifyBinItemDeleteIcon",
+      "Title": "verify Delete item message"
+    },
+    {
+      "TC_ID": "Tc_815_verifyBinItemEditIcon",
+      "Title": "verify Edit Item details"
+    },
+    {
+      "TC_ID": "Tc_819_verifyBinMinMax",
+      "Title": "verify Bin min and bin max"
+    },
+    {
+      "TC_ID": "Tc_824_verifyEditBinPopUp",
+      "Title": "verify Edit bin popup"
+    },
+    {
+      "TC_ID": "Tc_827_verifyCreateBinButton",
+      "Title": "verify Create bin button"
+    },
+    {
+      "TC_ID": "Tc_831_verifyCreateDuplicateBin",
+      "Title": "verify Create Duplicate bin"
+    },
+    {
+      "TC_ID": "Tc_836_verifyAddBinButton",
+      "Title": "verify ADD Bin Button"
+    },
+    {
+      "TC_ID": "Tc_837_verifyDuplicateAddBin",
+      "Title": "verify ADD Duplicate Bin"
+    },
+    {
+      "TC_ID": "Tc_857_ItemBinLedgerPageUI",
+      "Title": "verify Item Bin Ledger Page UI"
+    },
+    {
+      "TC_ID": "Tc_858_verifyZoneUI",
+      "Title": "verify ADD Zone UI"
+    },
+    {
+      "TC_ID": "Tc_860_verifyApplyClearFilter",
+      "Title": "verify Apply Clear Filter"
+    },
+    {
+      "TC_ID": "Tc_861_verifyItemNumberField",
+      "Title": "verify Item Number Field",
+      "itemNumber": "*99599013999"
+    },
+    {
+      "TC_ID": "Tc_862_verifyNegItemNumberField",
+      "Title": "verify NegItem Number Field"
+    },
+    {
+      "TC_ID": "Tc_863_verifyBinLocation",
+      "Title": "verify Bin Location",
+      "itemNumber": "*99599013999"
+    },
+    {
+      "TC_ID": "Tc_864_verifyNewZone",
+      "Title": "verify New Zone Popup"
+    },
+    {
+      "TC_ID": "Tc_865_verifyDuplicateZone",
+      "Title": "verify duplicate Zone"
+    },
+    {
+      "TC_ID": "Tc_866_verifyEditZone",
+      "Title": "verify Edit Zone"
+    },
+    {
+      "TC_ID": "Tc_868_verifyPickSequence",
+      "Title": "verify Pick Sequence"
+    },
+    {
+      "TC_ID": "Tc_869_verifyDeleteZOne",
+      "Title": "verify delete Zone"
+    }
+  ]
+}

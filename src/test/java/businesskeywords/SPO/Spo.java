@@ -201,7 +201,11 @@ public class Spo extends ReusableLib {
         if (!Utility_Functions.xIsDisplayed(driver, SpoPage.spoPageTitle)) {
             click(SelfServicePriceSheetPage.companySelector);
             click(SelfServicePriceSheetPage.companyLabel);
-            sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
+            if (System.getProperty("company") == null) {
+                sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
+            } else {
+                sendKey(SelfServicePriceSheetPage.winCompanyNumber, System.getProperty("company"));
+            }
             click(SelfServicePriceSheetPage.selectButton);
             Utility_Functions.timeWait(5);
         }
@@ -365,10 +369,10 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to verify WS expand and contract functionality
      */
-    public void verifyExpandContract(){
-        click(SpoPage.btnMinus,"Click on minus button to contract the section");
+    public void verifyExpandContract() {
+        click(SpoPage.btnMinus, "Click on minus button to contract the section");
         commonObj.validateElementExists(SpoPage.contractedSection, "Search filters and worksheet calculation section is compressed");
-        click(SpoPage.btnPlus,"Click on plus button to expand the section");
+        click(SpoPage.btnPlus, "Click on plus button to expand the section");
         commonObj.validateElementExists(SpoPage.expandedSection, "Search filters and worksheet calculation section is expanded");
 
     }
@@ -376,7 +380,7 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to validate refresh functionality
      */
-    public void verifyRefreshFunction(){
+    public void verifyRefreshFunction() {
         Utility_Functions.xScrollIntoView(driver, SpoPage.costOption);
         String cost = jsonData.getData("CostOption");
         int size = driver.findElements(SpoPage.costOption).size() - 1;
@@ -384,11 +388,11 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(By.xpath("//option[contains(text(),'List Price')]"), "Select List Price option");
         Utility_Functions.timeWait(2);
-        sendKeys(SpoPage.discountOrMultiplier,"10","Enter discount");
-        click(SpoPage.btnRefreshWorksheet,"Click on refresh worksheet button");
+        sendKeys(SpoPage.discountOrMultiplier, "10", "Enter discount");
+        click(SpoPage.btnRefreshWorksheet, "Click on refresh worksheet button");
         Utility_Functions.timeWait(2);
-        if(waitForElementDisappear(SpoPage.pageBlocker,10)){
-            click(SpoPage.btnConfirm,"Click on yes button");
+        if (waitForElementDisappear(SpoPage.pageBlocker, 10)) {
+            click(SpoPage.btnConfirm, "Click on yes button");
         }
         commonObj.validateElementExists(SpoPage.refreshMessage, "Refresh successful message is displayed");
     }
@@ -396,13 +400,13 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to validate expand collapse function
      */
-    public void validateExpandCollapse(){
-        click(SpoPage.btnExpand,"Click on expand all button");
+    public void validateExpandCollapse() {
+        click(SpoPage.btnExpand, "Click on expand all button");
         commonObj.validateElementExists(SpoPage.itemExpanded, "Item section is expanded");
-        click(SpoPage.btnCollapse,"Click on collapse all button");
-        if(!xWaitForElementPresent(driver,SpoPage.itemExpanded,2)){
+        click(SpoPage.btnCollapse, "Click on collapse all button");
+        if (!xWaitForElementPresent(driver, SpoPage.itemExpanded, 2)) {
             report.updateTestLog("Validate collapse", "The items section is collapsed", Status.PASS);
-        }else{
+        } else {
             report.updateTestLog("Validate collapse", "The items section is expanded", Status.FAIL);
         }
     }
@@ -410,11 +414,11 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to validate disable all fields
      */
-    public void validateDisableFields(){
-        click(SpoPage.disableFieldsChkbox,"Uncheck disable fields checkbox");
-        click(SpoPage.btnItemExpand,"Click item expand button");
+    public void validateDisableFields() {
+        click(SpoPage.disableFieldsChkbox, "Uncheck disable fields checkbox");
+        click(SpoPage.btnItemExpand, "Click item expand button");
         Utility_Functions.timeWait(2);
-        if(waitForElementDisappear(SpoPage.pageBlocker,10)) {
+        if (waitForElementDisappear(SpoPage.pageBlocker, 10)) {
             if (driver.findElement(SpoPage.vendorPartNo).isEnabled() && driver.findElement(SpoPage.unitOfMeasure).isEnabled() && driver.findElement(SpoPage.conversionFactor).isEnabled()) {
                 report.updateTestLog("Validate fields are enabled", "The item fields are enabled", Status.PASS);
             } else {
@@ -451,10 +455,12 @@ public class Spo extends ReusableLib {
      * Keyword to Verify functionality of Trash icon
      */
     public void verifyTrashIcon() throws AWTException {
-        /*clickWorkSheetName();
-        click(SpoPage.closeIcon, "Click Close Icon");
-        Utility_Functions.timeWait(2);
-        commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");*/
+        if (!Utility_Functions.xIsDisplayed(driver, SpoPage.trashIcon)) {
+            clickWorkSheetName();
+            click(SpoPage.closeIcon, "Click Close Icon");
+            Utility_Functions.timeWait(2);
+            commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
+        }
         click(SpoPage.trashIcon, "Click Trash Icon");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(SpoPage.deleteSavedWorksheetPopup, "Delete Saved Worksheet Popup message present");
