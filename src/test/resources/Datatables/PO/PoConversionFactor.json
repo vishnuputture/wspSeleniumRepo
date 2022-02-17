@@ -1,0 +1,28 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_242_verifyItemNumberOnPO": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendor,verifyMUPkgQtyConvFact,exitToMaster,signOut",
+      "Tc_245_verifyEditedItemNumberOnPO": "launchApp,siteLogin,validateItemMasterTitle,editPurchasing,exitToMaster,validatePOHeadingTitle,findVendor,verifyMUPkgQtyConvFact,exitToMaster,signOut",
+      "Tc_246_verifyExtendListPriceCalculation": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendor,verifyMUPkgQtyConvFact,calculateListPrice,exitToMaster,signOut"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_242_verifyItemNumberOnPO",
+      "Title": "Verify Item Number On PO Page",
+      "OrderedQty": "2"
+    },
+    {
+      "TC_ID": "Tc_245_verifyEditedItemNumberOnPO",
+      "Title": "Verify edited Item Number On PO Page",
+      "StdQty": "5",
+      "convFactor": "8",
+      "OrderedQty": "2"
+    },
+    {
+      "TC_ID": "Tc_246_verifyExtendListPriceCalculation",
+      "Title": "Verify Extend List Price Calculation",
+      "OrderedQty": "2"
+    }
+  ]
+}
