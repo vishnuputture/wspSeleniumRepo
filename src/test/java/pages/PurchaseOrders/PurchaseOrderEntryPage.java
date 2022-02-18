@@ -18,16 +18,25 @@ public class PurchaseOrderEntryPage extends ReusableLib {
     public static By typeShipment=By.id("I_5_56");
 
     public static By firstVendor=By.id("I_8_2");
-    //public static By freightCharges=By.id("D_11_51");
+    public static By freightCharges=By.id("D_11_51");
     public static By enterFreightCharges=By.id("I_11_70");
 
     public  static By errorMsgPO=By.id("D_24_2");
     public static By vendorNoInput=By.id("I_4_16");
     public static By orderNoInput=By.id("I_4_56");
     public static By customerNoInput=By.id("I_5_16");
+    public static By firstCustomer=By.id("I_8_2");
 
     public static By costOption=By.id("I_20_19");
     public static By costOptionLink=By.id("D_20_2");
 
     public static By actionInpput=By.id("I_2_61");
+
+    public static By shipToinput=By.id("I_6_47");
+    public static By toaddressLine1=By.id("I_7_47");
+
+    public static By shipDateInput=By.id("I_12_70");
+
+
+
 }

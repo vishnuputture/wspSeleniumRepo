@@ -46,5 +46,7 @@ public class PurchaseOrderDetailsPage  extends ReusableLib {
   public static By getLineItemsList=By.xpath("//div[string-length(normalize-space(text()))>75 ]");
 
   public static By amountHeader=By.id("D_1_65");
+  public static By actionInput=By.id("I_2_12");
+  public static By lineno=By.id("I_3_12");
 }
 

@@ -3,8 +3,14 @@ package businesskeywords.common;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import pages.common.LoginPage;
+import pages.common.MasterPage;
 import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Login extends ReusableLib {
 
@@ -48,6 +54,18 @@ public class Login extends ReusableLib {
         ngWaitRequestToFinish();
         if (Utility_Functions.xIsDisplayed(driver, LoginPage.pendingScreenTitle)) {
             Utility_Functions.actionKey(Keys.ENTER, driver);
+        }
+        if(getProperties("ENV").equalsIgnoreCase("PROD")){
+            sendKeys(MasterPage.sqlTxtBox,"where");
+            Utility_Functions.actionKey(Keys.ENTER, driver);
+            String currentCompany = getText(MasterPage.companyLbl);
+            Utility_Functions.actionKey(Keys.ENTER, driver);
+            String [] companyArr = getProperties("CompanyNumber").split(String.valueOf(','));
+            List <String> companyList = Arrays.asList(companyArr);
+            if(!companyList.contains(currentCompany)){
+                sendKeys(MasterPage.sqlTxtBox,"win "+companyList.get(0));
+                Utility_Functions.actionKey(Keys.ENTER, driver);
+            }
         }
     }
 
