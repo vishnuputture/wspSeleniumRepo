@@ -3,11 +3,10 @@ package businesskeywords.PurchaseOrders;
 import businesskeywords.common.Login;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import com.winSupply.framework.Util;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import pages.PurchaseOrders.PoEntryConversionFactorPage;
-import pages.common.MasterPage;
+import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemMasterPage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
@@ -47,6 +46,12 @@ public class PoEntryConversionFactor extends ReusableLib {
         Utility_Functions.xUpdateJson("BuyStdPackQty", buyStdPackQty);
         String covFactor = getAttribute(PoEntryConversionFactorPage.inCovFactor, "value");
         Utility_Functions.xUpdateJson("CovFactor", covFactor);
+        String listPrice= getAttribute(ItemMasterPage.txtBoxListPrice, "value");
+        Utility_Functions.xUpdateJson("ListPrice", listPrice);
+        String poCost= getAttribute(ItemMasterPage.txtBoxPoCost, "value");
+        Utility_Functions.xUpdateJson("PoCost", poCost);
+        String lastCost= getAttribute(ItemMasterPage.inCostsLast, "value");
+        Utility_Functions.xUpdateJson("LastCost", lastCost);
     }
 
     /**
@@ -71,6 +76,15 @@ public class PoEntryConversionFactor extends ReusableLib {
         getDetails();
     }
 
+    public void findVendorFreight(){
+        click(PurchaseOrderEntryPage.vendorNo,"Click on Vendor Number");
+        sendKeys(PurchaseOrderEntryPage.firstVendor,"1"+Keys.ENTER,"Selecting the First Vendor in the search"  );
+        sendKeys(PurchaseOrderEntryPage.enterFreightCharges,"FFA","Entered FFA Frieght Code");
+        if(!jsonData.getData("CostOption").equals(null)) {
+            sendKeys(PurchaseOrderEntryPage.costOption, jsonData.getData("CostOption") + Keys.ENTER, "Entered Cost Option as"+Utility_Functions.xGetJsonData("CostOption"));
+        }
+    }
+
     /**
      * This method to validate MU, Pkg ty, Conv Factor
      */
@@ -78,6 +92,7 @@ public class PoEntryConversionFactor extends ReusableLib {
         String orderedQty = jsonData.getData("OrderedQty");
         sendKeys(PoEntryConversionFactorPage.ordered, orderedQty+Keys.ENTER, "Enter ordered");
         sendKeys(PoEntryConversionFactorPage.itemNo, Utility_Functions.xGetJsonData("ItemNoMaster")+Keys.ENTER, "Enter Item Number");
+        Utility_Functions.timeWait(3);
         Utility_Functions.xAssertEquals(report,getAttribute(PoEntryConversionFactorPage.muFiled,"value").trim(),Utility_Functions.xGetJsonData("PurchasingUOM").trim(),"");
         Utility_Functions.xAssertEquals(report,getAttribute(PoEntryConversionFactorPage.pkgQty,"value").trim(),Utility_Functions.xGetJsonData("BuyStdPackQty").trim(),"");
         Utility_Functions.xAssertEquals(report,getText(PoEntryConversionFactorPage.convFactor).trim(),Utility_Functions.xGetJsonData("CovFactor").trim(),"");
@@ -95,12 +110,27 @@ public class PoEntryConversionFactor extends ReusableLib {
         click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
     }
 
+    public String chooseCostOption(int costOption){
+        switch (costOption){
+            case 1:
+                return "ListPost";
+            case 2:
+                return "PoCost";
+            case 3:
+                return "LastCost";
+            case 4:
+                return "WssCost";
+            default:
+                return "ListPost";
+        }
+    }
+
     /**
      * This method to calculate Extend Price
      */
     public void extendPrice(Double price){
-        int orderedQty = Integer.parseInt(jsonData.getData("OrderedQty"));
-        int extendPrice=Integer.parseInt(getAttribute(PoEntryConversionFactorPage.extendPrice,"value"));
+        Double orderedQty = Double.parseDouble(jsonData.getData("OrderedQty"));
+        Double extendPrice=Double.parseDouble(getAttribute(PoEntryConversionFactorPage.extendPrice,"value"));
         Double expExtendPrice=price*orderedQty;
         Utility_Functions.xAssertEquals(report,extendPrice,expExtendPrice,"");
     }
@@ -108,11 +138,13 @@ public class PoEntryConversionFactor extends ReusableLib {
     /**
      * This method to calculate List Price and extent price
      */
-    public void calculateListPrice() {
-        int packQty=Integer.parseInt(Utility_Functions.xGetJsonData("BuyStdPackQty"));
+    public void calculateCost() {
+        int costOpt=Integer.parseInt(jsonData.getData("CostOption"));
+        String cost=chooseCostOption(costOpt);
+        Double costVal=Double.parseDouble(Utility_Functions.xGetJsonData(cost));
         Double covFactor=Double.parseDouble(Utility_Functions.xGetJsonData("CovFactor"));
         Double price=Double.parseDouble(getAttribute(PoEntryConversionFactorPage.priceField,"value"));
-        Utility_Functions.xAssertEquals(report,price,covFactor*packQty,"");
+        Utility_Functions.xAssertEquals(report,price,covFactor*costVal,"");
         extendPrice(price);
     }
 }

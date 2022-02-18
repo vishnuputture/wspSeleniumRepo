@@ -14,5 +14,6 @@ public class PoEntryConversionFactorPage {
     public static  By convFactor=By.id("D_11_65");
     public static  By priceField=By.id("I_8_43");
     public static  By extendPrice=By.id("I_8_68");
+    public static  By costOption=By.id("I_20_19");
     public static  By toaster=By.xpath("//span[@class='growl-text']");
 }

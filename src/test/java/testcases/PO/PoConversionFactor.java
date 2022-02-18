@@ -30,4 +30,12 @@ public class PoConversionFactor extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_247_verifyExtendPoCostCalculation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Extend PO Cost Calculation");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
