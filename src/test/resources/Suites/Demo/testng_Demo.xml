@@ -56,9 +56,9 @@
                     <include name="TC_243_CreateManifest"></include>
                 </methods>
             </class>-->
-            <class name="testcases.BinMaintenance">
+            <class name="testcases.PO.PoConversionFactor">
                 <methods>
-                    <include name="Tc_765_verifyItemDescriptionField"></include>
+                    <include name="Tc_242_verifyItemNumberOnPO"></include>
                 </methods>
             </class>
         </classes>
