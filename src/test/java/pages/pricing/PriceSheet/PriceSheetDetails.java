@@ -40,6 +40,6 @@ public class PriceSheetDetails extends ReusableLib
 
     public static By removeHoldButton=By.xpath("//button[text()='Remove Hold']");
 
-    public static By markAsReadyButton=By.xpath("//button[text()='Mark As Ready']");
+    public static By markAsReadyButton=By.xpath("//button[text()='Ready to Process']");
 
 }
