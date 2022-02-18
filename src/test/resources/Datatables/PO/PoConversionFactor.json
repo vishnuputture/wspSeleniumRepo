@@ -4,7 +4,8 @@
       "Tc_242_verifyItemNumberOnPO": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,exitToMaster,signOut",
       "Tc_245_verifyEditedItemNumberOnPO": "launchApp,siteLogin,validateItemMasterTitle,editPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,exitToMaster,signOut",
       "Tc_246_verifyExtendListPriceCalculation": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut",
-      "Tc_247_verifyExtendPoCostCalculation": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut"
+      "Tc_247_verifyExtendPoCostCalculation": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut",
+      "Tc_248_verifyExtendLastCostCalculation": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut"
     }
   ],
   "General_Data": [
@@ -31,6 +32,12 @@
       "Title": "Verify Extend Po Cost Calculation",
       "OrderedQty": "2",
       "CostOption": "2"
+    },
+    {
+      "TC_ID": "Tc_248_verifyExtendLastCostCalculation",
+      "Title": "Verify Extend Last Cost Calculation",
+      "OrderedQty": "2",
+      "CostOption": "3"
     }
   ]
 }

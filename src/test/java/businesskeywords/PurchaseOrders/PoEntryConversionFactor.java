@@ -50,7 +50,7 @@ public class PoEntryConversionFactor extends ReusableLib {
         Utility_Functions.xUpdateJson("ListPrice", listPrice);
         String poCost= getAttribute(ItemMasterPage.txtBoxPoCost, "value");
         Utility_Functions.xUpdateJson("PoCost", poCost);
-        String lastCost= getAttribute(ItemMasterPage.inCostsLast, "value");
+        String lastCost= getText(ItemMasterPage.inCostsLast);
         Utility_Functions.xUpdateJson("LastCost", lastCost);
     }
 
