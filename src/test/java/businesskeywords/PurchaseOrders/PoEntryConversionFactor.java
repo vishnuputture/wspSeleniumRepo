@@ -113,7 +113,7 @@ public class PoEntryConversionFactor extends ReusableLib {
     public String chooseCostOption(int costOption){
         switch (costOption){
             case 1:
-                return "ListPost";
+                return "ListPrice";
             case 2:
                 return "PoCost";
             case 3:
@@ -121,7 +121,7 @@ public class PoEntryConversionFactor extends ReusableLib {
             case 4:
                 return "WssCost";
             default:
-                return "ListPost";
+                return "ListPrice";
         }
     }
 
