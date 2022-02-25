@@ -56,6 +56,8 @@
                     <include name="TC_243_CreateManifest"></include>
                 </methods>
             </class>-->
+
+
             <class name="testcases.PO.PoConversionFactor">
                 <methods>
                     <include name="Tc_242_verifyItemNumberOnPO"></include>
@@ -63,4 +65,11 @@
             </class>
         </classes>
     </test>
-</suite> <!-- Suite -->
+</suite>
+
+
+
+
+
+
+

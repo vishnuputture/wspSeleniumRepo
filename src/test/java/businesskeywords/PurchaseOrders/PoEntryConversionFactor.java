@@ -80,8 +80,11 @@ public class PoEntryConversionFactor extends ReusableLib {
         click(PurchaseOrderEntryPage.vendorNo,"Click on Vendor Number");
         sendKeys(PurchaseOrderEntryPage.firstVendor,"1"+Keys.ENTER,"Selecting the First Vendor in the search"  );
         sendKeys(PurchaseOrderEntryPage.enterFreightCharges,"FFA","Entered FFA Frieght Code");
-        if(!jsonData.getData("CostOption").equals(null)) {
+        if(jsonData.getData("CostOption")!=null) {
             sendKeys(PurchaseOrderEntryPage.costOption, jsonData.getData("CostOption") + Keys.ENTER, "Entered Cost Option as"+Utility_Functions.xGetJsonData("CostOption"));
+        }else
+        {
+            Utility_Functions.actionKey(Keys.ENTER,driver);
         }
     }
 

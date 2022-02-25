@@ -1,0 +1,18 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_902_InventoryReceiptUI": "launchApp,siteLogin,navigateToInventoryReceipt,inventoryReceiptUI",
+      "Tc_903_PurchaseOrderInquiryHyperlink": "launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_902_InventoryReceiptUI",
+      "Title": "Test case UI of Inventory Receipt Page"
+    },
+    {
+      "TC_ID": "Tc_903_PurchaseOrderInquiryHyperlink",
+      "Title": "Test case to verify Purchase Order Inquiry Hyperlink"
+    }
+  ]
+}
