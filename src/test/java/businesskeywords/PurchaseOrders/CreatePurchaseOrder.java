@@ -2,7 +2,10 @@ package businesskeywords.PurchaseOrders;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Report;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import org.aspectj.weaver.bcel.Utility;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,7 +15,9 @@ import pages.PurchaseOrders.CostOptionspage;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.PurchaseOrders.VendorNotesPage;
+import pages.common.MasterPage;
 import pages.inventory.ItemMasterPage;
+import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
 
 import java.text.DecimalFormat;
@@ -26,6 +31,14 @@ public class CreatePurchaseOrder extends ReusableLib {
 
         super(helper);
         commonObj = new CommonActions(helper);
+    }
+
+    public void navigateFromPODetailsToMaster()  {
+        click(SpecialPriceAllowancePage.btnF11,"Click [F11 Header] Button");
+        Utility_Functions.xScrollWindow(driver);
+        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
+        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
+        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
     }
 
     public void validatePOHeadingTitle()  {
@@ -280,5 +293,121 @@ public  void addPOWithListPriceAndDisc()
         commonObj.validateText(PurchaseOrderEntryPage.poHeaderTitle,"Purchase Order Headings","Validating Entry - Purchase Order");
 
     }
+
+    /**
+     * Keyword to enter [Qty] and [Item Number] in Purchase Order Details page
+     */
+    public void enterOrderedItemNumber(){
+        String itemNo = Utility_Functions.xGetJsonAsString("ItemNoMaster");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.quantityOrdered,jsonData.getData("QtyOrdered"),"Enter Quantity Ordered");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.itemNumberPOD,itemNo,"Enter Item Number as["+itemNo+"]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    /**
+     * Keyword to enter [Qty] and [Item Number] in Purchase Order Details page
+     */
+    public void enterItemNumberAndQty(){
+        String itemNo = jsonData.getData("ItemNo");
+        String qty = jsonData.getData("QtyOrdered");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.quantityOrdered, qty,"Enter Quantity Ordered");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.itemNumberPOD,itemNo,"Enter Item Number as["+itemNo+"]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    /**
+     * Keyword to select random [Item Number] and enter [Qty] in Purchase Order Details page
+     */
+    public void findOrderAndEnterQty(){
+        click(PurchaseOrderDetailsPage.itemNumberPOD);
+        click(PurchaseOrderDetailsPage.f4);
+
+        String itemNumber = commonObj.selectRandomItemNumber();
+        String itemNumberSelected = getAttribute(PurchaseOrderDetailsPage.itemNumberPOD, "value");
+        Utility_Functions.xAssertEquals(report, itemNumber, itemNumberSelected,"Selected Item Number is displayed");
+
+        sendKeysAndEnter(PurchaseOrderDetailsPage.quantityOrdered,jsonData.getData("QtyOrdered"),"Enter Quantity Ordered");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    /**
+     * Keyword to verify Item List Price in Purchase Order Details page
+     */
+    public void vrfyItemListPrice(){
+        String priceExpected = Utility_Functions.xGetJsonAsString("ListPrice").trim();
+        String priceActual = getAttribute(PurchaseOrderDetailsPage.pricePOD, "value").trim();
+        Utility_Functions.xAssertEquals(report, priceExpected, priceActual, "Validating [Price] in Purchase Order Details page");
+    }
+
+    /**
+     * Keyword to verify Item PO Price in Purchase Order Details page
+     */
+    public void vrfyItemPOPrice(){
+        String priceExpected = Utility_Functions.xGetJsonAsString("POCost").trim();
+        String priceActual = getAttribute(PurchaseOrderDetailsPage.pricePOD, "value").trim();
+        Utility_Functions.xAssertEquals(report, priceExpected, priceActual, "Validating [Price] in Purchase Order Details page");
+    }
+
+    /**
+     * Keyword to verify error in Purchase Order Details page
+     */
+    public void verifyError(String expected){
+        Utility_Functions.xScrollIntoView(driver, PurchaseOrderDetailsPage.errorMsgPOD);
+        String actual = getText(PurchaseOrderDetailsPage.errorMsgPOD).trim();
+        Utility_Functions.xAssertEquals(report, expected, actual, "Validating error message in Purchase Order Details page");
+    }
+
+    /**
+     * Keyword to Press Enter and verify Sales Order error in Purchase Order Details page
+     */
+    public void verifySalesOrderError(){
+        String error1 = jsonData.getData("Error1");
+        String error2 = jsonData.getData("Error2");
+
+        click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
+        verifyError(error1);
+
+        sendKeysAndEnter(PurchaseOrderDetailsPage.relatedSo, "879818","Enter random value in Related SO tbx");
+        click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
+        verifyError(error2);
+    }
+
+    /**
+     * Keyword to Press Enter and verify Sales Order error in Purchase Order Details page
+     */
+    public void vrfyCostVarianceError(){
+        click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
+        String error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
+        if (error.contains("F8 to accept")){
+            Utility_Functions.actionKey(Keys.F8, driver);
+        }
+        error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
+        if (error.contains("F4 Overrides")){
+            Utility_Functions.actionKey(Keys.F4, driver);
+        }
+        Utility_Functions.xScrollIntoView(driver, PurchaseOrderDetailsPage.errorMsgPOD);
+        commonObj.verifyElementContainsText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is", "Verify Cost Variance Warning message");
+        getConvFactorValue();
+        Utility_Functions.actionKey(Keys.F5, driver);
+    }
+
+    /**
+     * Keyword to get Conv Factor value from Purchase Order Details page
+     */
+    public void getConvFactorValue(){
+        String convFactor = getText(PurchaseOrderDetailsPage.convFactorValue).trim();
+        jsonData.putData("ConvFactor", convFactor);
+    }
+
+    /**
+     * Keyword to get Conv Factor value from Purchase Order Details page
+     */
+    public void getOrderNumberValue(){
+        String orderNo = getText(PurchaseOrderDetailsPage.orderNo2).trim();
+        jsonData.putData("OrderNumber", orderNo);
+    }
+
+
+
 
 }
