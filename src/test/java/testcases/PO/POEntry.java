@@ -47,7 +47,7 @@ public class POEntry extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-/*
+
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_208_Create_line_item_by_changing_Customer_number(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Create line item by changing Customer number");
@@ -56,22 +56,22 @@ public class POEntry extends TestConfigurations {
         tearDownTestRunner(testParameters, coreScript);
     }
 
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_209_Verify_the_functionality_of_Type_Shipment_S(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Verify the functionality of Type Shipment : S");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
+        @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+        public void Tc_209_Verify_the_functionality_of_Type_Shipment_S(SeleniumTestParameters testParameters) {
+            testParameters.setCurrentTestDescription("Verify the functionality of Type Shipment : S");
+            CoreScript coreScript = new CoreScript(testParameters);
+            coreScript.driveTestExecution();
+            tearDownTestRunner(testParameters, coreScript);
+        }
 
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_210_Verify_the_error_message(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Verify the error message");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
-*/
+            @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+            public void Tc_210_Verify_the_error_message(SeleniumTestParameters testParameters) {
+                testParameters.setCurrentTestDescription("Verify the error message");
+                CoreScript coreScript = new CoreScript(testParameters);
+                coreScript.driveTestExecution();
+                tearDownTestRunner(testParameters, coreScript);
+            }
+
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Calculation of Extended amount for List Price with Discount");
@@ -113,7 +113,7 @@ public class POEntry extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-
+*/
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_216_Verify_the_functionality_of_Freight_Charges(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify the functionality of Freight Charges");
@@ -121,7 +121,7 @@ public class POEntry extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-*/
+
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_217_Verify_the_functionality_of_Cost_Option(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify the functionality of Cost Option");

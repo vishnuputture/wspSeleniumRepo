@@ -10,14 +10,16 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.Reporter;
+import pages.PurchaseOrders.*;
+import pages.inventory.ItemMasterPage;
+import pages.pricing.spa.SpecialPriceAllowancePage;
 import pages.PurchaseOrders.CostOptionspage;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.PurchaseOrders.VendorNotesPage;
 import pages.common.MasterPage;
-import pages.inventory.ItemMasterPage;
-import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
 
 import java.text.DecimalFormat;
@@ -26,7 +28,8 @@ import java.util.List;
 
 public class CreatePurchaseOrder extends ReusableLib {
     CommonActions commonObj;
-
+    public static    String  customeraddress1;
+    public static    String  customeraddress2;
     public CreatePurchaseOrder(Helper helper) {
 
         super(helper);
@@ -61,9 +64,15 @@ public class CreatePurchaseOrder extends ReusableLib {
         sendKeys(PurchaseOrderEntryPage.firstVendor,"1"+Keys.ENTER,"Selecting the First Vendor in the search"  );
        sendKeys(PurchaseOrderEntryPage.enterFreightCharges,"FFA"+Keys.ENTER,"Entered FFA Frieght Code");
 
-   }
+      }
 
-   public  void validatePODetailsUI(){
+    public void findVendorWithoutFreightCharges() {
+        click(PurchaseOrderEntryPage.vendorNo, "Click on Vendor Number");
+        sendKeys(PurchaseOrderEntryPage.firstVendor, "1" + Keys.ENTER, "Selecting the First Vendor in the search");
+    }
+
+
+        public  void validatePODetailsUI(){
 
         commonObj.validateElementExists(PurchaseOrderDetailsPage.action1,"Action is present");
        commonObj.validateElementExists(PurchaseOrderDetailsPage.ediStat,"EDI Stat  is present");
@@ -167,13 +176,6 @@ public class CreatePurchaseOrder extends ReusableLib {
       Utility_Functions.timeWait(5);
       commonObj.validateText(VendorNotesPage.vendorInputVendorNotes,"","Verify Line1 Vendor note is deleted and blank");
   }
-/*
-    public void selectListPriceCost()
-    {        sendKeys(PurchaseOrderEntryPage.costOption,"1","Enter Cost Price as List Price");    }
-
-    public void selectLastPriceCost()
-    {sendKeys(PurchaseOrderEntryPage.costOption,"3","Enter Cost Price as List Price");   }
-*/
     public void applyCostPriceAndDisc(String costoption,String quantity,String discount)
     {
         click(PurchaseOrderEntryPage.vendorNo,"Click on Vendor Number");
@@ -188,25 +190,39 @@ public class CreatePurchaseOrder extends ReusableLib {
         sendKeys(PurchaseOrderDetailsPage.disc,discount+Keys.ENTER,"Entered Disc");
         Utility_Functions.timeWait(5);
 
+        if(Double.parseDouble(discount)>0) {
 
-        double extAmtCalc=Double.parseDouble(driver.findElement( PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
-                     *Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim())
-                     *(1-(Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.disc).getAttribute("value").trim()))/100) ;
-        Utility_Functions.timeWait(5);
-        double avgPrice=Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
-        String formattedavgPrice=String.format("%.4f", avgPrice);
+            double extAmtCalc = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
+                    * Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim())
+                    * (1 - (Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.disc).getAttribute("value").trim())) / 100);
+            Utility_Functions.timeWait(5);
+            double avgPrice = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
+            String formattedavgPrice = String.format("%.4f", avgPrice);
 
-       commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD,"WARNING- Cost variance -- F5 to accept.  Average cost is       "+
-                       formattedavgPrice   ,"Verifying Cost variance validation");
-        String extendedAmt=String.valueOf(Math.abs(Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
+            commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is       " +
+                    formattedavgPrice, "Verifying Cost variance validation");
+            String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
 
 
+            Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), extendedAmt);
+        }
+        else
+        {
+                        double extAmtCalc = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
+                    * Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
+            Utility_Functions.timeWait(5);
+            double avgPrice = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
+            String formattedavgPrice = String.format("%.4f", avgPrice);
 
-        Utility_Functions.xAssertEquals(report,String.valueOf(extAmtCalc),extendedAmt);
+            String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
 
+
+            Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), extendedAmt);
+
+        }
     }
-public  void addPOWithListPriceAndDisc()
-{
+     public  void addPOWithListPriceAndDisc()
+     {
     applyCostPriceAndDisc(jsonData.getData("listCostOption"), jsonData.getData("quantityOrdered"),
             jsonData.getData("discount"));
 
@@ -291,6 +307,98 @@ public  void addPOWithListPriceAndDisc()
         sendKeys(CostOptionspage.codeSelectinput,"1"+Keys.ENTER,"E");
         Utility_Functions.timeWait(5);
         commonObj.validateText(PurchaseOrderEntryPage.poHeaderTitle,"Purchase Order Headings","Validating Entry - Purchase Order");
+
+    }
+
+    public  void selectFirstCustomer()
+    {
+        clearText(PurchaseOrderEntryPage.customerNoInput);
+        clearText(PurchaseOrderEntryPage.orderNoInput);
+        click(PurchaseOrderEntryPage.customerNo);
+        Utility_Functions.timeWait(5);
+
+    customeraddress1 = Utility_Functions.getText(driver,MailingMasterSearchPage.firstaddressLine1,"innerText").toLowerCase().replace(" ","").trim();
+     customeraddress2=Utility_Functions.getText(driver,MailingMasterSearchPage.firstaddressLine2,"innerText").toLowerCase().replace(" ","").trim();
+        sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1"+Keys.ENTER,"Select Customer No");
+        Utility_Functions.timeWait(5);
+
+        commonObj.validateText(PurchaseOrderEntryPage.errorMsgPO,"ERROR - Vendor or Order Number cannot be blank"," Validate Vendor Or Order blank after Customer selection");
+
+        Utility_Functions.timeWait(2);
+        Assert.assertNotNull(driver.findElement(PurchaseOrderEntryPage.orderNoInput).getAttribute("value"),"Validate Order No is auto populated");
+
+    }
+
+    public void addPOWithPOPriceAndDisc()
+    {
+      applyCostPriceAndDisc(jsonData.getData("POCostOption"), jsonData.getData("quantityOrdered"),
+              jsonData.getData("discount"));
+      sendKeys(PurchaseOrderDetailsPage.extendedAmount,String.valueOf(Keys.F5));
+      Utility_Functions.timeWait(5);
+      Utility_Functions.xWaitForElementPresent(driver,driver.findElements(PurchaseOrderDetailsPage.getLineItemsList),5);
+
+      Utility_Functions.xIsElementDisplayed(report, driver.findElement(PurchaseOrderDetailsPage.getLineItemsList),"Added Line Item displayed");
+
+
+  }
+
+    public void validateShipmentType()
+    {
+      System.out.println("Customer Page Address One="+CreatePurchaseOrder.customeraddress1);
+      System.out.println("Customer Page Address Two="+CreatePurchaseOrder.customeraddress2);
+      String shipto=Utility_Functions.getText(driver,PurchaseOrderEntryPage.shipToinput,"value").replace(" ","").toLowerCase().trim();
+      String toaddress=Utility_Functions.getText(driver,PurchaseOrderEntryPage.toaddressLine1,"value").replace(" ","").toLowerCase().trim();
+
+      System.out.println("PO Order Ship Address1="+shipto);
+      System.out.println("PO Order To Address1="+toaddress);
+
+         //Assert.assertTrue(CreatePurchaseOrder.customeraddress1.contains(shipto));
+         //Assert.assertTrue(CreatePurchaseOrder.customeraddress2.contains(toaddress));
+          Utility_Functions.xAssertEquals(report,CreatePurchaseOrder.customeraddress1,shipto);
+      Utility_Functions.xAssertEquals(report,CreatePurchaseOrder.customeraddress2,toaddress);
+
+  }
+
+    public void  addPOWithListPriceWithoutDisc()
+    {
+        applyCostPriceAndDisc(jsonData.getData("listCostOption"), jsonData.getData("quantityOrdered"),jsonData.getData("nodiscount"));
+        sendKeys(PurchaseOrderDetailsPage.extendedAmount,String.valueOf(Keys.ENTER));
+        Utility_Functions.timeWait(8);
+        System.out.println("Validation Msg"+Utility_Functions.getText(driver.findElement(PurchaseOrderDetailsPage.errorMsgPOD),"outerText"));
+
+    //    commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD," ERROR - Discount can NOT be blank when using list price F4 Overrides","No Discount validation");
+       String message=Utility_Functions.getText(driver.findElement(PurchaseOrderDetailsPage.errorMsgPOD),"outerText").replace(" "," ").trim();
+        Utility_Functions.xAssertEquals(report,"ERROR - Discount can NOT be blank when using list price F4 Overrides",message,
+                "No Discount validation");
+    }
+
+    public void validateFrieghtCharges()
+    {
+        click(PurchaseOrderEntryPage.freightCharges,"Click on Frieght Charges Hyperlink");
+         Utility_Functions.timeWait(5);
+
+         sendKeys(FrieghtChargesPage.positionTo,jsonData.getData("invalidFrieght")+Keys.ENTER,"Enter Invalid Frieght Code");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(FrieghtChargesPage.errMsg,"No Code entries to display","Validate FriegntCharges message for invalid code");
+        clearText(FrieghtChargesPage.positionTo);
+
+        Utility_Functions.timeWait(5);
+
+        sendKeys(FrieghtChargesPage.positionTo,jsonData.getData("invalidFrieghtSpecialChar")+Keys.ENTER,"Enter Invalid Frieght Code with Special character");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(FrieghtChargesPage.errMsg,"No Code entries to display","Validate FriegntCharges message for invalid code with Special Characters");
+
+        clearText(FrieghtChargesPage.positionTo);
+        sendKeys(FrieghtChargesPage.positionTo,jsonData.getData("validFrieght")+Keys.ENTER,"Enter Invalid Frieght Code with Special character");
+        Utility_Functions.timeWait(5);
+
+        sendKeys(FrieghtChargesPage.selectfirstCode,"1"+Keys.ENTER,"Selecting First Code FFA");
+        Utility_Functions.timeWait(5);
+
+
+        Utility_Functions.xAssertEquals(report,jsonData.getData("validFrieght"),driver.findElement(PurchaseOrderEntryPage.enterFreightCharges),
+                  "value","Validate selected Frieght FFA");
+
 
     }
 
@@ -415,8 +523,5 @@ public  void addPOWithListPriceAndDisc()
         sendKeysAndEnter(PurchaseOrderDetailsPage.relatedSo, relatedSO,"Enter Related SO");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
-
-
-
 
 }

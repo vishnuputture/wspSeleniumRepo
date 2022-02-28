@@ -21,6 +21,7 @@ public class MasterPage extends ReusableLib {
     public static By itemMasterMenu =By.xpath("//div[text()='12']/following-sibling::div/a[contains(text(),'Revision')]");
 	public static By btnSignOut=By.xpath("//a[text()='Signoff']");
 	public static By sqlTxtBox=By.id("I_22_7");
+	public static By companyLbl=By.id("D_5_13_W1");
 	public static By sqlTitleLbl=By.id("D_1_11");
 	public static By loadingAnime=By.id("_pui_loading_animation");
 	public static By optionAndConstantsMenu = By.xpath("//div[text()='24']/following-sibling::div/a[contains(text(),'Options')]");
