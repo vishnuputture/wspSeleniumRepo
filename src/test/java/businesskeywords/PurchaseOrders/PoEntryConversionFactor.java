@@ -191,6 +191,13 @@ public class PoEntryConversionFactor extends ReusableLib {
     }
 
     /**
+     * Keyword to select Action text in Purchase Order Headings page
+     */
+    public void selectAction(){
+        sendKeys(PurchaseOrderEntryPage.actionInpput, jsonData.getData("Action"), "Enter Action");
+    }
+
+    /**
      * Keyword to validate Action text in Purchase Order Headings page
      */
     public void verifyAction(String actionExpected){
@@ -199,10 +206,34 @@ public class PoEntryConversionFactor extends ReusableLib {
     }
 
     /**
+     * Keyword to validate Action text in Purchase Order Headings page
+     */
+    public void verifyActionChange(){
+        String action = jsonData.getData("ActionExpected");
+        verifyAction(action);
+    }
+
+    /**
      * Keyword to validate Type Shipment text in Purchase Order Headings page
      */
     public void verifyTypeShipment(String typeShipmentExpected){
         String typeShipmentActual = getAttribute(PurchaseOrderEntryPage.orderNoInput, "value");
         Utility_Functions.xAssertEquals(report, typeShipmentExpected, typeShipmentActual,"Type Shipment text is verified");
+    }
+
+    /**
+     * Keyword to validate Action text in Purchase Order Headings page
+     */
+    public void verifyTypeShipmentChange(){
+        String action = jsonData.getData("TypeShipmentExpected");
+        verifyTypeShipment(action);
+    }
+
+    /**
+     * Keyword to enter existing PO order Number in Purchase Order Headings page
+     */
+    public void enterOrderNumber(){
+        sendKeysAndEnter(PurchaseOrderEntryPage.orderNoInput, jsonData.getData("PONumber"), "Enter existing PO Number");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 }

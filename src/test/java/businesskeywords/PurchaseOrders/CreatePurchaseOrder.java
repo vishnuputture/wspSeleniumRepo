@@ -308,7 +308,7 @@ public  void addPOWithListPriceAndDisc()
      * Keyword to enter [Qty] and [Item Number] in Purchase Order Details page
      */
     public void enterItemNumberAndQty(){
-        String itemNo = jsonData.getData("ItemNo");
+        String itemNo = jsonData.getData("itemNo");
         String qty = jsonData.getData("QtyOrdered");
         sendKeysAndEnter(PurchaseOrderDetailsPage.quantityOrdered, qty,"Enter Quantity Ordered");
         sendKeysAndEnter(PurchaseOrderDetailsPage.itemNumberPOD,itemNo,"Enter Item Number as["+itemNo+"]");
@@ -405,6 +405,15 @@ public  void addPOWithListPriceAndDisc()
     public void getOrderNumberValue(){
         String orderNo = getText(PurchaseOrderDetailsPage.orderNo2).trim();
         jsonData.putData("OrderNumber", orderNo);
+    }
+
+    /**
+     * Keyword to enter [Relates SO] in Purchase Order Details page
+     */
+    public void enterRelatedSO(){
+        String relatedSO = jsonData.getData("SalesOrderNo");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.relatedSo, relatedSO,"Enter Related SO");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
 

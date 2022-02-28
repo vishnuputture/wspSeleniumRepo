@@ -23,6 +23,8 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By salesOrderField = By.id("inOrderNum");
 	public static By btnSaveExit = By.id("btnSaveExit");
 	public static By btnExit = By.id("btnExitBill");
+	public static By closeTooltip = By.xpath("//div[@class='pui-tip-close']");
+	public static By lblRelatedPO = By.id("Related_PO.1");
 
 	//shipment tab
 
@@ -37,6 +39,8 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By  elementForContextClick= By.xpath("//select[@id='slbShipType.1']/parent::div");
 	public static By directShipDropdown = By.xpath("//*[contains(@id,'slbDirectShip')]");
 	public static By contextOptionLineDetails = By.xpath("//td[text()='Line Details']");
+	public static By contextOptionCreatePO = By.xpath("//td[text()='Create Purchase Order']");
+	public static By contextOptionCreatePOSelectedItem = By.xpath("//*[text()='Convert Entire Shipment']"); ////*[contains(text(),'Convert']
 	public static By shipmentItemName = By.id("outItemNumb.1");
 	public static By contextOptionDeleteItem = By.xpath("//td[text()='Delete Item From Shipment']");
 	public static By updateShipmentBtn = By.id("btnSave");
@@ -62,4 +66,17 @@ public class SalesOrdersPage extends ReusableLib {
     // Order INformation Page (Landing Page)
 	public static By loadSalesOrder= By.xpath("//div[@id='lblSalesOrderNumber']//following-sibling::div[2]/i");
 	public  static By orderStatus=By.xpath("//select[@id='SelectOrderStatusDescription']");
+
+	/********************************************* CREATE PURCHASE ORDER popup *********************************************/
+
+	public static By hdrCreatePO=By.xpath("//h3[text()='Create Purchase Order']");
+	public static By btnNext=By.id("btnNext");
+	public static By btnBack=By.id("btnNext");
+	public static By hdrBuildPO=By.xpath("//h3[text()='Build Purchase Order for All Items on a Shipment']");
+	public static By tbxVendorNumber = By.id("inVendorNumber");
+	public static By ddnFreightCode = By.id("slbFreightCode"); //Full Frt Allowed/ NO Frt Chrg.
+	public static By btnCreatePO = By.id("btnAdd");
+
+	public static By hdrRelatedPO=By.xpath("//h3[text()='Related Purchase Orders']");
+	public static By txtPONumber = By.xpath("//div[@id='outPONumber.1']/a");
 }

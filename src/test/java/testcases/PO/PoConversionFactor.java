@@ -94,4 +94,20 @@ public class PoConversionFactor extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify WARNING message while adding line item to Direct POs");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_258_VerifyAddingDirectPOToRelatedSO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to the functionality of adding Direct POs to  Related SO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
