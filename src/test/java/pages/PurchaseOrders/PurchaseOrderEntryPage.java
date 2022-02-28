@@ -29,14 +29,22 @@ public class PurchaseOrderEntryPage extends ReusableLib {
 
     public static By costOption=By.id("I_20_19");
     public static By costOptionLink=By.id("D_20_2");
+    public static By firstCostOptionCode=By.id("I_6_2_W1");
 
     public static By actionInpput=By.id("I_2_61");
-
     public static By shipToinput=By.id("I_6_47");
     public static By toaddressLine1=By.id("I_7_47");
 
     public static By shipDateInput=By.id("I_12_70");
 
+
+    /***************************************** Purchase Order Inquiry page elements *****************************************/
+
+    public static By ddnType = By.id("P1PTSHPTYP");
+    public static By lstOptionsColumn = By.xpath("//div[starts-with(@id,'P1OPT')]/input");
+    public static By lstOrderNumberColumn = By.xpath("//div[starts-with(@id,'P1ORDNUM')]");
+    public static By btnNext = By.id("btnSubmit");
+    public static By tbxOrderNumber = By.id("I_3_56");
 
 
 }

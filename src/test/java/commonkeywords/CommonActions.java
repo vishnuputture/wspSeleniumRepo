@@ -4,6 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
 import com.winSupply.framework.Status;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.OptionsConstantsPage;
 import pages.PurchaseOrders.PurchaseOrderEntryPage;
@@ -14,6 +15,7 @@ import pages.common.SqlStatementPage;
 
 import pages.*;
 import pages.inventory.CostAdjustmentPage;
+import pages.inventory.ItemMasterPage;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.OrderByCustomerPage;
 import pages.pricing.SpecialPricePage;
@@ -121,6 +123,13 @@ public class CommonActions extends ReusableLib {
 	}
 
 	/**
+	 * This method navigates from Inventory Management - Main Menu to Buyer's Inquiry page
+	 */
+	public void inventoryToInquiryBuyer() {
+		click(MasterPage.inquiryBuyerMenu,"Click Inquiry - Buyer");
+	}
+
+	/**
 	 *
 	 *
 	 * This method navigates from special price maintenance page to add special price page
@@ -152,6 +161,25 @@ public class CommonActions extends ReusableLib {
 			String title = Utility_Functions.getText(driver,ele);
 			System.out.println("Text: "+title);
 			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
+		}else {
+			System.out.println("Text: Not found");
+			throw new NoSuchElementException("Could not find :"+ele);
+		}
+	}
+
+	/**
+	 * This method verifies that the element contains expected text
+	 */
+	public void verifyElementContainsText(By ele,String textExpected,String msg) {
+		if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
+			String textActual = Utility_Functions.getText(driver,ele);
+			System.out.println("Text: "+textActual);
+			boolean flag = textActual.contains(textExpected);
+			if (flag)
+				report.updateTestLog("Verify text", "Element contains text expected: "+textExpected+" and actual: "+textActual, Status.PASS);
+			else
+				report.updateTestLog("Verify text", "Element contains text expected: "+textExpected+" and actual: "+textActual, Status.FAIL);
+			Assert.assertTrue(msg, flag);
 		}else {
 			System.out.println("Text: Not found");
 			throw new NoSuchElementException("Could not find :"+ele);
@@ -491,5 +519,21 @@ public class CommonActions extends ReusableLib {
 	public  void navigateToMfVendorCode() {
 		click(pages.inventory.OptionsConstantsPage.mfVendorCode, "Navigate to MF/Vendor Codes");
 		validateText(pages.inventory.OptionsConstantsPage.mfVendorCodePageTitle, "Mf / Vendor Code Revisions", "Lands On  Mf / Vendor Code Revisions Program");
+	}
+
+	/**
+	 * Keyword to select random Item in page - [Item Master Browse - Local]
+	 */
+	public String selectRandomItemNumber(){
+		int count = Utility_Functions.xRandomFunction(1, 10);
+		while(count>0){
+			click(ItemMasterPage.btnDown);
+			waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+			count--;
+		}
+		String itemNumber = getText(ItemMasterPage.itemNumber).trim();
+		sendKeysAndEnter(CostAdjustmentPage.optBox, "1", "Select Item Number");
+		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+		return itemNumber;
 	}
 }
