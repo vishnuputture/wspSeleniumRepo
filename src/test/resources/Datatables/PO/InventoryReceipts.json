@@ -1,8 +1,10 @@
 {
   "Business_Flow": [
     {
-      "Tc_902_InventoryReceiptUI": "launchApp,siteLogin,navigateToInventoryReceipt,inventoryReceiptUI",
-      "Tc_903_PurchaseOrderInquiryHyperlink": "launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink"
+      "Tc_902_InventoryReceiptUI": "launchApp,siteLogin,navigateToInventoryReceipt,inventoryReceiptUI,signOut",
+      "Tc_903_PurchaseOrderInquiryHyperlink": "launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,signOut",
+      "Tc_904_PurchaseOrderNumberField": "launchApp,siteLogin,navigateToInventoryReceipt,poNoField,signOut",
+      "Tc_897_OrderInUse": "launchApp,siteLogin,navigateToInventoryReceipt,orderInUse,signOut"
     }
   ],
   "General_Data": [
@@ -13,6 +15,15 @@
     {
       "TC_ID": "Tc_903_PurchaseOrderInquiryHyperlink",
       "Title": "Test case to verify Purchase Order Inquiry Hyperlink"
+    },
+    {
+      "TC_ID": "Tc_904_PurchaseOrderNumberField",
+      "Title": "Test case to verify Purchase Order Number Field"
+    },
+    {
+      "TC_ID": "Tc_897_OrderInUse",
+      "Title": "Test case to verify order In Use popup",
+      "PurchaseOrderNo": "030758"
     }
   ]
 }
