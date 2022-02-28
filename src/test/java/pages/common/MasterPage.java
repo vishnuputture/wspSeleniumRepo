@@ -9,6 +9,7 @@ public class MasterPage extends ReusableLib {
 	        super(helper);
 	    }
 
+	public static  By loadingSpinner=By.xpath("//i[contains(@class,'fa fa-spinner')]");
 	public static By orderProcessMenu=By.xpath("//div[text()='3']/following-sibling::div");
     public static By salesAnalysisMenu=By.xpath("//div[text()='5']/following-sibling::div");
 	public static By inventoryMenu = By.xpath("//div[text()='7']/following-sibling::div");
@@ -28,5 +29,5 @@ public class MasterPage extends ReusableLib {
 	public static By salesQuotes = By.xpath("//div[text()='13']/following-sibling::div/a[contains(text(),'Sales')]");
     public static By salesOrdersMenu = By.id("D_9_7");
 	public static By optionConstPageTitle = By.id("D_2_19");
-	public static  By loadingSpinner=By.xpath("//i[contains(@class,'fa fa-spinner')]");
+	public static By inquiryBuyerMenu =By.xpath("//div[text()='2']/following-sibling::div/a[contains(text(),'Buyer')]");
 }

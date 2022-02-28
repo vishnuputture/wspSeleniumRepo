@@ -4,11 +4,14 @@ package businesskeywords.SalesOrders;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.apache.hc.client5.http.auth.StandardAuthScheme;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.SalesOrders.*;
+import pages.common.MasterPage;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
 
 import org.openqa.selenium.Keys;
@@ -187,6 +190,48 @@ public class SalesOrders extends ReusableLib{
 		click(SalesOrdersPage.btnExit," exiting sales order");
 
 	}
-	    
+
+	/**
+	 * Keyword to select Delivery Information Sales Order page
+	 */
+	public void selectDeliveryInfo(){
+		Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.directShipDropDown,jsonData.getData("DirectShip"));
+		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+		Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.shipViaDropDown,jsonData.getData("ShipVia"));
+		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+	}
+
+	/**
+	 * Keyword to Items in Sales Order page
+	 */
+	public void selectItems(){
+		sendKeys(SalesOrdersPage.qtyOrdered,jsonData.getData("QtyOrder"),"Entering ordered quantity");
+		sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo"),"Entering item Number");
+		sendKeys(SalesOrdersPage.qtyToShip,jsonData.getData("QtyShip"),"Entering quantity to ship");
+		Utility_Functions.actionKey(Keys.ENTER, driver);
+		jsonData.putData("SalesOrderNo", driver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
+	}
+
+	/**
+	 * Keyword to create Purchase Order from shipment tab in Sales Order page
+	 */
+	public void createPOFromShipments() {
+		Utility_Functions.contextClickOnElement(driver, SalesOrdersPage.elementForContextClick);
+		Utility_Functions.xmouseOver(driver, SalesOrdersPage.contextOptionCreatePO);
+		click(SalesOrdersPage.contextOptionCreatePOSelectedItem, "Click [Convert Selected Items] option");
+		commonObj.validateText(SalesOrdersPage.hdrCreatePO,"Create Purchase Order","Validating Create Purchase Order popup header");
+		click(SalesOrdersPage.btnNext, "Click [Next] button");
+		commonObj.validateText(SalesOrdersPage.hdrBuildPO,"Build Purchase Order for All Items on a Shipment","Validating Build Purchase Order popup header");
+
+		Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.ddnFreightCode, jsonData.getData("FreightCode"));
+		sendKeysAndEnter(SalesOrdersPage.tbxVendorNumber, jsonData.getData("VendorNumber"),"Entering Vendor Number");
+		click(SalesOrdersPage.btnCreatePO, "Click [Create PO] button");
+		commonObj.validateText(SalesOrdersPage.hdrRelatedPO,"Related Purchase Orders","Validating Related Purchase Orders popup header");
+		String poNumber = getText(SalesOrdersPage.txtPONumber);
+		jsonData.putData("PONumber", poNumber);
+		Utility_Functions.actionKey(Keys.F12, driver);
+		//click(SalesOrdersPage.btnBack, "Click [Return to Sales Order] button");
+		commonObj.validateText(SalesOrdersPage.lblRelatedPO,"Related P.O.","Validating Related Purchase Orders label");
+	}
 	    
 }

@@ -88,4 +88,6 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By optInd = By.id("I_11_3");
     public static By bottom = By.xpath("//div[contains(text(),'Bottom')]");
     public static By codeUpdateSuccess = By.xpath("//div[@id='D_24_2'][contains(text(),'Cost')]");
+
+    public static By btnF11 = By.id("btnCF11");
 }

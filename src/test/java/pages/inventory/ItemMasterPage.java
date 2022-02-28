@@ -30,4 +30,12 @@ public class ItemMasterPage extends ReusableLib{
     public static By manufacturerCode = By.id("inManufacturerCode");
     public static By productCode = By.id("inProductCode");
     public static By vendorCode = By.id("inVendorCode");
+    public static By tbxConvFactor = By.id("inCovFactor");
+
+    public static By itemSearchIcon = By.id("faItemSearch");
+
+    /************************************ Item Master Browse - Local Page elements ************************************/
+
+    public static By btnDown = By.id("down_button");
+    public static By itemNumber = By.id("D_11_6");
 }

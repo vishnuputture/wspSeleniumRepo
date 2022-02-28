@@ -2403,6 +2403,17 @@ public class Utility_Functions extends ReusableLib {
         return value;
     }
 
+    /*
+     * **********************************************************************************************
+     * Function Name: xRandomFunction Author : winSupply Team Purpose : generate random Int in range
+     * **********************************************************************************************
+     */
+    public static int xRandomFunction(int min, int max) {
+        Random random = new Random();
+        int value = (int) (random.nextInt((max - min)+1) + min);
+        return value;
+    }
+
     public static Object xReadJson(String path) {
         try {
 

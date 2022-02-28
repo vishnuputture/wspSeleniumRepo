@@ -48,5 +48,14 @@ public class PurchaseOrderDetailsPage  extends ReusableLib {
   public static By amountHeader=By.id("D_1_65");
   public static By actionInput=By.id("I_2_12");
   public static By lineno=By.id("I_3_12");
+
+  public static By convFactorValue = By.id("D_11_65");
+  public static By orderNo2 = By.id("D_2_49");
+  public static By btnSubmit=By.id("btnSubmit");
+
+  /******************************* Actions panel locators *******************************/
+
+  public static By f4 = By.id("btnCF04");
+
 }
 

@@ -3,15 +3,22 @@ package businesskeywords.PurchaseOrders;
 import businesskeywords.common.Login;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.PoEntryConversionFactorPage;
+import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.PurchaseOrders.PurchaseOrderEntryPage;
+import pages.common.MasterPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemMasterPage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
+
+import java.util.List;
 
 public class PoEntryConversionFactor extends ReusableLib {
     CommonActions commonObj;
@@ -149,5 +156,87 @@ public class PoEntryConversionFactor extends ReusableLib {
         Double price=Double.parseDouble(getAttribute(PoEntryConversionFactorPage.priceField,"value"));
         Utility_Functions.xAssertEquals(report,price,covFactor*costVal,"");
         extendPrice(price);
+    }
+
+    /**
+     * Keyword to find and select a random order of type direct
+     */
+    public void selectDirectOrderAndVerify(){
+        String orderType = jsonData.getData("OrderType");
+        String action = jsonData.getData("Action");
+        String typeShipment = jsonData.getData("TypeShipment");
+
+        findOrderNumber(orderType);
+        verifyAction(action);
+        verifyTypeShipment(typeShipment);
+        click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
+    }
+
+    /**
+     * Keyword to find and select a random order of type direct
+     */
+    public void findOrderNumber(String orderType){
+        click(PurchaseOrderEntryPage.orderNo,"Click on Order Number");
+        Utility_Functions.xSelectDropdownByValue(driver, PurchaseOrderEntryPage.ddnType, orderType);
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        List<WebElement> lstOptions = getListElement(PurchaseOrderEntryPage.lstOptionsColumn);
+        List<WebElement> lstOrderNumber = getListElement(PurchaseOrderEntryPage.lstOrderNumberColumn);
+        List<String> lstOrderNumberText = Utility_Functions.xGetTextVisibleListString(driver, lstOrderNumber);
+        int random = Utility_Functions.xRandomFunction(0, lstOptions.size()-1);
+        String orderNumberSelected = lstOrderNumberText.get(random);
+        sendKeys(lstOptions.get(random), "2", "Selected an Order with Order Number as ["+orderNumberSelected+"]");
+        click(PurchaseOrderEntryPage.btnNext,"Click on Next button");
+
+        xWaitForElementPresent(driver, PurchaseOrderEntryPage.tbxOrderNumber, globalWait);
+        String orderNumberActual = getAttribute(PurchaseOrderEntryPage.tbxOrderNumber, "value");
+        Utility_Functions.xAssertEquals(report, orderNumberSelected, orderNumberActual,"Selected Order Number is displayed");
+    }
+
+    /**
+     * Keyword to select Action text in Purchase Order Headings page
+     */
+    public void selectAction(){
+        sendKeys(PurchaseOrderEntryPage.actionInpput, jsonData.getData("Action"), "Enter Action");
+    }
+
+    /**
+     * Keyword to validate Action text in Purchase Order Headings page
+     */
+    public void verifyAction(String actionExpected){
+        String actionActual = getAttribute(PurchaseOrderEntryPage.actionInpput, "value");
+        Utility_Functions.xAssertEquals(report, actionExpected, actionActual,"Action text is verified");
+    }
+
+    /**
+     * Keyword to validate Action text in Purchase Order Headings page
+     */
+    public void verifyActionChange(){
+        String action = jsonData.getData("ActionExpected");
+        verifyAction(action);
+    }
+
+    /**
+     * Keyword to validate Type Shipment text in Purchase Order Headings page
+     */
+    public void verifyTypeShipment(String typeShipmentExpected){
+        String typeShipmentActual = getAttribute(PurchaseOrderEntryPage.orderNoInput, "value");
+        Utility_Functions.xAssertEquals(report, typeShipmentExpected, typeShipmentActual,"Type Shipment text is verified");
+    }
+
+    /**
+     * Keyword to validate Action text in Purchase Order Headings page
+     */
+    public void verifyTypeShipmentChange(){
+        String action = jsonData.getData("TypeShipmentExpected");
+        verifyTypeShipment(action);
+    }
+
+    /**
+     * Keyword to enter existing PO order Number in Purchase Order Headings page
+     */
+    public void enterOrderNumber(){
+        sendKeysAndEnter(PurchaseOrderEntryPage.orderNoInput, jsonData.getData("PONumber"), "Enter existing PO Number");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 }
