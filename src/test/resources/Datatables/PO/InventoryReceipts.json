@@ -6,7 +6,7 @@
       "Tc_903_PurchaseOrderInquiryHyperlink": "launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,signOut",
       "Tc_904_PurchaseOrderNumberField": "launchApp,siteLogin,navigateToInventoryReceipt,poNoField,signOut",
       "Tc_897_OrderInUse": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,switchTab,launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,orderInUse,signOut,switchTabBack,exitIR,signOut",
-
+      "Tc_905_QtyReceivedField": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,qtyReceivedField,signOut"
     }
   ],
   "General_Data": [
@@ -24,8 +24,7 @@
     },
     {
       "TC_ID": "Tc_897_OrderInUse",
-      "Title": "Test case to verify order In Use popup",
-      "PurchaseOrderNo": "030758"
+      "Title": "Test case to verify order In Use popup"
     },
     {
       "TC_ID": "Tc_CreatePo",
@@ -42,6 +41,14 @@
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
       "PONumber": "030878"
+    },
+    {
+      "TC_ID": "Tc_905_QtyReceivedField",
+      "Title": "Test case to verify Quantity Received Input Field",
+      "negativeQtyReceived": "-10",
+      "blankSpaceQtyReceived": " ",
+      "zeroQtyReceived": "0",
+      "alphaNumericQtyReceived": "Asd@#234"
     }
   ]
 }

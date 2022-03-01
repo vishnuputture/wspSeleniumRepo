@@ -6,6 +6,7 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.PurchaseOrders.InventoryReceiptPage;
+import pages.PurchaseOrders.PoEntryConversionFactorPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.pricing.AddSpecialPricingPage;
 import supportLibraries.Utility_Functions;
@@ -134,7 +135,7 @@ public class POReceiptCorrects extends ReusableLib {
      * This method to Enter PO Number
      */
     public String enterPoNo() {
-        String poNo=Utility_Functions.xGetJsonData("PONumber");
+        String poNo = Utility_Functions.xGetJsonData("PONumber");
         sendKeys(InventoryReceiptPage.purchaseOrdNo, poNo, "Enter Purchase Order Number");
         Utility_Functions.actionKey(Keys.ENTER, driver);
         return poNo;
@@ -144,14 +145,14 @@ public class POReceiptCorrects extends ReusableLib {
      * This method verify the functionality of Purchase Order Number input field
      */
     public void poNoField() {
-        String poNo=enterPoNo();
+        String poNo = enterPoNo();
         commonObj.validateText(InventoryReceiptPage.headerIR, "inventory receipts", "inventory receipts Header is present");
         commonObj.validateText(InventoryReceiptPage.poInqIR, poNo, "Po number matches");
         commonObj.validateText(InventoryReceiptPage.ReceivedByIN, properties.getProperty("UserName").toUpperCase(Locale.ROOT), "Received By matches");
         exitIR();
     }
 
-    public void exitIR(){
+    public void exitIR() {
         Utility_Functions.xScrollIntoView(driver, WorkWithSalesQuotesPage.proc);
         click(WorkWithSalesQuotesPage.exitIR, "Click Exit Button");
     }
@@ -161,27 +162,49 @@ public class POReceiptCorrects extends ReusableLib {
      */
     public void switchTab() {
         Utility_Functions.openNewTab(driver);
-        Utility_Functions.xSwitchToWindow(driver,1);
+        Utility_Functions.xSwitchToWindow(driver, 1);
     }
 
     /**
      * This method switch tab
      */
     public void switchTabBack() {
-        Utility_Functions.xSwitchToWindow(driver,0);
+        Utility_Functions.xSwitchToWindow(driver, 0);
     }
 
     /**
      * This method verify the functionality of Order in Use popup
      */
     public void orderInUse() {
-        String poNo=Utility_Functions.xGetJsonData("PONumber");
+        String poNo = Utility_Functions.xGetJsonData("PONumber");
         commonObj.validateText(InventoryReceiptPage.orderInUsePopUp, "ORDER IN USE", "'ORDER IN USE' popup is present");
         commonObj.validateText(InventoryReceiptPage.outOrderNum, poNo, "'Order #" + poNo + " is in use' is present");
         commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty("UserName"), "User id is matches");
         click(InventoryReceiptPage.btnContinue, "Click Continue button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
         click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");
+    }
+
+    public void verifyQtyRecField(String val) {
+        String qtyRec = jsonData.getData(val);
+        clearText(InventoryReceiptPage.qtyReceived);
+        sendKeys(InventoryReceiptPage.qtyReceived, qtyRec, "Enter " + qtyRec + " into quantity received input field");
+        Utility_Functions.actionKey(Keys.ENTER,driver);
+    }
+
+    /**
+     * This method verify the functionality of Quantity Received Input Field
+     */
+    public void qtyReceivedField() {
+        verifyQtyRecField("negativeQtyReceived");
+        Utility_Functions.xAssertEquals(report, getAttribute(InventoryReceiptPage.qtyReceived, "title").trim(), "Qty Received Cannot be less than 0.", "");
+        verifyQtyRecField("blankSpaceQtyReceived");
+        commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
+        verifyQtyRecField("zeroQtyReceived");
+        commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
+        verifyQtyRecField("alphaNumericQtyReceived");
+        commonObj.validateText(InventoryReceiptPage.displayProgramMes, "Display Program Messages", "'Display Program Messages' Header is present");
+        Utility_Functions.actionKey(Keys.ENTER,driver);
     }
 
     /**

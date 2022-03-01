@@ -46,4 +46,12 @@ public class InventoryReceipts extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_905_QtyReceivedField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Quantity Received Input Field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

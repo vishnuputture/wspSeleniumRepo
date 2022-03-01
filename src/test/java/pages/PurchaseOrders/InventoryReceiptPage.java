@@ -8,6 +8,8 @@ public class InventoryReceiptPage {
     public static By vendorInvoiceNo = By.id("VDVIV#");
     public static By receivedBy = By.id("VDRCBY");
     public static By receiverDoc = By.id("WKRDOC");
+    public static By qtyReceived = By.id("VQR.1");
+    public static By displayProgramMes = By.id("D_1_16");
     public static By receivedDate = By.id("VDDTSH");
     public static By receiverDocNotes = By.id("VDNOTE");
     public static By freightCharges = By.id("VDFRT");
