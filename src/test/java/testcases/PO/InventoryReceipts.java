@@ -24,6 +24,14 @@ public class InventoryReceipts extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreatePo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Create Purchase Order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_904_PurchaseOrderNumberField(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify Purchase Order Number Field");
         CoreScript coreScript = new CoreScript(testParameters);

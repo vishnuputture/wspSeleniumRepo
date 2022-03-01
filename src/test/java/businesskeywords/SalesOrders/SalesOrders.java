@@ -229,6 +229,7 @@ public class SalesOrders extends ReusableLib{
 		commonObj.validateText(SalesOrdersPage.hdrRelatedPO,"Related Purchase Orders","Validating Related Purchase Orders popup header");
 		String poNumber = getText(SalesOrdersPage.txtPONumber);
 		jsonData.putData("PONumber", poNumber);
+		Utility_Functions.xUpdateJson("PONumber",poNumber);
 		Utility_Functions.actionKey(Keys.F12, driver);
 		//click(SalesOrdersPage.btnBack, "Click [Return to Sales Order] button");
 		commonObj.validateText(SalesOrdersPage.lblRelatedPO,"Related P.O.","Validating Related Purchase Orders label");

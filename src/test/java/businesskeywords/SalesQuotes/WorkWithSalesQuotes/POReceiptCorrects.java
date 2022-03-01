@@ -11,6 +11,7 @@ import pages.pricing.AddSpecialPricingPage;
 import supportLibraries.Utility_Functions;
 
 import java.awt.event.KeyEvent;
+import java.util.Locale;
 
 
 public class POReceiptCorrects extends ReusableLib {
@@ -132,37 +133,52 @@ public class POReceiptCorrects extends ReusableLib {
     /**
      * This method to Enter PO Number
      */
-    public void enterPoNo() {
-        sendKeys(InventoryReceiptPage.purchaseOrdNo, Utility_Functions.xGetJsonData("PONoLineItem"), "Enter Purchase Order Number");
+    public String enterPoNo() {
+        String poNo=Utility_Functions.xGetJsonData("PONumber");
+        sendKeys(InventoryReceiptPage.purchaseOrdNo, poNo, "Enter Purchase Order Number");
         Utility_Functions.actionKey(Keys.ENTER, driver);
-        commonObj.validateText(InventoryReceiptPage.headerIR, "inventory receipts", "inventory receipts Header is present");
+        return poNo;
     }
 
     /**
      * This method verify the functionality of Purchase Order Number input field
      */
     public void poNoField() {
-        navigateToPoInqPage();
-        /*String poNumber = findLineItemPO();
-        exitPoInqPage();*/
-        enterPoNo();
-        commonObj.validateText(InventoryReceiptPage.poInqIR, "030128", "Po number matches");
-        commonObj.validateText(InventoryReceiptPage.ReceivedByIN, System.getProperty("UserName"), "Received By matches");
+        String poNo=enterPoNo();
+        commonObj.validateText(InventoryReceiptPage.headerIR, "inventory receipts", "inventory receipts Header is present");
+        commonObj.validateText(InventoryReceiptPage.poInqIR, poNo, "Po number matches");
+        commonObj.validateText(InventoryReceiptPage.ReceivedByIN, properties.getProperty("UserName").toUpperCase(Locale.ROOT), "Received By matches");
+        exitIR();
+    }
+
+    public void exitIR(){
         Utility_Functions.xScrollIntoView(driver, WorkWithSalesQuotesPage.proc);
-        click(WorkWithSalesQuotesPage.saleQExtBtn, "Click Exit Button");
+        click(WorkWithSalesQuotesPage.exitIR, "Click Exit Button");
+    }
+
+    /**
+     * This method switch tab
+     */
+    public void switchTab() {
+        Utility_Functions.openNewTab(driver);
+        Utility_Functions.xSwitchToWindow(driver,1);
+    }
+
+    /**
+     * This method switch tab
+     */
+    public void switchTabBack() {
+        Utility_Functions.xSwitchToWindow(driver,0);
     }
 
     /**
      * This method verify the functionality of Order in Use popup
      */
     public void orderInUse() {
-        String poNo = jsonData.getData("PurchaseOrderNo");
-        sendKeys(InventoryReceiptPage.purchaseOrdNo, poNo, "Enter Purchase Order Number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        String poNo=Utility_Functions.xGetJsonData("PONumber");
         commonObj.validateText(InventoryReceiptPage.orderInUsePopUp, "ORDER IN USE", "'ORDER IN USE' popup is present");
         commonObj.validateText(InventoryReceiptPage.outOrderNum, poNo, "'Order #" + poNo + " is in use' is present");
         commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty("UserName"), "User id is matches");
-        commonObj.validateText(InventoryReceiptPage.outWorkStation, "DEVTPM001", "Workstation is matches");
         click(InventoryReceiptPage.btnContinue, "Click Continue button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
         click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");

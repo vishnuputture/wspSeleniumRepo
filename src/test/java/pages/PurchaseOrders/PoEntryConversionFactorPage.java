@@ -10,6 +10,8 @@ public class PoEntryConversionFactorPage {
     public static  By ordered=By.id("I_8_6");
     public static  By itemNo=By.id("I_8_23");
     public static  By muFiled=By.id("I_8_58");
+    public static  By selectItem=By.id("I_14_3");
+    public static  By storeItem=By.id("D_14_6");
     public static  By pkgQty=By.id("I_11_45");
     public static  By convFactor=By.id("D_11_65");
     public static  By priceField=By.id("I_8_43");

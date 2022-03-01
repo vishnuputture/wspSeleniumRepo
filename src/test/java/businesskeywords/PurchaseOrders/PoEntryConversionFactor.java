@@ -41,8 +41,8 @@ public class PoEntryConversionFactor extends ReusableLib {
     public void selectItem(){
         click(CostAdjustmentPage.searchIcon, "Click Search Icon");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xUpdateJson("ItemNoMaster", Utility_Functions.getText(driver, CustomerGroupMaintenancePage.secGroupName));
-        sendKeys(CostAdjustmentPage.optBox, "1", "Select Item Number");
+        Utility_Functions.xUpdateJson("ItemNoMaster", Utility_Functions.getText(driver, PoEntryConversionFactorPage.storeItem));
+        sendKeys(PoEntryConversionFactorPage.selectItem, "1", "Select Item Number");
         Utility_Functions.actionKey(Keys.ENTER, driver);
     }
 
@@ -99,8 +99,10 @@ public class PoEntryConversionFactor extends ReusableLib {
      * This method to validate MU, Pkg ty, Conv Factor
      */
     public void verifyMUPkgQtyConvFact() {
+        Utility_Functions.timeWait(2);
         String orderedQty = jsonData.getData("OrderedQty");
         sendKeys(PoEntryConversionFactorPage.ordered, orderedQty+Keys.ENTER, "Enter ordered");
+        Utility_Functions.timeWait(2);
         sendKeys(PoEntryConversionFactorPage.itemNo, Utility_Functions.xGetJsonData("ItemNoMaster")+Keys.ENTER, "Enter Item Number");
         Utility_Functions.timeWait(3);
         Utility_Functions.xAssertEquals(report,getAttribute(PoEntryConversionFactorPage.muFiled,"value").trim(),Utility_Functions.xGetJsonData("PurchasingUOM").trim(),"");
@@ -149,6 +151,7 @@ public class PoEntryConversionFactor extends ReusableLib {
      * This method to calculate List Price and extent price
      */
     public void calculateCost() {
+        Utility_Functions.timeWait(2);
         int costOpt=Integer.parseInt(jsonData.getData("CostOption"));
         String cost=chooseCostOption(costOpt);
         Double costVal=Double.parseDouble(Utility_Functions.xGetJsonData(cost));

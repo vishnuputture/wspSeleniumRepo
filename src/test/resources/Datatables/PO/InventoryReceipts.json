@@ -2,9 +2,11 @@
   "Business_Flow": [
     {
       "Tc_902_InventoryReceiptUI": "launchApp,siteLogin,navigateToInventoryReceipt,inventoryReceiptUI,signOut",
+      "Tc_CreatePo": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
       "Tc_903_PurchaseOrderInquiryHyperlink": "launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,signOut",
       "Tc_904_PurchaseOrderNumberField": "launchApp,siteLogin,navigateToInventoryReceipt,poNoField,signOut",
-      "Tc_897_OrderInUse": "launchApp,siteLogin,navigateToInventoryReceipt,orderInUse,signOut"
+      "Tc_897_OrderInUse": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,switchTab,launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,orderInUse,signOut,switchTabBack,exitIR,signOut",
+
     }
   ],
   "General_Data": [
@@ -24,6 +26,22 @@
       "TC_ID": "Tc_897_OrderInUse",
       "Title": "Test case to verify order In Use popup",
       "PurchaseOrderNo": "030758"
+    },
+    {
+      "TC_ID": "Tc_CreatePo",
+      "Title": "Test case to Create Purchase order",
+      "accountNo": "099599",
+      "DirectShip": "Yes",
+      "ShipVia": "BEST WAY",
+      "QtyOrder": "50",
+      "itemNo": "AABABM200",
+      "QtyShip": "50",
+      "SalesOrderNo": "000791",
+      "QtyOrdered": "25",
+      "VendorNumber": "000388",
+      "CostOption": "1",
+      "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
+      "PONumber": "030878"
     }
   ]
 }

@@ -52,6 +52,7 @@ public class WorkWithSalesQuotesPage extends ReusableLib {
     public static By nextButton=By.id("btnNext");
     public static By saleQExtBtn=By.id("btnCF03");
     public static By convert = By.xpath("//a[text()='Convert']");
+    public static By exitIR=By.id("RC1CTL_linkCF03");
     public static By ordInfBackOrd = By.xpath("//div[@id='outQtyBackorder.1']/a");
     public static By purchaseOrdNo = By.xpath("//div[@id='outPONumber.1']/a");
     public static By shipmentTab = By.xpath("//*[text()='Shipments']");
