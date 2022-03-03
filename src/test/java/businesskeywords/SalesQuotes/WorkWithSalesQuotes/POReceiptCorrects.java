@@ -5,6 +5,7 @@ import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptPage;
 import pages.PurchaseOrders.PoEntryConversionFactorPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
@@ -96,6 +97,10 @@ public class POReceiptCorrects extends ReusableLib {
         click(WorkWithSalesQuotesPage.saleQExtBtn, "Click Exit Button");
     }
 
+    public void exitInventoryReceiptPage() {
+        click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");
+    }
+
     /**
      * This method verify PO Inquiry Link
      */
@@ -185,26 +190,70 @@ public class POReceiptCorrects extends ReusableLib {
         click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");
     }
 
-    public void verifyQtyRecField(String val) {
-        String qtyRec = jsonData.getData(val);
-        clearText(InventoryReceiptPage.qtyReceived);
-        sendKeys(InventoryReceiptPage.qtyReceived, qtyRec, "Enter " + qtyRec + " into quantity received input field");
-        Utility_Functions.actionKey(Keys.ENTER,driver);
+    public void verifyQtyField(String val, By by) {
+        String qty = jsonData.getData(val);
+        clearText(by);
+        sendKeys(by, qty, "Enter " + qty + " into quantity received input field");
+        Utility_Functions.actionKey(Keys.ENTER, driver);
     }
 
     /**
      * This method verify the functionality of Quantity Received Input Field
      */
     public void qtyReceivedField() {
-        verifyQtyRecField("negativeQtyReceived");
+        verifyQtyField("negativeQtyReceived",InventoryReceiptPage.qtyReceived);
         Utility_Functions.xAssertEquals(report, getAttribute(InventoryReceiptPage.qtyReceived, "title").trim(), "Qty Received Cannot be less than 0.", "");
-        verifyQtyRecField("blankSpaceQtyReceived");
+        verifyQtyField("blankSpaceQtyReceived",InventoryReceiptPage.qtyReceived);
         commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
-        verifyQtyRecField("zeroQtyReceived");
+        verifyQtyField("zeroQtyReceived",InventoryReceiptPage.qtyReceived);
         commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
-        verifyQtyRecField("alphaNumericQtyReceived");
+        verifyQtyField("alphaNumericQtyReceived",InventoryReceiptPage.qtyReceived);
         commonObj.validateText(InventoryReceiptPage.displayProgramMes, "Display Program Messages", "'Display Program Messages' Header is present");
-        Utility_Functions.actionKey(Keys.ENTER,driver);
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+    }
+
+    /**
+     * This method to verify Unit Cost Field
+     */
+    public void unitCostField() {
+        sendKeys(InventoryReceiptPage.unitCostField, jsonData.getData("unitCost") + Keys.ENTER, "Enter value into Unit COst field");
+        commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
+    }
+
+    /**
+     * This method to verify Unit Cost Field
+     */
+    public void verifyUnitCostField() {
+        verifyQtyField("negativeUnitCost",InventoryReceiptPage.unitCostField);
+        Boolean isToasterPresent=isDisplayed(PoEntryConversionFactorPage.toaster);
+        Utility_Functions.xAssertEquals(report,isToasterPresent,false,"Page is processed and 'F9 Accepts Order' toaster message is not present");
+        verifyQtyField("zeroUnitCost",InventoryReceiptPage.unitCostField);
+        commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
+        verifyQtyField("blankSpaceUnitCost",InventoryReceiptPage.unitCostField);
+        commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
+        verifyQtyField("alphaNumericUnitCost",InventoryReceiptPage.unitCostField);
+        commonObj.validateText(InventoryReceiptPage.displayProgramMes, "Display Program Messages", "'Display Program Messages' Header is present");
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+    }
+
+    /**
+     * This method to Enter PO Number
+     */
+    public void validatePoNo(String poNum) {
+        String poNo = jsonData.getData(poNum);
+        sendKeys(InventoryReceiptPage.purchaseOrdNo, poNo, "Enter Purchase Order Number");
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        commonObj.validateText(PoEntryConversionFactorPage.toaster,"No Detail Lines exist for this Purchase Order","'No Detail Lines exist for this Purchase Order' toaster is present");
+    }
+
+    /**
+     * This method to verify Purchase Order Number input field
+     */
+    public void verifyPoNumber() {
+        validatePoNo("validPO");
+        validatePoNo("inValidPO");
+        validatePoNo("BlankSpacePO");
+        validatePoNo("alphaNumericInvalidPO");
     }
 
     /**

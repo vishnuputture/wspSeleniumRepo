@@ -2,11 +2,14 @@
   "Business_Flow": [
     {
       "Tc_902_InventoryReceiptUI": "launchApp,siteLogin,navigateToInventoryReceipt,inventoryReceiptUI,signOut",
-      "Tc_CreatePo": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
+      "Tc_CreatePoDirect": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
       "Tc_903_PurchaseOrderInquiryHyperlink": "launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,signOut",
       "Tc_904_PurchaseOrderNumberField": "launchApp,siteLogin,navigateToInventoryReceipt,poNoField,signOut",
       "Tc_897_OrderInUse": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,switchTab,launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,orderInUse,signOut,switchTabBack,exitIR,signOut",
-      "Tc_905_QtyReceivedField": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,qtyReceivedField,signOut"
+      "Tc_905_QtyReceivedField": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,qtyReceivedField,signOut",
+      "Tc_906_changeUnitCost": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,unitCostField,exitIR,signOut",
+      "Tc_907_VerifyUnitCostField": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,verifyUnitCostField,signOut",
+      "Tc_908_verifyPONumber": "launchApp,siteLogin,navigateToInventoryReceipt,verifyPoNumber,exitInventoryReceiptPage,signOut"
     }
   ],
   "General_Data": [
@@ -27,7 +30,7 @@
       "Title": "Test case to verify order In Use popup"
     },
     {
-      "TC_ID": "Tc_CreatePo",
+      "TC_ID": "Tc_CreatePoDirect",
       "Title": "Test case to Create Purchase order",
       "accountNo": "099599",
       "DirectShip": "Yes",
@@ -35,12 +38,12 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "000791",
+      "SalesOrderNo": "000796",
       "QtyOrdered": "25",
       "VendorNumber": "000388",
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "030878"
+      "PONumber": "030884"
     },
     {
       "TC_ID": "Tc_905_QtyReceivedField",
@@ -49,6 +52,27 @@
       "blankSpaceQtyReceived": " ",
       "zeroQtyReceived": "0",
       "alphaNumericQtyReceived": "Asd@#234"
+    },
+    {
+      "TC_ID": "Tc_906_changeUnitCost",
+      "Title": "Test case to verify Change Unit COst",
+      "unitCost": "4"
+    },
+    {
+      "TC_ID": "Tc_907_VerifyUnitCostField",
+      "Title": "Test case to verify unit cost field for negative values",
+      "negativeUnitCost": "-12",
+      "blankSpaceUnitCost": " ",
+      "zeroUnitCost": "0",
+      "alphaNumericUnitCost": "QAsdWs@#234"
+    },
+    {
+      "TC_ID": "Tc_908_verifyPONumber",
+      "Title": "Test case to verify Po Number",
+      "validPO": "030454",
+      "inValidPO": "1234567",
+      "BlankSpacePO": " ",
+      "alphaNumericInvalidPO": "Qwsd@323&*"
     }
   ]
 }

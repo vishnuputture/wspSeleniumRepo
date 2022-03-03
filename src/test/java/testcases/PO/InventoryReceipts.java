@@ -24,7 +24,7 @@ public class InventoryReceipts extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_CreatePo(SeleniumTestParameters testParameters) {
+    public void Tc_CreatePoDirect(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Create Purchase Order");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -50,6 +50,30 @@ public class InventoryReceipts extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_905_QtyReceivedField(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify Quantity Received Input Field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_906_changeUnitCost(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify change unit cost");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_907_VerifyUnitCostField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify unit cost field for negative values");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_908_verifyPONumber(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Po Number");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

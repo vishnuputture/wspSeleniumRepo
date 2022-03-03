@@ -6,6 +6,7 @@ public class InventoryReceiptPage {
     public static By inventoryHeader = By.id("OP18_heading");
     public static By purchaseOrdNo = By.id("VDORNM");
     public static By vendorInvoiceNo = By.id("VDVIV#");
+    public static By unitCostField = By.id("VUC.1");
     public static By receivedBy = By.id("VDRCBY");
     public static By receiverDoc = By.id("WKRDOC");
     public static By qtyReceived = By.id("VQR.1");
@@ -28,7 +29,7 @@ public class InventoryReceiptPage {
     public static By ReceivedByIN = By.id("RC1CTL_VDRCBY");
     public static By poInqLink = By.xpath("//a[text()='Purchase Order Inquiry']");
     public static By poHeaderLink = By.xpath("//a[text()='Purchase Order Header']");
-    public static By headerIR=By.id("RC1CTL_heading");
+    public static By headerIR = By.id("RC1CTL_heading");
     public static By ShipmentType = By.id("P1PTSHPTYP");
     public static By orderTotal = By.xpath("//div[contains(@id,'P1RECNME')]");
     public static By VendNameDet = By.id("outP4VENDNAME");
