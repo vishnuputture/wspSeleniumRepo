@@ -15,7 +15,9 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By tbxQtyRcvd = By.id("VQR.1");
     public static By btnExit = By.xpath("//input[@value='Exit']");
     public static By btnProcess = By.xpath("//input[@value='Process']");
-    public static By hdrFreightAllocation = By.xpath("//div[text()='Freight Allocation']");
+    public static By chbxEnableDisableCost = By.id("Checkbox2");
+    public static By growlText = By.className("growl-text");
+    public static By lstUnitCostTbx = By.xpath("//input[starts-with(@id,'VUC')]");
 
 
 

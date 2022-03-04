@@ -78,4 +78,12 @@ public class InventoryReceipts extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_909_ValidateEnableDisableCostCheckbox(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to functionality of Disable/Enable Cost checkbox");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

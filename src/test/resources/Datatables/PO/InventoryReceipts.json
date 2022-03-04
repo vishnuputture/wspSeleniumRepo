@@ -9,7 +9,8 @@
       "Tc_905_QtyReceivedField": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,qtyReceivedField,signOut",
       "Tc_906_changeUnitCost": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,unitCostField,exitIR,signOut",
       "Tc_907_VerifyUnitCostField": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,verifyUnitCostField,signOut",
-      "Tc_908_verifyPONumber": "launchApp,siteLogin,navigateToInventoryReceipt,verifyPoNumber,exitInventoryReceiptPage,signOut"
+      "Tc_908_verifyPONumber": "launchApp,siteLogin,navigateToInventoryReceipt,verifyPoNumber,exitInventoryReceiptPage,signOut",
+      "Tc_909_ValidateEnableDisableCostCheckbox": "launchApp,siteLogin,navigateToInventoryReceipt,enterExistingPONumber,validateEnableDisableCostChbx,navigateInventoryReceiptsToMaster,signOut"
     }
   ],
   "General_Data": [
@@ -73,6 +74,10 @@
       "inValidPO": "1234567",
       "BlankSpacePO": " ",
       "alphaNumericInvalidPO": "Qwsd@323&*"
+    },
+    {
+      "TC_ID": "Tc_909_ValidateEnableDisableCostCheckbox",
+      "OrderNumber": "030931"
     }
   ]
 }

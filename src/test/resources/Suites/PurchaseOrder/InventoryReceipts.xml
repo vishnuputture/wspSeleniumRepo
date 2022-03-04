@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression" parallel="none" thread-count="1">
+	<test name="PurchaseOrderConversionFacyors">
+
+		<classes>
+			<class name="testcases.PO.InventoryReceipts">
+				<methods>
+					<include name="Tc_909_ValidateEnableDisableCostCheckbox"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite> <!-- Suite -->
