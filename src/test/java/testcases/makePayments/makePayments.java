@@ -315,7 +315,7 @@ public class makePayments extends TestConfigurations {
     }
     
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_165_ValidateFixedPaymentRecordCC(SeleniumTestParameters testParameters) {
+    public void Tc_166_ValidateFixedPaymentRecordCC(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Validate Edit Saved Schedule Payment");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
