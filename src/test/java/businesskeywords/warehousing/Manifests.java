@@ -258,13 +258,11 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.truckEle);
         Utility_Functions.timeWait(3);
         String truckName = Utility_Functions.xGetJsonData("TruckName");
-        System.out.println("truckName...." + truckName);
         click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
         click(ManifestsPage.notes);
         Utility_Functions.timeWait(2);
         Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
         String driverName = Utility_Functions.xGetJsonData("Driver");
-        System.out.println("driverName...." + driverName);
         click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
         sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
         Utility_Functions.timeWait(2);
@@ -272,20 +270,29 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(ManifestsPage.addPOBtn, "CLick Add PO button");
         Utility_Functions.timeWait(5);
-        /*String poNo=Utility_Functions.getText(driver,driver.findElement(By.xpath("//tr[contains(@class,'ui-selectable-row')]/td")));
-        System.out.println("poNo....."+poNo);
-        Utility_Functions.xUpdateJson("PONumber",poNo);
-        System.out.println("poNo....."+poNo);*/
         click(ManifestsPage.addPoRowCount, "Select PO");
         Utility_Functions.timeWait(3);
         click(btn(" Add to Manifest "), "Click Add to Manifest Button");
-        Utility_Functions.timeWait(5);
-        //commonObj.validateText(ManifestsPage.orderAddedMessage, "Order " + Utility_Functions.xGetJsonData("PONumber") + " successfully added to manifest", "Order is added");
+        Utility_Functions.timeWait(3);
+        Utility_Functions.xScrollIntoView(driver,By.xpath("//div[contains(@class,'order-header')]/span"));
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
-        Utility_Functions.timeWait(5);
+        Utility_Functions.timeWait(3);
+        ifExist();
+        commonObj.validateElementExists(ManifestsPage.successMsg,"'Manifest successfully created.' message is present");
         String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
         Utility_Functions.xUpdateJson("ManifestNo", maniNo);
         commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
+    }
+
+    public void ifExist(){
+        if(isDisplayed(ManifestsPage.ifErrorExist)){
+            click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'')]")), "Select Driver from the drop down");
+            Utility_Functions.timeWait(2);
+            click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'')]")), "Select Driver from the drop down");
+            Utility_Functions.timeWait(2);
+            click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+            Utility_Functions.timeWait(3);
+        }
     }
 
     /**

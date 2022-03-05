@@ -252,7 +252,7 @@ public class Drivers extends ReusableLib {
      */
     public void navigateToUpdateDriverPage() {
         Utility_Functions.timeWait(3);
-        click(getTruck("Driver Name"), "CLick on Driver Name Hyper Link");
+        click(By.xpath("//td/a"), "CLick on Driver Name Hyper Link");
         Utility_Functions.timeWait(2);
         commonObj.validateText(DriversPage.updateDriverHeader, "Update Driver", "Update Driver Page header is present");
     }
