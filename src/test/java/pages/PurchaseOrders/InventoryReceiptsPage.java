@@ -18,6 +18,12 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By chbxEnableDisableCost = By.id("Checkbox2");
     public static By growlText = By.className("growl-text");
     public static By lstUnitCostTbx = By.xpath("//input[starts-with(@id,'VUC')]");
+    public static By lstRelatedSalesOrder = By.xpath("//div[starts-with(@id,'Hyperlink')]/a");
+
+    /**************************************** Sales Order Inquiry page ****************************************/
+
+    public static By hdrSalesOrderInquiry = By.id("outConstant4");
+    public static By tbxOrderNo = By.id("txtS1FLTRORD");
 
 
 

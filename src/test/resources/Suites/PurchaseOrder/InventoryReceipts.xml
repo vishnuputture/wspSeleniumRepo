@@ -7,6 +7,7 @@
 			<class name="testcases.PO.InventoryReceipts">
 				<methods>
 					<include name="Tc_909_ValidateEnableDisableCostCheckbox"></include>
+					<include name="Tc_910_ValidateRelatedSOHyperlink"></include>
 				</methods>
 			</class>
 		</classes>

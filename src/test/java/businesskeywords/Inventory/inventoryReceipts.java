@@ -4,6 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptsPage;
@@ -52,7 +53,7 @@ public class inventoryReceipts extends ReusableLib {
      * Keyword to enter existing PO Number in Inventory Receipts Page
      */
     public void enterExistingPONumber(){
-        String poNumber = jsonData.getData("OrderNumber");
+        String poNumber = jsonData.getData("PONumber");
         sendKeysAndEnter(InventoryReceiptsPage.tbxPONumber, poNumber,"Enter Purchase Order Number");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
@@ -69,7 +70,7 @@ public class inventoryReceipts extends ReusableLib {
     }
 
     /**
-     * Keyword to enter existing PO Number in Inventory Receipts Page
+     * Keyword to validate Enable/Disable Cost checkbox in Inventory Receipts Page
      */
     public void validateEnableDisableCostChbx(){
         click(InventoryReceiptsPage.chbxEnableDisableCost,"Click [Disable Cost] checkbox");
@@ -101,6 +102,29 @@ public class inventoryReceipts extends ReusableLib {
             report.updateTestLog("Verify Unit Cost Enabled/isabled", "Verify that [Unit Cost] textboxes are Enabled", Status.PASS);
         else
             report.updateTestLog("Verify Unit Cost Enabled/isabled", "Verify that [Unit Cost] textboxes are Disabled", Status.FAIL);
+    }
+
+    /**
+     * Keyword to validate Sales Order Number link in Inventory Receipts Page
+     */
+    public void validateSOHyperlink(){
+        commonObj.verifyElementContainsText(InventoryReceiptsPage.lstRelatedSalesOrder, jsonData.getData("SalesOrderNo"), "Validate SO Number in [Inventory Receipts] page");
+        click(InventoryReceiptsPage.lstRelatedSalesOrder,"Click [Related Sales Order] link");
+        commonObj.validateText(InventoryReceiptsPage.hdrSalesOrderInquiry, "Sales Order Inquiry", "Validating [Sales Order Inquiry] title");
+
+        String expectedSO = jsonData.getData("SalesOrderNo");
+        String actualSO = getAttribute(InventoryReceiptsPage.tbxOrderNo, "value");
+        if (actualSO.contains(expectedSO))
+            report.updateTestLog("Verify SO number", "Validate SO Number in [SALES ORDER INQUIRY] page",Status.PASS);
+        else
+            report.updateTestLog("Verify SO number", "Validate SO Number in [SALES ORDER INQUIRY] page",Status.FAIL);
+    }
+
+    /**
+     * Keyword to navigate back to Inventory Receipts Page from Sales Order Inquiry
+     */
+    public void exitSalesOrderInquiry(){
+        click(InventoryReceiptsPage.btnExit,"Click [Exit] button in Sales Order Inquiry page");
     }
 
 

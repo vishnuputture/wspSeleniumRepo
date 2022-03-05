@@ -512,7 +512,7 @@ public class CreatePurchaseOrder extends ReusableLib {
      */
     public void getOrderNumberValue(){
         String orderNo = getText(PurchaseOrderDetailsPage.orderNo2).trim();
-        jsonData.putData("OrderNumber", orderNo);
+        jsonData.putData("PONumber", orderNo);
     }
 
     /**
