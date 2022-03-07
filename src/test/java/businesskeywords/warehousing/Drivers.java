@@ -94,11 +94,12 @@ public class Drivers extends ReusableLib {
      * Keyword to Verify Pagination against current page
      */
     public void selectPage(int actPageNo, String expPage, String arrowIcon) {
-        click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(actPageNo));
+        //click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
         Utility_Functions.xScrollWindow(driver);
         String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
-        Utility_Functions.timeWait(2);
     }
 
     /**
@@ -118,8 +119,11 @@ public class Drivers extends ReusableLib {
                 click(driver.findElements(DriversPage.pageArrow).get(2));
                 Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             }
+            System.out.println("Started");
+            Utility_Functions.timeWait(2);
             click(driver.findElements(DriversPage.pageArrow).get(0));
             Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
+            System.out.println("Ended");
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
             selectPage(3, "" + size + "", "Right double Arrow (>>)");
