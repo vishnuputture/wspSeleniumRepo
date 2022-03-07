@@ -19,11 +19,28 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By growlText = By.className("growl-text");
     public static By lstUnitCostTbx = By.xpath("//input[starts-with(@id,'VUC')]");
     public static By lstRelatedSalesOrder = By.xpath("//div[starts-with(@id,'Hyperlink')]/a");
+    public static By pageNo = By.className("paging-number");
+    public static By btnPrevious = By.xpath("//span[contains(@class,'previous-paging-link') or (text()='Previous')]");
+    public static By btnNext = By.xpath("//span[contains(@class,'next-paging-link') or (text()='Next')]");
+    public static By btnCancelPO = By.xpath("//input[@value='Cancel Purchase Order']");
+    public static By btnPOInquiry = By.id("op18_cf01");
+    public static By purchaseOrderInquiry = By.xpath("//a[text()='Purchase Order Inquiry']");
+
 
     /**************************************** Sales Order Inquiry page ****************************************/
 
     public static By hdrSalesOrderInquiry = By.id("outConstant4");
     public static By tbxOrderNo = By.id("txtS1FLTRORD");
+
+    /**************************************** Cancel Purchase Order popup elements ****************************************/
+
+    public static By hdrCancelPO = By.xpath("//div[text()='CANCEL PURCHASE ORDER']  ");
+    public static By msgWarning = By.xpath("//div[@id='OutText']/p");
+    public static By btnNo = By.xpath("//input[@value='No']");
+    public static By btnYes = By.xpath("//input[@value='Yes']");
+    public static By btnContinue = By.id("btnContinue");
+
+
 
 
 
