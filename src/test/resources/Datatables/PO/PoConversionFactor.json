@@ -1,132 +1,132 @@
 {
-  "Business_Flow": [
+  "Business_Flow":[
     {
-      "Tc_242_verifyItemNumberOnPO": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,exitToMaster,signOut",
-      "Tc_245_verifyEditedItemNumberOnPO": "launchApp,siteLogin,validateItemMasterTitle,editPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,exitToMaster,signOut",
-      "Tc_246_verifyExtendListPriceCalculation": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut",
-      "Tc_247_verifyExtendPoCostCalculation": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut",
-      "Tc_248_verifyExtendLastCostCalculation": "launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut",
-      "Tc_249_EditItemListPriceAndVerifyInPODetailsPage": "launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,editRandomListPrice,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterOrderedItemNumber,vrfyItemListPrice,exitToMaster,signOut",
-      "Tc_250_EditItemPOPriceAndVerifyInPODetailsPage": "launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,editRandomPOCost,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterOrderedItemNumber,vrfyItemPOPrice,exitToMaster,signOut",
-      "Tc_251_VerifyErrorWhileAddingItemToDirectPO": "launchApp,siteLogin,validatePOHeadingTitle,selectDirectOrderAndVerify,findOrderAndEnterQty,verifySalesOrderError,exitToMaster,signOut",
-      "Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry": "launchApp,siteLogin,navigateToBuyersInquiry,selectRandomStock,getStockData,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,navigateFromPODetailsToMaster,navigateToBuyersInquiry,selectStock,verifyStockData,exitToMaster,signOut",
-      "Tc_253_VerifyItemDetailsAfterProcessingPO": "launchApp,siteLogin,navigateToBuyersInquiry,selectRandomStock,getStockData,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipts,enterExistingPONumber,enterQtyRcvdAndProcess,navigateInventoryReceiptsToMaster,navigateToBuyersInquiry,selectStock,verifyStockData,exitToMaster,signOut",
-      "Tc_256_VerifyLineItemAfterProcessingPO": "launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipts,enterExistingPONumber,enterQtyRcvdAndProcess,navigateInventoryReceiptsToMaster,signOut",
-      "Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,saveExitSalesOrders,exitSalesQuotesToMasterPage,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,enterRelatedSO,exitToMaster,signOut",
-      "Tc_258_VerifyAddingDirectPOToRelatedSO": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,validatePOHeadingTitle,selectAction,enterOrderNumber,verifyActionChange,verifyTypeShipmentChange,exitToMaster,signOut"
+      "Tc_242_verifyItemNumberOnPO":"launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,exitToMaster,signOut",
+      "Tc_245_verifyEditedItemNumberOnPO":"launchApp,siteLogin,validateItemMasterTitle,editPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,exitToMaster,signOut",
+      "Tc_246_verifyExtendListPriceCalculation":"launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut",
+      "Tc_247_verifyExtendPoCostCalculation":"launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut",
+      "Tc_248_verifyExtendLastCostCalculation":"launchApp,siteLogin,validateItemMasterTitle,getPurchasing,exitToMaster,validatePOHeadingTitle,findVendorFreight,verifyMUPkgQtyConvFact,calculateCost,exitToMaster,signOut",
+      "Tc_249_EditItemListPriceAndVerifyInPODetailsPage":"launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,editRandomListPrice,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterOrderedItemNumber,vrfyItemListPrice,exitToMaster,signOut",
+      "Tc_250_EditItemPOPriceAndVerifyInPODetailsPage":"launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,editRandomPOCost,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterOrderedItemNumber,vrfyItemPOPrice,exitToMaster,signOut",
+      "Tc_251_VerifyErrorWhileAddingItemToDirectPO":"launchApp,siteLogin,validatePOHeadingTitle,selectDirectOrderAndVerify,findOrderAndEnterQty,verifySalesOrderError,exitToMaster,signOut",
+      "Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry":"launchApp,siteLogin,navigateToBuyersInquiry,selectRandomStock,getStockData,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,navigateFromPODetailsToMaster,navigateToBuyersInquiry,selectStock,verifyStockData,exitToMaster,signOut",
+      "Tc_253_VerifyItemDetailsAfterProcessingPO":"launchApp,siteLogin,navigateToBuyersInquiry,selectRandomStock,getStockData,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipts,enterExistingPONumber,enterQtyRcvdAndProcess,navigateInventoryReceiptsToMaster,navigateToBuyersInquiry,selectStock,verifyStockData,exitToMaster,signOut",
+      "Tc_256_VerifyLineItemAfterProcessingPO":"launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipts,enterExistingPONumber,enterQtyRcvdAndProcess,navigateInventoryReceiptsToMaster,signOut",
+      "Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,saveExitSalesOrders,exitSalesQuotesToMasterPage,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,enterRelatedSO,exitToMaster,signOut",
+      "Tc_258_VerifyAddingDirectPOToRelatedSO":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,validatePOHeadingTitle,selectAction,enterOrderNumber,verifyActionChange,verifyTypeShipmentChange,exitToMaster,signOut"
     }
   ],
-  "General_Data": [
+  "General_Data":[
     {
-      "TC_ID": "Tc_242_verifyItemNumberOnPO",
-      "Title": "Verify Item Number On PO Page",
-      "OrderedQty": "2"
+      "TC_ID":"Tc_242_verifyItemNumberOnPO",
+      "Title":"Verify Item Number On PO Page",
+      "OrderedQty":"2"
     },
     {
-      "TC_ID": "Tc_245_verifyEditedItemNumberOnPO",
-      "Title": "Verify edited Item Number On PO Page",
-      "StdQty": "5",
-      "convFactor": "8",
-      "OrderedQty": "2"
+      "TC_ID":"Tc_245_verifyEditedItemNumberOnPO",
+      "Title":"Verify edited Item Number On PO Page",
+      "StdQty":"5",
+      "convFactor":"8",
+      "OrderedQty":"2"
     },
     {
-      "TC_ID": "Tc_246_verifyExtendListPriceCalculation",
-      "Title": "Verify Extend List Price Calculation",
-      "OrderedQty": "2",
-      "CostOption": "1"
+      "TC_ID":"Tc_246_verifyExtendListPriceCalculation",
+      "Title":"Verify Extend List Price Calculation",
+      "OrderedQty":"2",
+      "CostOption":"1"
     },
     {
-      "TC_ID": "Tc_247_verifyExtendPoCostCalculation",
-      "Title": "Verify Extend Po Cost Calculation",
-      "OrderedQty": "2",
-      "CostOption": "2"
+      "TC_ID":"Tc_247_verifyExtendPoCostCalculation",
+      "Title":"Verify Extend Po Cost Calculation",
+      "OrderedQty":"2",
+      "CostOption":"2"
     },
     {
-      "TC_ID": "Tc_248_verifyExtendLastCostCalculation",
-      "Title": "Verify Extend Last Cost Calculation",
-      "OrderedQty": "2",
-      "CostOption": "3"
+      "TC_ID":"Tc_248_verifyExtendLastCostCalculation",
+      "Title":"Verify Extend Last Cost Calculation",
+      "OrderedQty":"2",
+      "CostOption":"3"
     },
     {
-      "TC_ID": "Tc_249_EditItemListPriceAndVerifyInPODetailsPage",
-      "CostOption": "1",
-      "QtyOrdered": "1"
+      "TC_ID":"Tc_249_EditItemListPriceAndVerifyInPODetailsPage",
+      "CostOption":"1",
+      "QtyOrdered":"1"
     },
     {
-      "TC_ID": "Tc_250_EditItemPOPriceAndVerifyInPODetailsPage",
-      "CostOption": "2",
-      "QtyOrdered": "1"
+      "TC_ID":"Tc_250_EditItemPOPriceAndVerifyInPODetailsPage",
+      "CostOption":"2",
+      "QtyOrdered":"1"
     },
     {
-      "TC_ID": "Tc_251_VerifyErrorWhileAddingItemToDirectPO",
-      "OrderType": "DIRECT",
-      "Action": "C",
-      "TypeShipment": "D",
-      "QtyOrdered": "1",
-      "Error1": "ERROR - Related Sales Order Required For Direct POs.",
-      "Error2": "ERROR - Related Sales Order Not Found."
+      "TC_ID":"Tc_251_VerifyErrorWhileAddingItemToDirectPO",
+      "OrderType":"DIRECT",
+      "Action":"C",
+      "TypeShipment":"D",
+      "QtyOrdered":"1",
+      "Error1":"ERROR - Related Sales Order Required For Direct POs.",
+      "Error2":"ERROR - Related Sales Order Not Found."
     },
     {
-      "TC_ID": "Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry",
-      "itemNo": "DVT01714",
-      "WithReceipts": "6",
-      "OnPO": "6",
-      "AvailableToSell": "",
-      "CostOption": "1",
-      "QtyOrdered": "2",
-      "ConvFactor": "1.000"
+      "TC_ID":"Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry",
+      "itemNo":"DVT01714",
+      "WithReceipts":"6",
+      "OnPO":"6",
+      "AvailableToSell":"",
+      "CostOption":"1",
+      "QtyOrdered":"2",
+      "ConvFactor":"1.000"
     },
     {
-      "TC_ID": "Tc_253_VerifyItemDetailsAfterProcessingPO",
-      "itemNo": "DVT01714",
-      "WithReceipts": "5",
-      "OnPO": "4",
-      "AvailableToSell": "1",
-      "CostOption": "1",
-      "QtyOrdered": "2",
-      "ConvFactor": "1.000",
-      "OrderNumber": "030852"
+      "TC_ID":"Tc_253_VerifyItemDetailsAfterProcessingPO",
+      "itemNo":"DVT01714",
+      "WithReceipts":"33",
+      "OnPO":"20",
+      "AvailableToSell":"13",
+      "CostOption":"1",
+      "QtyOrdered":"2",
+      "ConvFactor":"1.000",
+      "PONumber":"030937"
     },
     {
-      "TC_ID": "Tc_256_VerifyLineItemAfterProcessingPO",
-      "itemNo": "DVT01714",
-      "WithReceipts": "15",
-      "OnPO": "2",
-      "AvailableToSell": "",
-      "CostOption": "1",
-      "QtyOrdered": "2",
-      "ConvFactor": "1.000",
-      "OrderNumber": ""
+      "TC_ID":"Tc_256_VerifyLineItemAfterProcessingPO",
+      "itemNo":"DVT01714",
+      "WithReceipts":"15",
+      "OnPO":"2",
+      "AvailableToSell":"",
+      "CostOption":"1",
+      "QtyOrdered":"2",
+      "ConvFactor":"1.000",
+      "PONumber":"030938"
     },
     {
-      "TC_ID": "Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO",
-      "accountNo": "099599",
-      "DirectShip": "Yes",
-      "ShipVia": "BEST WAY",
-      "QtyOrder": "50",
-      "itemNo": "AABABM200",
-      "QtyShip": "50",
-      "SalesOrderNo": "000778",
-      "QtyOrdered": "25",
-      "CostOption": "1"
+      "TC_ID":"Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO",
+      "accountNo":"099599",
+      "DirectShip":"Yes",
+      "ShipVia":"BEST WAY",
+      "QtyOrder":"50",
+      "itemNo":"AABABM200",
+      "QtyShip":"50",
+      "SalesOrderNo":"000778",
+      "QtyOrdered":"25",
+      "CostOption":"1"
     },
     {
-      "TC_ID": "Tc_258_VerifyAddingDirectPOToRelatedSO",
-      "accountNo": "099599",
-      "DirectShip": "Yes",
-      "ShipVia": "BEST WAY",
-      "QtyOrder": "50",
-      "itemNo": "AABABM200",
-      "QtyShip": "50",
-      "SalesOrderNo": "000762",
-      "QtyOrdered": "25",
-      "VendorNumber": "000388",
-      "CostOption": "1",
-      "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "",
-      "Action": "I",
-      "ActionExpected": "C",
-      "TypeShipmentExpected": "D"
+      "TC_ID":"Tc_258_VerifyAddingDirectPOToRelatedSO",
+      "accountNo":"099599",
+      "DirectShip":"Yes",
+      "ShipVia":"BEST WAY",
+      "QtyOrder":"50",
+      "itemNo":"AABABM200",
+      "QtyShip":"50",
+      "SalesOrderNo":"000762",
+      "QtyOrdered":"25",
+      "VendorNumber":"000388",
+      "CostOption":"1",
+      "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
+      "PONumber":"",
+      "Action":"I",
+      "ActionExpected":"C",
+      "TypeShipmentExpected":"D"
     }
   ]
 }

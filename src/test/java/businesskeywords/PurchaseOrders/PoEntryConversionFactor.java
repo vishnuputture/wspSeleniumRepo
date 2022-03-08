@@ -183,17 +183,35 @@ public class PoEntryConversionFactor extends ReusableLib {
         Utility_Functions.xSelectDropdownByValue(driver, PurchaseOrderEntryPage.ddnType, orderType);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
-        List<WebElement> lstOptions = getListElement(PurchaseOrderEntryPage.lstOptionsColumn);
-        List<WebElement> lstOrderNumber = getListElement(PurchaseOrderEntryPage.lstOrderNumberColumn);
-        List<String> lstOrderNumberText = Utility_Functions.xGetTextVisibleListString(driver, lstOrderNumber);
-        int random = Utility_Functions.xRandomFunction(0, lstOptions.size()-1);
-        String orderNumberSelected = lstOrderNumberText.get(random);
-        sendKeys(lstOptions.get(random), "2", "Selected an Order with Order Number as ["+orderNumberSelected+"]");
-        click(PurchaseOrderEntryPage.btnNext,"Click on Next button");
+        String orderNumberSelected = selectRandomPO();
 
         xWaitForElementPresent(driver, PurchaseOrderEntryPage.tbxOrderNumber, globalWait);
         String orderNumberActual = getAttribute(PurchaseOrderEntryPage.tbxOrderNumber, "value");
         Utility_Functions.xAssertEquals(report, orderNumberSelected, orderNumberActual,"Selected Order Number is displayed");
+    }
+
+    /**
+     * Keyword to select a random Purchase order
+     */
+    public String selectRandomPO(){
+        int randomIndex = Utility_Functions.xRandomFunction(1, 5);
+        while (randomIndex>=1){
+            boolean flag = getElement(PurchaseOrderEntryPage.btnNextPage).isEnabled();
+            if (flag)
+                click(PurchaseOrderEntryPage.btnNextPage);
+            else
+                break;
+            randomIndex--;
+        }
+        List<WebElement> lstOptions = getListElement(PurchaseOrderEntryPage.lstOptionsColumn);
+        List<WebElement> lstOrderNumber = getListElement(PurchaseOrderEntryPage.lstOrderNumberColumn);
+        List<String> lstOrderNumberText = Utility_Functions.xGetTextVisibleListString(driver, lstOrderNumber);
+        int random = Utility_Functions.xRandomFunction(0, lstOptions.size()-1);
+        String selectedPO = lstOrderNumberText.get(random);
+        sendKeys(lstOptions.get(random), "2", "Selected an Order with Order Number as ["+selectedPO+"]");
+        click(PurchaseOrderEntryPage.btnNext,"Click on Next button");
+
+        return selectedPO;
     }
 
     /**
