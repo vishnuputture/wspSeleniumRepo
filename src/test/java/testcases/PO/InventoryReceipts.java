@@ -126,4 +126,12 @@ public class InventoryReceipts extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_929_verifyPositionToOrder(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify verify Position To Order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
