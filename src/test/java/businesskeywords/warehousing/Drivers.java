@@ -94,6 +94,9 @@ public class Drivers extends ReusableLib {
      * Keyword to Verify Pagination against current page
      */
     public void selectPage(int actPageNo, String expPage, String arrowIcon) {
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.timeWait(2);
         click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
         Utility_Functions.xScrollWindow(driver);
         String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
@@ -113,11 +116,13 @@ public class Drivers extends ReusableLib {
         } else {
             click(driver.findElements(DriversPage.pageArrow).get(2));
             Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
+            Utility_Functions.timeWait(2);
             while (!Utility_Functions.xIsDisplayed(driver, DriversPage.lastPage)) {
                 size++;
                 click(driver.findElements(DriversPage.pageArrow).get(2));
                 Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             }
+            Utility_Functions.timeWait(2);
             click(driver.findElements(DriversPage.pageArrow).get(0));
             Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             selectPage(2, "2", "Right Arrow (>)");

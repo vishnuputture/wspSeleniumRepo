@@ -758,11 +758,22 @@ public class Spo extends ReusableLib {
      */
     public void createWorksheet() {
         Utility_Functions.timeWait(4);
-        String itemNo = driver.findElements(By.xpath("//tr[2]/td")).get(1).getText().trim();
+        String itemNo =null;
+        int i;
+        int totalItem=driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
+        for( i=0;i<totalItem;i++){
+            itemNo = driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).get(i).getText().trim().toUpperCase();
+            Character letter=itemNo.charAt(0);
+            Character letter1='J';
+            Boolean bl=letter.equals(letter1);
+            if(!bl){
+                break;
+            }
+        }
         Utility_Functions.xUpdateJson("ItemNoWS", itemNo);
-        String itemDesc = driver.findElement(By.xpath("//tr[2]/td/div")).getText().trim();
+        String itemDesc = driver.findElement(By.xpath("//tr["+i+"]/td/div")).getText().trim();
         Utility_Functions.xUpdateJson("itemDescWS", itemDesc);
-        String unitCost = driver.findElements(By.xpath("//tr[2]/td")).get(4).getText().trim();
+        String unitCost = driver.findElements(By.xpath("//tr["+i+"]/td")).get(4).getText().trim();
         Utility_Functions.xUpdateJson("unitCost", unitCost);
         clickButton("Create Worksheet");
         Utility_Functions.timeWait(3);
