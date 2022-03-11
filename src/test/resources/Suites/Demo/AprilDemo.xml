@@ -84,7 +84,7 @@
             </class>
         </classes>
     </test>
-    <test name="CheckMakePayments">
+    <!--<test name="CheckMakePayments">
         <classes>
         <class name="testcases.makePayments.makePayments">
             <methods>
@@ -131,6 +131,6 @@
             </methods>
         </class>
         </classes>
-    </test>
+    </test>-->
 
 </suite>

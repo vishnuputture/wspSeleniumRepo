@@ -16,6 +16,7 @@ import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
 import testcases.PO.InventoryReceipts;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 
@@ -136,6 +137,26 @@ public class PurchaseOrderInquiry extends ReusableLib {
     public void enterVendor() {
         String vendorNo=jsonData.getData("VendorNo");
         sendKeys(PurchaseOrderInquiryPage.vendorTextField,vendorNo+Keys.ENTER,"Enter Vendor Number");
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(PurchaseOrderInquiryPage.vendorVerify,vendorNo,vendorNo+" is present");
+    }
 
+    /**
+     * Keyword to validate Order By field
+     */
+    public void orderBy() {
+        click(PurchaseOrderInquiryPage.orderBySearchIcon,"Click Order By Search Icon");
+        Utility_Functions.timeWait(2);
+        List<WebElement> els=getListElement(PurchaseOrderInquiryPage.optField);
+        for(int i=0;i<els.size();i++){
+            Utility_Functions.timeWait(2);
+            Utility_Functions.xSendKeys(driver,els.get(i),"1"+ Keys.ENTER);
+            if(isDisplayed(PurchaseOrderInquiryPage.noResult1)){
+                commonObj.validateText(PurchaseOrderInquiryPage.noResult1,"* No results to display based on the selected criteria.","'* No results to display based on the selected criteria.' is present");
+                commonObj.validateText(PurchaseOrderInquiryPage.noResult2,"* The order may not exist or it may be omitted due to current settings.","'* The order may not exist or it may be omitted due to current settings.' is present");
+                commonObj.validateText(PurchaseOrderInquiryPage.noResult3,"* To continue searching, choose less restrictive search criteria.","'* To continue searching, choose less restrictive search criteria.' is present");
+            }
+            click(PurchaseOrderInquiryPage.orderBySearchIcon,"Click Order By Search Icon");
+        }
     }
 }

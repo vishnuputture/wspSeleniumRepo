@@ -16,7 +16,8 @@
       "Tc_915_ValidateCancelPOButton": "launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipt,enterInvalidPONumber,enterExistingPONumber2,vrfyCancelPONumberFunctionality,navigateInventoryReceiptsToMaster,signOut",
       "Tc_924_VerifyFunctionalityOfPartialReceivingPO": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,enterQtyReceivedAndProcess,inquiryPO,enterPONumberAndSelectAction,vrfyQtyAndItemLedgerDetails,backToInventoryReceipts,navigateInventoryReceiptsToMaster,signOut",
       "Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,enterQtyReceivedAndProcess,inquiryPO,selectStatus,enterPONumber,vrfyPONotInList,clickExitBtnPOInquiry,navigateInventoryReceiptsToMaster,signOut",
-      "Tc_929_verifyPositionToOrder": "launchApp,siteLogin,navigateToPoInquiry,enterPONumber,vrfyPONotInList,clickExitBtnPOInquiry,signOut"
+      "Tc_929_verifyPositionToOrder": "launchApp,siteLogin,navigateToPoInquiry,enterPONumber,vrfyPONotInList,clickExitBtnPOInquiry,signOut",
+      "Tc_932_verifyVendorOrderByField": "launchApp,siteLogin,navigateToPoInquiry,enterVendor,orderBy,clickExitBtnPOInquiry,signOut"
     }
   ],
   "General_Data": [
@@ -154,6 +155,10 @@
     {
       "TC_ID": "Tc_929_verifyPositionToOrder",
       "PONumber": "047649"
+    },
+    {
+      "TC_ID": "Tc_932_verifyVendorOrderByField",
+      "VendorNo": "000389"
     }
   ]
 }

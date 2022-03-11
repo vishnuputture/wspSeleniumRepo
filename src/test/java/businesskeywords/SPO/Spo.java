@@ -171,6 +171,15 @@ public class Spo extends ReusableLib {
         commonObj.navigateToDiscountMultiplier();
     }
 
+    public void getPassword() {
+        String URL = "https://vprasad:B36heVWqze@daily.winwholesale.com/";
+        driver.get(URL);
+        click(driver.findElement(By.xpath("//a[text()='QA ']")));
+        Utility_Functions.timeWait(4);
+        System.out.println(getText(By.xpath("//h2")));
+        Utility_Functions.xUpdateJson("spoPass", getText(By.xpath("//h2")));
+    }
+
     /**
      * Keyword to Navigate to Suggested PO
      */
@@ -186,7 +195,7 @@ public class Spo extends ReusableLib {
     public void winLogin() {
         if (Utility_Functions.xWaitForElementPresent(driver, SpoPage.winLogin, 10)) {
             sendKeys(SpoPage.userName, properties.getProperty("SpoUserName"));
-            sendKeys(SpoPage.password, properties.getProperty("SpoPassword"));
+            sendKeys(SpoPage.password, Utility_Functions.xGetJsonData("spoPass"));
             Utility_Functions.timeWait(2);
             click(SpoPage.submit);
             Utility_Functions.timeWait(5);
@@ -282,12 +291,12 @@ public class Spo extends ReusableLib {
      * Keyword to verify Page Count
      */
     public void valPageCount(int pageNum) {
-        click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
-        int truckCount = driver.findElements(SpoPage.worksheetCount).size();
+        Utility_Functions.xClickHiddenElement(driver, By.xpath("//span[text()='" + pageNum + "']"));
+        int truckCount = driver.findElements(SpoPage.itemNoCount).size();
         if (truckCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + truckCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Worksheet Count");
         } else {
-            commonObj.validateElementExists(SpoPage.worksheetCount, "Total Worksheet count is " + truckCount + "");
+            commonObj.validateElementExists(SpoPage.itemNoCount, "Total Worksheet count is " + truckCount + "");
         }
     }
 
@@ -352,7 +361,7 @@ public class Spo extends ReusableLib {
         String productCode = Utility_Functions.xGetJsonData("ProductCode").substring(0, 2);
         String vendorCode = Utility_Functions.xGetJsonData("VendorCode").substring(0, 2);
         commonObj.validateText(SpoPage.worksheetNameHeader, worksheetName + " - " + manufacturer + "" + productCode + "" + vendorCode + "", "" + worksheetName + " - " + manufacturer + "" + productCode + "" + vendorCode + " is present");
-        commonObj.validateText(SpoPage.vendorNoHeader, "Vendor: " + Utility_Functions.xGetJsonData("VendorNumber") + " - " + Utility_Functions.xGetJsonData("VendorCode").replace("- ", "") + "", "VENDOR: " + Utility_Functions.xGetJsonData("VendorNumber") + " - " + Utility_Functions.xGetJsonData("VendorCode").replace("-", "") + " is present");
+        commonObj.validateText(SpoPage.vendorNoHeader, "Vendor: " + Utility_Functions.xGetJsonData("VendorNumberItem") + "", "VENDOR: " + Utility_Functions.xGetJsonData("VendorNumberItem") + " is present");
     }
 
     public void isWSActive() {
@@ -497,6 +506,7 @@ public class Spo extends ReusableLib {
             Utility_Functions.xScrollIntoView(driver, SpoPage.discountError);
             commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
             Utility_Functions.timeWait(2);
+            Utility_Functions.xScrollIntoView(driver,SpoPage.closeIcon);
             sendKeys(SpoPage.isInvalidDisc, "-1", "Enter negative value into Discount Text box");
             if (Utility_Functions.xIsDisplayed(driver, button("Refresh Worksheet"))) {
                 clickButton("Refresh Worksheet");
@@ -622,11 +632,6 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(4);
         verifyStartNewWorkSheet();
         modifyLeadTimeField();
-        /*verifyStartNewWorkSheet();
-        String leadTimeAct1=getAttribute(SpoPage.leadTime,"ng-reflect-model");
-        Utility_Functions.xAssertEquals(report,leadTimeAct1,"10","Modified lead time is present");
-        click(SpoPage.closeIcon, "Click Close Icon");
-        Utility_Functions.timeWait(4);*/
     }
 
     /**
@@ -699,8 +704,9 @@ public class Spo extends ReusableLib {
             i++;
         }
         commonObj.validateElementExists(SpoPage.costOption, "Cost Option drop down present");
-        String[] option = {"List Price", "PO Cost", "Last Cost", "WSS Cost"};
-        for (int j = 0; j < 4; j++) {
+        Utility_Functions.xSelectDropdownByName(driver, SpoPage.costOption, "List Price");
+        String[] option = {"List Price", "PO Cost", "Last Cost"};
+        for (int j = 0; j < option.length; j++) {
             Utility_Functions.xAssertEquals(report, driver.findElements(SpoPage.costOptions).get(j).getText(), option[j], "" + option[j] + " is present");
         }
         commonObj.validateElementExists(SpoPage.trailingMonths, "Trailing Month section present");
@@ -719,12 +725,21 @@ public class Spo extends ReusableLib {
     public void selectDays() {
         Utility_Functions.xScrollIntoView(driver, SpoPage.dayOfTheWeek);
         click(SpoPage.dayOfTheWeek, "Click Day Of The Week Drop Down");
-        for (int i = 1; i < 4; i++) {
-            click(driver.findElements(SpoPage.dayCheckBox).get(i), "Select Day");
+        String[] days = {"Monday", "Tuesday", "Wednesday"};
+        for (String day : days) {
+            Utility_Functions.timeWait(2);
+            click(driver.findElement(By.xpath("//span[text()='" + day + "']")), "Select Day");
         }
+        int size = driver.findElements(SpoPage.verifyChecked).size();
         click(SpoPage.trailingMonths);
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SpoPage.selectedDays, "Monday, Tuesday, Wednesday", "Multiple days selected");
+        if (size == 3) {
+            commonObj.validateText(By.xpath("//div[text()='Thursday, Friday']"), "Thursday, Friday", "Multiple days selected");
+            Utility_Functions.xUpdateJson("selectedDays","Thursday, Friday");
+        } else {
+            commonObj.validateText(By.xpath("//div[text()='Monday, Tuesday, Wednesday']"), "Monday, Tuesday, Wednesday", "Multiple days selected");
+            Utility_Functions.xUpdateJson("selectedDays","Monday, Tuesday, Wednesday");
+        }
     }
 
     public By button(String buttonName) {
@@ -750,7 +765,7 @@ public class Spo extends ReusableLib {
         String unitCost = driver.findElements(By.xpath("//tr[2]/td")).get(4).getText().trim();
         Utility_Functions.xUpdateJson("unitCost", unitCost);
         clickButton("Create Worksheet");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.timeWait(3);
         commonObj.validateText(SpoPage.popUp, Utility_Functions.xGetJsonData("WorksheetTempName") + " worksheet successfully created.", Utility_Functions.xGetJsonData("WorksheetTempName") + " worksheet successfully created. pop message is present");
     }
 
@@ -770,6 +785,7 @@ public class Spo extends ReusableLib {
         String name = Utility_Functions.xGenerateAlphaNumericString();
         Utility_Functions.xUpdateJson("WorksheetTempName", name);
         sendKeys(SpoPage.worksheetSheetTemplateName, name, "Name Your Worksheet");
+        assignedUser();
         getMFVNPC();
         commonObj.validateElementExists(worksheetInputFields("Multiplier"), "'Multiplier' field is present");
         selectPreviousMonth("6");
@@ -792,19 +808,22 @@ public class Spo extends ReusableLib {
     public void costOption() {
         Utility_Functions.xScrollIntoView(driver, SpoPage.costOption);
         String cost = jsonData.getData("CostOption");
-        int size = driver.findElements(SpoPage.costOption).size() - 1;
-        try {
-            click(driver.findElements(SpoPage.costOption).get(size), "Click Cost Option Drop Down");
-        } catch (Exception e) {
-            click(driver.findElement(SpoPage.costOption), "Click Cost Option Drop Down");
+        if (!(cost == null)) {
+            int size = driver.findElements(SpoPage.costOption).size() - 1;
+            try {
+                click(driver.findElements(SpoPage.costOption).get(size), "Click Cost Option Drop Down");
+            } catch (Exception e) {
+                click(driver.findElement(SpoPage.costOption), "Click Cost Option Drop Down");
+            }
+            Utility_Functions.timeWait(2);
+            click(By.xpath("//option[contains(text(),'" + cost + "')]"), "Select " + cost + " option");
+            Utility_Functions.timeWait(4);
         }
-        Utility_Functions.timeWait(2);
-        click(By.xpath("//option[contains(text(),'" + cost + "')]"), "Select " + cost + " option");
-        Utility_Functions.timeWait(4);
     }
 
     public void errorRepeatSteps() {
         try {
+            Utility_Functions.timeWait(3);
             if (driver.findElement(SpoPage.popUp).getText().trim().equals("There are no items found for this MF, PD, VN combination.")) {
                 Utility_Functions.timeWait(4);
                 click(SpoPage.xIcon);
@@ -821,6 +840,7 @@ public class Spo extends ReusableLib {
     public void findProductWS() {
         String name = Utility_Functions.xGenerateAlphaNumericString();
         sendKeys(SpoPage.worksheetSheetTemplateName, name, "Name Your Worksheet");
+        assignedUser();
         fillMandatoryField();
         clickFindProduct();
     }
@@ -846,6 +866,7 @@ public class Spo extends ReusableLib {
         String name = Utility_Functions.xGenerateAlphaNumericString();
         Utility_Functions.xUpdateJson("WorksheetTempName", name);
         sendKeys(SpoPage.worksheetSheetTemplateName, name, "Name Your Worksheet");
+        assignedUser();
         fillMandatoryField();
         clickFindProduct();
     }
@@ -857,6 +878,41 @@ public class Spo extends ReusableLib {
         String vend = driver.findElement(worksheetInputFields("Vendor Number")).getAttribute("value");
         Utility_Functions.xUpdateJson("VendorNoForHeader", vend);
         sendKeys(worksheetInputFields("Product Code"), Utility_Functions.xGetJsonData("ProductCode"), "Enter Product Code");
+        String ven = getAttribute(SpoPage.searchTerm1, "ng-reflect-model").trim();
+        Utility_Functions.xUpdateJson("VendorNumberItem", ven);
+    }
+
+    /**
+     * Keyword to verify Page Count
+     */
+    public void valPageCountCreateItem(int pageNum) {
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.timeWait(4);
+        click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        int driverCount = driver.findElements(SpoPage.itemNoCount).size();
+        if (driverCount == pageNum) {
+            Utility_Functions.xAssertEquals(report, "" + driverCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " driver Count");
+        } else {
+            commonObj.validateElementExists(SpoPage.itemNoCount, "Total count is " + driverCount + "");
+        }
+    }
+
+    /**
+     * Keyword to Verify functionality of Page Count
+     */
+    public void funPageCountCreateItem() {
+        Utility_Functions.xScrollWindow(driver);
+        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
+            int driverCount = driver.findElements(SpoPage.itemNoCount).size();
+            commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having count " + driverCount + "");
+        } else {
+            int driverCount = driver.findElements(SpoPage.itemNoCount).size();
+            Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Count is 10 by default");
+            valPageCount(10);
+            valPageCount(15);
+            valPageCount(30);
+        }
     }
 
     /**
@@ -906,7 +962,6 @@ public class Spo extends ReusableLib {
      */
     public void wsItemsScreenUI() {
         wsItemsScreenColumn();
-        commonObj.validateText(By.xpath("//h3"), "WORKSHEET ITEMS", "Page subtitle 'WORKSHEET ITEMS' is present");
         commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
         commonObj.validateElementExists(SpoPage.excludeAsteriskItem, "'Exclude all asterisk items from this worksheet' check box present");
         Utility_Functions.xScrollIntoView(driver, SpoPage.addItemToWSLink);
@@ -1044,16 +1099,37 @@ public class Spo extends ReusableLib {
         click(driver.findElements(SpoPage.selectItem).get(sz - 1), "Select item from the list");
         String item1 = driver.findElement(By.xpath("(//input[@name='selectItem'])[" + sz + "]/parent::td/following-sibling::td")).getText();
         Utility_Functions.xUpdateJson("SelectItem1", item1);
+        getMfVnPdCode(1);
+    }
+
+    public void getMfVnPdCode(int row){
+        int size=driver.findElements(SpoPage.getMF).size();
+        String mfCode=driver.findElements(SpoPage.getMF).get(size-row).getText();
+        Utility_Functions.xUpdateJson("MFCode"+row,mfCode);
+        Utility_Functions.xUpdateJson("PDCode"+row, driver.findElements(SpoPage.getPD).get(size-row).getAttribute("value"));
     }
 
     public void searchVN() {
         int size = driver.findElements(worksheetInputFields("VN")).size() - 1;
         sendKeys(driver.findElements(worksheetInputFields("VN")).get(size), "B", "Search VN");
-        Utility_Functions.timeWait(4);
-        click(SpoPage.autoSuggestion, "Select VN from the suggestion");
         Utility_Functions.timeWait(2);
-        click(SpoPage.searchBtn, "Click Search Button");
-        Utility_Functions.timeWait(7);
+        for (int i = 0; i < driver.findElements(SpoPage.autoSuggestion).size(); i++) {
+            Utility_Functions.timeWait(4);
+            click(driver.findElements(SpoPage.autoSuggestion).get(i), "Select VN from the suggestion");
+            Utility_Functions.timeWait(2);
+            click(SpoPage.searchBtn, "Click Search Button");
+            Utility_Functions.timeWait(2);
+            if (!isDisplayed(SpoPage.noResultFound)) {
+                String vn=driver.findElements(worksheetInputFields("VN")).get(size).getAttribute("value");
+                Utility_Functions.xUpdateJson("VNCode", vn);
+                break;
+            }else {
+                driver.findElements(worksheetInputFields("VN")).get(size).clear();
+                sendKeys(driver.findElements(worksheetInputFields("VN")).get(size), "B", "Search VN");
+                Utility_Functions.timeWait(2);
+            }
+        }
+        //Utility_Functions.timeWait(4);
     }
 
     /**
@@ -1080,15 +1156,12 @@ public class Spo extends ReusableLib {
             Utility_Functions.timeWait(3);
             String item2 = driver.findElement(By.xpath("(//input[@name='selectItem'])[" + (sz - 1) + "]/parent::td/following-sibling::td")).getText();
             Utility_Functions.xUpdateJson("SelectItem2", item2);
-            Utility_Functions.xUpdateJson("MFCode", Utility_Functions.getText(driver, getColumnData("MF")));
-            Utility_Functions.xUpdateJson("PDCode", Utility_Functions.getText(driver, getColumnData("PD")));
-            Utility_Functions.xUpdateJson("VNCode", Utility_Functions.getText(driver, getColumnData("VN")));
+            getMfVnPdCode(2);
             click(SpoPage.addSelectedItemToWSBtn, "Click 'Add Selected Items to Worksheet' Button");
             Utility_Functions.timeWait(4);
             String pop = getText(SpoPage.popUp);
             if (pop.equals("1 item added successfully. 1 item already existed.")) {
                 Utility_Functions.xAssertEquals(report, pop, "1 item added successfully. 1 item already existed.", "'1 item added successfully. 1 item already existed.' popup message is Present");
-                //commonObj.validateText(SpoPage.popUp, "1 item added successfully. 1 item already existed.", "'1 item added successfully. 1 item already existed.' popup message is Present");
                 Utility_Functions.timeWait(7);
             }
             click(SpoPage.addSelectedItemToWSBtn, "Again select same item and Click 'Add Selected Items to Worksheet' Button");
@@ -1110,7 +1183,6 @@ public class Spo extends ReusableLib {
         String pop = getText(SpoPage.popUp);
         if (pop.equals("1 item added successfully.")) {
             Utility_Functions.xAssertEquals(report, pop, "1 item added successfully.", "'1 item added successfully.' popup message is Present");
-            //commonObj.validateText(SpoPage.popUp, "1 item added successfully.", "'1 item added successfully.' popup message is Present");
             Utility_Functions.timeWait(7);
         }
         click(SpoPage.addSelectedItemToWSBtn, "Again select same item and Click 'Add Selected Items to Worksheet' Button");
@@ -1123,16 +1195,17 @@ public class Spo extends ReusableLib {
         return By.xpath("//table/tbody/tr[1]/td[count(//table/thead/tr/th[contains(text(),'" + label + "')]/preceding-sibling::th)]");
     }
 
-    public void searchItem(String item) {
+    public void searchItem(String item,int row) {
         Utility_Functions.timeWait(4);
         click(TruckPage.filterSearch, "Click Search Filter icon");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
         sendKeys(SpoPage.itemNumSearch, Utility_Functions.xGetJsonData(item), "Enter Selected Item");
         Utility_Functions.timeWait(2);
-        sendKeys(SpoPage.manufacturerCode, Utility_Functions.xGetJsonData("MFCode"), "Enter Selected MF");
+        clearText(SpoPage.manufacturerCode);
+        sendKeys(SpoPage.manufacturerCode, Utility_Functions.xGetJsonData("MFCode"+row), "Enter Selected MF");
         Utility_Functions.timeWait(2);
-        sendKeys(SpoPage.productCode, Utility_Functions.xGetJsonData("PDCode"), "Enter Selected PD");
+        sendKeys(SpoPage.productCode, Utility_Functions.xGetJsonData("PDCode"+row), "Enter Selected PD");
         Utility_Functions.timeWait(2);
         sendKeys(SpoPage.vendorName, Utility_Functions.xGetJsonData("VNCode"), "Enter Selected VN");
         Utility_Functions.timeWait(2);
@@ -1147,8 +1220,8 @@ public class Spo extends ReusableLib {
      * This method to verify Added item to Worksheet
      */
     public void verifyAddedItem() {
-        searchItem("SelectItem1");
-        searchItem("SelectItem2");
+        searchItem("SelectItem2",2);
+        searchItem("SelectItem1",1);
     }
 
     public void validateColumn() {
@@ -1164,7 +1237,6 @@ public class Spo extends ReusableLib {
      * This method to UI of Add items to this worksheet screen
      */
     public void addItemsToWSUI() {
-        commonObj.validateText(SpoPage.spoPageTitle, "CREATE NEW WORKSHEET TEMPLATE", "Worksheet items Header is present");
         commonObj.validateElementExists(worksheetInputFields("Enter Search Terms"), "'Enter Search Terms' input text field present");
         commonObj.validateElementExists(worksheetInputFields("MF"), "'MF' input text field present");
         commonObj.validateElementExists(worksheetInputFields("PD"), "'PD' input text field present");
@@ -1266,6 +1338,7 @@ public class Spo extends ReusableLib {
         sendKeys(SpoPage.monthSupply, "5", "Enter '5' into 'Mos Supply' input text field");
         sendKeys(SpoPage.leadTime, "10", "Enter '10' into 'Lead Time' input text field");
         functionalRefreshButton();
+        Utility_Functions.xScrollWindowTop(driver);
         click(SpoPage.closeIcon, "Click Close Icon");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
@@ -1289,8 +1362,8 @@ public class Spo extends ReusableLib {
         }
         commonObj.validateElementExists(SpoPage.trashIcon, "Delete icon present");
         commonObj.validateElementExists(SpoPage.costOption, "Cost Option drop down present");
-        String[] option = {"List Price", "PO Cost", "Last Cost", "WSS Cost"};
-        for (int j = 0; j < 4; j++) {
+        String[] option = {"List Price", "PO Cost", "Last Cost"};
+        for (int j = 0; j < option.length; j++) {
             Utility_Functions.xAssertEquals(report, driver.findElements(SpoPage.costOptions).get(j).getText(), option[j], "" + option[j] + " is present");
         }
         commonObj.validateElementExists(SpoPage.trailingMonths, "Trailing Month section present");
@@ -1298,7 +1371,8 @@ public class Spo extends ReusableLib {
         commonObj.validateElementExists(actDeActToggle(true), "By default list is activated");
         commonObj.validateElementExists(button("Cancel"), "Cancel Button is present");
         commonObj.validateElementExists(button("Next "), "Next button is present");
-        commonObj.validateText(SpoPage.selectedDays, "Monday, Tuesday, Wednesday", "'Day of the week' is present");
+        String day=Utility_Functions.xGetJsonData("selectedDays");
+        commonObj.validateText(By.xpath("//div[text()='"+day+"']"), day, "'Day of the week' is present: "+day);
     }
 
     /**
@@ -1427,13 +1501,16 @@ public class Spo extends ReusableLib {
         Utility_Functions.xScrollIntoView(driver, SpoPage.dayOfTheWeek);
         click(SpoPage.dayOfTheWeek, "Click Day Of The Week Drop Down");
         Utility_Functions.timeWait(2);
-        for (int i = 1; i < 3; i++) {
-            click(driver.findElements(SpoPage.dayCheckBox).get(i), "Select Day");
-            updatedMessage();
+        int size=driver.findElements(SpoPage.dayCheckBox).size();
+        if(size>2) {
+            for (int i = 0; i < size - 2; i++) {
+                click(driver.findElements(SpoPage.dayCheckBox).get(i), "Select Day");
+                updatedMessage();
+            }
+            click(SpoPage.trailingMonths);
+            Utility_Functions.timeWait(2);
+            radioAndToggleBtn();
         }
-        click(SpoPage.trailingMonths);
-        Utility_Functions.timeWait(2);
-        radioAndToggleBtn();
     }
 
     public void clickTrashIcon() {
@@ -1469,7 +1546,7 @@ public class Spo extends ReusableLib {
      * This method to verify Save Worksheet
      */
     public void verifySavedWS() {
-        clickButton("Save");
+        click(SpoPage.saveWorksheet,"Click Save WorkSheet button");
         Utility_Functions.timeWait(4);
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
         commonObj.validateText(SpoPage.popUp, worksheetName + " worksheet updated successfully.", worksheetName + " worksheet updated successfully. popup is present");
@@ -1494,11 +1571,19 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
 
+    public void assignedUser() {
+        int val = driver.findElements(SpoPage.assignedUserIf).size();
+        if (driver.findElements(SpoPage.assignedUserIf).get(val - 1).getAttribute("ng-reflect-model") == null) {
+            sendKeys(SpoPage.assignedUserIf, properties.getProperty("SpoUserName"));
+        }
+    }
+
     /**
      * Keyword to Verify Duplicate WS
      */
     public void verifyDuplicateWS() {
         sendKeys(SpoPage.worksheetSheetTemplateName, Utility_Functions.xGetJsonData("WorksheetTempName"), "Name Your Worksheet");
+        assignedUser();
         getMFVNPC();
         selectDays();
         Utility_Functions.timeWait(2);
@@ -1516,12 +1601,12 @@ public class Spo extends ReusableLib {
      * Keyword to Modify Order Quantity
      */
     public void modifyOrderQty() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.orderQuantity);
+        Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
+        Utility_Functions.timeWait(2);
         sendKeys(SpoPage.orderQuantity, "99999999", "Modify First item Order Quantity to 999999");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(SpoPage.yellowModCol, "Border color changed to Yellow after Order quantity modification");
-        String itemNo = driver.findElements(SpoPage.itemNoCol).get(1).getText();
-        sendKeys(By.id(itemNo), "999999", "Modify Second item Order Quantity to 999999");
+        sendKeys(driver.findElements(SpoPage.orderQuantity).get(2), "999999", "Modify Second item Order Quantity to 999999");
     }
 
     /**
@@ -1726,6 +1811,7 @@ public class Spo extends ReusableLib {
      * Keyword to Verify Total Cost Calculation
      */
     public void verifyTotalCostCalculation() {
+        Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
         click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         Utility_Functions.timeWait(3);
         Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
@@ -1734,27 +1820,20 @@ public class Spo extends ReusableLib {
         sendKeys(SpoPage.orderQuantity, "15", "Modify Order Quantity");
         String unitCostVal = driver.findElement(SpoPage.unitCostField).getAttribute("value");
         double unitCost = convertDouble(unitCostVal) * 15;
+        double disc=Double.parseDouble(getAttribute(SpoPage.discountLineItem,"value"));
+        double totalDisc=(unitCost*disc)/100;
+        double afterDisc=unitCost-totalDisc;
         String totalCost = driver.findElement(SpoPage.totalCost).getText();
-        Utility_Functions.xAssertEquals(report, unitCost + "00000", totalCost, "Total cost Calculation Matches ");
-
-       /* double discount=discountTotalCostCalc();
-        double total=15*convertDouble(unitCostVal);
-        double totalDisc=(total)-((10*total)/100);
-        Utility_Functions.xAssertEquals(report,discount,totalDisc,"After discount Total cost Calculation Matches ");
-        Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
-        Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(driver, SpoPage.closeIcon);
-        Utility_Functions.timeWait(4);
-        commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");*/
+        Utility_Functions.xAssertEquals(report, afterDisc + "00000", totalCost, "Total cost Calculation Matches ");
     }
 
     /**
      * Keyword to Verify std Package Quantity
      */
     public void stdPackageQty() {
+        Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
         click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
         click(SpoPage.plusIcon, "Click Expand Icon");
         Utility_Functions.timeWait(3);
         sendKeys(SpoPage.orderQuantity, "125", "Modify Order Quantity");
@@ -1827,8 +1906,8 @@ public class Spo extends ReusableLib {
      */
     public void verifyUnitWeight() {
         Utility_Functions.timeWait(3);
+        Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
         click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
-        Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
         sendKeys(SpoPage.orderQuantity, "200", "Modify Order Quantity");
         Utility_Functions.timeWait(3);
         click(SpoPage.plusIcon, "Click on '+'");
