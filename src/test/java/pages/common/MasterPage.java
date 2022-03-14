@@ -30,4 +30,6 @@ public class MasterPage extends ReusableLib {
     public static By salesOrdersMenu = By.id("D_9_7");
 	public static By optionConstPageTitle = By.id("D_2_19");
 	public static By inquiryBuyerMenu =By.xpath("//div[text()='2']/following-sibling::div/a[contains(text(),'Buyer')]");
+
+	public static By inquiryPurchaseOrdersMenu =By.xpath("//div[text()='13']/following-sibling::div[@id='D_5_47']/a");
 }

@@ -421,6 +421,13 @@ public class CommonActions extends ReusableLib {
 	}
 
 	/**
+	 * This method navigates from Purchase Order Menu to Inquiry Purchase Orders Program
+	 */
+	public void purchaseOrderToPurchaseOrderInquiry() {
+		click(MasterPage.inquiryPurchaseOrdersMenu,"Click [Inquiry - Purchase Orders] menu");
+	}
+
+	/**
 	 *
 	 *
 	 * This method navigates from sales Quotes Page to master page

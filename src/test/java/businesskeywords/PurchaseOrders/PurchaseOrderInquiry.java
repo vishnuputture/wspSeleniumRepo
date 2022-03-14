@@ -4,7 +4,9 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Report;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptsPage;
@@ -32,10 +34,43 @@ public class PurchaseOrderInquiry extends ReusableLib {
     }
 
     /**
-     * Keyword to enter PO Number and select action in PURCHASE ORDER INQUIRY Page
+     * This method validates the title of Inquiry Purchase Orders Page
+     */
+    public void navigateToPurchaseOrderInquiry() {
+        commonObj.masterToPurchaseOrder();
+        commonObj.purchaseOrderToPurchaseOrderInquiry();
+        commonObj.validateText(PurchaseOrderInquiryPage.hdrPOInquiry, "PURCHASE ORDER INQUIRY", "Validating [PURCHASE ORDER INQUIRY] page title");
+    }
+
+    /**
+     * Keyword to click on [Exit] button in PURCHASE ORDER INQUIRY Page
      */
     public void clickExitBtnPOInquiry(){
+        Utility_Functions.xScrollIntoView(driver, PurchaseOrderInquiryPage.btnExitPOInquiryDtls);
         click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
+    }
+
+    /**
+     * Keyword to click on [Exit] button
+     */
+    public void clickOnExitBtn(){
+        click(PurchaseOrderInquiryPage.btnExitItemLedger, "Click [Exit] button");
+    }
+
+    /**
+     * Keyword to click on [Exit] button
+     */
+    public void clickOnF12ReturnBtn(){
+        click(PurchaseOrderInquiryPage.btnF12Return, "Click [F12=Return] button");
+    }
+
+    /**
+     * Keyword to exit to master from PURCHASE ORDER INQUIRY Page
+     */
+    public void navigatePOInquiryToMaster(){
+        Utility_Functions.xScrollPage(driver);
+        click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
+        Utility_Functions.actionKey(Keys.F3, driver);
     }
 
     /**
@@ -116,6 +151,172 @@ public class PurchaseOrderInquiry extends ReusableLib {
      */
     public void selectStatus(){
         Utility_Functions.xSelectDropdownByName(driver, PurchaseOrderInquiryPage.ddnStatus, jsonData.getData("Status"));
+    }
+
+    /**
+     * Keyword to verify presence of [No Detail Lines to Display]
+     */
+    public void vrfyNoDetailLineToDisplay(){
+        commonObj.validateText(PurchaseOrderInquiryPage.msgNoDetailLinesToDisplay, "* No Detail Lines to Display", "validate [No Detail Lines to Display] msg");
+    }
+
+    /**
+     * Keyword to verify switch view functionality in table
+     */
+    public void vrfySwitchView(){
+        commonObj.validateElementExists(PurchaseOrderInquiryPage.btnSwitchViewTable, "Verify presence of Switch View button");
+        commonObj.validateElementExists(PurchaseOrderInquiryPage.tblHdrOrderTotal, "Verify presence of [Order Total] table header");
+
+        clickSwitchView(PurchaseOrderInquiryPage.tblHdrJobName, "Job Name");
+        clickSwitchView(PurchaseOrderInquiryPage.tblHdrMiscNotes, "Misc Notes");
+        clickSwitchView(PurchaseOrderInquiryPage.tblHdrCustomerPO, "Customer PO");
+        clickSwitchView(PurchaseOrderInquiryPage.tblHdrQuoteNumber, "Quote Number");
+        clickSwitchView(PurchaseOrderInquiryPage.tblHdrReceiverDoc, "Receiver Doc");
+    }
+
+    /**
+     * Keyword to click switch view and verify presence of table header
+     */
+    public void clickSwitchView(By element, String tableHeaderName){
+        click(PurchaseOrderInquiryPage.btnSwitchViewTable,"Click [Switch View] Button");
+        commonObj.validateElementExists(element, "Verify presence of ["+tableHeaderName+"] table header");
+    }
+
+    /**
+     * Keyword to validate [Type] dropdown options
+     */
+    public void verifyTypeDdnOptions(){
+        List<String> lstTypeDdnValues = Utility_Functions.xgetDropdownOptionsAsList(driver, PurchaseOrderInquiryPage.ddnType);
+        String[] typeOptions = {"ALL (All-Direct and Stock)","DIRECT (Direct Shipment)","RFQ (Request For Quote)","STOCK (Stock)"};
+
+        boolean flag = false;
+        if (lstTypeDdnValues.size() == typeOptions.length){
+            for (int i=0; i<typeOptions.length; i++){
+                if (typeOptions[i].equalsIgnoreCase(lstTypeDdnValues.get(i)))
+                    flag = true;
+                else
+                    flag = false;
+            }
+        }
+        if (flag)
+            report.updateTestLog("Verify Type ddn options", "Verify Type dropdown options",Status.PASS);
+        else
+            report.updateTestLog("Verify Type ddn options", "Verify Type dropdown options",Status.FAIL);
+    }
+
+    /**
+     * Keyword to vallidate [Type] dropdown filter
+     */
+    public void vrfyTypeDdnFilter(){
+        selectTypeAndVrfyTableData("DIRECT (Direct Shipment)", "DIRECT");
+        selectTypeAndVrfyTableData("STOCK (Stock)", "STOCK");
+    }
+
+    /**
+     * Keyword to select [Type] dropdown option and verify table data
+     */
+    public void selectTypeAndVrfyTableData(String filterDdn, String colValue){
+        Utility_Functions.xSelectDropdownByName(driver, PurchaseOrderInquiryPage.ddnType, filterDdn);
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        boolean flag = false;
+        List<WebElement> listElement = getListElement(PurchaseOrderInquiryPage.lstShipmentColText);
+        for (WebElement e : listElement){
+            String text = e.getText().trim();
+            if (text.equalsIgnoreCase(colValue))
+                flag = true;
+            else
+                flag = false;
+        }
+        if (flag)
+            report.updateTestLog("Verify Type filter", "Verify filter by Shipment = ["+colValue+"]",Status.PASS);
+        else
+            report.updateTestLog("Verify Type filter", "Verify filter by Shipment = ["+colValue+"]",Status.FAIL);
+    }
+
+    /**
+     * Keyword to validate [Status] dropdown options
+     */
+    public void verifyStatusDdnOptions(){
+        List<String> lstStatusDdnValues = Utility_Functions.xgetDropdownOptionsAsList(driver, PurchaseOrderInquiryPage.ddnStatus);
+        String[] statusOptions = {"All","Closed","Open"};
+
+        boolean flag = false;
+        if (lstStatusDdnValues.size() == statusOptions.length){
+            for (int i=0; i<statusOptions.length; i++){
+                if (statusOptions[i].equalsIgnoreCase(lstStatusDdnValues.get(i)))
+                    flag = true;
+                else
+                    flag = false;
+            }
+        }
+        if (flag)
+            report.updateTestLog("Verify Status ddn options", "Verify Status dropdown options",Status.PASS);
+        else
+            report.updateTestLog("Verify Status ddn options", "Verify Status dropdown options",Status.FAIL);
+    }
+
+    /**
+     * Keyword to vallidate [Status] dropdown filter
+     */
+    public void vrfyStatusDdnFilter(){
+        selectStatusAndVrfyTableData("All", "OPEN CLOSED");
+        selectStatusAndVrfyTableData("Closed", "CLOSED");
+        selectStatusAndVrfyTableData("Open", "OPEN");
+    }
+
+    /**
+     * Keyword to select [Status] dropdown option and verify table data
+     */
+    public void selectStatusAndVrfyTableData(String filterDdn, String colValue){
+        Utility_Functions.xSelectDropdownByName(driver, PurchaseOrderInquiryPage.ddnStatus, filterDdn);
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        boolean flag = false;
+        List<WebElement> listElement = getListElement(PurchaseOrderInquiryPage.lstStatusColText);
+        for (WebElement e : listElement){
+            String text = e.getText().trim();
+            if (colValue.contains(text))
+                flag = true;
+            else
+                flag = false;
+        }
+        if (flag)
+            report.updateTestLog("Verify Status filter", "Verify filter by Status = ["+colValue+"]",Status.PASS);
+        else
+            report.updateTestLog("Verify Status filter", "Verify filter by Status = ["+colValue+"]",Status.FAIL);
+    }
+
+    /**
+     * Keyword to click on [Buyers Inquiry] link in PURCHASE ORDER INQUIRY Page
+     */
+    public void clickBuyersInquiry(){
+        click(PurchaseOrderInquiryPage.lnkBuyersInquiry, "Click [Buyers Inquiry] link");
+        commonObj.validateText(PurchaseOrderInquiryPage.hdrBuyersInquiry, "Buyer's Inquiry", "Validate [Buyer's Inquiry] page header");
+    }
+
+    /**
+     * Keyword to click on [Buyers Worksheet] link in PURCHASE ORDER INQUIRY Page
+     */
+    public void clickBuyersWorksheet(){
+        click(PurchaseOrderInquiryPage.lnkBuyersWorksheet, "Click [Buyers Worksheet] link");
+        commonObj.validateText(PurchaseOrderInquiryPage.hdrBuyersWorksheet, "Buyer's Worksheet - Processing Options", "Validate [Buyers Worksheet] page header");
+    }
+
+    /**
+     * Keyword to click on [PO Entry] link in PURCHASE ORDER INQUIRY Page
+     */
+    public void clickPOEntry(){
+        click(PurchaseOrderInquiryPage.lnkPOEntry, "Click [PO Entry] link");
+        commonObj.validateText(PurchaseOrderInquiryPage.hdrPOEntry, "Purchase Order Headings", "Validate [Purchase Order Headings] page header");
+    }
+
+    /**
+     * Keyword to click on [PO Preferences] link in PURCHASE ORDER INQUIRY Page
+     */
+    public void clickPOPreferences(){
+        click(PurchaseOrderInquiryPage.lnkPOPreferences, "Click [PO Preferences] link");
+        commonObj.validateText(PurchaseOrderInquiryPage.hdrPOPreferences, "Purchase Order User Preferences", "Validate [Purchase Order User Preferences] page header");
     }
 
 }

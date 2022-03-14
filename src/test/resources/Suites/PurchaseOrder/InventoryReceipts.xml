@@ -12,6 +12,11 @@
 					<include name="Tc_915_ValidateCancelPOButton"></include>
 					<include name="Tc_924_VerifyFunctionalityOfPartialReceivingPO"></include>
 					<include name="Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus"></include>
+					<include name="Tc_928_VerifyFunctionalityOfOverReceivingPO"></include>
+					<include name="Tc_934_VerifyFunctionalityOfRefreshButton"></include>
+					<include name="Tc_935_VerifyFunctionalityOfTypeDropdown"></include>
+					<include name="Tc_936_VerifyFunctionalityOfStatusDropdown"></include>
+					<include name="Tc_937_VerifyFunctionalityOfHyperlinks"></include>
 				</methods>
 			</class>
 		</classes>

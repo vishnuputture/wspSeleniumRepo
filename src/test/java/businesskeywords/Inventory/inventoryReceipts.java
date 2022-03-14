@@ -235,6 +235,57 @@ public class inventoryReceipts extends ReusableLib {
         click(InventoryReceiptsPage.purchaseOrderInquiry,"Click [Purchase Order Inquiry] button");
     }
 
+    /**
+     * Keyword to enter Over Quantity Received and verify popup in Inventory Receipt page
+     */
+    public void verifyOverReceivingPO(){
+        String qty = jsonData.getData("QtyReceived");
+        sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, qty,"Enter Quantity Received");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        verifyOverReceivingPOPopup();
+        clickUpdateSalesOrderBtn();
+
+        sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, "500","Enter Quantity Received");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        clickUpdateOnHandQtyBtn();
+
+        Utility_Functions.actionKey(Keys.F9, driver);
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.timeWait(2);
+    }
+
+    /**
+     * Keyword to verify [QUANTITY RECEIVED IS GREATER] popup in Inventory Receipt page
+     */
+    public void verifyOverReceivingPOPopup(){
+        commonObj.verifyElementContainsText(InventoryReceiptsPage.hdrOverReceivedPOPopup, "QUANTITY RECEIVED IS GREATER THAN DIRECT SHIP BO", "Validating Over Received PO popup header");
+        commonObj.validateElementExists(InventoryReceiptsPage.btnUpdateOnHandQty, "[Update On Hand Quantity] button is present in Over Received PO popup");
+        commonObj.validateElementExists(InventoryReceiptsPage.btnUpdateSO, "[Uppdate Sales Order] button is present in Over Received PO popup");
+    }
+
+    /**
+     * Keyword to click [Update Sales Order] button in [QUANTITY RECEIVED IS GREATER] popup
+     */
+    public void clickUpdateSalesOrderBtn(){
+        click(InventoryReceiptsPage.btnUpdateSO,"Click [Update Sales Order] button");
+        Utility_Functions.timeWait(2);
+        boolean flag = getElement(InventoryReceiptsPage.tbxQtyRcvd).isEnabled();
+        if (flag)
+            report.updateTestLog("Verify Quantity Received tbx", "Verify Quantity Received tbx is enabled",Status.PASS);
+        else
+            report.updateTestLog("Verify Quantity Received tbx", "Verify Quantity Received tbx is enabled",Status.FAIL);
+    }
+
+    /**
+     * Keyword to click [Update On Hand Quantity] button in [QUANTITY RECEIVED IS GREATER] popup
+     */
+    public void clickUpdateOnHandQtyBtn(){
+        click(InventoryReceiptsPage.btnUpdateOnHandQty,"Click [Update Sales Order] button");
+        Utility_Functions.timeWait(2);
+    }
+
 
 
 }
