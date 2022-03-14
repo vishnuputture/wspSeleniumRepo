@@ -1,24 +1,16 @@
 package businesskeywords.PurchaseOrders;
 
-import businesskeywords.Inventory.inventoryReceipts;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import com.winSupply.framework.Report;
 import com.winSupply.framework.Status;
-import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import pages.PurchaseOrders.InventoryReceiptPage;
-import pages.PurchaseOrders.InventoryReceiptsPage;
 import pages.PurchaseOrders.PurchaseOrderInquiryPage;
 import pages.common.MasterPage;
-import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
-import testcases.PO.InventoryReceipts;
 
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 
