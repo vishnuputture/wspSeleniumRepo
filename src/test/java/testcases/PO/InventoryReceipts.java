@@ -136,6 +136,22 @@ public class InventoryReceipts extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_929_verifyPositionToOrder(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify verify Position To Order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_932_verifyVendorOrderByField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Vendor Order By Field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_934_VerifyFunctionalityOfRefreshButton(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify the functionality of Refresh button in PURCHASE ORDER INQUIRY");
         CoreScript coreScript = new CoreScript(testParameters);

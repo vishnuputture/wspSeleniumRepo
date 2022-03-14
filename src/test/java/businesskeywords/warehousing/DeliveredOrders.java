@@ -50,7 +50,7 @@ public class DeliveredOrders extends ReusableLib {
      * Keyword to verify UI of Delivered Orders
      */
     public void deliveredOrdersUI() {
-        String[] actText={"Order Number","Date Delivered","Customer PO Number","Delivered To","Shipment Status","Manifest Order Status","Driver","Truck","Manifest Number"};
+        String[] actText={"Order Number","Date/Time","PO No.","Manifest No.","Delivered To","Shipment Status","Manifest Status","Driver","Truck","Ship Via"};
         List<WebElement> els=driver.findElements(By.xpath("//th"));
         int i=0;
         for(WebElement el:els){
@@ -80,7 +80,7 @@ public class DeliveredOrders extends ReusableLib {
         click(TruckPage.filterSearch, "Click Search Filter icon");
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
-        String[] actText = {"Order Number", "Date Delivered Range", "Customer PO Number", "Delivered To", "Shipment Status", "Manifest Order Status", "Driver", "Truck", "Manifest Number"};
+        String[] actText = {"Order Number", "Date Delivered Range", "Customer PO Number", "Delivered To","Ship Via", "Shipment Status", "Manifest Order Status", "Driver", "Truck", "Manifest Number"};
         List<WebElement> els = driver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {
@@ -119,10 +119,10 @@ public class DeliveredOrders extends ReusableLib {
         click(TruckPage.applyFilter, "Click Apply Filters");
         Utility_Functions.timeWait(2);
         commonObj.validateText(drv.getTruck("Order Number"), Utility_Functions.xGetJsonData("SalesOrder")+"-01", "After filter Order Number: ");
-        commonObj.validateText(drv.getTruck("Manifest Order Status"), "Delivered", "After filter Manifest Order Status: ");
+        commonObj.validateText(drv.getTruck("Manifest Status"), "Delivered", "After filter Manifest Order Status: ");
         commonObj.validateText(drv.getTruck("Shipment Status"), "Open", "After filter Shipment Status: ");
         commonObj.validateText(drv.getTruck("Truck"), truckName, "After filter Truck Name: ");
         commonObj.validateText(drv.getTruck("Driver"), driverName, "After filter Driver Name: ");
-        commonObj.validateText(drv.getTruck("Manifest Number"),Utility_Functions.xGetJsonData("ManifestNumber") , "After filter status: ");
+        commonObj.validateText(drv.getTruck("Manifest No."),Utility_Functions.xGetJsonData("ManifestNumber") , "After filter status: ");
     }
 }

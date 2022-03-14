@@ -136,7 +136,6 @@
                     <include name="Tc_197_DriversHelpIcon"></include>
                     <include name="Tc_198_DriversPagination"></include>
                     <include name="Tc_200_DriversPageCount"></include>
-
                     <include name="Tc_AddTruck"></include>
                     <include name="Tc_AddNewDriver"></include>
                     <include name="Tc_CreateManifestPO"></include>

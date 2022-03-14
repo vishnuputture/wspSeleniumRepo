@@ -34,7 +34,7 @@ public class Trucks extends ReusableLib {
 
     public void navigateToShippingManifest() {
         //driver.get(jsonData.getData("Url"));
-        driver.get("http://wservicedev.winwholesale.com/shipping-manifest-manager/#/truck-list/warehousing");
+        driver.get("http://lcoservicedev.winwholesale.com/shipping-manifest-manager/#/list/warehousing");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 

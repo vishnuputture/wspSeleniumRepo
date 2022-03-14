@@ -17,6 +17,8 @@
       "Tc_924_VerifyFunctionalityOfPartialReceivingPO":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,enterQtyReceivedAndProcess,inquiryPO,enterPONumberAndSelectAction,vrfyQtyAndItemLedgerDetails,backToInventoryReceipts,navigateInventoryReceiptsToMaster,signOut",
       "Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItemsAndQty,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,enterQtyReceivedAndProcess,inquiryPO,selectStatus,enterPONumber,vrfyPONotInList,clickExitBtnPOInquiry,navigateInventoryReceiptsToMaster,signOut",
       "Tc_928_VerifyFunctionalityOfOverReceivingPO":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItemsAndQty,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,verifyOverReceivingPO,inquiryPO,selectStatus,enterPONumberAndSelectAction,vrfyNoDetailLineToDisplay,clickExitBtnPOInquiry,navigateInventoryReceiptsToMaster,signOut",
+      "Tc_929_verifyPositionToOrder":"launchApp,siteLogin,navigateToPoInquiry,enterPONumber,vrfyPONotInList,clickExitBtnPOInquiry,signOut",
+      "Tc_932_verifyVendorOrderByField":"launchApp,siteLogin,navigateToPoInquiry,enterVendor,orderBy,clickExitBtnPOInquiry,signOut",
       "Tc_934_VerifyFunctionalityOfRefreshButton":"launchApp,siteLogin,navigateToPurchaseOrderInquiry,vrfySwitchView,navigatePOInquiryToMaster,signOut",
       "Tc_935_VerifyFunctionalityOfTypeDropdown":"launchApp,siteLogin,navigateToPurchaseOrderInquiry,verifyTypeDdnOptions,vrfyTypeDdnFilter,navigatePOInquiryToMaster,signOut",
       "Tc_936_VerifyFunctionalityOfStatusDropdown":"launchApp,siteLogin,navigateToPurchaseOrderInquiry,verifyStatusDdnOptions,vrfyStatusDdnFilter,navigatePOInquiryToMaster,signOut",
@@ -170,6 +172,14 @@
       "QtyReceived":"100",
       "Action":"1",
       "Status":"All"
+    },
+    {
+      "TC_ID":"Tc_929_verifyPositionToOrder",
+      "PONumber":"047649"
+    },
+    {
+      "TC_ID":"Tc_932_verifyVendorOrderByField",
+      "VendorNo":"000389"
     },
     {
       "TC_ID":"Tc_934_VerifyFunctionalityOfRefreshButton"

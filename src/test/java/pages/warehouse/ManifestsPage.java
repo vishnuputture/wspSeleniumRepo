@@ -39,6 +39,7 @@ public class ManifestsPage {
     public static By updateStatusPOPick=By.xpath("//div[text()=' Picked Up ']");
     public static By updateStatusPONotPick=By.xpath("//div[text()=' Not Picked Up ']");
     public static By soStatus=By.xpath("//p[@class='order-detail']");
+    public static By ifErrorExist=By.xpath("//span[@class='ui-growl-image pi pi-times']");
     public static By warningIcon=By.xpath("//i[contains(@class,'win-status-warning')]");
     public static By deliveredGreenIcon=By.xpath("//win-status-icon[@ng-reflect-status='DELIVERED']");
     public static By notDeliveredRedIcon=By.xpath("//win-status-icon[@ng-reflect-status='NOT DELIVERED']");
@@ -53,7 +54,7 @@ public class ManifestsPage {
     public static By pickUpCount=By.xpath("//input[@ng-reflect-name='tempQuantityPickedup0']");
     public static By pickedUpStatus=By.xpath("//p[text()='Picked Up']");
     public static By notPickedUpStatus=By.xpath("//p[text()='Not Picked Up']");
-    public static By inProgressStatus=By.xpath("//span[contains(text(),'In Process')]");
+    public static By inProgressStatus=By.xpath("//win-status-icon/following-sibling::span[contains(text(),'In Process')]");
     public static By manStatus=By.xpath("//span[@class='manifest-status-text']");
     public static By closedStatus=By.xpath("//span[contains(text(),'Closed')]");
     public static By closeIcon=By.xpath("//i[@class='fa fa-check-circle-o']");

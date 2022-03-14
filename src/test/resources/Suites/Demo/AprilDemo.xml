@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression" parallel="none" thread-count="1">
+    <!--<test name="Check">
+        <classes>
+            <class name="testcases.Warehouse">
+                <methods>
+                    &lt;!&ndash; ############ UI Of the page ############ &ndash;&gt;
+
+                    <include name="Tc_TruckUI"></include>
+                    <include name="Tc_searchFiltersTruckUi"></include>
+                    <include name="Tc_AddNewTruckScreenUI"></include>
+                    <include name="Tc_UpdateTruckUI"></include>
+                    <include name="Tc_DriversUI"></include>
+                    <include name="Tc_209_AddNewDriverScreenUI"></include>
+                    <include name="Tc_UpdateDriverUI"></include>
+                    <include name="Tc_TrucksHelpIcon"></include>
+                    <include name="Tc_TrucksPagination"></include>
+                    <include name="Tc_TrucksPageCount"></include>
+                    <include name="Tc_197_DriversHelpIcon"></include>
+                    <include name="Tc_198_DriversPagination"></include>
+                    <include name="Tc_200_DriversPageCount"></include>
+                    <include name="Tc_AddTruck"></include>
+                    <include name="Tc_AddNewDriver"></include>
+                    <include name="Tc_CreateManifestPO"></include>
+                    <include name="Tc_DeleteManifest"></include>
+                    <include name="Tc_DeleteTruck"></include>
+                    <include name="Tc_DeleteDriver"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>-->
+    <test name="SanityCheck1">
+        <classes>
+            <class name="testcases.Warehouse">
+                <methods>
+                    <include name="Tc_AddTruck"></include>
+                    <include name="Tc_AddNewDriver"></include>
+                    <include name="Tc_CreateSalesOrderWISE"></include>
+                    <include name="TC_243_CreateManifest"></include>
+                    <include name="Tc_ManifestListUI"></include>
+                    <include name="Tc_240_CreateManifestUI"></include>
+                    <include name="Tc_NotDeliveredOrdersUI"></include>
+                    <include name="Tc_DeliveredOrdersUI"></include>
+                    <include name="Tc_DeliveredOrdersSearchFilterUI"></include>
+                    <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
+                    <include name="TC_295_ManifestOrderUI"></include>
+                    <include name="Tc_235_ManifestListHelpIcon"></include>
+                    <include name="Tc_236_ManifestListPagination"></include>
+                    <include name="Tc_238_ManifestListPageCount"></include>
+                    <include name="Tc_241_collapseExpandSession"></include>
+                    <include name="Tc_OrderNumberSO_UI"></include>
+                    <include name="TC_SOUpdateStatusDelivered"></include>
+                    <include name="Tc_VerifyDeliveredOrders"></include>
+                    <include name="Tc_DeleteTruck"></include>
+                    <include name="Tc_DeleteDriver"></include>
+                    <include name="TC_SOUpdateStatusNotDelivered"></include>
+                    <include name="Tc_VerifyNotDeliveredOrders"></include>
+                    <include name="Tc_CreateManifestNotDeliveredOrd"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="SanityCheck2">
+        <classes>
+            <class name="testcases.Warehouse">
+                <methods>
+                    <include name="Tc_CreateSalesOrderWISE"></include>
+                    <include name="TC_243_CreateManifest"></include>
+                    <include name="TC_SOUpdateStatusNotDelivered"></include>
+                    <include name="Tc_AddToManifestNotDelOrd"></include>
+                    <include name="Tc_CreateManifestPO"></include>
+                    <include name="Tc_OrderNumberPO_UI"></include>
+                    <include name="TC_POUpdateStatus"></include>
+                    <include name="Tc_CloseManifest"></include>
+                    <include name="TC_244_CreateManifestMultipleShipments"></include>
+                    <include name="Tc_InProgressStatus"></include>
+                    <include name="TC_258_ManifestSearchFilterUI"></include>
+                    <include name="TC_297_SaveNoteExpandCollapse"></include>
+                    <include name="Tc_UpdateTruck"></include>
+                    <include name="Tc_UpdateDriver"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!--<test name="CheckMakePayments">
+        <classes>
+        <class name="testcases.makePayments.makePayments">
+            <methods>
+                <include name="Tc_CreateSalesOrderInvoice"></include>
+                <include name="Tc_CreateSalesOrderWithMultipleShipment"></include>
+                <include name="Tc_ValidateMakePaymentsStatusFilter"></include>
+                <include name="Tc_ValidateMakePaymentsDateFilter"></include>
+                <include name="Tc_ValidateMakePaymentsCustomDateFilter"></include>
+                <include name="Tc_ValidateMakePaymentsInvoiceSearchFilter"></include>
+                <include name="Tc_NavigateToMakePayments"></include>
+                <include name="Tc_NavigateToSchedulePayments"></include>
+                <include name="Tc_SortByInvoiceNumber"></include>
+                <include name="Tc_SortByInvoiceTotal"></include>
+                <include name="Tc_SortByInvoiceDiscount"></include>
+                <include name="Tc_SortByInvoiceAmtDue"></include>
+                <include name="Tc_SortByInvoiceDate"></include>
+                <include name="Tc_SortByInvoicePaymentDueDate"></include>
+                <include name="Tc_139_clickHere_Link_SchedulePage"></include>
+                <include name="Tc_140_disabling_Terms_Condition_CheckBox_Enroll"></include>
+                <include name="Tc_141_EnableTermsConditionCheckBoxAndEnroll"></include>
+                <include name="Tc_142_disabling_Terms_Condition_CheckBox_Exit"></include>
+                <include name="Tc_MakeSinglePaymentByBankAcc"></include>
+                <include name="Tc_MakeSinglePaymentByCC"></include>
+                <include name="Tc_143_enablingTermsConditionCheckBoxExit"></include>
+                <include name="Tc_144_validateMakeRegPayment"></include>
+                <include name="Tc_145_FieldVerificationStartDateEndDate"></include>
+                <include name="Tc_149_CalenderValidation"></include>
+                <include name="Tc_152_ValidateOutStandingBalance"></include>
+                <include name="Tc_153_ValidateOtherAmount"></include>
+                <include name="Tc_205_ValidateOneTimeSchedule"></include>
+                <include name="Tc_208_ValidateOneTimeScheduleDateField"></include>
+                <include name="Tc_211_addNewBankAcc"></include>
+                <include name="Tc_MakeMultiPaymentByBA"></include>
+                <include name="Tc_155_validateReviewSession"></include>
+                <include name="Tc_156_validateCancelButtonOnReviewSession"></include>
+                <include name="Tc_159_validateEnrollButtonOnReviewSession"></include>
+                <include name="Tc_160_validateEditSavedSchedulePayment"></include>
+                <include name="Tc_161_validateStopSavedSchedulePayment"></include>
+                <include name="Tc_162_NavigateToFixedPayments"></include>
+                <include name="Tc_163_FixedPaymentByBA"></include>
+                <include name="Tc_164_FixedPaymentByCC"></include>
+                <include name="Tc_165_ValidateFixedPaymentRecordBA"></include>
+                <include name="Tc_166_ValidateFixedPaymentRecordCC"></include>
+            </methods>
+        </class>
+        </classes>
+    </test>-->
+
+</suite>
