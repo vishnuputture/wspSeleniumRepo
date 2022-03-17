@@ -293,10 +293,13 @@ public class Spo extends ReusableLib {
     public void valPageCount(int pageNum) {
         Utility_Functions.xClickHiddenElement(driver, By.xpath("//span[text()='" + pageNum + "']"));
         int truckCount = driver.findElements(SpoPage.itemNoCount).size();
+        if(truckCount==0){
+            truckCount=driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
+        }
         if (truckCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + truckCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Worksheet Count");
         } else {
-            commonObj.validateElementExists(SpoPage.itemNoCount, "Total Worksheet count is " + truckCount + "");
+            commonObj.validateElementExists(By.xpath("//*[text()='']"), "Total Worksheet count is " + truckCount + "");
         }
     }
 
@@ -521,7 +524,7 @@ public class Spo extends ReusableLib {
         clickButton("Yes");
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.popUp, "Worksheet updated successfully.", "Worksheet updated successfully. popup is present");
-        Utility_Functions.timeWait(4);
+        Utility_Functions.timeWait(6);
     }
 
     public void noButton() {
@@ -771,9 +774,19 @@ public class Spo extends ReusableLib {
             }
         }
         Utility_Functions.xUpdateJson("ItemNoWS", itemNo);
-        String itemDesc = driver.findElement(By.xpath("//tr["+i+"]/td/div")).getText().trim();
+        String itemDesc;
+        try {
+            itemDesc = driver.findElement(By.xpath("//tr[" + i + "]/td/div")).getText().trim();
+        }catch (Exception e){
+            itemDesc = driver.findElement(By.xpath("//tr[" + (i+1) + "]/td/div")).getText().trim();
+        }
         Utility_Functions.xUpdateJson("itemDescWS", itemDesc);
-        String unitCost = driver.findElements(By.xpath("//tr["+i+"]/td")).get(4).getText().trim();
+        String unitCost;
+        try {
+            unitCost = driver.findElements(By.xpath("//tr["+i+"]/td")).get(4).getText().trim();
+        }catch (Exception e){
+            unitCost = driver.findElements(By.xpath("//tr["+(i+1)+"]/td")).get(4).getText().trim();
+        }
         Utility_Functions.xUpdateJson("unitCost", unitCost);
         clickButton("Create Worksheet");
         Utility_Functions.timeWait(3);
@@ -916,9 +929,15 @@ public class Spo extends ReusableLib {
         Utility_Functions.xScrollWindow(driver);
         if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
             int driverCount = driver.findElements(SpoPage.itemNoCount).size();
+            if(driverCount==0){
+                driverCount=driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
+            }
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having count " + driverCount + "");
         } else {
             int driverCount = driver.findElements(SpoPage.itemNoCount).size();
+            if(driverCount==0){
+                driverCount=driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
+            }
             Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Count is 10 by default");
             valPageCount(10);
             valPageCount(15);

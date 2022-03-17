@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
-    <!--<test name="Check">
+    <test name="Check">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
-                    &lt;!&ndash; ############ UI Of the page ############ &ndash;&gt;
+                    <!-- ############ UI Of the page ############ -->
 
                     <include name="Tc_TruckUI"></include>
                     <include name="Tc_searchFiltersTruckUi"></include>
@@ -29,7 +29,7 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
     <test name="SanityCheck1">
         <classes>
             <class name="testcases.Warehouse">
@@ -84,7 +84,7 @@
             </class>
         </classes>
     </test>
-    <!--<test name="CheckMakePayments">
+    <test name="CheckMakePayments">
         <classes>
         <class name="testcases.makePayments.makePayments">
             <methods>
@@ -131,7 +131,7 @@
             </methods>
         </class>
         </classes>
-    </test>-->
+    </test>
 
     <test name="SanityCheck5">
         <classes>

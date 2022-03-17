@@ -84,7 +84,7 @@ public class SpoPage extends ReusableLib {
     public static By cancelPopup=By.id("cancelConfirmation");
     public static By selectedMonth=By.xpath("//div[contains(@ng-reflect-ng-class,'sales-history-grid-selected')]");
     public static By excludeAsteriskItem=By.xpath("//span/preceding-sibling::input[@type='checkbox']");
-    public static By itemNoCount=By.xpath("//td[contains(@class,'item-color')]");
+    public static By itemNoCount=By.xpath("//a[contains(@id,'header-name')]");
     public static By addItemToWSLink=By.xpath("//i[@class='fa fa-plus']/parent::a");
     public static By addItemHeader=By.xpath("//div[@id='addItemstoWorksheetModalId']/descendant::h2");
     public static By autoSuggestion=By.xpath("//li[contains(@class,'autocomplete')]/span");
