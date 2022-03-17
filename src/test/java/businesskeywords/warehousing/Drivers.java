@@ -97,7 +97,7 @@ public class Drivers extends ReusableLib {
         Utility_Functions.timeWait(2);
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.timeWait(2);
-        click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
+        Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(actPageNo));
         Utility_Functions.xScrollWindow(driver);
         String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
