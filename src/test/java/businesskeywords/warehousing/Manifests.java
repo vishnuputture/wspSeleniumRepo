@@ -172,8 +172,8 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.newManifestDeliveryDate);
         click(TruckPage.licensePlateExpSelect, "Select Delivery Date");
         click(ManifestsPage.newManifestStartTime, "Select Start Date");
-        int hour=Utility_Functions.genRandNum(12);
-        sendKeys(ManifestsPage.hour,""+hour+"");
+        int hour = Utility_Functions.genRandNum(12);
+        sendKeys(ManifestsPage.hour, "" + hour + "");
         click(ManifestsPage.truckEle);
         Utility_Functions.timeWait(3);
         String truckName = Utility_Functions.xGetJsonData("TruckName");
@@ -194,9 +194,9 @@ public class Manifests extends ReusableLib {
     public void verifyManifestNum() {
         Utility_Functions.timeWait(5);
         String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
-        Utility_Functions.xUpdateJson("ManFest",maniNo);
+        Utility_Functions.xUpdateJson("ManFest", maniNo);
         commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
-        commonObj.validateElementExists(ManifestsPage.mobileIcon,"Generate icon is present");
+        commonObj.validateElementExists(ManifestsPage.mobileIcon, "Generate icon is present");
     }
 
     /**
@@ -274,18 +274,18 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(3);
         click(btn(" Add to Manifest "), "Click Add to Manifest Button");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver,By.xpath("//div[contains(@class,'order-header')]/span"));
+        Utility_Functions.xScrollIntoView(driver, By.xpath("//div[contains(@class,'order-header')]/span"));
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
         Utility_Functions.timeWait(3);
         ifExist();
-        commonObj.validateElementExists(ManifestsPage.successMsg,"'Manifest successfully created.' message is present");
+        commonObj.validateElementExists(ManifestsPage.successMsg, "'Manifest successfully created.' message is present");
         String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
         Utility_Functions.xUpdateJson("ManifestNo", maniNo);
         commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
     }
 
-    public void ifExist(){
-        if(isDisplayed(ManifestsPage.ifErrorExist)){
+    public void ifExist() {
+        if (isDisplayed(ManifestsPage.ifErrorExist)) {
             click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'')]")), "Select Driver from the drop down");
             Utility_Functions.timeWait(2);
             click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'')]")), "Select Driver from the drop down");
@@ -326,7 +326,7 @@ public class Manifests extends ReusableLib {
     public void navigateToManifestOrder() {
         Utility_Functions.timeWait(4);
         String manNo = Utility_Functions.getText(driver, getRowVal("Manifest Number")).trim();
-        Utility_Functions.xUpdateJson("ManifestNumber",manNo);
+        Utility_Functions.xUpdateJson("ManifestNumber", manNo);
         if (Utility_Functions.xIsDisplayed(driver, ManifestsPage.generatedIcon)) {
             click(ManifestsPage.generatedIcon);
         }
@@ -403,6 +403,25 @@ public class Manifests extends ReusableLib {
     }
 
     /**
+     * Keyword to Delete Manifest
+     */
+    public void deleteManifestList() {
+        int size1 = driver.findElements(TruckPage.deleteInProgress).size();
+        for (int j = 0; j < size1; j++) {
+            click(TruckPage.deleteInProgress, "Click In progress Manifest");
+            Utility_Functions.timeWait(3);
+            int size = driver.findElements(ManifestsPage.updateStatusDrop).size();
+            for (int i = 0; i < size; i++) {
+                Utility_Functions.xScrollIntoView(driver, ManifestsPage.updateStatusDrop);
+                Utility_Functions.timeWait(3);
+                click(driver.findElements(ManifestsPage.updateStatusDrop).get(i));
+                click(ManifestsPage.updateStatusSO, "Click Delivered");
+                Utility_Functions.timeWait(6);
+            }
+        }
+    }
+
+    /**
      * Keyword to verify functionality of update status(Not Delivered) button for Sales order
      */
     public void updateStatusNotDeliveredSO() {
@@ -439,14 +458,14 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(3);
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xHoverElementClk(driver.findElement(ManifestsPage.updateStatusPOPick),driver);
-       // click(ManifestsPage.updateStatusPOPick, "Click Picked Up");
+        Utility_Functions.xHoverElementClk(driver.findElement(ManifestsPage.updateStatusPOPick), driver);
+        // click(ManifestsPage.updateStatusPOPick, "Click Picked Up");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.pickedUpStatus, "Picked Up", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xHoverElementClk(driver.findElement(ManifestsPage.updateStatusPONotPick),driver);
+        Utility_Functions.xHoverElementClk(driver.findElement(ManifestsPage.updateStatusPONotPick), driver);
         //click(ManifestsPage.updateStatusPONotPick, "Click Not Picked Up");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.notPickedUpStatus, "Not Picked Up", "Verify the status: ");
@@ -561,13 +580,13 @@ public class Manifests extends ReusableLib {
      */
     public void closeManifest() {
         Utility_Functions.timeWait(2);
-        click(ManifestsPage.closeIcon,"Click CLose manifest icon");
-        commonObj.validateText(ManifestsPage.closeManifestMsg,"CLOSE MANIFEST","CLOSE MANIFEST popup window is present");
-        click(TruckPage.noButtonPopUp,"Click No button");
+        click(ManifestsPage.closeIcon, "Click CLose manifest icon");
+        commonObj.validateText(ManifestsPage.closeManifestMsg, "CLOSE MANIFEST", "CLOSE MANIFEST popup window is present");
+        click(TruckPage.noButtonPopUp, "Click No button");
         commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
-        click(ManifestsPage.closeIcon,"Click CLose manifest icon");
-        commonObj.validateText(ManifestsPage.closeManifestMsg,"CLOSE MANIFEST","CLOSE MANIFEST popup window is present");
-        click(TruckPage.yesButtonPopUp,"Click Yes button");
+        click(ManifestsPage.closeIcon, "Click CLose manifest icon");
+        commonObj.validateText(ManifestsPage.closeManifestMsg, "CLOSE MANIFEST", "CLOSE MANIFEST popup window is present");
+        click(TruckPage.yesButtonPopUp, "Click Yes button");
         commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
         commonObj.validateText(ManifestsPage.manStatus, "Closed", "Verify status: ");
     }
@@ -576,19 +595,19 @@ public class Manifests extends ReusableLib {
      * Keyword to verify delete Manifest
      */
     public void deleteManifest() {
-        String man=Utility_Functions.getText(driver,truckObj.getTruck("Manifest Number"));
-        click(truckObj.getTruck("Manifest Number"),"Click Manifest Number Hyper Link");
+        String man = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
+        click(truckObj.getTruck("Manifest Number"), "Click Manifest Number Hyper Link");
         Utility_Functions.timeWait(5);
-        commonObj.validateText(By.xpath("//h2[text()=' Manifest #: "+man+" ']"),"Manifest #: "+man+"","Manifest Number Screen Header: ");
-        click(ManifestsPage.deleteManifest,"Click Delete Manifest");
+        commonObj.validateText(By.xpath("//h2[text()=' Manifest #: " + man + " ']"), "Manifest #: " + man + "", "Manifest Number Screen Header: ");
+        click(ManifestsPage.deleteManifest, "Click Delete Manifest");
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
         click(driver.findElements(ManifestsPage.delButton).get(0), "Click No Button");
-        commonObj.validateText(By.xpath("//h2[text()=' Manifest #: "+man+" ']"),"Manifest #: "+man+"","Manifest Number Screen Header: ");
-        click(ManifestsPage.deleteManifest,"Click Delete Manifest");
+        commonObj.validateText(By.xpath("//h2[text()=' Manifest #: " + man + " ']"), "Manifest #: " + man + "", "Manifest Number Screen Header: ");
+        click(ManifestsPage.deleteManifest, "Click Delete Manifest");
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
         click(driver.findElements(ManifestsPage.delButton).get(1), "Click Yes Button");
         Utility_Functions.timeWait(3);
-        String exp = "Manifest #"+man+" successfully deleted.";
+        String exp = "Manifest #" + man + " successfully deleted.";
         commonObj.validateText(TruckPage.deletePopUp, exp, "Deleted Manifest Successful message is present");
     }
 
@@ -597,19 +616,19 @@ public class Manifests extends ReusableLib {
      */
     public void closeAllManifest() {
         Utility_Functions.timeWait(2);
-        if(Utility_Functions.xIsDisplayed(driver,ManifestsPage.closeIcon)) {
+        if (Utility_Functions.xIsDisplayed(driver, ManifestsPage.closeIcon)) {
             int size = driver.findElements(ManifestsPage.closeIcon).size();
             for (int i = 0; i < size; i++) {
                 Utility_Functions.timeWait(3);
-                click(ManifestsPage.closeIcon,"Click CLose manifest icon");
-                commonObj.validateText(ManifestsPage.closeManifestMsg,"CLOSE MANIFEST","CLOSE MANIFEST popup window is present");
+                click(ManifestsPage.closeIcon, "Click CLose manifest icon");
+                commonObj.validateText(ManifestsPage.closeManifestMsg, "CLOSE MANIFEST", "CLOSE MANIFEST popup window is present");
                 Utility_Functions.timeWait(2);
-                click(TruckPage.noButtonPopUp,"Click No button");
+                click(TruckPage.noButtonPopUp, "Click No button");
                 Utility_Functions.timeWait(2);
                 commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
-                click(ManifestsPage.closeIcon,"Click CLose manifest icon");
+                click(ManifestsPage.closeIcon, "Click CLose manifest icon");
                 Utility_Functions.timeWait(2);
-                click(TruckPage.yesButtonPopUp,"Click Yes button");
+                click(TruckPage.yesButtonPopUp, "Click Yes button");
                 commonObj.validateText(ManifestsPage.manifestListHeader, "Manifest List", "Manifest List Screen Header is present");
                 commonObj.validateText(ManifestsPage.closedStatus, "Closed", "Verify status: ");
             }
