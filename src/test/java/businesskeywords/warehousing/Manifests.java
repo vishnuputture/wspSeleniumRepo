@@ -416,7 +416,7 @@ public class Manifests extends ReusableLib {
                 Utility_Functions.timeWait(3);
                 click(driver.findElements(ManifestsPage.updateStatusDrop).get(i));
                 click(ManifestsPage.updateStatusSO, "Click Delivered");
-                Utility_Functions.timeWait(6);
+                Utility_Functions.timeWait(5);
             }
         }
     }
