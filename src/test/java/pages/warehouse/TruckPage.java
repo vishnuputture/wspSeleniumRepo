@@ -11,7 +11,7 @@ public class TruckPage {
     public static By menuIconTruck=By.xpath("//*[contains(@class,'menu-icon fa fa-truck')]");
     public static By subMenuTruck=By.xpath("//a[contains(text(),'Trucks')]");
     public static By deleteInProgress=By.xpath("//span[text()=' In Process ']/ancestor::td/preceding-sibling::td/a[contains(@aria-describedby,'tooltip')]");
-    public static By warningIcon=By.xpath("//i[@class='fa fa-clock-o win-status-warning']");
+    public static By manifestCount=By.xpath("//td/*[@class='ng-star-inserted']");
     public static By truckNameInput =By.id("truckName");
     public static By newTruckPlateExpInput =By.id("newTruckPlateExpiration");
     public static By licensePlateNumberInput =By.id("licensePlateNumber");

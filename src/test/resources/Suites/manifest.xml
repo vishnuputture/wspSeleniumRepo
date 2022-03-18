@@ -123,6 +123,7 @@
                 <methods>
                     <!-- ############ UI Of the page ############ -->
 
+                    <include name="Tc_DeleteManifestList"></include>
                     <include name="Tc_TruckUI"></include>
                     <include name="Tc_searchFiltersTruckUi"></include>
                     <include name="Tc_AddNewTruckScreenUI"></include>

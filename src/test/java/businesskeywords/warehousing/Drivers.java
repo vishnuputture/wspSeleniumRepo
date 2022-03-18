@@ -201,16 +201,12 @@ public class Drivers extends ReusableLib {
         sendKeys(DriversPage.username, genText(), "Entering username name");
         click(DriversPage.saveDriver, "Saving record");
         Utility_Functions.timeWait(3);
-        click(DriversPage.cdlSort);
-        Utility_Functions.timeWait(2);
         String actText = "Driver " + jsonData.getData("firstName") + " " + lastName + " (" + jsonData.getData("alias") + ") successfully created.";
         String expTest = Utility_Functions.getText(driver, By.xpath("//span[contains(text(),'" + jsonData.getData("firstName") + " " + lastName + "')]"));
         Utility_Functions.xAssertEquals(report, actText, expTest, "Driver successfully added pop up message");
         String actTx = "" + jsonData.getData("firstName") + " " + lastName + "";
         Utility_Functions.timeWait(3);
-        //String expTx = driver.findElement(By.xpath("//a[text()='" + jsonData.getData("firstName") + " " + lastName + "']")).getText();
         Utility_Functions.xUpdateJson("Driver", actTx);
-        //Utility_Functions.xAssertEquals(report, actTx, expTx, "Driver successfully added");
     }
 
     /**
@@ -257,7 +253,7 @@ public class Drivers extends ReusableLib {
      */
     public void navigateToUpdateDriverPage() {
         Utility_Functions.timeWait(3);
-        click(By.xpath("//td/a"), "CLick on Driver Name Hyper Link");
+        Utility_Functions.xClickHiddenElement(driver,By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(DriversPage.updateDriverHeader, "Update Driver", "Update Driver Page header is present");
     }

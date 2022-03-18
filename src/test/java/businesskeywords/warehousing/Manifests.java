@@ -402,23 +402,69 @@ public class Manifests extends ReusableLib {
         commonObj.validateText(ManifestsPage.manStatus, "Delivered", "Verify status: ");
     }
 
+    public void deleteMan() {
+        int size = driver.findElements(TruckPage.manifestCount).size();
+        String man = null;
+        String man1 = null;
+        for (int i = 1; i < size; ) {
+            man = Utility_Functions.getText(driver, By.xpath("(//span[contains(text(),'')]/ancestor::td/preceding-sibling::td/a)[" + i + "]"));
+            if (man.equals(man1)) {
+                i = i + 2;
+                if (i >= size) {
+                    break;
+                }
+                man = Utility_Functions.getText(driver, By.xpath("(//span[contains(text(),'')]/ancestor::td/preceding-sibling::td/a)[" + i + "]"));
+            }
+            man1 = man;
+            Utility_Functions.xClickHiddenElement(driver, By.xpath("//span[contains(text(),'')]/ancestor::td/preceding-sibling::td/a[contains(text(),'" + man + "')]"));
+            Utility_Functions.timeWait(5);
+            if (isDisplayed(ManifestsPage.deleteManifest)) {
+                click(ManifestsPage.deleteManifest, "Click Delete Manifest");
+                if (isDisplayed(TruckPage.deleteConfPopUp)) {
+                    commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
+                    click(driver.findElements(ManifestsPage.delButton).get(0), "Click No Button");
+                    commonObj.validateText(By.xpath("//h2[text()=' Manifest #: " + man + " ']"), "Manifest #: " + man + "", "Manifest Number Screen Header: ");
+                    click(ManifestsPage.deleteManifest, "Click Delete Manifest");
+                    commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
+                    click(driver.findElements(ManifestsPage.delButton).get(1), "Click Yes Button");
+                }
+                Utility_Functions.timeWait(3);
+                String exp = "Manifest #" + man + " successfully deleted.";
+                commonObj.validateElementExists(TruckPage.deletePopUp, exp);
+            }
+            driver.navigate().back();
+            Utility_Functions.timeWait(2);
+        }
+    }
+
     /**
      * Keyword to Delete Manifest
      */
     public void deleteManifestList() {
         int size1 = driver.findElements(TruckPage.deleteInProgress).size();
         for (int j = 0; j < size1; j++) {
-            click(TruckPage.deleteInProgress, "Click In progress Manifest");
+            Utility_Functions.xClickHiddenElement(driver, TruckPage.deleteInProgress);
             Utility_Functions.timeWait(3);
             int size = driver.findElements(ManifestsPage.updateStatusDrop).size();
             for (int i = 0; i < size; i++) {
                 Utility_Functions.xScrollIntoView(driver, ManifestsPage.updateStatusDrop);
                 Utility_Functions.timeWait(3);
-                click(driver.findElements(ManifestsPage.updateStatusDrop).get(i));
-                click(ManifestsPage.updateStatusSO, "Click Delivered");
+                try {
+                    Utility_Functions.xClickHiddenElement(driver, driver.findElements(ManifestsPage.updateStatusDrop).get(i));
+                } catch (Exception e) {
+                    Utility_Functions.xClickHiddenElement(driver, driver.findElements(ManifestsPage.updateStatusDrop).get(i + 1));
+                }
+                try {
+                    Utility_Functions.xClickHiddenElement(driver, ManifestsPage.updateStatusSO);
+                } catch (Exception e) {
+                    Utility_Functions.xClickHiddenElement(driver, ManifestsPage.updateStatusPOPick);
+                }
                 Utility_Functions.timeWait(5);
             }
+            driver.navigate().back();
+            Utility_Functions.timeWait(3);
         }
+        deleteMan();
     }
 
     /**
@@ -596,7 +642,7 @@ public class Manifests extends ReusableLib {
      */
     public void deleteManifest() {
         String man = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
-        click(truckObj.getTruck("Manifest Number"), "Click Manifest Number Hyper Link");
+        Utility_Functions.xClickHiddenElement(driver, By.xpath("//td/a"));
         Utility_Functions.timeWait(5);
         commonObj.validateText(By.xpath("//h2[text()=' Manifest #: " + man + " ']"), "Manifest #: " + man + "", "Manifest Number Screen Header: ");
         click(ManifestsPage.deleteManifest, "Click Delete Manifest");
