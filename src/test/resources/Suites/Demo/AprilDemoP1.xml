@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
-    <test name="Check">
+    <!--<test name="Check">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
-                    <!-- ############ UI Of the page ############ -->
+                    &lt;!&ndash; ############ UI Of the page ############ &ndash;&gt;
 
                     <include name="Tc_DeleteManifestList"></include>
                     <include name="Tc_CloseManifest"></include>
@@ -134,26 +134,26 @@
             </methods>
         </class>
         </classes>
-    </test>
+    </test>-->
 
     <test name="SanityCheck5">
         <classes>
             <class name="testcases.PO.Spo">
                 <methods>
-                    <include name="Tc_50_SuggestedPOUI"></include>
+                    <!--<include name="Tc_50_SuggestedPOUI"></include>
                     <include name="Tc_51_CreateNewWorksheetTemplateUI"></include>
                     <include name="Tc_52_VerifyCancelButtonCreateWSTemp"></include>
                     <include name="Tc_62_PaginationSPO"></include>
-                    <include name="Tc_66_CreateWS_MFPDVNPODiscount"></include>
-                    <include name="Tc_67_CreateWS_MFPDVNListPriceDiscount"></include>
-                    <include name="Tc_68_CreateWS_MFPDVNLastCostDiscount"></include>
                     <include name="Tc_69_VerifyWssCostDiscountFIndProduct"></include>
+                    <include name="Tc_66_CreateWS_MFPDVNPODiscount"></include>
+                    <include name="Tc_67_CreateWS_MFPDVNListPriceDiscount"></include>-->
+                    <include name="Tc_68_CreateWS_MFPDVNLastCostDiscount"></include>
                     <include name="Tc_VerifyCreateDuplicateWS"></include>
 
                     <include name="Tc_73_RefreshWorkSheet"></include>
                     <include name="Tc_74_DeleteSavedWorkSheet"></include>
                     <include name="Tc_86_verifySavedWorkSheetAvailablePopup"></include>
-                    <include name="Tc_87_VerifyAddItemsToWS"></include>
+                    <!--<include name="Tc_87_VerifyAddItemsToWS"></include>
                     <include name="Tc_88_AddItemToWSUI"></include>
                     <include name="Tc_89_PaginationAddItemToWSScreen"></include>
                     <include name="Tc_PageCountAddItemToWSPage"></include>
@@ -190,7 +190,7 @@
                     <include name="Tc_70_wsItemScreenUI"></include>
                     <include name="Tc_71_PaginationWsItemScreen"></include>
                     <include name="Tc_PageCountAddItemToWSScreen"></include>
-                    <include name="Tc_120_EditWSTrashIcon"></include>
+                    <include name="Tc_120_EditWSTrashIcon"></include>-->
                 </methods>
             </class>
         </classes>

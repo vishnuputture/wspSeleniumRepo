@@ -897,8 +897,11 @@ public class Spo extends ReusableLib {
 
     public void getMFVNPC() {
         sendKeys(worksheetInputFields("Vendor Code"), Utility_Functions.xGetJsonData("VendorCode"), "Enter Vendor Code");
+        Utility_Functions.timeWait(3);
         sendKeysAndTab(worksheetInputFields("Vendor Number"), Utility_Functions.xGetJsonData("VendorNumber"), "Enter Vendor Number");
+        Utility_Functions.timeWait(3);
         sendKeys(worksheetInputFields("Manufacturer Code"), Utility_Functions.xGetJsonData("ManufacturerCode"), "Enter Manufacturer code");
+        Utility_Functions.timeWait(4);
         String vend = driver.findElement(worksheetInputFields("Vendor Number")).getAttribute("value");
         Utility_Functions.xUpdateJson("VendorNoForHeader", vend);
         sendKeys(worksheetInputFields("Product Code"), Utility_Functions.xGetJsonData("ProductCode"), "Enter Product Code");

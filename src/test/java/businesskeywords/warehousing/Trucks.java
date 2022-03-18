@@ -342,7 +342,7 @@ public class Trucks extends ReusableLib {
      */
     public void navigateToUpdateTruckPage() {
         Utility_Functions.timeWait(3);
-        click(getTruck("Truck Name"), "CLick on Truck Name Hyper Link");
+        Utility_Functions.xClickHiddenElement(driver,By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
     }
