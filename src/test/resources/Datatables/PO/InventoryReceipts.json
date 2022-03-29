@@ -3,7 +3,7 @@
     {
       "Tc_902_InventoryReceiptUI":"launchApp,siteLogin,navigateToInventoryReceipt,inventoryReceiptUI,signOut",
       "Tc_CreatePoDirect":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
-      "Tc_903_PurchaseOrderInquiryHyperlink":"launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,signOut",
+      "Tc_903_PurchaseOrderInquiryHyperlink":"launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,exitInventoryReceipt,signOut",
       "Tc_904_PurchaseOrderNumberField":"launchApp,siteLogin,navigateToInventoryReceipt,poNoField,signOut",
       "Tc_897_OrderInUse":"launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,switchTab,launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,orderInUse,signOut,switchTabBack,exitIR,signOut",
       "Tc_905_QtyReceivedField":"launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,qtyReceivedField,signOut",
@@ -46,12 +46,12 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000920",
+      "SalesOrderNo":"000988",
       "QtyOrdered":"25",
       "VendorNumber":"000388",
       "CostOption":"1",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"031088"
+      "PONumber":"031214"
     },
     {
       "TC_ID":"Tc_905_QtyReceivedField",
@@ -94,12 +94,12 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000917",
+      "SalesOrderNo":"000986",
       "QtyOrdered":"25",
       "VendorNumber":"000388",
       "CostOption":"1",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"031084"
+      "PONumber":"031211"
     },
     {
       "TC_ID":"Tc_913_ValidatePreviousAndNextButtons",
@@ -111,7 +111,7 @@
     },
     {
       "TC_ID":"Tc_915_ValidateCancelPOButton",
-      "PONumber":"031085",
+      "PONumber":"031212",
       "InvalidPONumber":"000001",
       "itemNo":"DVT01714",
       "CostOption":"1",
@@ -126,11 +126,11 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000918",
+      "SalesOrderNo":"000987",
       "QtyOrdered":"1",
       "VendorNumber":"000388",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"031086",
+      "PONumber":"031213",
       "QtyReceived":"1",
       "Qty":"4",
       "Action":"1"
@@ -143,11 +143,11 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000919",
+      "SalesOrderNo":"000984",
       "QtyOrdered":"25",
       "VendorNumber":"000388",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"031087",
+      "PONumber":"031209",
       "QtyReceived":"1",
       "Action":"1",
       "Status":"Closed"
