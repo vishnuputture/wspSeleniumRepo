@@ -75,7 +75,8 @@ public class POReceiptCorrects extends ReusableLib {
         commonObj.validateElementExists(InventoryReceiptPage.exitBtn, "Exit button is present");
         commonObj.validateElementExists(InventoryReceiptPage.cancelPO, "Cancel Po Button is present");
         commonObj.validateElementExists(InventoryReceiptPage.processBtn, "Process Button is present");
-        click(WorkWithSalesQuotesPage.saleQExtBtn, "Click Exit Button");
+        //click(WorkWithSalesQuotesPage.saleQExtBtn, "Click Exit Button");
+        Utility_Functions.actionKey(Keys.F3, driver);
     }
 
     public void navigateToPoInqPage() {
@@ -93,8 +94,9 @@ public class POReceiptCorrects extends ReusableLib {
     }
 
     public void exitInventoryReceipt() {
-        Utility_Functions.xScrollIntoView(driver, WorkWithSalesQuotesPage.saleQExtBtn);
-        click(WorkWithSalesQuotesPage.saleQExtBtn, "Click Exit Button");
+        //Utility_Functions.xScrollIntoView(driver, WorkWithSalesQuotesPage.saleQExtBtn);
+        //click(WorkWithSalesQuotesPage.saleQExtBtn, "Click Exit Button");
+        Utility_Functions.actionKey(Keys.F3, driver);
     }
 
     public void exitInventoryReceiptPage() {

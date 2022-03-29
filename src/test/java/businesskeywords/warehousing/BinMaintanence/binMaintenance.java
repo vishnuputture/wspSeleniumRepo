@@ -1673,8 +1673,11 @@ public class binMaintenance extends ReusableLib {
     public void verifyUIofItemsLabelsPopup() {
         click(BinMaintenancePage.itemLabelsTabPopup, "Click on [Item Labels] tab button");
         waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        Utility_Functions.timeWait(1);
         clickAllItemsAndVrfyItsQtyInPrintItemLabelsPopup("1");
+        Utility_Functions.timeWait(1);
         clickAllItemsAndVrfyItsQtyInPrintItemLabelsPopup("");
+        Utility_Functions.timeWait(1);
         enableDisableSelectAllItemsAndVrfyItemsQty("No");
         enableDisableSelectAllItemsAndVrfyItemsQty("Yes");
     }
@@ -1686,7 +1689,7 @@ public class binMaintenance extends ReusableLib {
         List<WebElement> lstItems = getListElement(BinMaintenancePage.lstBinItemLabelsPopup);
         for (WebElement element : lstItems) {
             click(element, "Click on item no [" + lstItems.indexOf(element) + 1 + "] from list of items to print labels");
-            Utility_Functions.timeWait(1);
+            Utility_Functions.timeWait(2);
         }
         List<WebElement> lstQtyTbx = getListElement(BinMaintenancePage.lstQtyItemLabelsPopup);
         validateListValue(lstQtyTbx, qty);

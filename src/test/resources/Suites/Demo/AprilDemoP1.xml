@@ -121,21 +121,22 @@
         <classes>
             <class name="testcases.PO.InventoryReceipts">
                 <methods>
-                    <include name="Tc_902_InventoryReceiptUI"/>
-                    <include name="Tc_CreatePoDirect"/>
-                    <include name="Tc_903_PurchaseOrderInquiryHyperlink"/>
-                    <include name="Tc_904_PurchaseOrderNumberField"/>
-                    <include name="Tc_897_OrderInUse"/>
-                    <include name="Tc_905_QtyReceivedField"/>
-                    <include name="Tc_906_changeUnitCost"/>
-                    <include name="Tc_907_VerifyUnitCostField"/>
-                    <include name="Tc_908_verifyPONumber"/>
-                    <include name="Tc_909_ValidateEnableDisableCostCheckbox"/>
-                    <include name="Tc_910_ValidateRelatedSOHyperlink"/>
-                    <include name="Tc_913_ValidatePreviousAndNextButtons"/>
-                    <include name="Tc_915_ValidateCancelPOButton"/>
-                    <include name="Tc_924_VerifyFunctionalityOfPartialReceivingPO"/>
-                    <include name="Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus"/>
+                    <include name="Tc_902_InventoryReceiptUI"></include>
+                    <include name="Tc_CreatePoDirect"></include>
+                    <include name="Tc_903_PurchaseOrderInquiryHyperlink"></include>
+                    <include name="Tc_904_PurchaseOrderNumberField"></include>
+                    <include name="Tc_906_changeUnitCost"></include>
+                    <include name="Tc_907_VerifyUnitCostField"></include>
+                    <include name="Tc_908_verifyPONumber"></include>
+                    <include name="Tc_909_ValidateEnableDisableCostCheckbox"></include>
+                    <include name="Tc_910_ValidateRelatedSOHyperlink"></include>
+                    <include name="Tc_913_ValidatePreviousAndNextButtons"></include>
+                    <include name="Tc_915_ValidateCancelPOButton"></include>
+                    <include name="Tc_924_VerifyFunctionalityOfPartialReceivingPO"></include>
+                    <include name="Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus"></include>
+                    <include name="Tc_905_QtyReceivedField"></include>
+                    <include name="Tc_CreatePoDirect"></include>
+                    <include name="Tc_897_OrderInUse"></include>
                 </methods>
             </class>
         </classes>
