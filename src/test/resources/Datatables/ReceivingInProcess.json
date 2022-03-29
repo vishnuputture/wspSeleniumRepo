@@ -1,0 +1,39 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_957_SearchFilterUI": "navigateToReceivingInProcess,selectCompany,searchFilterUI",
+      "Tc_958_SearchFilterFunctionality": "navigateToReceivingInProcess,selectCompany,searchFilterFunctionality",
+      "Tc_956_clearAllApplyFilterFunctionality": "navigateToReceivingInProcess,selectCompany,applyClearAllFilterBtn",
+      "Tc_946_verifyPurchaseOrderInputField": "navigateToReceivingInProcess,selectCompany,verifyPurchaseOrderInputField",
+      "Tc_947_verifyUserIdInputField": "navigateToReceivingInProcess,selectCompany,applyClearAllFilterBtn",
+      "Tc_948_verifyVendorInputField": "navigateToReceivingInProcess,selectCompany,applyClearAllFilterBtn"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_957_SearchFilterUI",
+      "Title": "UI of Search Filter"
+    },
+    {
+      "TC_ID": "Tc_958_SearchFilterFunctionality",
+      "Title": "Verify Search Filter Functionality",
+      "PO":"03"
+    },
+    {
+      "TC_ID": "Tc_956_clearAllApplyFilterFunctionality",
+      "Title": "Verify clear All Apply Filter Functionality"
+    },
+    {
+      "TC_ID": "Tc_946_verifyPurchaseOrderInputField",
+      "Title": "Verify Purchase Order Input Field"
+    },
+    {
+      "TC_ID": "Tc_947_verifyUserIdInputField",
+      "Title": "Verify User Id Input Field"
+    },
+    {
+      "TC_ID": "Tc_948_verifyVendorInputField",
+      "Title": "Verify Vendor Input Field"
+    }
+  ]
+}
