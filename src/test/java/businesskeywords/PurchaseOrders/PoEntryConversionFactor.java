@@ -8,6 +8,7 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import pages.PurchaseOrders.InventoryReceiptsPage;
 import pages.PurchaseOrders.PoEntryConversionFactorPage;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.PurchaseOrders.PurchaseOrderEntryPage;
@@ -172,6 +173,11 @@ public class PoEntryConversionFactor extends ReusableLib {
         findOrderNumber(orderType);
         verifyAction(action);
         verifyTypeShipment(typeShipment);
+
+        String text = getAttribute(PurchaseOrderEntryPage.enterFreightCharges, "value");
+        if (text.isEmpty()){
+            sendKeys(PurchaseOrderEntryPage.enterFreightCharges,"FFA","Entered FFA Frieght Code");
+        }
         click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
     }
 

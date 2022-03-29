@@ -41,7 +41,7 @@ public class inquiryBuyer extends ReusableLib {
     public void selectRandomStock(){
         click(BuyersInquiryPage.btnStockNo, "Click on [Stock No] button");
         String itemNo = commonObj.selectRandomItemNumber();
-        jsonData.putData("ItemNo", itemNo);
+        jsonData.putData("itemNo", itemNo);
         String itemNoActual = getAttribute(BuyersInquiryPage.tbxStockNo, "value");
         Utility_Functions.xAssertEquals(report, itemNo, itemNoActual, "Validating selected item no is displayed");
     }
@@ -50,7 +50,7 @@ public class inquiryBuyer extends ReusableLib {
      * Keyword to select desired Stock No. in Buyer's Inquiry Page
      */
     public void selectStock(){
-        String itemNo = jsonData.getData("ItemNo");
+        String itemNo = jsonData.getData("itemNo");
         sendKeysAndEnter(BuyersInquiryPage.tbxStockNo, itemNo,"Enter Stock No");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }

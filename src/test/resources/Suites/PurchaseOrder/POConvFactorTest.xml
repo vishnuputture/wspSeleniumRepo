@@ -14,7 +14,6 @@
 					<include name="Tc_256_VerifyLineItemAfterProcessingPO"></include>
 					<include name="Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO"></include>
 					<include name="Tc_258_VerifyAddingDirectPOToRelatedSO"></include>
-
 				</methods>
 			</class>
 		</classes>
