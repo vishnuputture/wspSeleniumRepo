@@ -68,24 +68,24 @@
     },
     {
       "TC_ID":"Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry",
-      "itemNo":"DVT01714",
-      "WithReceipts":"6",
-      "OnPO":"6",
-      "AvailableToSell":"",
+      "itemNo":"SUPCD455X370",
+      "WithReceipts":"3",
+      "OnPO":"2",
+      "AvailableToSell":"1",
       "CostOption":"1",
       "QtyOrdered":"2",
       "ConvFactor":"1.000"
     },
     {
       "TC_ID":"Tc_253_VerifyItemDetailsAfterProcessingPO",
-      "itemNo":"DVT01714",
-      "WithReceipts":"33",
-      "OnPO":"20",
-      "AvailableToSell":"13",
+      "itemNo":"BTC8733941934",
+      "WithReceipts":"54",
+      "OnPO":"54",
+      "AvailableToSell":"",
       "CostOption":"1",
       "QtyOrdered":"2",
       "ConvFactor":"1.000",
-      "PONumber":"030937"
+      "PONumber":"031118"
     },
     {
       "TC_ID":"Tc_256_VerifyLineItemAfterProcessingPO",
@@ -96,7 +96,7 @@
       "CostOption":"1",
       "QtyOrdered":"2",
       "ConvFactor":"1.000",
-      "PONumber":"030938"
+      "PONumber":"031119"
     },
     {
       "TC_ID":"Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO",
@@ -106,7 +106,7 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000778",
+      "SalesOrderNo":"000926",
       "QtyOrdered":"25",
       "CostOption":"1"
     },
@@ -118,12 +118,12 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000762",
+      "SalesOrderNo":"000927",
       "QtyOrdered":"25",
       "VendorNumber":"000388",
       "CostOption":"1",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"",
+      "PONumber":"031121",
       "Action":"I",
       "ActionExpected":"C",
       "TypeShipmentExpected":"D"
