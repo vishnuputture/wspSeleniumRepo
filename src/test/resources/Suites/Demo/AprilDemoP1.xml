@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
 
-    <test name="MakePayments">
+<!--    <test name="MakePayments">
         <classes>
             <class name="testcases.makePayments.makePayments">
                 <methods>
@@ -46,6 +46,112 @@
                     <include name="Tc_164_FixedPaymentByCC"></include>
                     <include name="Tc_165_ValidateFixedPaymentRecordBA"></include>
                     <include name="Tc_166_ValidateFixedPaymentRecordCC"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>-->
+
+    <test name="SanityCheck">
+        <classes>
+            <class name="testcases.BinMaintenance">
+                <methods>
+                    <include name="Tc_748_ItemBinMaintenanceUI"/>
+                    <include name="Tc_749_MainMenuOptions"/>
+                    <include name="Tc_753_verifyApplyClearAllFilter"/>
+                    <include name="Tc_758_verifyFilterCheckBox"/>
+                    <include name="Tc_759_verifyContainsCheckBox"/>
+                    <include name="Tc_761_verifySuggestedMatchesPopUp"/>
+                    <include name="Tc_763_verifyItemNoNegValue"/>
+                    <include name="Tc_764_verifyItemDescriptionFilter"/>
+                    <include name="Tc_765_verifyItemDescriptionField"/>
+                    <include name="Tc_750_VerifyUIItemNumbersAreAvailable"/>
+                    <include name="Tc_787_verifyOnHand"/>
+                    <include name="Tc_790_verifyClearAllButton"/>
+                    <include name="Tc_791_verifyPageCountItemMaintenance"/>
+                    <include name="Tc_793_verifyPaginationItemMaintenance"/>
+                    <include name="Tc_795_verifySelectAllCheckBox"/>
+                    <include name="Tc_801_verifyLabelButton"/>
+                    <include name="Tc_805_verifyItemDetailsMaster"/>
+                    <include name="Tc_808_verifyItemDetailsUI"/>
+                    <include name="Tc_809_verifyPaginationItemDetails"/>
+                    <include name="Tc_810_verifyPageCountItemDetails"/>
+                    <include name="Tc_811_verifySelectDeselectItem"/>
+                    <include name="Tc_812_verifySecondaryOptionsBinType"/>
+                    <include name="Tc_813_verifyUpdateBinType"/>
+                    <include name="Tc_814_verifyBinItemDeleteIcon"/>
+                    <include name="Tc_815_verifyBinItemEditIcon"/>
+                    <include name="Tc_819_verifyBinMinMax"/>
+                    <include name="Tc_824_verifyEditBinPopUp"/>
+                    <include name="Tc_827_verifyCreateBinButton"/>
+                    <include name="Tc_831_verifyCreateDuplicateBin"/>
+                    <include name="Tc_836_verifyAddBinButton"/>
+                    <include name="Tc_837_verifyDuplicateAddBin"/>
+                    <include name="Tc_857_ItemBinLedgerPageUI"/>
+                    <include name="Tc_858_verifyZoneUI"/>
+                    <include name="Tc_860_verifyApplyClearFilter"/>
+                    <include name="Tc_861_verifyItemNumberField"/>
+                    <include name="Tc_862_verifyNegItemNumberField"/>
+                    <include name="Tc_863_verifyBinLocation"/>
+                    <include name="Tc_864_verifyNewZone"/>
+                    <include name="Tc_865_verifyDuplicateZone"/>
+                    <include name="Tc_866_verifyEditZone"/>
+                    <include name="Tc_868_verifyPickSequence"/>
+                    <include name="Tc_869_verifyDeleteZOne"/>
+                    <include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"/>
+                    <include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"/>
+                    <include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"/>
+                    <include name="Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable"/>
+                    <include name="Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable"/>
+                    <include name="Tc_766_verifyUIOfCreateNewBinPopup"/>
+                    <include name="Tc_767_verifyCreateNewBinWithConditionGood"/>
+                    <include name="Tc_768_verifyCreateNewBinWithConditionDamaged"/>
+                    <include name="Tc_769_verifyCreateNewBinWithConditionDefective"/>
+                    <include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"/>
+                    <include name="Tc_780_verifyEditBinsButtonFunctionality"/>
+                    <include name="Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins"/>
+                    <include name="Tc_784_verifyBinWithItemsCannotBeDeleted"/>
+                    <include name="Tc_785_verifyBinWithoutItemsCanBeDeleted"/>
+                    <include name="Tc_786_verifyPrintBinLabelsFunctionality"/>
+                    <include name="Tc_789_verifyPrintBinItemsLabelFunctionality"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="InventoryReceipts">
+        <classes>
+            <class name="testcases.PO.InventoryReceipts">
+                <methods>
+                    <include name="Tc_902_InventoryReceiptUI"/>
+                    <include name="Tc_CreatePoDirect"/>
+                    <include name="Tc_903_PurchaseOrderInquiryHyperlink"/>
+                    <include name="Tc_904_PurchaseOrderNumberField"/>
+                    <include name="Tc_897_OrderInUse"/>
+                    <include name="Tc_905_QtyReceivedField"/>
+                    <include name="Tc_906_changeUnitCost"/>
+                    <include name="Tc_907_VerifyUnitCostField"/>
+                    <include name="Tc_908_verifyPONumber"/>
+                    <include name="Tc_909_ValidateEnableDisableCostCheckbox"/>
+                    <include name="Tc_910_ValidateRelatedSOHyperlink"/>
+                    <include name="Tc_913_ValidatePreviousAndNextButtons"/>
+                    <include name="Tc_915_ValidateCancelPOButton"/>
+                    <include name="Tc_924_VerifyFunctionalityOfPartialReceivingPO"/>
+                    <include name="Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="PurchaseOrderConversionFactors">
+        <classes>
+            <class name="testcases.PO.PoConversionFactor">
+                <methods>
+                    <include name="Tc_249_EditItemListPriceAndVerifyInPODetailsPage"/>
+                    <include name="Tc_250_EditItemPOPriceAndVerifyInPODetailsPage"/>
+                    <include name="Tc_251_VerifyErrorWhileAddingItemToDirectPO"/>
+                    <include name="Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry"/>
+                    <include name="Tc_253_VerifyItemDetailsAfterProcessingPO"/>
+                    <include name="Tc_256_VerifyLineItemAfterProcessingPO"/>
+                    <include name="Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO"/>
+                    <include name="Tc_258_VerifyAddingDirectPOToRelatedSO"/>
                 </methods>
             </class>
         </classes>
