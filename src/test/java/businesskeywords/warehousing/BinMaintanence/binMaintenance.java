@@ -276,6 +276,7 @@ public class binMaintenance extends ReusableLib {
         String itemNumber = jsonData.getData("itemNo");
         sendKeys(BinMaintenancePage.itemNumber, itemNumber, "Enter " + itemNumber + " into Item number text field");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(4);
         click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         click(BinMaintenancePage.itemNumberContains, "Enable item Number Contains check box");

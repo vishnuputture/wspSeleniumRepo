@@ -2,7 +2,94 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
 
-<!--    <test name="MakePayments">
+
+    <test name="Manifest1">
+        <classes>
+            <class name="testcases.Warehouse">
+                <methods>
+                    <!-- ############ UI Of the page ############ -->
+
+                    <include name="Tc_DeleteManifestList"></include>
+                    <include name="Tc_CloseManifest"></include>
+                    <include name="Tc_TruckUI"></include>
+                    <include name="Tc_searchFiltersTruckUi"></include>
+                    <include name="Tc_AddNewTruckScreenUI"></include>
+                    <include name="Tc_UpdateTruckUI"></include>
+                    <include name="Tc_DriversUI"></include>
+                    <include name="Tc_209_AddNewDriverScreenUI"></include>
+                    <include name="Tc_UpdateDriverUI"></include>
+                    <include name="Tc_TrucksHelpIcon"></include>
+                    <include name="Tc_TrucksPagination"></include>
+                    <include name="Tc_TrucksPageCount"></include>
+                    <include name="Tc_197_DriversHelpIcon"></include>
+                    <include name="Tc_198_DriversPagination"></include>
+                    <include name="Tc_200_DriversPageCount"></include>
+                    <include name="Tc_AddTruck"></include>
+                    <include name="Tc_AddNewDriver"></include>
+                    <include name="Tc_CreateManifestPO"></include>
+                    <include name="Tc_DeleteManifest"></include>
+                    <include name="Tc_DeleteTruck"></include>
+                    <include name="Tc_DeleteDriver"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Manifest2">
+        <classes>
+            <class name="testcases.Warehouse">
+                <methods>
+                    <include name="Tc_AddTruck"></include>
+                    <include name="Tc_AddNewDriver"></include>
+                    <include name="Tc_CreateSalesOrderWISE"></include>
+                    <include name="TC_243_CreateManifest"></include>
+                    <include name="Tc_ManifestListUI"></include>
+                    <include name="Tc_240_CreateManifestUI"></include>
+                    <include name="Tc_NotDeliveredOrdersUI"></include>
+                    <include name="Tc_DeliveredOrdersUI"></include>
+                    <include name="Tc_DeliveredOrdersSearchFilterUI"></include>
+                    <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
+                    <include name="TC_295_ManifestOrderUI"></include>
+                    <include name="Tc_235_ManifestListHelpIcon"></include>
+                    <include name="Tc_236_ManifestListPagination"></include>
+                    <include name="Tc_238_ManifestListPageCount"></include>
+                    <include name="Tc_241_collapseExpandSession"></include>
+                    <include name="Tc_OrderNumberSO_UI"></include>
+                    <include name="TC_SOUpdateStatusDelivered"></include>
+                    <include name="Tc_VerifyDeliveredOrders"></include>
+                    <include name="Tc_DeleteTruck"></include>
+                    <include name="Tc_DeleteDriver"></include>
+                    <include name="TC_SOUpdateStatusNotDelivered"></include>
+                    <include name="Tc_VerifyNotDeliveredOrders"></include>
+                    <include name="Tc_CreateManifestNotDeliveredOrd"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Manifest3">
+        <classes>
+            <class name="testcases.Warehouse">
+                <methods>
+                    <include name="Tc_CreateSalesOrderWISE"></include>
+                    <include name="TC_243_CreateManifest"></include>
+                    <include name="TC_SOUpdateStatusNotDelivered"></include>
+                    <include name="Tc_AddToManifestNotDelOrd"></include>
+                    <include name="Tc_CreateManifestPO"></include>
+                    <include name="Tc_OrderNumberPO_UI"></include>
+                    <include name="TC_POUpdateStatus"></include>
+                    <include name="TC_244_CreateManifestMultipleShipments"></include>
+                    <include name="Tc_InProgressStatus"></include>
+                    <include name="TC_258_ManifestSearchFilterUI"></include>
+                    <include name="TC_297_SaveNoteExpandCollapse"></include>
+                    <include name="Tc_UpdateTruck"></include>
+                    <include name="Tc_UpdateDriver"></include>
+                    <include name="Tc_DeleteManifestList"></include>
+                    <include name="Tc_CloseManifest"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="CheckMakePayments">
         <classes>
             <class name="testcases.makePayments.makePayments">
                 <methods>
@@ -49,9 +136,9 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
 
-    <test name="SanityCheck">
+    <test name="BinMaintenance">
         <classes>
             <class name="testcases.BinMaintenance">
                 <methods>
@@ -158,4 +245,95 @@
         </classes>
     </test>
 
+    <test name="SanityCheck3">
+        <classes>
+            <class name="testcases.PO.Spo">
+                <methods>
+                    <include name="Tc_50_SuggestedPOUI"></include>
+                    <include name="Tc_51_CreateNewWorksheetTemplateUI"></include>
+                    <include name="Tc_52_VerifyCancelButtonCreateWSTemp"></include>
+                    <include name="Tc_62_PaginationSPO"></include>
+                    <include name="Tc_69_VerifyWssCostDiscountFIndProduct"></include>
+                    <include name="Tc_66_CreateWS_MFPDVNPODiscount"></include>
+                    <include name="Tc_67_CreateWS_MFPDVNListPriceDiscount"></include>
+                    <include name="Tc_68_CreateWS_MFPDVNLastCostDiscount"></include>
+                    <include name="Tc_VerifyCreateDuplicateWS"></include>
+
+                    <include name="Tc_73_RefreshWorkSheet"></include>
+                    <include name="Tc_74_DeleteSavedWorkSheet"></include>
+                    <include name="Tc_86_verifySavedWorkSheetAvailablePopup"></include>
+                    <include name="Tc_87_VerifyAddItemsToWS"></include>
+                    <include name="Tc_88_AddItemToWSUI"></include>
+                    <include name="Tc_89_PaginationAddItemToWSScreen"></include>
+                    <include name="Tc_PageCountAddItemToWSPage"></include>
+                    <include name="Tc_102_VerifyEditWSTempUI"></include>
+                    <include name="Tc_106_WSCalculationSection"></include>
+
+                    <include name="Tc_110_PaginationWSDetailsPage"></include>
+                    <include name="Tc_PageCountWSDetailsPage"></include>
+                    <include name="Tc_116_VerifyAssignedUserCanBeChanged"></include>
+                    <include name="Tc_117_VerifySalesOptionEditable"></include>
+                    <include name="Tc_118_DayToRunSection"></include>
+                    <include name="Tc_121_SaveWsButton"></include>
+                    <include name="Tc_50_SuggestedPOUI"></include>
+                    <include name="Tc_129_VerifyOrderWeightTotal"></include>
+                    <include name="Tc_131_VerifyAddDuplicateItemToWS"></include>
+                    <include name="Tc_133_VerifySaveWorksheetBtn"></include>
+
+                    <include name="Tc_138_CalculationMethodOptions"></include>
+                    <include name="Tc_139_VerifyConvertToPOOrderQuantitiesZero"></include>
+                    <include name="Tc_140_VerifyTotalOrderExceedForConvertPO"></include>
+                    <include name="Tc_141_VerifyOrderMinimum"></include>
+                    <include name="Tc_144_VerifyUnitTotalWeight"></include>
+                    <include name="Tc_145_VerifyTotalCost"></include>
+                    <include name="Tc_146_VerifyNotAStandardPackage"></include>
+                    <include name="Tc_VerifyTrashIconEditWSTemp"></include>
+                    <include name="Tc_148_searchFilterUI"></include>
+                    <include name="Tc_156_CreateWSMultiplier"></include>
+
+                    <include name="Tc_164_verifyDiscountMultiplier"></include>
+                    <include name="Tc_166_VerifyErrorMsgAgainstFields"></include>
+                    <include name="Tc_175_CreateWS_MFPDVNListPriceMultiplier"></include>
+                    <include name="Tc_176_CreateWS_MFPDVNPOMultiplier"></include>
+                     <include name="Tc_VerifyWSItemsSearchFilter"></include>
+                     <include name="Tc_70_wsItemScreenUI"></include>
+                     <include name="Tc_71_PaginationWsItemScreen"></include>
+                    <include name="Tc_PageCountAddItemToWSScreen"></include>
+                    <include name="Tc_177_CreateWS_MFPDVNLastCostMultiplier"></include>
+                    <include name="Tc_120_EditWSTrashIcon"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="SPAScreenVerification">
+        <classes>
+            <class name="testcases.Pricing.SPA" >
+                <methods>
+                    <include name="Tc_161_VerifySPAScreenHeader"></include>
+                    <include name="Tc_166_VerifySPAScreenInformation"></include>
+
+                    <include name="Tc_311_VerifyAddCustomersToGroupName"></include>
+                    <include name="Tc_315_VerifyEditCustomerGroup"></include>
+                    <include name="Tc_316_VerifyDisplayCustomer"></include>
+                    <include name="Tc_317_VerifyDeleteGroupName"></include>
+                    <include name="Tc_318_VerifyCustomerGroupSorting"></include>
+                    <include name="Tc_319_VerifyDeleteMultipleGroupName"></include>
+                    <include name="Tc_323_VerifySPAHideShowExpiredRecords"></include>
+                    <include name="Tc_322_VerifySPAAddRecords"></include>
+                    <include name="Tc_337_VerifySPASearchRecords"></include>
+                    <include name="Tc_326_VerifySPARecordDeletion"></include>
+
+                    <include name="Tc_324_VerifySortingContract"></include>
+                    <include name="Tc_325_VerifyEditContract"></include>
+                    <include name="Tc_327_VerifyAssignMFPDCode"></include>
+                    <include name="Tc_328_VerifyCopyContract"></include>
+                    <include name="Tc_331_VerifyAssignIndividualItem"></include>
+                    <include name="Tc_332_VerifyDisplayContractDetails"></include>
+                    <include name="Tc_334_VerifyUpdateCost"></include>
+                    <include name="Tc_336_VerifyLoadPriceSheet"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

@@ -26,8 +26,8 @@ public class SpoPage extends ReusableLib {
     public static By onePage=By.xpath("//nav[@id='suggestedOrderLanderPagination1']//child::span[text()='of 1']");
     public static By worksheetCount=By.xpath("//a[@class='header-name-link']");
     public static By disClearAllFilter=By.xpath("//button[contains(text(),'Clear All Filters') and @disabled]");
-    public static By newWorksheetBtn=By.xpath("//span[text()='New Worksheet']");
-    public static By unitCostField=By.xpath("//input[@class='form-control text-right']");
+    public static By newWorksheetBtn=By.id("new-worksheet-button");
+    public static By unitCostField=By.xpath("//input[contains(@class,'form-control text-right')]");
     public static By dayOfTheWeek=By.xpath("//label[text()='Day of the Week']/ancestor::div/descendant::div[contains(@class,'multiselect')]");
     public static By dayCheckBox=By.xpath("//span[@class='p-checkbox-icon pi pi-check']");
     public static By popUp=By.xpath("//div[contains(@class,'p-toast-summary')]");
@@ -138,5 +138,5 @@ public class SpoPage extends ReusableLib {
     public static By noResultFound=By.xpath("//td[text()=' No Results Found ']");
     public static By getPD=By.xpath("//p-autocomplete[contains(@id,'pd-filter-')]/descendant::input");
     public static By getVN=By.xpath("//p-autocomplete[contains(@id,'vn-filter-0)']/descendant::input");
-    public static By getMF=By.xpath("//span[@triggers='hover']");
+    public static By getMF=By.xpath("//p-autocomplete[contains(@id,'mf-filter-')]/descendant::input");
 }

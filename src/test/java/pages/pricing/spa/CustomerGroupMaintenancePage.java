@@ -16,8 +16,8 @@ public class CustomerGroupMaintenancePage extends ReusableLib {
     public static By secCust = By.id("I_13_3");
     public static By thrdCust = By.id("I_14_3");
     public static By forCust = By.id("I_15_3");
-    public static By firCustNo = By.id("D_12_6");
-    public static By secCustNo = By.id("D_13_6");
+    public static By firCustNo = By.id("D_12_8");
+    public static By secCustNo = By.id("D_13_8");
     public static By forCustNo = By.id("D_15_6");
     public static By selectDeSel = By.id("btnCF05");
     public static By sort = By.id("btnCF10");
@@ -36,7 +36,7 @@ public class CustomerGroupMaintenancePage extends ReusableLib {
     public static By upBtn = By.id("up_button");
     public static By bottomPage = By.id("D_21_68");
     public static By customerName = By.id("D_5_23");
-    public static By groupOptField = By.xpath("//input[contains(@id,'I')]");
+    public static By groupOptField = By.xpath("//input[contains(@id,'I_') and @maxlength='1']");
     public static By getGroupName = By.xpath("//input[contains(@id,'I')]/following::div[@class='A20']");
 
 }
