@@ -137,7 +137,11 @@ public class CycleCostAdjust extends ReusableLib {
         int num = Utility_Functions.genRandNum(99);
         String noSpaceStr = selectQuantity("" + num + "");
         Utility_Functions.timeWait(5);
-        int onH = Integer.parseInt(noSpaceStr);
+
+        int onH = 0;
+        if(!noSpaceStr.isEmpty())
+            onH = Integer.parseInt(noSpaceStr);
+
         int res = num - onH;
         System.out.println("res: " + res);
         int qnt = Integer.parseInt(driver.findElement(CostAdjustmentPage.quantity).getText());
@@ -270,14 +274,16 @@ public class CycleCostAdjust extends ReusableLib {
          */
         public String getAmount () {
         String fAmount = driver.findElement(CostAdjustmentPage.firRowAmt).getText();
+        String fAmountxp = fAmount.replaceAll(",", "");
         String seAmount = driver.findElement(CostAdjustmentPage.secRowAmt).getText();
-        System.out.println("fAmount: " + fAmount);
-        System.out.println("seAmount: " + seAmount);
+        String seAmountxp = seAmount.replaceAll(",", "");
+        System.out.println("fAmount: " + fAmountxp);
+        System.out.println("seAmount: " + seAmountxp);
 
-        double d = Double.parseDouble(fAmount);
+        double d = Double.parseDouble(fAmountxp);
         System.out.println(d);
 
-        double d1 = Double.parseDouble(seAmount);
+        double d1 = Double.parseDouble(seAmountxp);
         System.out.println(d1);
 
         double amt = d + d1;
