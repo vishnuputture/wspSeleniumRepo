@@ -28,7 +28,7 @@
                     <include name="Tc_102_VerifyEditWSTempUI"></include>
                     <include name="Tc_106_WSCalculationSection"></include>
 
-                   <!--<include name="Tc_110_PaginationWSDetailsPage"></include>
+                   <include name="Tc_110_PaginationWSDetailsPage"></include>
                     <include name="Tc_PageCountWSDetailsPage"></include>
                     <include name="Tc_116_VerifyAssignedUserCanBeChanged"></include>
                     <include name="Tc_117_VerifySalesOptionEditable"></include>
@@ -36,9 +36,9 @@
                     <include name="Tc_121_SaveWsButton"></include>
                     <include name="Tc_129_VerifyOrderWeightTotal"></include>
                     <include name="Tc_131_VerifyAddDuplicateItemToWS"></include>
-                    <include name="Tc_133_VerifySaveWorksheetBtn"></include>-->
+                    <include name="Tc_133_VerifySaveWorksheetBtn"></include>
 
-                    <!--<include name="Tc_138_CalculationMethodOptions"></include>
+                    <include name="Tc_138_CalculationMethodOptions"></include>
                    <include name="Tc_139_VerifyConvertToPOOrderQuantitiesZero"></include>
                    <include name="Tc_140_VerifyTotalOrderExceedForConvertPO"></include>
                    <include name="Tc_141_VerifyOrderMinimum"></include>
@@ -55,7 +55,7 @@
                    <include name="Tc_176_CreateWS_MFPDVNPOMultiplier"></include>
                    <include name="Tc_177_CreateWS_MFPDVNLastCostMultiplier"></include>
                    <include name="Tc_VerifyWSItemsSearchFilter"></include>
-                   <include name="Tc_120_EditWSTrashIcon"></include>-->
+                   <include name="Tc_120_EditWSTrashIcon"></include>
                 </methods>
             </class>
         </classes>

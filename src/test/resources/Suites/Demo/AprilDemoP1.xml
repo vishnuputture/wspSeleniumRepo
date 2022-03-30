@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
-    <!--<test name="Check">
+    <test name="Check">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
-                    &lt;!&ndash; ############ UI Of the page ############ &ndash;&gt;
+                    <!-- ############ UI Of the page ############ -->
 
                     <include name="Tc_DeleteManifestList"></include>
                     <include name="Tc_CloseManifest"></include>
@@ -86,8 +86,8 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
-    <!--<test name="CheckMakePayments">
+    </test>
+    <test name="CheckMakePayments">
         <classes>
             <class name="testcases.makePayments.makePayments">
                 <methods>
@@ -136,393 +136,111 @@
         </classes>
     </test>-->
 
-    <test name="SanityCheck3">
+    <test name="SanityCheck">
         <classes>
-            <class name="testcases.PO.Spo">
+            <class name="testcases.BinMaintenance">
                 <methods>
-                    <!--<include name="Tc_50_SuggestedPOUI"></include>
-                    <include name="Tc_51_CreateNewWorksheetTemplateUI"></include>
-                    <include name="Tc_52_VerifyCancelButtonCreateWSTemp"></include>
-                    <include name="Tc_62_PaginationSPO"></include>
-                    <include name="Tc_69_VerifyWssCostDiscountFIndProduct"></include>
-                    <include name="Tc_66_CreateWS_MFPDVNPODiscount"></include>
-                    <include name="Tc_67_CreateWS_MFPDVNListPriceDiscount"></include>
-                    <include name="Tc_68_CreateWS_MFPDVNLastCostDiscount"></include>
-                    <include name="Tc_VerifyCreateDuplicateWS"></include>-->
-
-                    <include name="Tc_73_RefreshWorkSheet"></include>
-                    <include name="Tc_74_DeleteSavedWorkSheet"></include>
-                    <include name="Tc_86_verifySavedWorkSheetAvailablePopup"></include>
-                    <include name="Tc_87_VerifyAddItemsToWS"></include>
-                    <include name="Tc_88_AddItemToWSUI"></include>
-                    <include name="Tc_89_PaginationAddItemToWSScreen"></include>
-                    <include name="Tc_PageCountAddItemToWSPage"></include>
-                    <include name="Tc_102_VerifyEditWSTempUI"></include>
-                    <include name="Tc_106_WSCalculationSection"></include>
-
-                    <!-- <include name="Tc_110_PaginationWSDetailsPage"></include>
-                    <include name="Tc_PageCountWSDetailsPage"></include>
-                    <include name="Tc_116_VerifyAssignedUserCanBeChanged"></include>
-                    <include name="Tc_117_VerifySalesOptionEditable"></include>
-                    <include name="Tc_118_DayToRunSection"></include>
-                    <include name="Tc_121_SaveWsButton"></include>
-                    <include name="Tc_129_VerifyOrderWeightTotal"></include>
-                    <include name="Tc_131_VerifyAddDuplicateItemToWS"></include>
-                    <include name="Tc_133_VerifySaveWorksheetBtn"></include>
-
-                    <include name="Tc_138_CalculationMethodOptions"></include>
-                    <include name="Tc_139_VerifyConvertToPOOrderQuantitiesZero"></include>
-                    <include name="Tc_140_VerifyTotalOrderExceedForConvertPO"></include>
-                    <include name="Tc_141_VerifyOrderMinimum"></include>
-                    <include name="Tc_144_VerifyUnitTotalWeight"></include>
-                    <include name="Tc_145_VerifyTotalCost"></include>
-                    <include name="Tc_146_VerifyNotAStandardPackage"></include>
-                    <include name="Tc_VerifyTrashIconEditWSTemp"></include>
-                    <include name="Tc_148_searchFilterUI"></include>
-                    <include name="Tc_156_CreateWSMultiplier"></include>
-
-                    <include name="Tc_164_verifyDiscountMultiplier"></include>
-                    <include name="Tc_166_VerifyErrorMsgAgainstFields"></include>
-                    <include name="Tc_175_CreateWS_MFPDVNListPriceMultiplier"></include>
-                    <include name="Tc_176_CreateWS_MFPDVNPOMultiplier"></include>
-                    <include name="Tc_VerifyWSItemsSearchFilter"></include>
-                    <include name="Tc_70_wsItemScreenUI"></include>
-                    <include name="Tc_71_PaginationWsItemScreen"></include>
-                    <include name="Tc_PageCountAddItemToWSScreen"></include>
-                    <include name="Tc_177_CreateWS_MFPDVNLastCostMultiplier"></include>
-                    <include name="Tc_120_EditWSTrashIcon"></include>-->
+                    <include name="Tc_748_ItemBinMaintenanceUI"/>
+                    <include name="Tc_749_MainMenuOptions"/>
+                    <include name="Tc_753_verifyApplyClearAllFilter"/>
+                    <include name="Tc_758_verifyFilterCheckBox"/>
+                    <include name="Tc_759_verifyContainsCheckBox"/>
+                    <include name="Tc_761_verifySuggestedMatchesPopUp"/>
+                    <include name="Tc_763_verifyItemNoNegValue"/>
+                    <include name="Tc_764_verifyItemDescriptionFilter"/>
+                    <include name="Tc_765_verifyItemDescriptionField"/>
+                    <include name="Tc_750_VerifyUIItemNumbersAreAvailable"/>
+                    <include name="Tc_787_verifyOnHand"/>
+                    <include name="Tc_790_verifyClearAllButton"/>
+                    <include name="Tc_791_verifyPageCountItemMaintenance"/>
+                    <include name="Tc_793_verifyPaginationItemMaintenance"/>
+                    <include name="Tc_795_verifySelectAllCheckBox"/>
+                    <include name="Tc_801_verifyLabelButton"/>
+                    <include name="Tc_805_verifyItemDetailsMaster"/>
+                    <include name="Tc_808_verifyItemDetailsUI"/>
+                    <include name="Tc_809_verifyPaginationItemDetails"/>
+                    <include name="Tc_810_verifyPageCountItemDetails"/>
+                    <include name="Tc_811_verifySelectDeselectItem"/>
+                    <include name="Tc_812_verifySecondaryOptionsBinType"/>
+                    <include name="Tc_813_verifyUpdateBinType"/>
+                    <include name="Tc_814_verifyBinItemDeleteIcon"/>
+                    <include name="Tc_815_verifyBinItemEditIcon"/>
+                    <include name="Tc_819_verifyBinMinMax"/>
+                    <include name="Tc_824_verifyEditBinPopUp"/>
+                    <include name="Tc_827_verifyCreateBinButton"/>
+                    <include name="Tc_831_verifyCreateDuplicateBin"/>
+                    <include name="Tc_836_verifyAddBinButton"/>
+                    <include name="Tc_837_verifyDuplicateAddBin"/>
+                    <include name="Tc_857_ItemBinLedgerPageUI"/>
+                    <include name="Tc_858_verifyZoneUI"/>
+                    <include name="Tc_860_verifyApplyClearFilter"/>
+                    <include name="Tc_861_verifyItemNumberField"/>
+                    <include name="Tc_862_verifyNegItemNumberField"/>
+                    <include name="Tc_863_verifyBinLocation"/>
+                    <include name="Tc_864_verifyNewZone"/>
+                    <include name="Tc_865_verifyDuplicateZone"/>
+                    <include name="Tc_866_verifyEditZone"/>
+                    <include name="Tc_868_verifyPickSequence"/>
+                    <include name="Tc_869_verifyDeleteZOne"/>
+                    <include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"/>
+                    <include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"/>
+                    <include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"/>
+                    <include name="Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable"/>
+                    <include name="Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable"/>
+                    <include name="Tc_766_verifyUIOfCreateNewBinPopup"/>
+                    <include name="Tc_767_verifyCreateNewBinWithConditionGood"/>
+                    <include name="Tc_768_verifyCreateNewBinWithConditionDamaged"/>
+                    <include name="Tc_769_verifyCreateNewBinWithConditionDefective"/>
+                    <include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"/>
+                    <include name="Tc_780_verifyEditBinsButtonFunctionality"/>
+                    <include name="Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins"/>
+                    <include name="Tc_784_verifyBinWithItemsCannotBeDeleted"/>
+                    <include name="Tc_785_verifyBinWithoutItemsCanBeDeleted"/>
+                    <include name="Tc_786_verifyPrintBinLabelsFunctionality"/>
+                    <include name="Tc_789_verifyPrintBinItemsLabelFunctionality"/>
                 </methods>
             </class>
         </classes>
     </test>
-    <!--<test name="PurchaseOrderConversionFacyors">
+    <test name="InventoryReceipts">
         <classes>
             <class name="testcases.PO.InventoryReceipts">
                 <methods>
+                    <include name="Tc_902_InventoryReceiptUI"></include>
+                    <include name="Tc_CreatePoDirect"></include>
+                    <include name="Tc_903_PurchaseOrderInquiryHyperlink"></include>
+                    <include name="Tc_904_PurchaseOrderNumberField"></include>
+                    <include name="Tc_906_changeUnitCost"></include>
+                    <include name="Tc_907_VerifyUnitCostField"></include>
+                    <include name="Tc_908_verifyPONumber"></include>
                     <include name="Tc_909_ValidateEnableDisableCostCheckbox"></include>
                     <include name="Tc_910_ValidateRelatedSOHyperlink"></include>
                     <include name="Tc_913_ValidatePreviousAndNextButtons"></include>
                     <include name="Tc_915_ValidateCancelPOButton"></include>
                     <include name="Tc_924_VerifyFunctionalityOfPartialReceivingPO"></include>
                     <include name="Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus"></include>
+                    <include name="Tc_905_QtyReceivedField"></include>
+                    <include name="Tc_CreatePoDirect"></include>
+                    <include name="Tc_897_OrderInUse"></include>
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="PurchaseOrderConversionFacyors">
-
+    <test name="PurchaseOrderConversionFactors">
         <classes>
             <class name="testcases.PO.PoConversionFactor">
                 <methods>
-                    <include name="Tc_249_EditItemListPriceAndVerifyInPODetailsPage"></include>
-                    <include name="Tc_250_EditItemPOPriceAndVerifyInPODetailsPage"></include>
-                    <include name="Tc_251_VerifyErrorWhileAddingItemToDirectPO"></include>
-                    <include name="Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry"></include>
-                    <include name="Tc_253_VerifyItemDetailsAfterProcessingPO"></include>
-                    <include name="Tc_256_VerifyLineItemAfterProcessingPO"></include>
-                    <include name="Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO"></include>
-                    <include name="Tc_258_VerifyAddingDirectPOToRelatedSO"></include>
-
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="PurchaseOrder">
-
-        <classes>
-            <class name="testcases.PO.POEntry">
-                <methods>
-                    <include name="Tc_203_PurchaseOrderHeadingUI"></include>
-                    <include name="Tc_205_Purchase_Order_DetailsUI"></include>
-                    <include name="Tc_206_Field_Verification_for_Vendor_and_Order_Number"></include>
-                    <include name="Tc_207_Functionality_of_F12_Vendor_Notes"></include>
-                    <include name="Tc_207_Functionality_of_F12_Vendor_Notes"></include>
-                    <include name="Tc_208_Create_line_item_by_changing_Customer_number"></include>
-                    <include name="Tc_209_Verify_the_functionality_of_Type_Shipment_S"></include>
-                    <include name="Tc_210_Verify_the_error_message"></include>
-                    <include name="Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount"></include>
-                    <include name="Tc_212_Calculation_of_Extended_amount_for_Last_Cost_with_and_without_Discount"></include>
-                    <include name="Tc_213_Verification_for_addition_of_duplicate_line_item_number"></include>
-                    <include name="Tc_216_Verify_the_functionality_of_Freight_Charges"></include>
-                    <include name="Tc_217_Verify_the_functionality_of_Cost_Option"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="SalesQuotes">
-
-        <classes>
-            <class name="testcases.SalesQuotes.WorkWithSalesQuote">
-                <methods>
-                    <include name="SalesQuotesSmoke"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="SanityCheck4">
-
-        <classes>
-            <class name="testcases.Inventory.AverageCost" >
-                <methods>
-                    <include name="Tc_21_SearchItemData"></include>
-                    <include name="Tc_22_UpdateItemData"></include>
-                    <include name="Tc_23_UpdateItemQuantity"></include>
-                    <include name="Tc_24_UpdateItemAVGCost"></include>
-                    <include name="Tc_25_ValidateItemCreation"></include>
-                    <include name="Tc_27_ValidateItemUpdate"></include>
-                    <include name="Tc_28_ValidateReceiveCorrection"></include>
-                    <include name="Tc_29_ValidateCostAdjustmentProcess"></include>
-                    <include name="Tc_30_ValidateCostAdjustmentLedger"></include>
-                    <include name="Tc_31_ValidateMultipleReceiveCorrection"></include>
-                    <include name="Tc_32_ValidateMultipleCostAdjustment"></include>
-                    <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
-                </methods>
-            </class>
-
-            <class name="testcases.Inventory.CycleCostAdjust" >
-                <methods>
-                    <include name="Tc_26_Navigation_to_Cycle_Count_Adjustments"></include>
-                    <include name="Tc_27_Verify_assignment_quantity_to_Item"></include>
-                    <include name="Tc_29_Negative_Quantity_to_Item"></include>
-                    <include name="Tc_30_Navigation_To_Item_Ledger_Screen"></include>
-                    <include name="Tc_31_Verify_Item_Ledger_Screen"></include>
-                    <include name="Tc_28_assignment_of_quantity_to_multiple_items"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="SanityCheck5">
-        <classes>
-            <class name="testcases.SalesQuotes.WorkWithSalesQuote">
-                <methods>
-                    <include name="SalesQuotesToPO"></include>
-                    <include name="CheckInventoryReceipts"></include>
-                    <include name="InquiryOrdersByCustomer"></include>
-                    <include name="OrderShippingConfirmation"></include>
-                    <include name="PrintReportInvoices"></include>
-                    <include name="FinalInquiryOrderStatus"></include>
-
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="SanityCheck6">
-        <classes>
-            <class name="testcases.SalesQuotes.WorkWithSalesQuote">
-                <methods>
-                    <include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
-                    <include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
-                    <include name="Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button"></include>
-                    <include name="Tc_140_verify_the_functionality_of_Select_Function_Drop_Down"></include>
-                    <include name="Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons"></include>
-                    <include name="Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons"></include>
-                    <include name="Tc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost"></include>
-                    <include name="Tc_142_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
-                    <include name="Tc_143_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
-                    <include name="Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
-                    <include name="Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
-                    <include name="Tc_168_verify_the_functionality_of_PO_Cost_and_Proposed_Matrix_Cost_box_and_Save_Button"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="SanityCheck7">
-        <classes>
-            <class name="testcases.SalesQuotes.WorkWithSalesQuote">
-                <methods>
-                    <include name="Tc_188_ValidateNavigationToPricingMatrix"></include>
-                    <include name="Tc_191_ValidateFirstRowColPricingMatrix"></include>
-                    <include name="Tc_193_ValidateAddRowPricingMatrix"></include>
-                    <include name="Tc_194_ValidateCopyRowPricingMatrix"></include>
-                    <include name="Tc_195_ValidateAddColPricingMatrix"></include>
-                    <include name="Tc_196_ValidateCopyColPricingMatrix"></include>
-                    <include name="Tc_199_ValidateMoreKeysPricingMatrix"></include>
-                    <include name="Tc_197_ValidatePgLeftRightPricingMatrix"></include>
-                    <include name="Tc_198_ValidatePgUpDownPricingMatrix"></include>
-                    <include name="Tc_200_ValidateDisplayListPricingMatrix"></include>
+                    <include name="Tc_249_EditItemListPriceAndVerifyInPODetailsPage"/>
+                    <include name="Tc_250_EditItemPOPriceAndVerifyInPODetailsPage"/>
+                    <include name="Tc_251_VerifyErrorWhileAddingItemToDirectPO"/>
+                    <include name="Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry"/>
+                    <include name="Tc_253_VerifyItemDetailsAfterProcessingPO"/>
+                    <include name="Tc_256_VerifyLineItemAfterProcessingPO"/>
+                    <include name="Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO"/>
+                    <include name="Tc_258_VerifyAddingDirectPOToRelatedSO"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="SanityCheck8">
-        <classes>
-            <class name="testcases.SalesQuotes.WorkWithSalesQuote">
-                <methods>
-                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
-                    <include name="Tc_189_NavigatePriceSheetDetails"></include>
-                    <include name="Tc_363_FillPriceSheetAndSave"></include>
-                    <include name="Tc_360_PriceSheetOnHold"></include>
-                    <include name="Tc_360_PriceSheetRemoveHold"></include>
-                    <include name="Tc_367_PriceSheetMarkAsReady"></include>
-                    <include name="Tc_367_ValidatePriceSheetProcessed"></include>
-                    <include name="Tc_195_ValidatePriceSheetItemListCost"></include>
-                    <include name="Tc_196_ValidatePriceSheetItemMatrixCost"></include>
-                    <include name="Tc_197_ValidatePriceSheetItemPoCost"></include>
-                    <include name="Tc_344_VerifySearchByName"></include>
-                    <include name="Tc_344_VerifyFilterByManufacturer"></include>
-                    <include name="Tc_344_VerifyFilterByStatus"></include>
-                    <include name="Tc_344_VerifyFilterEffectiveDate"></include>
-                    <include name="Tc_399_VerifyListPriceInputField"></include>
-                    <include name="TC_408_CreateValidPriceSheetWithNETPriceValue"></include>
-                    <include name="Tc_189_NavigatePriceSheetDetails"></include>
-                    <include name="Tc_363_FillPriceSheetAndSave"></include>
-                    <include name="Tc_360_PriceSheetOnHold"></include>
-                    <include name="Tc_360_PriceSheetRemoveHold"></include>
-                    <include name="Tc_367_PriceSheetMarkAsReady"></include>
-                    <include name="Tc_367_ValidatePriceSheetProcessed"></include>
-                    <include name="Tc_195_ValidatePriceSheetItemListCost"></include>
-                    <include name="Tc_196_ValidatePriceSheetItemMatrixCost"></include>
-                    <include name="Tc_197_ValidatePriceSheetItemPoCost"></include>
-                    <include name="Tc_399_VerifyListPriceInputField"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="RefactorCheck9">
-        <classes>
-            <class name="testcases.Pricing.Wise">
-                <methods>
-                    <include name="Tc_19_ValidateCustomerNumber"></include>
-                    <include name="Tc_20_ValidateItemNumber"></include>
-                    <include name="Tc_22_ValidateDBafterAdd"></include>
-                    <include name="Tc_5_ValidatePositiontoCustomerNumber_Beginning"></include>
-                    <include name="Tc_9_ValidatePositiontoCustomerNumber_Middle"></include>
-                    <include name="Tc_10_ValidatePositiontoCustomerNumber_End"></include>
-                    <include name="Tc_11_ValidatePositiontoItemNumber_Beginning"></include>
-                    <include name="Tc_17_NavigateToAddSpecialScreen"></include>
-                    <include name="Tc_13_ValidatePositiontoItemNumber_Middle"></include>
-                    <include name="Tc_23_ValidateDBAfterDelete"></include>
-                    <include name="Tc_API_updatePricing"></include>
-                    <include name="Tc_API_validatePricing"></include>
-                    <include name="Tc_2_ValidateNoSpecialPriceMessage"></include>
-                    <include name="Tc_3_ValidateDefaultFiltersSplPricing"></include>
-                    <include name="Tc_12_ValidatePositiontoItemNumber_End"></include>
-                    <include name="Tc_24_InsertPAPRecordToDelete"></include>
-                    <include name="Tc_21_E2E"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="SPAScreenVerification">
-        <classes>
-            <class name="testcases.Pricing.SPA" >
-                <methods>
-                    <include name="Tc_161_VerifySPAScreenHeader"></include>
-                    <include name="Tc_166_VerifySPAScreenInformation"></include>
-
-                    <include name="Tc_311_VerifyAddCustomersToGroupName"></include>
-                    <include name="Tc_315_VerifyEditCustomerGroup"></include>
-                    <include name="Tc_316_VerifyDisplayCustomer"></include>
-                    <include name="Tc_317_VerifyDeleteGroupName"></include>
-                    <include name="Tc_318_VerifyCustomerGroupSorting"></include>
-                    <include name="Tc_319_VerifyDeleteMultipleGroupName"></include>
-                    <include name="Tc_323_VerifySPAHideShowExpiredRecords"></include>
-                    <include name="Tc_322_VerifySPAAddRecords"></include>
-                    <include name="Tc_337_VerifySPASearchRecords"></include>
-                    <include name="Tc_326_VerifySPARecordDeletion"></include>
-
-                    <include name="Tc_324_VerifySortingContract"></include>
-                    <include name="Tc_325_VerifyEditContract"></include>
-                    <include name="Tc_327_VerifyAssignMFPDCode"></include>
-                    <include name="Tc_328_VerifyCopyContract"></include>
-                    <include name="Tc_331_VerifyAssignIndividualItem"></include>
-                    <include name="Tc_332_VerifyDisplayContractDetails"></include>
-                    <include name="Tc_334_VerifyUpdateCost"></include>
-                    <include name="Tc_336_VerifyLoadPriceSheet"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="BinMaintenance">
-        <classes>
-            <class name="testcases.BinMaintenance">
-                <methods>
-                    <include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"></include>
-                    <include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"></include>
-                    <include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"></include>
-                    <include name="Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable"></include>
-                    <include name="Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable"></include>
-                    <include name="Tc_766_verifyUIOfCreateNewBinPopup"></include>
-                    <include name="Tc_767_verifyCreateNewBinWithConditionGood"></include>
-                    <include name="Tc_768_verifyCreateNewBinWithConditionDamaged"></include>
-                    <include name="Tc_769_verifyCreateNewBinWithConditionDefective"></include>
-                    <include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"></include>
-                    <include name="Tc_780_verifyEditBinsButtonFunctionality"></include>
-                    <include name="Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins"></include>
-                    <include name="Tc_784_verifyBinWithItemsCannotBeDeleted"></include>
-                    <include name="Tc_785_verifyBinWithoutItemsCanBeDeleted"></include>
-                    <include name="Tc_786_verifyPrintBinLabelsFunctionality"></include>
-                    <include name="Tc_789_verifyPrintBinItemsLabelFunctionality"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="SanityCheck">
-
-        <classes>
-            <class name="testcases.BinMaintenance">
-                <methods>
-                    <include name="Tc_748_ItemBinMaintenanceUI"></include>
-                    <include name="Tc_749_MainMenuOptions"></include>
-                    <include name="Tc_753_verifyApplyClearAllFilter"></include>
-                    <include name="Tc_758_verifyFilterCheckBox"></include>
-                    <include name="Tc_759_verifyContainsCheckBox"></include>
-                    <include name="Tc_761_verifySuggestedMatchesPopUp"></include>
-                    <include name="Tc_763_verifyItemNoNegValue"></include>
-                    <include name="Tc_764_verifyItemDescriptionFilter"></include>
-                    <include name="Tc_765_verifyItemDescriptionField"></include>
-                    <include name="Tc_750_VerifyUIItemNumbersAreAvailable"></include>
-                    <include name="Tc_787_verifyOnHand"></include>
-                    <include name="Tc_790_verifyClearAllButton"></include>
-                    <include name="Tc_791_verifyPageCountItemMaintenance"></include>
-                    <include name="Tc_793_verifyPaginationItemMaintenance"></include>
-                    <include name="Tc_795_verifySelectAllCheckBox"></include>
-                    <include name="Tc_801_verifyLabelButton"></include>
-                    <include name="Tc_805_verifyItemDetailsMaster"></include>
-                    <include name="Tc_808_verifyItemDetailsUI"></include>
-                    <include name="Tc_809_verifyPaginationItemDetails"></include>
-                    <include name="Tc_810_verifyPageCountItemDetails"></include>
-                    <include name="Tc_811_verifySelectDeselectItem"></include>
-                    <include name="Tc_812_verifySecondaryOptionsBinType"></include>
-                    <include name="Tc_813_verifyUpdateBinType"></include>
-                    <include name="Tc_814_verifyBinItemDeleteIcon"></include>
-                    <include name="Tc_815_verifyBinItemEditIcon"></include>
-                    <include name="Tc_819_verifyBinMinMax"></include>
-                    <include name="Tc_824_verifyEditBinPopUp"></include>
-                    <include name="Tc_827_verifyCreateBinButton"></include>
-                    <include name="Tc_831_verifyCreateDuplicateBin"></include>
-                    <include name="Tc_836_verifyAddBinButton"></include>
-                    <include name="Tc_837_verifyDuplicateAddBin"></include>
-                    <include name="Tc_857_ItemBinLedgerPageUI"></include>
-                    <include name="Tc_858_verifyZoneUI"></include>
-                    <include name="Tc_860_verifyApplyClearFilter"></include>
-                    <include name="Tc_861_verifyItemNumberField"></include>
-                    <include name="Tc_862_verifyNegItemNumberField"></include>
-                    <include name="Tc_863_verifyBinLocation"></include>
-                    <include name="Tc_864_verifyNewZone"></include>
-                    <include name="Tc_865_verifyDuplicateZone"></include>
-                    <include name="Tc_866_verifyEditZone"></include>
-                    <include name="Tc_868_verifyPickSequence"></include>
-                    <include name="Tc_869_verifyDeleteZOne"></include>
-                    <include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"></include>
-                    <include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"></include>
-                    <include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"></include>
-                    <include name="Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable"></include>
-                    <include name="Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable"></include>
-                    <include name="Tc_766_verifyUIOfCreateNewBinPopup"></include>
-                    <include name="Tc_767_verifyCreateNewBinWithConditionGood"></include>
-                    <include name="Tc_768_verifyCreateNewBinWithConditionDamaged"></include>
-                    <include name="Tc_769_verifyCreateNewBinWithConditionDefective"></include>
-                    <include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"></include>
-                    <include name="Tc_780_verifyEditBinsButtonFunctionality"></include>
-                    <include name="Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins"></include>
-                    <include name="Tc_784_verifyBinWithItemsCannotBeDeleted"></include>
-                    <include name="Tc_785_verifyBinWithoutItemsCanBeDeleted"></include>
-                    <include name="Tc_786_verifyPrintBinLabelsFunctionality"></include>
-                    <include name="Tc_789_verifyPrintBinItemsLabelFunctionality"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>-->
 </suite>

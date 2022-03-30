@@ -90,7 +90,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<testNG.suiteXmlFile>src/test/resources/Suites/Sanity/jenkins.xml</testNG.suiteXmlFile>
+				<testNG.suiteXmlFile>src/test/resources/Suites/Demo/AprilDemoP1.xml</testNG.suiteXmlFile>
 			</properties>
 			<build>
 				<pluginManagement>

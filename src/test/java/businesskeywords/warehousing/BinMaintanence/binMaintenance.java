@@ -465,7 +465,22 @@ public class binMaintenance extends ReusableLib {
     }
 
     /**
-     * Keyword to Verify functionality of Page Count
+     * Keyword to verify Page Count for [Bin Maintenance]
+     */
+    public void valPageCountBins(int pageNum) {
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.timeWait(2);
+        click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        int ItemCount = driver.findElements(BinMaintenancePage.binsCountSP).size();
+        if (ItemCount == pageNum) {
+            Utility_Functions.xAssertEquals(report, "" + ItemCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Bin Count");
+        } else {
+            commonObj.validateElementExists(BinMaintenancePage.binsCountSP, "Total Bin count is " + ItemCount + "");
+        }
+    }
+
+    /**
+     * Keyword to Verify functionality of Page Count for [Bin Maintenance]
      */
     public void funPageCountBinMaintenance() {
         Utility_Functions.xScrollWindow(driver);
@@ -475,11 +490,11 @@ public class binMaintenance extends ReusableLib {
             int itemCount = driver.findElements(BinMaintenancePage.binsCountSP).size();
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having Item count " + itemCount + "");
         } else {
-            valPageCount(10);
-            valPageCount(15);
-            valPageCount(30);
-            valPageCount(30);
-            valPageCount(10);
+            valPageCountBins(10);
+            valPageCountBins(15);
+            valPageCountBins(30);
+            valPageCountBins(30);
+            valPageCountBins(10);
         }
     }
 
@@ -891,7 +906,7 @@ public class binMaintenance extends ReusableLib {
         commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully", "'Bin and Bin-item are created successfully' is present");
         commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLoc + "')]"), binLoc + " Bin location is created");
         commonObj.validateText(getStatus("" + binLoc + ""), "Good", "For bin location: " + binLoc + " status is Good");
-        commonObj.validateText(getZone("" + binLoc + ""), "TS", "For bin location: " + binLoc + " Zone is TS");
+        commonObj.validateText(getZone("" + binLoc + ""), "QS", "For bin location: " + binLoc + " Zone is TS");
     }
 
     /**
@@ -977,7 +992,7 @@ public class binMaintenance extends ReusableLib {
         addBinSaveBtn(binLct);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is created successfully.", "'Bin-item is created successfully.' is present");
         commonObj.validateText(By.xpath("//td[contains(text(),'" + binLct + "')]"), binLct, binLct + " Bin location is added");
-        commonObj.validateText(getZone("" + binLct + ""), "TS", "For bin location: " + binLct + " Zone is TS");
+        commonObj.validateText(getZone("" + binLct + ""), "QS", "For bin location: " + binLct + " Zone is TS");
         Utility_Functions.timeWait(2);
     }
 
@@ -1659,8 +1674,11 @@ public class binMaintenance extends ReusableLib {
     public void verifyUIofItemsLabelsPopup() {
         click(BinMaintenancePage.itemLabelsTabPopup, "Click on [Item Labels] tab button");
         waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
+        Utility_Functions.timeWait(1);
         clickAllItemsAndVrfyItsQtyInPrintItemLabelsPopup("1");
+        Utility_Functions.timeWait(1);
         clickAllItemsAndVrfyItsQtyInPrintItemLabelsPopup("");
+        Utility_Functions.timeWait(1);
         enableDisableSelectAllItemsAndVrfyItemsQty("No");
         enableDisableSelectAllItemsAndVrfyItemsQty("Yes");
     }
@@ -1672,7 +1690,7 @@ public class binMaintenance extends ReusableLib {
         List<WebElement> lstItems = getListElement(BinMaintenancePage.lstBinItemLabelsPopup);
         for (WebElement element : lstItems) {
             click(element, "Click on item no [" + lstItems.indexOf(element) + 1 + "] from list of items to print labels");
-            Utility_Functions.timeWait(1);
+            Utility_Functions.timeWait(2);
         }
         List<WebElement> lstQtyTbx = getListElement(BinMaintenancePage.lstQtyItemLabelsPopup);
         validateListValue(lstQtyTbx, qty);
