@@ -1,5 +1,6 @@
 package businesskeywords.warehousing.ReceivingInProcess;
 
+import businesskeywords.warehousing.BinMaintanence.binMaintenance;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
@@ -7,15 +8,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.SPO.SpoPage;
 import pages.common.MasterPage;
+import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import pages.warehouse.ReceivingInProcess.ReceivingInProcessPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReceivingInProcess extends ReusableLib {
     CommonActions commonObj;
+    binMaintenance binMain;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -26,6 +28,7 @@ public class ReceivingInProcess extends ReusableLib {
     public ReceivingInProcess(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
+        binMain=new binMaintenance(helper);
     }
 
     /**
@@ -38,6 +41,18 @@ public class ReceivingInProcess extends ReusableLib {
 
     public By searchField(String field) {
         return By.xpath("//input[@placeholder='" + field + "']");
+    }
+
+    public By pageLabel(String field) {
+        return By.xpath("//div[text()='"+field+"']");
+    }
+
+    public By spanElement(String text) {
+        return By.xpath("//span[contains(text(),'" + text + "')]");
+    }
+
+    public By button(String button){
+        return By.xpath("//button[text()='"+button+"']");
     }
 
     /**
@@ -120,7 +135,11 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void applyClearAllFilterBtn() {
         clickSearchIcon();
-        sendKeys(searchField("Purchase Order"), "03", "Search for po");
+        if(isDisplayed(BinMaintenancePage.itemNumberContains)) {
+            click(BinMaintenancePage.itemNumberContains, "Enable item Number Contains check box");
+        }else {
+            sendKeys(searchField("Purchase Order"), "03", "Search for po");
+        }
         Utility_Functions.timeWait(2);
         click(ReceivingInProcessPage.clearAllBtn,"Click Clear All Button");
         commonObj.validateText(TruckPage.applyFiltersDis,"apply filters","Apply Filter button is disabled");
@@ -133,11 +152,136 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void verifyPurchaseOrderInputField() {
         clickSearchIcon();
-        sendKeys(searchField("Purchase Order"), "03", "Search for po");
-        Utility_Functions.timeWait(2);
-        click(ReceivingInProcessPage.clearAllBtn,"Click Clear All Button");
-        commonObj.validateText(TruckPage.applyFiltersDis,"apply filters","Apply Filter button is disabled");
-        commonObj.validateText(SpoPage.disClearAllFilter,"Clear All Filters","Clear All Filters button is disabled");
-        click(TruckPage.filtersCrossIcon,"Click close icon");
+        searchAndApplyFilter("Purchase Order",jsonData.getData("InValidPo"));
+        commonObj.validateText(spanElement("There are no orders currently being received."),"There are no orders currently being received.","'There are no orders currently being received.' message is present");
+        clickSearchIcon();
+        searchAndApplyFilter("Purchase Order",jsonData.getData("AlphaNumericPo"));
+        commonObj.validateText(spanElement("There are no orders currently being received."),"There are no orders currently being received.","'There are no orders currently being received.' message is present");
+    }
+
+    /**
+     * Keyword to verify User ID Input Field
+     */
+    public void verifyUserIdInputField() {
+        clickSearchIcon();
+        searchAndApplyFilter("User ID",jsonData.getData("InValidUserId"));
+        commonObj.validateText(spanElement("There are no orders currently being received."),"There are no orders currently being received.","'There are no orders currently being received.' message is present");
+        clickSearchIcon();
+        searchAndApplyFilter("User ID",jsonData.getData("AlphaNumericUserId"));
+        commonObj.validateText(spanElement("There are no orders currently being received."),"There are no orders currently being received.","'There are no orders currently being received.' message is present");
+        clickSearchIcon();
+        searchAndApplyFilter("User ID",jsonData.getData("PartialUserId"));
+        commonObj.validateText(spanElement("There are no orders currently being received."),"There are no orders currently being received.","'There are no orders currently being received.' message is present");
+    }
+
+    /**
+     * Keyword to verify Vendor Input Field
+     */
+    public void verifyVendorInputField() {
+        clickSearchIcon();
+        searchAndApplyFilter("Vendor",jsonData.getData("InValidVendor"));
+        commonObj.validateText(spanElement("There are no orders currently being received."),"There are no orders currently being received.","'There are no orders currently being received.' message is present");
+        click(ReceivingInProcessPage.clearFilterCrossIcon,"Click Vendor x");
+        commonObj.validateElementExists(By.xpath("//tr/td/a"),"Page is processed and all the records are present");
+        Utility_Functions.timeWait(3);
+        searchAndApplyFilter("Vendor",jsonData.getData("AlphaNumericVendor"));
+        commonObj.validateText(spanElement("There are no orders currently being received."),"There are no orders currently being received.","'There are no orders currently being received.' message is present");
+    }
+
+    /**
+     * Keyword to verify receiving InProcess UI
+     */
+    public void receivingInProcessUI() {
+        commonObj.validateText(By.xpath("//h2"),"Receiving In Process","'Receiving In Process' header is present");
+        commonObj.validateText(By.xpath("//h3"),"OPEN PURCHASE ORDERS","' OPEN PURCHASE ORDERS' sub header is present");
+        commonObj.validateText(pageLabel("Received / Open Lines"),"Received / Open Lines","'Received / Open Lines' section is present");
+        commonObj.validateText(pageLabel("Percent Complete"),"Percent Complete","'Percent Complete' section is present");
+        commonObj.validateText(ReceivingInProcessPage.refreshPoListLink,"Refresh PO List","'Refresh PO List' is present");
+        String[] columnVal={"Purchase Order","Vendor","Receiver Doc","User ID","Received / Open Lines","Percent Complete","First Received","Last Received","Actions"};
+        for(String name:columnVal){
+            commonObj.validateText(By.xpath("//th[contains(text(),'"+name+"')]"),name,name+ "Column is present");
+        }
+    }
+
+    /**
+     * Keyword to verify Sorting Functionality
+     */
+    public void sortingFunctionality() {
+        String[] columnVal={"Purchase Order","Vendor","Receiver Doc","User ID","Received / Open Lines","Percent Complete","First Received","Last Received"};
+        for(String name:columnVal){
+            commonObj.validateText(By.xpath("//th[contains(text(),'"+name+"')]"),name,name+ "Column is present");
+            click(By.xpath("//th[contains(text(),'"+name+"')]/descendant::i"),"click" +name+" column");
+            Utility_Functions.timeWait(3);
+        }
+    }
+
+    public void navigateToRemainingPage(){
+        String po = getText(By.xpath("//tr/td/a")).trim();
+        click(By.xpath("//tr/td/a"),"Click Purchase Order link");
+        commonObj.validateText(By.xpath("//h2[text()='ORDER NUMBER: "+po+"']"),"ORDER NUMBER: "+po,"ORDER NUMBER: "+po+" is present");
+    }
+
+    /**
+     * Keyword to verify search Filter Remaining UI
+     */
+    public void searchFilterRemainingUI() {
+        clickSearchIcon();
+        String[] actText = {"Item Number", "Item Description"};
+        List<WebElement> els = driver.findElements(ReceivingInProcessPage.searchLabels);
+        int i = 0;
+        for (WebElement el : els) {
+            if(el.getText().trim().contains(actText[i])){
+                commonObj.validateElementExists(ReceivingInProcessPage.searchLabels,actText[i]+" is present");
+            }
+        }
+        commonObj.validateElementExists(ReceivingInProcessPage.containsCheckBox,"item Number Contains check box is present");
+        commonObj.validateElementExists(TruckPage.filtersCrossIcon, "Cross icon is present");
+        commonObj.validateText(TruckPage.applyFiltersDis, "Apply Filters", "Apply Filters button exist and button is disabled");
+        commonObj.validateText(SpoPage.disClearAllFilter, "Clear All Filters", "Clear All Filters button is exist with red in color and button is disabled");
+    }
+
+    public void searchFilterRemainFunctionality(){
+        clickSearchIcon();
+        binMain.verifyContainsCheckBox();
+    }
+
+    /**
+     * Keyword to verify Item Number Input Field
+     */
+    public void verifyItemNoInputField() {
+        clickSearchIcon();
+        searchAndApplyFilter("Item Number",jsonData.getData("InValidItemNo"));
+        commonObj.validateText(spanElement("There are no items remaining."),"There are no items remaining.","'There are no items remaining.' message is present");
+        clickSearchIcon();
+        searchAndApplyFilter("Item Number",jsonData.getData("AlphaNumericItemNo"));
+        commonObj.validateText(spanElement("There are no items remaining."),"There are no items remaining.","'There are no items remaining.' message is present");
+    }
+
+    /**
+     * Keyword to verify Item Description Input Field
+     */
+    public void verifyItemDescriptionInputField() {
+        clickSearchIcon();
+        searchAndApplyFilter("Item Number",jsonData.getData("InValidItemDesc"));
+        commonObj.validateText(spanElement("There are no items remaining."),"There are no items remaining.","'There are no items remaining.' message is present");
+        clickSearchIcon();
+        searchAndApplyFilter("Item Number",jsonData.getData("AlphaNumericItemDesc"));
+        commonObj.validateText(spanElement("There are no items remaining."),"There are no items remaining.","'There are no items remaining.' message is present");
+    }
+
+    /**
+     * Keyword to verify Order Number Remaining UI
+     */
+    public void verifyOrderNumberRemainingUI() {
+        commonObj.validateText(By.xpath("//h3"),"REMAINING","REMAINING' sub header is present");
+        commonObj.validateText(pageLabel("Vendor"),"Vendor","'Received / Open Lines' section is present");
+        commonObj.validateText(pageLabel("First Received - Last Received"),"First Received - Last Received","'First Received - Last Received' section is present");
+        commonObj.validateText(pageLabel("Receiver Doc"),"Receiver Doc","'Receiver Doc' section is present");
+        commonObj.validateText(pageLabel("Percent Complete"),"Percent Complete","'Percent Complete' section is present");
+        String[] columnVal={"Line","Item Number","Item Description","Open Qty","Qty Received","Bin Location","Zone","User ID","Actions"};
+        for(String name:columnVal){
+            commonObj.validateText(By.xpath("//th[contains(text(),'"+name+"')]"),name,name+ "Column is present");
+        }
+        commonObj.validateText(button("Back"),"Back","'Back' button is present");
     }
 }

@@ -244,7 +244,7 @@ public class Spo extends ReusableLib {
             Utility_Functions.xAssertEquals(report, elm.get(i).getText().trim(), acText[i], "");
             i++;
         }
-        commonObj.validateText(SpoPage.newWorksheetBtn, "New Worksheet", "New Worksheet button is present");
+        commonObj.validateText(SpoPage.newWorksheetBtn, "New template", "New template button is present");
     }
 
     /**
@@ -523,7 +523,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(4);
         clickButton("Yes");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(SpoPage.popUp, "Worksheet updated successfully.", "Worksheet updated successfully. popup is present");
+        commonObj.validateText(SpoPage.popUp, "template updated successfully.", "Worksheet updated successfully. popup is present");
         Utility_Functions.timeWait(6);
     }
 
@@ -595,6 +595,7 @@ public class Spo extends ReusableLib {
     }
 
     public void modifyLeadTimeField() {
+        Utility_Functions.xScrollWindowTopByValue(driver,1);
         sendKeys(SpoPage.leadTime, "10", "Modify lead time field");
         functionalRefreshButton();
         click(SpoPage.saveWorksheetBtn, "Click Save Worksheet button");
@@ -625,6 +626,7 @@ public class Spo extends ReusableLib {
         verifyOpenNewWSBtn();
         modifyLeadTimeField();
         verifyOpenNewWSBtn();
+        Utility_Functions.xScrollWindowTopByValue(driver,1);
         String leadTimeAct = getAttribute(SpoPage.leadTime, "ng-reflect-model");
         if (leadTimeAct.equals("10")) {
             Utility_Functions.xAssertEquals(report, leadTimeAct, "10", "Modified lead time is present");
@@ -790,7 +792,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.xUpdateJson("unitCost", unitCost);
         clickButton("Create Worksheet");
         Utility_Functions.timeWait(3);
-        commonObj.validateText(SpoPage.popUp, Utility_Functions.xGetJsonData("WorksheetTempName") + " worksheet successfully created.", Utility_Functions.xGetJsonData("WorksheetTempName") + " worksheet successfully created. pop message is present");
+        commonObj.validateText(SpoPage.popUp, Utility_Functions.xGetJsonData("WorksheetTempName") + " template successfully created.", Utility_Functions.xGetJsonData("WorksheetTempName") + " template successfully created. pop message is present");
     }
 
     public void handleDiscountFieldIfPresent() {
@@ -830,7 +832,7 @@ public class Spo extends ReusableLib {
     }
 
     public void costOption() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.costOption);
+        Utility_Functions.xScrollWindowTopByValue(driver,1);
         String cost = jsonData.getData("CostOption");
         if (!(cost == null)) {
             int size = driver.findElements(SpoPage.costOption).size() - 1;

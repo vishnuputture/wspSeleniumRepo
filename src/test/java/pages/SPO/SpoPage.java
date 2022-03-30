@@ -26,7 +26,7 @@ public class SpoPage extends ReusableLib {
     public static By onePage=By.xpath("//nav[@id='suggestedOrderLanderPagination1']//child::span[text()='of 1']");
     public static By worksheetCount=By.xpath("//a[@class='header-name-link']");
     public static By disClearAllFilter=By.xpath("//button[contains(text(),'Clear All Filters') and @disabled]");
-    public static By newWorksheetBtn=By.xpath("//span[text()='New Worksheet']");
+    public static By newWorksheetBtn=By.id("new-worksheet-button");
     public static By unitCostField=By.xpath("//input[@class='form-control text-right']");
     public static By dayOfTheWeek=By.xpath("//label[text()='Day of the Week']/ancestor::div/descendant::div[contains(@class,'multiselect')]");
     public static By dayCheckBox=By.xpath("//span[@class='p-checkbox-icon pi pi-check']");

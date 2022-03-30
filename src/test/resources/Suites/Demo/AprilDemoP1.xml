@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
-    <test name="Check">
+    <!--<test name="Check">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
-                    <!-- ############ UI Of the page ############ -->
+                    &lt;!&ndash; ############ UI Of the page ############ &ndash;&gt;
 
                     <include name="Tc_DeleteManifestList"></include>
                     <include name="Tc_CloseManifest"></include>
@@ -86,8 +86,8 @@
                 </methods>
             </class>
         </classes>
-    </test>
-    <test name="CheckMakePayments">
+    </test>-->
+    <!--<test name="CheckMakePayments">
         <classes>
             <class name="testcases.makePayments.makePayments">
                 <methods>
@@ -134,13 +134,13 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 
     <test name="SanityCheck3">
         <classes>
             <class name="testcases.PO.Spo">
                 <methods>
-                    <include name="Tc_50_SuggestedPOUI"></include>
+                    <!--<include name="Tc_50_SuggestedPOUI"></include>
                     <include name="Tc_51_CreateNewWorksheetTemplateUI"></include>
                     <include name="Tc_52_VerifyCancelButtonCreateWSTemp"></include>
                     <include name="Tc_62_PaginationSPO"></include>
@@ -148,7 +148,7 @@
                     <include name="Tc_66_CreateWS_MFPDVNPODiscount"></include>
                     <include name="Tc_67_CreateWS_MFPDVNListPriceDiscount"></include>
                     <include name="Tc_68_CreateWS_MFPDVNLastCostDiscount"></include>
-                    <include name="Tc_VerifyCreateDuplicateWS"></include>
+                    <include name="Tc_VerifyCreateDuplicateWS"></include>-->
 
                     <include name="Tc_73_RefreshWorkSheet"></include>
                     <include name="Tc_74_DeleteSavedWorkSheet"></include>
@@ -160,7 +160,7 @@
                     <include name="Tc_102_VerifyEditWSTempUI"></include>
                     <include name="Tc_106_WSCalculationSection"></include>
 
-                    <include name="Tc_110_PaginationWSDetailsPage"></include>
+                    <!-- <include name="Tc_110_PaginationWSDetailsPage"></include>
                     <include name="Tc_PageCountWSDetailsPage"></include>
                     <include name="Tc_116_VerifyAssignedUserCanBeChanged"></include>
                     <include name="Tc_117_VerifySalesOptionEditable"></include>
@@ -190,7 +190,7 @@
                     <include name="Tc_71_PaginationWsItemScreen"></include>
                     <include name="Tc_PageCountAddItemToWSScreen"></include>
                     <include name="Tc_177_CreateWS_MFPDVNLastCostMultiplier"></include>
-                    <include name="Tc_120_EditWSTrashIcon"></include>
+                    <include name="Tc_120_EditWSTrashIcon"></include>-->
                 </methods>
             </class>
         </classes>
