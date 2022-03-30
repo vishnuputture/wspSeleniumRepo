@@ -484,7 +484,7 @@ public class Spo extends ReusableLib {
         clickButtonWithSize("Yes");
         Utility_Functions.timeWait(3);
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
-        commonObj.validateText(SpoPage.popUp, "" + worksheetName + " worksheet successfully deleted.", "" + worksheetName + " worksheet successfully deleted. pop up message is present");
+        commonObj.validateText(SpoPage.popUp, "" + worksheetName + " template successfully deleted.", "" + worksheetName + " template successfully deleted. pop up message is present");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, SpoPage.savedTag), false, "Saved Worksheet is deleted and not present on SPO page");
@@ -523,7 +523,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(4);
         clickButton("Yes");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(SpoPage.popUp, "template updated successfully.", "Worksheet updated successfully. popup is present");
+        commonObj.validateText(SpoPage.popUp, "template updated successfully.", "template updated successfully. popup is present");
         Utility_Functions.timeWait(6);
     }
 
@@ -833,6 +833,8 @@ public class Spo extends ReusableLib {
 
     public void costOption() {
         Utility_Functions.xScrollWindowTopByValue(driver,1);
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xScrollIntoView(driver,SpoPage.costOption);
         String cost = jsonData.getData("CostOption");
         if (!(cost == null)) {
             int size = driver.findElements(SpoPage.costOption).size() - 1;
@@ -1139,8 +1141,7 @@ public class Spo extends ReusableLib {
 
     public void getMfVnPdCode(int row){
         int size=driver.findElements(SpoPage.getMF).size();
-        String mfCode=driver.findElements(SpoPage.getMF).get(size-row).getText();
-        Utility_Functions.xUpdateJson("MFCode"+row,mfCode);
+        Utility_Functions.xUpdateJson("MFCode"+row, driver.findElements(SpoPage.getMF).get(size-row).getAttribute("value"));
         Utility_Functions.xUpdateJson("PDCode"+row, driver.findElements(SpoPage.getPD).get(size-row).getAttribute("value"));
     }
 
@@ -1416,9 +1417,13 @@ public class Spo extends ReusableLib {
     public void verifyAssignedUserChange() throws AWTException {
         sendKeysAndTab(SpoPage.assignedUser, "AutomationTesting", "Edit Assigned User");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(SpoPage.popUp, "Worksheet updated successfully.", "Worksheet updated successfully. popup is present");
+        commonObj.validateText(SpoPage.popUp, "template updated successfully.", "template updated successfully. popup is present");
         Utility_Functions.timeWait(2);
         click(button("Cancel"), "Click Cancel Button");
+        Utility_Functions.timeWait(6);
+        //commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
+        verifyWsOptionHeader();
+        clickButton("Back");
         Utility_Functions.timeWait(6);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         filterCreatedWorksheet();
@@ -1447,7 +1452,7 @@ public class Spo extends ReusableLib {
 
     public void updatedMessage() {
         if (Utility_Functions.xIsDisplayed(driver, SpoPage.popUp)) {
-            commonObj.validateText(SpoPage.popUp, "Worksheet updated successfully.", "Worksheet updated successfully. popup is present");
+            commonObj.validateText(SpoPage.popUp, "template updated successfully.", "template updated successfully. popup is present");
             Utility_Functions.timeWait(2);
         }
     }
@@ -1468,6 +1473,9 @@ public class Spo extends ReusableLib {
         int size = driver.findElements(SpoPage.selectedMonth).size();
         Utility_Functions.xAssertEquals(report, "" + size + "", "24", "Total " + size + " columns highlighted ");
         click(button("Cancel"), "Click Cancel Button");
+        Utility_Functions.timeWait(6);
+        verifyWsOptionHeader();
+        clickButton("Back");
         Utility_Functions.timeWait(6);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
@@ -1570,7 +1578,7 @@ public class Spo extends ReusableLib {
         clickButtonWithSize("Yes");
         Utility_Functions.timeWait(3);
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
-        commonObj.validateText(SpoPage.popUp, "" + worksheetName + " worksheet successfully deleted.", "" + worksheetName + " worksheet successfully deleted. pop up message is present");
+        commonObj.validateText(SpoPage.popUp, "" + worksheetName + " template successfully deleted.", "" + worksheetName + " template successfully deleted. pop up message is present");
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         clickSearch();
@@ -1584,7 +1592,7 @@ public class Spo extends ReusableLib {
         click(SpoPage.saveWorksheet,"Click Save WorkSheet button");
         Utility_Functions.timeWait(4);
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
-        commonObj.validateText(SpoPage.popUp, worksheetName + " worksheet updated successfully.", worksheetName + " worksheet updated successfully. popup is present");
+        commonObj.validateText(SpoPage.popUp, worksheetName + " template updated successfully.", worksheetName + " template updated successfully. popup is present");
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
@@ -1846,13 +1854,24 @@ public class Spo extends ReusableLib {
      * Keyword to Verify Total Cost Calculation
      */
     public void verifyTotalCostCalculation() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
-        click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        try{
+            click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        }catch (Exception e){
+            Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
+            click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        }
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
-        click(SpoPage.plusIcon, "Click Expand Icon");
+        try{
+            click(SpoPage.plusIcon, "Click Expand Icon");
+        }catch (Exception e){
+            Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
+            click(SpoPage.plusIcon, "Click Expand Icon");
+        }
         Utility_Functions.timeWait(3);
         sendKeys(SpoPage.orderQuantity, "15", "Modify Order Quantity");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.actionKey(Keys.TAB,driver);
+        Utility_Functions.timeWait(2);
         String unitCostVal = driver.findElement(SpoPage.unitCostField).getAttribute("value");
         double unitCost = convertDouble(unitCostVal) * 15;
         double disc=Double.parseDouble(getAttribute(SpoPage.discountLineItem,"value"));
@@ -1866,10 +1885,19 @@ public class Spo extends ReusableLib {
      * Keyword to Verify std Package Quantity
      */
     public void stdPackageQty() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
-        click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        try{
+            click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        }catch (Exception e){
+            Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
+            click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        }
         Utility_Functions.timeWait(3);
-        click(SpoPage.plusIcon, "Click Expand Icon");
+        try{
+            click(SpoPage.plusIcon, "Click Expand Icon");
+        }catch (Exception e){
+            Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
+            click(SpoPage.plusIcon, "Click Expand Icon");
+        }
         Utility_Functions.timeWait(3);
         sendKeys(SpoPage.orderQuantity, "125", "Modify Order Quantity");
         Utility_Functions.timeWait(3);
@@ -1941,8 +1969,12 @@ public class Spo extends ReusableLib {
      */
     public void verifyUnitWeight() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
-        click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        try{
+            click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        }catch (Exception e){
+            Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
+            click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
+        }
         sendKeys(SpoPage.orderQuantity, "200", "Modify Order Quantity");
         Utility_Functions.timeWait(3);
         click(SpoPage.plusIcon, "Click on '+'");

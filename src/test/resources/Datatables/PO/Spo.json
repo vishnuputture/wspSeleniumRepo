@@ -28,7 +28,7 @@
       "Tc_117_VerifySalesOptionEditable": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifySalesOptionEditable",
       "Tc_118_DayToRunSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDayToRunEditable",
       "Tc_120_EditWSTrashIcon": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyDeleteSavedWS",
-      "Tc_121_SaveWsButton": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifySavedWS",
+      "Tc_121_SaveWsButton": "getPassword,navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifySavedWS",
       "Tc_129_VerifyOrderWeightTotal": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,orderWeightTotal",
       "Tc_131_VerifyAddDuplicateItemToWS": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,navigateWSItem,navigateToAddItemToWS,addItemsToWS,addSelectedItemsWorksheetBtn,backToWSBtnEditWs,verifyAddedItem",
       "Tc_133_VerifySaveWorksheetBtn": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,createWorksheet,filterCreatedWorksheet,navigateWSOption,verifySavedWSBtn",
