@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
-    <test name="Check">
+    <test name="Manifest1">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
@@ -32,7 +32,7 @@
             </class>
         </classes>
     </test>
-    <test name="SanityCheck1">
+    <test name="Manifest2">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
@@ -64,7 +64,7 @@
         </classes>
     </test>
 
-    <test name="SanityCheck2">
+    <test name="Manifest3">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
@@ -134,9 +134,9 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
 
-    <test name="SanityCheck">
+    <test name="BinMaintenance">
         <classes>
             <class name="testcases.BinMaintenance">
                 <methods>
