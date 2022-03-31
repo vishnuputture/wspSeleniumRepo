@@ -368,12 +368,15 @@ public class Trucks extends ReusableLib {
      * Keyword to verify Delete Truck
      */
     public void deleteTruck() {
-        click(TruckPage.deleteButton, "Click Delete Truck Button");
-        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xClickHiddenElement(driver,TruckPage.deleteButton);
+        Utility_Functions.timeWait(3);
+        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.noButtonPopUp, "Click No Button");
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
-        click(TruckPage.deleteButton, "Click Delete Truck Button");
-        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
+        Utility_Functions.xClickHiddenElement(driver,TruckPage.deleteButton);
+        Utility_Functions.timeWait(3);
+        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.yesButtonPopUp, "Click Yes Button");
         Utility_Functions.timeWait(3);
         String exp = "Truck could not be deleted because it is assigned to a manifest.";
