@@ -403,20 +403,13 @@ public class Manifests extends ReusableLib {
     }
 
     public void deleteMan() {
+        Utility_Functions.timeWait(4);
+        int count=1;
         int size = driver.findElements(TruckPage.manifestCount).size();
-        String man = null;
-        String man1 = null;
-        for (int i = 1; i < size; ) {
-            man = Utility_Functions.getText(driver, By.xpath("(//span[contains(text(),'')]/ancestor::td/preceding-sibling::td/a)[" + i + "]"));
-            if (man.equals(man1)) {
-                i = i + 2;
-                if (i >= size) {
-                    break;
-                }
-                man = Utility_Functions.getText(driver, By.xpath("(//span[contains(text(),'')]/ancestor::td/preceding-sibling::td/a)[" + i + "]"));
-            }
-            man1 = man;
-            Utility_Functions.xClickHiddenElement(driver, By.xpath("//span[contains(text(),'')]/ancestor::td/preceding-sibling::td/a[contains(text(),'" + man + "')]"));
+        for (int i = 1; i <= size; i++) {
+            Utility_Functions.timeWait(4);
+            String man = Utility_Functions.getText(driver, By.xpath("(//td/a[contains(text(),'0')])[" + count + "]"));
+            Utility_Functions.xClickHiddenElement(driver, By.xpath("//td/a[contains(text(),'" + man + "')]"));
             Utility_Functions.timeWait(5);
             if (isDisplayed(ManifestsPage.deleteManifest)) {
                 click(ManifestsPage.deleteManifest, "Click Delete Manifest");
@@ -431,6 +424,8 @@ public class Manifests extends ReusableLib {
                 Utility_Functions.timeWait(3);
                 String exp = "Manifest #" + man + " successfully deleted.";
                 commonObj.validateElementExists(TruckPage.deletePopUp, exp);
+            }else {
+                count++;
             }
             driver.navigate().back();
             Utility_Functions.timeWait(2);

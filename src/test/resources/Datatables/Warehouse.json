@@ -53,7 +53,7 @@
 			"Tc_UpdateDriverUI": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,navigateToUpdateDriverPage,updateDriverUI",
 			"Tc_UpdateDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,updateDriver",
 			"Tc_DeleteDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,deleteDriver",
-			"Tc_DeleteManifestList": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifestList,deleteManifestList,deleteManifestList"
+			"Tc_DeleteManifestList": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifestList,closeAllManifest,deleteManifestList,closeAllManifest,deleteManifestList"
 		}
 	],
 	"General_Data":[
