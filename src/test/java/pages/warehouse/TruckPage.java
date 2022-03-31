@@ -30,6 +30,7 @@ public class TruckPage {
     public static By helpIcon=By.xpath("//a[contains(@href,'Help')]");
     public static By filterSearch=By.xpath("//i[@class='fa fa-search']");
     public static By licensePlateExpSelect=By.xpath("//td[@class='day']");
+    public static By licensePlateExpSelectInActive=By.xpath("//td[@class='new day']");
     public static By searchFiltersLabel=By.xpath("//div[@class='input-field']//label[@class='win-label']");
     public static By applyFiltersDis=By.xpath("//button[@disabled and contains(text(),'Apply Filters')]");
     public static By clearFilters=By.xpath("//button[contains(text(),'Clear All Filters') and contains(@class,'red')]");

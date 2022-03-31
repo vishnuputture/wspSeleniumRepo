@@ -397,8 +397,8 @@ public class Trucks extends ReusableLib {
             click(DriversPage.inActive,"Select InActive From the status drop down");
             Utility_Functions.timeWait(2);
             click(TruckPage.newTruckPlateExpInput);
-            int size=driver.findElements(TruckPage.licensePlateExpSelect).size()-1;
-            click(driver.findElements(TruckPage.licensePlateExpSelect).get(size), "Select License Plate Expiration Date");
+            int size=driver.findElements(TruckPage.licensePlateExpSelectInActive).size()-1;
+            click(driver.findElements(TruckPage.licensePlateExpSelectInActive).get(size), "Select License Plate Expiration Date");
             Utility_Functions.timeWait(2);
             click(TruckPage.saveTruckButton,"Click Save Truck");
             Utility_Functions.timeWait(3);

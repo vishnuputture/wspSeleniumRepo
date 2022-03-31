@@ -16,6 +16,7 @@ import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +104,7 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifySearchFilterFields() {
         SearchCheckBox();
-        String[] field = {"Item Number", "Item Description", "Zone", "Bin Condition", "IOV", "Bin Type", "MF", "PD", "VN", "Total On Hand Qty"};
+        String[] field = {"Item Number", "Item Description", "Zone", "Bin Condition", "IOV", "Bin Type", "Manufacturer", "Product Group", "Vendor", "Total On Hand Qty"};
         for (String label : field) {
             commonObj.validateElementExists(By.xpath("//label[contains(text(),'" + label + "')]/parent::div/descendant::input"), label + " is present");
         }
@@ -193,7 +194,7 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyAvailMenuIcon() {
         click(BinMaintenancePage.menuIcon, "Click on main menu");
-        String[] field = {"BIN LOCATIONS", "Item-Bin Maintenance", "Item-Bin Ledger", "SHIPPING MANIFESTS", "Print Documents and Labels"};
+        String[] field = {"BIN LOCATIONS", "Receiving", "SHIPPING MANIFESTS", "Exceptions Queue", "Print Documents and Labels"};
         for (String label : field) {
             commonObj.validateText(tabs(label), label, label + " option is present");
         }
@@ -245,17 +246,20 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify exclude * Items
      */
     public void verifyExcludeItems(By by, String checkBoxName) {
+        Utility_Functions.timeWait(3);
         enableAsteriskItem(by, "Enable");
         Utility_Functions.timeWait(2);
         commonObj.validateText(tabs("Item Number"), "Item Number", "'Item Number' filtered value is present at right top corner of the page");
         commonObj.validateText(tabs(checkBoxName), checkBoxName, checkBoxName + " filtered value is present at right top corner of the page");
         commonObj.validateText(tabs("Clear Filters "), "Clear Filters", "'Clear Filters ' filtered value is present at right top corner of the page");
+        Utility_Functions.timeWait(3);
         click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         enableAsteriskItem(by, "Disable");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, tabs("Item Number")), false, "Item number result Filter is removed");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, tabs(checkBoxName)), false, checkBoxName + " result Filter is removed");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, tabs("Clear Filters ")), false, "Clear Filters result Filter is removed");
+        Utility_Functions.timeWait(3);
         click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
     }
@@ -393,7 +397,7 @@ public class binMaintenance extends ReusableLib {
         String symbl = getAttribute(BinMaintenancePage.onHand, "ng-reflect-model");
         Utility_Functions.xAssertEquals(report, symbl, "=", "By default On Hand Symbol '='");
         click(BinMaintenancePage.onHand);
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(5);
         String[] syms = {"=", "<", ">"};
         for (String sym : syms) {
             if (Utility_Functions.xIsDisplayed(driver, TruckPage.filterSearch)) {
@@ -420,7 +424,7 @@ public class binMaintenance extends ReusableLib {
     public void verifyUIItemNumbersAreAvailable() {
         enableContainsFilter();
         commonObj.validateText(BinMaintenancePage.selectAllCheckbox, "Select All Items", "'Select All Items' check box is present");
-        String[] actText = {"Item Number", "Description", "MF PD VN", "Bins", "On Hand"};
+        String[] actText = {"Item Number", "Description", "Manufacturer", "Product Group", "Vendor", "Bins", "On Hand"};
         List<WebElement> els = driver.findElements(By.xpath("//th"));
         for (int i = 0; i < 4; i++) {
             Utility_Functions.xAssertEquals(report, els.get(i).getText().trim(), actText[i], "");
@@ -436,7 +440,11 @@ public class binMaintenance extends ReusableLib {
     public void valPageCount(int pageNum) {
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.timeWait(2);
-        click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        try {
+            click(By.xpath("//nav[@id='itemDetailsPagination1']/descendant::span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        } catch (Exception e) {
+            click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        }
         int ItemCount = driver.findElements(BinMaintenancePage.itemCountSP).size();
         if (ItemCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + ItemCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Item Count");
@@ -502,10 +510,17 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify Pagination against current page
      */
     public void selectPage(int actPageNo, String expPage, String arrowIcon) {
-        click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
-        Utility_Functions.xScrollWindow(driver);
-        String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
-        Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
+        try {
+            click(driver.findElements(BinMaintenancePage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
+            Utility_Functions.xScrollWindow(driver);
+            String pageNo = driver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
+            Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
+        }catch (Exception e){
+            click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
+            Utility_Functions.xScrollWindow(driver);
+            String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+            Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
+        }
         Utility_Functions.timeWait(2);
     }
 
@@ -519,16 +534,29 @@ public class binMaintenance extends ReusableLib {
         if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
         } else {
-            click(driver.findElements(DriversPage.pageArrow).get(2));
-            Utility_Functions.xScrollWindow(driver);
-            click(driver.findElements(DriversPage.pageArrow).get(0));
+            try {
+                click(driver.findElements(BinMaintenancePage.pageArrow).get(2));
+                Utility_Functions.xScrollWindow(driver);
+                click(driver.findElements(BinMaintenancePage.pageArrow).get(0));
+            } catch (Exception e) {
+                click(driver.findElements(DriversPage.pageArrow).get(2));
+                Utility_Functions.xScrollWindow(driver);
+                click(driver.findElements(DriversPage.pageArrow).get(0));
+            }
             Utility_Functions.xScrollWindow(driver);
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
-            click(driver.findElements(DriversPage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
-            Utility_Functions.xScrollWindow(driver);
-            String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
-            Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
+            try {
+                click(driver.findElements(BinMaintenancePage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
+                Utility_Functions.xScrollWindow(driver);
+                String pageNo = driver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
+                Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
+            } catch (Exception e) {
+                click(driver.findElements(DriversPage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
+                Utility_Functions.xScrollWindow(driver);
+                String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+                Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
+            }
             Utility_Functions.timeWait(2);
             selectPage(0, "1", "Left double Arrow (<<)");
         }
@@ -616,12 +644,12 @@ public class binMaintenance extends ReusableLib {
 
     public ArrayList<String> itemDetails() {
         ArrayList<String> setVal = new ArrayList();
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 6; i++) {
             String val = getText(By.xpath("(//td/*)[" + i + "]")).trim();
             setVal.add(val);
         }
-        String bin = getText(By.xpath("(//td)[4]")).trim();
-        String onHand = getText(By.xpath("(//td)[5]")).trim();
+        String bin = getText(By.xpath("(//td)[6]")).trim();
+        String onHand = getText(By.xpath("(//td)[7]")).trim();
         setVal.add(bin);
         setVal.add(onHand);
         return setVal;
@@ -642,12 +670,11 @@ public class binMaintenance extends ReusableLib {
         String[] productCode = getAttribute(ItemMasterPage.productCode, "value").trim().split("-");
         String[] vendorCode = getAttribute(ItemMasterPage.vendorCode, "value").trim().split("-");
         String desc = getAttribute(ItemMasterPage.itemDesc1, "value").trim();
-        Utility_Functions.xAssertEquals(report, val.get(1).toString(), desc, "Description ");
-        String[] splitCode = val.get(3).toString().trim().split(" ");
-        Utility_Functions.xAssertEquals(report, splitCode[0], manufacturerCode[0].trim(), "Manufacture code ");
-        Utility_Functions.xAssertEquals(report, splitCode[1], productCode[0].trim(), "Product code ");
-        Utility_Functions.xAssertEquals(report, splitCode[2], vendorCode[0].trim(), "vendor code ");
-        commonObj.validateText(BinMaintenancePage.outQtyOnHand, val.get(5).toString(), "On hand quantity matches");
+        Utility_Functions.xAssertEquals(report, val.get(1).toString().trim(), desc, "Description ");
+        Utility_Functions.xAssertEquals(report, val.get(3).toString().trim(), manufacturerCode[0].trim(), "Manufacture code ");
+        Utility_Functions.xAssertEquals(report, val.get(4).toString().trim(), productCode[0].trim(), "Product code ");
+        Utility_Functions.xAssertEquals(report, val.get(5).toString().trim(), vendorCode[0].trim(), "vendor code ");
+        commonObj.validateText(BinMaintenancePage.outQtyOnHand, val.get(7).toString(), "On hand quantity matches");
         click(SpecialPriceAllowancePage.btnExit);
     }
 
