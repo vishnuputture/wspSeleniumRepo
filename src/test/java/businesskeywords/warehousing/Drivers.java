@@ -114,16 +114,16 @@ public class Drivers extends ReusableLib {
         if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
         } else {
-            click(driver.findElements(DriversPage.pageArrow).get(2));
+            Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(2));
             Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             Utility_Functions.timeWait(2);
             while (!Utility_Functions.xIsDisplayed(driver, DriversPage.lastPage)) {
                 size++;
-                click(driver.findElements(DriversPage.pageArrow).get(2));
+                Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(2));
                 Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             }
             Utility_Functions.timeWait(2);
-            click(driver.findElements(DriversPage.pageArrow).get(0));
+            Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(0));
             Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
@@ -139,7 +139,11 @@ public class Drivers extends ReusableLib {
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.timeWait(4);
-        click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        try {
+            click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        }catch (Exception e){
+            Utility_Functions.xClickHiddenElement(driver,By.xpath("//span[text()='" + pageNum + "']"));
+        }
         int driverCount = driver.findElements(DriversPage.driverNameCount).size();
         if (driverCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + driverCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " driver Count");

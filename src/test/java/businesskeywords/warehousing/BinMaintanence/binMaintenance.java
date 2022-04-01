@@ -1254,7 +1254,11 @@ public class binMaintenance extends ReusableLib {
      * Keyword to click [Create New Bin] button
      */
     public void clickCreateNewBinBtn() {
-        click(button("Create New Bin"), "Click on [Create New Bin] button");
+        try {
+            click(button("Create New Bin"), "Click on [Create New Bin] button");
+        }catch (Exception e){
+            Utility_Functions.xClickHiddenElement(driver,button("Create New Bin"));
+        }
         waitForVisible(BinMaintenancePage.hdrCreateNewBinPopup);
     }
 

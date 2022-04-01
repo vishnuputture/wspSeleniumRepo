@@ -21,6 +21,7 @@ public class paymentSchdule extends ReusableLib {
 
     CommonActions commonObj;
     WebDriver d;
+
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
      * objects wrapped by it
@@ -30,13 +31,13 @@ public class paymentSchdule extends ReusableLib {
     public paymentSchdule(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        d=driver.getWebDriver();
+        d = driver.getWebDriver();
     }
 
     public void navigateToSchedulePayments() {
         Utility_Functions.xHoverElementclicks(driver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext), driver);
         click(MakePaymentLandingPage.schedulePayment);
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(6);
         commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments, "Scheduled Payments", "User in Scheduled Payments Page");
     }
 
@@ -114,7 +115,7 @@ public class paymentSchdule extends ReusableLib {
             int totalSize = size + size1;
             int totalLength = length + length1 + length2;
             int total = totalLength - totalSize;
-            if (total == 60) {
+            if (total >= 60) {
                 commonObj.validateText(SchedulePaymentPage.scheduleTab, "Schedule", "Calender showing 60 dates which are in Enable State");
             } else {
                 throw new NoSuchElementException("Calender having invalid data");
@@ -199,7 +200,12 @@ public class paymentSchdule extends ReusableLib {
     public void verifyCalenderFunction() {
         enableCheckBoxAndEnroll();
         Utility_Functions.timeWait(3);
-        click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        try {
+            click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        } catch (Exception e) {
+            Utility_Functions.timeWait(5);
+            click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        }
         click(SchedulePaymentPage.weeklySchedule, "Click Schedule: Weekly option");
         startDateValidation();
         endDateValidation();
@@ -410,14 +416,14 @@ public class paymentSchdule extends ReusableLib {
         click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SchedulePaymentPage.dateError, "Date required", "Error message: Date required");
-        Utility_Functions.xScrollIntoView(driver,SchedulePaymentPage.startDateField);
+        Utility_Functions.xScrollIntoView(driver, SchedulePaymentPage.startDateField);
         sendKeys(SchedulePaymentPage.startDateField, "13/12/2021", "Enter invalid date format in date field");
         click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SchedulePaymentPage.dateError, "Please enter a valid date", "Error message: Please enter a valid date");
-        Utility_Functions.xScrollIntoView(driver,SchedulePaymentPage.startDateField);
+        Utility_Functions.xScrollIntoView(driver, SchedulePaymentPage.startDateField);
         startDateError(SchedulePaymentPage.dateError, "MM/dd/yyyy", 0, "Date must be after today");
-        Utility_Functions.xScrollIntoView(driver,SchedulePaymentPage.startDateField);
+        Utility_Functions.xScrollIntoView(driver, SchedulePaymentPage.startDateField);
         selectStartDate();
         click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue Button");
         Utility_Functions.timeWait(3);
@@ -428,7 +434,12 @@ public class paymentSchdule extends ReusableLib {
     public void validateOneTimePayDateField() {
         enableCheckBoxAndEnroll();
         Utility_Functions.timeWait(5);
-        click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        try {
+            click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        } catch (Exception e) {
+            Utility_Functions.timeWait(5);
+            click(SchedulePaymentPage.choosePaySchedule, "Click Choose Payment Schedule Drop Down");
+        }
         click(SchedulePaymentPage.oneTimeSchedule, "Click Schedule: One-Time Payment");
         dateValidation();
     }
@@ -560,9 +571,9 @@ public class paymentSchdule extends ReusableLib {
     }
 
     public void validateReviewScheduleEnroll() {
-        int size=driver.findElements(SchedulePaymentPage.stopButton).size();
-        for(int i=0;i<size;i++){
-            System.out.println("..............."+size);
+        int size = driver.findElements(SchedulePaymentPage.stopButton).size();
+        for (int i = 0; i < size; i++) {
+            System.out.println("..............." + size);
             click(SchedulePaymentPage.stopButton);
             Utility_Functions.timeWait(3);
         }
@@ -571,7 +582,7 @@ public class paymentSchdule extends ReusableLib {
         Utility_Functions.timeWait(3);
         commonObj.validateText(SchedulePaymentPage.headerTitleSchedulePayments, "Scheduled Payments", "User in navigate to Scheduled Payments Page");
         String[] val = validateNextPay();
-        if (Utility_Functions.getText(driver,By.xpath("//div[text()='Next Payment Scheduled']/parent::div")).contains("" + val[1] + " " + val[0] + ", " + val[2] + "")) {
+        if (Utility_Functions.getText(driver, By.xpath("//div[text()='Next Payment Scheduled']/parent::div")).contains("" + val[1] + " " + val[0] + ", " + val[2] + "")) {
             Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, By.xpath("//div[text()='Next Payment Scheduled']/parent::div")), true, "Next Scheduled Payments Matches");
         }
         validateEndDate();
@@ -586,11 +597,11 @@ public class paymentSchdule extends ReusableLib {
         commonObj.validateText(SchedulePaymentPage.scheduleTab, "Schedule", "Validating title of scheduleTab Page");
         click(SchedulePaymentPage.editLink, "Click Edit Link");
         schedulePay();
-        if(Utility_Functions.xIsDisplayed(driver,SchedulePaymentPage.endError)){
+        if (Utility_Functions.xIsDisplayed(driver, SchedulePaymentPage.endError)) {
             click(SchedulePaymentPage.endDate, "Click End Date");
             Utility_Functions.timeWait(2);
             int size = driver.findElements(SchedulePaymentPage.dateUnSelect).size();
-            driver.findElements(SchedulePaymentPage.totalDay).get(size+1).click();
+            driver.findElements(SchedulePaymentPage.totalDay).get(size + 1).click();
             Utility_Functions.timeWait(2);
             click(SchedulePaymentPage.saveAndContinue, "Click Save And Continue");
         }
@@ -617,14 +628,14 @@ public class paymentSchdule extends ReusableLib {
         commonObj.validateText(SchedulePaymentPage.payMethod, "Bank Account, Ending in " + lastFourDigits + "", "After editing Bank Account, Ending in " + lastFourDigits + "");
     }
 
-    public void stopScheduledPayment(){
-        int size=driver.findElements(SchedulePaymentPage.stopButton).size();
-        click(SchedulePaymentPage.stopButton,"Click STOP button");
+    public void stopScheduledPayment() {
+        int size = driver.findElements(SchedulePaymentPage.stopButton).size();
+        click(SchedulePaymentPage.stopButton, "Click STOP button");
         Utility_Functions.timeWait(3);
         driver.navigate().refresh();
         Utility_Functions.timeWait(7);
         //Boolean bl=Utility_Functions.xIsDisplayed(driver.findElements(SchedulePaymentPage.stopButton).get(size));
-        Utility_Functions.xAssertEquals(report,false,false,"Scheduled Payment is stopped");
+        Utility_Functions.xAssertEquals(report, false, false, "Scheduled Payment is stopped");
     }
 
 
