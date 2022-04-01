@@ -3,11 +3,11 @@
 <suite name="Regression" parallel="none" thread-count="1">
 
 
-   <!--<test name="Manifest1">
+   <test name="Manifest1">
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
-                    &lt;!&ndash; ############ UI Of the page ############ &ndash;&gt;
+                    <!-- ############ UI Of the page ############ -->
 
                     <include name="Tc_DeleteManifestList"></include>
                     <include name="Tc_CloseManifest"></include>
@@ -88,7 +88,7 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
      <test name="CheckMakePayments">
         <classes>
             <class name="testcases.makePayments.makePayments">
@@ -138,7 +138,7 @@
         </classes>
     </test>
 
-   <!-- <test name="BinMaintenance">
+    <test name="BinMaintenance">
         <classes>
             <class name="testcases.BinMaintenance">
                 <methods>
@@ -333,7 +333,7 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
     <!--<test name="SPO">
         <classes>
             <class name="testcases.PO.Spo">
