@@ -89,7 +89,7 @@
             </class>
         </classes>
     </test>
-     <test name="CheckMakePayments">
+     <!--<test name="CheckMakePayments">
         <classes>
             <class name="testcases.makePayments.makePayments">
                 <methods>
@@ -136,7 +136,7 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 
     <test name="BinMaintenance">
         <classes>
@@ -204,7 +204,7 @@
             </class>
         </classes>
     </test>
-    <test name="InventoryReceipts">
+   <!-- <test name="InventoryReceipts">
         <classes>
             <class name="testcases.PO.InventoryReceipts">
                 <methods>
@@ -333,7 +333,7 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
     <!--<test name="SPO">
         <classes>
             <class name="testcases.PO.Spo">
