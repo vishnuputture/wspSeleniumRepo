@@ -3,7 +3,7 @@
     {
       "Tc_902_InventoryReceiptUI":"launchApp,siteLogin,navigateToInventoryReceipt,inventoryReceiptUI,signOut",
       "Tc_CreatePoDirect":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
-      "Tc_903_PurchaseOrderInquiryHyperlink":"launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,exitInventoryReceipt,signOut",
+      "Tc_903_PurchaseOrderInquiryHyperlink":"launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,signOut",
       "Tc_904_PurchaseOrderNumberField":"launchApp,siteLogin,navigateToInventoryReceipt,poNoField,signOut",
       "Tc_897_OrderInUse":"launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,switchTab,launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,orderInUse,signOut,switchTabBack,exitIR,signOut",
       "Tc_905_QtyReceivedField":"launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,qtyReceivedField,signOut",
@@ -15,9 +15,14 @@
       "Tc_913_ValidatePreviousAndNextButtons":"launchApp,siteLogin,navigateToInventoryReceipt,enterExistingPONumber,vrfyPaginator,navigateInventoryReceiptsToMaster,signOut",
       "Tc_915_ValidateCancelPOButton":"launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipt,enterInvalidPONumber,enterExistingPONumber2,vrfyCancelPONumberFunctionality,navigateInventoryReceiptsToMaster,signOut",
       "Tc_924_VerifyFunctionalityOfPartialReceivingPO":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,enterQtyReceivedAndProcess,inquiryPO,enterPONumberAndSelectAction,vrfyQtyAndItemLedgerDetails,backToInventoryReceipts,navigateInventoryReceiptsToMaster,signOut",
-      "Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,enterQtyReceivedAndProcess,inquiryPO,selectStatus,enterPONumber,vrfyPONotInList,clickExitBtnPOInquiry,navigateInventoryReceiptsToMaster,signOut",
+      "Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItemsAndQty,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,enterQtyReceivedAndProcess,inquiryPO,selectStatus,enterPONumber,vrfyPONotInList,clickExitBtnPOInquiry,navigateInventoryReceiptsToMaster,signOut",
+      "Tc_928_VerifyFunctionalityOfOverReceivingPO":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItemsAndQty,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,enterExistingPONumber,verifyOverReceivingPO,inquiryPO,selectStatus,enterPONumberAndSelectAction,vrfyNoDetailLineToDisplay,clickExitBtnPOInquiry,navigateInventoryReceiptsToMaster,signOut",
       "Tc_929_verifyPositionToOrder":"launchApp,siteLogin,navigateToPoInquiry,enterPONumber,vrfyPONotInList,clickExitBtnPOInquiry,signOut",
-      "Tc_932_verifyVendorOrderByField":"launchApp,siteLogin,navigateToPoInquiry,enterVendor,orderBy,clickExitBtnPOInquiry,signOut"
+      "Tc_932_verifyVendorOrderByField":"launchApp,siteLogin,navigateToPoInquiry,enterVendor,orderBy,clickExitBtnPOInquiry,signOut",
+      "Tc_934_VerifyFunctionalityOfRefreshButton":"launchApp,siteLogin,navigateToPurchaseOrderInquiry,vrfySwitchView,navigatePOInquiryToMaster,signOut",
+      "Tc_935_VerifyFunctionalityOfTypeDropdown":"launchApp,siteLogin,navigateToPurchaseOrderInquiry,verifyTypeDdnOptions,vrfyTypeDdnFilter,navigatePOInquiryToMaster,signOut",
+      "Tc_936_VerifyFunctionalityOfStatusDropdown":"launchApp,siteLogin,navigateToPurchaseOrderInquiry,verifyStatusDdnOptions,vrfyStatusDdnFilter,navigatePOInquiryToMaster,signOut",
+      "Tc_937_VerifyFunctionalityOfHyperlinks":"launchApp,siteLogin,navigateToPurchaseOrderInquiry,clickBuyersInquiry,clickOnExitBtn,clickBuyersWorksheet,clickOnExitBtn,clickPOEntry,clickOnExitBtn,clickPOPreferences,clickOnF12ReturnBtn,navigatePOInquiryToMaster,signOut"
     }
   ],
   "General_Data":[
@@ -46,12 +51,12 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000988",
+      "SalesOrderNo":"000796",
       "QtyOrdered":"25",
       "VendorNumber":"000388",
       "CostOption":"1",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"031214"
+      "PONumber":"030884"
     },
     {
       "TC_ID":"Tc_905_QtyReceivedField",
@@ -94,12 +99,12 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000986",
+      "SalesOrderNo":"000837",
       "QtyOrdered":"25",
       "VendorNumber":"000388",
       "CostOption":"1",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"031211"
+      "PONumber":"030941"
     },
     {
       "TC_ID":"Tc_913_ValidatePreviousAndNextButtons",
@@ -111,7 +116,7 @@
     },
     {
       "TC_ID":"Tc_915_ValidateCancelPOButton",
-      "PONumber":"031212",
+      "PONumber":"030946",
       "InvalidPONumber":"000001",
       "itemNo":"DVT01714",
       "CostOption":"1",
@@ -126,11 +131,11 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000987",
+      "SalesOrderNo":"000866",
       "QtyOrdered":"1",
       "VendorNumber":"000388",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"031213",
+      "PONumber":"030986",
       "QtyReceived":"1",
       "Qty":"4",
       "Action":"1"
@@ -143,14 +148,30 @@
       "QtyOrder":"50",
       "itemNo":"AABABM200",
       "QtyShip":"50",
-      "SalesOrderNo":"000984",
+      "SalesOrderNo":"000862",
       "QtyOrdered":"25",
       "VendorNumber":"000388",
       "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber":"031209",
+      "PONumber":"030983",
       "QtyReceived":"1",
       "Action":"1",
       "Status":"Closed"
+    },
+    {
+      "TC_ID":"Tc_928_VerifyFunctionalityOfOverReceivingPO",
+      "accountNo":"000300",
+      "DirectShip":"Yes",
+      "ShipVia":"BEST WAY",
+      "QtyOrder":"50",
+      "itemNo":"4507261010",
+      "SalesOrderNo":"000890",
+      "QtyOrdered":"25",
+      "VendorNumber":"998008",
+      "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
+      "PONumber":"031043",
+      "QtyReceived":"100",
+      "Action":"1",
+      "Status":"All"
     },
     {
       "TC_ID":"Tc_929_verifyPositionToOrder",
@@ -159,6 +180,18 @@
     {
       "TC_ID":"Tc_932_verifyVendorOrderByField",
       "VendorNo":"000389"
+    },
+    {
+      "TC_ID":"Tc_934_VerifyFunctionalityOfRefreshButton"
+    },
+    {
+      "TC_ID":"Tc_935_VerifyFunctionalityOfTypeDropdown"
+    },
+    {
+      "TC_ID":"Tc_936_VerifyFunctionalityOfStatusDropdown"
+    },
+    {
+      "TC_ID":"Tc_937_VerifyFunctionalityOfHyperlinks"
     }
   ]
 }

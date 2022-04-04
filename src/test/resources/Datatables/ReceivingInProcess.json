@@ -15,7 +15,10 @@
       "Tc_949_verifyItemNoInputField": "navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyItemNoInputField",
       "Tc_950_verifyItemDescriptionInputField": "navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyItemDescriptionInputField",
       "Tc_951_verifyRemainingUI": "navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyOrderNumberRemainingUI",
-      "Tc_965_ReceiveItemsStockPORFGun": "navigateToRFGun,navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyReceiveItemsStockPORFGun"
+      "Tc_965_ReceiveItemsStockPORFGun": "navigateToReceivingInProcess,selectCompany,verifyReceiveSearchPo,navigateToRFGun,searchPo,processPO,switchBackToReceivingInProcess,verifyReceivedOpenLine,navigateToRemainingPage,verifyReceivedPO",
+      "Tc_966_ReceiveItemsStockPORFGunAllItem": "navigateToRFGun,searchPo,processPO,processPO,navigateToReceivingInProcess,selectCompany,searchItem,navigateToRemainingPage,verifyAllReceivedPO",
+      "Tc_967_POCompletelyReceivedNightlyProcess": "navigateToReceivingInProcess,selectCompany,verifyReceiveSearchPo"
+
     }
   ],
   "General_Data": [
@@ -86,7 +89,26 @@
     },
     {
       "TC_ID": "Tc_965_ReceiveItemsStockPORFGun",
-      "Title": "verify Receive Items Stock PO RF Gun"
+      "Title": "verify Receive Items Stock PO RF Gun",
+      "InvalidQty": "-2",
+      "ValidQty": "1",
+      "ReceivedQty": "1",
+      "ReceivedPercentage": "50%",
+      "PoNo": "031327"
+    },
+    {
+      "TC_ID": "Tc_966_ReceiveItemsStockPORFGunAllItem",
+      "Title": "verify Receive Items Stock PO RF Gun",
+      "InvalidQty": "-2",
+      "ValidQty": "1",
+      "ReceivedQty": "2",
+      "ReceivedPercentage": "100%",
+      "PoNo": "031330"
+    },
+    {
+      "TC_ID": "Tc_967_POCompletelyReceivedNightlyProcess",
+      "Title": "PO Completely Received Nightly Process",
+      "PoNo": "031327"
     }
   ]
 }

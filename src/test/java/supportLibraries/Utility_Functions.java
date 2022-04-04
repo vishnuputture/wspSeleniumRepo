@@ -3075,6 +3075,30 @@ public class Utility_Functions extends ReusableLib {
         dropdown.selectByVisibleText(value);
     }
 
+    /*
+     * ******************************************************************************************************
+     * Function Name: xgetDropdownValueText Author : winSupply Team Purpose : get Dropdown Options as list
+     * ******************************************************************************************************
+     */
+    public static List<String> xgetDropdownOptionsAsList(FrameworkDriver driver, By e) {
+        xWaitForElementPresent(driver, e, 10);
+        xWaitForElementClickable(driver, e, 10);
+        WebElement wb = driver.findElement(e);
+        Select dropdown = new Select(wb);
+        List<WebElement> elements = dropdown.getOptions();
+        List<String> lstElementText = new ArrayList<String>();
+        if (elements.size() > 0) {
+            for (WebElement ele : elements){
+                String text = ele.getText();
+                if (!text.isEmpty())
+                    lstElementText.add(text);
+            }
+        }else
+            timeWait(1);
+        return lstElementText;
+
+    }
+
     public static void xSelectDropdownByValue(WebElement e, String value) {
         Select dropdown = new Select(e);
         dropdown.selectByValue(value);

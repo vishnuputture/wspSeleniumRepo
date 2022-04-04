@@ -292,8 +292,12 @@ public class ReceivingInProcess extends ReusableLib {
     public void navigateToRFGun() {
         Utility_Functions.openNewTab(driver);
         driver.get(properties.getProperty("RF_Gun"));
+        Utility_Functions.timeWait(4);
+        if(Utility_Functions.isAlert(driver)){}
         sendKeys(ReceivingInProcessPage.userRF, properties.getProperty("VPNUsn"), "Enter RF user name");
+        Utility_Functions.timeWait(3);
         sendKeys(ReceivingInProcessPage.passwordRF, properties.getProperty("VPNPass"), "Enter RF Password");
+        Utility_Functions.timeWait(4);
         click(ReceivingInProcessPage.loginBtn, "Click Login Button");
         click(ReceivingInProcessPage.putAway, "Click Receive Put Away");
     }
@@ -303,22 +307,135 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void searchPo() {
         Utility_Functions.timeWait(4);
-        sendKeys(ReceivingInProcessPage.searchPo, "", "search Item Or PO");
+        sendKeys(ReceivingInProcessPage.searchPo, jsonData.getData("PoNo"), "search Item Or PO");
         Utility_Functions.actionKey(Keys.ENTER, driver);
     }
+
+
 
     /**
      * Keyword to process the PO
      */
     public void processPO() {
-        Utility_Functions.timeWait(3);
-        click(ReceivingInProcessPage.processButton, "Click on Process");
-        Utility_Functions.timeWait(3);
-        commonObj.validateText(ReceivingInProcessPage.poConfirmationPopup, "PO COMPLETE CONFIRMATION", "'PO COMPLETE CONFIRMATION' is present");
-        click(ReceivingInProcessPage.completeBtn, "Click Complete PO button");
+        Utility_Functions.timeWait(5);
+        click(ReceivingInProcessPage.poItems, "Click on 1st PO Item");
+        Utility_Functions.timeWait(5);
+        if(isDisplayed(ReceivingInProcessPage.completeBtn)) {
+            click(ReceivingInProcessPage.completeBtn, "Click Complete PO button");
+        }
+        Utility_Functions.timeWait(5);
+        enterQty(jsonData.getData("InvalidQty"));
+        Utility_Functions.timeWait(2);
+        String[] remainingCount=getText(ReceivingInProcessPage.remainingCount).split(":");
+        enterQty(remainingCount[1].trim());
+        enterScanBarCode();
     }
 
+    /**
+     * Keyword to Enter Scan Bar Code
+     */
+    public void enterScanBarCode(){
+        sendKeys(ReceivingInProcessPage.scanBarCode,"A");
+        Utility_Functions.timeWait(4);
+        int size=driver.findElements(By.xpath("//ul/li")).size();
+        click(driver.findElements(By.xpath("//ul/li")).get(size-1),"Select Location");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xUpdateJson("BinLocation",getAttribute(ReceivingInProcessPage.scanBarCode,"value"));
+        Utility_Functions.actionKey(Keys.ENTER,driver);
+        Utility_Functions.timeWait(5);
+    }
+
+    /**
+     * Keyword to Enter Quantity
+     */
+    public void enterQty(String qty) {
+        Utility_Functions.timeWait(3);
+        sendKeysAndTab(ReceivingInProcessPage.qtyTxtBox, qty, "Enter " + qty + " into Quantity field");
+        if (isDisplayed(ReceivingInProcessPage.serialItemPopup)){
+            click(ReceivingInProcessPage.skipBtn,"Click Skip Button");
+            Utility_Functions.timeWait(2);
+        }
+        if (qty.contains("-"))
+            commonObj.validateElementExists(ReceivingInProcessPage.qtyError, "Error in Quantity field");
+    }
+
+    /**
+     * Keyword to switch Back To Receiving In Process
+     */
     public void switchBackToReceivingInProcess() {
         Utility_Functions.xSwitchToWindow(driver, 0);
+    }
+
+    /**
+     * Keyword to verify Receive Search Po
+     */
+    public void verifyReceiveSearchPo() {
+        searchItem();
+        commonObj.validateText(spanElement("There are no orders currently being received."), "There are no orders currently being received.", "'There are no orders currently being received.' message is present");
+    }
+
+    public void searchItem(){
+        clickSearchIcon();
+        searchAndApplyFilter("Purchase Order", jsonData.getData("PoNo"));
+    }
+
+    /**
+     * Keyword to verify Received / Open Lines
+     */
+    public void verifyReceivedOpenLine() {
+        click(ReceivingInProcessPage.refreshPoListLink,"Click Refresh PO List");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(By.xpath("//tr/td/a"), jsonData.getData("PoNo"), "Result PO number found");
+        commonObj.validateText(By.xpath("//div[text()='"+jsonData.getData("ReceivedQty")+" / 2']"),jsonData.getData("ReceivedQty")+" / 2","Verify Received / Open Lines Count");
+        commonObj.validateText(By.xpath("//td[text()='"+jsonData.getData("ReceivedPercentage")+"']"),jsonData.getData("ReceivedPercentage"),"Verify Percentage Completed");
+        commonObj.validateText(ReceivingInProcessPage.progressBar,jsonData.getData("ReceivedPercentage"),"Verify Progress Bar");
+    }
+
+    public By getRecField(String val){
+        return By.xpath("//*[text()='"+val+"']");
+    }
+
+    public By getItem(String val){
+        return By.xpath("(//*[text()='"+val+"']/preceding-sibling::td)[1]");
+    }
+
+    public By getButton(String val){
+        return By.xpath("//button[contains(text(),'"+val+"')]");
+    }
+
+    /**
+     * Keyword to verify Received PO
+     */
+    public void verifyReceivedPO() {
+        commonObj.validateText(getRecField("UNASSIGNED"),Utility_Functions.xGetJsonData("BinLocation"),"'UNASSIGNED' Bin location for item "+getItem("UNASSIGNED"));
+        commonObj.validateText(getRecField("Closed"),"Closed","Closed Open Qty is present for item "+ getItem("Closed"));
+        commonObj.validateText(getRecField("1"),"1","1 Qty Received is present for item "+ getItem("1"));
+        commonObj.validateText(getRecField("0"),"0","0 Qty Received is present for item "+ getItem("0"));
+    }
+
+    /**
+     * Keyword to verify Received PO for All Received Item
+     */
+    public void verifyAllReceivedPO() throws Exception {
+        commonObj.validateText(getRecField("UNASSIGNED"),Utility_Functions.xGetJsonData("BinLocation"),"'UNASSIGNED' Bin location for item "+getItem("UNASSIGNED"));
+        commonObj.validateText(getRecField("Closed"),"Closed","Closed Open Qty is present for item "+ getItem("Closed"));
+        commonObj.validateText(getRecField("1"),"1","1 Qty Received is present for item "+ getItem("1"));
+        int closeCount=driver.findElements(getRecField("Closed")).size();
+        int unassigned=driver.findElements(getRecField("UNASSIGNED")).size();
+        Utility_Functions.xAssertEquals(report,closeCount,2,"Closed status is present for the item");
+        Utility_Functions.xAssertEquals(report,unassigned,2,"unassigned Bin Location is present for the item");
+        if(isDisplayed(getRecField("0"))){
+            throw new Exception("Error in receiving 1 item not Received");
+        }
+    }
+
+    /**
+     * Keyword to complete PO
+     */
+    public void completePo() {
+        Utility_Functions.timeWait(4);
+        click(getButton("Process"),"Click Process");
+        click(getButton("Complete PO"),"Click Complete PO");
+        Utility_Functions.timeWait(5);
     }
 }

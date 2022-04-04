@@ -34,11 +34,17 @@ public class InventoryReceiptsPage extends ReusableLib{
 
     /**************************************** Cancel Purchase Order popup elements ****************************************/
 
-    public static By hdrCancelPO = By.xpath("//div[text()='CANCEL PURCHASE ORDER']  ");
+    public static By hdrCancelPO = By.xpath("//div[text()='CANCEL PURCHASE ORDER']");
     public static By msgWarning = By.xpath("//div[@id='OutText']/p");
     public static By btnNo = By.xpath("//input[@value='No']");
     public static By btnYes = By.xpath("//input[@value='Yes']");
     public static By btnContinue = By.id("btnContinue");
+
+    /************************* QUANTITY RECEIVED IS GREATER THAN DIRECT SHIP BOQUANTITY popup elements *************************/
+
+    public static By hdrOverReceivedPOPopup = By.xpath("//div[starts-with(text(),'Quantity Received is Greater')]");
+    public static By btnUpdateOnHandQty = By.id("btnCF21");
+    public static By btnUpdateSO = By.id("btnCF18");
 
 
 

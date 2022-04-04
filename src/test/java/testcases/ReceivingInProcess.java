@@ -126,4 +126,20 @@ public class ReceivingInProcess extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_966_ReceiveItemsStockPORFGunAllItem(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("verify Receive Items Stock PO RF Gun for all Item");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_967_POCompletelyReceivedNightlyProcess(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("PO Completely Received Nightly Process");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
