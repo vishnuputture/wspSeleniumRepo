@@ -14,7 +14,8 @@
       "Tc_962_clearAllApplyFilterFunctionality": "navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,applyClearAllFilterBtn",
       "Tc_949_verifyItemNoInputField": "navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyItemNoInputField",
       "Tc_950_verifyItemDescriptionInputField": "navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyItemDescriptionInputField",
-      "Tc_951_verifyRemainingUI": "navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyOrderNumberRemainingUI"
+      "Tc_951_verifyRemainingUI": "navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyOrderNumberRemainingUI",
+      "Tc_965_ReceiveItemsStockPORFGun": "navigateToRFGun,navigateToReceivingInProcess,selectCompany,navigateToRemainingPage,verifyReceiveItemsStockPORFGun"
     }
   ],
   "General_Data": [
@@ -82,6 +83,10 @@
       "Title": "Verify Item Description Input Field",
       "InValidItemDesc": "098035622",
       "AlphaNumericItemDesc": "ytRgb239i"
+    },
+    {
+      "TC_ID": "Tc_965_ReceiveItemsStockPORFGun",
+      "Title": "verify Receive Items Stock PO RF Gun"
     }
   ]
 }
