@@ -48,7 +48,7 @@
       "accountNo": "000233",
       "itemNo1": "5105TCW158SS2",
       "itemNo2": "0023PBE0520",
-      "Iteration": "1"
+      "Iteration": "5"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWithMultipleShipment",
@@ -63,10 +63,14 @@
       "userPassword": "Qwerty@1"
     },
     {
-      "TC_ID": "Tc_165_ValidateFixedPaymentRecordBA"
+      "TC_ID": "Tc_165_ValidateFixedPaymentRecordBA",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
-      "TC_ID": "Tc_166_ValidateFixedPaymentRecordCC"
+      "TC_ID": "Tc_166_ValidateFixedPaymentRecordCC",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_ValidateMakePaymentsStatusFilter",
@@ -253,7 +257,8 @@
     {
       "TC_ID": "Tc_163_FixedPaymentByBA",
       "userName": "bhabani.mishra@numerique.biz",
-      "userPassword": "Win2021"
+      "userPassword": "Win2021",
+      "Iteration": "2"
     },
     {
       "TC_ID": "Tc_164_FixedPaymentByCC",

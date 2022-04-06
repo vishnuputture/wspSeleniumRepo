@@ -68,13 +68,14 @@ public class makePayments extends ReusableLib {
     public void logInToMakePayments()
     {
         Utility_Functions.xWaitForElementClickable(driver,MakePaymentLandingPage.signIn,10);
-
+        Utility_Functions.timeWait(4);
         commonObj.validateText(MakePaymentLandingPage.signIn,"Sign In","validating make payment dropdown");
         click(MakePaymentLandingPage.signIn);
         sendKey(MakePaymentLandingPage.userEmail,jsonData.getData("userName"));
         sendKey(MakePaymentLandingPage.userPassword,jsonData.getData("userPassword"));
         click(MakePaymentLandingPage.submitbtn);
         commonObj.validateText(MakePaymentLandingPage.makePaymentdrpdwntext,"Make Payments","validating make payment dropdown");
+        Utility_Functions.timeWait(3);
     }
 
     public void navigateToInvoice()
