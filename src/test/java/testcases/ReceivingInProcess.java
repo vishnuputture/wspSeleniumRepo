@@ -136,8 +136,104 @@ public class ReceivingInProcess extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_975_ReceivingCompletedStockPOInventoryReceiptsScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to Receiving Completed Stock PO Inventory Receipts Screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_967_POCompletelyReceivedNightlyProcess(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("PO Completely Received Nightly Process");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreatePoDirect(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Create Purchase Order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_968_ReceiveDirectPOInRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Receive Direct PO In RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_969_AssignBinsItemsRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Assign Bins Items RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_975_ReceivingProcessMultipleScreens(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Receiving Process Multiple Screens");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_971_ManuallyProcessStockPOInReceivingInProcessScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Manually Process Stock PO In Receiving In Process Screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_972_ManuallyProcessStockPORFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Manually Process Stock PO In Receiving In RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_CreatePOWithTwoLineItem(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Create PO With Two Line Item");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_979_PartialReceivingStockPOItemsInventoryReceiptsScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Partial Receiving of Stock PO Items from inventory receipts screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_CreatePOWithSingleLineItem(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case Create PO With Single Line Item");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_974_CompleteReceivingStockPOItemsInventoryReceiptsScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to Complete Receiving Stock PO Items Inventory Receipts Screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_976_ReceivingPartiallyReceivedStockPOInventoryReceiptsScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to Receiving partially received stock PO in inventory receipts screen");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

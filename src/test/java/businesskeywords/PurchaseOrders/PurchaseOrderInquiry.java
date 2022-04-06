@@ -74,7 +74,9 @@ public class PurchaseOrderInquiry extends ReusableLib {
      */
     public void navigatePOInquiryToMaster(){
         Utility_Functions.xScrollPage(driver);
-        click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
+        if(isDisplayed(PurchaseOrderInquiryPage.btnExitPOInquiryDtls)) {
+            click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
+        }
         Utility_Functions.actionKey(Keys.F3, driver);
     }
 

@@ -27,5 +27,6 @@ public class ReceivingInProcessPage {
     public static By processBtn=By.xpath("//button[contains(text(),'Process')]");
     public static By remainingCount=By.xpath("//ion-col[contains(text(),' Remaining: ')]");
     public static By tickIcon=By.xpath("//i[@onfocusclass='win-success']");
+    public static By lastArrow=By.xpath("//a[text()='»']");
 
 }

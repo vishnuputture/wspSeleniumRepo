@@ -1,5 +1,6 @@
 package businesskeywords.warehousing.ReceivingInProcess;
 
+import businesskeywords.PurchaseOrders.CreatePurchaseOrder;
 import businesskeywords.warehousing.BinMaintanence.binMaintenance;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -7,18 +8,26 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import pages.PurchaseOrders.InventoryReceiptsPage;
+import pages.PurchaseOrders.PurchaseOrderDetailsPage;
+import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.SPO.SpoPage;
+import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
+import pages.inventory.ReceiveCorrectionPage;
+import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import pages.warehouse.ReceivingInProcess.ReceivingInProcessPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
+import testcases.Pricing.MatrixCostUpdate;
 
 import java.util.List;
 
 public class ReceivingInProcess extends ReusableLib {
     CommonActions commonObj;
     binMaintenance binMain;
+    CreatePurchaseOrder createPurchaseOrder;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -30,6 +39,7 @@ public class ReceivingInProcess extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         binMain = new binMaintenance(helper);
+        createPurchaseOrder = new CreatePurchaseOrder(helper);
     }
 
     /**
@@ -78,7 +88,12 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void clickSearchIcon() {
         Utility_Functions.timeWait(3);
-        click(TruckPage.filterSearch, "Click Search Filter icon");
+        if(isDisplayed(ReceivingInProcessPage.clearFilterCrossIcon)){
+            click(ReceivingInProcessPage.clearFilterCrossIcon, "Click Vendor x");
+            Utility_Functions.timeWait(2);
+        }else {
+            click(TruckPage.filterSearch, "Click Search Filter icon");
+        }
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
     }
@@ -217,6 +232,7 @@ public class ReceivingInProcess extends ReusableLib {
     }
 
     public void navigateToRemainingPage() {
+        Utility_Functions.timeWait(4);
         String po = getText(By.xpath("//tr/td/a")).trim();
         click(By.xpath("//tr/td/a"), "Click Purchase Order link");
         commonObj.validateText(By.xpath("//h2[text()='ORDER NUMBER: " + po + "']"), "ORDER NUMBER: " + po, "ORDER NUMBER: " + po + " is present");
@@ -286,14 +302,19 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.validateText(button("Back"), "Back", "'Back' button is present");
     }
 
+    public void openNewTab(){
+        Utility_Functions.openNewTab(driver);
+    }
+
     /**
      * Keyword to navigate to RF Gun
      */
     public void navigateToRFGun() {
-        Utility_Functions.openNewTab(driver);
+        openNewTab();
         driver.get(properties.getProperty("RF_Gun"));
         Utility_Functions.timeWait(4);
-        if(Utility_Functions.isAlert(driver)){}
+        if (Utility_Functions.isAlert(driver)) {
+        }
         sendKeys(ReceivingInProcessPage.userRF, properties.getProperty("VPNUsn"), "Enter RF user name");
         Utility_Functions.timeWait(3);
         sendKeys(ReceivingInProcessPage.passwordRF, properties.getProperty("VPNPass"), "Enter RF Password");
@@ -307,41 +328,68 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void searchPo() {
         Utility_Functions.timeWait(4);
-        sendKeys(ReceivingInProcessPage.searchPo, jsonData.getData("PoNo"), "search Item Or PO");
+        sendKeys(ReceivingInProcessPage.searchPo, Utility_Functions.xGetJsonData("PONumber"), "search Item Or PO");
         Utility_Functions.actionKey(Keys.ENTER, driver);
     }
 
+    public void processPurchase() {
+        Utility_Functions.timeWait(5);
+        click(ReceivingInProcessPage.poItems, "Click on 1st PO Item");
+        Utility_Functions.timeWait(5);
+        if (isDisplayed(ReceivingInProcessPage.completeBtn)) {
+            click(ReceivingInProcessPage.completeBtn, "Click Complete PO button");
+        }
+        Utility_Functions.timeWait(5);
+        createBin();
+        enterQty(jsonData.getData("InvalidQty"));
+        Utility_Functions.timeWait(2);
+        String[] remainingCount = getText(ReceivingInProcessPage.remainingCount).split(":");
+        enterQty(remainingCount[1].trim());
+    }
 
+    public void processPartialPurchase() {
+        Utility_Functions.timeWait(5);
+        click(ReceivingInProcessPage.poItems, "Click on 1st PO Item");
+        Utility_Functions.timeWait(5);
+        if (isDisplayed(ReceivingInProcessPage.completeBtn)) {
+            click(ReceivingInProcessPage.completeBtn, "Click Complete PO button");
+        }
+        Utility_Functions.timeWait(5);
+        createBin();
+        enterQty(jsonData.getData("InvalidQty"));
+        Utility_Functions.timeWait(2);
+        String[] remainingCount = getText(ReceivingInProcessPage.remainingCount).split(":");
+        int count = Integer.parseInt(remainingCount[1].trim());
+        enterQty("" + (count - 2) + "");
+    }
 
     /**
      * Keyword to process the PO
      */
     public void processPO() {
-        Utility_Functions.timeWait(5);
-        click(ReceivingInProcessPage.poItems, "Click on 1st PO Item");
-        Utility_Functions.timeWait(5);
-        if(isDisplayed(ReceivingInProcessPage.completeBtn)) {
-            click(ReceivingInProcessPage.completeBtn, "Click Complete PO button");
-        }
-        Utility_Functions.timeWait(5);
-        enterQty(jsonData.getData("InvalidQty"));
-        Utility_Functions.timeWait(2);
-        String[] remainingCount=getText(ReceivingInProcessPage.remainingCount).split(":");
-        enterQty(remainingCount[1].trim());
+        processPurchase();
+        enterScanBarCode();
+    }
+
+    /**
+     * Keyword to process the Partial PO
+     */
+    public void processPartialPO() {
+        processPartialPurchase();
         enterScanBarCode();
     }
 
     /**
      * Keyword to Enter Scan Bar Code
      */
-    public void enterScanBarCode(){
-        sendKeys(ReceivingInProcessPage.scanBarCode,"A");
+    public void enterScanBarCode() {
+        sendKeys(ReceivingInProcessPage.scanBarCode, "A");
         Utility_Functions.timeWait(4);
-        int size=driver.findElements(By.xpath("//ul/li")).size();
-        click(driver.findElements(By.xpath("//ul/li")).get(size-1),"Select Location");
+        int size = driver.findElements(By.xpath("//ul/li")).size();
+        click(driver.findElements(By.xpath("//ul/li")).get(size - 1), "Select Location");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xUpdateJson("BinLocation",getAttribute(ReceivingInProcessPage.scanBarCode,"value"));
-        Utility_Functions.actionKey(Keys.ENTER,driver);
+        Utility_Functions.xUpdateJson("BinLocation", getAttribute(ReceivingInProcessPage.scanBarCode, "value"));
+        Utility_Functions.actionKey(Keys.ENTER, driver);
         Utility_Functions.timeWait(5);
     }
 
@@ -351,8 +399,8 @@ public class ReceivingInProcess extends ReusableLib {
     public void enterQty(String qty) {
         Utility_Functions.timeWait(3);
         sendKeysAndTab(ReceivingInProcessPage.qtyTxtBox, qty, "Enter " + qty + " into Quantity field");
-        if (isDisplayed(ReceivingInProcessPage.serialItemPopup)){
-            click(ReceivingInProcessPage.skipBtn,"Click Skip Button");
+        if (isDisplayed(ReceivingInProcessPage.serialItemPopup)) {
+            click(ReceivingInProcessPage.skipBtn, "Click Skip Button");
             Utility_Functions.timeWait(2);
         }
         if (qty.contains("-"))
@@ -363,6 +411,7 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to switch Back To Receiving In Process
      */
     public void switchBackToReceivingInProcess() {
+        Utility_Functions.timeWait(2);
         Utility_Functions.xSwitchToWindow(driver, 0);
     }
 
@@ -374,59 +423,267 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.validateText(spanElement("There are no orders currently being received."), "There are no orders currently being received.", "'There are no orders currently being received.' message is present");
     }
 
-    public void searchItem(){
+    public void clickReceiveInProcessLink(){
+        Utility_Functions.timeWait(4);
+        click(By.xpath("//a[text()='Receiving in Process']"));
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    public void switchToNextWindow(){
+        Utility_Functions.xSwitchToWindow(driver,report,1);
+    }
+
+    public void verifyPoNotFound(){
+        String po=Utility_Functions.xGetJsonData("PONumber");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(BinMaintenancePage.toaster,"PO "+po+" is not available.","'PO "+po+" is not available.' is present");
+    }
+
+    public void searchItem() {
         clickSearchIcon();
-        searchAndApplyFilter("Purchase Order", jsonData.getData("PoNo"));
+        searchAndApplyFilter("Purchase Order", Utility_Functions.xGetJsonData("PONumber"));
+    }
+    
+    public void confirmFreight(){
+        Utility_Functions.timeWait(6);
+        if(isDisplayed(WorkWithSalesQuotesPage.proc)) {
+            click(WorkWithSalesQuotesPage.proc, "Click on process");
+            Utility_Functions.timeWait(2);
+            Utility_Functions.actionKey(Keys.ENTER, driver);
+        }
     }
 
     /**
      * Keyword to verify Received / Open Lines
      */
     public void verifyReceivedOpenLine() {
-        click(ReceivingInProcessPage.refreshPoListLink,"Click Refresh PO List");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(By.xpath("//tr/td/a"), jsonData.getData("PoNo"), "Result PO number found");
-        commonObj.validateText(By.xpath("//div[text()='"+jsonData.getData("ReceivedQty")+" / 2']"),jsonData.getData("ReceivedQty")+" / 2","Verify Received / Open Lines Count");
-        commonObj.validateText(By.xpath("//td[text()='"+jsonData.getData("ReceivedPercentage")+"']"),jsonData.getData("ReceivedPercentage"),"Verify Percentage Completed");
-        commonObj.validateText(ReceivingInProcessPage.progressBar,jsonData.getData("ReceivedPercentage"),"Verify Progress Bar");
+        if (isDisplayed(ReceivingInProcessPage.refreshPoListLink)) {
+            Utility_Functions.xClickHiddenElement(driver,ReceivingInProcessPage.refreshPoListLink);
+        }
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(By.xpath("//tr/td/a"), Utility_Functions.xGetJsonData("PONumber"), "Result PO number found");
+        commonObj.validateText(By.xpath("//div[text()='" + jsonData.getData("ReceivedQty") + " / 2']"), jsonData.getData("ReceivedQty") + " / 2", "Verify Received / Open Lines Count");
+        commonObj.validateText(By.xpath("//td[text()='" + jsonData.getData("ReceivedPercentage") + "']"), jsonData.getData("ReceivedPercentage"), "Verify Percentage Completed");
+        commonObj.validateText(ReceivingInProcessPage.progressBar, jsonData.getData("ReceivedPercentage"), "Verify Progress Bar");
     }
 
-    public By getRecField(String val){
-        return By.xpath("//*[text()='"+val+"']");
+    public By getRecField(String val) {
+        return By.xpath("//*[text()='" + val + "']");
     }
 
-    public By getItem(String val){
-        return By.xpath("(//*[text()='"+val+"']/preceding-sibling::td)[1]");
+    public By getItem(String val) {
+        return By.xpath("(//*[text()='" + val + "']/preceding-sibling::td)[1]");
     }
 
-    public By getButton(String val){
-        return By.xpath("//button[contains(text(),'"+val+"')]");
+    public By getButton(String val) {
+        return By.xpath("//button[contains(text(),'" + val + "')]");
     }
 
     /**
      * Keyword to verify Received PO
      */
     public void verifyReceivedPO() {
-        commonObj.validateText(getRecField("UNASSIGNED"),Utility_Functions.xGetJsonData("BinLocation"),"'UNASSIGNED' Bin location for item "+getItem("UNASSIGNED"));
-        commonObj.validateText(getRecField("Closed"),"Closed","Closed Open Qty is present for item "+ getItem("Closed"));
-        commonObj.validateText(getRecField("1"),"1","1 Qty Received is present for item "+ getItem("1"));
-        commonObj.validateText(getRecField("0"),"0","0 Qty Received is present for item "+ getItem("0"));
+        commonObj.validateText(getRecField("UNASSIGNED"), Utility_Functions.xGetJsonData("BinLocation"), "'UNASSIGNED' Bin location for item " + getItem("UNASSIGNED"));
+        commonObj.validateText(getRecField("Closed"), "Closed", "Closed Open Qty is present for item " + getItem("Closed"));
+        commonObj.validateText(getRecField("1"), "1", "1 Qty Received is present for item " + getItem("1"));
+        commonObj.validateText(getRecField("0"), "0", "0 Qty Received is present for item " + getItem("0"));
+    }
+
+    /**
+     * Keyword to verify Received PO
+     */
+    public void verifyReceivedPOPartial() {
+        commonObj.validateText(getRecField("UNASSIGNED"), Utility_Functions.xGetJsonData("BinLocation"), "'UNASSIGNED' Bin location for item " + getItem("UNASSIGNED"));
+        commonObj.validateText(getRecField("8"), "8", "8 Qty Received is present for item " + getItem("8"));
     }
 
     /**
      * Keyword to verify Received PO for All Received Item
      */
     public void verifyAllReceivedPO() throws Exception {
-        commonObj.validateText(getRecField("UNASSIGNED"),Utility_Functions.xGetJsonData("BinLocation"),"'UNASSIGNED' Bin location for item "+getItem("UNASSIGNED"));
-        commonObj.validateText(getRecField("Closed"),"Closed","Closed Open Qty is present for item "+ getItem("Closed"));
-        commonObj.validateText(getRecField("1"),"1","1 Qty Received is present for item "+ getItem("1"));
-        int closeCount=driver.findElements(getRecField("Closed")).size();
-        int unassigned=driver.findElements(getRecField("UNASSIGNED")).size();
-        Utility_Functions.xAssertEquals(report,closeCount,2,"Closed status is present for the item");
-        Utility_Functions.xAssertEquals(report,unassigned,2,"unassigned Bin Location is present for the item");
-        if(isDisplayed(getRecField("0"))){
+        commonObj.validateText(getRecField("UNASSIGNED"), Utility_Functions.xGetJsonData("BinLocation"), "'UNASSIGNED' Bin location for item " + getItem("UNASSIGNED"));
+        commonObj.validateText(getRecField("Closed"), "Closed", "Closed Open Qty is present for item " + getItem("Closed"));
+        commonObj.validateText(getRecField("1"), "1", "1 Qty Received is present for item " + getItem("1"));
+        int closeCount = driver.findElements(getRecField("Closed")).size();
+        int unassigned = driver.findElements(getRecField("UNASSIGNED")).size();
+        Utility_Functions.xAssertEquals(report, closeCount, 2, "Closed status is present for the item");
+        Utility_Functions.xAssertEquals(report, unassigned, 2, "unassigned Bin Location is present for the item");
+        if (isDisplayed(getRecField("0"))) {
             throw new Exception("Error in receiving 1 item not Received");
         }
+    }
+
+    /**
+     * Keyword to verify Received PO for All Received Item
+     */
+    public void verifyAllReceivedSingleItemPO() throws Exception {
+        commonObj.validateText(getRecField("UNASSIGNED"), Utility_Functions.xGetJsonData("BinLocation"), "'UNASSIGNED' Bin location for item " + getItem("UNASSIGNED"));
+        commonObj.validateText(getRecField("Closed"), "Closed", "Closed Open Qty is present for item " + getItem("Closed"));
+        commonObj.validateText(getRecField("1"), "1", "1 Qty Received is present for item " + getItem("1"));
+        int closeCount = driver.findElements(getRecField("Closed")).size();
+        int unassigned = driver.findElements(getRecField("UNASSIGNED")).size();
+        Utility_Functions.xAssertEquals(report, closeCount, 1, "Closed status is present for the item");
+        Utility_Functions.xAssertEquals(report, unassigned, 1, "unassigned Bin Location is present for the item");
+        if (isDisplayed(getRecField("0"))) {
+            throw new Exception("Error in receiving 1 item not Received");
+        }
+    }
+
+    /**
+     * Keyword to verify Direct Ship status
+     */
+    public void directShip() {
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(button(" Direct Ship "), "Direct Ship", "'Direct Ship' is present");
+    }
+
+    public void orderInUseRFGun() {
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(button(" Order In Use "), "Order In Use", "'Order In Use' is present");
+    }
+
+    public By tabs(String tab) {
+        return By.xpath("//span[text()='" + tab + "']");
+    }
+
+    /**
+     * Keyword to select No Bin option
+     */
+    public void selectNoBin() {
+        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        click(BinMaintenancePage.binType, "Click Bin Type drop down");
+        click(tabs("No Bin"), "Click No Bin option");
+        click(BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.timeWait(3);
+        Utility_Functions.xUpdateJson("NoBimItem", getText(By.xpath("//td[text()='0']/preceding-sibling::td/a")));
+    }
+
+    /**
+     * Keyword to enter [Qty] and [No Bin Item Number] in Purchase Order Details page
+     */
+    public void enterItemNumberAndQtyNoBin() {
+        String itemNo = Utility_Functions.xGetJsonAsString("NoBimItem");
+        String qty = jsonData.getData("QtyOrdered");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.quantityOrdered, qty, "Enter Quantity Ordered");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.itemNumberPOD, itemNo, "Enter Item Number as[" + itemNo + "]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        vrfyCostError();
+        getOrderNumberVal();
+    }
+
+    public void addItem(String no) {
+        String itemNo = jsonData.getData("ItemNo" + no);
+        String qty = jsonData.getData("QtyOrdered");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.quantityOrdered, qty, "Enter Quantity Ordered");
+        sendKeysAndEnter(PurchaseOrderDetailsPage.itemNumberPOD, itemNo, "Enter Item Number as[" + itemNo + "]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        vrfyCostError();
+    }
+
+    /**
+     * Keyword to enter [Qty] and [two Item Number] in Purchase Order Details page
+     */
+    public void enterItemNumberQty() {
+        addItem("1");
+        addItem("2");
+        getOrderNumberVal();
+    }
+
+    /**
+     * Keyword to enter [Qty] and [two Item Number] in Purchase Order Details page
+     */
+    public void enterSingleItemNumberQty() {
+        addItem("1");
+        getOrderNumberVal();
+    }
+
+    public void redirectToMasterPage(){
+        click(MatrixCostUpdatePage.btnF3,"Navigate Back to Master Page");
+        Utility_Functions.timeWait(2);
+    }
+
+    /**
+     * Keyword to Press Enter and verify Sales Order error in Purchase Order Details page
+     */
+    public void vrfyCostError() {
+        click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
+        String error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
+        if (error.contains("F8 to accept")) {
+            Utility_Functions.actionKey(Keys.F8, driver);
+        }
+        error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
+        if (error.contains("WARNING- Price field is zero or blank")) {
+            sendKeysAndEnter(PurchaseOrderDetailsPage.pricePOD, "100", "Enter value in Price tbx");
+            waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        }
+        error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
+        if (error.contains("ERROR - Multiplier can NOT be 0")) {
+            sendKeysAndEnter(PurchaseOrderDetailsPage.tbxMultiplier, "1", "Enter value in Multiplier tbx");
+            waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        }
+        error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
+        if (error.contains("F4 Overrides")) {
+            Utility_Functions.actionKey(Keys.F4, driver);
+        }
+        if (getText(PurchaseOrderDetailsPage.errorMsgPOD).trim().contains("WARNING- Cost variance -- F5 to accept.  Average cost is")) {
+            Utility_Functions.xScrollIntoView(driver, PurchaseOrderDetailsPage.errorMsgPOD);
+            commonObj.verifyElementContainsText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is", "Verify Cost Variance Warning message");
+            Utility_Functions.actionKey(Keys.F5, driver);
+        }
+    }
+
+    /**
+     * Keyword to get Conv Factor value from Purchase Order Details page
+     */
+    public void getOrderNumberVal() {
+        String orderNo = getText(PurchaseOrderDetailsPage.orderNo2).trim();
+        Utility_Functions.xUpdateJson("PONumber", orderNo);
+    }
+
+    public void createBin() {
+        if (isDisplayed(spanElement("Create Bin"))) {
+            commonObj.validateText(pageLabel("No Bin Locations Associated"), "No Bin Locations Associated", "'No Bin Locations Associated' is present");
+            click(spanElement("Create Bin"), "Click [Create Bin]");
+            Utility_Functions.timeWait(3);
+            int binLoc = Utility_Functions.xRandomFunction();
+            sendKeys(searchField("Enter Bin Name"), "" + binLoc + "", "Enter Bin Location");
+            click(spanElement("Select Zone"));
+            Utility_Functions.timeWait(2);
+            click(By.xpath("(//li/span)[1]"), "Select Zone");
+            click(button("Create Association "), "Click 'Create Association' button");
+            Utility_Functions.timeWait(3);
+            commonObj.validateText(By.xpath("//ion-col[contains(text(),'" + binLoc + "')]"), "" + binLoc + "", binLoc + " is present");
+        }
+    }
+
+    public void backToReceivingScreen(){
+        click(button("Back"));
+        Utility_Functions.timeWait(4);
+    }
+
+    /**
+     * Keyword to enter invalid PO Number in Inventory Receipts Page
+     */
+    public void enterPONumberInvtryRecpt() {
+        String poNumber = Utility_Functions.xGetJsonData("PONumber");
+        sendKeysAndEnter(InventoryReceiptsPage.tbxPONumber, poNumber, "Enter invalid Purchase Order Number");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.validateText(InventoryReceiptsPage.growlText, "No Detail Lines exist for this Purchase Order", "Validating growl text");
+    }
+
+    public void completeProcess(){
+        try {
+            Utility_Functions.timeWait(2);
+            Utility_Functions.xAssertEquals(report,getAttribute(ReceivingInProcessPage.tickIcon,"ng-reflect-tooltip"),"Process","");
+            click(ReceivingInProcessPage.tickIcon, "Click Process Tick Icon");
+        }catch (Exception e){
+            Utility_Functions.timeWait(4);
+            click(ReceivingInProcessPage.tickIcon, "Click Process Tick Icon");
+        }
+        click(button("Complete PO"),"Click 'Complete PO' Button");
+        Utility_Functions.timeWait(4);
+        Utility_Functions.xAssertEquals(report,getAttribute(ReceivingInProcessPage.tickIcon,"ng-reflect-tooltip"),"Completed","");
     }
 
     /**
@@ -434,8 +691,8 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void completePo() {
         Utility_Functions.timeWait(4);
-        click(getButton("Process"),"Click Process");
-        click(getButton("Complete PO"),"Click Complete PO");
+        click(getButton("Process"), "Click Process");
+        click(getButton("Complete PO"), "Click Complete PO");
         Utility_Functions.timeWait(5);
     }
 }
