@@ -70,7 +70,7 @@ public class QtestAPIHandler {
 	public static Map<Integer, String> getAllProjects() {
 		RequestSpecification request = RestAssured.given();
 		request.header("Authorization", "Bearer " + accessToken);
-		Response res = request.get("https://" + companyName + ".qtestnet.com/api/v3/projects?assigned=true&page=1");
+		Response res = request.get("https://" + companyName + ".qtestnet.com/api/v3/projects?assigned=true");
 		int code = res.getStatusCode();
 		Assert.assertEquals(code, 200);
 		JsonPath jsonResponse = res.jsonPath();
@@ -95,7 +95,7 @@ public class QtestAPIHandler {
 		RequestSpecification request = RestAssured.given();
 		request.header("Authorization", "Bearer " + accessToken);
 		Response res = request
-				.get("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID + "/test-cases");
+				.get("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID + "/test-cases?size=1000");
 		int code = res.getStatusCode();
 		Assert.assertEquals(code, 200);
 		JsonPath jsonResponse = res.jsonPath();
