@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Purchasing" parallel="none" thread-count="1">
+    <test name="InventoryReceipts">
+        <classes>
+            <class name="testcases.PO.InventoryReceipts">
+                <methods>
+                    <include name="Tc_902_InventoryReceiptUI"></include>
+                    <include name="Tc_CreatePoDirect"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="PurchaseOrderConversionFactors">
+        <classes>
+            <class name="testcases.PO.PoConversionFactor">
+                <methods>
+                    <include name="Tc_249_EditItemListPriceAndVerifyInPODetailsPage"/>
+                    <include name="Tc_250_EditItemPOPriceAndVerifyInPODetailsPage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="SPO">
+        <classes>
+            <class name="testcases.PO.Spo">
+                <methods>
+                    <include name="Tc_50_SuggestedPOUI"></include>
+                    <include name="Tc_51_CreateNewWorksheetTemplateUI"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

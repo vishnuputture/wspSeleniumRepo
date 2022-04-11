@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Demo">
+    <suite-files>
+        <suite-file path="Inventory.xml"></suite-file>
+        <suite-file path="MainDemo.xml"></suite-file>
+        <suite-file path="MakePayment.xml"></suite-file>
+        <suite-file path="PO.xml"></suite-file>
+        <suite-file path="Pricing.xml"></suite-file>
+        <suite-file path="Warehousing.xml"></suite-file>
+    </suite-files>
+</suite>
