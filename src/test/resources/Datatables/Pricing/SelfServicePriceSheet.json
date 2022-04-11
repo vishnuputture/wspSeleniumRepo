@@ -7,9 +7,9 @@
       "Tc_360_PriceSheetOnHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,sheetOnHold",
       "Tc_360_PriceSheetRemoveHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,unHoldSheet",
       "Tc_367_PriceSheetMarkAsReady": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,markReady",
-      "Tc_367_ValidatePriceSheetProcessed": "launchApp,siteLogin,runPriceSheetBatch,validateSheetProcessed",
-      "Tc_195_ValidatePriceSheetItemListCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateListPrice",
-      "Tc_196_ValidatePriceSheetItemMatrixCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateMatrixPrice",
+      "Tc_367_ValidatePriceSheetProcessed": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,processSheet,validateSheetProcessed",
+      "Tc_195_ValidatePriceSheetItemListCost": "launchApp,siteLogin,validateItemMasterTitle,validateListPrice",
+      "Tc_196_ValidatePriceSheetItemMatrixCost": "launchApp,siteLogin,validateItemMasterTitle,validateMatrixPrice",
       "Tc_197_ValidatePriceSheetItemPoCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validatePoCost",
       "Tc_344_VerifySearchByName":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterSearchByName",
       "Tc_344_VerifyFilterByManufacturer":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByManufacturer",
@@ -22,8 +22,8 @@
       "Tc_360_PriceSheetOnHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,sheetOnHold",
       "Tc_360_PriceSheetRemoveHold": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,unHoldSheet",
       "Tc_367_PriceSheetMarkAsReady": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,saveSheet,navigateToPriceSheetDetailsPage,markReady",
-      "Tc_367_ValidatePriceSheetProcessed": "launchApp,siteLogin,runPriceSheetBatch,validateSheetProcessed",
-      "Tc_195_ValidatePriceSheetItemListCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateListPrice",
+      "Tc_367_ValidatePriceSheetProcessed": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,processSheet,validateSheetProcessed",
+      "Tc_195_ValidatePriceSheetItemListCost": "launchApp,siteLogin,validateItemMasterTitle,validateListPrice",
       "Tc_196_ValidatePriceSheetItemMatrixCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateMatrixPrice",
       "Tc_197_ValidatePriceSheetItemPoCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validatePoCost",
       "Tc_399_VerifyListPriceInputField":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyListPriceRow"
@@ -39,7 +39,7 @@
       "TC_ID": "Tc_189_NavigatePriceSheetDetails",
       "Manufacturer": "KOHLER CO",
       "SheetName": "TestAutomation001B",
-      "WiseItem": "*99599014041,*99599014042,*99599014043,*99599014044,*99599014045"
+      "WiseItem": "*99599014194,*99599014195,*99599014196"
     },
     {
       "TC_ID": "Tc_363_FillPriceSheetAndSave"
@@ -58,18 +58,18 @@
     },
     {
       "TC_ID": "Tc_195_ValidatePriceSheetItemListCost",
-      "WiseItem":"*99599014041",
-      "ListPrice":"10"
+      "WiseItem":"*99599014194",
+      "ListPrice":"12"
     },
     {
       "TC_ID": "Tc_196_ValidatePriceSheetItemMatrixCost",
-      "WiseItem":"*99599014041",
-      "MatrixCost":"4"
+      "WiseItem":"*99599014194",
+      "MatrixCost":"10"
     },
     {
       "TC_ID": "Tc_197_ValidatePriceSheetItemPoCost",
-      "WiseItem":"*99599014041",
-      "PoCost":"4"
+      "WiseItem":"*99599014194",
+      "PoCost":"10"
     },
     {
       "TC_ID": "Tc_344_VerifySearchByName"

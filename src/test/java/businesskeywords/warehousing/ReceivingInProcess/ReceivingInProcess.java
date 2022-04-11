@@ -393,6 +393,19 @@ public class ReceivingInProcess extends ReusableLib {
         Utility_Functions.timeWait(5);
     }
 
+    public void navigateBack(){
+        driver.navigate().back();
+        Utility_Functions.timeWait(4);
+    }
+
+    public void enterScanBarCodeNotReceiveRfGun() {
+        sendKeys(ReceivingInProcessPage.scanBarCode, Utility_Functions.xGetJsonData("BinLocation"));
+        Utility_Functions.timeWait(4);
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(spanElement("not available for RF Gun Receiving"),Utility_Functions.xGetJsonData("BinLocation")+" is not available for RF Gun Receiving.",Utility_Functions.xGetJsonData("BinLocation")+" is not available for RF Gun Receiving. is present");
+    }
+
     /**
      * Keyword to Enter Quantity
      */

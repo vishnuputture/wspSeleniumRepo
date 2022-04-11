@@ -1,5 +1,6 @@
 package supportLibraries;
 
+import com.github.javafaker.Faker;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.core.Helper;
 import com.winSupply.framework.*;
@@ -4902,5 +4903,17 @@ public class Utility_Functions extends ReusableLib {
                 driver.switchTo().window(handle);
             }
         }
+    }
+
+    public static String getRandomName(){
+        Faker faker = new Faker();
+
+        String name = faker.name().fullName();
+        String[] splitName=name.split(" ");
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String[] streetAddress = faker.address().streetAddress().split(" ");
+        String getRandomName="TestAuto:"+firstName+"_"+lastName+"-"+streetAddress[0];
+        return getRandomName;
     }
 }

@@ -238,4 +238,20 @@ public class ReceivingInProcess extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_767_verifyCreateNewBinWithNotAvailableReceiving(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify creation of New Bin with Condition as Good");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_970_ReceiveItemsMultipleBinsZonesRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to Receive items in multiple bins/zones in RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

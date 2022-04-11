@@ -1,9 +1,10 @@
 package businesskeywords.Pricing.PriceSheet;
 
+import bsh.util.Util;
+import businesskeywords.common.Login;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
-import com.winSupply.framework.Util;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -25,12 +26,14 @@ public class SelfServicePriceSheet extends ReusableLib {
      * @param helper The {@link Helper} object
      */
     CommonActions commonObj;
+    Login login;
     // String strDate;
     static String code;
 
     public SelfServicePriceSheet(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
+        login=new Login(helper);
     }
 
     public void navigateToSelfServicePriceSheet() {
@@ -44,46 +47,59 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     public void extractSheetDetails() {
-    	 Utility_Functions.timeWait(5);
-    	 Utility_Functions.xUpdateJson("PoCostMultiplier",driver.findElement(SelfServicePriceSheetPage.poCostMultiplier).getAttribute("value"));
-    	 Utility_Functions.xUpdateJson("MatrixCostMultiplier",driver.findElement(SelfServicePriceSheetPage.matrixCostMultiplier).getAttribute("value"));
-    	 Utility_Functions.xUpdateJson("ListPrice",driver.findElement(SelfServicePriceSheetPage.listPrice).getText());
-
-
+        Utility_Functions.timeWait(5);
+        Utility_Functions.xUpdateJson("PoCostMultiplier", driver.findElement(SelfServicePriceSheetPage.poCostMultiplier).getAttribute("value"));
+        Utility_Functions.xUpdateJson("MatrixCostMultiplier", driver.findElement(SelfServicePriceSheetPage.matrixCostMultiplier).getAttribute("value"));
+        Utility_Functions.xUpdateJson("ListPrice", driver.findElement(SelfServicePriceSheetPage.listPrice).getText());
     }
 
-    public void openNewTab(){
-    	Utility_Functions.openNewTab(driver);
+    public void reLoadPageIfProcessNowButtonNotAvailable() {
+        click(PriceSheetDetails.menuPriceSheet);
+        if(isDisplayed(PriceSheetDetails.toolTipPriceSheet)) {
+            click(PriceSheetDetails.toolTipPriceSheet);
+        }
+        navigateToSelfServicePriceSheet();
+        navigateToPriceSheetDetailsPage();
+    }
+
+    public void processSheet() {
+        Utility_Functions.timeWait(3);
+        checkDateInvalid(1);
+        Utility_Functions.timeWait(3);
+        if (!isDisplayed(PriceSheetDetails.processNowButton)) {
+            reLoadPageIfProcessNowButtonNotAvailable();
+        }
+        Utility_Functions.timeWait(3);
+        if (isDisplayed(PriceSheetDetails.processNowDisButton)) {
+            click(PriceSheetDetails.updateListPrice);
+        }
+        clickProcessNow();
+    }
+
+    public void clickProcessNow(){
+        try {
+            click(PriceSheetDetails.processNowButton, "Click [Process Now] Button");
+        } catch (Exception e) {
+            Utility_Functions.timeWait(5);
+            click(PriceSheetDetails.processNowButton, "Click [Process Now] Button");
+        }
+    }
+
+    public void openNewTab() {
+        Utility_Functions.openNewTab(driver);
     }
 
     public void validateSheetProcessed() {
-    	 Utility_Functions.openNewTab(driver);
-    	 String url = properties.getProperty("URLPriceSheet");
-         driver.get(url);
-         ngWaitRequestToFinish();
-         navigateToSelfServicePriceSheet();
-         //ngWaitRequestToFinish();
-         //Utility_Functions.xWaitForElementPresent(driver, driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")), 10);
-         try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-         //removed strip method below after gettext()
-         String status = driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")).getText();
-         System.out.println("Status :" + status);
-         //String status = driver.findElement(By.xpath("//tbody//tr//td[text()='"+Utility_Functions.xGetJsonData("priceSheetName")+"']//following-sibling::td//span")).getText();
-         if(status.equalsIgnoreCase("Processed"))
-         {
-             report.updateTestLog("VerifyRecord", "status Matched", Status.PASS);
-         }else
-         {
-             report.updateTestLog("VerifyRecord", "status Mis-Matched", Status.FAIL);
-         }
-
-
+        Utility_Functions.timeWait(4);
+        driver.navigate().refresh();
+        Utility_Functions.timeWait(6);
+        String status = driver.findElement(By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span")).getText();
+        System.out.println("Status :" + status);
+        if (status.equalsIgnoreCase("Processed")) {
+            report.updateTestLog("VerifyRecord", "status Matched", Status.PASS);
+        } else {
+            report.updateTestLog("VerifyRecord", "status Mis-Matched", Status.FAIL);
+        }
     }
 
     public String generateDate() {
@@ -117,6 +133,7 @@ public class SelfServicePriceSheet extends ReusableLib {
 
 
     public void addPriceSheetDetails() {
+        String name = Utility_Functions.getRandomName();
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -128,63 +145,60 @@ public class SelfServicePriceSheet extends ReusableLib {
 
         codeGen();
 
-
+        Utility_Functions.timeWait(6);
         click(SelfServicePriceSheetPage.addPriceSheetbtn);
 
-        autoComplete(SelfServicePriceSheetPage.manufacturer,"koh",SelfServicePriceSheetPage.manufacturerList,jsonData.getData("Manufacturer"));
-        sendKey(SelfServicePriceSheetPage.priceSheetName,jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
-       // sendKeyDate(SelfServicePriceSheetPage.effectiveDate,strPriceDate);
-        Utility_Functions.xSendkeysAndTab(driver.findElement(SelfServicePriceSheetPage.effectiveDate),strPriceDate);
-        sendKey(SelfServicePriceSheetPage.priceSheetCode,Utility_Functions.xGetJsonData("priceSheetCode"));
+        autoComplete(SelfServicePriceSheetPage.manufacturer, "koh", SelfServicePriceSheetPage.manufacturerList, jsonData.getData("Manufacturer"));
+        sendKey(SelfServicePriceSheetPage.priceSheetName, name);
+        // sendKeyDate(SelfServicePriceSheetPage.effectiveDate,strPriceDate);
+        Utility_Functions.xSendkeysAndTab(driver.findElement(SelfServicePriceSheetPage.effectiveDate), strPriceDate);
+        sendKey(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"));
 
         click(SelfServicePriceSheetPage.choosePriceSheet);
         String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
         System.out.println(path);
         Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
-        commonObj.validateText(SelfServicePriceSheetPage.successMessage,"Price Sheet successfully uploaded","upload Successful");
-
-        Utility_Functions.xUpdateJson("priceSheetName",jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
-
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
+        Utility_Functions.xUpdateJson("priceSheetName", name);
     }
 
-    public  void validateUpload()
-    {
-      String strdate=generateDate();;
-      commonObj.validateText(SelfServicePriceSheetPage.uploadedDataName,jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"),"Name Matched");
-      commonObj.validateText(SelfServicePriceSheetPage.uploadedDataManufacturer,jsonData.getData("Manufacturer"),"Manufacturer Matched");
-      commonObj.validateText(SelfServicePriceSheetPage.uploadedDataCode,strdate+"-"+Utility_Functions.xGetJsonData("priceSheetCode"),"Code Matched");
-      commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus,"available","Status Matched");
-
+    public void validateUpload() {
+        String strdate = generateDate();
+        ;
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataName, Utility_Functions.xGetJsonData("priceSheetName"), "Name Matched");
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataManufacturer, jsonData.getData("Manufacturer"), "Manufacturer Matched");
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataCode, strdate + "-" + Utility_Functions.xGetJsonData("priceSheetCode"), "Code Matched");
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus, "available", "Status Matched");
         commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
     }
 
 
-
     public void navigateToPriceSheetDetailsPage() {
-        click(SelfServicePriceSheetPage.uploadedDataName);
+        try {
+            click(SelfServicePriceSheetPage.uploadedDataName);
+        } catch (Exception e) {
+            Utility_Functions.timeWait(5);
+            click(SelfServicePriceSheetPage.uploadedDataName);
+        }
         commonObj.validateText(PriceSheetDetails.detailsPageHeader, "Price Sheet Details", "inside Details Page");
-
     }
 
 
-    public void verifyUploadedSheetDetails()
-    {
-     commonObj.validateText(PriceSheetDetails.codeValue,Utility_Functions.xGetJsonData("priceSheetEffDate")+"-"+Utility_Functions.xGetJsonData("priceSheetCode"),"code Matched");
-     commonObj.validateText(PriceSheetDetails.manufacturerValue,jsonData.getData("Manufacturer"),"Manufacturer Matched");
-     commonObj.validateText(PriceSheetDetails.statusValue,"Available","Status Matched");
-     String temp=driver.findElement(PriceSheetDetails.nameValue).getAttribute("value");
-     System.out.println("The innertext is "+temp);
-    // commonObj.validateText(PriceSheetDetails.nameValue,temp,"name matched");
-     if(temp.equalsIgnoreCase(jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode")))
-     {
-         report.updateTestLog("VerifyRecord", "Name Matched", Status.PASS);
-     }else
-     {
-         report.updateTestLog("VerifyRecord", "Name Mis-Matched", Status.FAIL);
-     }
+    public void verifyUploadedSheetDetails() {
+        commonObj.validateText(PriceSheetDetails.codeValue, Utility_Functions.xGetJsonData("priceSheetEffDate") + "-" + Utility_Functions.xGetJsonData("priceSheetCode"), "code Matched");
+        commonObj.validateText(PriceSheetDetails.manufacturerValue, jsonData.getData("Manufacturer"), "Manufacturer Matched");
+        commonObj.validateText(PriceSheetDetails.statusValue, "Available", "Status Matched");
+        String temp = driver.findElement(PriceSheetDetails.nameValue).getAttribute("value");
+        System.out.println("The innertext is " + temp);
+        // commonObj.validateText(PriceSheetDetails.nameValue,temp,"name matched");
+        if (temp.equalsIgnoreCase(Utility_Functions.xGetJsonData("priceSheetName"))) {
+            report.updateTestLog("VerifyRecord", "Name Matched", Status.PASS);
+        } else {
+            report.updateTestLog("VerifyRecord", "Name Mis-Matched", Status.FAIL);
+        }
     }
-
 
 
     public void verifyItemUpload() {
@@ -212,18 +226,37 @@ public class SelfServicePriceSheet extends ReusableLib {
 
 
         Utility_Functions.xSendkeysAndTab(driver.findElement(PriceSheetDetails.processedDate), strPriceDate);
-
-
-        click(PriceSheetDetails.saveButton);
+        Utility_Functions.timeWait(4);
+        try {
+            Utility_Functions.timeWait(6);
+            click(PriceSheetDetails.saveButton);
+        } catch (Exception e) {
+            Utility_Functions.timeWait(6);
+            click(PriceSheetDetails.saveButton);
+        }
         commonObj.validateText(PriceSheetDetails.statusValue, "Maintaining", "Status Matched");
 
     }
 
-    public void saveSheet() {
-        click(PriceSheetDetails.saveButton);
+    public void checkDateInvalid(int i) {
+        if (isDisplayed(PriceSheetDetails.invalidDate)) {
+            Date dt = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(dt);
+            c.add(Calendar.DATE, i);
+            dt = c.getTime();
+            SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+            String strPriceDate = formatter.format(dt);
+            Utility_Functions.xSendkeysAndTab(driver.findElement(PriceSheetDetails.processedDate), strPriceDate);
+            Utility_Functions.timeWait(3);
+        }
+    }
 
+    public void saveSheet() {
+        checkDateInvalid(0);
+        click(PriceSheetDetails.saveButton);
         Utility_Functions.timeWait(5);
-        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus,"Maintaining","Status Matched");
+        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus, "Maintaining", "Status Matched");
 
     }
 
@@ -242,7 +275,7 @@ public class SelfServicePriceSheet extends ReusableLib {
 
     }
 
-    public void markReady() {
+    public void processDatePick(){
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -250,8 +283,12 @@ public class SelfServicePriceSheet extends ReusableLib {
         dt = c.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strPriceDate = formatter.format(dt);
-
+        Utility_Functions.timeWait(3);
         Utility_Functions.xSendkeysAndTab(driver.findElement(PriceSheetDetails.processedDate), strPriceDate);
+    }
+
+    public void markReady() {
+        processDatePick();
         Utility_Functions.timeWait(3);
         click(PriceSheetDetails.markAsReadyButton);
         Utility_Functions.timeWait(5);
@@ -344,7 +381,7 @@ public class SelfServicePriceSheet extends ReusableLib {
      * This method To Filter search by name
      */
     public void filterSearchByName() {
-        searchByName(jsonData.getData("SheetName"));
+        searchByName(Utility_Functions.xGetJsonData("priceSheetName"));
     }
 
     public void refreshToCancel() {
@@ -415,8 +452,10 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.xSendkeysAndTab(report, driver.findElement(SelfServicePriceSheetPage.listPriceInput), val, "Enter " + val + " into List Price roe text field");
         String color = driver.findElement(SelfServicePriceSheetPage.listPrice).getCssValue("background-color");
         Utility_Functions.xAssertEquals(report, color, "rgba(204, 0, 0, 0.1)", "List Price Input box Color changed to RED");
-        Utility_Functions.xmouseOver(driver, SelfServicePriceSheetPage.errorIcon);
-        String error = driver.findElement(SelfServicePriceSheetPage.errorIcon).getAttribute("data-original-title");
+        int size=driver.findElements(SelfServicePriceSheetPage.errorIcon).size();
+        Utility_Functions.xmouseOver(driver, driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size-1));
+        String error = driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size-1).getAttribute("data-original-title");
+        Utility_Functions.xmouseOut(driver,driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size-1));
         Utility_Functions.timeWait(3);
         Utility_Functions.xAssertEquals(report, error, errMsg, "Error Message: ");
     }
@@ -440,6 +479,7 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     public void addPriceSheetDetailsNetSheet() {
+        String name = Utility_Functions.getRandomName();
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -450,20 +490,20 @@ public class SelfServicePriceSheet extends ReusableLib {
         System.out.println(strPriceDate);
         codeGen();
         click(SelfServicePriceSheetPage.addPriceSheetbtn);
-        autoComplete(SelfServicePriceSheetPage.manufacturer,"koh",SelfServicePriceSheetPage.manufacturerList,jsonData.getData("Manufacturer"));
+        autoComplete(SelfServicePriceSheetPage.manufacturer, "koh", SelfServicePriceSheetPage.manufacturerList, jsonData.getData("Manufacturer"));
         Utility_Functions.timeWait(5);
         System.out.println("DOne.....");
-        sendKey(SelfServicePriceSheetPage.priceSheetName,jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
-        Utility_Functions.xSendkeysAndTab(driver.findElement(SelfServicePriceSheetPage.effectiveDate),strPriceDate);
-        sendKey(SelfServicePriceSheetPage.priceSheetCode,Utility_Functions.xGetJsonData("priceSheetCode"));
+        sendKey(SelfServicePriceSheetPage.priceSheetName, name);
+        Utility_Functions.xSendkeysAndTab(driver.findElement(SelfServicePriceSheetPage.effectiveDate), strPriceDate);
+        sendKey(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"));
         click(SelfServicePriceSheetPage.netPrice);
         click(SelfServicePriceSheetPage.choosePriceSheet);
         String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
         System.out.println(path);
         Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
-        commonObj.validateText(SelfServicePriceSheetPage.successMessage,"Price Sheet successfully uploaded","upload Successful");
-        Utility_Functions.xUpdateJson("priceSheetName",jsonData.getData("SheetName")+Utility_Functions.xGetJsonData("priceSheetCode"));
+        commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
+        Utility_Functions.xUpdateJson("priceSheetName", name);
     }
 
     public void fillSheetDataNetPrice() {
@@ -477,12 +517,12 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.timeWait(2);
         Utility_Functions.xSendkeysAndTab(driver.findElement(PriceSheetDetails.processedDate), strPriceDate);
         Utility_Functions.timeWait(2);
-        int size=driver.findElements(PriceSheetDetails.errorMessage).size();
+        int size = driver.findElements(PriceSheetDetails.errorMessage).size();
         int count = 0;
-        if(Utility_Functions.xIsDisplayed(driver,PriceSheetDetails.errorMessage)) {
-            for(int i=0;count<size;count++) {
-                if(count==size-1){
-                    Utility_Functions.xScrollIntoView(driver,driver.findElements(PriceSheetDetails.errorMessage).get(i));
+        if (Utility_Functions.xIsDisplayed(driver, PriceSheetDetails.errorMessage)) {
+            for (int i = 0; count < size; count++) {
+                if (count == size - 1) {
+                    Utility_Functions.xScrollIntoView(driver, driver.findElements(PriceSheetDetails.errorMessage).get(i));
                 }
                 Utility_Functions.timeWait(2);
                 Utility_Functions.xMouseDoubleClick(driver, driver.findElements(PriceSheetDetails.errorMessage).get(i));
@@ -492,6 +532,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         }
         Utility_Functions.timeWait(2);
         click(PriceSheetDetails.saveButton);
+        Utility_Functions.timeWait(6);
         commonObj.validateText(PriceSheetDetails.statusValue, "Maintaining", "Status Matched");
     }
 }

@@ -232,7 +232,7 @@ public class SalesOrders extends ReusableLib{
 		commonObj.validateText(SalesOrdersPage.hdrCreatePO,"Create Purchase Order","Validating Create Purchase Order popup header");
 		click(SalesOrdersPage.btnNext, "Click [Next] button");
 		commonObj.validateText(SalesOrdersPage.hdrBuildPO,"Build Purchase Order for All Items on a Shipment","Validating Build Purchase Order popup header");
-
+		Utility_Functions.timeWait(3);
 		Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.ddnFreightCode, jsonData.getData("FreightCode"));
 		sendKeysAndEnter(SalesOrdersPage.tbxVendorNumber, jsonData.getData("VendorNumber"),"Entering Vendor Number");
 		click(SalesOrdersPage.btnCreatePO, "Click [Create PO] button");

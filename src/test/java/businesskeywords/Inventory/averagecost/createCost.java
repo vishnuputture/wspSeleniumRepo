@@ -116,7 +116,7 @@ public class createCost extends ReusableLib {
     	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
     	Utility_Functions.actionKey(Keys.ENTER, driver);
     	String temp=driver.findElement(ItemMasterPage.txtBoxListPrice).getAttribute("value").trim();
-    	if(temp.equalsIgnoreCase(jsonData.getData("ListPrice")))
+    	if(temp.equalsIgnoreCase(jsonData.getData("ListPrice")+".000000"))
         {
             report.updateTestLog("VerifyRecord", "Price Matched", Status.PASS);
         }else
