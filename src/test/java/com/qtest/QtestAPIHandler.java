@@ -95,7 +95,7 @@ public class QtestAPIHandler {
 		RequestSpecification request = RestAssured.given();
 		request.header("Authorization", "Bearer " + accessToken);
 		Response res = request
-				.get("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID + "/test-cases");
+				.get("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID + "/test-cases?size=2000");
 		int code = res.getStatusCode();
 		Assert.assertEquals(code, 200);
 		JsonPath jsonResponse = res.jsonPath();
@@ -153,7 +153,7 @@ public class QtestAPIHandler {
 		List<String> testPid = jsonResponse.getList("pid");
 		Map<Integer, String> idMapper = new HashMap<Integer, String>();
 		for (int i = 0; i < testId.size(); i++) {
-			idMapper.put(testId.get(i), testPid.get(i));
+			idMapper.put(testId.get(i), testNames.get(i));
 		}
 		return idMapper;
 	}
@@ -179,6 +179,26 @@ public class QtestAPIHandler {
 		JsonPath jsonResponse = res.jsonPath();
 		int testSuiteID = jsonResponse.getInt("id");
 		return testSuiteID;
+	}
+
+	public static int createTestCycle(int projectID, String testCycleName){
+		JSONObject json = new JSONObject();
+
+		json.put("name", testCycleName);
+		json.put("description", "Automated cycle");
+		String jsonBody = json.toJSONString();
+		RequestSpecification request = RestAssured.given();
+		request.header("Authorization", "Bearer " + accessToken);
+		request.header("Content-Type", "application/json");
+		request.body(jsonBody);
+
+		Response res = request.post("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID
+				+ "/test-cycles");
+		int code = res.getStatusCode();
+		Assert.assertEquals(code, 200);
+		JsonPath jsonResponse = res.jsonPath();
+		int testCycleID = jsonResponse.getInt("id");
+		return testCycleID;
 	}
 
 	/**

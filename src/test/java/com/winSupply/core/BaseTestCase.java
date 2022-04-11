@@ -98,6 +98,7 @@ public abstract class BaseTestCase {
 			nThreads = 1;
 		} else {
 			nThreads = testContext.getCurrentXmlTest().getThreadCount();
+
 		}
 
 		// Note: Separate threads may be spawned through usage of DataProvider
@@ -112,7 +113,7 @@ public abstract class BaseTestCase {
 
 		String qtestSave = getProperties("SaveDataToQTest");
 		if (qtestSave.equalsIgnoreCase("true")) {
-			QTestManager.createQtestSuite();
+			QTestManager.createQtestSuite(testContext.getSuite().getName());
 		}
 		if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
 			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
