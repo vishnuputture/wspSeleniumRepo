@@ -52,6 +52,7 @@ public class PurchaseOrderDetailsPage  extends ReusableLib {
   public static By convFactorValue = By.id("D_11_65");
   public static By orderNo2 = By.id("D_2_49");
   public static By btnSubmit=By.id("btnSubmit");
+  public static By tbxMultiplier=By.id("I_8_61");
 
   /******************************* Actions panel locators *******************************/
 

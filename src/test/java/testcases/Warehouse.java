@@ -422,4 +422,12 @@ public class Warehouse extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_DeleteManifestList(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Delete Manifest List");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

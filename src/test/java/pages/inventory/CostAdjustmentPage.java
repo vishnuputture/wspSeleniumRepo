@@ -32,7 +32,7 @@ public class CostAdjustmentPage extends ReusableLib{
 	public static By quantity=By.id("AdjQty");
 	public static By includeYes=By.id("I_6_64");
 	public static By firRowAdj=By.id("outIAQTY.1");
-	public static By secRowAdj=By.id("outIAMT.2");
+	public static By secRowAdj=By.id("outIAQTY.2");
 	public static By firRowAmt=By.id("outIAMT.1");
 	public static By secRowAmt=By.id("outIAMT.2");
 	public static By countNum=By.id("Ccount");

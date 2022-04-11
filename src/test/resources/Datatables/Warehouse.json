@@ -52,7 +52,8 @@
 			"Tc_DeleteTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,applyFilter,navigateToUpdateTruckPage,deleteTruck",
 			"Tc_UpdateDriverUI": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,navigateToUpdateDriverPage,updateDriverUI",
 			"Tc_UpdateDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,updateDriver",
-			"Tc_DeleteDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,deleteDriver"
+			"Tc_DeleteDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,deleteDriver",
+			"Tc_DeleteManifestList": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifestList,closeAllManifest,deleteManifestList,closeAllManifest,deleteManifestList"
 		}
 	],
 	"General_Data":[
@@ -302,6 +303,11 @@
 		},
 		{
 			"TC_ID": "Tc_UpdateDriver",
+			"Title": "Verify Update Driver",
+			"alias": "Testing"
+		},
+		{
+			"TC_ID": "Tc_DeleteManifestList",
 			"Title": "Verify Update Driver",
 			"alias": "Testing"
 		}

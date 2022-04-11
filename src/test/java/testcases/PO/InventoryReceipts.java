@@ -78,4 +78,108 @@ public class InventoryReceipts extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_909_ValidateEnableDisableCostCheckbox(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify functionality of Disable/Enable Cost checkbox");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_910_ValidateRelatedSOHyperlink(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify functionality of Related Sales Order Hyperlink");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_913_ValidatePreviousAndNextButtons(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify functionality of Previous and Next button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_915_ValidateCancelPOButton(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify functionality of Cancel Purchase Order button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_924_VerifyFunctionalityOfPartialReceivingPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify functionality of Partial Receiving PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Direct PO's partial receiving should not reflect in closed status until full receiving ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_928_VerifyFunctionalityOfOverReceivingPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify the functionality of over receiving a PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_929_verifyPositionToOrder(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify verify Position To Order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_932_verifyVendorOrderByField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Vendor Order By Field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_934_VerifyFunctionalityOfRefreshButton(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify the functionality of Refresh button in PURCHASE ORDER INQUIRY");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_935_VerifyFunctionalityOfTypeDropdown(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify the functionality of Type Dropdown in PURCHASE ORDER INQUIRY");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_936_VerifyFunctionalityOfStatusDropdown(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify the functionality of Status Dropdown in PURCHASE ORDER INQUIRY");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_937_VerifyFunctionalityOfHyperlinks(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify the functionality of hyperlinks in PURCHASE ORDER INQUIRY");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

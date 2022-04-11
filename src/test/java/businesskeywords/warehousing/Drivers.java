@@ -95,11 +95,13 @@ public class Drivers extends ReusableLib {
      */
     public void selectPage(int actPageNo, String expPage, String arrowIcon) {
         Utility_Functions.timeWait(2);
+        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.timeWait(2);
         Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(actPageNo));
-        //click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
         Utility_Functions.xScrollWindow(driver);
         String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
+        Utility_Functions.timeWait(2);
     }
 
     /**
@@ -112,18 +114,17 @@ public class Drivers extends ReusableLib {
         if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
         } else {
-            click(driver.findElements(DriversPage.pageArrow).get(2));
+            Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(2));
             Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
+            Utility_Functions.timeWait(2);
             while (!Utility_Functions.xIsDisplayed(driver, DriversPage.lastPage)) {
                 size++;
-                click(driver.findElements(DriversPage.pageArrow).get(2));
+                Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(2));
                 Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
             }
-            System.out.println("Started");
             Utility_Functions.timeWait(2);
-            click(driver.findElements(DriversPage.pageArrow).get(0));
+            Utility_Functions.xClickHiddenElement(driver,driver.findElements(DriversPage.pageArrow).get(0));
             Utility_Functions.xScrollIntoView(driver,DriversPage.pageArrow);
-            System.out.println("Ended");
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
             selectPage(3, "" + size + "", "Right double Arrow (>>)");
@@ -138,7 +139,11 @@ public class Drivers extends ReusableLib {
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.xScrollWindow(driver);
         Utility_Functions.timeWait(4);
-        click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        try {
+            click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
+        }catch (Exception e){
+            Utility_Functions.xClickHiddenElement(driver,By.xpath("//span[text()='" + pageNum + "']"));
+        }
         int driverCount = driver.findElements(DriversPage.driverNameCount).size();
         if (driverCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + driverCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " driver Count");
@@ -200,16 +205,12 @@ public class Drivers extends ReusableLib {
         sendKeys(DriversPage.username, genText(), "Entering username name");
         click(DriversPage.saveDriver, "Saving record");
         Utility_Functions.timeWait(3);
-        click(DriversPage.cdlSort);
-        Utility_Functions.timeWait(2);
         String actText = "Driver " + jsonData.getData("firstName") + " " + lastName + " (" + jsonData.getData("alias") + ") successfully created.";
         String expTest = Utility_Functions.getText(driver, By.xpath("//span[contains(text(),'" + jsonData.getData("firstName") + " " + lastName + "')]"));
         Utility_Functions.xAssertEquals(report, actText, expTest, "Driver successfully added pop up message");
         String actTx = "" + jsonData.getData("firstName") + " " + lastName + "";
         Utility_Functions.timeWait(3);
-        //String expTx = driver.findElement(By.xpath("//a[text()='" + jsonData.getData("firstName") + " " + lastName + "']")).getText();
         Utility_Functions.xUpdateJson("Driver", actTx);
-        //Utility_Functions.xAssertEquals(report, actTx, expTx, "Driver successfully added");
     }
 
     /**
@@ -256,7 +257,7 @@ public class Drivers extends ReusableLib {
      */
     public void navigateToUpdateDriverPage() {
         Utility_Functions.timeWait(3);
-        click(By.xpath("//td/a"), "CLick on Driver Name Hyper Link");
+        Utility_Functions.xClickHiddenElement(driver,By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(DriversPage.updateDriverHeader, "Update Driver", "Update Driver Page header is present");
     }

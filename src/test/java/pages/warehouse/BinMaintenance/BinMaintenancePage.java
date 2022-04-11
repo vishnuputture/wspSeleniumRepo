@@ -27,6 +27,8 @@ public class BinMaintenancePage {
     public static  By stagingArea=By.id("stagingArea");
     public static  By menuIcon=By.xpath("//i[contains(@class,'bars menu-icon')]");
     public static  By inboxIcon=By.xpath("//i[@class='menu-icon fa fa-inbox']");
+    public static  By pageArrow=By.xpath("//nav[@id='itemDetailsPagination1']//a[@class='page-link']");
+    public static  By currentPage=By.xpath("//nav[@id='itemDetailsPagination1']/descendant::input[@id='currentPage']");
     public static  By zone=By.xpath("//a[contains(text(),'Zones')]");
     public static  By shippingManifestIcon=By.xpath("//i[contains(@class,'fa fa-truck')]");
     public static  By printIcon=By.xpath("//i[@class='menu-icon fa fa-print']");

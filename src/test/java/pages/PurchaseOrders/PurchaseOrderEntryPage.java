@@ -44,7 +44,7 @@ public class PurchaseOrderEntryPage extends ReusableLib {
     public static By lstOptionsColumn = By.xpath("//div[starts-with(@id,'P1OPT')]/input");
     public static By lstOrderNumberColumn = By.xpath("//div[starts-with(@id,'P1ORDNUM')]");
     public static By btnNext = By.id("btnSubmit");
+    public static By btnNextPage = By.xpath("//span[contains(@class,'next-paging-link') or (text()='Next')]");
     public static By tbxOrderNumber = By.id("I_3_56");
-
 
 }

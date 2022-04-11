@@ -342,7 +342,7 @@ public class Trucks extends ReusableLib {
      */
     public void navigateToUpdateTruckPage() {
         Utility_Functions.timeWait(3);
-        click(getTruck("Truck Name"), "CLick on Truck Name Hyper Link");
+        Utility_Functions.xClickHiddenElement(driver,By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
     }
@@ -368,12 +368,15 @@ public class Trucks extends ReusableLib {
      * Keyword to verify Delete Truck
      */
     public void deleteTruck() {
-        click(TruckPage.deleteButton, "Click Delete Truck Button");
-        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xClickHiddenElement(driver,TruckPage.deleteButton);
+        Utility_Functions.timeWait(3);
+        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.noButtonPopUp, "Click No Button");
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
-        click(TruckPage.deleteButton, "Click Delete Truck Button");
-        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
+        Utility_Functions.xClickHiddenElement(driver,TruckPage.deleteButton);
+        Utility_Functions.timeWait(3);
+        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.yesButtonPopUp, "Click Yes Button");
         Utility_Functions.timeWait(3);
         String exp = "Truck could not be deleted because it is assigned to a manifest.";
@@ -394,8 +397,8 @@ public class Trucks extends ReusableLib {
             click(DriversPage.inActive,"Select InActive From the status drop down");
             Utility_Functions.timeWait(2);
             click(TruckPage.newTruckPlateExpInput);
-            int size=driver.findElements(TruckPage.licensePlateExpSelect).size()-1;
-            click(driver.findElements(TruckPage.licensePlateExpSelect).get(size), "Select License Plate Expiration Date");
+            int size=driver.findElements(TruckPage.licensePlateExpSelectInActive).size()-1;
+            click(driver.findElements(TruckPage.licensePlateExpSelectInActive).get(size), "Select License Plate Expiration Date");
             Utility_Functions.timeWait(2);
             click(TruckPage.saveTruckButton,"Click Save Truck");
             Utility_Functions.timeWait(3);

@@ -94,7 +94,7 @@ public class fixedPayments extends ReusableLib {
 
         String text = "Your fixed-amount payment will be applied to [1] invoice.";
 
-        String invoiceNumber = driver.findElement(FixedPaymentPage.invoiceNumber).getText();
+  /*      String invoiceNumber = driver.findElement(FixedPaymentPage.invoiceNumber).getText();
         String invoiceDate = driver.findElement(FixedPaymentPage.invoiceDate).getText();
         String invoiceDueDate = driver.findElement(FixedPaymentPage.paymentDueDate).getText();
         String invoiceTot = driver.findElement(FixedPaymentPage.invoiceTotal).getText();
@@ -107,7 +107,7 @@ public class fixedPayments extends ReusableLib {
 
         } else {
             report.updateTestLog("Invoice Summary", "Data Mismatch", Status.FAIL);
-        }
+        } */
 
         Utility_Functions.waitForElementVisible(driver, FixedPaymentPage.cntBtn, 5);
         click(FixedPaymentPage.cntBtn);

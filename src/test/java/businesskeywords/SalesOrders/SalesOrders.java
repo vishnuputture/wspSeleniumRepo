@@ -202,12 +202,22 @@ public class SalesOrders extends ReusableLib{
 	}
 
 	/**
-	 * Keyword to Items in Sales Order page
+	 * Keyword to select Items in Sales Order page
 	 */
 	public void selectItems(){
 		sendKeys(SalesOrdersPage.qtyOrdered,jsonData.getData("QtyOrder"),"Entering ordered quantity");
 		sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo"),"Entering item Number");
 		sendKeys(SalesOrdersPage.qtyToShip,jsonData.getData("QtyShip"),"Entering quantity to ship");
+		Utility_Functions.actionKey(Keys.ENTER, driver);
+		jsonData.putData("SalesOrderNo", driver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
+	}
+
+	/**
+	 * Keyword to select Items in Sales Order page
+	 */
+	public void selectItemsAndQty(){
+		sendKeys(SalesOrdersPage.qtyOrdered,jsonData.getData("QtyOrder"),"Entering ordered quantity");
+		sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo"),"Entering item Number");
 		Utility_Functions.actionKey(Keys.ENTER, driver);
 		jsonData.putData("SalesOrderNo", driver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 	}

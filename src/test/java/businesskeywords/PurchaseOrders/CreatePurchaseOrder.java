@@ -490,6 +490,16 @@ public class CreatePurchaseOrder extends ReusableLib {
             Utility_Functions.actionKey(Keys.F8, driver);
         }
         error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
+        if (error.contains("WARNING- Price field is zero or blank")){
+            sendKeysAndEnter(PurchaseOrderDetailsPage.pricePOD, "100","Enter value in Price tbx");
+            waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        }
+        error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
+        if (error.contains("ERROR - Multiplier can NOT be 0")){
+            sendKeysAndEnter(PurchaseOrderDetailsPage.tbxMultiplier, "1","Enter value in Multiplier tbx");
+            waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        }
+        error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
         if (error.contains("F4 Overrides")){
             Utility_Functions.actionKey(Keys.F4, driver);
         }
@@ -512,7 +522,7 @@ public class CreatePurchaseOrder extends ReusableLib {
      */
     public void getOrderNumberValue(){
         String orderNo = getText(PurchaseOrderDetailsPage.orderNo2).trim();
-        jsonData.putData("OrderNumber", orderNo);
+        jsonData.putData("PONumber", orderNo);
     }
 
     /**
