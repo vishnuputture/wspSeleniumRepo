@@ -232,7 +232,7 @@ public abstract class BaseTestCase {
 		htmlReporter.config().setReportName("Extent Report for Automation");
 		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
 		htmlReporter.config().setTheme(Theme.STANDARD);
-		
+
 		extentReport = new ExtentReports();
 		extentReport.attachReporter(htmlReporter);
 		extentReport.setSystemInfo("Project Name", properties.getProperty("ProjectName"));
