@@ -7,8 +7,8 @@
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
-                    <include name="Tc_TruckUI"></include>
-                    <include name="Tc_searchFiltersTruckUi"></include>
+                    <include name="Tc_209_AddNewDriverScreenUI"></include>
+                    <include name="Tc_240_CreateManifestUI"></include>
                 </methods>
             </class>
         </classes>
@@ -19,6 +19,16 @@
                 <methods>
                     <include name="Tc_748_ItemBinMaintenanceUI"/>
                     <include name="Tc_749_MainMenuOptions"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="InventoryReceipts">
+        <classes>
+            <class name="testcases.PO.InventoryReceipts">
+                <methods>
+                    <include name="Tc_902_InventoryReceiptUI"></include>
+                    <include name="Tc_CreatePoDirect"></include>
                 </methods>
             </class>
         </classes>

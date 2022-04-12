@@ -6,8 +6,8 @@
         <classes>
             <class name="testcases.makePayments.makePayments">
                 <methods>
-                    <include name="Tc_CreateSalesOrderInvoice"></include>
-                    <include name="Tc_CreateSalesOrderWithMultipleShipment"></include>
+                    <include name="Tc_140_disabling_Terms_Condition_CheckBox_Enroll"></include>
+                    <include name="Tc_141_EnableTermsConditionCheckBoxAndEnroll"></include>
                 </methods>
             </class>
         </classes>

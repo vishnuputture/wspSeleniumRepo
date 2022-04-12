@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Purchasing" parallel="none" thread-count="1">
-    <test name="InventoryReceipts">
-        <classes>
-            <class name="testcases.PO.InventoryReceipts">
-                <methods>
-                    <include name="Tc_902_InventoryReceiptUI"></include>
-                    <include name="Tc_CreatePoDirect"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
+
     <test name="PurchaseOrderConversionFactors">
         <classes>
             <class name="testcases.PO.PoConversionFactor">

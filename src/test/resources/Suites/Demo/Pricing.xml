@@ -16,7 +16,6 @@
         <classes>
             <class name="testcases.Pricing.Wise">
                 <methods>
-                    <include name="Tc_19_ValidateCustomerNumber"></include>
                     <include name="Tc_20_ValidateItemNumber"></include>
                     <include name="Tc_21_E2E"></include>
                 </methods>
@@ -28,7 +27,7 @@
             <class name="testcases.Pricing.SelfServicePriceSheet">
                 <methods>
                     <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
-                    <include name="Tc_189_NavigatePriceSheetDetails"></include>
+                    <include name="Tc_363_FillPriceSheetAndSave"></include>
                 </methods>
             </class>
         </classes>
