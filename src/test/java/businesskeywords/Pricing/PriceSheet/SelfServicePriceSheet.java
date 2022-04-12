@@ -169,7 +169,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         ;
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataName, Utility_Functions.xGetJsonData("priceSheetName"), "Name Matched");
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataManufacturer, jsonData.getData("Manufacturer"), "Manufacturer Matched");
-        commonObj.validateText(SelfServicePriceSheetPage.uploadedDataCode, strdate + "-" + Utility_Functions.xGetJsonData("priceSheetCode"), "Code Matched");
+        //commonObj.validateText(SelfServicePriceSheetPage.uploadedDataCode, strdate + "-" + Utility_Functions.xGetJsonData("priceSheetCode"), "Code Matched");
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus, "available", "Status Matched");
         commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
     }
