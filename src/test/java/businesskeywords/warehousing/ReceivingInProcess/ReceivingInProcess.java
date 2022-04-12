@@ -111,11 +111,13 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.verifyElementContainsText(By.xpath("//tr/td/a"), jsonData.getData("PO"), "Filter results found");
         String userId = getUserId();
         clickSearchIcon();
-        clearText(searchField("Purchase Order"));
-        searchAndApplyFilter("User ID", userId);
-        commonObj.validateText(By.xpath("//tr/td/span"), userId, "User id is present" + userId);
+        if (userId!=null) {
+            clearText(searchField("Purchase Order"));
+            searchAndApplyFilter("User ID", userId);
+            commonObj.validateText(By.xpath("//tr/td/span"), userId, "User id is present" + userId);
+            clickSearchIcon();
+        }
         String vendor = driver.findElements(By.xpath("//tr/td")).get(1).getText();
-        clickSearchIcon();
         clearText(searchField("User ID"));
         searchAndApplyFilter("Vendor", vendor);
         Utility_Functions.xAssertEquals(report, driver.findElements(By.xpath("//tr/td")).get(1).getText(), vendor, "");
