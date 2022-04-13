@@ -38,8 +38,11 @@ public class TimeStamp {
 					String timeStamp = "Run_" + Util.getCurrentFormattedTime(properties.getProperty("DateFormatString"))
 							.replace(" ", "_").replace(":", "-");
 
-					reportPathWithTimeStamp = frameworkParameters.getRelativePath() + Util.getFileSeparator()
+					/* reportPathWithTimeStamp = frameworkParameters.getRelativePath() + Util.getFileSeparator()
 							+ "Results" + Util.getFileSeparator() + frameworkParameters.getRunConfiguration()
+							+ Util.getFileSeparator() + timeStamp;*/
+					reportPathWithTimeStamp = frameworkParameters.getRelativePath() + Util.getFileSeparator()
+							+ properties.getProperty("ReportPath") + Util.getFileSeparator() + "Result"
 							+ Util.getFileSeparator() + timeStamp;
 					reportPathWithTimeStamp = WhitelistingPath.cleanStringForFilePath(reportPathWithTimeStamp);
 
