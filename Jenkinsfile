@@ -38,10 +38,10 @@ pipeline{
          publishHTML([allowMissing: false,
          alwaysLinkToLastBuild: true,
          keepAll: true,
-         reportDir:
-        '/test-output/Result/**/Extent Result/',
+         reportDir:'/test-output/Result/**/Extent Result/',
          reportFiles: 'ExtentReport.html',
          reportName: 'Jenkins- Execution Report'
+         ])
         }
         success {
             emailext mimeType: 'text/html',
