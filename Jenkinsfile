@@ -28,8 +28,7 @@ pipeline{
         stage('Test'){
             steps{
                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
-                bat "del result.zip"
-                zip zipFile: 'result.zip', archive: false, dir: '/test-output/Result/**/Extent Result'
+                bat "cp ${WORKSPACE}/test-output/Result/**/Extent Result/ExtentReport.html ${WORKSPACE}/ExtentReport.html"
             }
         }
     }
@@ -40,14 +39,14 @@ pipeline{
                body: "Execution Report Attachment Details",
                subject: "Email Report from - '${env.JOB_NAME}' - Build Passed",
                to: 'QAAutomation@winsupplyinc.com',
-               attachmentsPattern: 'result.zip'
+               attachmentsPattern: 'ExtentReport.html'
             }
         failure {
              emailext mimeType: 'text/html',
                body: "Execution Report Attachment Details",
                subject: "Email Report from - '${env.JOB_NAME}' - Build Failed",
                to: 'QAAutomation@winsupplyinc.com',
-               attachmentsPattern: 'result.zip'
+               attachmentsPattern: 'ExtentReport.html'
         }
     }
 }
