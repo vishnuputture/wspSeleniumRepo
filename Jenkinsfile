@@ -28,7 +28,7 @@ pipeline{
         stage('Test'){
             steps{
                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
-                bat "xcopy ${WORKSPACE}\\test-output\\Result\\**\\Extent Result\\ExtentReport.html ${WORKSPACE}\\ExtentReport.html"
+                bat "xcopy ${WORKSPACE}\\test-output\\Result\\**\\Extent Result\\ExtentReport.html ${WORKSPACE}\\ExtentReport.html /Y"
             }
         }
 
