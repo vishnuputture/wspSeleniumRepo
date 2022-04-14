@@ -35,13 +35,13 @@ pipeline{
     post {
         success {
             emailext mimeType: 'text/html',
-               body: '${FILE,path="test-output/Extent Result/ExtentReport.html"}',
+               body: '${FILE,path="test-output/Result/**/Extent Result/ExtentReport.html"}',
                subject: "Email Report from - '${env.JOB_NAME}' - Build Passed",
                to: 'QAAutomation@winsupplyinc.com'
             }
         failure {
              emailext mimeType: 'text/html',
-               body: '${FILE,path="test-output/Extent Result/ExtentReport.html"}',
+               body: '${FILE,path="test-output/Result/**/Extent Result/ExtentReport.html"}',
                subject: "Email Report from - '${env.JOB_NAME}' - Build Failed",
                to: 'QAAutomation@winsupplyinc.com'
         }
