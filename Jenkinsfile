@@ -28,21 +28,24 @@ pipeline{
         stage('Test'){
             steps{
                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
-                bat "copy ${WORKSPACE}\\test-output\\Result\\**\\Extent Result\\ExtentReport.html ${WORKSPACE}\\ExtentReport.html"
+                bat "xcopy ${WORKSPACE}\\test-output\\Result\\**\\Extent Result\\ExtentReport.html ${WORKSPACE}\\ExtentReport.html"
             }
         }
+
+        stage('Results')
+                {
+                 publishHTML([allowMissing: false,
+                 alwaysLinkToLastBuild: true,
+                 keepAll: true,
+                 reportDir:
+                '/test-output/Result/**/Extent Result/',
+                 reportFiles: 'ExtentReport.html',
+                 reportName: 'Jenkins- Execution Report'
+                 ])
+            }
     }
 
     post {
-        always{
-         publishHTML([allowMissing: false,
-         alwaysLinkToLastBuild: true,
-         keepAll: true,
-         reportDir:'/test-output/Result/**/Extent Result/',
-         reportFiles: 'ExtentReport.html',
-         reportName: 'Jenkins- Execution Report'
-         ])
-        }
         success {
             emailext mimeType: 'text/html',
                body: "Execution Report Attachment Details",
