@@ -28,23 +28,9 @@ pipeline{
         stage('Test'){
             steps{
                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
-
+                bat "xcopy ${WORKSPACE}\\test-output\\Result\\**\\Extent Result ${WORKSPACE} /i /d /y"
             }
         }
-
-        stage('Results'){
-            steps{
-                 publishHTML([allowMissing: false,
-                 alwaysLinkToLastBuild: true,
-                 keepAll: true,
-                 reportDir:
-                '/test-output/Result/**/Extent Result/',
-                 reportFiles: 'ExtentReport.html',
-                 reportName: 'Jenkins- Execution Report'
-                 ])
-                 bat "xcopy ${WORKSPACE}\\test-output\\Result\\**\\Extent Result ${WORKSPACE} /i /d /y"
-                 }
-            }
     }
 
     post {
