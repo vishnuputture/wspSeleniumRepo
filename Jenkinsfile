@@ -34,6 +34,15 @@ pipeline{
     }
 
     post {
+        always{   
+         publishHTML([allowMissing: false,
+         alwaysLinkToLastBuild: true,
+         keepAll: true,
+         reportDir:
+        '/test-output/Result/**/Extent Result/',
+         reportFiles: 'ExtentReport.html',
+         reportName: 'Jenkins- Execution Report'
+        }
         success {
             emailext mimeType: 'text/html',
                body: "Execution Report Attachment Details",
