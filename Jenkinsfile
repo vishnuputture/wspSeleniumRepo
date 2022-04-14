@@ -32,8 +32,8 @@ pipeline{
             }
         }
 
-        stage('Results')
-                {
+        stage('Results'){
+            steps{
                  publishHTML([allowMissing: false,
                  alwaysLinkToLastBuild: true,
                  keepAll: true,
@@ -42,6 +42,7 @@ pipeline{
                  reportFiles: 'ExtentReport.html',
                  reportName: 'Jenkins- Execution Report'
                  ])
+                 }
             }
     }
 
