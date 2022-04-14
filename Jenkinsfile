@@ -35,15 +35,17 @@ pipeline{
     post {
         success {
             emailext mimeType: 'text/html',
-               body: '${FILE,path="test-output/Result/Run_*/Extent Result/ExtentReport.html"}',
+               body: "Execution Report Attachment Details",
                subject: "Email Report from - '${env.JOB_NAME}' - Build Passed",
-               to: 'QAAutomation@winsupplyinc.com'
+               to: 'QAAutomation@winsupplyinc.com',
+               attachmentsPattern: '/test-output/Result/**/Extent Result/ExtentReport.html'
             }
         failure {
              emailext mimeType: 'text/html',
-               body: '${FILE,path="test-output/Result/Run_*/Extent Result/ExtentReport.html"}',
+               body: "Execution Report Attachment Details",
                subject: "Email Report from - '${env.JOB_NAME}' - Build Failed",
-               to: 'QAAutomation@winsupplyinc.com'
+               to: 'QAAutomation@winsupplyinc.com',
+               attachmentsPattern: '/test-output/Result/**/Extent Result/ExtentReport.html'
         }
     }
 }
