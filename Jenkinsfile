@@ -36,18 +36,18 @@ pipeline{
 
     post {
         success {
-            emailext attachmentsPattern: 'result.zip'
-                mimeType: 'text/html',
+            emailext mimeType: 'text/html',
                body: "Execution Report Attachment Details",
                subject: "Email Report from - '${env.JOB_NAME}' - Build Passed",
-               to: 'QAAutomation@winsupplyinc.com'
+               to: 'QAAutomation@winsupplyinc.com',
+               attachmentsPattern: 'result.zip'
             }
         failure {
-             emailext attachmentsPattern: 'result.zip'
-                mimeType: 'text/html',
+             emailext mimeType: 'text/html',
                body: "Execution Report Attachment Details",
                subject: "Email Report from - '${env.JOB_NAME}' - Build Failed",
-               to: 'QAAutomation@winsupplyinc.com'
+               to: 'QAAutomation@winsupplyinc.com',
+               attachmentsPattern: 'result.zip'
         }
     }
 }
