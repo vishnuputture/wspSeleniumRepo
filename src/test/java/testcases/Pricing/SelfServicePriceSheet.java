@@ -8,6 +8,14 @@ import org.testng.annotations.Test;
 public class SelfServicePriceSheet extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_286_SelfPriceSheetUi(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Self Price Sheet UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_379_CreateValidPriceSheetWithoutNETPriceValue(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -131,6 +139,14 @@ public class SelfServicePriceSheet extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_408_CreateValidPriceSheetWithNETPriceValue(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify List Price field with multiple values");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_753_ProcessNowIngesting(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Process Now even if Process Date is in future");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

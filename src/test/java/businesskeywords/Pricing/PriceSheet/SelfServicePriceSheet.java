@@ -36,14 +36,22 @@ public class SelfServicePriceSheet extends ReusableLib {
         login=new Login(helper);
     }
 
+    public By linkEle(String val){
+       return By.xpath("//a[text()='"+val+"']");
+    }
+
+    public By labelInput(String label){
+        return By.xpath("//label[contains(text(),'"+label+"')]/parent::div/descendant::input");
+    }
+
     public void navigateToSelfServicePriceSheet() {
         click(SelfServicePriceSheetPage.companySelector);
         click(SelfServicePriceSheetPage.companyLabel);
         sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
         commonObj.validateText(SelfServicePriceSheetPage.selectButton, "Select", "Validating Select button");
         click(SelfServicePriceSheetPage.selectButton);
+        Utility_Functions.timeWait(6);
         commonObj.validateText(SelfServicePriceSheetPage.headerTitle, "SELF SERVICE PRICE SHEETS", "Validating Landing page title");
-
     }
 
     public void extractSheetDetails() {
@@ -72,6 +80,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.timeWait(3);
         if (isDisplayed(PriceSheetDetails.processNowDisButton)) {
             click(PriceSheetDetails.updateListPrice);
+            checkDateInvalid(1);
         }
         clickProcessNow();
     }
@@ -239,6 +248,7 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     public void checkDateInvalid(int i) {
+        Utility_Functions.timeWait(2);
         if (isDisplayed(PriceSheetDetails.invalidDate)) {
             Date dt = new Date();
             Calendar c = Calendar.getInstance();
@@ -534,5 +544,43 @@ public class SelfServicePriceSheet extends ReusableLib {
         click(PriceSheetDetails.saveButton);
         Utility_Functions.timeWait(6);
         commonObj.validateText(PriceSheetDetails.statusValue, "Maintaining", "Status Matched");
+    }
+
+    public void priceSheetUi(){
+        commonObj.validateElementExists(SelfServicePriceSheetPage.iconI,"[i] icon is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.downloadNewVersion,"[CostPriceSheetTemplate.xlsx] link is present");
+        commonObj.validateText(linkEle("Dismiss"),"Dismiss","[Dismiss] link is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.helpIcon,"[?] icon is present");
+        String[] labels={"Search By Name","Filter By Manufacturer","Filter By Status","Filter By Effective Date"};
+        for(String label:labels){
+            commonObj.validateElementExists(labelInput(label),"["+label+"] is present");
+        }
+        commonObj.validateElementExists(SelfServicePriceSheetPage.startDate,"[Start Date] is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.endDate,"[End Date] is present");
+        commonObj.validateText(SelfServicePriceSheetPage.addPriceSheetbtn,"Add Price Sheet","[Add Price Sheet] button is present");
+        String[] colms={"Name","Manufacturer","Code","Status","Type","Effective Date","Processed Date"};
+        for (String colm:colms){
+            commonObj.validateElementExists(By.xpath("//th"),"["+colm+"] column is present");
+        }
+        commonObj.validateElementExists(SelfServicePriceSheetPage.menuIcon,"Menu icon is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.logoutIcon,"LogOut icon is present");
+    }
+
+    public void ingestingStatus(){
+        Utility_Functions.timeWait(4);
+        String status = driver.findElement(By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span")).getText();
+        if (status.equalsIgnoreCase("Ingesting")) {
+            report.updateTestLog("VerifyRecord", "status Matched", Status.PASS);
+        } else {
+            report.updateTestLog("VerifyRecord", "status Mis-Matched", Status.FAIL);
+        }
+        driver.navigate().refresh();
+        Utility_Functions.timeWait(6);
+        String status1 = driver.findElement(By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span")).getText();
+        if (status1.equalsIgnoreCase("Processed")) {
+            report.updateTestLog("VerifyRecord", "status Matched", Status.PASS);
+        } else {
+            report.updateTestLog("VerifyRecord", "status Mis-Matched", Status.FAIL);
+        }
     }
 }

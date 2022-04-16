@@ -1,6 +1,7 @@
 {
   "Business_Flow": [
     {
+      "Tc_286_SelfPriceSheetUi": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,priceSheetUi",
       "TC_379_CreateValidPriceSheetWithoutNETPriceValue": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,addPriceSheetDetails,validateUpload",
       "Tc_189_NavigatePriceSheetDetails":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyUploadedSheetDetails,verifyItemUpload",
       "Tc_363_FillPriceSheetAndSave": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,fillSheetData",
@@ -26,10 +27,14 @@
       "Tc_195_ValidatePriceSheetItemListCost": "launchApp,siteLogin,validateItemMasterTitle,validateListPrice",
       "Tc_196_ValidatePriceSheetItemMatrixCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateMatrixPrice",
       "Tc_197_ValidatePriceSheetItemPoCost": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validatePoCost",
-      "Tc_399_VerifyListPriceInputField":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyListPriceRow"
+      "Tc_399_VerifyListPriceInputField":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyListPriceRow",
+      "Tc_753_ProcessNowIngesting": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,processSheet,ingestingStatus"
     }
   ],
   "General_Data": [
+    {
+      "TC_ID": "Tc_286_SelfPriceSheetUi"
+    },
     {
       "TC_ID": "TC_379_CreateValidPriceSheetWithoutNETPriceValue",
       "Manufacturer": "KOHLER CO",
@@ -99,6 +104,9 @@
       "TC_ID": "TC_408_CreateValidPriceSheetWithNETPriceValue",
       "Manufacturer": "KOHLER CO",
       "SheetName": "TestAutomation001B"
+    },
+    {
+      "TC_ID": "Tc_753_ProcessNowIngesting"
     }
   ]
 }

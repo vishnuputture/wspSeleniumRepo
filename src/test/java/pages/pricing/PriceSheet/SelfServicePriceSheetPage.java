@@ -26,8 +26,14 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     //landing Page
 
     public static By headerTitle=By.xpath("//h2[text()='SELF SERVICE PRICE SHEETS']");
-
+    public static By iconI=By.xpath("//span[@class='fa-info-circle']");
     public static By addPriceSheetbtn= By.xpath("//button[text()=' Add Price Sheet ']");
+    public static By downloadNewVersion=By.xpath("//a[@download='CostPriceSheetTemplate.xlsx']");
+    public static By helpIcon=By.xpath("//a[contains(@class,'help-icon')]");
+    public static By startDate=By.id("startDate");
+    public static By endDate=By.id("endDate");
+    public static By logoutIcon=By.xpath("//i[contains(@class,'log-out-icon')]");
+    public static By menuIcon=By.xpath("//i[contains(@class,'menu-icon')]");
 
     //Modal
 
@@ -58,8 +64,6 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By filterManufacturer=By.xpath("//label[contains(text(),'Filter By Manufacturer')]/parent::div/descendant::span");
     public static By filterManufacturerDropField=By.xpath("//label[contains(text(),'Filter By Manufacturer')]/parent::div/descendant::input[contains(@class,'dropdown')]");
     public static By filterByStatus=By.xpath("//input[@name='searchTerm']");
-    public static By startDate=By.id("startDate");
-    public static By endDate=By.id("endDate");
     public static By closeIcon=By.xpath("//i[contains(@class,'dropdown-clear-icon')]");
     public static By updateListPriceCheckBox=By.id("listPrice");
     public static By errorIcon=By.xpath("//i[@class='fa fa-error_outline']");
