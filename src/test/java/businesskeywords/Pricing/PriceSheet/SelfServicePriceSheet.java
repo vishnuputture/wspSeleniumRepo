@@ -7,11 +7,14 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import pages.SPO.SpoPage;
 import pages.SalesOrders.SalesOrdersPage;
 import pages.pricing.PriceSheet.PriceSheetDetails;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.pricing.SpecialPricePage;
+import software.amazon.ion.Decimal;
 import supportLibraries.Utility_Functions;
 
 import java.io.File;
@@ -33,15 +36,23 @@ public class SelfServicePriceSheet extends ReusableLib {
     public SelfServicePriceSheet(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        login=new Login(helper);
+        login = new Login(helper);
     }
 
-    public By linkEle(String val){
-       return By.xpath("//a[text()='"+val+"']");
+    public By linkEle(String val) {
+        return By.xpath("//a[text()='" + val + "']");
     }
 
-    public By labelInput(String label){
-        return By.xpath("//label[contains(text(),'"+label+"')]/parent::div/descendant::input");
+    public By labelInput(String label) {
+        return By.xpath("//label[contains(text(),'" + label + "')]/parent::div/descendant::input");
+    }
+
+    public By checkedFields(String field) {
+        return By.xpath("//label[text()='" + field + "']/following-sibling::input[contains(@class,'ng-untouched')]");
+    }
+
+    public By nonEditableField(String field) {
+        return By.xpath("//label[text()='" + field + "']/following-sibling::div");
     }
 
     public void navigateToSelfServicePriceSheet() {
@@ -63,7 +74,7 @@ public class SelfServicePriceSheet extends ReusableLib {
 
     public void reLoadPageIfProcessNowButtonNotAvailable() {
         click(PriceSheetDetails.menuPriceSheet);
-        if(isDisplayed(PriceSheetDetails.toolTipPriceSheet)) {
+        if (isDisplayed(PriceSheetDetails.toolTipPriceSheet)) {
             click(PriceSheetDetails.toolTipPriceSheet);
         }
         navigateToSelfServicePriceSheet();
@@ -85,7 +96,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         clickProcessNow();
     }
 
-    public void clickProcessNow(){
+    public void clickProcessNow() {
         try {
             click(PriceSheetDetails.processNowButton, "Click [Process Now] Button");
         } catch (Exception e) {
@@ -285,7 +296,7 @@ public class SelfServicePriceSheet extends ReusableLib {
 
     }
 
-    public void processDatePick(){
+    public void processDatePick() {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -462,10 +473,10 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.xSendkeysAndTab(report, driver.findElement(SelfServicePriceSheetPage.listPriceInput), val, "Enter " + val + " into List Price roe text field");
         String color = driver.findElement(SelfServicePriceSheetPage.listPrice).getCssValue("background-color");
         Utility_Functions.xAssertEquals(report, color, "rgba(204, 0, 0, 0.1)", "List Price Input box Color changed to RED");
-        int size=driver.findElements(SelfServicePriceSheetPage.errorIcon).size();
-        Utility_Functions.xmouseOver(driver, driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size-1));
-        String error = driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size-1).getAttribute("data-original-title");
-        Utility_Functions.xmouseOut(driver,driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size-1));
+        int size = driver.findElements(SelfServicePriceSheetPage.errorIcon).size();
+        Utility_Functions.xmouseOver(driver, driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size - 1));
+        String error = driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size - 1).getAttribute("data-original-title");
+        Utility_Functions.xmouseOut(driver, driver.findElements(SelfServicePriceSheetPage.errorIcon).get(size - 1));
         Utility_Functions.timeWait(3);
         Utility_Functions.xAssertEquals(report, error, errMsg, "Error Message: ");
     }
@@ -546,27 +557,27 @@ public class SelfServicePriceSheet extends ReusableLib {
         commonObj.validateText(PriceSheetDetails.statusValue, "Maintaining", "Status Matched");
     }
 
-    public void priceSheetUi(){
-        commonObj.validateElementExists(SelfServicePriceSheetPage.iconI,"[i] icon is present");
-        commonObj.validateElementExists(SelfServicePriceSheetPage.downloadNewVersion,"[CostPriceSheetTemplate.xlsx] link is present");
-        commonObj.validateText(linkEle("Dismiss"),"Dismiss","[Dismiss] link is present");
-        commonObj.validateElementExists(SelfServicePriceSheetPage.helpIcon,"[?] icon is present");
-        String[] labels={"Search By Name","Filter By Manufacturer","Filter By Status","Filter By Effective Date"};
-        for(String label:labels){
-            commonObj.validateElementExists(labelInput(label),"["+label+"] is present");
+    public void priceSheetUi() {
+        commonObj.validateElementExists(SelfServicePriceSheetPage.iconI, "[i] icon is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.downloadNewVersion, "[CostPriceSheetTemplate.xlsx] link is present");
+        commonObj.validateText(linkEle("Dismiss"), "Dismiss", "[Dismiss] link is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.helpIcon, "[?] icon is present");
+        String[] labels = {"Search By Name", "Filter By Manufacturer", "Filter By Status", "Filter By Effective Date"};
+        for (String label : labels) {
+            commonObj.validateElementExists(labelInput(label), "[" + label + "] is present");
         }
-        commonObj.validateElementExists(SelfServicePriceSheetPage.startDate,"[Start Date] is present");
-        commonObj.validateElementExists(SelfServicePriceSheetPage.endDate,"[End Date] is present");
-        commonObj.validateText(SelfServicePriceSheetPage.addPriceSheetbtn,"Add Price Sheet","[Add Price Sheet] button is present");
-        String[] colms={"Name","Manufacturer","Code","Status","Type","Effective Date","Processed Date"};
-        for (String colm:colms){
-            commonObj.validateElementExists(By.xpath("//th"),"["+colm+"] column is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.startDate, "[Start Date] is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.endDate, "[End Date] is present");
+        commonObj.validateText(SelfServicePriceSheetPage.addPriceSheetbtn, "Add Price Sheet", "[Add Price Sheet] button is present");
+        String[] colms = {"Name", "Manufacturer", "Code", "Status", "Type", "Effective Date", "Processed Date"};
+        for (String colm : colms) {
+            commonObj.validateElementExists(By.xpath("//th"), "[" + colm + "] column is present");
         }
-        commonObj.validateElementExists(SelfServicePriceSheetPage.menuIcon,"Menu icon is present");
-        commonObj.validateElementExists(SelfServicePriceSheetPage.logoutIcon,"LogOut icon is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.menuIcon, "Menu icon is present");
+        commonObj.validateElementExists(SelfServicePriceSheetPage.logoutIcon, "LogOut icon is present");
     }
 
-    public void ingestingStatus(){
+    public void ingestingStatus() {
         Utility_Functions.timeWait(4);
         String status = driver.findElement(By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span")).getText();
         if (status.equalsIgnoreCase("Ingesting")) {
@@ -582,5 +593,123 @@ public class SelfServicePriceSheet extends ReusableLib {
         } else {
             report.updateTestLog("VerifyRecord", "status Mis-Matched", Status.FAIL);
         }
+    }
+
+    public void processSheetNonEditable() {
+        Utility_Functions.timeWait(4);
+        String[] fields = {"Update List Price", "Update PO Cost", "Update Matrix Cost"};
+        for (String field : fields) {
+            commonObj.validateElementExists(checkedFields(field), "[" + fields + "] check box is disabled");
+        }
+        commonObj.validateElementExists(nonEditableField("Effective Date"), "[Effective Date] field is disabled");
+        commonObj.validateElementExists(nonEditableField("Process Date"), "[Process Date] field is disabled");
+    }
+
+    public void deletePriceSheet() {
+        int size = driver.findElements(SelfServicePriceSheetPage.deleteIcon).size();
+        for (int i = 0; i < size; i++) {
+            Utility_Functions.timeWait(2);
+            Utility_Functions.xMouseClick(driver, driver.findElements(SelfServicePriceSheetPage.deleteIcon).get(0));
+            Utility_Functions.timeWait(2);
+            commonObj.validateText(SelfServicePriceSheetPage.deletePriceSheetPopup, "Delete Price Sheet?", "[Delete Price Sheet?] popup is present");
+            click(SelfServicePriceSheetPage.deleteButton, "Click Delete Button");
+            Utility_Functions.timeWait(2);
+            commonObj.validateText(SpoPage.popUp, "Price Sheet successfully deleted", "upload deleted");
+        }
+    }
+
+    public void percentageListNegative(int wisePriceInt){
+        Utility_Functions.xScrollIntoView(driver,PriceSheetDetails.newListPrice);
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElement(PriceSheetDetails.newListPrice));
+        int lessListPrice=wisePriceInt-1;
+        int negativeListPrice=lessListPrice-wisePriceInt;
+        double neg=Double.parseDouble(""+negativeListPrice+"");
+        double wiseP=Double.parseDouble(""+wisePriceInt+"");
+        double val=neg/wiseP;
+        double percentageListNegative=(val)*100;
+        sendKeysAndTab(PriceSheetDetails.newListPriceHigh,""+lessListPrice+"","Enter List price less than Wise List Price");
+        String listPercentage=driver.findElements(PriceSheetDetails.wiseListPriceChangePrice).get(0).getText().replace("$","");
+        Utility_Functions.xAssertEquals(report,listPercentage,""+percentageListNegative+"%","");
+    }
+
+    public void percentageListPositive(int wisePriceInt){
+        Utility_Functions.xScrollIntoView(driver,PriceSheetDetails.newListPrice);
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElement(PriceSheetDetails.newListPrice));
+        int greatListPrice=wisePriceInt+1;
+        int posListPrice=greatListPrice-wisePriceInt;
+        double pos=Double.parseDouble(""+posListPrice+"");
+        double wiseP=Double.parseDouble(""+wisePriceInt+"");
+        double val=pos/wiseP;
+        double percentageListPositive=(val)*100;
+        sendKeysAndTab(PriceSheetDetails.newListPriceHigh,""+greatListPrice+"","Enter List price less than Wise List Price");
+        String listPercentage=driver.findElements(PriceSheetDetails.wiseListPriceChangePrice).get(0).getText().replace("$","");
+        Utility_Functions.xAssertEquals(report,listPercentage,""+percentageListPositive+"%","");
+    }
+
+    public void listPriceCalculation(){
+        String wiseListPrice=getText(PriceSheetDetails.wiseListPriceChangePrice);
+        String wisePrice=wiseListPrice.replace("$","");
+        Double wisePriceDbl=Double.parseDouble(wisePrice);
+        int wisePriceInt=Integer.parseInt(wisePriceDbl.toString().replace(".0",""));
+        percentageListNegative(wisePriceInt);
+        percentageListPositive(wisePriceInt);
+    }
+
+    public void calculatePoCost(int wisePriceInt){
+        Utility_Functions.xScrollIntoView(driver,PriceSheetDetails.newListPrice);
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElement(PriceSheetDetails.newListPrice));
+        int greatListPrice=wisePriceInt+1;
+        sendKeysAndTab(PriceSheetDetails.newListPriceHigh,""+greatListPrice+"","Enter List price");
+        Utility_Functions.xScrollIntoView(driver,driver.findElements(PriceSheetDetails.newListPrice).get(1));
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElements(PriceSheetDetails.newListPrice).get(1));
+        sendKeysAndTab(PriceSheetDetails.newListPriceHigh,"0.5","Enter PO COst Multiplier");
+        double calculatedPoCost=greatListPrice*0.5000;
+        commonObj.validateText(PriceSheetDetails.currentHighlights,""+calculatedPoCost+"000","Calculated Po Cost Matches");
+        Utility_Functions.actionKey(Keys.TAB, driver);
+        double wisePoCost=Double.parseDouble(getText(PriceSheetDetails.currentHighlights).replace("$",""));
+        Utility_Functions.actionKey(Keys.TAB, driver);
+        double poPercentageCostChange=(calculatedPoCost-wisePoCost)*100;
+        double actPoPerChange=poPercentageCostChange/wisePoCost;
+        commonObj.validateText(PriceSheetDetails.currentHighlights,""+actPoPerChange+"%","");
+    }
+
+    public void poCostCalculation(){
+        String wiseListPrice=getText(PriceSheetDetails.wiseListPriceChangePrice);
+        String wisePrice=wiseListPrice.replace("$","");
+        Double wisePriceDbl=Double.parseDouble(wisePrice);
+        int wisePriceInt=Integer.parseInt(wisePriceDbl.toString().replace(".0",""));
+        calculatePoCost(wisePriceInt);
+    }
+
+    public void calculateMatrixCost(int wisePriceInt){
+        Utility_Functions.xScrollIntoView(driver,PriceSheetDetails.newListPrice);
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElement(PriceSheetDetails.newListPrice));
+        int greatListPrice=wisePriceInt+1;
+        sendKeysAndTab(PriceSheetDetails.newListPriceHigh,""+greatListPrice+"","Enter List price");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xScrollIntoView(driver,driver.findElements(PriceSheetDetails.newListPrice).get(1));
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElements(PriceSheetDetails.newListPrice).get(1));
+        Utility_Functions.actionKey(Keys.TAB, driver);
+        Utility_Functions.actionKey(Keys.TAB, driver);
+        Utility_Functions.actionKey(Keys.TAB, driver);
+        Utility_Functions.actionKey(Keys.TAB, driver);
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElement(PriceSheetDetails.currentHighlights));
+        sendKeysAndTab(PriceSheetDetails.newListPriceHigh,"0.5","Enter Matrix COst Multiplier");
+        double calculatedMatrixCost=greatListPrice*0.5000;
+        commonObj.validateText(PriceSheetDetails.currentHighlights,""+calculatedMatrixCost+"000","Calculated Matrix Cost Matches");
+        Utility_Functions.actionKey(Keys.TAB, driver);
+        double wiseMatrixCost=Double.parseDouble(getText(PriceSheetDetails.currentHighlights).replace("$",""));
+        Utility_Functions.actionKey(Keys.TAB, driver);
+        double poPercentageCostChange=(calculatedMatrixCost-wiseMatrixCost)*100;
+        double actPoPerChange=poPercentageCostChange/wiseMatrixCost;
+        commonObj.validateText(PriceSheetDetails.currentHighlights,""+actPoPerChange+"%","");
+    }
+
+    public void matrixCostCalculation(){
+        String wiseListPrice=getText(PriceSheetDetails.wiseListPriceChangePrice);
+        String wisePrice=wiseListPrice.replace("$","");
+        Double wisePriceDbl=Double.parseDouble(wisePrice);
+        int wisePriceInt=Integer.parseInt(wisePriceDbl.toString().replace(".0",""));
+        calculateMatrixCost(wisePriceInt);
     }
 }

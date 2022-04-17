@@ -37,4 +37,8 @@ public class PriceSheetDetails extends ReusableLib {
     public static By markAsReadyButton = By.xpath("//button[text()='Ready to Process']");
     public static By menuPriceSheet=By.xpath("//i[contains(@class,'sheet_maintenance')]");
     public static By toolTipPriceSheet=By.xpath("//a[@class='side-nav-tooltip']");
+    public static By newListPrice=By.xpath("//td[@class='htRight htNumeric']");
+    public static By newListPriceHigh=By.xpath("//textarea[@class='handsontableInput']");
+    public static By wiseListPriceChangePrice=By.xpath("//td[@class='htRight htNumeric htDimmed']");
+    public static By currentHighlights=By.xpath("//td[contains(@class,'current highlight')]");
 }

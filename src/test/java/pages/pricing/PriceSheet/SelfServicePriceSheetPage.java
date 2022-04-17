@@ -34,6 +34,9 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By endDate=By.id("endDate");
     public static By logoutIcon=By.xpath("//i[contains(@class,'log-out-icon')]");
     public static By menuIcon=By.xpath("//i[contains(@class,'menu-icon')]");
+    public static By deleteIcon=By.xpath("//td[contains(text(),'TestAuto:')]/parent::tr/descendant::i");
+    public static By deleteButton=By.xpath("//button[contains(text(),'Delete')]");
+    public static By deletePriceSheetPopup=By.xpath("//span[contains(text(),'Delete Price Sheet?')]");
 
     //Modal
 
@@ -58,7 +61,6 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By netPrice = By.id("netSheet");
     public static By matrixCostMultiplier = By.id("matrixCostMultiplier");
     public static By listPrice = By.xpath("//tbody//tr[1]//td[8]");
-    public static By deleteSheet=By.xpath("//td[contains(text(),'TestAuto:')]/following-sibling::td/i");
     public static By firstSearchByName=By.xpath("//tr[@class='ng-star-inserted']/td");
     public static By searchByName=By.xpath("//label[contains(text(),'Search By Name')]/parent::div/descendant::input");
     public static By filterManufacturer=By.xpath("//label[contains(text(),'Filter By Manufacturer')]/parent::div/descendant::span");

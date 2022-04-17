@@ -145,8 +145,56 @@ public class SelfServicePriceSheet extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_753_ProcessNowIngesting(SeleniumTestParameters testParameters) {
+    public void Tc_753_ProcessNowSheetAvailableIngesting(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Verify Process Now even if Process Date is in future");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_754_ProcessNowSheetReadyToProcessIngesting(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Process Now even if Process Date is in future");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_755_ProcessedNonEditable(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Processed Non Editable");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_764_DeletePriceSheet(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify delete price sheet");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_767_ListPriceCal(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify List Price Calculation");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_768_PoCostCal(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Po Percentage change");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_769_MatrixCostCal(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Matrix COst Calculation");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
