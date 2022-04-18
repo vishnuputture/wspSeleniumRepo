@@ -199,4 +199,20 @@ public class SelfServicePriceSheet extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_773_ProcessingErrorStatusNoIteNo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify status changes to 'processing error' when the line item is not found in database");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_774_SortByErrorFilter(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Sort By Error Filter");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

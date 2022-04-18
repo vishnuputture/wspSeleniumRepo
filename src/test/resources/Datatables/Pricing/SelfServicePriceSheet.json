@@ -24,7 +24,9 @@
       "Tc_764_DeletePriceSheet": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,deletePriceSheet",
       "Tc_767_ListPriceCal": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,listPriceCalculation",
       "Tc_768_PoCostCal": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,poCostCalculation",
-      "Tc_769_MatrixCostCal": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,matrixCostCalculation"
+      "Tc_769_MatrixCostCal": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,matrixCostCalculation",
+      "Tc_773_ProcessingErrorStatusNoIteNo": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,processErrorNoItem,validateSheetErrorProcess",
+      "Tc_774_SortByErrorFilter": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyErrorFilter"
     }
   ],
   "General_Data": [
@@ -121,6 +123,12 @@
     },
     {
       "TC_ID": "Tc_769_MatrixCostCal"
+    },
+    {
+      "TC_ID": "Tc_773_ProcessingErrorStatusNoIteNo"
+    },
+    {
+      "TC_ID": "Tc_774_SortByErrorFilter"
     }
   ]
 }

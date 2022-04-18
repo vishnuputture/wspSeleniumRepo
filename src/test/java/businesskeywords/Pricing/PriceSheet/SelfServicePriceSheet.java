@@ -81,7 +81,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         navigateToPriceSheetDetailsPage();
     }
 
-    public void processSheet() {
+    public void checkProcessNowButton(){
         Utility_Functions.timeWait(3);
         checkDateInvalid(1);
         Utility_Functions.timeWait(3);
@@ -93,6 +93,10 @@ public class SelfServicePriceSheet extends ReusableLib {
             click(PriceSheetDetails.updateListPrice);
             checkDateInvalid(1);
         }
+    }
+
+    public void processSheet() {
+        checkProcessNowButton();
         clickProcessNow();
     }
 
@@ -711,5 +715,48 @@ public class SelfServicePriceSheet extends ReusableLib {
         Double wisePriceDbl=Double.parseDouble(wisePrice);
         int wisePriceInt=Integer.parseInt(wisePriceDbl.toString().replace(".0",""));
         calculateMatrixCost(wisePriceInt);
+    }
+
+    public void validateSheetErrorProcess() {
+        Utility_Functions.timeWait(4);
+        driver.navigate().refresh();
+        Utility_Functions.timeWait(6);
+        String status = driver.findElement(By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span")).getText();
+        if (status.equalsIgnoreCase("Processing Error")) {
+            report.updateTestLog("VerifyRecord", "status Matched", Status.PASS);
+        } else {
+            report.updateTestLog("VerifyRecord", "status Mis-Matched", Status.FAIL);
+        }
+    }
+
+    public void processErrorNoItem(){
+        Utility_Functions.timeWait(4);
+        checkProcessNowButton();
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElement(By.xpath("//tr/td")));
+        sendKeys(PriceSheetDetails.newListPriceHigh,"Qse77T","Enter invalid Item Number");
+        click(PriceSheetDetails.updatePOCost);
+        clickProcessNow();
+    }
+
+    public void selectErrorFilter(By filter,By res,String filterOpt,String notPres){
+        click(PriceSheetDetails.itemFilter,"Click Item Filter");
+        click(filter,"Select ["+filterOpt+"] option from the item Filter dropdown");
+        commonObj.validateElementExists(res,"["+filterOpt+"] item number present");
+        Boolean bl=isDisplayed(filter);
+        Utility_Functions.xAssertEquals(report,bl,false,"["+notPres+"] Item not present ");
+    }
+
+    public void verifyErrorFilter(){
+        Utility_Functions.timeWait(4);
+        checkProcessNowButton();
+        Utility_Functions.xMouseDoubleClick(driver,driver.findElement(By.xpath("//tr/td")));
+        sendKeysAndTab(PriceSheetDetails.newListPriceHigh,"Qse7#@$$$s237T","Enter invalid Item Number");
+        commonObj.validateText(PriceSheetDetails.errorFilter,"Errors found","[Errors found] error message is present for invalid item number");
+        selectErrorFilter(PriceSheetDetails.withError,PriceSheetDetails.redInvalidItem,"With Error","Without Error");
+        selectErrorFilter(PriceSheetDetails.withoutError,PriceSheetDetails.withoutErrorItem,"Without Error","With Error");
+        click(PriceSheetDetails.itemFilter,"Click Item Filter");
+        click(PriceSheetDetails.allFilter,"Select [All] option from the item Filter dropdown");
+        commonObj.validateElementExists(PriceSheetDetails.redInvalidItem,"[With Error] item number present");
+        commonObj.validateElementExists(PriceSheetDetails.withoutErrorItem,"[Without Error] item number present");
     }
 }
