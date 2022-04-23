@@ -277,6 +277,13 @@
       "Title":"Test case to verify Skip receiving of stock PO in RF Gun",
       "Count":"3",
       "ItemNo":"AABABM200"
+    },
+    {
+      "TC_ID":"TC_988_AssignAlternateItemNoInRFGun",
+      "Title":"Test case to verify Assign alternate item number in RF Gun",
+      "Count":"3",
+      "ItemNo":"AABABM200",
+      "AlternateItemNo":"TEST3943178"
     }
   ]
 }
