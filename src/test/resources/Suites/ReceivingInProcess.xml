@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression" parallel="none" thread-count="1">
+	<test name="ReceivingInProcess">
+
+		<classes>
+			<class name="testcases.ReceivingInProcess">
+				<methods>
+					<include name="TC_983_POSearchUsingAlternateItemNumberInRFGun"></include>
+					<include name="TC_982_POSearchByItemNoVendorNameInRFGun"></include>
+					<include name="TC_984_ReceiveStockPOItemUsingItemNoInRFGun"></include>
+					<include name="TC_985_ReceiveItemInMultiplePOUsingAlternateItemNoInRFGun"></include>
+					<include name="TC_987_SkipReceivingOfStockPOInRFGun"></include>
+					<include name="TC_988_AssignAlternateItemNoInRFGun"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

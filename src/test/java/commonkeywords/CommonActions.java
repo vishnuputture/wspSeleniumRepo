@@ -14,6 +14,7 @@ import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
 
 import pages.*;
+import pages.inventory.AlternateItemNumberPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemMasterPage;
 import pages.pricing.AddSpecialPricingPage;
@@ -137,6 +138,13 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void splPricingToAddPricing() {
 		click(SpecialPricePage.specialPricingAdd,"Click on Add");
+	}
+
+	/**
+	 * This method navigates from Inventory Management - Main Menu to ALTERNATE ITEM NUMBER REVISIONS page
+	 */
+	public void inventoryToAlternateItemNoRevision() {
+		click(AlternateItemNumberPage.revisionAlternateItemNoMenu,"Click [Revision - Alternate Item Number] menu button");
 	}
 
 	/**

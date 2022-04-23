@@ -254,4 +254,52 @@ public class ReceivingInProcess extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_982_POSearchByItemNoVendorNameInRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify PO Search by item number/vendor name in RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_983_POSearchUsingAlternateItemNumberInRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify PO Search using alternate item number in RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_984_ReceiveStockPOItemUsingItemNoInRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Receive stock PO item using alternate item number in RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_985_ReceiveItemInMultiplePOUsingAlternateItemNoInRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Receive item in multiple PO using alternate item number");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_987_SkipReceivingOfStockPOInRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Skip receiving of stock PO in RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_988_AssignAlternateItemNoInRFGun(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to verify Assign alternate item number in RF Gun");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
