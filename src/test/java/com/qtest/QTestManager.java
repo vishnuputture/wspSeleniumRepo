@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.winSupply.framework.Settings;
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
+import org.json.simple.JSONObject;
 
 public class QTestManager {
 	public static int projectid;
@@ -46,18 +49,19 @@ public class QTestManager {
 
 	/**
 	 * get test cycle id
-	 * 
-	 * @param uitestCycleID
 	 * @return
 	 */
-	public static int getTestCycleID(String uitestCycleID) {
+	public static int getTestCycleID() {
 		Map<Integer, String> testCycleMapper = QtestAPIHandler.getTestCycleID(projectid);
 		int testCycleid = 0;
 		for (Integer key : testCycleMapper.keySet()) {
-			if (testCycleMapper.get(key).equalsIgnoreCase(uitestCycleID)) {
+			if (testCycleMapper.get(key).equalsIgnoreCase(properties.getProperty("qTestCycleName"))) {
 				testCycleid = key;
 				break;
 			}
+		}
+		if(testCycleid == 0){
+			testCycleid = QtestAPIHandler.createTestCycle(projectid,properties.getProperty("qTestCycleName"));
 		}
 		return testCycleid;
 	}
@@ -141,11 +145,11 @@ public class QTestManager {
 	 * This method will be initialized in beforeSuite Creates connection with API
 	 * Find Test Cycle and create Test suite
 	 */
-	public static void createQtestSuite() {
+	public static void createQtestSuite(String projectName) {
 		// properties = Settings.getInstance();
 		String username = properties.getProperty("qTest_UserName");
 		String password = properties.getProperty("qTest_Password");
-		createAPIconnection(username, password);
+		createAPIconnection(username, password,projectName);
 		createTestSuite();
 	}
 
@@ -161,10 +165,12 @@ public class QTestManager {
 	/**
 	 * Connect with QTest with API
 	 */
-	public static void createAPIconnection(String username, String password) {
+	public static void createAPIconnection(String username, String password, String projectName) {
 		QtestAPIHandler.getloginToken(username, password);
-
-		projectName = properties.getProperty("qTest_ProjectName");
+		/*projectName = System.getProperty("qTest_ProjectName");
+		if(projectName==null) {
+			projectName = properties.getProperty("qTest_ProjectName");
+		}*/
 		projectid = getQtestProjectID(projectName);
 		System.out.println("Connected with QTest with API");
 	}
@@ -174,7 +180,7 @@ public class QTestManager {
 	 */
 	public static void createTestSuite() {
 		uiTestCycleID = properties.getProperty("qTest_CycleID");
-		testCycleid = getTestCycleID(uiTestCycleID);
+		testCycleid = getTestCycleID();
 		testSuiteName = properties.getProperty("BuildName") + "_"
 				+ QtestAPIHandler.getQtestFormatTimeStamp().split("\\.")[0];
 		testSuiteID = QtestAPIHandler.addTestSuitetoTestCycle(projectid, testCycleid, testSuiteName);

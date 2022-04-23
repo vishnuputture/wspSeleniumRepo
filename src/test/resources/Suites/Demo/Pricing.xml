@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Pricing" parallel="none" thread-count="1">
+
+    <test name="SPAScreenVerification">
+        <classes>
+            <class name="testcases.Pricing.SPA" >
+                <methods>
+                    <include name="Tc_161_VerifySPAScreenHeader"></include>
+                    <include name="Tc_166_VerifySPAScreenInformation"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="WISE">
+        <classes>
+            <class name="testcases.Pricing.Wise">
+                <methods>
+                    <include name="Tc_20_ValidateItemNumber"></include>
+                    <include name="Tc_21_E2E"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="SelfServicePriceSheet">
+        <classes>
+            <class name="testcases.Pricing.SelfServicePriceSheet">
+                <methods>
+                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
+                    <include name="Tc_363_FillPriceSheetAndSave"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

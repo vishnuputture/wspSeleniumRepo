@@ -46,8 +46,9 @@ public class Login extends ReusableLib {
     	waitForVisible(LoginPage.signOnPageTitle);
     //	Utility_Functions.xUpdateJsonWithArray("Test", "1");
        // Utility_Functions.xUpdateJsonWithArray("Test", "2");
-        String user = getProperties("UserName");
-        String password = getProperties("Password");
+        String env=getProperties("ENV").toUpperCase();
+        String user = getProperties(env+"UserName");
+        String password = getProperties(env+"Password");
         sendKeys(LoginPage.userNametxtBox, user, "Entering username " + user);
         sendKeys(LoginPage.passWordtxtBox, password, "Entering password ******");
         Utility_Functions.actionKey(Keys.ENTER, driver);
@@ -55,7 +56,7 @@ public class Login extends ReusableLib {
         if (Utility_Functions.xIsDisplayed(driver, LoginPage.pendingScreenTitle)) {
             Utility_Functions.actionKey(Keys.ENTER, driver);
         }
-        if(getProperties("ENV").equalsIgnoreCase("PROD")){
+        if(env.equalsIgnoreCase("PROD")){
             sendKeys(MasterPage.sqlTxtBox,"where");
             Utility_Functions.actionKey(Keys.ENTER, driver);
             String currentCompany = getText(MasterPage.companyLbl);

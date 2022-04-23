@@ -98,6 +98,7 @@ public abstract class BaseTestCase {
 			nThreads = 1;
 		} else {
 			nThreads = testContext.getCurrentXmlTest().getThreadCount();
+
 		}
 
 		// Note: Separate threads may be spawned through usage of DataProvider
@@ -112,7 +113,7 @@ public abstract class BaseTestCase {
 
 		String qtestSave = getProperties("SaveDataToQTest");
 		if (qtestSave.equalsIgnoreCase("true")) {
-			QTestManager.createQtestSuite();
+			QTestManager.createQtestSuite(testContext.getSuite().getName());
 		}
 		if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
 			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
@@ -222,17 +223,24 @@ public abstract class BaseTestCase {
 		Properties properties = Settings.getInstance();
 		htmlReporter = new ExtentHtmlReporter(resultSummaryManager.getReportPath() + Util.getFileSeparator()
 				+ "Extent Result" + Util.getFileSeparator() + "ExtentReport.html");
+
+		htmlReporter.config().setDocumentTitle(" Extent Report");
+
+		// # Added Line Item to Run Suite of Suite on 12th April 2022
+		htmlReporter.setAppendExisting(true);
+
+		htmlReporter.config().setReportName("Extent Report for Automation");
+		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
+		htmlReporter.config().setTheme(Theme.STANDARD);
+
 		extentReport = new ExtentReports();
 		extentReport.attachReporter(htmlReporter);
 		extentReport.setSystemInfo("Project Name", properties.getProperty("ProjectName"));
 		extentReport.setSystemInfo("Framework", " Maven");
 		extentReport.setSystemInfo("Framework Version", "3.2");
-		extentReport.setSystemInfo("Author", "Gopesh");
+		extentReport.setSystemInfo("Author", "NUMQ");
 
-		htmlReporter.config().setDocumentTitle(" Extent Report");
-		htmlReporter.config().setReportName("Extent Report for Automation");
-		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
-		htmlReporter.config().setTheme(Theme.STANDARD);
+
 
 	}
 

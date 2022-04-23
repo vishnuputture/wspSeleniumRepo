@@ -26,10 +26,12 @@
       "Tc_971_ManuallyProcessStockPOInReceivingInProcessScreen":"launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberQty,exitToMaster,signOut,navigateToRFGun,searchPo,processPartialPO,navigateToReceivingInProcess,selectCompany,searchItem,verifyReceivedOpenLine,navigateToRemainingPage,verifyReceivedPOPartial",
       "Tc_972_ManuallyProcessStockPORFGun":"navigateToRFGun,searchPo,completePo,navigateToReceivingInProcess,selectCompany,searchItem",
       "TC_CreatePOWithTwoLineItem":"launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberQty,exitToMaster,signOut",
-      "Tc_979_PartialReceivingStockPOItemsInventoryReceiptsScreen":",navigateToInventoryReceipt,enterExistingPONumberRFGun,clickReceiveInProcessLink,switchToNextWindow,selectCompany,verifyReceiveSearchPo,switchBackToReceivingInProcess,enterQtyReceivedAndProcess,confirmFreight,switchToNextWindow,verifyReceiveSearchPo,switchBackToReceivingInProcess,navigatePOInquiryToMaster,signOut",
+      "Tc_979_PartialReceivingStockPOItemsInventoryReceiptsScreen":"launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberQty,exitToMaster,redirectToMasterPage,navigateToInventoryReceipt,enterExistingPONumberRFGun,clickReceiveInProcessLink,switchToNextWindow,selectCompany,verifyReceiveSearchPo,switchBackToReceivingInProcess,enterQtyReceivedAndProcess,confirmFreight,switchToNextWindow,verifyReceiveSearchPo,switchBackToReceivingInProcess,navigatePOInquiryToMaster,signOut",
       "TC_CreatePOWithSingleLineItem":"launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterSingleItemNumberQty,exitToMaster,signOut",
       "Tc_974_CompleteReceivingStockPOItemsInventoryReceiptsScreen":"launchApp,siteLogin,navigateToInventoryReceipt,enterExistingPONumberRFGun,clickReceiveInProcessLink,switchToNextWindow,selectCompany,verifyReceiveSearchPo,switchBackToReceivingInProcess,enterQtyReceivedAndProcess,confirmFreight,switchToNextWindow,verifyReceiveSearchPo,switchBackToReceivingInProcess,navigatePOInquiryToMaster,signOut",
       "Tc_976_ReceivingPartiallyReceivedStockPOInventoryReceiptsScreen":"navigateToRFGun,searchPo,processPartialPO,launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,orderInUse",
+      "Tc_767_verifyCreateNewBinWithNotAvailableReceiving":"navigateToBinMain,selectCompany,clickBinMaintenanceTab,enableContainsFilter,createNewBinAndVerifyData",
+      "Tc_970_ReceiveItemsMultipleBinsZonesRFGun":"launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterSingleItemNumberQty,exitToMaster,signOut,navigateToRFGun,searchPo,processPartialPurchase,enterScanBarCodeNotReceiveRfGun,navigateBack,processPurchase,enterScanBarCodeNotReceiveRfGun",
       "TC_983_POSearchUsingAlternateItemNumberInRFGun":"navigateToRFGun,verifySearchByItemNo",
       "TC_982_POSearchByItemNoVendorNameInRFGun":"navigateToRFGun,verifySearchByItemNo,clickFilterByVendorBtn,verifySearchByVendorName",
       "TC_984_ReceiveStockPOItemUsingItemNoInRFGun":"navigateToRFGun,searchUsingItemNo,selectRandomPOChkbxRFGun,clickCancelBtnRFGun,selectRandomPOChkbxRFGun,clickReceivePOBtnRFGun,clickConfirmBtn,enterQtyAndBin",
@@ -223,6 +225,25 @@
       "InvalidQty":"-2"
     },
     {
+      "TC_ID":"Tc_767_verifyCreateNewBinWithNotAvailableReceiving",
+      "BinLocation":"TEST94340",
+      "BinCondition":"Good",
+      "BinZones":"Default",
+      "BinPicking":"Manual Picking & Staging",
+      "BinReceiving":"Not Available For Receiving",
+      "BinAvailableToSell":"Yes",
+      "BinSpecialHandling":"Yes",
+      "BinStagingArea":"No",
+      "BinItems":"0"
+    },
+    {
+      "TC_ID":"Tc_970_ReceiveItemsMultipleBinsZonesRFGun",
+      "Title":"Test to Receive items in multiple bins/zones in RF Gun",
+      "ItemNo1":"AABABM100",
+      "QtyOrdered":"10",
+      "InvalidQty":"-2"
+    },
+    {
       "TC_ID":"TC_983_POSearchUsingAlternateItemNumberInRFGun",
       "Title":"Test case to verify PO Search using Item Number/Vendor Name in RF Gun",
       "InvalidItemNumber":"67735432",
@@ -256,13 +277,6 @@
       "Title":"Test case to verify Skip receiving of stock PO in RF Gun",
       "Count":"3",
       "ItemNo":"AABABM200"
-    },
-    {
-      "TC_ID":"TC_988_AssignAlternateItemNoInRFGun",
-      "Title":"Test case to verify Skip receiving of stock PO in RF Gun",
-      "Count":"3",
-      "ItemNo":"AABABM200",
-      "AlternateItemNo":"TEST3943178"
     }
   ]
 }

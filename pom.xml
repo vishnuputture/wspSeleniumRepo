@@ -90,7 +90,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<testNG.suiteXmlFile>src/test/resources/Suites/Demo/AprilDemoP1.xml</testNG.suiteXmlFile>
+				<testNG.suiteXmlFile>src/test/resources/Suites/Demo/MainDemo.xml</testNG.suiteXmlFile>
 			</properties>
 			<build>
 				<pluginManagement>
@@ -285,7 +285,11 @@
 			<artifactId>java-client</artifactId>
 			<version>${java.client.appium}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>0.12</version>
+		</dependency>
 		<!-- TestNG Dependency -->
 		<dependency>
 			<groupId>org.testng</groupId>

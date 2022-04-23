@@ -515,7 +515,7 @@ public class binMaintenance extends ReusableLib {
             Utility_Functions.xScrollWindow(driver);
             String pageNo = driver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
             Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
-        }catch (Exception e){
+        } catch (Exception e) {
             click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
             Utility_Functions.xScrollWindow(driver);
             String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
@@ -911,13 +911,13 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void enterRequiredData() {
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.createBinCondition), "Good", "Select 'Good' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.createBinCondition), jsonData.getData("BinCondition"), "Select 'Good' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(1), "Test", "Select 'Test' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(1), jsonData.getData("BinZone"), "Select 'Test' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(2), "RF Gun", "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(2), jsonData.getData("Picking"), "Select 'RF Gun' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(3), "RF Gun", "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(3), jsonData.getData("Receiving"), "Select 'RF Gun' option from the drop down ");
         Utility_Functions.timeWait(2);
     }
 
@@ -1256,8 +1256,8 @@ public class binMaintenance extends ReusableLib {
     public void clickCreateNewBinBtn() {
         try {
             click(button("Create New Bin"), "Click on [Create New Bin] button");
-        }catch (Exception e){
-            Utility_Functions.xClickHiddenElement(driver,button("Create New Bin"));
+        } catch (Exception e) {
+            Utility_Functions.xClickHiddenElement(driver, button("Create New Bin"));
         }
         waitForVisible(BinMaintenancePage.hdrCreateNewBinPopup);
     }
@@ -1361,6 +1361,7 @@ public class binMaintenance extends ReusableLib {
         clickCreateNewBinBtn();
         String binLocation = "TEST" + Utility_Functions.xRandomFunction(99999);
         jsonData.putData("BinLocation", binLocation);
+        Utility_Functions.xUpdateJson("BinLocation",binLocation);
         String condition = jsonData.getData("BinCondition");
         String zones = jsonData.getData("BinZones");
         String picking = jsonData.getData("BinPicking");

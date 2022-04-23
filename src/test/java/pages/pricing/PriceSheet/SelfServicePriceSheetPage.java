@@ -49,10 +49,10 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By uploadedDataCode=By.xpath("//tbody//tr[1]//td[3]");
     public static By uploadedDataStatus=By.xpath("//tbody//tr[1]//td[4]");
     public static By poCostMultiplier = By.id("poCostMultiplier");
-    public static By netPrice = By.id("netPrice");
+    public static By netPrice = By.id("netSheet");
     public static By matrixCostMultiplier = By.id("matrixCostMultiplier");
     public static By listPrice = By.xpath("//tbody//tr[1]//td[8]");
-
+    public static By deleteSheet=By.xpath("//td[contains(text(),'TestAuto:')]/following-sibling::td/i");
     public static By firstSearchByName=By.xpath("//tr[@class='ng-star-inserted']/td");
     public static By searchByName=By.xpath("//label[contains(text(),'Search By Name')]/parent::div/descendant::input");
     public static By filterManufacturer=By.xpath("//label[contains(text(),'Filter By Manufacturer')]/parent::div/descendant::span");

@@ -91,10 +91,10 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void clickSearchIcon() {
         Utility_Functions.timeWait(3);
-        if(isDisplayed(ReceivingInProcessPage.clearFilterCrossIcon)){
+        if (isDisplayed(ReceivingInProcessPage.clearFilterCrossIcon)) {
             click(ReceivingInProcessPage.clearFilterCrossIcon, "Click Vendor x");
             Utility_Functions.timeWait(2);
-        }else {
+        } else {
             click(TruckPage.filterSearch, "Click Search Filter icon");
         }
         Utility_Functions.timeWait(2);
@@ -114,11 +114,13 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.verifyElementContainsText(By.xpath("//tr/td/a"), jsonData.getData("PO"), "Filter results found");
         String userId = getUserId();
         clickSearchIcon();
-        clearText(searchField("Purchase Order"));
-        searchAndApplyFilter("User ID", userId);
-        commonObj.validateText(By.xpath("//tr/td/span"), userId, "User id is present" + userId);
+        if (userId!=null) {
+            clearText(searchField("Purchase Order"));
+            searchAndApplyFilter("User ID", userId);
+            commonObj.validateText(By.xpath("//tr/td/span"), userId, "User id is present" + userId);
+            clickSearchIcon();
+        }
         String vendor = driver.findElements(By.xpath("//tr/td")).get(1).getText();
-        clickSearchIcon();
         clearText(searchField("User ID"));
         searchAndApplyFilter("Vendor", vendor);
         Utility_Functions.xAssertEquals(report, driver.findElements(By.xpath("//tr/td")).get(1).getText(), vendor, "");
@@ -305,7 +307,7 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.validateText(button("Back"), "Back", "'Back' button is present");
     }
 
-    public void openNewTab(){
+    public void openNewTab() {
         Utility_Functions.openNewTab(driver);
     }
 
@@ -386,14 +388,32 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to Enter Scan Bar Code
      */
     public void enterScanBarCode() {
+        int size = 0;
         sendKeys(ReceivingInProcessPage.scanBarCode, "A");
         Utility_Functions.timeWait(4);
-        int size = driver.findElements(By.xpath("//ul/li")).size();
+        size = driver.findElements(By.xpath("//ul/li")).size();
+        if (size == 0) {
+            Utility_Functions.timeWait(5);
+            size = driver.findElements(By.xpath("//ul/li")).size();
+        }
         click(driver.findElements(By.xpath("//ul/li")).get(size - 1), "Select Location");
         Utility_Functions.timeWait(2);
         Utility_Functions.xUpdateJson("BinLocation", getAttribute(ReceivingInProcessPage.scanBarCode, "value"));
         Utility_Functions.actionKey(Keys.ENTER, driver);
         Utility_Functions.timeWait(5);
+    }
+
+    public void navigateBack() {
+        driver.navigate().back();
+        Utility_Functions.timeWait(4);
+    }
+
+    public void enterScanBarCodeNotReceiveRfGun() {
+        sendKeys(ReceivingInProcessPage.scanBarCode, Utility_Functions.xGetJsonData("BinLocation"));
+        Utility_Functions.timeWait(4);
+        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.timeWait(1);
+        commonObj.validateText(spanElement("not available for RF Gun Receiving"), Utility_Functions.xGetJsonData("BinLocation") + " is not available for RF Gun Receiving.", Utility_Functions.xGetJsonData("BinLocation") + " is not available for RF Gun Receiving. is present");
     }
 
     /**
@@ -426,30 +446,30 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.validateText(spanElement("There are no orders currently being received."), "There are no orders currently being received.", "'There are no orders currently being received.' message is present");
     }
 
-    public void clickReceiveInProcessLink(){
+    public void clickReceiveInProcessLink() {
         Utility_Functions.timeWait(4);
         click(By.xpath("//a[text()='Receiving in Process']"));
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
-    public void switchToNextWindow(){
-        Utility_Functions.xSwitchToWindow(driver,report,1);
+    public void switchToNextWindow() {
+        Utility_Functions.xSwitchToWindow(driver, report, 1);
     }
 
-    public void verifyPoNotFound(){
-        String po=Utility_Functions.xGetJsonData("PONumber");
+    public void verifyPoNotFound() {
+        String po = Utility_Functions.xGetJsonData("PONumber");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(BinMaintenancePage.toaster,"PO "+po+" is not available.","'PO "+po+" is not available.' is present");
+        commonObj.validateText(BinMaintenancePage.toaster, "PO " + po + " is not available.", "'PO " + po + " is not available.' is present");
     }
 
     public void searchItem() {
         clickSearchIcon();
         searchAndApplyFilter("Purchase Order", Utility_Functions.xGetJsonData("PONumber"));
     }
-    
-    public void confirmFreight(){
+
+    public void confirmFreight() {
         Utility_Functions.timeWait(6);
-        if(isDisplayed(WorkWithSalesQuotesPage.proc)) {
+        if (isDisplayed(WorkWithSalesQuotesPage.proc)) {
             click(WorkWithSalesQuotesPage.proc, "Click on process");
             Utility_Functions.timeWait(2);
             Utility_Functions.actionKey(Keys.ENTER, driver);
@@ -462,7 +482,7 @@ public class ReceivingInProcess extends ReusableLib {
     public void verifyReceivedOpenLine() {
         Utility_Functions.timeWait(4);
         if (isDisplayed(ReceivingInProcessPage.refreshPoListLink)) {
-            Utility_Functions.xClickHiddenElement(driver,ReceivingInProcessPage.refreshPoListLink);
+            Utility_Functions.xClickHiddenElement(driver, ReceivingInProcessPage.refreshPoListLink);
         }
         Utility_Functions.timeWait(4);
         commonObj.validateText(By.xpath("//tr/td/a"), Utility_Functions.xGetJsonData("PONumber"), "Result PO number found");
@@ -601,8 +621,8 @@ public class ReceivingInProcess extends ReusableLib {
         getOrderNumberVal();
     }
 
-    public void redirectToMasterPage(){
-        click(MatrixCostUpdatePage.btnF3,"Navigate Back to Master Page");
+    public void redirectToMasterPage() {
+        click(MatrixCostUpdatePage.btnF3, "Navigate Back to Master Page");
         Utility_Functions.timeWait(2);
     }
 
@@ -660,7 +680,7 @@ public class ReceivingInProcess extends ReusableLib {
         }
     }
 
-    public void backToReceivingScreen(){
+    public void backToReceivingScreen() {
         click(button("Back"));
         Utility_Functions.timeWait(4);
     }
@@ -675,18 +695,18 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.validateText(InventoryReceiptsPage.growlText, "No Detail Lines exist for this Purchase Order", "Validating growl text");
     }
 
-    public void completeProcess(){
+    public void completeProcess() {
         try {
             Utility_Functions.timeWait(2);
-            Utility_Functions.xAssertEquals(report,getAttribute(ReceivingInProcessPage.tickIcon,"ng-reflect-tooltip"),"Process","");
+            Utility_Functions.xAssertEquals(report, getAttribute(ReceivingInProcessPage.tickIcon, "ng-reflect-tooltip"), "Process", "");
             click(ReceivingInProcessPage.tickIcon, "Click Process Tick Icon");
-        }catch (Exception e){
+        } catch (Exception e) {
             Utility_Functions.timeWait(4);
             click(ReceivingInProcessPage.tickIcon, "Click Process Tick Icon");
         }
-        click(button("Complete PO"),"Click 'Complete PO' Button");
+        click(button("Complete PO"), "Click 'Complete PO' Button");
         Utility_Functions.timeWait(4);
-        Utility_Functions.xAssertEquals(report,getAttribute(ReceivingInProcessPage.tickIcon,"ng-reflect-tooltip"),"Completed","");
+        Utility_Functions.xAssertEquals(report, getAttribute(ReceivingInProcessPage.tickIcon, "ng-reflect-tooltip"), "Completed", "");
     }
 
     /**
