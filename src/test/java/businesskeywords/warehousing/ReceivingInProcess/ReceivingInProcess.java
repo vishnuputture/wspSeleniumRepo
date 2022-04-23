@@ -4,6 +4,8 @@ import businesskeywords.PurchaseOrders.CreatePurchaseOrder;
 import businesskeywords.warehousing.BinMaintanence.binMaintenance;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Status;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,6 +21,7 @@ import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import pages.warehouse.ReceivingInProcess.ReceivingInProcessPage;
 import pages.warehouse.TruckPage;
+import software.amazon.awssdk.services.kendra.model.Search;
 import supportLibraries.Utility_Functions;
 import testcases.Pricing.MatrixCostUpdate;
 
@@ -694,5 +697,319 @@ public class ReceivingInProcess extends ReusableLib {
         click(getButton("Process"), "Click Process");
         click(getButton("Complete PO"), "Click Complete PO");
         Utility_Functions.timeWait(5);
+    }
+
+    /**
+     * Keyword to search using ItemNo
+     */
+    public void searchUsingItemNo() {
+        String itemNo = jsonData.getData("ItemNo");
+        enterDataInSearchTbx(itemNo);
+        vrfyResultsDisplayed();
+    }
+
+    /**
+     * Keyword to verify search results are displayed
+     */
+    public void vrfyResultsDisplayed(){
+        List<WebElement> lstSearchResults = getListElement(ReceivingInProcessPage.lstVendorNameSearchResults);
+        int count = 0;
+        if(lstSearchResults.size()>0){
+            for (WebElement element : lstSearchResults){
+                Utility_Functions.xScrollIntoView(driver, element);
+                if (element.isDisplayed())
+                    count++;
+            }
+            if(count==lstSearchResults.size())
+                report.updateTestLog("Verify Search Results", "Search Results are displayed",Status.PASS);
+            else
+                report.updateTestLog("Verify Search Results", "Search Results are NOT displayed",Status.FAIL);
+        }else
+            report.updateTestLog("Verify Search Results", "No Search Results",Status.PASS);
+    }
+
+    /**
+     * Keyword to enter ItemNo/PO in search textbox
+     */
+    public void enterDataInSearchTbx(String itemNo) {
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        Utility_Functions.timeWait(2);
+        waitForElementPresent(ReceivingInProcessPage.searchPo);
+        sendKeysAndEnter(ReceivingInProcessPage.searchPo, itemNo, "Enter Item Number "+itemNo+" in [Search Item Or PO] box");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+    }
+
+    /**
+     * Keyword to verify search using invalid ItemNo
+     */
+    public void verifySearchByItemNo() {
+        String invalidItemNo = jsonData.getData("InvalidItemNumber");
+        enterDataInSearchTbx(invalidItemNo);
+        commonObj.validateText(ReceivingInProcessPage.lblNoResultsFound, "No results found", "Validating Search Results");
+        click(ReceivingInProcessPage.btnClearSearch);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+
+        searchUsingItemNo();
+    }
+
+    /**
+     * Keyword to click on [Filter By Vendor] button
+     */
+    public void clickFilterByVendorBtn() {
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementPresent(ReceivingInProcessPage.btnFilterByVendor);
+        Utility_Functions.xScrollIntoView(driver, ReceivingInProcessPage.btnFilterByVendor);
+
+        click(ReceivingInProcessPage.btnFilterByVendor, "Click [Filter by Vendor] button");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementPresent(ReceivingInProcessPage.tbxSearchByVendor);
+    }
+
+    /**
+     * Keyword to search using Vendor Name
+     */
+    public void searchByVendor() {
+        clickFilterByVendorBtn();
+        String vendorName = jsonData.getData("VendorName");
+        enterDataInSearchByVendorTbx(vendorName);
+        vrfyResultsDisplayed();
+    }
+
+    /**
+     * Keyword to enter Vendor Name in search textbox
+     */
+    public void enterDataInSearchByVendorTbx(String vendorName) {
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementPresent(ReceivingInProcessPage.tbxSearchByVendor);
+        sendKeys(ReceivingInProcessPage.tbxSearchByVendor, vendorName, "Enter Vendor Name "+vendorName+" in [Search by Vendor] box");
+        Utility_Functions.timeWait(5);
+
+        List<WebElement> lstVendorNameOptions = getListElement(ReceivingInProcessPage.lstVendorNameOptions);
+        if (lstVendorNameOptions.size()==1){
+            String vendor = lstVendorNameOptions.get(0).getText();
+            click(lstVendorNameOptions.get(0), "Selected Vendor ["+vendor+"] from type-ahead list");
+        }else{
+            int random = Utility_Functions.xRandomFunction(0, lstVendorNameOptions.size()-1);
+            String vendor = lstVendorNameOptions.get(random).getText();
+            click(lstVendorNameOptions.get(random), "Selected Vendor ["+vendor+"] from type-ahead list");
+        }
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+    }
+
+    /**
+     * Keyword to verify search by Vendor Name functionality
+     */
+    public void verifySearchByVendorName() {
+        String invalidVendorName = jsonData.getData("InvalidVendorName");
+        sendKeysAndEnter(ReceivingInProcessPage.tbxSearchByVendor, invalidVendorName, "Enter invalid Vendor Name "+invalidVendorName+" in [Search by Vendor] box");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        commonObj.validateText(ReceivingInProcessPage.lblNoResultsFound, "No results found", "Validating Search Results");
+        click(ReceivingInProcessPage.btnClearVendorSearch, "Click clear vendor search button");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+
+        searchByVendor();
+    }
+
+    /**
+     * Keyword to randomly click on select checkbox from Search Results
+     */
+    public void selectRandomPOChkbxRFGun() {
+        List<WebElement> lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
+        if (lstChkBxSelectPO.size()==1){
+            click(lstChkBxSelectPO.get(0), "Selected first PO from Search Results list");
+            Utility_Functions.timeWait(2);
+
+            lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
+            boolean chkbxIsSelected = lstChkBxSelectPO.get(0).getAttribute("class").contains("selected-checkbox");
+            if (chkbxIsSelected)
+                report.updateTestLog("Verify PO Selected", "Verify PO Selected",Status.PASS);
+            else
+                report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
+        }else{
+            int random = Utility_Functions.xRandomFunction(0, lstChkBxSelectPO.size()-1);
+            Utility_Functions.xScrollIntoView(driver, lstChkBxSelectPO.get(random));
+            click(lstChkBxSelectPO.get(random), "Selected random PO from Search Results list");
+            Utility_Functions.timeWait(2);
+
+            lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
+            boolean chkbxIsSelected = lstChkBxSelectPO.get(random).getAttribute("class").contains("selected-checkbox");
+            if (chkbxIsSelected)
+                report.updateTestLog("Verify PO Selected", "Verify PO Selected",Status.PASS);
+            else
+                report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
+        }
+    }
+
+    /**
+     * Keyword to click on first [N] checkbox from Search Results
+     */
+    public void selectPOChkbxRFGun() {
+        int count = Integer.parseInt(jsonData.getData("Count").trim());
+        selectFirstNPOChkbxRFGun(count);
+    }
+
+    /**
+     * Keyword to click on first [N] checkbox from Search Results
+     */
+    public void selectFirstNPOChkbxRFGun(int count) {
+        List<WebElement> lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
+        if (lstChkBxSelectPO.size()==1){
+            click(lstChkBxSelectPO.get(0), "Selected first PO from Search Results list");
+            Utility_Functions.timeWait(2);
+
+            lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
+            boolean chkbxIsSelected = lstChkBxSelectPO.get(0).getAttribute("class").contains("selected-checkbox");
+            if (chkbxIsSelected)
+                report.updateTestLog("Verify PO Selected", "Verify PO Selected",Status.PASS);
+            else
+                report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
+        }else{
+            for (int i=0; i<count; i++){
+                Utility_Functions.xScrollIntoView(driver, lstChkBxSelectPO.get(i));
+                click(lstChkBxSelectPO.get(i), "Selected ["+i+1+"th] PO from Search Results list");
+                Utility_Functions.timeWait(2);
+
+                lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
+                boolean chkbxIsSelected = lstChkBxSelectPO.get(i).getAttribute("class").contains("selected-checkbox");
+                if (chkbxIsSelected)
+                    report.updateTestLog("Verify PO Selected", "Verify PO Selected",Status.PASS);
+                else
+                    report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
+            }
+        }
+    }
+
+    /**
+     * Keyword to click on [Cancel] button and validate PO checkbox gets deselected in Search Results
+     */
+    public void clickCancelBtnRFGun(){
+        click(ReceivingInProcessPage.btnCancelPOSelection, "Click [Cancel]  button to deselect PO selection");
+        Utility_Functions.timeWait(2);
+
+        List<WebElement> lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
+        int count = 0;
+        for (WebElement element : lstChkBxSelectPO){
+            Utility_Functions.xScrollIntoView(driver, element);
+            boolean chkbxIsSelected = element.getAttribute("class").contains("selected-checkbox");
+            if (!chkbxIsSelected)
+                count++;
+        }
+        if (count==lstChkBxSelectPO.size())
+            report.updateTestLog("Verify PO selection is cleared", "Verify PO selection is cleared", Status.PASS);
+        else
+            report.updateTestLog("Verify PO selection is cleared", "failed to clear select PO", Status.FAIL);
+    }
+
+    /**
+     * Keyword to click on [Receive n PO(s)] button
+     */
+    public void clickReceivePOBtnRFGun() {
+        click(ReceivingInProcessPage.btnReceivePO, "Click [Receive n PO(s)] button");
+        Utility_Functions.timeWait(2);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        Utility_Functions.timeWait(2);
+    }
+
+    /**
+     * Keyword to click on [Confirm] button
+     */
+    public void clickConfirmBtn() {
+        waitForElementPresent(ReceivingInProcessPage.btnConfirm);
+        click(ReceivingInProcessPage.btnConfirm, "Click [Confirm] button");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
+        clickSkipBtnIfPresent();
+        Utility_Functions.actionKey(Keys.ESCAPE, driver);
+    }
+
+    /**
+     * Keyword to click on [Skip] button if present
+     */
+    public void clickSkipBtnIfPresent() {
+        Utility_Functions.timeWait(2);
+        if (isDisplayed(ReceivingInProcessPage.btnSkip)){
+            click(ReceivingInProcessPage.btnSkip, "Click [Skip] button");
+            Utility_Functions.timeWait(1);
+        }
+    }
+
+    /**
+     * Keyword to select [Qty] and [Bin] in put away screen
+     */
+    public void enterQtyAndBin() {
+        String qty = jsonData.getData("Qty");
+        String bin = jsonData.getData("Bin");
+        sendKeysAndTab(ReceivingInProcessPage.tbxQty, qty, "Enter Quantity as ["+qty+"] in [Qty] box");
+        Utility_Functions.timeWait(2);
+        click(ReceivingInProcessPage.btnSkip, "Click [Skip] button");
+        Utility_Functions.timeWait(2);
+        sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as ["+bin+"] in [Scan Location] box");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+
+        boolean isMsgDisplayed = Utility_Functions.xWaitForElementPresent(driver, ReceivingInProcessPage.msg, globalWait);
+        if (isMsgDisplayed)
+            report.updateTestLog("Verify notification is displayed", "Notification is displayed", Status.PASS);
+        else
+            report.updateTestLog("Verify notification is displayed", "Notification is NOT displayed", Status.FAIL);
+
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(ReceivingInProcessPage.hdrPurchaseOrderItems, "PURCHASE ORDER ITEMS", "Validating [PURCHASE ORDER ITEMS] header");
+    }
+
+    /**
+     * Keyword to select [Qty] and [Bin] in put away screen when Multiple PO's are selected
+     */
+    public void enterQtyAndBinWhenMultiplePOSelected() {
+        String qty = jsonData.getData("Qty");
+        String bin = jsonData.getData("Bin");
+        clickSkipBtnIfPresent();
+        sendKeysAndTab(ReceivingInProcessPage.tbxQty, qty, "Enter Quantity as ["+qty+"] in [Qty] box");
+        Utility_Functions.timeWait(1);
+        click(ReceivingInProcessPage.btnSkip, "Click [Skip] button");
+        Utility_Functions.timeWait(1);
+        sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as ["+bin+"] in [Scan Location] box");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+
+        boolean isMsgDisplayed = Utility_Functions.xWaitForElementPresent(driver, ReceivingInProcessPage.msg, globalWait);
+        if (isMsgDisplayed)
+            report.updateTestLog("Verify notification is displayed", "Notification is displayed", Status.PASS);
+        else
+            report.updateTestLog("Verify notification is displayed", "Notification is NOT displayed", Status.FAIL);
+
+        Utility_Functions.timeWait(3);
+    }
+
+    /**
+     * Keyword to click on [Skip PO] button
+     */
+    public void clickSkipPOBtn() {
+        waitForElementPresent(ReceivingInProcessPage.btnSkipPO);
+        click(ReceivingInProcessPage.btnSkipPO, "Click [Skip PO] button");
+        commonObj.validateText(ReceivingInProcessPage.msgSkipPO, "Are you sure you want to skip this PO? This action cannot be undone.", "Validate Skip PO message");
+        commonObj.validateElementExists(ReceivingInProcessPage.btnSkipPOModal, "Validate presence of [Skip PO] button");
+        commonObj.validateElementExists(ReceivingInProcessPage.btnReturnToPutAwaySkipPOModal, "Validate presence of [Return to Put Away] button");
+        click(ReceivingInProcessPage.btnSkipPOModal, "Click [Skip PO] button in Skip PO modal");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
+    }
+
+    /**
+     * Keyword to click on [Add Alternate Item Number] button
+     */
+    public void clickAddAlternateItemNumberBtn() {
+        waitForElementPresent(ReceivingInProcessPage.iconAddAlternateItem);
+        click(ReceivingInProcessPage.iconAddAlternateItem, "Click [Add Alternate Item Number] icon");
+        commonObj.validateElementExists(ReceivingInProcessPage.tbxEnterAlternateItemNumber, "Validate presence of [Scan or enter new value] searchbar");
+        commonObj.validateElementExists(ReceivingInProcessPage.btnBack, "Validate presence of [Back] button");
+        commonObj.validateElementExists(ReceivingInProcessPage.btnAddAlternateItem, "Validate presence of [Add Alternate Item Number] button");
+    }
+
+    /**
+     * Keyword to enter random Alternate Item Number
+     */
+    public void enterRandomAlternateItemNumber() {
+        String randomAlternateItemNumber = "TEST"+Utility_Functions.xRandomFunction();
+        jsonData.putData("AlternateItemNo", randomAlternateItemNumber);
+        sendKeys(ReceivingInProcessPage.tbxEnterAlternateItemNumber, randomAlternateItemNumber, "Enter random Alternate ItemNumber ["+randomAlternateItemNumber+"] in [Scan or enter new value] searchbar");
+        click(ReceivingInProcessPage.btnAddAlternateItem, "Click [Add Alternate Item Number] button");
+        waitForElementPresent(ReceivingInProcessPage.msgAlternatePartNoAddedSuccess);
     }
 }

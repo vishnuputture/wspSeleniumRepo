@@ -199,7 +199,7 @@ public class CreatePurchaseOrder extends ReusableLib {
             double avgPrice = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
             String formattedavgPrice = String.format("%.4f", avgPrice);
 
-            commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is       " +
+            commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is     " +
                     formattedavgPrice, "Verifying Cost variance validation");
             String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
 
