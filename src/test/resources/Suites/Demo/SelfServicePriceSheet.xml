@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Pricing" parallel="none" thread-count="1">
+
+    <test name="SelfServicePriceSheet1">
+        <classes>
+            <class name="testcases.Pricing.SelfServicePriceSheet">
+                <methods>
+                    <include name="Tc_286_SelfPriceSheetUi"></include>
+                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
+                    <include name="Tc_189_NavigatePriceSheetDetails"></include>
+                    <include name="Tc_363_FillPriceSheetAndSave"></include>
+                    <include name="Tc_360_PriceSheetOnHold"></include>
+                    <include name="Tc_360_PriceSheetRemoveHold"></include>
+                    <include name="Tc_367_PriceSheetMarkAsReady"></include>
+                    <include name="Tc_367_ValidatePriceSheetProcessed"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="SelfServicePriceSheet2">
+        <classes>
+            <class name="testcases.Pricing.SelfServicePriceSheet">
+                <methods>
+                    <include name="Tc_195_ValidatePriceSheetItemListCost"></include>
+                    <include name="Tc_196_ValidatePriceSheetItemMatrixCost"></include>
+                    <include name="Tc_197_ValidatePriceSheetItemPoCost"></include>
+                    <include name="Tc_344_VerifySearchByName"></include>
+                    <include name="Tc_344_VerifyFilterByManufacturer"></include>
+                    <include name="Tc_344_VerifyFilterByStatus"></include>
+                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
+                    <include name="Tc_344_VerifyFilterEffectiveDate"></include>
+                    <include name="Tc_399_VerifyListPriceInputField"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="SelfServicePriceSheet3">
+        <classes>
+            <class name="testcases.Pricing.SelfServicePriceSheet">
+                <methods>
+                    <include name="TC_408_CreateValidPriceSheetWithNETPriceValue"></include>
+                    <include name="Tc_753_ProcessNowSheetAvailableIngesting"></include>
+                    <include name="Tc_754_ProcessNowSheetReadyToProcessIngesting"></include>
+                    <include name="Tc_755_ProcessedNonEditable"></include>
+                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
+                    <include name="Tc_767_ListPriceCal"></include>
+                    <include name="Tc_768_PoCostCal"></include>
+                    <include name="Tc_769_MatrixCostCal"></include>
+                    <include name="Tc_773_ProcessingErrorStatusNoIteNo"></include>
+                    <include name="Tc_774_SortByErrorFilter"></include>
+                    <include name="Tc_764_DeletePriceSheet"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
