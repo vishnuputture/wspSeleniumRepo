@@ -37,4 +37,15 @@ public class PriceSheetDetails extends ReusableLib {
     public static By markAsReadyButton = By.xpath("//button[text()='Ready to Process']");
     public static By menuPriceSheet=By.xpath("//i[contains(@class,'sheet_maintenance')]");
     public static By toolTipPriceSheet=By.xpath("//a[@class='side-nav-tooltip']");
+    public static By newListPrice=By.xpath("//td[@class='htRight htNumeric']");
+    public static By newListPriceHigh=By.xpath("//textarea[@class='handsontableInput']");
+    public static By wiseListPriceChangePrice=By.xpath("//td[@class='htRight htNumeric htDimmed']");
+    public static By currentHighlights=By.xpath("//td[contains(@class,'current highlight')]");
+    public static By errorFilter=By.xpath("//span[contains(text(),'Errors found')]");
+    public static By itemFilter=By.xpath("//div/input[@id='errorFilterSelect2']");
+    public static By withError=By.xpath("//span[text()='With Errors']");
+    public static By allFilter=By.xpath("//span[text()='All']");
+    public static By withoutError=By.xpath("//span[text()='Without Errors']");
+    public static By redInvalidItem=By.xpath("//td[@class='afterHiddenColumn htInvalid']");
+    public static By withoutErrorItem=By.xpath("//td[@class='afterHiddenColumn']");
 }
