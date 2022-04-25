@@ -46,7 +46,9 @@ public class Login extends ReusableLib {
     	waitForVisible(LoginPage.signOnPageTitle);
     //	Utility_Functions.xUpdateJsonWithArray("Test", "1");
        // Utility_Functions.xUpdateJsonWithArray("Test", "2");
-        String env=getProperties("ENV").toUpperCase();
+
+
+        String env = getProperties("ENV");
         String user = getProperties(env+"UserName");
         String password = getProperties(env+"Password");
         sendKeys(LoginPage.userNametxtBox, user, "Entering username " + user);
