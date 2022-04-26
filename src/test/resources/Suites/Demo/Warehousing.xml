@@ -7,8 +7,59 @@
         <classes>
             <class name="testcases.Warehouse">
                 <methods>
+                    <include name="Tc_TruckUI"></include>
+                    <include name="Tc_TrucksHelpIcon"></include>
+                    <include name="Tc_TrucksPagination"></include>
+                    <include name="Tc_TrucksPageCount"></include>
+                    <include name="Tc_AddNewTruckScreenUI"></include>
+                    <include name="Tc_AddTruck"></include>
+                    <include name="Tc_searchFiltersTruckUi"></include>
+                    <include name="Tc_DriversUI"></include>
+                    <include name="Tc_197_DriversHelpIcon"></include>
+                    <include name="Tc_198_DriversPagination"></include>
+                    <include name="Tc_200_DriversPageCount"></include>
                     <include name="Tc_209_AddNewDriverScreenUI"></include>
+                    <include name="Tc_AddNewDriver"></include>
+                    <include name="Tc_ApplyFilterDriver"></include>
+                    <include name="Tc_ApplyFilterTruck"></include>
+                    <include name="Tc_ManifestListUI"></include>
+                    <include name="Tc_235_ManifestListHelpIcon"></include>
+                    <include name="Tc_236_ManifestListPagination"></include>
+                    <include name="Tc_238_ManifestListPageCount"></include>
+                    <include name="Tc_CreateSalesOrderWISE"></include>
                     <include name="Tc_240_CreateManifestUI"></include>
+                    <include name="Tc_241_collapseExpandSession"></include>
+                    <include name="TC_243_CreateManifest"></include>
+                    <include name="Tc_OrderNumberSO_UI"></include>
+                    <include name="Tc_SaveAdjustment"></include>
+                    <include name="TC_SOUpdateStatusDelivered"></include>
+                    <include name="Tc_DeliveredOrdersSearchFilterUI"></include>
+                    <include name="Tc_DeliveredOrdersUI"></include>
+                    <include name="Tc_VerifyDeliveredOrders"></include>
+                    <include name="TC_SOUpdateStatusNotDelivered"></include>
+                    <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
+                    <include name="Tc_NotDeliveredOrdersUI"></include>
+                    <include name="Tc_VerifyNotDeliveredOrders"></include>
+                    <include name="Tc_CloseManifest"></include>
+                    <include name="Tc_DeleteManifest"></include>
+                    <include name="Tc_CreateManifestNotDeliveredOrd"></include>
+                    <include name="Tc_AddToManifestNotDelOrd"></include>
+                    <include name="Tc_CreateManifestPO"></include>
+                    <include name="Tc_OrderNumberPO_UI"></include>
+                    <include name="Tc_SaveAdjustmentPO"></include>
+                    <include name="TC_POUpdateStatus"></include>
+                    <include name="TC_244_CreateManifestMultipleShipments"></include>
+                    <include name="Tc_InProgressStatus"></include>
+                    <include name="TC_258_ManifestSearchFilterUI"></include>
+                    <include name="TC_295_ManifestOrderUI"></include>
+                    <include name="TC_297_SaveNoteExpandCollapse"></include>
+                    <include name="Tc_DeleteTruck"></include>
+                    <include name="Tc_DeleteDriver"></include>
+                    <include name="Tc_UpdateTruckUI"></include>
+                    <include name="Tc_UpdateTruck"></include>
+                    <include name="Tc_UpdateDriverUI"></include>
+                    <include name="Tc_UpdateDriver"></include>
+                    <include name="Tc_DeleteManifestList"></include>
                 </methods>
             </class>
         </classes>
@@ -19,6 +70,62 @@
                 <methods>
                     <include name="Tc_748_ItemBinMaintenanceUI"/>
                     <include name="Tc_749_MainMenuOptions"/>
+                    <include name="Tc_753_verifyApplyClearAllFilter"/>
+                    <include name="Tc_758_verifyFilterCheckBox"/>
+                    <include name="Tc_759_verifyContainsCheckBox"/>
+                    <include name="Tc_761_verifySuggestedMatchesPopUp"/>
+                    <include name="Tc_763_verifyItemNoNegValue"/>
+                    <include name="Tc_764_verifyItemDescriptionFilter"/>
+                    <include name="Tc_765_verifyItemDescriptionField"/>
+                    <include name="Tc_750_VerifyUIItemNumbersAreAvailable"/>
+                    <include name="Tc_787_verifyOnHand"/>
+                    <include name="Tc_790_verifyClearAllButton"/>
+                    <include name="Tc_791_verifyPageCountItemMaintenance"/>
+                    <include name="Tc_793_verifyPaginationItemMaintenance"/>
+                    <include name="Tc_795_verifySelectAllCheckBox"/>
+                    <include name="Tc_801_verifyLabelButton"/>
+                    <include name="Tc_805_verifyItemDetailsMaster"/>
+                    <include name="Tc_808_verifyItemDetailsUI"/>
+                    <include name="Tc_809_verifyPaginationItemDetails"/>
+                    <include name="Tc_810_verifyPageCountItemDetails"/>
+                    <include name="Tc_811_verifySelectDeselectItem"/>
+                    <include name="Tc_812_verifySecondaryOptionsBinType"/>
+                    <include name="Tc_813_verifyUpdateBinType"/>
+                    <include name="Tc_814_verifyBinItemDeleteIcon"/>
+                    <include name="Tc_815_verifyBinItemEditIcon"/>
+                    <include name="Tc_819_verifyBinMinMax"/>
+                    <include name="Tc_824_verifyEditBinPopUp"/>
+                    <include name="Tc_827_verifyCreateBinButton"/>
+                    <include name="Tc_831_verifyCreateDuplicateBin"/>
+                    <include name="Tc_836_verifyAddBinButton"/>
+                    <include name="Tc_837_verifyDuplicateAddBin"/>
+                    <include name="Tc_857_ItemBinLedgerPageUI"/>
+                    <include name="Tc_858_verifyZoneUI"/>
+                    <include name="Tc_860_verifyApplyClearFilter"/>
+                    <include name="Tc_861_verifyItemNumberField"/>
+                    <include name="Tc_862_verifyNegItemNumberField"/>
+                    <include name="Tc_863_verifyBinLocation"/>
+                    <include name="Tc_864_verifyNewZone"/>
+                    <include name="Tc_865_verifyDuplicateZone"/>
+                    <include name="Tc_866_verifyEditZone"/>
+                    <include name="Tc_868_verifyPickSequence"/>
+                    <include name="Tc_869_verifyDeleteZOne"/>
+                    <include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"/>
+                    <include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"/>
+                    <include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"/>
+                    <include name="Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable"/>
+                    <include name="Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable"/>
+                    <include name="Tc_766_verifyUIOfCreateNewBinPopup"/>
+                    <include name="Tc_767_verifyCreateNewBinWithConditionGood"/>
+                    <include name="Tc_768_verifyCreateNewBinWithConditionDamaged"/>
+                    <include name="Tc_769_verifyCreateNewBinWithConditionDefective"/>
+                    <include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"/>
+                    <include name="Tc_780_verifyEditBinsButtonFunctionality"/>
+                    <include name="Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins"/>
+                    <include name="Tc_784_verifyBinWithItemsCannotBeDeleted"/>
+                    <include name="Tc_785_verifyBinWithoutItemsCanBeDeleted"/>
+                    <include name="Tc_786_verifyPrintBinLabelsFunctionality"/>
+                    <include name="Tc_789_verifyPrintBinItemsLabelFunctionality"/>
                 </methods>
             </class>
         </classes>
@@ -29,6 +136,27 @@
                 <methods>
                     <include name="Tc_902_InventoryReceiptUI"></include>
                     <include name="Tc_CreatePoDirect"></include>
+                    <include name="Tc_903_PurchaseOrderInquiryHyperlink"></include>
+                    <include name="Tc_904_PurchaseOrderNumberField"></include>
+                    <include name="Tc_906_changeUnitCost"></include>
+                    <include name="Tc_907_VerifyUnitCostField"></include>
+                    <include name="Tc_908_verifyPONumber"></include>
+                    <include name="Tc_909_ValidateEnableDisableCostCheckbox"></include>
+                    <include name="Tc_910_ValidateRelatedSOHyperlink"></include>
+                    <include name="Tc_913_ValidatePreviousAndNextButtons"></include>
+                    <include name="Tc_915_ValidateCancelPOButton"></include>
+                    <include name="Tc_924_VerifyFunctionalityOfPartialReceivingPO"></include>
+                    <include name="Tc_925_VerifyPartialReceivingPODoesNotDisplayedInClosedStatus"></include>
+                    <include name="Tc_905_QtyReceivedField"></include>
+                    <include name="Tc_CreatePoDirect"></include>
+                    <include name="Tc_897_OrderInUse"></include>
+                    <include name="Tc_928_VerifyFunctionalityOfOverReceivingPO"></include>
+                    <include name="Tc_929_verifyPositionToOrder"></include>
+                    <include name="Tc_932_verifyVendorOrderByField"></include>
+                    <include name="Tc_934_VerifyFunctionalityOfRefreshButton"></include>
+                    <include name="Tc_935_VerifyFunctionalityOfTypeDropdown"></include>
+                    <include name="Tc_936_VerifyFunctionalityOfStatusDropdown"></include>
+                    <include name="Tc_937_VerifyFunctionalityOfHyperlinks"></include>
                 </methods>
             </class>
         </classes>
@@ -39,6 +167,41 @@
                 <methods>
                     <include name="Tc_957_SearchFilterUI"></include>
                     <include name="Tc_958_SearchFilterFunctionality"></include>
+                    <include name="Tc_956_clearAllApplyFilterFunctionality"></include>
+                    <include name="Tc_946_verifyPurchaseOrderInputField"></include>
+                    <include name="Tc_947_verifyUserIdInputField"></include>
+                    <include name="Tc_948_verifyVendorInputField"></include>
+                    <include name="Tc_945_receivingInProcessUI"></include>
+                    <include name="Tc_959_sortingFunctionality"></include>
+                    <include name="Tc_960_SearchFilterRemainingUI"></include>
+                    <include name="Tc_961_SearchFilterRemainFunctionality"></include>
+                    <include name="Tc_962_clearAllApplyFilterFunctionality"></include>
+                    <include name="Tc_949_verifyItemNoInputField"></include>
+                    <include name="Tc_950_verifyItemDescriptionInputField"></include>
+                    <include name="Tc_951_verifyRemainingUI"></include>
+                    <include name="Tc_965_ReceiveItemsStockPORFGun"></include>
+                    <include name="Tc_966_ReceiveItemsStockPORFGunAllItem"></include>
+                    <include name="Tc_975_ReceivingCompletedStockPOInventoryReceiptsScreen"></include>
+                    <include name="Tc_967_POCompletelyReceivedNightlyProcess"></include>
+                    <include name="Tc_CreatePoDirect"></include>
+                    <include name="Tc_968_ReceiveDirectPOInRFGun"></include>
+                    <include name="Tc_969_AssignBinsItemsRFGun"></include>
+                    <include name="Tc_975_ReceivingProcessMultipleScreens"></include>
+                    <include name="Tc_971_ManuallyProcessStockPOInReceivingInProcessScreen"></include>
+                    <include name="Tc_972_ManuallyProcessStockPORFGun"></include>
+                    <include name="TC_CreatePOWithTwoLineItem"></include>
+                    <include name="Tc_979_PartialReceivingStockPOItemsInventoryReceiptsScreen"></include>
+                    <include name="TC_CreatePOWithSingleLineItem"></include>
+                    <include name="Tc_974_CompleteReceivingStockPOItemsInventoryReceiptsScreen"></include>
+                    <include name="Tc_976_ReceivingPartiallyReceivedStockPOInventoryReceiptsScreen"></include>
+                    <include name="Tc_767_verifyCreateNewBinWithNotAvailableReceiving"></include>
+                    <include name="Tc_970_ReceiveItemsMultipleBinsZonesRFGun"></include>
+                    <include name="TC_983_POSearchUsingAlternateItemNumberInRFGun"></include>
+                    <include name="TC_982_POSearchByItemNoVendorNameInRFGun"></include>
+                    <include name="TC_984_ReceiveStockPOItemUsingItemNoInRFGun"></include>
+                    <include name="TC_985_ReceiveItemInMultiplePOUsingAlternateItemNoInRFGun"></include>
+                    <include name="TC_987_SkipReceivingOfStockPOInRFGun"></include>
+                    <include name="TC_988_AssignAlternateItemNoInRFGun"></include>
                 </methods>
             </class>
         </classes>
