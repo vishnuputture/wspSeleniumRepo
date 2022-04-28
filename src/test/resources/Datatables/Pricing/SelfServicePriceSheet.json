@@ -1,7 +1,7 @@
 {
   "Business_Flow": [
     {
-      "Tc_286_SelfPriceSheetUi": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,priceSheetUi",
+      "Tc_286_SelfPriceSheetUi": "getPassword,launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,priceSheetUi",
       "TC_379_CreateValidPriceSheetWithoutNETPriceValue": "launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,addPriceSheetDetails,validateUpload",
       "Tc_344_VerifySearchByName":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterSearchByName",
       "Tc_344_VerifyFilterByManufacturer":"launchSelfServicePriceSheet,navigateToSelfServicePriceSheet,filterByManufacturer",
