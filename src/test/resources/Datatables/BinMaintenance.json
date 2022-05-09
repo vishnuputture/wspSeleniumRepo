@@ -184,7 +184,11 @@
     },
     {
       "TC_ID": "Tc_831_verifyCreateDuplicateBin",
-      "Title": "verify Create Duplicate bin"
+      "Title": "verify Create Duplicate bin",
+      "BinCondition": "Good",
+      "BinZone": "Test",
+      "Picking": "RF Gun",
+      "Receiving": "RF Gun"
     },
     {
       "TC_ID": "Tc_836_verifyAddBinButton",
@@ -266,11 +270,15 @@
     },
     {
       "TC_ID": "Tc_766_verifyUIOfCreateNewBinPopup",
-      "Title": "NMRQ :Functionality of Create New Bin button"
+      "Title": "NMRQ :Functionality of Create New Bin button",
+      "BinCondition": "Good",
+      "BinZone": "Test",
+      "Picking": "RF Gun",
+      "Receiving": "RF Gun"
     },
     {
       "TC_ID": "Tc_767_verifyCreateNewBinWithConditionGood",
-      "BinLocation": "TEST26969",
+      "BinLocation": "TEST11660",
       "BinCondition": "Good",
       "BinZones": "Default",
       "BinPicking": "Automatic",
@@ -282,7 +290,7 @@
     },
     {
       "TC_ID": "Tc_768_verifyCreateNewBinWithConditionDamaged",
-      "BinLocation": "TEST15027",
+      "BinLocation": "TEST49846",
       "BinCondition": "Damaged",
       "BinZones": "Default",
       "BinPicking": "Manual Picking & Staging",
@@ -294,7 +302,7 @@
     },
     {
       "TC_ID": "Tc_769_verifyCreateNewBinWithConditionDefective",
-      "BinLocation": "TEST50766",
+      "BinLocation": "TEST13576",
       "BinCondition": "Defective",
       "BinZones": "Default",
       "BinPicking": "Manual Picking & Staging",
@@ -315,9 +323,9 @@
     {
       "TC_ID": "Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins",
       "CountOfRecordsToSelect": "2",
-      "BinCondition": "Good",
+      "BinCondition": "Damaged",
       "BinZones": "Default",
-      "BinPicking": "Automatic",
+      "BinPicking": "RF Gun",
       "BinReceiving": "Manual",
       "BinAvailableToSell": "Yes",
       "BinSpecialHandling": "Yes",
@@ -328,7 +336,7 @@
     },
     {
       "TC_ID": "Tc_785_verifyBinWithoutItemsCanBeDeleted",
-      "BinLocation": "TEST22082",
+      "BinLocation": "TEST12667",
       "BinCondition": "Good",
       "BinZones": "Default",
       "BinPicking": "Automatic",
