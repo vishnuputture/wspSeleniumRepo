@@ -3,6 +3,7 @@ package businesskeywords.PurchaseOrders;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -17,6 +18,7 @@ import java.util.List;
 public class PurchaseOrderInquiry extends ReusableLib {
 
     CommonActions commonObj;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -27,6 +29,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
     public PurchaseOrderInquiry(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -42,7 +45,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to click on [Exit] button in PURCHASE ORDER INQUIRY Page
      */
     public void clickExitBtnPOInquiry() {
-        Utility_Functions.xScrollIntoView(driver, PurchaseOrderInquiryPage.btnExitPOInquiryDtls);
+        Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderInquiryPage.btnExitPOInquiryDtls);
         click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
     }
 
@@ -73,11 +76,11 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to exit to master from PURCHASE ORDER INQUIRY Page
      */
     public void navigatePOInquiryToMaster(){
-        Utility_Functions.xScrollPage(driver);
+        Utility_Functions.xScrollPage(ownDriver);
         if(isDisplayed(PurchaseOrderInquiryPage.btnExitPOInquiryDtls)) {
             click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
         }
-        Utility_Functions.actionKey(Keys.F3, driver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
 
     /**
@@ -157,7 +160,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to select Status
      */
     public void selectStatus() {
-        Utility_Functions.xSelectDropdownByName(driver, PurchaseOrderInquiryPage.ddnStatus, jsonData.getData("Status"));
+        Utility_Functions.xSelectDropdownByName(ownDriver, PurchaseOrderInquiryPage.ddnStatus, jsonData.getData("Status"));
     }
 
     /**
@@ -179,7 +182,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
         List<WebElement> els=getListElement(PurchaseOrderInquiryPage.optField);
         for(int i=0;i<els.size();i++){
             Utility_Functions.timeWait(2);
-            Utility_Functions.xSendKeys(driver,els.get(i),"1"+ Keys.ENTER);
+            Utility_Functions.xSendKeys(ownDriver,els.get(i),"1"+ Keys.ENTER);
             if(isDisplayed(PurchaseOrderInquiryPage.noResult1)){
                 commonObj.validateText(PurchaseOrderInquiryPage.noResult1,"* No results to display based on the selected criteria.","'* No results to display based on the selected criteria.' is present");
                 commonObj.validateText(PurchaseOrderInquiryPage.noResult2,"* The order may not exist or it may be omitted due to current settings.","'* The order may not exist or it may be omitted due to current settings.' is present");
@@ -222,7 +225,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to validate [Type] dropdown options
      */
     public void verifyTypeDdnOptions(){
-        List<String> lstTypeDdnValues = Utility_Functions.xgetDropdownOptionsAsList(driver, PurchaseOrderInquiryPage.ddnType);
+        List<String> lstTypeDdnValues = Utility_Functions.xgetDropdownOptionsAsList(ownDriver, PurchaseOrderInquiryPage.ddnType);
         String[] typeOptions = {"ALL (All-Direct and Stock)","DIRECT (Direct Shipment)","RFQ (Request For Quote)","STOCK (Stock)"};
 
         boolean flag = false;
@@ -252,7 +255,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to select [Type] dropdown option and verify table data
      */
     public void selectTypeAndVrfyTableData(String filterDdn, String colValue){
-        Utility_Functions.xSelectDropdownByName(driver, PurchaseOrderInquiryPage.ddnType, filterDdn);
+        Utility_Functions.xSelectDropdownByName(ownDriver, PurchaseOrderInquiryPage.ddnType, filterDdn);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
         boolean flag = false;
@@ -274,7 +277,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to validate [Status] dropdown options
      */
     public void verifyStatusDdnOptions(){
-        List<String> lstStatusDdnValues = Utility_Functions.xgetDropdownOptionsAsList(driver, PurchaseOrderInquiryPage.ddnStatus);
+        List<String> lstStatusDdnValues = Utility_Functions.xgetDropdownOptionsAsList(ownDriver, PurchaseOrderInquiryPage.ddnStatus);
         String[] statusOptions = {"All","Closed","Open"};
 
         boolean flag = false;
@@ -305,7 +308,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to select [Status] dropdown option and verify table data
      */
     public void selectStatusAndVrfyTableData(String filterDdn, String colValue){
-        Utility_Functions.xSelectDropdownByName(driver, PurchaseOrderInquiryPage.ddnStatus, filterDdn);
+        Utility_Functions.xSelectDropdownByName(ownDriver, PurchaseOrderInquiryPage.ddnStatus, filterDdn);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
         boolean flag = false;

@@ -3,6 +3,7 @@ package businesskeywords.SalesQuotes.WorkWithSalesQuotes;
 import businesskeywords.SalesQuotes.WorkWithSalesQuotes.WorkWithSalesQuote;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import pages.pricing.OrderByCustomerPage;
@@ -10,6 +11,7 @@ import supportLibraries.Utility_Functions;
 
 public class ShippingConfirmation  extends ReusableLib {
     CommonActions commonObj=new CommonActions(helper);
+    private FrameworkDriver ownDriver;
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
      * objects wrapped by it
@@ -19,6 +21,7 @@ public class ShippingConfirmation  extends ReusableLib {
 
     public ShippingConfirmation(Helper helper) {
         super(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -35,10 +38,10 @@ public class ShippingConfirmation  extends ReusableLib {
      *
      */
     public void orderConfirmation() {
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         sendKeys(pages.pricing.ShippingConfirmation.orderNum1,Utility_Functions.xGetJsonData("SOSmoke"));
         sendKeys(pages.pricing.ShippingConfirmation.orderNum2,"01");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         sendKeys(pages.pricing.ShippingConfirmation.qtyToShip,"1");
         click(pages.pricing.ShippingConfirmation.confOrder,"Click Confirm Order");
     }
@@ -48,7 +51,7 @@ public class ShippingConfirmation  extends ReusableLib {
      *
      */
     public void exitShippingConfirmation() {
-        Utility_Functions.actionKey(Keys.F3, driver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
         click(pages.pricing.ShippingConfirmation.exitShipConf,"Exit from Shipping Confirmation Program");
     }
 

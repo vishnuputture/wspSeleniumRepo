@@ -4,6 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
 import com.winSupply.framework.Status;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.OptionsConstantsPage;
@@ -42,8 +43,11 @@ public class CommonActions extends ReusableLib {
 	 *
 	 * @param helper The {@link Helper} object
 	 */
+
+	private FrameworkDriver ownDriver;
 	public CommonActions(Helper helper) {
 		super(helper);
+		ownDriver=helper.getGSDriver();
 	}
 
 	/**
@@ -154,8 +158,8 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void validateText(By ele,String text,String msg) {
-		if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
-			String title = Utility_Functions.getText(driver,ele);
+		if(Utility_Functions.xWaitForElementPresent(ownDriver,ele, 5)) {
+			String title = Utility_Functions.getText(ownDriver,ele);
 			System.out.println("Text: "+title);
 			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
 		}else {
@@ -165,8 +169,8 @@ public class CommonActions extends ReusableLib {
 	}
 
 	public void validateText(WebElement ele,String text,String msg) {
-		if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
-			String title = Utility_Functions.getText(driver,ele);
+		if(Utility_Functions.xWaitForElementPresent(ownDriver,ele, 5)) {
+			String title = Utility_Functions.getText(ownDriver,ele);
 			System.out.println("Text: "+title);
 			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
 		}else {
@@ -179,8 +183,8 @@ public class CommonActions extends ReusableLib {
 	 * This method verifies that the element contains expected text
 	 */
 	public void verifyElementContainsText(By ele,String textExpected,String msg) {
-		if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
-			String textActual = Utility_Functions.getText(driver,ele);
+		if(Utility_Functions.xWaitForElementPresent(ownDriver,ele, 5)) {
+			String textActual = Utility_Functions.getText(ownDriver,ele);
 			System.out.println("Text: "+textActual);
 			boolean flag = textActual.contains(textExpected);
 			if (flag)
@@ -196,7 +200,7 @@ public class CommonActions extends ReusableLib {
 
 
 	public void validateElementExists(By ele, String msg) {
-        if(Utility_Functions.xWaitForElementPresent(driver,ele, 5)) {
+        if(Utility_Functions.xWaitForElementPresent(ownDriver,ele, 5)) {
             System.out.println("Element: "+ ele + " exists");
 			report.updateTestLog("Validate ", msg + "" + "",
 					Status.PASS);
@@ -229,10 +233,10 @@ public class CommonActions extends ReusableLib {
 		System.out.println(strDate);
 
 		sendKeys(AddSpecialPricingPage.expDateTxtBox,strDate,"Entering expiration date");
-		Utility_Functions.actionKey(Keys.ENTER, driver);
+		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 
-		if(Utility_Functions.xWaitForElementPresent(driver,AddSpecialPricingPage.successLbl, 5)) {
-			String successMessage = Utility_Functions.getText(driver,AddSpecialPricingPage.successLbl);
+		if(Utility_Functions.xWaitForElementPresent(ownDriver,AddSpecialPricingPage.successLbl, 5)) {
+			String successMessage = Utility_Functions.getText(ownDriver,AddSpecialPricingPage.successLbl);
 			System.out.println("Text: "+successMessage);
 			Utility_Functions.xAssertEquals(report, jsonData.getData("success"), successMessage.trim(), "Validating success message");
 		}else {
@@ -258,7 +262,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void exitSplPriceToMasterPage() {
-		Utility_Functions.xWaitForElementToBeClickable(driver, SpecialPricePage.btnF3, 5);
+		Utility_Functions.xWaitForElementToBeClickable(ownDriver, SpecialPricePage.btnF3, 5);
 
 
 		click(SpecialPricePage.btnF3,"Click F3");
@@ -272,9 +276,9 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void goToSqlApp() {
 		sendKeys(MasterPage.sqlTxtBox,"STRSQL","Go to SQL application");
-		Utility_Functions.actionKey(Keys.ENTER, driver);
-		if(Utility_Functions.xWaitForElementPresent(driver,MasterPage.sqlTitleLbl, 5)) {
-			String title = Utility_Functions.getText(driver,MasterPage.sqlTitleLbl);
+		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+		if(Utility_Functions.xWaitForElementPresent(ownDriver,MasterPage.sqlTitleLbl, 5)) {
+			String title = Utility_Functions.getText(ownDriver,MasterPage.sqlTitleLbl);
 			System.out.println("Text: "+title);
 			Utility_Functions.xAssertEquals(report, "Enter SQL Statements", title.trim(), "Validating SQL page title");
 		}else {
@@ -296,7 +300,7 @@ public class CommonActions extends ReusableLib {
 		sendKeys(SqlStatementPage.sqltxtBox2,"where cacust = '"+custNum+"'");
 		sendKeys(SqlStatementPage.sqltxtBox3,"and caitem = '"+itemNum+"'","Enter Sql statement to retrieve data");
 
-		Utility_Functions.actionKey(Keys.ENTER, driver);
+		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 	}
 
 	/**
@@ -311,7 +315,7 @@ public class CommonActions extends ReusableLib {
 		sendKeys(SqlStatementPage.sqltxtBox2,"('1',"+"'"+custNum+"'"+","+"'"+itemNum+"'"+", ' ',' ', ' ',4, 0,");
 		sendKeys(SqlStatementPage.sqltxtBox3,"'"+Date1+"'"+","+"'"+Date2+"'"+", 0, 0, 0, ' ', 'PAP')");
 
-		Utility_Functions.actionKey(Keys.ENTER, driver);
+		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 	}
 
 //Vishnu
@@ -442,7 +446,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void exitSalesQuotesToMasterPage() {
-		Utility_Functions.xWaitForElementToBeClickable(driver, SpecialPricePage.btnF3, 5);
+		Utility_Functions.xWaitForElementToBeClickable(ownDriver, SpecialPricePage.btnF3, 5);
 		click(SpecialPricePage.btnF3,"Click F3");
 	}
 
@@ -462,7 +466,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void exitFromCustomerGroupMaintenance() {
-		Boolean res=Utility_Functions.xIsDisplayed(driver,CustomerGroupMaintenancePage.cancelBtn);
+		Boolean res=Utility_Functions.xIsDisplayed(ownDriver,CustomerGroupMaintenancePage.cancelBtn);
 		if(res==true){
 			click(CustomerGroupMaintenancePage.cancelBtn,"CLick F12=Return");
 		}

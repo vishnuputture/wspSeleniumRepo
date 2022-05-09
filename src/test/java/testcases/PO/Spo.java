@@ -9,6 +9,7 @@ public class Spo extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_50_SuggestedPOUI(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case UI of Suggested Purchase Order Page");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -17,6 +18,7 @@ public class Spo extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_51_CreateNewWorksheetTemplateUI(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case UI of Create New Worksheet Template Page");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

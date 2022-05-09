@@ -67,6 +67,7 @@ public class Utility_Functions extends ReusableLib {
      */
     private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     static Properties properties = Settings.getInstance();
+    private FrameworkDriver ownDriver;
 
     public static String jsonFile = "src/test/resources/MiddleLayerDataFiles/" + properties.getProperty("RunTimeDataFile") + ".json";
 //"src/test/resources/Datatables/RunTimeData.json";
@@ -79,6 +80,7 @@ public class Utility_Functions extends ReusableLib {
 
     public Utility_Functions(Helper helper) {
         super(helper);
+        ownDriver=helper.getGSDriver();
 
     }
 
@@ -738,7 +740,7 @@ public class Utility_Functions extends ReusableLib {
     }
 
     // implicit wait
-    public static void impWait(int time) {
+    public static void impWait(int time, FrameworkDriver driver) {
         driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS);
     }
 
@@ -4683,7 +4685,7 @@ public class Utility_Functions extends ReusableLib {
 
     private boolean inputData(String tagID, String Value) {
         boolean isElementFound = false;
-        List<WebElement> GenRiskInfoList = driver.findElements(By.xpath(".//*[@id[contains(.,'" + tagID + "')]]"));
+        List<WebElement> GenRiskInfoList = ownDriver.findElements(By.xpath(".//*[@id[contains(.,'" + tagID + "')]]"));
         Utility_Functions.timeWait(1);
 
         for (WebElement GenRisk : GenRiskInfoList) {
@@ -4691,7 +4693,7 @@ public class Utility_Functions extends ReusableLib {
             if (GenRisk.getAttribute("id").endsWith(tagID)) {
                 if (GenRisk.getTagName().equals("input")) {
 
-                    Utility_Functions.xSendKeys(driver, GenRisk, Value);
+                    Utility_Functions.xSendKeys(ownDriver, GenRisk, Value);
 
                     isElementFound = true;
                 }

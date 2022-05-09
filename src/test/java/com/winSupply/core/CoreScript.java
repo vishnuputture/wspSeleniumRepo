@@ -44,9 +44,13 @@ public class CoreScript {
      * @param testParameters A {@link SeleniumTestParameters} object
      */
     public CoreScript(SeleniumTestParameters testParameters) {
+        System.out.println("Test core 1 " + testParameters.getCurrentTestcase());
         this.testParameters = testParameters;
+        System.out.println("Test core 1 "+ testParameters.getCurrentTestcase());
         this.extentReport = testParameters.getExtentReport();
+        System.out.println("Test core 1 "+ testParameters.getCurrentTestcase());
         this.extentTest = testParameters.getExtentTest();
+        System.out.println("Test core 1 "+ testParameters.getCurrentTestcase());
     }
 
     private List<String> businessFlowData;
@@ -89,11 +93,17 @@ public class CoreScript {
     public void driveTestExecution() {
         try {
             startUp();
+            System.out.println("Test core core1  "+testParameters.getCurrentTestcase());
             initDriver();
+            System.out.println("Test core core2  "+testParameters.getCurrentTestcase());
             initTestIterations();
+            System.out.println("Test core core3  "+testParameters.getCurrentTestcase());
             initTestReport();
+            System.out.println("Test core core4  "+testParameters.getCurrentTestcase());
             initTestData();
+            System.out.println("Test core core5  "+testParameters.getCurrentTestcase());
             executeBusinessCase();
+            System.out.println("Test core core6  "+testParameters.getCurrentTestcase());
         } catch (FrameworkException fx) {
             exceptionHandler(fx, fx.getErrorName());
         } catch (Exception ex) {
@@ -175,25 +185,33 @@ public class CoreScript {
     private void executeBusinessCase() {
 
         if (properties.getProperty("Approach").equalsIgnoreCase("KeywordDriven")) {
+
             executeTestCase();
         }
     }
 
     private void executeTestIterations() {
         while (currentIteration <= testParameters.getEndIteration()) {
-
+            System.out.println("Businessflow before : "+testParameters.getCurrentTestcase());
                 report.addTestLogSection("Iteration: " + Integer.toString(currentIteration));
+            System.out.println("Businessflow before0 : "+testParameters.getCurrentTestcase());
                 report.updateTestLog("CurrentIteration","Iteration: " + Integer.toString(currentIteration),Status.PASS);
+            System.out.println("Businessflow before1 : "+testParameters.getCurrentTestcase());
                 report.setIteration(currentIteration);
 
+            System.out.println("Businessflow before2 : "+testParameters.getCurrentTestcase());
             // Evaluate each test iteration for any errors
             try {
+                System.out.println("Businessflow start : "+testParameters.getCurrentTestcase());
                 executeTestcase(businessFlowData);
             } catch (FrameworkException fx) {
+                System.out.println("Exception 1 :"+testParameters.getCurrentTestcase());
                 exceptionHandler(fx, fx.getErrorName());
             } catch (InvocationTargetException ix) {
+                System.out.println("Exception 2 :"+testParameters.getCurrentTestcase());
                 exceptionHandler(ix, "Error");
             } catch (Exception ex) {
+                System.out.println("Exception 3 :"+testParameters.getCurrentTestcase());
                 exceptionHandler(ex, "Error");
             }
 
@@ -346,6 +364,7 @@ public class CoreScript {
                 + Util.getFileSeparator() + "test" + Util.getFileSeparator() + "resources" + Util.getFileSeparator()
                 + "Datatables";
         TestConfigurations t = new TestConfigurations();
+
         String subPath = t.currentMethodName.toString().replace("package testcases", "");
         String encryptedDatatablePath;
         if (subPath != null ) {
@@ -385,12 +404,14 @@ public class CoreScript {
                     + "\" is not found in the Business Flow sheet!");
         }else{
             businessKeyword = busnssObj.get(0);
+            System.out.println("Business flow : "+t.currentTestcase+" "+businessKeyword);
         }
         String[] businessKeywordsArr = businessKeyword.split(",");
         String dataValue;
         businessFlowData = new ArrayList<String>();
         for (String bkey : businessKeywordsArr
         ) {
+            System.out.println("Test case business flow : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
             businessFlowData.add(bkey.trim());
         }
         if (businessFlowData.isEmpty()) {
@@ -538,14 +559,21 @@ public class CoreScript {
     }
 
     private void initializeTestScript() {
+        System.out.println("Init script1 :"+testParameters.getCurrentTestcase());
         driverUtil = new WebDriverUtil(driver);
+        System.out.println("Init script2 :"+testParameters.getCurrentTestcase());
         apiDriver.setRport(report);
+        System.out.println("Init script3 :"+testParameters.getCurrentTestcase());
         helper = new Helper(jsonData, report, driver, driverUtil, apiDriver, extentTest, reusableHandle,
                 testParameters.getEndIteration());
+        System.out.println("Init script4 :"+testParameters.getCurrentTestcase());
         if (!isAPITest() && !isDBTest()) {
             driver.setRport(report);
+            System.out.println("Init script5 :"+testParameters.getCurrentTestcase());
             objectHandling = new ObjectMachinate(report, pureWebDriver, frameworkParameters, testParameters);
+            System.out.println("Init script6 :"+testParameters.getCurrentTestcase());
             driver.setObjectHandling(objectHandling);
+            System.out.println("Init script7 :"+testParameters.getCurrentTestcase());
         }
 
         initializeBusinessFlow();
@@ -943,6 +971,7 @@ public class CoreScript {
 
 
     private void setExtentTestcase() {
+        System.out.println("Extent Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         extentTest = extentReport.createTest(
                 testParameters.getCurrentTestcase() + "-" + testParameters.getCurrentTestInstance(),
                 testParameters.getCurrentTestDescription());

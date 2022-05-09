@@ -4,6 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,6 +20,7 @@ import java.util.Random;
 public class PricingMatrix extends ReusableLib {
     CommonActions commonObj;
     public static String exp_itemNumber;
+	private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -30,6 +32,7 @@ public class PricingMatrix extends ReusableLib {
     public PricingMatrix(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
+		ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -84,7 +87,7 @@ public class PricingMatrix extends ReusableLib {
         click(SpecialPricePage.btnF3,"Click F3=Exit");
         sendKeys(PricingMatrixPage.mtxRowCode,name);
         click(PricingMatrixPage.enterLink,"Press ENTER");
-        String exp=driver.findElement(PricingMatrixPage.validateRow(name)).getText();
+        String exp=ownDriver.findElement(PricingMatrixPage.validateRow(name)).getText();
         Utility_Functions.xAssertEquals(report,exp,name,"Row added");
     }
 
@@ -135,7 +138,7 @@ public class PricingMatrix extends ReusableLib {
      *
      */
     public String getRow(By by) {
-        String row=driver.findElement(by).getText();
+        String row=ownDriver.findElement(by).getText();
         return row;
     }
 
@@ -144,7 +147,7 @@ public class PricingMatrix extends ReusableLib {
      *
      */
     public String getCol(By by) {
-        String col=driver.findElement(by).getText();
+        String col=ownDriver.findElement(by).getText();
         return col;
     }
 
@@ -158,22 +161,22 @@ public class PricingMatrix extends ReusableLib {
     
     
     public void validateStartRowCol() {
-    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strRow,"value"), Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), "Validating first row value");
-    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strCol,"value"), Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), "Validating first column value");
+    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strRow,"value"), Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstRow), "Validating first row value");
+    	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strCol,"value"), Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstCol), "Validating first column value");
     	
     }
     
     public void changeRowCol() {
-    	String secondRow = Utility_Functions.getText(driver,  PricingMatrixPage.secondRow);
-    	String secondCol = Utility_Functions.getText(driver,  PricingMatrixPage.secondCol);
+    	String secondRow = Utility_Functions.getText(ownDriver,  PricingMatrixPage.secondRow);
+    	String secondCol = Utility_Functions.getText(ownDriver,  PricingMatrixPage.secondCol);
     	
     	sendKeys(PricingMatrixPage.strRow,secondRow,"Changing first row");
     	sendKeys(PricingMatrixPage.strCol,secondCol,"Changing first column");
     	
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	
-    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), secondCol, "Validating first column name");
-    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), secondRow, "Validating first row name");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstCol), secondCol, "Validating first column name");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstRow), secondRow, "Validating first row name");
     	
     }
     
@@ -192,12 +195,12 @@ public class PricingMatrix extends ReusableLib {
     	sendKeys(PricingMatrixPage.txtMatrixRowCode,rowName,"Enter row name");
     	
     	sendKeys(PricingMatrixPage.txtDescription1,"Test desc","Enter row description");
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	
     	click(PricingMatrixPage.btnF3Exit,"Click on exit button");
     	
     	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strRow,"value"), rowName, "Validating first row value");
-    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), rowName, "Validating first row name");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstRow), rowName, "Validating first row name");
     }
     
     public void addCol() {
@@ -215,53 +218,53 @@ public class PricingMatrix extends ReusableLib {
     	sendKeys(PricingMatrixPage.txtMatrixRowCode,colName,"Enter column name");
     	
     	sendKeys(PricingMatrixPage.txtDescription1,"Test desc","Enter column description");
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	
     	click(PricingMatrixPage.btnF3Exit,"Click on exit button");
     	
     	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.strCol,"value"), colName, "Validating first column value");
-    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), colName, "Validating first column name");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstCol), colName, "Validating first column name");
     }
     
     public void copyRow() {
     	click(PricingMatrixPage.copyRow,"Click on copy row button");
-    	String copyCol1 = Utility_Functions.getText(driver, PricingMatrixPage.copyCol1);
-    	String copyCol2 = Utility_Functions.getText(driver, PricingMatrixPage.copyCol2);
+    	String copyCol1 = Utility_Functions.getText(ownDriver, PricingMatrixPage.copyCol1);
+    	String copyCol2 = Utility_Functions.getText(ownDriver, PricingMatrixPage.copyCol2);
     	
-    	String copyRow1 = Utility_Functions.getText(driver, PricingMatrixPage.copyRow1);
-    	String copyRow2 = Utility_Functions.getText(driver, PricingMatrixPage.copyRow2);
+    	String copyRow1 = Utility_Functions.getText(ownDriver, PricingMatrixPage.copyRow1);
+    	String copyRow2 = Utility_Functions.getText(ownDriver, PricingMatrixPage.copyRow2);
     	sendKeys(PricingMatrixPage.copyColFrom,copyRow1,"Enter from row name");
     	sendKeys(PricingMatrixPage.copyColTo,copyRow2,"Enter to row name");
     	sendKeys(PricingMatrixPage.selectRowFrom,copyCol1,"Enter from col name");
     	sendKeys(PricingMatrixPage.selectRowTo,copyCol2,"Enter to col name");
     	
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	sendKeys(PricingMatrixPage.notBlank,"N");
     	click(PricingMatrixPage.enterLink,"Click ENTER");
-        Utility_Functions.xClickIfAvlbl(driver,PricingMatrixPage.f8END);
-        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), copyRow2, "Validating first row name");
-        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), copyCol2, "Validating first column name");
+        Utility_Functions.xClickIfAvlbl(ownDriver,PricingMatrixPage.f8END);
+        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstRow), copyRow2, "Validating first row name");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstCol), copyCol2, "Validating first column name");
     }
     
     
     public void copyCol() {
     	click(PricingMatrixPage.copyRow,"Click on copy column button");
-    	String copyCol1 = Utility_Functions.getText(driver, PricingMatrixPage.copyCol1);
-    	String copyCol2 = Utility_Functions.getText(driver, PricingMatrixPage.copyCol2);
+    	String copyCol1 = Utility_Functions.getText(ownDriver, PricingMatrixPage.copyCol1);
+    	String copyCol2 = Utility_Functions.getText(ownDriver, PricingMatrixPage.copyCol2);
     	
-    	String copyRow1 = Utility_Functions.getText(driver, PricingMatrixPage.copyRow1);
-    	String copyRow2 = Utility_Functions.getText(driver, PricingMatrixPage.copyRow2);
+    	String copyRow1 = Utility_Functions.getText(ownDriver, PricingMatrixPage.copyRow1);
+    	String copyRow2 = Utility_Functions.getText(ownDriver, PricingMatrixPage.copyRow2);
     	sendKeys(PricingMatrixPage.copyColFrom,copyRow1,"Enter from col name");
     	sendKeys(PricingMatrixPage.copyColTo,copyRow2,"Enter to col name");
     	sendKeys(PricingMatrixPage.selectRowFrom,copyCol1,"Enter from row name");
     	sendKeys(PricingMatrixPage.selectRowTo,copyCol2,"Enter to row name");
     	
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	sendKeys(PricingMatrixPage.notBlank,"N");
     	click(PricingMatrixPage.enterLink,"Click ENTER");
-        Utility_Functions.xClickIfAvlbl(driver,PricingMatrixPage.f8END);
-        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstRow), copyRow2, "Validating first row name");
-        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.firstCol), copyCol2, "Validating first column name");
+        Utility_Functions.xClickIfAvlbl(ownDriver,PricingMatrixPage.f8END);
+        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstRow), copyRow2, "Validating first row name");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstCol), copyCol2, "Validating first column name");
     }
     
     public void moreKeysValidation() {
@@ -280,7 +283,7 @@ public class PricingMatrix extends ReusableLib {
     			 buttonSet = firstSet;
     		}
     			for(String id : buttonSet) {
-    				if(Utility_Functions.xIsDisplayed(driver, PricingMatrixPage.getButton(id))) {
+    				if(Utility_Functions.xIsDisplayed(ownDriver, PricingMatrixPage.getButton(id))) {
     					report.updateTestLog("Search", getAttribute( PricingMatrixPage.getButton(id),"value")+"is present", Status.PASS);
     				}else {
     					report.updateTestLog("Search", "Button "+id +" is not present", Status.FAIL);
@@ -292,48 +295,48 @@ public class PricingMatrix extends ReusableLib {
     }
     
     public void pgLeftRt() {
-    	String beforeCol =  Utility_Functions.getText(driver,  PricingMatrixPage.col7);
+    	String beforeCol =  Utility_Functions.getText(ownDriver,  PricingMatrixPage.col7);
     	
     	click(PricingMatrixPage.getButton("btnCF12"),"Clicking on page right button");
-    	Utility_Functions.xAssertNotEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.col7), beforeCol, "Column name should be different");
+    	Utility_Functions.xAssertNotEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.col7), beforeCol, "Column name should be different");
     	click(PricingMatrixPage.getButton("btnCF11"),"Clicking on page left button");
-    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.col7), beforeCol, "Column name should be same");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.col7), beforeCol, "Column name should be same");
     }
     
     public void pgUpDn() {
-    	String beforeRow = Utility_Functions.getText(driver,  PricingMatrixPage.row5);
+    	String beforeRow = Utility_Functions.getText(ownDriver,  PricingMatrixPage.row5);
     	
     	click(PricingMatrixPage.getButton("btnPageDown"),"Clicking on page down button");
     	
-    	Utility_Functions.xAssertNotEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.row5), beforeRow, "Row name should be different");
+    	Utility_Functions.xAssertNotEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.row5), beforeRow, "Row name should be different");
     	
     	click(PricingMatrixPage.getButton("btnPageUp"),"Clicking on page up button");
     	
-    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.row5), beforeRow, "Row name should be same");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.row5), beforeRow, "Row name should be same");
     }
     
     public void validateDispList() {
     	//click(PricingMatrixPage.btnF24,"Click on more buttons");
     	
-    	String selectedRow = Utility_Functions.getText(driver,  PricingMatrixPage.firstRow);
+    	String selectedRow = Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstRow);
     	
     	click(PricingMatrixPage.firstRow, "Click on the first row");
     	
     	click(PricingMatrixPage.getButton("btnCF14"),"Click on the display list button");
     	
-    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.dispListTitle).trim(), "Matrix Row/Item List", "Title should match");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.dispListTitle).trim(), "Matrix Row/Item List", "Title should match");
     	
     	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.selectRowTxtBox,"value"), selectedRow, "Validating selected row textbox");
     	
     	click(PricingMatrixPage.getButton("btnCF12"));
     	
-    	String selectedCol = Utility_Functions.getText(driver,  PricingMatrixPage.firstCol);
+    	String selectedCol = Utility_Functions.getText(ownDriver,  PricingMatrixPage.firstCol);
 
-    	Utility_Functions.xMouseClick(driver,PricingMatrixPage.firstCol);
+    	Utility_Functions.xMouseClick(ownDriver,PricingMatrixPage.firstCol);
     	
     	click(PricingMatrixPage.getButton("btnCF14"),"Click on the display list button");
     	
-    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(driver,  PricingMatrixPage.dispListTitle).trim(), "Matrix Column/Customer List", "Title should match");
+    	Utility_Functions.xAssertEquals(report, Utility_Functions.getText(ownDriver,  PricingMatrixPage.dispListTitle).trim(), "Matrix Column/Customer List", "Title should match");
     	
     	Utility_Functions.xAssertEquals(report, getAttribute(PricingMatrixPage.selectColTxtBox,"value"), selectedCol, "Validating selected column textbox");
     	

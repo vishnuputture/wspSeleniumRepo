@@ -2,6 +2,7 @@ package businesskeywords.Pricing.MatrixCostUpdate;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import pages.pricing.matrixcost.MatrixCostUpdatePage;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public class ValidateItemNoFromItemMaster extends ReusableLib {
     CommonActions commonObj=new CommonActions(helper);
     public static ArrayList<String> values;
+    private FrameworkDriver ownDriver;
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
      * objects wrapped by it
@@ -21,6 +23,7 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
 
     public ValidateItemNoFromItemMaster(Helper helper) {
         super(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -29,8 +32,8 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
     public void modiftPropoField() {
         values=new ArrayList();
         PoCostUpdation poUpdation = new PoCostUpdation(helper);
-        Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.greenActFilOpt),"'*Green indicates active filter option' is Present");
-        String itemN0 = driver.findElement(MatrixCostUpdatePage.itemNumber).getText();
+        Utility_Functions.xIsElementDisplayed(report,ownDriver.findElement(MatrixCostUpdatePage.greenActFilOpt),"'*Green indicates active filter option' is Present");
+        String itemN0 = ownDriver.findElement(MatrixCostUpdatePage.itemNumber).getText();
         System.out.println("Item no : "+itemN0);
         String decValue = poUpdation.updateField(poUpdation.fieldWithValidRandomValue(),MatrixCostUpdatePage.ProposedMtxCost);
         values.add(itemN0);
@@ -45,7 +48,7 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
     public void modifyPOCostField() {
         values=new ArrayList();
         PoCostUpdation poUpdation=new PoCostUpdation(helper);
-        String itemN0 = driver.findElement(MatrixCostUpdatePage.itemNumber).getText();
+        String itemN0 = ownDriver.findElement(MatrixCostUpdatePage.itemNumber).getText();
         System.out.println("Item no : "+itemN0);
         String decValue = poUpdation.updateField(poUpdation.fieldWithValidRandomValue(),MatrixCostUpdatePage.poField);
         values.add(itemN0);
@@ -70,8 +73,8 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
         System.out.println("Size : "+values.size());
         System.out.println("String[] values : " + values.get(0) + " & " + values.get(1));
         sendKeys(MatrixCostUpdatePage.txtBoxSearch, values.get(0));
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-        String expValue = driver.findElement(MatrixCostUpdatePage.itmMsrPropoFld).getAttribute("value");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        String expValue = ownDriver.findElement(MatrixCostUpdatePage.itmMsrPropoFld).getAttribute("value");
         System.out.println("Exp : " + expValue);
         String[] arrSplit = expValue.split("\\.");
         Utility_Functions.xAssertEquals(report, values.get(1)+".0000",arrSplit[0]+".0000", ",","Updated value");
@@ -86,8 +89,8 @@ public class ValidateItemNoFromItemMaster extends ReusableLib {
         System.out.println("Size : "+values.size());
         System.out.println("String[] values : " + values.get(0) + " & " + values.get(1));
         sendKeys(MatrixCostUpdatePage.txtBoxSearch, values.get(0));
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-        String expValue = driver.findElement(MatrixCostUpdatePage.poFieldItem).getAttribute("value");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        String expValue = ownDriver.findElement(MatrixCostUpdatePage.poFieldItem).getAttribute("value");
         System.out.println("Exp : " + expValue);
         String[] arrSplit = expValue.split("\\.");
         Utility_Functions.xAssertEquals(report, values.get(1)+".0000",arrSplit[0]+".0000", ",","Updated value");

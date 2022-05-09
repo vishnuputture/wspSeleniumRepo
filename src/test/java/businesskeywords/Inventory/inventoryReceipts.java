@@ -4,6 +4,7 @@ import businesskeywords.PurchaseOrders.PoEntryConversionFactor;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ public class inventoryReceipts extends ReusableLib {
 
     CommonActions commonObj;
     PoEntryConversionFactor objPOEntryConvFactor;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -31,6 +33,7 @@ public class inventoryReceipts extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         objPOEntryConvFactor = new PoEntryConversionFactor(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -46,7 +49,7 @@ public class inventoryReceipts extends ReusableLib {
      * This method exits from Inventory Receipts Page to master page
      */
     public void navigateInventoryReceiptsToMaster() {
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         click(InventoryReceiptsPage.btnExit, "Click Exit Button");
         click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
     }
@@ -59,7 +62,7 @@ public class inventoryReceipts extends ReusableLib {
         String selectedPO = objPOEntryConvFactor.selectRandomPO();
         jsonData.putData("PONumber", selectedPO);
 
-        xWaitForElementPresent(driver, InventoryReceiptsPage.tbxPONumber, globalWait);
+        xWaitForElementPresent(ownDriver, InventoryReceiptsPage.tbxPONumber, globalWait);
         String actualPO = getAttribute(InventoryReceiptsPage.tbxPONumber, "value");
         Utility_Functions.xAssertEquals(report, selectedPO, actualPO, "Selected Purchase Order Number is displayed");
     }
@@ -107,9 +110,9 @@ public class inventoryReceipts extends ReusableLib {
         String qty = jsonData.getData("QtyOrdered");
         sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, qty, "Enter Quantity Received");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        Utility_Functions.actionKey(Keys.F9, driver);
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.timeWait(2);
     }
 
@@ -121,9 +124,9 @@ public class inventoryReceipts extends ReusableLib {
         String qty = jsonData.getData("QtyReceived");
         sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, qty, "Enter Quantity Received");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        Utility_Functions.actionKey(Keys.F9, driver);
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.timeWait(2);
         if (isDisplayed(ReceivingInProcessPage.serialItemPopup)) {
             click(ReceivingInProcessPage.skipBtn, "Click Skip Button");
@@ -260,9 +263,9 @@ public class inventoryReceipts extends ReusableLib {
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         clickUpdateOnHandQtyBtn();
 
-        Utility_Functions.actionKey(Keys.F9, driver);
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.timeWait(2);
     }
 

@@ -1,5 +1,6 @@
 package com.winSupply.core;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -7,6 +8,7 @@ import java.util.Properties;
 import com.mattermost.MattermostAPIHandler;
 import org.testng.Assert;
 import org.testng.ITestContext;
+import org.testng.ITestNGMethod;
 import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
@@ -89,6 +91,7 @@ public abstract class BaseTestCase {
 	 */
 	@BeforeSuite
 	public void setUpTestSuite(ITestContext testContext) {
+		System.out.println("Test suite : "+testContext.getSuite().getName()+" Thread "+Thread.currentThread().getId());
 		numberOfTests = 0;
 		resultSummaryManager.setRelativePath();
 		resultSummaryManager.initializeTestBatch(testContext.getSuite().getName());
@@ -96,11 +99,12 @@ public abstract class BaseTestCase {
 		int nThreads;
 		if ("false".equalsIgnoreCase(testContext.getSuite().getParallel())) {
 			nThreads = 1;
+
 		} else {
 			nThreads = testContext.getCurrentXmlTest().getThreadCount();
 
 		}
-
+		System.out.println("Results thread "+nThreads);
 		// Note: Separate threads may be spawned through usage of DataProvider
 		// testContext.getSuite().getXmlSuite().getDataProviderThreadCount();
 		// This will be at test case level (multiple instances on same test case
@@ -127,10 +131,29 @@ public abstract class BaseTestCase {
 	 * test case
 	 */
 	@BeforeMethod
-	public void setUpTestRunner() {
+	public void setUpTestRunner(Method method) {
+		System.out.println("Before test : "+method.getName());
 		FrameworkParameters frameworkParameters = FrameworkParameters.getInstance();
+
 		if (frameworkParameters.getStopExecution()) {
-			tearDownTestSuite();
+			if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
+				String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
+				MattermostAPIHandler.postMessage(channel, "After Test Suite: " + properties.getProperty("RunConfiguration") + "\n" +
+						"Failed tests: " + failedTestCase.size() + "/" + numberOfTests);
+			}
+
+			resultSummaryManager.wrapUp(true);
+			System.out.println("Before test : "+method.getName()+" 2 ");
+			try {
+				extentReport.flush();
+			}catch(Exception e){
+				System.out.println("report flush failed");
+			}
+
+
+			System.out.println("Before test : "+method.getName()+" 3 ");
+			resultSummaryManager.launchResultSummary();
+			System.out.println("Before test : "+method.getName()+" 4 ");
 
 			// Throwing TestNG SkipException within a configuration method
 			// causes all subsequent test methods to be skipped/aborted
@@ -153,6 +176,7 @@ public abstract class BaseTestCase {
 	public static String currentTestCase;
 
 	protected synchronized void tearDownTestRunner(SeleniumTestParameters testParameters, CoreScript coreScript) {
+		System.out.println("tear down : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
 		numberOfTests++;
 		TestCaseBean testCaseBean = coreScript.getTestCaseBean();
 		String testReportName = coreScript.getReportName();
@@ -202,7 +226,8 @@ public abstract class BaseTestCase {
 	 * overall test suite
 	 */
 	@AfterSuite
-	public void tearDownTestSuite() {
+	public void tearDownTestSuite(ITestContext testContext) {
+		System.out.println("Test suite : "+testContext.getSuite().getName()+" Thread "+Thread.currentThread().getId());
 		if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
 			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
 			MattermostAPIHandler.postMessage(channel, "After Test Suite: " + properties.getProperty("RunConfiguration") + "\n" +

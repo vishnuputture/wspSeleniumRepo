@@ -2,6 +2,7 @@ package businesskeywords.warehousing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class NotDeliveredOrders extends ReusableLib {
     Manifests manFest;
     Drivers drv;
     Trucks truck;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -29,6 +31,7 @@ public class NotDeliveredOrders extends ReusableLib {
         manFest = new Manifests(helper);
         drv=new Drivers(helper);
         truck=new Trucks(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -49,7 +52,7 @@ public class NotDeliveredOrders extends ReusableLib {
      */
     public void notDeliveredOrdersUI() {
         String[] actText={"Order Number","Date Not Delivered","Customer PO Number","Deliver To","Driver","Manifest Number","Actions"};
-        List<WebElement> els=driver.findElements(By.xpath("//th"));
+        List<WebElement> els=ownDriver.findElements(By.xpath("//th"));
         int i=0;
         for(WebElement el:els){
             if(i==7){break;}else {
@@ -59,9 +62,9 @@ public class NotDeliveredOrders extends ReusableLib {
         }
         commonObj.validateElementExists(TruckPage.helpIcon,"Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch,"Search filter icon is present");
-        String page=Utility_Functions.getText(driver,TruckPage.currentPage);
-        commonObj.validateElementExists(TruckPage.currentPage,"Current Page "+page+" "+Utility_Functions.getText(driver,TruckPage.outOf)+"");
-        List<WebElement> elm=driver.findElements(TruckPage.show);
+        String page=Utility_Functions.getText(ownDriver,TruckPage.currentPage);
+        commonObj.validateElementExists(TruckPage.currentPage,"Current Page "+page+" "+Utility_Functions.getText(ownDriver,TruckPage.outOf)+"");
+        List<WebElement> elm=ownDriver.findElements(TruckPage.show);
         String[] acText={"10","15","30"};
         int j=0;
         for(WebElement el:elm){
@@ -82,7 +85,7 @@ public class NotDeliveredOrders extends ReusableLib {
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
         String[] actText = {"Order Number", "Date Not Delivered", "Customer PO Number", "Deliver To","Driver", "Manifest Number"};
-        List<WebElement> els = driver.findElements(TruckPage.searchFiltersLabel);
+        List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -97,12 +100,12 @@ public class NotDeliveredOrders extends ReusableLib {
      *
      */
     public void funPageCountNotDelivered() {
-        Utility_Functions.xScrollWindow(driver);
-        if(Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)){
-            int driverCount = driver.findElements(DriversPage.driverNameCount).size()-1;
+        Utility_Functions.xScrollWindow(ownDriver);
+        if(Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)){
+            int driverCount = ownDriver.findElements(DriversPage.driverNameCount).size()-1;
             commonObj.validateText(DriversPage.onePage,"of 1","One page is available having count "+driverCount+"");
         }else {
-            int driverCount = driver.findElements(DriversPage.driverNameCount).size()-1;
+            int driverCount = ownDriver.findElements(DriversPage.driverNameCount).size()-1;
             System.out.println("........." + driverCount + ".......");
             Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Count is 10 by default");
             drv.valPageCount(10);
@@ -124,14 +127,14 @@ public class NotDeliveredOrders extends ReusableLib {
         Utility_Functions.timeWait(1);
         sendKeys(filterField("Order Number"), Utility_Functions.xGetJsonData("SalesOrder")+"-01", "Enter Order Number");
         click(NotDeliveredOrdersPage.notDeliveredDate,"Click Not Delivered Date");
-        int size=driver.findElements(NotDeliveredOrdersPage.activeDay).size();
-        click(driver.findElements(NotDeliveredOrdersPage.activeDay).get(size-1),"Select today date");
-        String date=driver.findElement(NotDeliveredOrdersPage.notDeliveredDate).getAttribute("ng-reflect-model");
-        Utility_Functions.xMouseClick(driver, DeliveredOrdersPage.driverDrop);
+        int size=ownDriver.findElements(NotDeliveredOrdersPage.activeDay).size();
+        click(ownDriver.findElements(NotDeliveredOrdersPage.activeDay).get(size-1),"Select today date");
+        String date=ownDriver.findElement(NotDeliveredOrdersPage.notDeliveredDate).getAttribute("ng-reflect-model");
+        Utility_Functions.xMouseClick(ownDriver, DeliveredOrdersPage.driverDrop);
         Utility_Functions.timeWait(2);
         String driverName = Utility_Functions.xGetJsonData("Driver");
         System.out.println("driverName...." + driverName);
-        click(driver.findElement(By.xpath("//label[text()='Driver']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
+        click(ownDriver.findElement(By.xpath("//label[text()='Driver']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
         Utility_Functions.timeWait(2);
         sendKeys(filterField("Manifest Number"), Utility_Functions.xGetJsonData("ManifestNumber"), "Enter Manifest Number");
         click(TruckPage.applyFilter, "Click Apply Filters");
@@ -169,11 +172,11 @@ public class NotDeliveredOrders extends ReusableLib {
         Utility_Functions.timeWait(5);
         commonObj.validateText(NotDeliveredOrdersPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
         Utility_Functions.timeWait(7);
-        String manifestNo=Utility_Functions.getText(driver,NotDeliveredOrdersPage.selManNo);
+        String manifestNo=Utility_Functions.getText(ownDriver,NotDeliveredOrdersPage.selManNo);
         click(truck.getTruck("Status"),"Select "+manifestNo+" manifest number");
         Utility_Functions.timeWait(2);
-        int size=driver.findElements(NotDeliveredOrdersPage.addToManifestButton).size()-1;
-        click(driver.findElements(NotDeliveredOrdersPage.addToManifestButton).get(size),"Click Add to Manifest Number");
+        int size=ownDriver.findElements(NotDeliveredOrdersPage.addToManifestButton).size()-1;
+        click(ownDriver.findElements(NotDeliveredOrdersPage.addToManifestButton).get(size),"Click Add to Manifest Number");
         Utility_Functions.timeWait(3);
         commonObj.validateText(TruckPage.deletePopUp,"Order number "+Utility_Functions.xGetJsonData("SalesOrder")+"-01"+" successfully added to manifest "+manifestNo+".","");
         manFest.navigateToManifestsScreen();

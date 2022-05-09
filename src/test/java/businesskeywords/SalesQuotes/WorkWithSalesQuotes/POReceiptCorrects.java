@@ -2,6 +2,7 @@ package businesskeywords.SalesQuotes.WorkWithSalesQuotes;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -18,6 +19,7 @@ import java.util.Locale;
 
 public class POReceiptCorrects extends ReusableLib {
     CommonActions commonObj;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -28,6 +30,7 @@ public class POReceiptCorrects extends ReusableLib {
     public POReceiptCorrects(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /************************Inventory Receipt***********************/
@@ -46,16 +49,16 @@ public class POReceiptCorrects extends ReusableLib {
     public void inventReceipt() {
         sendKey(WorkWithSalesQuotesPage.purcOrdNo, Utility_Functions.xGetJsonData("POSmoke"));
         click(WorkWithSalesQuotesPage.process, "Click Process button");
-        String imNo = Utility_Functions.getText(driver, WorkWithSalesQuotesPage.itemNo).trim();
-        String itmDesc = Utility_Functions.getText(driver, WorkWithSalesQuotesPage.itmDesc).trim();
+        String imNo = Utility_Functions.getText(ownDriver, WorkWithSalesQuotesPage.itemNo).trim();
+        String itmDesc = Utility_Functions.getText(ownDriver, WorkWithSalesQuotesPage.itmDesc).trim();
         String testDesc = jsonData.getData("TestDescription");
-        String relSaleOrd = Utility_Functions.getText(driver, WorkWithSalesQuotesPage.relSaleOrd);
+        String relSaleOrd = Utility_Functions.getText(ownDriver, WorkWithSalesQuotesPage.relSaleOrd);
         sendKey(WorkWithSalesQuotesPage.qtyRec, "1");
         Utility_Functions.xAssertEquals(report, imNo, Utility_Functions.xGetJsonData("SQItem"), "Item Number: ");
         Utility_Functions.xAssertEquals(report, testDesc, itmDesc, "Item Description: ");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xGetJsonData("SOSmoke") + "-01", relSaleOrd, "Related Sale Order: ");
         click(WorkWithSalesQuotesPage.proc, "Click Process button");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");
     }
 
@@ -76,7 +79,7 @@ public class POReceiptCorrects extends ReusableLib {
         commonObj.validateElementExists(InventoryReceiptPage.cancelPO, "Cancel Po Button is present");
         commonObj.validateElementExists(InventoryReceiptPage.processBtn, "Process Button is present");
         //click(WorkWithSalesQuotesPage.saleQExtBtn, "Click Exit Button");
-        Utility_Functions.actionKey(Keys.F3, driver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
 
     public void navigateToPoInqPage() {
@@ -88,7 +91,7 @@ public class POReceiptCorrects extends ReusableLib {
      * This method to exit from Purchase Order Inquiry
      */
     public void exitPoInqPage() {
-        Utility_Functions.xScrollIntoView(driver, WorkWithSalesQuotesPage.saleQExtBtn);
+        Utility_Functions.xScrollIntoView(ownDriver, WorkWithSalesQuotesPage.saleQExtBtn);
         click(AddSpecialPricingPage.btnF12, "Click Back button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
     }
@@ -96,7 +99,7 @@ public class POReceiptCorrects extends ReusableLib {
     public void exitInventoryReceipt() {
         //Utility_Functions.xScrollIntoView(driver, WorkWithSalesQuotesPage.saleQExtBtn);
         //click(WorkWithSalesQuotesPage.saleQExtBtn, "Click Exit Button");
-        Utility_Functions.actionKey(Keys.F3, driver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
 
     public void exitInventoryReceiptPage() {
@@ -119,21 +122,21 @@ public class POReceiptCorrects extends ReusableLib {
      * This method to find PO number which having Line Item
      */
     public String findLineItemPO() {
-        Utility_Functions.xSelectDropdownByName(driver, report, InventoryReceiptPage.ShipmentType, "DIRECT (Direct Shipment)", "Select direct Shipment from the Type drop down");
-        int records = driver.findElements(InventoryReceiptPage.orderTotal).size();
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, InventoryReceiptPage.ShipmentType, "DIRECT (Direct Shipment)", "Select direct Shipment from the Type drop down");
+        int records = ownDriver.findElements(InventoryReceiptPage.orderTotal).size();
         String poNo = null;
         for (int i = 0; i < records; i++) {
-            Double isLineItemPresent = Double.parseDouble(driver.findElements(InventoryReceiptPage.orderTotal).get(i).getText());
+            Double isLineItemPresent = Double.parseDouble(ownDriver.findElements(InventoryReceiptPage.orderTotal).get(i).getText());
             if (isLineItemPresent > 1) {
-                poNo = driver.findElements(By.xpath("//div[contains(@id,'P1RECNME')]/preceding::div[contains(@id,'P1ORDNUM')]")).get(i).getText().trim();
+                poNo = ownDriver.findElements(By.xpath("//div[contains(@id,'P1RECNME')]/preceding::div[contains(@id,'P1ORDNUM')]")).get(i).getText().trim();
                 Utility_Functions.xUpdateJson("PONoLineItem", poNo);
-                sendKeys(driver.findElements(By.xpath("//div[contains(@id,'P1RECNME')]/preceding::div[contains(@id,'P1OPT')]/input")).get(i), "1", "Navigate to Po details page");
-                Utility_Functions.actionKey(Keys.ENTER, driver);
+                sendKeys(ownDriver.findElements(By.xpath("//div[contains(@id,'P1RECNME')]/preceding::div[contains(@id,'P1OPT')]/input")).get(i), "1", "Navigate to Po details page");
+                Utility_Functions.actionKey(Keys.ENTER, ownDriver);
                 break;
             }
         }
         getPoDetails();
-        Utility_Functions.xScrollIntoView(driver, WorkWithSalesQuotesPage.saleQExtBtn);
+        Utility_Functions.xScrollIntoView(ownDriver, WorkWithSalesQuotesPage.saleQExtBtn);
         click(AddSpecialPricingPage.btnF12, "Click Back button");
         return poNo;
     }
@@ -144,7 +147,7 @@ public class POReceiptCorrects extends ReusableLib {
     public String enterPoNo() {
         String poNo = Utility_Functions.xGetJsonData("PONumber");
         sendKeys(InventoryReceiptPage.purchaseOrdNo, poNo, "Enter Purchase Order Number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         return poNo;
     }
 
@@ -160,7 +163,7 @@ public class POReceiptCorrects extends ReusableLib {
     }
 
     public void exitIR() {
-        Utility_Functions.xScrollIntoView(driver, WorkWithSalesQuotesPage.proc);
+        Utility_Functions.xScrollIntoView(ownDriver, WorkWithSalesQuotesPage.proc);
         click(WorkWithSalesQuotesPage.exitIR, "Click Exit Button");
     }
 
@@ -168,15 +171,15 @@ public class POReceiptCorrects extends ReusableLib {
      * This method switch tab
      */
     public void switchTab() {
-        Utility_Functions.openNewTab(driver);
-        Utility_Functions.xSwitchToWindow(driver, 1);
+        Utility_Functions.openNewTab(ownDriver);
+        Utility_Functions.xSwitchToWindow(ownDriver, 1);
     }
 
     /**
      * This method switch tab
      */
     public void switchTabBack() {
-        Utility_Functions.xSwitchToWindow(driver, 0);
+        Utility_Functions.xSwitchToWindow(ownDriver, 0);
     }
 
     /**
@@ -196,7 +199,7 @@ public class POReceiptCorrects extends ReusableLib {
         String qty = jsonData.getData(val);
         clearText(by);
         sendKeys(by, qty, "Enter " + qty + " into quantity received input field");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     /**
@@ -211,7 +214,7 @@ public class POReceiptCorrects extends ReusableLib {
         commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
         verifyQtyField("alphaNumericQtyReceived",InventoryReceiptPage.qtyReceived);
         commonObj.validateText(InventoryReceiptPage.displayProgramMes, "Display Program Messages", "'Display Program Messages' Header is present");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     /**
@@ -235,7 +238,7 @@ public class POReceiptCorrects extends ReusableLib {
         commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
         verifyQtyField("alphaNumericUnitCost",InventoryReceiptPage.unitCostField);
         commonObj.validateText(InventoryReceiptPage.displayProgramMes, "Display Program Messages", "'Display Program Messages' Header is present");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     /**
@@ -244,7 +247,7 @@ public class POReceiptCorrects extends ReusableLib {
     public void validatePoNo(String poNum) {
         String poNo = jsonData.getData(poNum);
         sendKeys(InventoryReceiptPage.purchaseOrdNo, poNo, "Enter Purchase Order Number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(PoEntryConversionFactorPage.toaster,"No Detail Lines exist for this Purchase Order","'No Detail Lines exist for this Purchase Order' toaster is present");
     }
 
