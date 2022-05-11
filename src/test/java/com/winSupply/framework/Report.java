@@ -344,7 +344,11 @@ public class Report {
 	 *            The status of the test step
 	 */
 	public void updateTestLog(String stepName, String stepDescription, Status stepStatus) {
+		System.out.println("Screenshot 0 "+stepDescription);
 		String screenshotName = handleStepInvolvingScreenshot(stepName, stepStatus);
+		if (stepStatus==Status.PASS) {
+			System.out.println("Screenshot 1 " + stepDescription);
+		}
 		if ((stepName != "GS Info") && (stepStatus != Status.DEBUG)) {
 			setTestLogValues(stepName, stepDescription, stepStatus.toString());
 			//updateExtentStatus(stepName, stepDescription, stepStatus);
@@ -352,12 +356,20 @@ public class Report {
 				updateExtentStatus(stepName, stepDescription, stepStatus,reportSettings.getReportPath() + Util.getFileSeparator() + SCREENSHOTS
 						+ Util.getFileSeparator() + screenshotName);
 			} catch (IOException e) {
+				System.out.println("Exception IO");
 				e.printStackTrace();
+			}catch(Exception e){
+				System.out.println("Exception null pointer : "+e.getMessage());
+
 			}
 		}
-
+		if (stepStatus==Status.PASS) {
+			System.out.println("Screenshot 2 " + stepDescription);
+		}
 		handleStepInvolvingPassOrFail(stepDescription, stepStatus);
-
+		if (stepStatus==Status.PASS) {
+			System.out.println("Screenshot 3 " + stepDescription);
+		}
 		if (stepStatus.ordinal() <= reportSettings.getLogLevel()) {
 
 

@@ -83,7 +83,7 @@ public class Login extends ReusableLib {
 
 
     public void launchSelfServicePriceSheet(){
-        String url = properties.getProperty("URLPriceSheet");
+        String url = properties.getProperty("URLPriceSheet"+properties.getProperty("ENV"));
         ownDriver.get(url);
         ngWaitRequestToFinish();
     }

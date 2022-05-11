@@ -194,8 +194,8 @@ public class CoreScript {
         while (currentIteration <= testParameters.getEndIteration()) {
             System.out.println("Businessflow before : "+testParameters.getCurrentTestcase());
                 report.addTestLogSection("Iteration: " + Integer.toString(currentIteration));
-            System.out.println("Businessflow before0 : "+testParameters.getCurrentTestcase());
-                report.updateTestLog("CurrentIteration","Iteration: " + Integer.toString(currentIteration),Status.PASS);
+            System.out.println("Businessflow before0 : "+testParameters.getCurrentTestcase()+" iteration : "+currentIteration);
+                report.updateTestLog("CurrentIteration","Iteration: " + Integer.toString(currentIteration)+testParameters.getCurrentTestcase(),Status.PASS);
             System.out.println("Businessflow before1 : "+testParameters.getCurrentTestcase());
                 report.setIteration(currentIteration);
 
@@ -222,7 +222,6 @@ public class CoreScript {
     private void executeTestcase(List<String> businessFlowData)
             throws IllegalAccessException, InvocationTargetException, ClassNotFoundException, InstantiationException {
         Map<String, Integer> keywordDirectory = new HashMap<String, Integer>();
-
         for (int currentKeywordNum = 0; currentKeywordNum < businessFlowData.size(); currentKeywordNum++) {
             String[] currentFlowData = businessFlowData.get(currentKeywordNum).split(",");
             String currentKeyword = currentFlowData[0];
@@ -247,12 +246,14 @@ public class CoreScript {
                 jsonData.setCurrentRow(testParameters.getCurrentTestcase(), currentIteration);
 
                 if (currentSubIteration > 1) {
+
                     report.addTestLogSubSection(currentKeyword + " (Sub-Iteration: " + currentSubIteration + ")");
                     report.setSubIteration(currentSubIteration);
+
                 } else {
                     report.addTestLogSubSection(currentKeyword);
                 }
-
+                System.out.println("Invoke : "+testParameters.getCurrentTestcase());
                 invokeBusinessComponent(currentKeyword);
             }
         }
