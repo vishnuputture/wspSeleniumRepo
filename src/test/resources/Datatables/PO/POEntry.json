@@ -20,11 +20,10 @@
       "Tc_CreatePo": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInformation,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
       "Tc_310_SoFromStockPO": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,navigateToCreateSo,selectCustNo,selectShipVia,processSo,exitPoEntry,signOut",
       "Tc_311_VerifySalesOrderCreated": "launchApp,siteLogin,validateSalesOrderTitle,verifySalesOrderEntryFields",
-      "Tc_309_verifyF21Preferences": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,navigateToPoUserIdentifier,verifyPreferences,navigateToPoUserIdentifier,validateIdentifier,clickReturn,exitPoEntry,signOut",
+      "Tc_309_verifyF21Preferences": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,enterFreightCharges,navigateToPoUserIdentifier,verifyPreferences,navigateToPoUserIdentifier,validateIdentifier,clickReturn,exitPoEntry,signOut",
       "Tc_314_verifyErrorMessageEmailFaxOptions": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,verifyErrorMsgMailEDI,exitPoEntry,signOut",
       "Tc_315_verifySelectChangeDeselect": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,sendViaMail,enterItemNumberAndQty,vrfyCostVarianceError,navigateToPoHeading,changeMailDetails,selectMailDetails,deselectMailDetails,exitFromPOSend,exitPoEntry,signOut",
       "Tc_321_verifyClosedMail": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,sendViaMail,enterItemNumberAndQty,vrfyCostVarianceError,navigateToPoHeading,selectMailDetails,processMail,exitFromPOSend,exitPoEntry,signOut",
-
       "Tc_CreatePoDirect": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
       "Tc_312_VerifyCannotCreateSoForDirectPo": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,directPoCreateSoError,exitPoEntry,signOut",
       "Tc_316_verifyFieldExpansionOrderNo": "launchApp,siteLogin,validatePOHeadingTitle,getVendor,verifyOrderNo,exitPoEntry,signOut",
@@ -44,7 +43,7 @@
     {
       "TC_ID": "Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount",
       "quantityOrdered": "3",
-      "discount": "10",
+      "discount": "1",
       "listCostOption": "1"
     },
     {
@@ -106,12 +105,12 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "001556",
+      "SalesOrderNo": "001570",
       "QtyOrdered": "25",
       "VendorNumber": "000388",
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "032153"
+      "PONumber": "032179"
     },
     {
       "TC_ID": "Tc_311_VerifySalesOrderCreated"
@@ -125,12 +124,12 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "001544",
+      "SalesOrderNo": "001573",
       "QtyOrdered": "25",
       "VendorNumber": "000388",
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "032130"
+      "PONumber": "032180"
     },
     {
       "TC_ID": "Tc_312_VerifyCannotCreateSoForDirectPo"

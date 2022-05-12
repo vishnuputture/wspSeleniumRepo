@@ -801,6 +801,7 @@ public class CreatePurchaseOrder extends ReusableLib {
         sendKeys(PurchaseOrderDetailsPage.sendViaMail,"Y","Enter Send Via Mail as [Y]");
         sendKeys(PurchaseOrderDetailsPage.sendViaEDI,"Y","Enter Send Via EDI as [Y]");
         enter();
+        Utility_Functions.timeWait(2);
         commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD,"ERROR - You may NOT Email an EDI order.","[ERROR - You may NOT Email an EDI order.] error message is present");
     }
 

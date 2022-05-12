@@ -24,12 +24,12 @@
 					<include name="Tc_311_VerifySalesOrderCreated"></include>
 					<include name="Tc_309_verifyF21Preferences"></include>
 					<include name="Tc_314_verifyErrorMessageEmailFaxOptions"></include>
+					<include name="Tc_317_verifyFieldExpansionSONoField"></include>
 					<include name="Tc_315_verifySelectChangeDeselect"></include>
 					<include name="Tc_321_verifyClosedMail"></include>
 					<include name="Tc_CreatePoDirect"></include>
 					<include name="Tc_312_VerifyCannotCreateSoForDirectPo"></include>
 					<include name="Tc_316_verifyFieldExpansionOrderNo"></include>
-					<include name="Tc_317_verifyFieldExpansionSONoField"></include>
 					<include name="Tc_318_verifyFieldExpansionRelatedSaleField"></include>
 					<include name="Tc_319_InquiryOrderNumber"></include>
 					<include name="Tc_335_deleteOrderNumber"></include>
