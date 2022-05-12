@@ -184,7 +184,11 @@
     },
     {
       "TC_ID": "Tc_831_verifyCreateDuplicateBin",
-      "Title": "verify Create Duplicate bin"
+      "Title": "verify Create Duplicate bin",
+      "BinCondition": "Good",
+      "BinZone": "Test",
+      "Picking": "RF Gun",
+      "Receiving": "RF Gun"
     },
     {
       "TC_ID": "Tc_836_verifyAddBinButton",

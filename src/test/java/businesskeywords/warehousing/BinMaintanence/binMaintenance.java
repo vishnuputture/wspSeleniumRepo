@@ -879,7 +879,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
         Utility_Functions.timeWait(2);
         try {
-            click(driver.findElements(button("Save ")).get(1), "Click Save button");
+            click(BinMaintenancePage.btnSaveEdiBinPopup, "Click Save button");
         } catch (Exception e) {
             click(BinMaintenancePage.stagingArea);
             Utility_Functions.timeWait(2);
@@ -928,7 +928,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xUpdateJson("itemLocation", "" + binLoc + "");
         sendKeys(BinMaintenancePage.createBinLabel, "" + binLoc + "", "Enter Bin Location");
         enterRequiredData();
-        click(driver.findElement(button("Save ")), "Click Save button");
+        click(driver.findElement(button("Create ")), "Click Save button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully", "'Bin and Bin-item are created successfully' is present");
         commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLoc + "')]"), binLoc + " Bin location is created");
@@ -949,9 +949,9 @@ public class binMaintenance extends ReusableLib {
         for (String label : labels) {
             commonObj.validateText(By.xpath("//input[@type='checkbox']/following-sibling::label[text()='" + label + "']"), label, label + " checkbox is present");
         }
-        String[] textLabels = {" Bin Location", "Condition", "Zones", "Picking", "Receiving"};
+        String[] textLabels = {" Bin Location", "Condition", "Zone", "Picking", "Receiving"};
         for (String textLabel : textLabels) {
-            commonObj.validateText(By.xpath("//label[text()='" + textLabel + "']"), textLabel.trim(), textLabel + " text box is present");
+            commonObj.validateText(By.xpath("//create-bin-component//label[text()='" + textLabel + "']"), textLabel.trim(), textLabel + " text box is present");
         }
         click(driver.findElements((button("Cancel "))).get(1), "Click Cancel button");
         Utility_Functions.timeWait(2);
@@ -969,7 +969,7 @@ public class binMaintenance extends ReusableLib {
         sendKeys(BinMaintenancePage.createBinLabel, Utility_Functions.xGetJsonData("itemLocation"), "Enter Bin Location");
         Utility_Functions.timeWait(2);
         enterRequiredData();
-        click(driver.findElement(button("Save ")), "Click Save button");
+        click(BinMaintenancePage.btnSaveCreateNewBinpopup, "Click Save button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin Location already exists", "'Bin Location already exists' is present");
     }
@@ -1271,7 +1271,7 @@ public class binMaintenance extends ReusableLib {
         vrfyDefaultSelectionOfChbxInCreateNewBinPopup();
         commonObj.validateElementExists(BinMaintenancePage.tbxBinLocation, "[Bin Location] textbox is present");
 
-        String[] field = {"Condition", "Zones", "Picking", "Receiving"};
+        String[] field = {"Condition", "Zone", "Picking", "Receiving"};
         for (String label : field) {
             commonObj.validateElementExists(By.xpath("//label[contains(text(),'" + label + "')]//following-sibling::select"), "Dropdown [" + label + "] is present");
         }
