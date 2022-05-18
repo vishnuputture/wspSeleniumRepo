@@ -8,6 +8,24 @@
                 <methods>
                     <include name="Tc_161_VerifySPAScreenHeader"></include>
                     <include name="Tc_166_VerifySPAScreenInformation"></include>
+                    <include name="Tc_311_VerifyAddCustomersToGroupName"></include>
+                    <include name="Tc_315_VerifyEditCustomerGroup"></include>
+                    <include name="Tc_316_VerifyDisplayCustomer"></include>
+                    <include name="Tc_317_VerifyDeleteGroupName"></include>
+                    <include name="Tc_318_VerifyCustomerGroupSorting"></include>
+                    <include name="Tc_319_VerifyDeleteMultipleGroupName"></include>
+                    <include name="Tc_323_VerifySPAHideShowExpiredRecords"></include>
+                    <include name="Tc_322_VerifySPAAddRecords"></include>
+                    <include name="Tc_337_VerifySPASearchRecords"></include>
+                    <include name="Tc_326_VerifySPARecordDeletion"></include>
+                    <include name="Tc_324_VerifySortingContract"></include>
+                    <include name="Tc_325_VerifyEditContract"></include>
+                    <include name="Tc_327_VerifyAssignMFPDCode"></include>
+                    <include name="Tc_328_VerifyCopyContract"></include>
+                    <include name="Tc_331_VerifyAssignIndividualItem"></include>
+                    <include name="Tc_332_VerifyDisplayContractDetails"></include>
+                    <include name="Tc_334_VerifyUpdateCost"></include>
+                    <include name="Tc_336_VerifyLoadPriceSheet"></include>
                 </methods>
             </class>
         </classes>
@@ -16,7 +34,22 @@
         <classes>
             <class name="testcases.Pricing.Wise">
                 <methods>
+                    <include name="Tc_19_ValidateCustomerNumber"></include>
                     <include name="Tc_20_ValidateItemNumber"></include>
+                    <include name="Tc_22_ValidateDBafterAdd"></include>
+                    <include name="Tc_5_ValidatePositiontoCustomerNumber_Beginning"></include>
+                    <include name="Tc_9_ValidatePositiontoCustomerNumber_Middle"></include>
+                    <include name="Tc_10_ValidatePositiontoCustomerNumber_End"></include>
+                    <include name="Tc_11_ValidatePositiontoItemNumber_Beginning"></include>
+                    <include name="Tc_17_NavigateToAddSpecialScreen"></include>
+                    <include name="Tc_13_ValidatePositiontoItemNumber_Middle"></include>
+                    <include name="Tc_23_ValidateDBAfterDelete"></include>
+                    <include name="Tc_API_updatePricing"></include>
+                    <include name="Tc_API_validatePricing"></include>
+                    <include name="Tc_2_ValidateNoSpecialPriceMessage"></include>
+                    <include name="Tc_3_ValidateDefaultFiltersSplPricing"></include>
+                    <include name="Tc_12_ValidatePositiontoItemNumber_End"></include>
+                    <include name="Tc_24_InsertPAPRecordToDelete"></include>
                     <include name="Tc_21_E2E"></include>
                 </methods>
             </class>
@@ -26,8 +59,32 @@
         <classes>
             <class name="testcases.Pricing.SelfServicePriceSheet">
                 <methods>
+                    <include name="Tc_286_SelfPriceSheetUi"></include>
                     <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
+                    <include name="Tc_189_NavigatePriceSheetDetails"></include>
                     <include name="Tc_363_FillPriceSheetAndSave"></include>
+                    <include name="Tc_360_PriceSheetOnHold"></include>
+                    <include name="Tc_360_PriceSheetRemoveHold"></include>
+                    <include name="Tc_367_PriceSheetMarkAsReady"></include>
+                    <include name="Tc_367_ValidatePriceSheetProcessed"></include>
+                    <include name="Tc_195_ValidatePriceSheetItemListCost"></include>
+                    <include name="Tc_196_ValidatePriceSheetItemMatrixCost"></include>
+                    <include name="Tc_197_ValidatePriceSheetItemPoCost"></include>
+                    <include name="Tc_344_VerifySearchByName"></include>
+                    <include name="Tc_344_VerifyFilterByManufacturer"></include>
+                    <include name="Tc_344_VerifyFilterByStatus"></include>
+                    <include name="Tc_344_VerifyFilterEffectiveDate"></include>
+                    <include name="Tc_399_VerifyListPriceInputField"></include>
+                    <include name="TC_408_CreateValidPriceSheetWithNETPriceValue"></include>
+                    <include name="Tc_753_ProcessNowSheetAvailableIngesting"></include>
+                    <include name="Tc_754_ProcessNowSheetReadyToProcessIngesting"></include>
+                    <include name="Tc_755_ProcessedNonEditable"></include>
+                    <include name="Tc_764_DeletePriceSheet"></include>
+                    <include name="Tc_767_ListPriceCal"></include>
+                    <include name="Tc_768_PoCostCal"></include>
+                    <include name="Tc_769_MatrixCostCal"></include>
+                    <include name="Tc_773_ProcessingErrorStatusNoIteNo"></include>
+                    <include name="Tc_774_SortByErrorFilter"></include>
                 </methods>
             </class>
         </classes>
