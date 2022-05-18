@@ -189,7 +189,7 @@ public class POReceiptCorrects extends ReusableLib {
         String poNo = Utility_Functions.xGetJsonData("PONumber");
         commonObj.validateText(InventoryReceiptPage.orderInUsePopUp, "ORDER IN USE", "'ORDER IN USE' popup is present");
         commonObj.validateText(InventoryReceiptPage.outOrderNum, poNo, "'Order #" + poNo + " is in use' is present");
-        commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty("UserName"), "User id is matches");
+        commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty(getProperties("ENV")+"UserName"), "User id is matches");
         click(InventoryReceiptPage.btnContinue, "Click Continue button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
         click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");

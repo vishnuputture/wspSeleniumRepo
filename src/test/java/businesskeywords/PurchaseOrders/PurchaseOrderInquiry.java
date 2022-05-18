@@ -45,7 +45,10 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to click on [Exit] button in PURCHASE ORDER INQUIRY Page
      */
     public void clickExitBtnPOInquiry() {
-        Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderInquiryPage.btnExitPOInquiryDtls);
+
+        //Utility_Functions.xScrollIntoView(driver, PurchaseOrderInquiryPage.btnExitPOInquiryDtls);
+        Utility_Functions.xScrollPage(ownDriver);
+
         click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
     }
 
@@ -63,6 +66,22 @@ public class PurchaseOrderInquiry extends ReusableLib {
      */
     public void clickOnExitBtn(){
         click(PurchaseOrderInquiryPage.btnExitItemLedger, "Click [Exit] button");
+    }
+
+    /**
+     * Keyword to press [F3] Exit button
+     */
+    public void pressF3ExitBtn(){
+        Utility_Functions.actionKey(Keys.F3, driver);
+        report.updateTestLog("Press [F3] button", "Press [F3] button",Status.PASS);
+    }
+
+    /**
+     * Keyword to press [F12] Exit button
+     */
+    public void pressF12CancelBtn(){
+        Utility_Functions.actionKey(Keys.F12, driver);
+        report.updateTestLog("Press [F12] button", "Press [F12] button",Status.PASS);
     }
 
     /**
@@ -182,13 +201,17 @@ public class PurchaseOrderInquiry extends ReusableLib {
         List<WebElement> els=getListElement(PurchaseOrderInquiryPage.optField);
         for(int i=0;i<els.size();i++){
             Utility_Functions.timeWait(2);
+
+            els=getListElement(PurchaseOrderInquiryPage.optField);
             Utility_Functions.xSendKeys(ownDriver,els.get(i),"1"+ Keys.ENTER);
+
             if(isDisplayed(PurchaseOrderInquiryPage.noResult1)){
                 commonObj.validateText(PurchaseOrderInquiryPage.noResult1,"* No results to display based on the selected criteria.","'* No results to display based on the selected criteria.' is present");
                 commonObj.validateText(PurchaseOrderInquiryPage.noResult2,"* The order may not exist or it may be omitted due to current settings.","'* The order may not exist or it may be omitted due to current settings.' is present");
                 commonObj.validateText(PurchaseOrderInquiryPage.noResult3,"* To continue searching, choose less restrictive search criteria.","'* To continue searching, choose less restrictive search criteria.' is present");
             }
             click(PurchaseOrderInquiryPage.orderBySearchIcon,"Click Order By Search Icon");
+            Utility_Functions.timeWait(2);
         }
     }
 
