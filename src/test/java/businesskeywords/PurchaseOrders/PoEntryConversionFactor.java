@@ -25,6 +25,7 @@ public class PoEntryConversionFactor extends ReusableLib {
     CommonActions commonObj;
     businesskeywords.SPO.Spo sp;
     Login login;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -37,14 +38,15 @@ public class PoEntryConversionFactor extends ReusableLib {
         commonObj = new CommonActions(helper);
         sp = new businesskeywords.SPO.Spo(helper);
         login = new Login(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     public void selectItem(){
         click(CostAdjustmentPage.searchIcon, "Click Search Icon");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xUpdateJson("ItemNoMaster", Utility_Functions.getText(driver, PoEntryConversionFactorPage.storeItem));
+        Utility_Functions.xUpdateJson("ItemNoMaster", Utility_Functions.getText(ownDriver, PoEntryConversionFactorPage.storeItem));
         sendKeys(PoEntryConversionFactorPage.selectItem, "1", "Select Item Number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     public void getDetails(){
@@ -92,7 +94,7 @@ public class PoEntryConversionFactor extends ReusableLib {
             sendKeys(PurchaseOrderEntryPage.costOption, jsonData.getData("CostOption") + Keys.ENTER, "Entered Cost Option as"+Utility_Functions.xGetJsonData("CostOption"));
         }else
         {
-            Utility_Functions.actionKey(Keys.ENTER,driver);
+            Utility_Functions.actionKey(Keys.ENTER,ownDriver);
         }
     }
 
@@ -115,10 +117,10 @@ public class PoEntryConversionFactor extends ReusableLib {
      * This method to Exit Po Entry
      */
     public void exitToMaster() {
-        if(Utility_Functions.xIsDisplayed(driver,SpecialPriceAllowancePage.showContractDate)) {
+        if(Utility_Functions.xIsDisplayed(ownDriver,SpecialPriceAllowancePage.showContractDate)) {
             click(SpecialPriceAllowancePage.showContractDate, "Click F11=Header");
         }
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
         click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
     }
@@ -186,12 +188,12 @@ public class PoEntryConversionFactor extends ReusableLib {
      */
     public void findOrderNumber(String orderType){
         click(PurchaseOrderEntryPage.orderNo,"Click on Order Number");
-        Utility_Functions.xSelectDropdownByValue(driver, PurchaseOrderEntryPage.ddnType, orderType);
+        Utility_Functions.xSelectDropdownByValue(ownDriver, PurchaseOrderEntryPage.ddnType, orderType);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
         String orderNumberSelected = selectRandomPO();
 
-        xWaitForElementPresent(driver, PurchaseOrderEntryPage.tbxOrderNumber, globalWait);
+        xWaitForElementPresent(ownDriver, PurchaseOrderEntryPage.tbxOrderNumber, globalWait);
         String orderNumberActual = getAttribute(PurchaseOrderEntryPage.tbxOrderNumber, "value");
         Utility_Functions.xAssertEquals(report, orderNumberSelected, orderNumberActual,"Selected Order Number is displayed");
     }
@@ -211,7 +213,7 @@ public class PoEntryConversionFactor extends ReusableLib {
         }
         List<WebElement> lstOptions = getListElement(PurchaseOrderEntryPage.lstOptionsColumn);
         List<WebElement> lstOrderNumber = getListElement(PurchaseOrderEntryPage.lstOrderNumberColumn);
-        List<String> lstOrderNumberText = Utility_Functions.xGetTextVisibleListString(driver, lstOrderNumber);
+        List<String> lstOrderNumberText = Utility_Functions.xGetTextVisibleListString(ownDriver, lstOrderNumber);
         int random = Utility_Functions.xRandomFunction(0, lstOptions.size()-1);
         String selectedPO = lstOrderNumberText.get(random);
         sendKeys(lstOptions.get(random), "2", "Selected an Order with Order Number as ["+selectedPO+"]");

@@ -2,14 +2,17 @@ package pages.pricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import org.openqa.selenium.By;
 import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;
 
 public class AddSpecialPricingPage extends ReusableLib {
 
+	private FrameworkDriver ownDriver;
 	 public AddSpecialPricingPage(Helper helper) {
 	        super(helper);
+		 ownDriver=helper.getGSDriver();
 	    }
 	 
 	 public static By addSpecialPriceTitle=By.xpath("//div[@class='app-header'][@id='D_2_17']");
@@ -23,12 +26,12 @@ public class AddSpecialPricingPage extends ReusableLib {
 
 	 public void enterCustNumber(String dataStr, String message){
 		sendKeys(custNumTxtBox,dataStr,message);
-		 Utility_Functions.actionKey(Keys.ENTER, driver);
+		 Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 	 }
 	 public void enterCustItemNumber(String custNoStr, String custMessage,String itemNoStr, String itemMessage){
 		 sendKeys(custNumTxtBox,custNoStr,custMessage);
 		 sendKeys(itemNumTxtBox,itemNoStr,itemMessage);
-		 Utility_Functions.actionKey(Keys.ENTER, driver);
+		 Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 	 }
 	 
 }

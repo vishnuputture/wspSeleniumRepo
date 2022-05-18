@@ -3,6 +3,7 @@ package businesskeywords.SalesQuotes.WorkWithSalesQuotes;
 import businesskeywords.SalesQuotes.WorkWithSalesQuotes.WorkWithSalesQuote;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import pages.pricing.OrderByCustomerPage;
@@ -11,6 +12,7 @@ import supportLibraries.Utility_Functions;
 
 public class ReportMenu extends ReusableLib {
     CommonActions commonObj;
+    private FrameworkDriver ownDriver;
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
      * objects wrapped by it
@@ -21,6 +23,7 @@ public class ReportMenu extends ReusableLib {
     public ReportMenu(Helper helper) {
         super(helper);
         commonObj=new CommonActions(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -39,10 +42,10 @@ public class ReportMenu extends ReusableLib {
      */
     public void createInvoices() {
         sendKeys(ReportsMenu.enterSel,"I");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         sendKeys(ReportsMenu.KeyNo1, Utility_Functions.xGetJsonData("SOSmoke"));
         sendKeys(ReportsMenu.KeyNo2, "01");
-        Utility_Functions.actionKey(Keys.F1, driver);
+        Utility_Functions.actionKey(Keys.F1, ownDriver);
         System.out.println("Invoice Done......");
     }
 

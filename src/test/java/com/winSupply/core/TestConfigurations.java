@@ -37,7 +37,7 @@ public class TestConfigurations extends BaseTestCase {
 
 		currentMethodName = currentMethod.getDeclaringClass().getPackage().toString();  //Changed on 04 July 2021
 
-		currentTestcase = currentTestcase.substring(0, 1).toUpperCase().concat(currentTestcase.substring(1));
+		currentTestcase = currentMethod.getName().substring(0, 1).toUpperCase().concat(currentTestcase.substring(1));
 
 		return new Object[][] { { new SeleniumParametersBuilders(currentScenario, currentTestcase)
 				.extentReport(extentReport).extentTest(extentTest).testInstance("Instance1")
