@@ -883,7 +883,7 @@ public class binMaintenance extends ReusableLib {
         } catch (Exception e) {
             click(BinMaintenancePage.stagingArea);
             Utility_Functions.timeWait(2);
-            click(driver.findElements(button("Save ")).get(1), "Click Save button");
+            click(driver.findElements(button("Save ")).get(0), "Click Save button");
         }
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Selected Bins updated successfully.", "'Selected Bins updated successfully.' is present");

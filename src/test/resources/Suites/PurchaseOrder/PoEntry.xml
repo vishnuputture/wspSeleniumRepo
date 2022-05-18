@@ -19,6 +19,7 @@
 					<include name="Tc_216_Verify_the_functionality_of_Freight_Charges"></include>
 					<include name="Tc_217_Verify_the_functionality_of_Cost_Option"></include>
 					<include name="Tc_308_CreateSOUI"></include>
+
 					<include name="Tc_CreatePo"></include>
 					<include name="Tc_310_SoFromStockPO"></include>
 					<include name="Tc_311_VerifySalesOrderCreated"></include>
