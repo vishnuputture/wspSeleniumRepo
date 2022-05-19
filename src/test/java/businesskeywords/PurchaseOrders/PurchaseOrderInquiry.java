@@ -72,7 +72,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to press [F3] Exit button
      */
     public void pressF3ExitBtn(){
-        Utility_Functions.actionKey(Keys.F3, driver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
         report.updateTestLog("Press [F3] button", "Press [F3] button",Status.PASS);
     }
 
@@ -80,7 +80,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to press [F12] Exit button
      */
     public void pressF12CancelBtn(){
-        Utility_Functions.actionKey(Keys.F12, driver);
+        Utility_Functions.actionKey(Keys.F12, ownDriver);
         report.updateTestLog("Press [F12] button", "Press [F12] button",Status.PASS);
     }
 
