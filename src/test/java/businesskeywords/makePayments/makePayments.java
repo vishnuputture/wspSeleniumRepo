@@ -51,6 +51,7 @@ public class makePayments extends ReusableLib {
 
     CommonActions commonObj;
     WebDriver d;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -62,12 +63,13 @@ public class makePayments extends ReusableLib {
     public makePayments(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        d=driver.getWebDriver();
+        ownDriver=helper.getGSDriver();
+        d=ownDriver.getWebDriver();
     }
 
     public void logInToMakePayments()
     {
-        Utility_Functions.xWaitForElementClickable(driver,MakePaymentLandingPage.signIn,10);
+        Utility_Functions.xWaitForElementClickable(ownDriver,MakePaymentLandingPage.signIn,10);
         Utility_Functions.timeWait(4);
         commonObj.validateText(MakePaymentLandingPage.signIn,"Sign In","validating make payment dropdown");
         click(MakePaymentLandingPage.signIn);
@@ -80,8 +82,8 @@ public class makePayments extends ReusableLib {
 
     public void navigateToInvoice()
     {
-    	Utility_Functions.xWaitForElementPresent(driver, MakePaymentLandingPage.makePaymentdrpdwntext, 5);
-        Utility_Functions.xHoverElementclicks(driver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext),driver);
+    	Utility_Functions.xWaitForElementPresent(ownDriver, MakePaymentLandingPage.makePaymentdrpdwntext, 5);
+        Utility_Functions.xHoverElementclicks(ownDriver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext),ownDriver);
         click(MakePaymentLandingPage.invoices);
         commonObj.validateText(InvoicePage.headerTitleInvoice,"Invoices","User in invoice Page");
 
@@ -99,13 +101,13 @@ public class makePayments extends ReusableLib {
         for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableInvoiceHeader);
-            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceNumbers);
+            List<WebElement> invoiceList = ownDriver.findElements(InvoicePage.tableInvoiceNumbers);
 
             for (int j = 0; j < invoiceList.size(); j++) {
                 String temp = invoiceList.get(j).getText();
                 //         System.out.println(temp);
                 int k = j + 1;
-                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//a")).getText();
+                String inv = ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//a")).getText();
                 //         System.out.println(inv);
                 if (temp.equalsIgnoreCase(inv)) {
                     report.updateTestLog("Matches Invoice number", inv, Status.PASS);
@@ -121,14 +123,14 @@ public class makePayments extends ReusableLib {
         for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableTotalHeader);
-            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceTotal);
+            List<WebElement> invoiceList = ownDriver.findElements(InvoicePage.tableInvoiceTotal);
 
             for (int j = 0; j < invoiceList.size(); j++) {
                 String temp = invoiceList.get(j).getText();
                 //        System.out.println(temp);
                 int k = j + 1;
 
-                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[7]")).getText();
+                String inv = ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[7]")).getText();
                 //         System.out.println(inv);
                 if (temp.equalsIgnoreCase(inv)) {
                     report.updateTestLog("Matches Invoice Total", inv, Status.PASS);
@@ -144,14 +146,14 @@ public class makePayments extends ReusableLib {
         for (int i = 0; i < 2; i++) {
 
             click(InvoicePage.tableDiscountHeader);
-            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDiscount);
+            List<WebElement> invoiceList = ownDriver.findElements(InvoicePage.tableInvoiceDiscount);
 
             for (int j = 0; j < invoiceList.size(); j++) {
                 String temp = invoiceList.get(j).getText();
                 //        System.out.println(temp);
                 int k = j + 1;
 
-                String inv = driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[8]")).getText();
+                String inv = ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//div[8]")).getText();
                 //         System.out.println(inv);
                 if (temp.equalsIgnoreCase(inv)) {
                     report.updateTestLog("Matches Invoice Total", inv, Status.PASS);
@@ -168,7 +170,7 @@ public class makePayments extends ReusableLib {
         for(int i=0;i<2;i++) {
 
             click(InvoicePage.tableAmtDueHeader);
-            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceAmtDue);
+            List<WebElement> invoiceList = ownDriver.findElements(InvoicePage.tableInvoiceAmtDue);
 
             for(int j=0;j<invoiceList.size();j++)
             {
@@ -176,7 +178,7 @@ public class makePayments extends ReusableLib {
                 //        System.out.println(temp);
                 int k=j+1;
 
-                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[8]")).getText();
+                String inv= ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[8]")).getText();
                 //         System.out.println(inv);
                 if(temp.equalsIgnoreCase(inv))
                 {
@@ -195,7 +197,7 @@ public class makePayments extends ReusableLib {
         for(int i=0;i<2;i++) {
 
             click(InvoicePage.tableDateHeader);
-            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDate);
+            List<WebElement> invoiceList = ownDriver.findElements(InvoicePage.tableInvoiceDate);
 
             for(int j=0;j<invoiceList.size();j++)
             {
@@ -203,7 +205,7 @@ public class makePayments extends ReusableLib {
                 //        System.out.println(temp);
                 int k=j+1;
 
-                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[5]")).getText();
+                String inv= ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[5]")).getText();
                 //         System.out.println(inv);
                 if(temp.equalsIgnoreCase(inv))
                 {
@@ -219,16 +221,16 @@ public class makePayments extends ReusableLib {
 
 
     public void validateInvoiceStatusFilter() {
-    	int statusCount = Utility_Functions.xGetSelectOptionCount(driver,driver.findElement(MakePaymentLandingPage.invoiceStatusDropDown));
+    	int statusCount = Utility_Functions.xGetSelectOptionCount(ownDriver,ownDriver.findElement(MakePaymentLandingPage.invoiceStatusDropDown));
     	for(int i=0 ;i<statusCount;i++ ) {
-    		Utility_Functions.xSelectDropdownByIndex(driver,driver.findElement(MakePaymentLandingPage.invoiceStatusDropDown),i);
+    		Utility_Functions.xSelectDropdownByIndex(ownDriver,ownDriver.findElement(MakePaymentLandingPage.invoiceStatusDropDown),i);
     		Utility_Functions.timeWait(2);
-    		if(!Utility_Functions.isExist(driver, MakePaymentLandingPage.lblNoRecords)) {
+    		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
     		click(MakePaymentLandingPage.btnTableExpand);
     		Utility_Functions.timeWait(4);
-    		String temp = driver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
+    		String temp = ownDriver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
     		int displayCount = 0;
-    		for(WebElement e :driver.findElements(MakePaymentLandingPage.recordRow) ) {
+    		for(WebElement e :ownDriver.findElements(MakePaymentLandingPage.recordRow) ) {
     			if(e.getAttribute("hidden")==null) {
     				displayCount++;
     			}
@@ -244,18 +246,18 @@ public class makePayments extends ReusableLib {
     }
 
     public void validateInvoiceDateFilter() {
-    	Utility_Functions.xSelectDropdownByVisibleText(driver, MakePaymentLandingPage.invoiceStatusDropDown, "All");
-    	int statusCount = Utility_Functions.xGetSelectOptionCount(driver,driver.findElement(MakePaymentLandingPage.invoiceDatesDropDown));
+    	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, MakePaymentLandingPage.invoiceStatusDropDown, "All");
+    	int statusCount = Utility_Functions.xGetSelectOptionCount(ownDriver,ownDriver.findElement(MakePaymentLandingPage.invoiceDatesDropDown));
     	for(int i=0 ;i<statusCount-1;i++ ) {
-    		Utility_Functions.xSelectDropdownByIndex(driver,driver.findElement(MakePaymentLandingPage.invoiceDatesDropDown),i);
+    		Utility_Functions.xSelectDropdownByIndex(ownDriver,ownDriver.findElement(MakePaymentLandingPage.invoiceDatesDropDown),i);
     		Utility_Functions.timeWait(2);
-    		if(!Utility_Functions.isExist(driver, MakePaymentLandingPage.lblNoRecords)) {
+    		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
     		click(MakePaymentLandingPage.btnTableExpand);
     		Utility_Functions.timeWait(4);
-    		String temp = driver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
+    		String temp = ownDriver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
     		//System.out.println("count :"+temp.split("of")[0].trim().substring(1));
     		int displayCount = 0;
-    		for(WebElement e :driver.findElements(MakePaymentLandingPage.recordRow) ) {
+    		for(WebElement e :ownDriver.findElements(MakePaymentLandingPage.recordRow) ) {
     			if(e.getAttribute("hidden")==null) {
     				displayCount++;
     			}
@@ -271,8 +273,8 @@ public class makePayments extends ReusableLib {
     }
 
     public void validateInvoiceCustomDateFilter() {
-    	Utility_Functions.xSelectDropdownByVisibleText(driver, MakePaymentLandingPage.invoiceStatusDropDown, "All");
-    	Utility_Functions.xSelectDropdownByVisibleText(driver, MakePaymentLandingPage.invoiceDatesDropDown, "Custom");
+    	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, MakePaymentLandingPage.invoiceStatusDropDown, "All");
+    	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, MakePaymentLandingPage.invoiceDatesDropDown, "Custom");
 
     	Date dt = new Date();
 		Calendar c = Calendar.getInstance();
@@ -291,13 +293,13 @@ public class makePayments extends ReusableLib {
 
 		click(MakePaymentLandingPage.dateFilterApply);
 		Utility_Functions.timeWait(2);
-		if(!Utility_Functions.isExist(driver, MakePaymentLandingPage.lblNoRecords)) {
+		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
 			click(MakePaymentLandingPage.btnTableExpand);
     		Utility_Functions.timeWait(4);
-    		String temp = driver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
+    		String temp = ownDriver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
     		//System.out.println("count :"+temp.split("of")[0].trim().substring(1));
     		int displayCount = 0;
-    		for(WebElement e :driver.findElements(MakePaymentLandingPage.recordRow) ) {
+    		for(WebElement e :ownDriver.findElements(MakePaymentLandingPage.recordRow) ) {
     			if(e.getAttribute("hidden")==null) {
     				displayCount++;
     			}
@@ -312,19 +314,19 @@ public class makePayments extends ReusableLib {
     }
 
     public void validateInvoiceSearchFilter() {
-    	Utility_Functions.xSelectDropdownByVisibleText(driver, MakePaymentLandingPage.invoiceStatusDropDown, "All");
+    	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, MakePaymentLandingPage.invoiceStatusDropDown, "All");
     	//Utility_Functions.xSelectDropdownByVisibleText(driver, MakePaymentLandingPage.invoiceDatesDropDown, "Custom");
     	sendKeys(MakePaymentLandingPage.txtBoxInvoiceSearch,Utility_Functions.xGetJsonData("CreatedSalesOrder"),"Entering filter data");
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 
     	Utility_Functions.timeWait(2);
-		if(!Utility_Functions.isExist(driver, MakePaymentLandingPage.lblNoRecords)) {
+		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
 			click(MakePaymentLandingPage.btnTableExpand);
     		Utility_Functions.timeWait(4);
-    		String temp = driver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
+    		String temp = ownDriver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
     		//System.out.println("count :"+temp.split("of")[0].trim().substring(1));
     		int displayCount = 0;
-    		for(WebElement e :driver.findElements(MakePaymentLandingPage.recordRow) ) {
+    		for(WebElement e :ownDriver.findElements(MakePaymentLandingPage.recordRow) ) {
     			if(e.getAttribute("hidden")==null) {
     				displayCount++;
     			}
@@ -344,7 +346,7 @@ public class makePayments extends ReusableLib {
         for(int i=0;i<2;i++) {
 
             click(InvoicePage.tableDateHeader);
-            List<WebElement> invoiceList = driver.findElements(InvoicePage.tableInvoiceDate);
+            List<WebElement> invoiceList = ownDriver.findElements(InvoicePage.tableInvoiceDate);
 
             for(int j=0;j<invoiceList.size();j++)
             {
@@ -352,7 +354,7 @@ public class makePayments extends ReusableLib {
                 //        System.out.println(temp);
                 int k=j+1;
 
-                String inv= driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[5]")).getText();
+                String inv= ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//div[5]")).getText();
                 //         System.out.println(inv);
                 if(temp.equalsIgnoreCase(inv))
                 {
@@ -370,12 +372,12 @@ public class makePayments extends ReusableLib {
     {
             click(InvoicePage.supplierCheckBox);
 
-            List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
+            List<WebElement> invoiceCheckBoxCount = ownDriver.findElements(InvoicePage.invoiceCheckBox);
 
             for(int j=0;j<1;j++)
             {
                 int k=j+1;
-                driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
+                ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
             }
 
             click(InvoicePage.makePaymentBtn);
@@ -389,7 +391,7 @@ public class makePayments extends ReusableLib {
             Utility_Functions.timeWait(3);
             commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
             scrollToView();
-            String txt=driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+            String txt=ownDriver.findElement(MakeAPaymentPage.confirmationNumber).getText();
             Utility_Functions.xUpdateJson("MPInvoiceNumberBA",txt);
 
 
@@ -399,12 +401,12 @@ public class makePayments extends ReusableLib {
     {
         click(InvoicePage.supplierCheckBox);
 
-        List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
+        List<WebElement> invoiceCheckBoxCount = ownDriver.findElements(InvoicePage.invoiceCheckBox);
 
         for(int j=0;j<1;j++)
         {
             int k=j+1;
-            driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
+            ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
         }
 
         click(InvoicePage.makePaymentBtn);
@@ -420,7 +422,7 @@ public class makePayments extends ReusableLib {
         Utility_Functions.timeWait(3);
         commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
         scrollToView();
-        String txt=driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+        String txt=ownDriver.findElement(MakeAPaymentPage.confirmationNumber).getText();
         Utility_Functions.xUpdateJson("MPInvoiceNumberCC",txt);
 
 
@@ -429,11 +431,11 @@ public class makePayments extends ReusableLib {
     public void makeMultiPaymentBA() {
         click(InvoicePage.supplierCheckBox);
 
-        List<WebElement> invoiceCheckBoxCount = driver.findElements(InvoicePage.invoiceCheckBox);
+        List<WebElement> invoiceCheckBoxCount = ownDriver.findElements(InvoicePage.invoiceCheckBox);
         int count = Integer.parseInt(jsonData.getData("invoiceCount"));
         for (int j = 0; j < count; j++) {
             int k = j + 1;
-            driver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//label")).click();
+            ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]" + "[" + k + "]" + "//label")).click();
         }
 
         click(InvoicePage.makePaymentBtn);
@@ -447,7 +449,7 @@ public class makePayments extends ReusableLib {
         Utility_Functions.timeWait(3);
         commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation, "Payment Confirmation", "Payment Successful");
         scrollToView();
-        String txt = driver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+        String txt = ownDriver.findElement(MakeAPaymentPage.confirmationNumber).getText();
         Utility_Functions.xUpdateJson("MPInvoiceNumberBA", txt);
     }
 

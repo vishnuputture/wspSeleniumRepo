@@ -6,6 +6,7 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Settings;
 import com.winSupply.framework.Status;
 import com.winSupply.framework.Util;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
@@ -36,6 +37,7 @@ public class Spo extends ReusableLib {
     CommonActions commonObj;
     SpecialPricingAllowance specPrAll;
     public static Properties properties = Settings.getInstance();
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -47,6 +49,7 @@ public class Spo extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         specPrAll = new SpecialPricingAllowance(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -66,9 +69,9 @@ public class Spo extends ReusableLib {
     public void getMfPdVn() {
         click(CostAdjustmentPage.searchIcon, "Click Search Icon");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xUpdateJson("ItemNoMaster", Utility_Functions.getText(driver, CustomerGroupMaintenancePage.secGroupName));
+        Utility_Functions.xUpdateJson("ItemNoMaster", Utility_Functions.getText(ownDriver, CustomerGroupMaintenancePage.secGroupName));
         sendKeys(CostAdjustmentPage.optBox, "1", "Select Item Number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String manufacturerCode = getAttribute(ItemMasterPage.manufacturerCode, "value");
         Utility_Functions.xUpdateJson("ManufacturerCode", manufacturerCode);
         String productCode = getAttribute(ItemMasterPage.productCode, "value");
@@ -85,7 +88,7 @@ public class Spo extends ReusableLib {
     public void inquireVendor() {
         sendKeys(OptionsConstantsPage.actionTextBox, "I", "Enter I into Action Text box field");
         sendKeys(PricingMatrixPage.txtBoxAction, Utility_Functions.xGetJsonData("VendorCode"), "Enter Copied(From Item Master) vendor code");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String val = getAttribute(OptionsConstantsPage.descriptionLine, "value");
         Utility_Functions.xAssertEquals(report, val, "SMITH", "");
         String vendorNo = getAttribute(OptionsConstantsPage.vendorNo, "value");
@@ -93,7 +96,7 @@ public class Spo extends ReusableLib {
     }
 
     public void backToMaster() {
-        Utility_Functions.waitForElementVisible(driver, SpoPage.backBtn, 10);
+        Utility_Functions.waitForElementVisible(ownDriver, SpoPage.backBtn, 10);
         click(SpoPage.backBtn);
         click(SpoPage.backBtn, "Navigate back to master");
     }
@@ -112,11 +115,11 @@ public class Spo extends ReusableLib {
         sendKeys(OptionsConstantsPage.descriptionLine, "smith", "Enter Description Line 1");
         click(SpecialPriceAllowancePage.assignedGroups, "Click F2-Vendor Alpha Search");
         sendKeys(WorkWithSalesQuotesPage.sltOpt, "1", "Select Vendor number");
-        String VendorNumber = Utility_Functions.getText(driver, OptionsConstantsPage.vendorNumber);
+        String VendorNumber = Utility_Functions.getText(ownDriver, OptionsConstantsPage.vendorNumber);
         Utility_Functions.xUpdateJson("VendorNumber", VendorNumber);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.timeWait(3);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         inquireVendor();
         click(SpecialPriceAllowancePage.btnExit);
     }
@@ -173,8 +176,8 @@ public class Spo extends ReusableLib {
 
     public void getPassword() {
         String URL = "https://vprasad:B36heVWqze@daily.winwholesale.com/";
-        driver.get(URL);
-        click(driver.findElement(By.xpath("//a[text()='QA ']")));
+        ownDriver.get(URL);
+        click(ownDriver.findElement(By.xpath("//a[text()='QA ']")));
         Utility_Functions.timeWait(4);
         System.out.println(getText(By.xpath("//h2")));
         Utility_Functions.xUpdateJson("spoPass", getText(By.xpath("//h2")));
@@ -185,7 +188,7 @@ public class Spo extends ReusableLib {
      */
     public void navigateToSPO() {
         String url = properties.getProperty("SpoURL");
-        driver.get(url);
+        ownDriver.get(url);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
@@ -193,7 +196,7 @@ public class Spo extends ReusableLib {
      * Keyword to login to SPO
      */
     public void winLogin() {
-        if (Utility_Functions.xWaitForElementPresent(driver, SpoPage.winLogin, 10)) {
+        if (Utility_Functions.xWaitForElementPresent(ownDriver, SpoPage.winLogin, 10)) {
             sendKeys(SpoPage.userName, properties.getProperty("SpoUserName"));
             sendKeys(SpoPage.password, Utility_Functions.xGetJsonData("spoPass"));
             Utility_Functions.timeWait(2);
@@ -207,7 +210,7 @@ public class Spo extends ReusableLib {
      */
     public void selectCompany() {
         winLogin();
-        if (!Utility_Functions.xIsDisplayed(driver, SpoPage.spoPageTitle)) {
+        if (!Utility_Functions.xIsDisplayed(ownDriver, SpoPage.spoPageTitle)) {
             click(SelfServicePriceSheetPage.companySelector);
             click(SelfServicePriceSheetPage.companyLabel);
             if (System.getProperty("company") == null) {
@@ -226,7 +229,7 @@ public class Spo extends ReusableLib {
     public void verifySpoUI() {
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
         String[] actText = {"Worksheet Name\nLast Updated", "Items Below Order Point", "Cost Option", "Total Suggested PO Cost", "Freight Minimum", "Percentage of Target Met", "Order Minimum", "Assigned User"};
-        List<WebElement> els = driver.findElements(By.xpath("//th"));
+        List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         for (int i = 0; i < 8; i++) {
             Utility_Functions.xAssertEquals(report, els.get(i).getText().trim(), actText[i], "");
             i++;
@@ -234,11 +237,11 @@ public class Spo extends ReusableLib {
         commonObj.validateElementExists(SpoPage.helpIcon, "Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
         Utility_Functions.timeWait(4);
-        int size = driver.findElements(SpoPage.pagination).size();
+        int size = ownDriver.findElements(SpoPage.pagination).size();
         Utility_Functions.xAssertEquals(report, size, 8, "Next page and previous page arrow icon is present");
-        String page = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
-        commonObj.validateElementExists(TruckPage.currentPage, "Current Page " + page + " " + Utility_Functions.getText(driver, TruckPage.outOf) + "");
-        List<WebElement> elm = driver.findElements(TruckPage.show);
+        String page = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+        commonObj.validateElementExists(TruckPage.currentPage, "Current Page " + page + " " + Utility_Functions.getText(ownDriver, TruckPage.outOf) + "");
+        List<WebElement> elm = ownDriver.findElements(TruckPage.show);
         String[] acText = {"10", "15", "30"};
         for (int i = 0; i < 3; i++) {
             Utility_Functions.xAssertEquals(report, elm.get(i).getText().trim(), acText[i], "");
@@ -259,8 +262,8 @@ public class Spo extends ReusableLib {
      * Keyword to Verify Pagination against current page
      */
     public void selectPage(int actPageNo, String expPage, String arrowIcon) {
-        click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present at top the Right side of the page");
-        String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+        click(ownDriver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present at top the Right side of the page");
+        String pageNo = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
         Utility_Functions.timeWait(2);
     }
@@ -271,15 +274,15 @@ public class Spo extends ReusableLib {
     public void paginationSPO() {
         int size = 2;
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.onePage)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.onePage)) {
             commonObj.validateText(SpoPage.onePage, "of 1", "One page is available");
         } else {
-            click(driver.findElements(DriversPage.pageArrow).get(2));
-            while (!Utility_Functions.xIsDisplayed(driver, DriversPage.lastPage)) {
+            click(ownDriver.findElements(DriversPage.pageArrow).get(2));
+            while (!Utility_Functions.xIsDisplayed(ownDriver, DriversPage.lastPage)) {
                 size++;
-                click(driver.findElements(DriversPage.pageArrow).get(2));
+                click(ownDriver.findElements(DriversPage.pageArrow).get(2));
             }
-            click(driver.findElements(DriversPage.pageArrow).get(0));
+            click(ownDriver.findElements(DriversPage.pageArrow).get(0));
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
             selectPage(3, "" + size + "", "Right double Arrow (>>)");
@@ -291,10 +294,10 @@ public class Spo extends ReusableLib {
      * Keyword to verify Page Count
      */
     public void valPageCount(int pageNum) {
-        Utility_Functions.xClickHiddenElement(driver, By.xpath("//span[text()='" + pageNum + "']"));
-        int truckCount = driver.findElements(SpoPage.itemNoCount).size();
+        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//span[text()='" + pageNum + "']"));
+        int truckCount = ownDriver.findElements(SpoPage.itemNoCount).size();
         if(truckCount==0){
-            truckCount=driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
+            truckCount=ownDriver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
         }
         if (truckCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + truckCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Worksheet Count");
@@ -307,8 +310,8 @@ public class Spo extends ReusableLib {
      * Keyword to Verify functionality of Page Count
      */
     public void funPageCountSPO() {
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.onePage)) {
-            int truckCount = driver.findElements(SpoPage.worksheetCount).size();
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.onePage)) {
+            int truckCount = ownDriver.findElements(SpoPage.worksheetCount).size();
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having Worksheet count " + truckCount + "");
         } else {
             /*int truckCount = driver.findElements(SpoPage.worksheetCount).size();
@@ -329,7 +332,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
         String[] actText = {"Worksheet Name", "Cost Option", "Percentage of Target Met", "Target Metric", "Assigned User"};
-        List<WebElement> els = driver.findElements(TruckPage.searchFiltersLabel);
+        List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -348,7 +351,7 @@ public class Spo extends ReusableLib {
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
         Utility_Functions.timeWait(3);
         commonObj.validateText(SpoPage.popUp, "" + worksheetName + " updated successfully.", "" + worksheetName + " updated successfully. pop up message is present");
-        String lastDate = Utility_Functions.getText(driver, SpoPage.lastUpdate);
+        String lastDate = Utility_Functions.getText(ownDriver, SpoPage.lastUpdate);
         String date = specPrAll.getDate(Calendar.DATE, 0);
         if (lastDate.contains(date)) {
             commonObj.validateElementExists(SpoPage.lastUpdate, "Worksheet is updated showing correct date and time: " + lastDate + "");
@@ -368,8 +371,8 @@ public class Spo extends ReusableLib {
     }
 
     public void isWSActive() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.toggleSlider);
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.activateList)) {
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.toggleSlider);
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.activateList)) {
             click(SpoPage.toggleSlider, "Activate Worksheet");
             updatedMessage();
             clickButton("Cancel");
@@ -393,10 +396,10 @@ public class Spo extends ReusableLib {
      * Keyword to validate refresh functionality
      */
     public void verifyRefreshFunction() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.costOption);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.costOption);
         String cost = jsonData.getData("CostOption");
-        int size = driver.findElements(SpoPage.costOption).size() - 1;
-        click(driver.findElements(SpoPage.costOption).get(size), "Click Cost Option Drop Down");
+        int size = ownDriver.findElements(SpoPage.costOption).size() - 1;
+        click(ownDriver.findElements(SpoPage.costOption).get(size), "Click Cost Option Drop Down");
         Utility_Functions.timeWait(2);
         click(By.xpath("//option[contains(text(),'List Price')]"), "Select List Price option");
         Utility_Functions.timeWait(2);
@@ -416,7 +419,7 @@ public class Spo extends ReusableLib {
         click(SpoPage.btnExpand, "Click on expand all button");
         commonObj.validateElementExists(SpoPage.itemExpanded, "Item section is expanded");
         click(SpoPage.btnCollapse, "Click on collapse all button");
-        if (!xWaitForElementPresent(driver, SpoPage.itemExpanded, 2)) {
+        if (!xWaitForElementPresent(ownDriver, SpoPage.itemExpanded, 2)) {
             report.updateTestLog("Validate collapse", "The items section is collapsed", Status.PASS);
         } else {
             report.updateTestLog("Validate collapse", "The items section is expanded", Status.FAIL);
@@ -431,7 +434,7 @@ public class Spo extends ReusableLib {
         click(SpoPage.btnItemExpand, "Click item expand button");
         Utility_Functions.timeWait(2);
         if (waitForElementDisappear(SpoPage.pageBlocker, 10)) {
-            if (driver.findElement(SpoPage.vendorPartNo).isEnabled() && driver.findElement(SpoPage.unitOfMeasure).isEnabled() && driver.findElement(SpoPage.conversionFactor).isEnabled()) {
+            if (ownDriver.findElement(SpoPage.vendorPartNo).isEnabled() && ownDriver.findElement(SpoPage.unitOfMeasure).isEnabled() && ownDriver.findElement(SpoPage.conversionFactor).isEnabled()) {
                 report.updateTestLog("Validate fields are enabled", "The item fields are enabled", Status.PASS);
             } else {
                 report.updateTestLog("Validate fields are enabled", "The item fields are disabled", Status.FAIL);
@@ -446,8 +449,8 @@ public class Spo extends ReusableLib {
         click(SpoPage.worksheetNameLink, "Click Worksheet name hyperlink");
         String worksheetName = Utility_Functions.xGetJsonData("WorksheetTempName");
         Utility_Functions.timeWait(4);
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.popUp)) {
-            if (Utility_Functions.getText(driver, SpoPage.popUp).equals("")) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.popUp)) {
+            if (Utility_Functions.getText(ownDriver, SpoPage.popUp).equals("")) {
                 click(SpoPage.worksheetNameLink, "Click Worksheet name hyperlink");
                 Utility_Functions.timeWait(4);
             }
@@ -467,7 +470,7 @@ public class Spo extends ReusableLib {
      * Keyword to Verify functionality of Trash icon
      */
     public void verifyTrashIcon() throws AWTException {
-        if (!Utility_Functions.xIsDisplayed(driver, SpoPage.trashIcon)) {
+        if (!Utility_Functions.xIsDisplayed(ownDriver, SpoPage.trashIcon)) {
             clickWorkSheetName();
             click(SpoPage.closeIcon, "Click Close Icon");
             Utility_Functions.timeWait(2);
@@ -487,7 +490,7 @@ public class Spo extends ReusableLib {
         commonObj.validateText(SpoPage.popUp, "" + worksheetName + " template successfully deleted.", "" + worksheetName + " template successfully deleted. pop up message is present");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
-        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, SpoPage.savedTag), false, "Saved Worksheet is deleted and not present on SPO page");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(ownDriver, SpoPage.savedTag), false, "Saved Worksheet is deleted and not present on SPO page");
     }
 
     public By worksheetName(String tag) {
@@ -499,19 +502,19 @@ public class Spo extends ReusableLib {
      * if Multiple index found and target element must be last one
      */
     public void clickButtonWithSize(String button) {
-        int size = driver.findElements(By.xpath("//button[text()='" + button + "']")).size() - 1;
-        click(driver.findElements(By.xpath("//button[text()='" + button + "']")).get(size), "Click " + button + " button");
+        int size = ownDriver.findElements(By.xpath("//button[text()='" + button + "']")).size() - 1;
+        click(ownDriver.findElements(By.xpath("//button[text()='" + button + "']")).get(size), "Click " + button + " button");
         Utility_Functions.timeWait(2);
     }
 
     public void discountError() {
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.isInvalidDisc)) {
-            Utility_Functions.xScrollIntoView(driver, SpoPage.discountError);
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.isInvalidDisc)) {
+            Utility_Functions.xScrollIntoView(ownDriver, SpoPage.discountError);
             commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
             Utility_Functions.timeWait(2);
-            Utility_Functions.xScrollIntoView(driver,SpoPage.closeIcon);
+            Utility_Functions.xScrollIntoView(ownDriver,SpoPage.closeIcon);
             sendKeys(SpoPage.isInvalidDisc, "-1", "Enter negative value into Discount Text box");
-            if (Utility_Functions.xIsDisplayed(driver, button("Refresh Worksheet"))) {
+            if (Utility_Functions.xIsDisplayed(ownDriver, button("Refresh Worksheet"))) {
                 clickButton("Refresh Worksheet");
             }
             Utility_Functions.timeWait(2);
@@ -541,7 +544,7 @@ public class Spo extends ReusableLib {
         clickButton("Refresh Worksheet");
         discountError();
         Utility_Functions.timeWait(4);
-        if (!Utility_Functions.xIsDisplayed(driver, SpoPage.exclamationWarn)) {
+        if (!Utility_Functions.xIsDisplayed(ownDriver, SpoPage.exclamationWarn)) {
             sendKeys(SpoPage.leadTime, "20", "Lead time 10 is present already once again Modify lead time field");
             clickButton("Refresh Worksheet");
             Utility_Functions.timeWait(4);
@@ -595,20 +598,20 @@ public class Spo extends ReusableLib {
     }
 
     public void modifyLeadTimeField() {
-        Utility_Functions.xScrollWindowTopByValue(driver,1);
+        Utility_Functions.xScrollWindowTopByValue(ownDriver,1);
         sendKeys(SpoPage.leadTime, "10", "Modify lead time field");
         functionalRefreshButton();
         click(SpoPage.saveWorksheetBtn, "Click Save Worksheet button");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(driver, SpoPage.closeIcon);
+        Utility_Functions.xMouseClick(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
     }
 
     public void verifyTrashIconPresence() throws AWTException {
-        if (!Utility_Functions.xIsDisplayed(driver, SpoPage.trashIcon)) {
+        if (!Utility_Functions.xIsDisplayed(ownDriver, SpoPage.trashIcon)) {
             clickWorkSheetName();
             Utility_Functions.timeWait(3);
             click(SpoPage.closeIcon, "Click Close Icon");
@@ -626,7 +629,7 @@ public class Spo extends ReusableLib {
         verifyOpenNewWSBtn();
         modifyLeadTimeField();
         verifyOpenNewWSBtn();
-        Utility_Functions.xScrollWindowTopByValue(driver,1);
+        Utility_Functions.xScrollWindowTopByValue(ownDriver,1);
         String leadTimeAct = getAttribute(SpoPage.leadTime, "ng-reflect-model");
         if (leadTimeAct.equals("10")) {
             Utility_Functions.xAssertEquals(report, leadTimeAct, "10", "Modified lead time is present");
@@ -657,11 +660,11 @@ public class Spo extends ReusableLib {
      * Keyword to validate Time Of the Day/night Fields
      */
     public void validateTimeOfDayNightDropDown(String field, int optionCount) {
-        int size = driver.findElements(By.xpath("//div[@class='col-3']//select[@id='" + field + "1']/option")).size();
+        int size = ownDriver.findElements(By.xpath("//div[@class='col-3']//select[@id='" + field + "1']/option")).size();
         Utility_Functions.xAssertEquals(report, size, optionCount, "Total " + size + " count on " + field + "");
         if (field.equals("minute")) {
             String[] min = {"00", "15", "30", "45"};
-            List<WebElement> el = driver.findElements(By.xpath("//div[@class='col-3']//select[@id='" + field + "1']/option"));
+            List<WebElement> el = ownDriver.findElements(By.xpath("//div[@class='col-3']//select[@id='" + field + "1']/option"));
             int i = 0;
             for (WebElement elm : el) {
                 Utility_Functions.xAssertEquals(report, elm.getText(), min[i], "");
@@ -669,7 +672,7 @@ public class Spo extends ReusableLib {
             }
         } else if (field.equals("Meridian")) {
             String[] mer = {"AM", "PM"};
-            List<WebElement> el = driver.findElements(By.xpath("//div[@class='col-3']//select[@id='" + field + "1']/option"));
+            List<WebElement> el = ownDriver.findElements(By.xpath("//div[@class='col-3']//select[@id='" + field + "1']/option"));
             int i = 0;
             for (WebElement elm : el) {
                 Utility_Functions.xAssertEquals(report, elm.getText(), mer[i], "");
@@ -703,16 +706,16 @@ public class Spo extends ReusableLib {
     public void createNewWorksheetTemplateUI() {
         String[] field = {"Name Your Worksheet", "Assigned User", "Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number", "Months Supply to Order", "Multiplier", "Lead Time (Days)", ""};
         int i = 0;
-        while (Utility_Functions.xIsDisplayed(driver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
+        while (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
             String text = field[i];
             commonObj.validateElementExists(wsFields(text), "" + text + " text box field present");
             i++;
         }
         commonObj.validateElementExists(SpoPage.costOption, "Cost Option drop down present");
-        Utility_Functions.xSelectDropdownByName(driver, SpoPage.costOption, "List Price");
+        Utility_Functions.xSelectDropdownByName(ownDriver, SpoPage.costOption, "List Price");
         String[] option = {"List Price", "PO Cost", "Last Cost"};
         for (int j = 0; j < option.length; j++) {
-            Utility_Functions.xAssertEquals(report, driver.findElements(SpoPage.costOptions).get(j).getText(), option[j], "" + option[j] + " is present");
+            Utility_Functions.xAssertEquals(report, ownDriver.findElements(SpoPage.costOptions).get(j).getText(), option[j], "" + option[j] + " is present");
         }
         commonObj.validateElementExists(SpoPage.trailingMonths, "Trailing Month section present");
         validateTimeOfDayNight();
@@ -728,14 +731,14 @@ public class Spo extends ReusableLib {
      * Keyword to select days
      */
     public void selectDays() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.dayOfTheWeek);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.dayOfTheWeek);
         click(SpoPage.dayOfTheWeek, "Click Day Of The Week Drop Down");
         String[] days = {"Monday", "Tuesday", "Wednesday"};
         for (String day : days) {
             Utility_Functions.timeWait(2);
-            click(driver.findElement(By.xpath("//span[text()='" + day + "']")), "Select Day");
+            click(ownDriver.findElement(By.xpath("//span[text()='" + day + "']")), "Select Day");
         }
-        int size = driver.findElements(SpoPage.verifyChecked).size();
+        int size = ownDriver.findElements(SpoPage.verifyChecked).size();
         click(SpoPage.trailingMonths);
         Utility_Functions.timeWait(2);
         if (size == 3) {
@@ -765,9 +768,9 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(4);
         String itemNo =null;
         int i;
-        int totalItem=driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
+        int totalItem=ownDriver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
         for( i=0;i<totalItem;i++){
-            itemNo = driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).get(i).getText().trim().toUpperCase();
+            itemNo = ownDriver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).get(i).getText().trim().toUpperCase();
             Character letter=itemNo.charAt(0);
             Character letter1='J';
             Boolean bl=letter.equals(letter1);
@@ -778,16 +781,16 @@ public class Spo extends ReusableLib {
         Utility_Functions.xUpdateJson("ItemNoWS", itemNo);
         String itemDesc;
         try {
-            itemDesc = driver.findElement(By.xpath("//tr[" + i + "]/td/div")).getText().trim();
+            itemDesc = ownDriver.findElement(By.xpath("//tr[" + i + "]/td/div")).getText().trim();
         }catch (Exception e){
-            itemDesc = driver.findElement(By.xpath("//tr[" + (i+1) + "]/td/div")).getText().trim();
+            itemDesc = ownDriver.findElement(By.xpath("//tr[" + (i+1) + "]/td/div")).getText().trim();
         }
         Utility_Functions.xUpdateJson("itemDescWS", itemDesc);
         String unitCost;
         try {
-            unitCost = driver.findElements(By.xpath("//tr["+i+"]/td")).get(4).getText().trim();
+            unitCost = ownDriver.findElements(By.xpath("//tr["+i+"]/td")).get(4).getText().trim();
         }catch (Exception e){
-            unitCost = driver.findElements(By.xpath("//tr["+(i+1)+"]/td")).get(4).getText().trim();
+            unitCost = ownDriver.findElements(By.xpath("//tr["+(i+1)+"]/td")).get(4).getText().trim();
         }
         Utility_Functions.xUpdateJson("unitCost", unitCost);
         clickButton("Create Worksheet");
@@ -796,7 +799,7 @@ public class Spo extends ReusableLib {
     }
 
     public void handleDiscountFieldIfPresent() {
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.isInvalidDisc)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.isInvalidDisc)) {
             commonObj.validateText(SpoPage.discountError, "Discount cannot be 0 when using List Price.", "Discount cannot be 0 when using List Price. error message is present");
             sendKeys(SpoPage.isInvalidDisc, "1", "Enter Discount");
             clickButton("Find Products");
@@ -827,21 +830,21 @@ public class Spo extends ReusableLib {
      */
     public void selectPreviousMonth(String month) {
         sendKeys(SpoPage.trailingMonths, month, "Enter '" + month + "' into Trailing month");
-        int size = driver.findElements(SpoPage.selectedMonth).size();
+        int size = ownDriver.findElements(SpoPage.selectedMonth).size();
         Utility_Functions.xAssertEquals(report, size / 2, month, "");
     }
 
     public void costOption() {
-        Utility_Functions.xScrollWindowTopByValue(driver,1);
+        Utility_Functions.xScrollWindowTopByValue(ownDriver,1);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollIntoView(driver,SpoPage.costOption);
+        Utility_Functions.xScrollIntoView(ownDriver,SpoPage.costOption);
         String cost = jsonData.getData("CostOption");
         if (!(cost == null)) {
-            int size = driver.findElements(SpoPage.costOption).size() - 1;
+            int size = ownDriver.findElements(SpoPage.costOption).size() - 1;
             try {
-                click(driver.findElements(SpoPage.costOption).get(size), "Click Cost Option Drop Down");
+                click(ownDriver.findElements(SpoPage.costOption).get(size), "Click Cost Option Drop Down");
             } catch (Exception e) {
-                click(driver.findElement(SpoPage.costOption), "Click Cost Option Drop Down");
+                click(ownDriver.findElement(SpoPage.costOption), "Click Cost Option Drop Down");
             }
             Utility_Functions.timeWait(2);
             click(By.xpath("//option[contains(text(),'" + cost + "')]"), "Select " + cost + " option");
@@ -852,7 +855,7 @@ public class Spo extends ReusableLib {
     public void errorRepeatSteps() {
         try {
             Utility_Functions.timeWait(3);
-            if (driver.findElement(SpoPage.popUp).getText().trim().equals("There are no items found for this MF, PD, VN combination.")) {
+            if (ownDriver.findElement(SpoPage.popUp).getText().trim().equals("There are no items found for this MF, PD, VN combination.")) {
                 Utility_Functions.timeWait(4);
                 click(SpoPage.xIcon);
                 navigateToCreateWorksheet();
@@ -906,7 +909,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(3);
         sendKeys(worksheetInputFields("Manufacturer Code"), Utility_Functions.xGetJsonData("ManufacturerCode"), "Enter Manufacturer code");
         Utility_Functions.timeWait(4);
-        String vend = driver.findElement(worksheetInputFields("Vendor Number")).getAttribute("value");
+        String vend = ownDriver.findElement(worksheetInputFields("Vendor Number")).getAttribute("value");
         Utility_Functions.xUpdateJson("VendorNoForHeader", vend);
         sendKeys(worksheetInputFields("Product Code"), Utility_Functions.xGetJsonData("ProductCode"), "Enter Product Code");
         String ven = getAttribute(SpoPage.searchTerm1, "ng-reflect-model").trim();
@@ -917,11 +920,11 @@ public class Spo extends ReusableLib {
      * Keyword to verify Page Count
      */
     public void valPageCountCreateItem(int pageNum) {
-        Utility_Functions.xScrollWindow(driver);
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(4);
         click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
-        int driverCount = driver.findElements(SpoPage.itemNoCount).size();
+        int driverCount = ownDriver.findElements(SpoPage.itemNoCount).size();
         if (driverCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + driverCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " driver Count");
         } else {
@@ -933,17 +936,17 @@ public class Spo extends ReusableLib {
      * Keyword to Verify functionality of Page Count
      */
     public void funPageCountCreateItem() {
-        Utility_Functions.xScrollWindow(driver);
-        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
-            int driverCount = driver.findElements(SpoPage.itemNoCount).size();
+        Utility_Functions.xScrollWindow(ownDriver);
+        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
+            int driverCount = ownDriver.findElements(SpoPage.itemNoCount).size();
             if(driverCount==0){
-                driverCount=driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
+                driverCount=ownDriver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
             }
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having count " + driverCount + "");
         } else {
-            int driverCount = driver.findElements(SpoPage.itemNoCount).size();
+            int driverCount = ownDriver.findElements(SpoPage.itemNoCount).size();
             if(driverCount==0){
-                driverCount=driver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
+                driverCount=ownDriver.findElements(By.xpath("//td[@ng-reflect-ng-class='item-color']")).size();
             }
             Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Count is 10 by default");
             valPageCount(10);
@@ -963,7 +966,7 @@ public class Spo extends ReusableLib {
      * This method to select day to run radio button
      */
     public void runWSRadioBtn() {
-        if (driver.findElement(runWsRadioBtn("Run each week")).isSelected()) {
+        if (ownDriver.findElement(runWsRadioBtn("Run each week")).isSelected()) {
             click(runWsRadioBtn("Run each week"));
         } else {
             click(runWsRadioBtn("Run every other week"));
@@ -987,7 +990,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(3);
         commonObj.validateText(SpoPage.spoPageTitle, "CREATE NEW WORKSHEET TEMPLATE", "Worksheet items Header is present");
         String[] actText = {"Item Number", "Item Description", "Last Ordered", "Unit Cost", "Unit Weight", "Stocked at Home WSS"};
-        List<WebElement> els = driver.findElements(By.xpath("//th"));
+        List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         for (int i = 1; i <= 6; i++) {
             Utility_Functions.xAssertEquals(report, els.get(i).getText().trim(), actText[i - 1], "");
             i++;
@@ -1001,7 +1004,7 @@ public class Spo extends ReusableLib {
         wsItemsScreenColumn();
         commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
         commonObj.validateElementExists(SpoPage.excludeAsteriskItem, "'Exclude all asterisk items from this worksheet' check box present");
-        Utility_Functions.xScrollIntoView(driver, SpoPage.addItemToWSLink);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.addItemToWSLink);
         commonObj.validateText(SpoPage.addItemToWSLink, "Add Items to this Worksheet", "'+ Add Items to this Worksheet link is present'");
         commonObj.validateElementExists(button("Cancel"), "Cancel button is present");
         commonObj.validateElementExists(button("Back"), "Back button is present");
@@ -1014,7 +1017,7 @@ public class Spo extends ReusableLib {
         commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
         sendKeys(SpoPage.worksheetNameFilter, Utility_Functions.xGetJsonData("WorksheetTempName"), "Enter created worksheet");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver, TruckPage.applyFilter);
+        Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.applyFilter);
         Utility_Functions.timeWait(6);
     }
 
@@ -1023,7 +1026,7 @@ public class Spo extends ReusableLib {
      */
     public void filterCreatedWorksheet() throws AWTException {
         Utility_Functions.timeWait(7);
-        if (Utility_Functions.xIsDisplayed(driver, TruckPage.filterSearch)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, TruckPage.filterSearch)) {
             clickSearch();
             commonObj.validateText(SpoPage.filteredWorksheet, Utility_Functions.xGetJsonData("WorksheetTempName"), "Created Work sheet present");
         }
@@ -1034,7 +1037,7 @@ public class Spo extends ReusableLib {
      */
     public void chooseMultiplierOpt() {
         sendKeys(pages.PurchaseOrders.OptionsConstantsPage.discMultOpt, "1", "Enter 1 into field");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     /**
@@ -1042,7 +1045,7 @@ public class Spo extends ReusableLib {
      */
     public void chooseDiscountOpt() {
         clearText(pages.PurchaseOrders.OptionsConstantsPage.discMultOpt);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     /**
@@ -1063,13 +1066,13 @@ public class Spo extends ReusableLib {
      * This method to verify default value on create worksheet template
      */
     public void verifyDefaultValues() {
-        String supplyToOrder = driver.findElement(SpoPage.supplyToOrder).getAttribute("placeholder");
-        String trailingMonths = driver.findElement(SpoPage.trailingMonths).getAttribute("ng-reflect-model");
-        Utility_Functions.xScrollIntoView(driver, SpoPage.optionsConstants);
-        String discount = driver.findElement(SpoPage.optionsConstants).getAttribute("placeholder");
-        String leadTime = driver.findElement(SpoPage.leadTime).getAttribute("placeholder");
-        Utility_Functions.xScrollIntoView(driver, SpoPage.hourDropDown);
-        String hour = driver.findElement(SpoPage.hourDropDown).getAttribute("ng-reflect-model");
+        String supplyToOrder = ownDriver.findElement(SpoPage.supplyToOrder).getAttribute("placeholder");
+        String trailingMonths = ownDriver.findElement(SpoPage.trailingMonths).getAttribute("ng-reflect-model");
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.optionsConstants);
+        String discount = ownDriver.findElement(SpoPage.optionsConstants).getAttribute("placeholder");
+        String leadTime = ownDriver.findElement(SpoPage.leadTime).getAttribute("placeholder");
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.hourDropDown);
+        String hour = ownDriver.findElement(SpoPage.hourDropDown).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, supplyToOrder, "1.00", "Months Supply to Order '1.00' value is set by default");
         Utility_Functions.xAssertEquals(report, trailingMonths, "3", "Previous 3 Months of History From Current by default");
         Utility_Functions.xAssertEquals(report, discount, "0", "Discount ");
@@ -1099,7 +1102,7 @@ public class Spo extends ReusableLib {
      */
     public void navigateToAddItemToWS() {
         Utility_Functions.timeWait(4);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.addItemToWSLink);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.addItemToWSLink);
         Utility_Functions.timeWait(1);
         click(SpoPage.addItemToWSLink, "Click '+ Add Items to this worksheet link'");
         Utility_Functions.timeWait(2);
@@ -1128,40 +1131,40 @@ public class Spo extends ReusableLib {
      * This method to select Item from the list
      */
     public void selectItem() {
-        int sz = driver.findElements(SpoPage.selectItem).size();
+        int sz = ownDriver.findElements(SpoPage.selectItem).size();
         if (sz == 0) {
             addItemsToWS();
         }
-        Utility_Functions.xScrollIntoView(driver, driver.findElements(SpoPage.selectItem).get(sz - 1));
-        click(driver.findElements(SpoPage.selectItem).get(sz - 1), "Select item from the list");
-        String item1 = driver.findElement(By.xpath("(//input[@name='selectItem'])[" + sz + "]/parent::td/following-sibling::td")).getText();
+        Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElements(SpoPage.selectItem).get(sz - 1));
+        click(ownDriver.findElements(SpoPage.selectItem).get(sz - 1), "Select item from the list");
+        String item1 = ownDriver.findElement(By.xpath("(//input[@name='selectItem'])[" + sz + "]/parent::td/following-sibling::td")).getText();
         Utility_Functions.xUpdateJson("SelectItem1", item1);
         getMfVnPdCode(1);
     }
 
     public void getMfVnPdCode(int row){
-        int size=driver.findElements(SpoPage.getMF).size();
-        Utility_Functions.xUpdateJson("MFCode"+row, driver.findElements(SpoPage.getMF).get(size-row).getAttribute("value"));
-        Utility_Functions.xUpdateJson("PDCode"+row, driver.findElements(SpoPage.getPD).get(size-row).getAttribute("value"));
+        int size=ownDriver.findElements(SpoPage.getMF).size();
+        Utility_Functions.xUpdateJson("MFCode"+row, ownDriver.findElements(SpoPage.getMF).get(size-row).getAttribute("value"));
+        Utility_Functions.xUpdateJson("PDCode"+row, ownDriver.findElements(SpoPage.getPD).get(size-row).getAttribute("value"));
     }
 
     public void searchVN() {
-        int size = driver.findElements(worksheetInputFields("VN")).size() - 1;
-        sendKeys(driver.findElements(worksheetInputFields("VN")).get(size), "B", "Search VN");
+        int size = ownDriver.findElements(worksheetInputFields("VN")).size() - 1;
+        sendKeys(ownDriver.findElements(worksheetInputFields("VN")).get(size), "B", "Search VN");
         Utility_Functions.timeWait(2);
-        for (int i = 0; i < driver.findElements(SpoPage.autoSuggestion).size(); i++) {
+        for (int i = 0; i < ownDriver.findElements(SpoPage.autoSuggestion).size(); i++) {
             Utility_Functions.timeWait(4);
-            click(driver.findElements(SpoPage.autoSuggestion).get(i), "Select VN from the suggestion");
+            click(ownDriver.findElements(SpoPage.autoSuggestion).get(i), "Select VN from the suggestion");
             Utility_Functions.timeWait(2);
             click(SpoPage.searchBtn, "Click Search Button");
             Utility_Functions.timeWait(2);
             if (!isDisplayed(SpoPage.noResultFound)) {
-                String vn=driver.findElements(worksheetInputFields("VN")).get(size).getAttribute("value");
+                String vn=ownDriver.findElements(worksheetInputFields("VN")).get(size).getAttribute("value");
                 Utility_Functions.xUpdateJson("VNCode", vn);
                 break;
             }else {
-                driver.findElements(worksheetInputFields("VN")).get(size).clear();
-                sendKeys(driver.findElements(worksheetInputFields("VN")).get(size), "B", "Search VN");
+                ownDriver.findElements(worksheetInputFields("VN")).get(size).clear();
+                sendKeys(ownDriver.findElements(worksheetInputFields("VN")).get(size), "B", "Search VN");
                 Utility_Functions.timeWait(2);
             }
         }
@@ -1174,23 +1177,23 @@ public class Spo extends ReusableLib {
      */
     public void addItemsToWS() {
         searchVN();
-        String bl = driver.findElement(SpoPage.selectAllCheckBox).getAttribute("ng-reflect-model");
+        String bl = ownDriver.findElement(SpoPage.selectAllCheckBox).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, bl, "true", "All check boxes are enabled by default");
         click(SpoPage.selectAllCheckBox, "Click checkbox");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(SpoPage.buttonDisabled, "'Add Selected Items to Worksheet' button is disabled");
-        String bl1 = driver.findElement(SpoPage.selectAllCheckBox).getAttribute("ng-reflect-model");
+        String bl1 = ownDriver.findElement(SpoPage.selectAllCheckBox).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, bl1, "false", "All check boxes are disabled");
         selectItem();
     }
 
     public void selectSecItem() {
-        int sz = driver.findElements(SpoPage.selectItem).size();
+        int sz = ownDriver.findElements(SpoPage.selectItem).size();
         if (sz > 1) {
-            Utility_Functions.xScrollIntoView(driver, driver.findElements(SpoPage.selectItem).get(sz - 2));
-            click(driver.findElements(SpoPage.selectItem).get(sz - 2), "Select item from the list");
+            Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElements(SpoPage.selectItem).get(sz - 2));
+            click(ownDriver.findElements(SpoPage.selectItem).get(sz - 2), "Select item from the list");
             Utility_Functions.timeWait(3);
-            String item2 = driver.findElement(By.xpath("(//input[@name='selectItem'])[" + (sz - 1) + "]/parent::td/following-sibling::td")).getText();
+            String item2 = ownDriver.findElement(By.xpath("(//input[@name='selectItem'])[" + (sz - 1) + "]/parent::td/following-sibling::td")).getText();
             Utility_Functions.xUpdateJson("SelectItem2", item2);
             getMfVnPdCode(2);
             click(SpoPage.addSelectedItemToWSBtn, "Click 'Add Selected Items to Worksheet' Button");
@@ -1247,7 +1250,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(SpoPage.manufacturerCode);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver, TruckPage.applyFilter);
+        Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.applyFilter);
         Utility_Functions.timeWait(2);
         commonObj.validateText(getItemNo("Item Number"), Utility_Functions.xGetJsonData(item), "Selected Item is added to the worksheet");
     }
@@ -1262,7 +1265,7 @@ public class Spo extends ReusableLib {
 
     public void validateColumn() {
         String[] actText = {"Item Number", "Item Description", "Qty on Hand", "Qty Available", "Qty on PO", "Qty on SO", "MF", "PD", "VN"};
-        List<WebElement> els = driver.findElements(By.xpath("//th"));
+        List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         for (int i = 9; i <= 17; i++) {
             Utility_Functions.xAssertEquals(report, els.get(i).getText().trim(), actText[i - 9], "");
             i++;
@@ -1292,7 +1295,7 @@ public class Spo extends ReusableLib {
     public void wsItemSearchFilter() throws AWTException {
         ArrayList<String> str = new ArrayList<>();
         for (int i = 1; i < 7; i++) {
-            String val = driver.findElements(By.xpath("//td")).get(i).getText().trim();
+            String val = ownDriver.findElements(By.xpath("//td")).get(i).getText().trim();
             str.add(val);
         }
         click(TruckPage.filterSearch, "Click Search Filter icon");
@@ -1329,17 +1332,17 @@ public class Spo extends ReusableLib {
     public void assertCost(String CostOption) {
         switch (CostOption) {
             case "List Price":
-                Utility_Functions.xScrollIntoView(driver, ItemMasterPage.txtBoxListPrice);
+                Utility_Functions.xScrollIntoView(ownDriver, ItemMasterPage.txtBoxListPrice);
                 String listPrice = getAttribute(ItemMasterPage.txtBoxListPrice, "value");
                 Utility_Functions.xAssertEquals(report, listPrice, Utility_Functions.xGetJsonData("unitCost"), "List Price: ");
                 break;
             case "PO Cost":
-                Utility_Functions.xScrollIntoView(driver, ItemMasterPage.txtBoxPoCost);
+                Utility_Functions.xScrollIntoView(ownDriver, ItemMasterPage.txtBoxPoCost);
                 String PoCost = getAttribute(ItemMasterPage.txtBoxPoCost, "value");
                 Utility_Functions.xAssertEquals(report, PoCost + "00", Utility_Functions.xGetJsonData("unitCost"), "Po Cost: ");
                 break;
             default:
-                Utility_Functions.xScrollIntoView(driver, ItemMasterPage.inCostsLast);
+                Utility_Functions.xScrollIntoView(ownDriver, ItemMasterPage.inCostsLast);
                 Utility_Functions.timeWait(2);
                 String LastCost = getAttribute(ItemMasterPage.inCostsLast, "value");
                 Utility_Functions.xAssertEquals(report, LastCost + "00", Utility_Functions.xGetJsonData("unitCost"), "Last Cost: ");
@@ -1352,7 +1355,7 @@ public class Spo extends ReusableLib {
      */
     public void verifyUnitCost() {
         sendKeys(ItemMasterPage.txtBoxSearch, Utility_Functions.xGetJsonData("ItemNoWS"));
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.timeWait(2);
         String itemDesc1 = getAttribute(ItemMasterPage.itemDesc1, "value").trim();
         Utility_Functions.xAssertEquals(report, itemDesc1, Utility_Functions.xGetJsonData("itemDescWS"), "Item description: ");
@@ -1374,7 +1377,7 @@ public class Spo extends ReusableLib {
         sendKeys(SpoPage.monthSupply, "5", "Enter '5' into 'Mos Supply' input text field");
         sendKeys(SpoPage.leadTime, "10", "Enter '10' into 'Lead Time' input text field");
         functionalRefreshButton();
-        Utility_Functions.xScrollWindowTop(driver);
+        Utility_Functions.xScrollWindowTop(ownDriver);
         click(SpoPage.closeIcon, "Click Close Icon");
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
@@ -1400,7 +1403,7 @@ public class Spo extends ReusableLib {
         commonObj.validateElementExists(SpoPage.costOption, "Cost Option drop down present");
         String[] option = {"List Price", "PO Cost", "Last Cost"};
         for (int j = 0; j < option.length; j++) {
-            Utility_Functions.xAssertEquals(report, driver.findElements(SpoPage.costOptions).get(j).getText(), option[j], "" + option[j] + " is present");
+            Utility_Functions.xAssertEquals(report, ownDriver.findElements(SpoPage.costOptions).get(j).getText(), option[j], "" + option[j] + " is present");
         }
         commonObj.validateElementExists(SpoPage.trailingMonths, "Trailing Month section present");
         validateTimeOfDayNight();
@@ -1429,7 +1432,7 @@ public class Spo extends ReusableLib {
         filterCreatedWorksheet();
         navigateWSOption();
         navigateEditWSTemp();
-        String user = driver.findElement(SpoPage.assignedUser).getAttribute("value");
+        String user = ownDriver.findElement(SpoPage.assignedUser).getAttribute("value");
         Utility_Functions.xAssertEquals(report, user, "AutomationTesting", "Assigned User is updated ");
     }
 
@@ -1440,10 +1443,10 @@ public class Spo extends ReusableLib {
         filterCreatedWorksheet();
         navigateWSOption();
         navigateEditWSTemp();
-        String monSupply = driver.findElement(SpoPage.supplyToOrder).getAttribute("value");
-        String discount = driver.findElement(SpoPage.discountOrMultiplier).getAttribute("value");
-        String leadTime = driver.findElement(SpoPage.leadTime).getAttribute("value");
-        String trailMon = driver.findElement(SpoPage.trailingMonths).getAttribute("value");
+        String monSupply = ownDriver.findElement(SpoPage.supplyToOrder).getAttribute("value");
+        String discount = ownDriver.findElement(SpoPage.discountOrMultiplier).getAttribute("value");
+        String leadTime = ownDriver.findElement(SpoPage.leadTime).getAttribute("value");
+        String trailMon = ownDriver.findElement(SpoPage.trailingMonths).getAttribute("value");
         Utility_Functions.xAssertEquals(report, monSupply, "3", "Months Supply to Order is updated");
         Utility_Functions.xAssertEquals(report, discount, "1", "Discount to Order is updated");
         Utility_Functions.xAssertEquals(report, leadTime, "20", "leadTime to Order is updated");
@@ -1451,7 +1454,7 @@ public class Spo extends ReusableLib {
     }
 
     public void updatedMessage() {
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.popUp)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.popUp)) {
             commonObj.validateText(SpoPage.popUp, "template updated successfully.", "template updated successfully. popup is present");
             Utility_Functions.timeWait(2);
         }
@@ -1470,7 +1473,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
         updatedMessage();
         sendKeys(SpoPage.trailingMonths, "24", "Enter '24' into Trailing month");
-        int size = driver.findElements(SpoPage.selectedMonth).size();
+        int size = ownDriver.findElements(SpoPage.selectedMonth).size();
         Utility_Functions.xAssertEquals(report, "" + size + "", "24", "Total " + size + " columns highlighted ");
         click(button("Cancel"), "Click Cancel Button");
         Utility_Functions.timeWait(6);
@@ -1494,7 +1497,7 @@ public class Spo extends ReusableLib {
     }
 
     public void radioAndToggleBtn() {
-        if (Utility_Functions.xIsDisplayed(driver, isRadioSelected(false))) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, isRadioSelected(false))) {
             click(SpoPage.runEachOtherWeek, "Click Run Each Other Week Radio Button");
         } else {
             click(SpoPage.runEachWeek, "Click Run Each Week Radio Button");
@@ -1502,7 +1505,7 @@ public class Spo extends ReusableLib {
         updatedMessage();
         click(SpoPage.toggleSlider);
         Utility_Functions.timeWait(6);
-        if (Utility_Functions.xIsDisplayed(driver, toggleActivate(false))) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, toggleActivate(false))) {
             click(SpoPage.toggleSlider, "Click Activate List toggle Button");
         }
         updatedMessage();
@@ -1514,11 +1517,11 @@ public class Spo extends ReusableLib {
     public void verifyWSFields() {
         String[] field = {"Manufacturer Code", "Product Code", "Vendor Code", "Vendor Number"};
         int i = 0;
-        while (Utility_Functions.xIsDisplayed(driver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
+        while (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//label[text()='" + field[i] + "']/parent::div/descendant::input"))) {
             String text = field[i];
             sendKeysAndTab(wsFields(text), "WzxctfdfghQQwe", "Click " + text + " Input field");
             Utility_Functions.timeWait(5);
-            String val = driver.findElements(SpoPage.invalidWSName).get(i).getText().trim();
+            String val = ownDriver.findElements(SpoPage.invalidWSName).get(i).getText().trim();
             Utility_Functions.xAssertEquals(report, val, "Invalid " + text + ".", "Invalid " + text + ". is present");
             i++;
             if (text.equals("Vendor Number")) {
@@ -1531,7 +1534,7 @@ public class Spo extends ReusableLib {
      * This method to verify Day to run Section can be changed
      */
     public void verifyDayToRunEditable() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.hourDropDown);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.hourDropDown);
         click(SpoPage.hourDropDown);
         Utility_Functions.timeWait(2);
         selectDayToRun("10");
@@ -1541,13 +1544,13 @@ public class Spo extends ReusableLib {
         click(SpoPage.meridianDropDown);
         Utility_Functions.timeWait(2);
         selectDayToRun("AM");
-        Utility_Functions.xScrollIntoView(driver, SpoPage.dayOfTheWeek);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.dayOfTheWeek);
         click(SpoPage.dayOfTheWeek, "Click Day Of The Week Drop Down");
         Utility_Functions.timeWait(2);
-        int size=driver.findElements(SpoPage.dayCheckBox).size();
+        int size=ownDriver.findElements(SpoPage.dayCheckBox).size();
         if(size>2) {
             for (int i = 0; i < size - 2; i++) {
-                click(driver.findElements(SpoPage.dayCheckBox).get(i), "Select Day");
+                click(ownDriver.findElements(SpoPage.dayCheckBox).get(i), "Select Day");
                 updatedMessage();
             }
             click(SpoPage.trailingMonths);
@@ -1560,7 +1563,7 @@ public class Spo extends ReusableLib {
         try {
             click(SpoPage.trashIcon, "Click Trash Icon");
         } catch (Exception e) {
-            Utility_Functions.xClickHiddenElement(driver, SpoPage.trashIcon);
+            Utility_Functions.xClickHiddenElement(ownDriver, SpoPage.trashIcon);
         }
         Utility_Functions.timeWait(3);
     }
@@ -1601,22 +1604,22 @@ public class Spo extends ReusableLib {
      * This method to verify Save Worksheet button
      */
     public void verifySavedWSBtn() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.orderQuantity);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.orderQuantity);
         sendKeys(SpoPage.orderQuantity, "10", "Modify Order Quantity");
         click(SpoPage.saveWorksheetBtn, "Click Save Worksheet button");
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.popUp, "Worksheet saved successfully.", "Worksheet saved successfully. popup is present");
-        Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(driver, SpoPage.closeIcon);
+        Utility_Functions.xMouseClick(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(4);
         commonObj.validateText(SpoPage.savedTag, "Saved", "Worksheet status turned to Saved tag");
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
 
     public void assignedUser() {
-        int val = driver.findElements(SpoPage.assignedUserIf).size();
-        if (driver.findElements(SpoPage.assignedUserIf).get(val - 1).getAttribute("ng-reflect-model") == null) {
+        int val = ownDriver.findElements(SpoPage.assignedUserIf).size();
+        if (ownDriver.findElements(SpoPage.assignedUserIf).get(val - 1).getAttribute("ng-reflect-model") == null) {
             sendKeys(SpoPage.assignedUserIf, properties.getProperty("SpoUserName"));
         }
     }
@@ -1633,10 +1636,10 @@ public class Spo extends ReusableLib {
         clickButton("Find Products");
         Utility_Functions.timeWait(5);
         errorRepeatSteps();
-        Utility_Functions.xScrollIntoView(driver, SpoPage.invalidWSName);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.invalidWSName);
         commonObj.validateText(SpoPage.invalidWSName, "Worksheet with this name already exists.", "Duplicate Worksheet can not create");
         handleDiscountFieldIfPresent();
-        Utility_Functions.xScrollIntoView(driver, SpoPage.invalidWSName);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.invalidWSName);
         commonObj.validateText(SpoPage.invalidWSName, "Worksheet with this name already exists.", "Duplicate Worksheet can not create");
     }
 
@@ -1644,12 +1647,12 @@ public class Spo extends ReusableLib {
      * Keyword to Modify Order Quantity
      */
     public void modifyOrderQty() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.disableAllFields);
         Utility_Functions.timeWait(2);
         sendKeys(SpoPage.orderQuantity, "99999999", "Modify First item Order Quantity to 999999");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(SpoPage.yellowModCol, "Border color changed to Yellow after Order quantity modification");
-        sendKeys(driver.findElements(SpoPage.orderQuantity).get(2), "999999", "Modify Second item Order Quantity to 999999");
+        sendKeys(ownDriver.findElements(SpoPage.orderQuantity).get(2), "999999", "Modify Second item Order Quantity to 999999");
     }
 
     /**
@@ -1668,13 +1671,13 @@ public class Spo extends ReusableLib {
         clickConcertPOBtn();
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.popUp, "Worksheet Order Total exceeds Maximum of 9,999,999.99 for PO Conversion. Please modify and try again.", "'Worksheet Order Total exceeds Maximum of $9,999,999.99 for PO Conversion. Please modify and try again.' error message is present");
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.xIcon)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.xIcon)) {
             click(SpoPage.xIcon);
         }
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver, SpoPage.closeIcon);
+        Utility_Functions.xClickHiddenElement(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(5);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
@@ -1687,7 +1690,7 @@ public class Spo extends ReusableLib {
         String freight = jsonData.getData("FreightMinimum");
         sendKeys(VendorInformationPage.actionCode, "I", "Enter 'I' into Action Code input field");
         sendKeys(VendorInformationPage.vendorNo, Utility_Functions.xGetJsonData("VendorNumber"), "Enter Vendor Number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         sendKeys(VendorInformationPage.actionCode, "C", "Enter 'C' into Action Code input field");
         sendKeys(VendorInformationPage.vendorNo, Utility_Functions.xGetJsonData("VendorNumber"), "Enter Vendor Number");
         sendKeys(VendorInformationPage.minOrderCode, "$", "Enter Order Minimum Code as '$'");
@@ -1695,18 +1698,18 @@ public class Spo extends ReusableLib {
         sendKeys(VendorInformationPage.freightOrderCode, "$", "Enter Freight Minimum Code as '$'");
         sendKeys(VendorInformationPage.freightOrderQty, freight + ".00", "Enter Freight Minimum Quantity as " + freight);
         Utility_Functions.timeWait(2);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         inquireAssignOrderMinFreightMin();
     }
 
     public void validateAssignedField() {
         String order = jsonData.getData("OrderMinimum");
         String freight = jsonData.getData("FreightMinimum");
-        String orderCode = driver.findElement(VendorInformationPage.minOrderCode).getText().trim();
-        String orderQty = driver.findElement(VendorInformationPage.minOrderQty).getAttribute("value").trim();
-        String freightCode = driver.findElement(VendorInformationPage.freightOrderCode).getText().trim();
-        String freightQty = driver.findElement(VendorInformationPage.freightOrderQty).getAttribute("value").trim();
+        String orderCode = ownDriver.findElement(VendorInformationPage.minOrderCode).getText().trim();
+        String orderQty = ownDriver.findElement(VendorInformationPage.minOrderQty).getAttribute("value").trim();
+        String freightCode = ownDriver.findElement(VendorInformationPage.freightOrderCode).getText().trim();
+        String freightQty = ownDriver.findElement(VendorInformationPage.freightOrderQty).getAttribute("value").trim();
         Utility_Functions.xAssertEquals(report, orderCode, "$", "Minimum Order Code is present");
         Utility_Functions.xAssertEquals(report, orderQty, order + ".00", "Minimum Order Quantity is present");
         Utility_Functions.xAssertEquals(report, freightCode, "$", "Minimum Freight Code is present");
@@ -1719,11 +1722,11 @@ public class Spo extends ReusableLib {
     public void inquireAssignOrderMinFreightMin() {
         sendKeys(VendorInformationPage.actionCode, "I", "Enter 'I' into Action Code input field");
         sendKeys(VendorInformationPage.vendorNo, Utility_Functions.xGetJsonData("VendorNumber"), "Enter Vendor Number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String[] split = Utility_Functions.xGetJsonData("VendorNoForHeader").split(" ");
         String vendorName = split[2] + " " + split[3];
         commonObj.validateText(VendorInformationPage.vendorName, vendorName, "Vendor Name: " + vendorName + " is present");
-        Utility_Functions.xScrollIntoView(driver, VendorInformationPage.minOrderCode);
+        Utility_Functions.xScrollIntoView(ownDriver, VendorInformationPage.minOrderCode);
         validateAssignedField();
         click(ItemLedgerPage.btnExit, "Exit from page");
     }
@@ -1733,17 +1736,17 @@ public class Spo extends ReusableLib {
         String order = ord.replace("$", "");
         String freght = printCurrency(Locale.US, jsonData.getData("FreightMinimum"));
         String freight = freght.replace("$", "");
-        int size = driver.findElements(SpoPage.minFreightOrder).size();
-        String orderMin = driver.findElements(SpoPage.minFreightOrder).get(size - 1).getText().trim();
+        int size = ownDriver.findElements(SpoPage.minFreightOrder).size();
+        String orderMin = ownDriver.findElements(SpoPage.minFreightOrder).get(size - 1).getText().trim();
         Utility_Functions.xAssertEquals(report, order, orderMin, "Order minimum is matches");
-        String freightMin = driver.findElements(SpoPage.minFreightOrder).get(size - 2).getText().trim();
+        String freightMin = ownDriver.findElements(SpoPage.minFreightOrder).get(size - 2).getText().trim();
         Utility_Functions.xAssertEquals(report, freight, freightMin, "Freight minimum is matches");
     }
 
     public void cancelButtonPO() {
         click(SpoPage.convertPOBtn, "Click Convert to PO button");
         Utility_Functions.timeWait(3);
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.exclamationWarn)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.exclamationWarn)) {
             commonObj.validateElementExists(SpoPage.exclamationWarn, "'MINIMUM ORDER NOT MET' Popup is present");
         }
         click(SpoPage.cancelBtnMinOrd, "Click Cancel Button");
@@ -1752,7 +1755,7 @@ public class Spo extends ReusableLib {
     public void saveAndConvertPOBtn() {
         click(SpoPage.convertPOBtn, "click Convert to PO button");
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.exclamationWarn)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.exclamationWarn)) {
             commonObj.validateElementExists(SpoPage.exclamationWarn, "'MINIMUM ORDER NOT MET' Popup is present");
         }
         clickButton("Save and Convert to PO");
@@ -1776,9 +1779,9 @@ public class Spo extends ReusableLib {
      * Keyword to navigate back to SPO page
      */
     public void navigateBackToSPOPage() {
-        Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver, SpoPage.closeIcon);
+        Utility_Functions.xClickHiddenElement(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(2);
         commonObj.validateText(SpoPage.spoPageTitle, "SUGGESTED PURCHASE ORDERS", "SPO Screen Header is present");
     }
@@ -1788,7 +1791,7 @@ public class Spo extends ReusableLib {
      */
     public void verifyOrderMinimum() {
         verifyOrderFreightMin();
-        Utility_Functions.xScrollIntoView(driver, SpoPage.orderQuantity);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.orderQuantity);
         sendKeys(SpoPage.orderQuantity, "1", "Modify Order Quantity");
         cancelButtonPO();
         saveAndConvertPOBtn();
@@ -1808,9 +1811,9 @@ public class Spo extends ReusableLib {
     public void disableAndExpand() {
         clickButton(" Expand All ");
         Utility_Functions.timeWait(4);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.isDisabledCalcMethod);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.isDisabledCalcMethod);
         commonObj.validateElementExists(SpoPage.isDisabledCalcMethod, "Calculation Method drop box is disabled");
-        Utility_Functions.xScrollIntoView(driver, SpoPage.closeIcon);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.closeIcon);
         Utility_Functions.timeWait(3);
         click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         Utility_Functions.timeWait(3);
@@ -1821,7 +1824,7 @@ public class Spo extends ReusableLib {
      */
     public void verifyCalculationMethodOptions() {
         disableAndExpand();
-        Utility_Functions.xScrollIntoView(driver, SpoPage.calcMethod);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.calcMethod);
         String[] options = {"M - Manual", "X - Max", "S - Suggested Order Qty", "Q - Economic Order Qty"};
         int i = 0;
         for (String option : options) {
@@ -1839,13 +1842,13 @@ public class Spo extends ReusableLib {
 
     public double discountTotalCostCalc() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.discountOrMultiplier);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.discountOrMultiplier);
         Utility_Functions.timeWait(3);
         sendKeys(SpoPage.discountOrMultiplier, "10", "Enter Discount");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.minusIcon);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.minusIcon);
         Utility_Functions.timeWait(2);
-        String totalCost = driver.findElement(SpoPage.totalCost).getText();
+        String totalCost = ownDriver.findElement(SpoPage.totalCost).getText();
         double discount = convertDouble(totalCost);
         return discount;
     }
@@ -1857,27 +1860,27 @@ public class Spo extends ReusableLib {
         try{
             click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         }catch (Exception e){
-            Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
+            Utility_Functions.xScrollIntoView(ownDriver, SpoPage.disableAllFields);
             click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         }
         Utility_Functions.timeWait(3);
         try{
             click(SpoPage.plusIcon, "Click Expand Icon");
         }catch (Exception e){
-            Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
+            Utility_Functions.xScrollIntoView(ownDriver, SpoPage.plusIcon);
             click(SpoPage.plusIcon, "Click Expand Icon");
         }
         Utility_Functions.timeWait(3);
         sendKeys(SpoPage.orderQuantity, "15", "Modify Order Quantity");
         Utility_Functions.timeWait(2);
-        Utility_Functions.actionKey(Keys.TAB,driver);
+        Utility_Functions.actionKey(Keys.TAB,ownDriver);
         Utility_Functions.timeWait(2);
-        String unitCostVal = driver.findElement(SpoPage.unitCostField).getAttribute("value");
+        String unitCostVal = ownDriver.findElement(SpoPage.unitCostField).getAttribute("value");
         double unitCost = convertDouble(unitCostVal) * 15;
         double disc=Double.parseDouble(getAttribute(SpoPage.discountLineItem,"value"));
         double totalDisc=(unitCost*disc)/100;
         double afterDisc=unitCost-totalDisc;
-        String totalCost = driver.findElement(SpoPage.totalCost).getText();
+        String totalCost = ownDriver.findElement(SpoPage.totalCost).getText();
         Utility_Functions.xAssertEquals(report, afterDisc + "00000", totalCost, "Total cost Calculation Matches ");
     }
 
@@ -1888,14 +1891,14 @@ public class Spo extends ReusableLib {
         try{
             click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         }catch (Exception e){
-            Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
+            Utility_Functions.xScrollIntoView(ownDriver, SpoPage.disableAllFields);
             click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         }
         Utility_Functions.timeWait(3);
         try{
             click(SpoPage.plusIcon, "Click Expand Icon");
         }catch (Exception e){
-            Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
+            Utility_Functions.xScrollIntoView(ownDriver, SpoPage.plusIcon);
             click(SpoPage.plusIcon, "Click Expand Icon");
         }
         Utility_Functions.timeWait(3);
@@ -1903,11 +1906,11 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(3);
         sendKeysAndTab(SpoPage.standardPackage, "100", "Update standard quantity");
         Utility_Functions.timeWait(4);
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.popUp)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.popUp)) {
             commonObj.validateText(SpoPage.popUp, "Worksheet saved successfully.", "Worksheet saved successfully. popup is present");
         }
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, SpoPage.worksheetNameHeader)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, SpoPage.worksheetNameHeader)) {
             Utility_Functions.timeWait(3);
             commonObj.validateText(SpoPage.notStdQty, "NOT A STANDARD PACKAGE QTY", "Popup is present");
         } else {
@@ -1916,7 +1919,7 @@ public class Spo extends ReusableLib {
         try {
             clickButton("Cancel");
         } catch (Exception e) {
-            Utility_Functions.xClickHiddenElement(driver, driver.findElements(By.xpath("//button[contains(text(),'Cancel')]")).get(1));
+            Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(By.xpath("//button[contains(text(),'Cancel')]")).get(1));
         }
         Utility_Functions.timeWait(2);
         click(SpoPage.saveWorksheetBtn, "Click Save Worksheet button");
@@ -1928,15 +1931,15 @@ public class Spo extends ReusableLib {
 
     public double getData(String str) {
         By el = By.xpath("//td[contains(text(),'" + str + "')]");
-        int size = driver.findElements(el).size();
+        int size = ownDriver.findElements(el).size();
         double val2 = 0;
         double val;
         String data;
         for (int i = 0; i < size; i++) {
             if (str.equals("$")) {
-                data = driver.findElements(el).get(i).getText().replace(str, "").replace(",", "");
+                data = ownDriver.findElements(el).get(i).getText().replace(str, "").replace(",", "");
             } else {
-                data = driver.findElements(el).get(i).getText().replace(" " + str, "");
+                data = ownDriver.findElements(el).get(i).getText().replace(" " + str, "");
             }
             System.out.println(data);
             val = Double.parseDouble(data);
@@ -1952,15 +1955,15 @@ public class Spo extends ReusableLib {
      */
     public void orderWeightTotal() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver, SpoPage.plusIcon);
+        Utility_Functions.xScrollIntoView(ownDriver, SpoPage.plusIcon);
         double orderTotal = getData("$");
         double totalWeight = getData("lbs");
-        int size = driver.findElements(SpoPage.minFreightOrder).size();
-        String order = driver.findElements(SpoPage.minFreightOrder).get(size - 3).getText().trim();
+        int size = ownDriver.findElements(SpoPage.minFreightOrder).size();
+        String order = ownDriver.findElements(SpoPage.minFreightOrder).get(size - 3).getText().trim();
         order = order.replace(",", "");
         Utility_Functions.xAssertEquals(report, orderTotal + "0", order, "order Total matches");
-        int sz = driver.findElements(SpoPage.calHead).size();
-        String weight = driver.findElements(SpoPage.calHead).get(sz - 2).getText();
+        int sz = ownDriver.findElements(SpoPage.calHead).size();
+        String weight = ownDriver.findElements(SpoPage.calHead).get(sz - 2).getText();
         Utility_Functions.xAssertEquals(report, weight, totalWeight + "00", "Total Weight matches");
     }
 
@@ -1972,7 +1975,7 @@ public class Spo extends ReusableLib {
         try{
             click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         }catch (Exception e){
-            Utility_Functions.xScrollIntoView(driver, SpoPage.disableAllFields);
+            Utility_Functions.xScrollIntoView(ownDriver, SpoPage.disableAllFields);
             click(SpoPage.disableAllFields, "Uncheck Disable All Fields");
         }
         sendKeys(SpoPage.orderQuantity, "200", "Modify Order Quantity");
@@ -1991,8 +1994,8 @@ public class Spo extends ReusableLib {
         int totWeight = 200 * unitWeight;
         String totalWeight = getText(SpoPage.totalWeight).trim().replace(" lbs", "");
         Utility_Functions.xAssertEquals(report, totalWeight, "" + totWeight + "" + ".000", "Total Weight Matches");
-        int sz = driver.findElements(SpoPage.calHead).size();
-        String weight = driver.findElements(SpoPage.calHead).get(sz - 2).getText();
+        int sz = ownDriver.findElements(SpoPage.calHead).size();
+        String weight = ownDriver.findElements(SpoPage.calHead).get(sz - 2).getText();
         Utility_Functions.xAssertEquals(report, weight, "" + totWeight + "" + ".000", "Current LBS matches");
     }
 
@@ -2000,12 +2003,12 @@ public class Spo extends ReusableLib {
         navigateToSPO();
         selectCompany();
         Utility_Functions.timeWait(10);
-        while (driver.findElement(By.xpath("//a[@class='header-name-link']")).isDisplayed()) {
-            int size = driver.findElements(By.xpath("//a[@class='header-name-link']")).size();
+        while (ownDriver.findElement(By.xpath("//a[@class='header-name-link']")).isDisplayed()) {
+            int size = ownDriver.findElements(By.xpath("//a[@class='header-name-link']")).size();
             for (int i = 0; i < size; i++) {
-                Utility_Functions.xScrollWindowTop(driver);
+                Utility_Functions.xScrollWindowTop(ownDriver);
                 Utility_Functions.timeWait(3);
-                click(driver.findElements(By.xpath("//a[@class='header-name-link']")).get(i));
+                click(ownDriver.findElements(By.xpath("//a[@class='header-name-link']")).get(i));
                 Utility_Functions.timeWait(7);
                 navigateEditWSTemp();
                 verifyDeleteSavedWS();

@@ -9,6 +9,7 @@ public class SPA extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_161_VerifySPAScreenHeader(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Title");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -17,6 +18,7 @@ public class SPA extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_166_VerifySPAScreenInformation(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to verify Special Price Allowance Screen Information");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

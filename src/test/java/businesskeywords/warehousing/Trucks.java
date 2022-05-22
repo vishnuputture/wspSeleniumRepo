@@ -2,6 +2,7 @@ package businesskeywords.warehousing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,7 @@ import java.util.Random;
 
 public class Trucks extends ReusableLib {
     CommonActions commonObj;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -29,12 +31,13 @@ public class Trucks extends ReusableLib {
     public Trucks(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
+        ownDriver=helper.getGSDriver();
     }
 
 
     public void navigateToShippingManifest() {
         //driver.get(jsonData.getData("Url"));
-        driver.get("http://lcoservicedev.winwholesale.com/shipping-manifest-manager/#/list/warehousing");
+        ownDriver.get("http://lcoservicedev.winwholesale.com/shipping-manifest-manager/#/list/warehousing");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
@@ -51,7 +54,7 @@ public class Trucks extends ReusableLib {
 
     public void callSelectCompany() {
         Utility_Functions.timeWait(7);
-        if (Utility_Functions.xIsDisplayed(driver, DeliveredOrdersPage.unAuth)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, DeliveredOrdersPage.unAuth)) {
             selectCompany();
             click(TruckPage.menuIconTruck);
         }
@@ -87,7 +90,7 @@ public class Trucks extends ReusableLib {
      */
     public void verifyAvailFieldTruck() {
         String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model"};
-        List<WebElement> els = driver.findElements(By.xpath("//th"));
+        List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -95,11 +98,11 @@ public class Trucks extends ReusableLib {
         }
         commonObj.validateElementExists(TruckPage.helpIcon, "Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
-        int size = driver.findElements(TruckPage.pagination).size();
+        int size = ownDriver.findElements(TruckPage.pagination).size();
         Utility_Functions.xAssertEquals(report, size, 4, "Next page and previous page arrow icon is present");
-        String page = Utility_Functions.getText(driver, TruckPage.currentPage);
-        commonObj.validateElementExists(TruckPage.currentPage, "Current Page " + page + " " + Utility_Functions.getText(driver, TruckPage.outOf) + "");
-        List<WebElement> elm = driver.findElements(TruckPage.show);
+        String page = Utility_Functions.getText(ownDriver, TruckPage.currentPage);
+        commonObj.validateElementExists(TruckPage.currentPage, "Current Page " + page + " " + Utility_Functions.getText(ownDriver, TruckPage.outOf) + "");
+        List<WebElement> elm = ownDriver.findElements(TruckPage.show);
         String[] acText = {"10", "15", "30"};
         int j = 0;
         for (WebElement el : elm) {
@@ -120,9 +123,9 @@ public class Trucks extends ReusableLib {
      * Keyword to Verify Pagination against current page
      */
     public void selectPage(int actPageNo, String expPage, String arrowIcon) {
-        click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
-        Utility_Functions.xScrollWindow(driver);
-        String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+        click(ownDriver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
+        Utility_Functions.xScrollWindow(ownDriver);
+        String pageNo = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
         Utility_Functions.timeWait(2);
     }
@@ -132,20 +135,20 @@ public class Trucks extends ReusableLib {
      */
     public void paginationTruck() {
         int size = 2;
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
         } else {
-            click(driver.findElements(DriversPage.pageArrow).get(2));
-            Utility_Functions.xScrollWindow(driver);
-            while (!Utility_Functions.xIsDisplayed(driver, DriversPage.lastPage)) {
+            click(ownDriver.findElements(DriversPage.pageArrow).get(2));
+            Utility_Functions.xScrollWindow(ownDriver);
+            while (!Utility_Functions.xIsDisplayed(ownDriver, DriversPage.lastPage)) {
                 size++;
-                click(driver.findElements(DriversPage.pageArrow).get(2));
-                Utility_Functions.xScrollWindow(driver);
+                click(ownDriver.findElements(DriversPage.pageArrow).get(2));
+                Utility_Functions.xScrollWindow(ownDriver);
             }
-            click(driver.findElements(DriversPage.pageArrow).get(0));
-            Utility_Functions.xScrollWindow(driver);
+            click(ownDriver.findElements(DriversPage.pageArrow).get(0));
+            Utility_Functions.xScrollWindow(ownDriver);
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
             selectPage(3, "" + size + "", "Right double Arrow (>>)");
@@ -157,9 +160,9 @@ public class Trucks extends ReusableLib {
      * Keyword to verify Page Count
      */
     public void valPageCount(int pageNum) {
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
-        int truckCount = driver.findElements(DriversPage.driverNameCount).size();
+        int truckCount = ownDriver.findElements(DriversPage.driverNameCount).size();
         if (truckCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + truckCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " driver Count");
         } else {
@@ -171,12 +174,12 @@ public class Trucks extends ReusableLib {
      * Keyword to Verify functionality of Page Count
      */
     public void funPageCountTruck() {
-        Utility_Functions.xScrollWindow(driver);
-        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
-            int truckCount = driver.findElements(DriversPage.driverNameCount).size();
+        Utility_Functions.xScrollWindow(ownDriver);
+        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
+            int truckCount = ownDriver.findElements(DriversPage.driverNameCount).size();
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having drivers count " + truckCount + "");
         } else {
-            int truckCount = driver.findElements(DriversPage.driverNameCount).size();
+            int truckCount = ownDriver.findElements(DriversPage.driverNameCount).size();
             Utility_Functions.xAssertEquals(report, "" + truckCount + "", "10", "The Driver Count is 10 by default");
             valPageCount(10);
             valPageCount(15);
@@ -197,7 +200,7 @@ public class Trucks extends ReusableLib {
      */
     public void uiAddNewTruck() {
         String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model", "VIN", "Truck Weight - Unloaded"};
-        List<WebElement> els = driver.findElements(TruckPage.newTruckLabel);
+        List<WebElement> els = ownDriver.findElements(TruckPage.newTruckLabel);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -232,7 +235,7 @@ public class Trucks extends ReusableLib {
         click(TruckPage.saveBtn, "Saving record");
         Utility_Functions.timeWait(2);
         String actText = "Truck " + truckName + " successfully created.";
-        String expTest = Utility_Functions.getText(driver, By.xpath("//span[contains(text(),'" + truckName + "')]"));
+        String expTest = Utility_Functions.getText(ownDriver, By.xpath("//span[contains(text(),'" + truckName + "')]"));
         Utility_Functions.xAssertEquals(report, actText, expTest, "Truck successfully added pop up message");
         /* System.out.println("//a[text()='"+truckName+"']");
         String actTx=""+truckName+"";
@@ -263,7 +266,7 @@ public class Trucks extends ReusableLib {
         click(TruckPage.saveBtn, "Saving record");
         Utility_Functions.timeWait(2);
         String actText = "Truck " + truckName + " successfully created.";
-        String expTest = Utility_Functions.getText(driver, By.xpath("//span[contains(text(),'" + truckName + "')]"));
+        String expTest = Utility_Functions.getText(ownDriver, By.xpath("//span[contains(text(),'" + truckName + "')]"));
         Utility_Functions.xAssertEquals(report, actText, expTest, "Truck successfully added pop up message");
         /* System.out.println("//a[text()='"+truckName+"']");
         String actTx=""+truckName+"";
@@ -279,11 +282,11 @@ public class Trucks extends ReusableLib {
     public void searchFiltersTruckUI() {
         click(TruckPage.filterSearch, "Click Search Filter icon");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
         String[] actText = {"Truck Name", "License Plate Number", "Status", "CDL Required"};
-        List<WebElement> els = driver.findElements(TruckPage.searchFiltersLabel);
+        List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -304,7 +307,7 @@ public class Trucks extends ReusableLib {
     public String selectFilter(By by, String label, String option) {
         click(by);
         Utility_Functions.timeWait(1);
-        String name = Utility_Functions.getText(driver, getDropDownVal(option));
+        String name = Utility_Functions.getText(ownDriver, getDropDownVal(option));
         System.out.println(name);
         Utility_Functions.timeWait(1);
         click(getDropDownVal(option), "Select " + option + " " + label + " drop Down");
@@ -342,7 +345,7 @@ public class Trucks extends ReusableLib {
      */
     public void navigateToUpdateTruckPage() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xClickHiddenElement(driver,By.xpath("//td/a"));
+        Utility_Functions.xClickHiddenElement(ownDriver,By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
     }
@@ -352,7 +355,7 @@ public class Trucks extends ReusableLib {
      */
     public void uiUpdateTruck() {
         String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model", "VIN", "Truck Weight - Unloaded", "Total Truck Weight Limit"};
-        List<WebElement> els = driver.findElements(TruckPage.newTruckLabel);
+        List<WebElement> els = ownDriver.findElements(TruckPage.newTruckLabel);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -369,18 +372,18 @@ public class Trucks extends ReusableLib {
      */
     public void deleteTruck() {
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver,TruckPage.deleteButton);
+        Utility_Functions.xClickHiddenElement(ownDriver,TruckPage.deleteButton);
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.noButtonPopUp, "Click No Button");
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
-        Utility_Functions.xClickHiddenElement(driver,TruckPage.deleteButton);
+        Utility_Functions.xClickHiddenElement(ownDriver,TruckPage.deleteButton);
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.yesButtonPopUp, "Click Yes Button");
         Utility_Functions.timeWait(3);
         String exp = "Truck could not be deleted because it is assigned to a manifest.";
-        String act = Utility_Functions.getText(driver, TruckPage.deletePopUp);
+        String act = Utility_Functions.getText(ownDriver, TruckPage.deletePopUp);
         if (act.equals(exp)) {
             commonObj.validateElementExists(TruckPage.deletePopUp, exp + ": pop message is present");
         } else {
@@ -397,8 +400,8 @@ public class Trucks extends ReusableLib {
             click(DriversPage.inActive,"Select InActive From the status drop down");
             Utility_Functions.timeWait(2);
             click(TruckPage.newTruckPlateExpInput);
-            int size=driver.findElements(TruckPage.licensePlateExpSelectInActive).size()-1;
-            click(driver.findElements(TruckPage.licensePlateExpSelectInActive).get(size), "Select License Plate Expiration Date");
+            int size=ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).size()-1;
+            click(ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).get(size), "Select License Plate Expiration Date");
             Utility_Functions.timeWait(2);
             click(TruckPage.saveTruckButton,"Click Save Truck");
             Utility_Functions.timeWait(3);

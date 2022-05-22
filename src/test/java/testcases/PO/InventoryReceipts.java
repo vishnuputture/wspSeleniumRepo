@@ -9,6 +9,7 @@ public class InventoryReceipts extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_902_InventoryReceiptUI(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case UI of Inventory Receipt Page");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -25,6 +26,7 @@ public class InventoryReceipts extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_CreatePoDirect(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to Create Purchase Order");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

@@ -51,7 +51,7 @@ public abstract class ReusableLib {
         this.helper = helper;
         this.jsonData = helper.getDataTable();
         this.report = helper.getReport();
-        this.driver = helper.getGSDriver();
+        //this.driver = helper.getGSDriver();
         this.driverUtil = helper.getDriverUtil();
         this.apiDriver = helper.getApiDriver();
         this.extentTest = helper.getExtentTest();
@@ -99,7 +99,7 @@ public abstract class ReusableLib {
     /**
      * The {@link FrameworkDriver} object
      */
-    protected static FrameworkDriver driver;
+   // protected static FrameworkDriver driver;
 
     protected WebDriverUtil driverUtil;
     /**
@@ -182,7 +182,7 @@ public abstract class ReusableLib {
     protected void clickIfAvlble(By el) {
 
         if (isDisplayed(el)) {
-            driver.findElement(el).click();
+            helper.getGSDriver().findElement(el).click();
         }
 
     }
@@ -207,7 +207,7 @@ public abstract class ReusableLib {
         if (context.equals("NATIVE_APP")) {
             perfectoCommand.put("name", appName);
             try {
-                driver.getAppiumDriver().executeScript("mobile:application:close", perfectoCommand);
+                helper.getGSDriver().getAppiumDriver().executeScript("mobile:application:close", perfectoCommand);
             } catch (final WebDriverException e) {
             }
         }
@@ -223,7 +223,7 @@ public abstract class ReusableLib {
         if (context.equals("NATIVE_APP")) {
             perfectoCommand.put("identifier", bundleId);
             try {
-                driver.getAppiumDriver().executeScript("mobile:application:close", perfectoCommand);
+                helper.getGSDriver().getAppiumDriver().executeScript("mobile:application:close", perfectoCommand);
             } catch (final WebDriverException e) {
             }
         }
@@ -236,7 +236,7 @@ public abstract class ReusableLib {
      */
     protected void deleteFromDevice(final String handsetFile) {
         perfectoCommand.put("handsetFile", handsetFile);
-        driver.getAppiumDriver().executeScript("mobile:media:delete", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:media:delete", perfectoCommand);
         perfectoCommand.clear();
 
     }
@@ -248,7 +248,7 @@ public abstract class ReusableLib {
      */
     protected void deleteFromRepository(final String repositoryFile) {
         perfectoCommand.put("repositoryFile", repositoryFile);
-        driver.getAppiumDriver().executeScript("mobile:media:delete", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:media:delete", perfectoCommand);
         perfectoCommand.clear();
 
     }
@@ -261,7 +261,7 @@ public abstract class ReusableLib {
     protected void deviceKeyPress(final String keyPress) {
 
         perfectoCommand.put("keySequence", keyPress);
-        driver.getAppiumDriver().executeScript("mobile:presskey", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:presskey", perfectoCommand);
         perfectoCommand.clear();
     }
 
@@ -274,7 +274,7 @@ public abstract class ReusableLib {
         final String command = "mobile:report:download";
         final Map<String, String> params = new HashMap<>();
         params.put("type", type);
-        final String report = (String) (driver.getRemoteWebDriver()).executeScript(command, params);
+        final String report = (String) (helper.getGSDriver().getRemoteWebDriver()).executeScript(command, params);
         final byte[] reportBytes = OutputType.BYTES.convertFromBase64Png(report);
         return reportBytes;
     }
@@ -283,7 +283,7 @@ public abstract class ReusableLib {
      * Function Applicable only when the ExecutionMode used is <b>PERFECTO
      */
     protected byte[] downloadWTReport() {
-        final String reportUrl = (String) driver.getAppiumDriver().getCapabilities()
+        final String reportUrl = (String) helper.getGSDriver().getAppiumDriver().getCapabilities()
                 .getCapability("windTunnelReportUrl");
         String returnString = "<html><head><META http-equiv=\"refresh\" content=\"0;URL=";
         returnString = returnString + reportUrl + "\"></head><body /></html>";
@@ -316,25 +316,25 @@ public abstract class ReusableLib {
                 coordinates.add("42%,40%");
                 coordinates.add("42%,60%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("42%,40%");
                 coordinates.add("52%,40%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("42%,48%");
                 coordinates.add("52%,48%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("42%,56%");
                 coordinates.add("52%,56%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 break;
@@ -372,25 +372,25 @@ public abstract class ReusableLib {
                 coordinates.add("30%,40%");
                 coordinates.add("30%,60%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("30%,40%");
                 coordinates.add("40%,40%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("38%,40%");
                 coordinates.add("38%,52%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("38%,48%");
                 coordinates.add("28%,48%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 break;
@@ -401,31 +401,31 @@ public abstract class ReusableLib {
                 coordinates.add("54%,40%");
                 coordinates.add("54%,60%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("54%,40%");
                 coordinates.add("64%,40%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("62%,40%");
                 coordinates.add("62%,52%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("62%,48%");
                 coordinates.add("52%,48%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 coordinates.add("54%,48%");
                 coordinates.add("64%,60%");
                 perfectoCommand.put("location", coordinates);
-                driver.executeScript("mobile:touch:drag", perfectoCommand);
+                helper.getGSDriver().executeScript("mobile:touch:drag", perfectoCommand);
                 perfectoCommand.clear();
                 coordinates.clear();
                 break;
@@ -465,7 +465,7 @@ public abstract class ReusableLib {
     protected void getFileOnDevice(final String handsetFile, final String repositoryFile) {
         perfectoCommand.put("repositoryFile", repositoryFile);
         perfectoCommand.put("handsetFile", handsetFile);
-        driver.getAppiumDriver().executeScript("mobile:media:get", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:media:get", perfectoCommand);
         perfectoCommand.clear();
 
     }
@@ -587,7 +587,7 @@ public abstract class ReusableLib {
         perfectoCommand.put("screen.height", "100%");
         perfectoCommand.put("screen.left", "0%");
         perfectoCommand.put("screen.width", "100%");
-        Object result = driver.executeScript("mobile:image:find", perfectoCommand);
+        Object result = helper.getGSDriver().executeScript("mobile:image:find", perfectoCommand);
         final Boolean resultBool = Boolean.valueOf(result.toString());
         perfectoCommand.clear();
         return resultBool;
@@ -609,7 +609,7 @@ public abstract class ReusableLib {
         perfectoCommand.put("screen.height", "100%");
         perfectoCommand.put("screen.left", "0%");
         perfectoCommand.put("screen.width", "100%");
-        driver.executeScript("mobile:image:select", perfectoCommand);
+        helper.getGSDriver().executeScript("mobile:image:select", perfectoCommand);
         perfectoCommand.clear();
     }
 
@@ -658,7 +658,7 @@ public abstract class ReusableLib {
         if (context.equals("NATIVE_APP")) {
             final Map<String, Object> perfectoCommand = new HashMap<>();
             perfectoCommand.put("name", appName);
-            driver.getAppiumDriver().executeScript("mobile:application:open", perfectoCommand);
+            helper.getGSDriver().getAppiumDriver().executeScript("mobile:application:open", perfectoCommand);
         }
     }
 
@@ -671,7 +671,7 @@ public abstract class ReusableLib {
     protected void openAppWithIdentifier(final String context, final String identifer) {
         if (context.equals("NATIVE_APP")) {
             perfectoCommand.put("identifier", identifer);
-            driver.getAppiumDriver().executeScript("mobile:application:open", perfectoCommand);
+            helper.getGSDriver().getAppiumDriver().executeScript("mobile:application:open", perfectoCommand);
             perfectoCommand.clear();
         }
     }
@@ -701,7 +701,7 @@ public abstract class ReusableLib {
     protected void putFileOnDevice(final String repositoryFile, final String handsetFile) {
         perfectoCommand.put("repositoryFile", repositoryFile);
         perfectoCommand.put("handsetFile", handsetFile);
-        driver.getAppiumDriver().executeScript("mobile:media:put", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:media:put", perfectoCommand);
         perfectoCommand.clear();
 
     }
@@ -808,19 +808,19 @@ public abstract class ReusableLib {
     
     protected void sendKeysAndTab(By el, String strVal, String CustomMsg) {
     	sendKeys(el, strVal);
-    	Utility_Functions.actionKey(Keys.TAB, driver);
+    	Utility_Functions.actionKey(Keys.TAB, helper.getGSDriver());
     	report.updateTestLog("EnterData and tab", strVal + " " + CustomMsg, Status.PASS);
     }
     
     protected void sendKeysAndEnter(By el, String strVal, String CustomMsg) {
     	sendKeys(el, strVal);
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	Utility_Functions.actionKey(Keys.ENTER, helper.getGSDriver());
     	report.updateTestLog("EnterData and press enter", strVal + " " + CustomMsg, Status.PASS);
     }
     
     protected void sendKeysAndFunction(By el, String strVal,Keys key, String CustomMsg) {
     	sendKeys(el, strVal);
-    	Utility_Functions.actionKey(key, driver);
+    	Utility_Functions.actionKey(key, helper.getGSDriver());
     	report.updateTestLog("EnterData and perform action", strVal + " " + CustomMsg, Status.PASS);
     }
     
@@ -870,7 +870,7 @@ public abstract class ReusableLib {
         swipeCoordinates.add(x1 + ',' + y1);
         swipeCoordinates.add(x2 + ',' + y2);
         perfectoCommand.put("location", swipeCoordinates);
-        driver.getAppiumDriver().executeScript("mobile:touch:drag", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:touch:drag", perfectoCommand);
         perfectoCommand.clear();
     }
 
@@ -884,7 +884,7 @@ public abstract class ReusableLib {
         perfectoCommand.put("scrolling", "scroll");
         perfectoCommand.put("maxscroll", "10");
         perfectoCommand.put("next", "SWIPE_UP");
-        driver.executeScript("mobile:text:select", perfectoCommand);
+        helper.getGSDriver().executeScript("mobile:text:select", perfectoCommand);
         perfectoCommand.clear();
     }
 
@@ -897,7 +897,7 @@ public abstract class ReusableLib {
     protected Boolean textCheckpoint(final String textToFind, final Integer timeout) {
         perfectoCommand.put("content", textToFind);
         perfectoCommand.put("timeout", timeout);
-        final Object result = driver.getAppiumDriver().executeScript("mobile:checkpoint:text", perfectoCommand);
+        final Object result = helper.getGSDriver().getAppiumDriver().executeScript("mobile:checkpoint:text", perfectoCommand);
         final Boolean resultBool = Boolean.valueOf(result.toString());
         perfectoCommand.clear();
         return resultBool;
@@ -912,7 +912,7 @@ public abstract class ReusableLib {
     protected void textClick(final String textToFind, final Integer timeout) {
         perfectoCommand.put("content", textToFind);
         perfectoCommand.put("timeout", timeout);
-        driver.getAppiumDriver().executeScript("mobile:text:select", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:text:select", perfectoCommand);
         perfectoCommand.clear();
 
     }
@@ -961,7 +961,7 @@ public abstract class ReusableLib {
         String url;
         int responseCode;
 
-        List<WebElement> links = driver.findElements(By.tagName("img"));
+        List<WebElement> links = helper.getGSDriver().findElements(By.tagName("img"));
 
         Iterator<WebElement> it = links.iterator();
 
@@ -1006,7 +1006,7 @@ public abstract class ReusableLib {
         String url;
         int responseCode;
 
-        List<WebElement> links = driver.findElements(By.tagName("a"));
+        List<WebElement> links = helper.getGSDriver().findElements(By.tagName("a"));
 
         Iterator<WebElement> it = links.iterator();
 
@@ -1071,7 +1071,7 @@ public abstract class ReusableLib {
         perfectoCommand.put("label", label);
         perfectoCommand.put("threshold", threshold);
         perfectoCommand.put("timeout", timeout);
-        driver.getAppiumDriver().executeScript("mobile:button-text:click", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:button-text:click", perfectoCommand);
         perfectoCommand.clear();
     }
 
@@ -1091,7 +1091,7 @@ public abstract class ReusableLib {
         perfectoCommand.put("timeout", timeout);
         perfectoCommand.put("label.direction", labelDirection);
         perfectoCommand.put("label.offset", labelOffset);
-        driver.getAppiumDriver().executeScript("mobile:button-text:click", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:button-text:click", perfectoCommand);
         perfectoCommand.clear();
     }
 
@@ -1105,20 +1105,20 @@ public abstract class ReusableLib {
         perfectoCommand.put("label", label);
         perfectoCommand.put("threshold", threshold);
         perfectoCommand.put("scrolling", "scroll");
-        driver.getAppiumDriver().executeScript("mobile:button-text:click", perfectoCommand);
+        helper.getGSDriver().getAppiumDriver().executeScript("mobile:button-text:click", perfectoCommand);
         perfectoCommand.clear();
     }
 
     protected void waitForElementClickable(By el, int timeWait) {
         try {
 
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.presenceOfElementLocated(el));
             wait.until(ExpectedConditions.elementToBeClickable(el));
 
         } catch (StaleElementReferenceException e) {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.presenceOfElementLocated(el));
             wait.until(ExpectedConditions.elementToBeClickable(el));
@@ -1128,11 +1128,11 @@ public abstract class ReusableLib {
 
     protected void waitForElementClickable(WebElement el, int timeWait) {
         try {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.elementToBeClickable(el));
         } catch (StaleElementReferenceException e) {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.elementToBeClickable(el));
         }
@@ -1142,14 +1142,14 @@ public abstract class ReusableLib {
     // wait for element to disappear
     protected boolean waitForElementDisappear(By locator, int timeWait) {
         try {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class)
                     .ignoring(NoSuchElementException.class)
                     .ignoring(ElementNotVisibleException.class);
             wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
             return true;
         } catch (StaleElementReferenceException e) {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class)
                     .ignoring(NoSuchElementException.class)
                     .ignoring(ElementNotVisibleException.class);
@@ -1164,13 +1164,13 @@ public abstract class ReusableLib {
     // wait for element to disappear
     protected boolean waitForElementDisappear(By locator, String text, int timeWait) {
         try {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.invisibilityOfElementWithText(locator, text));
             return true;
         }
         catch (StaleElementReferenceException e) {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.invisibilityOfElementWithText(locator, text));
             return true;
@@ -1205,13 +1205,13 @@ public abstract class ReusableLib {
 
     protected boolean xWaitForElementVisible(By locator, int timeWait) {
         try {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class).ignoring(NoSuchElementException.class);
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             return true;
 
         } catch (StaleElementReferenceException e) {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class).ignoring(NoSuchElementException.class);
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             return true;
@@ -1224,18 +1224,18 @@ public abstract class ReusableLib {
 
     protected List<WebElement> getListElement(By el) {
 
-        List<WebElement> webEl = driver.findElements(el);
+        List<WebElement> webEl = helper.getGSDriver().findElements(el);
         return webEl;
 
     }
 
     protected void waitForElementPresent(By by) {
         try {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), globalWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), globalWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
         } catch (StaleElementReferenceException e) {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), globalWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), globalWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
         } catch (Exception e) {
@@ -1247,12 +1247,12 @@ public abstract class ReusableLib {
 
     protected void waitForVisible(By by) {
         try {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), globalWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), globalWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
         } catch (StaleElementReferenceException e) {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), globalWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), globalWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.presenceOfElementLocated(by));
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by));
@@ -1262,11 +1262,11 @@ public abstract class ReusableLib {
 
     protected void waitForVisible(WebElement by) {
         try {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), globalWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), globalWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.visibilityOf(by));
         } catch (StaleElementReferenceException e) {
-            FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), globalWait)
+            FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), globalWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.visibilityOf(by));
         }
@@ -1287,13 +1287,13 @@ public abstract class ReusableLib {
     }
 
     protected void androiScrollAndClick(String elementText) {
-        AndroidDriver<MobileElement> andriodDriver = driver.getAndriodDriver();
+        AndroidDriver<MobileElement> andriodDriver = helper.getGSDriver().getAndriodDriver();
         andriodDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0))." +
                 "scrollIntoView(new UiSelector().textContains(\"" + elementText + "\").instance(0))").click();
     }
 
     protected void androiScrollToText(String elementText) {
-        AndroidDriver<MobileElement> andriodDriver = driver.getAndriodDriver();
+        AndroidDriver<MobileElement> andriodDriver = helper.getGSDriver().getAndriodDriver();
         andriodDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0))." +
                 "scrollIntoView(new UiSelector().textContains(\"" + elementText + "\").instance(0))");
     }
@@ -1322,18 +1322,18 @@ public abstract class ReusableLib {
 
     protected WebElement getElement(By by) {
         try {
-            return driver.findElement(by);
+            return helper.getGSDriver().findElement(by);
         } catch (StaleElementReferenceException e) {
-            return driver.findElement(by);
+            return helper.getGSDriver().findElement(by);
         }
     }
 
     protected void refreshPage() {
-        driver.navigate().refresh();
+        helper.getGSDriver().navigate().refresh();
     }
 
     protected void ngWaitRequestToFinish() {
-        NgWebDriver ngWebDriver = driver.getNgWebDriver();
+        NgWebDriver ngWebDriver = helper.getGSDriver().getNgWebDriver();
         ngWebDriver.waitForAngularRequestsToFinish();
     }
 
@@ -1345,7 +1345,7 @@ public abstract class ReusableLib {
         return val;
     }
     protected String getValue(By ele) {
-        return driver.findElement(ele).getAttribute("value");
+        return helper.getGSDriver().findElement(ele).getAttribute("value");
 
     }
 
@@ -1357,7 +1357,7 @@ public abstract class ReusableLib {
             //wait for visibility
 
             waitForVisible(list);
-            List<WebElement> listElm= driver.findElements(list);
+            List<WebElement> listElm= helper.getGSDriver().findElements(list);
             for(int i=0;i<listElm.size();i++)
             {
                 if (listElm.get(i).getText().equalsIgnoreCase(str2))
@@ -1377,7 +1377,7 @@ public abstract class ReusableLib {
 
     public List<WebElement> getRowData(By by)
     {
-        return driver.findElements(by);
+        return helper.getGSDriver().findElements(by);
     }
 
 

@@ -3,6 +3,7 @@ package businesskeywords.common;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 
 
@@ -16,6 +17,7 @@ import org.openqa.selenium.NoSuchElementException;
 public class SqlStatement extends ReusableLib {
 
     CommonActions commonObj;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -26,6 +28,7 @@ public class SqlStatement extends ReusableLib {
     public SqlStatement(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -37,8 +40,8 @@ public class SqlStatement extends ReusableLib {
         commonObj.goToSqlApp();
         commonObj.sqlRetrieveSpecialPrice(Utility_Functions.xGetJsonAsString("CustomerNo"), Utility_Functions.xGetJsonAsString("ItemNo"));
 
-        if (Utility_Functions.xWaitForElementPresent(driver, SqlStatementPage.resultRow, 5)) {
-            String result = Utility_Functions.getText(driver, SqlStatementPage.resultRow);
+        if (Utility_Functions.xWaitForElementPresent(ownDriver, SqlStatementPage.resultRow, 5)) {
+            String result = Utility_Functions.getText(ownDriver, SqlStatementPage.resultRow);
             System.out.println("Text: " + result);
             result = result.replaceAll("\\s", "");
             result = result.replaceAll("\\.0*$", "");
@@ -59,8 +62,8 @@ public class SqlStatement extends ReusableLib {
         commonObj.goToSqlApp();
         commonObj.sqlRetrieveSpecialPrice(Utility_Functions.xGetJsonAsString("CustomerNo"), Utility_Functions.xGetJsonAsString("ItemNo"));
 
-        if (Utility_Functions.xWaitForElementPresent(driver, SqlStatementPage.resultRow, 5)) {
-            String result = Utility_Functions.getText(driver, SqlStatementPage.resultRow);
+        if (Utility_Functions.xWaitForElementPresent(ownDriver, SqlStatementPage.resultRow, 5)) {
+            String result = Utility_Functions.getText(ownDriver, SqlStatementPage.resultRow);
             System.out.println("Text: " + result);
             Utility_Functions.xAssertEquals(report, "********  End of data  ********", result, "No Record-End of data");
         } else {
@@ -82,8 +85,8 @@ public class SqlStatement extends ReusableLib {
 
         commonObj.sqlInsertSpecialPricePAP(Utility_Functions.xGetJsonAsString("CustomerNo"), Utility_Functions.xGetJsonAsString("ItemNo"),jsonData.getData("Date1"), jsonData.getData("Date2"));
 
-        if (Utility_Functions.xWaitForElementPresent(driver, SqlStatementPage.resultRowInsert, 5)) {
-            String result = Utility_Functions.getText(driver, SqlStatementPage.resultRowInsert);
+        if (Utility_Functions.xWaitForElementPresent(ownDriver, SqlStatementPage.resultRowInsert, 5)) {
+            String result = Utility_Functions.getText(ownDriver, SqlStatementPage.resultRowInsert);
             System.out.println("Text: " + result);
             Utility_Functions.xAssertEquals(report, "1 rows inserted in IM08 in DTA99599.", result, "Validating Successful Insert");
         } else {
@@ -98,10 +101,10 @@ public class SqlStatement extends ReusableLib {
 
     public void exitSql() {
         click(SpecialPricePage.btnF3, "Click on F3");
-        if (Utility_Functions.xWaitForElementPresent(driver, SqlStatementPage.sqlTitle, 5)) {
+        if (Utility_Functions.xWaitForElementPresent(ownDriver, SqlStatementPage.sqlTitle, 5)) {
             click(SpecialPricePage.btnF3, "Click on F3");
             sendKeys(SqlStatementPage.choiceTxtBox, "2");
-            Utility_Functions.actionKey(Keys.ENTER, driver);
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         } else {
             throw new NoSuchElementException("Could not find :" + SqlStatementPage.sqlTitle);
         }
@@ -112,10 +115,10 @@ public class SqlStatement extends ReusableLib {
      */
     public void exitInsertSql() {
         click(SpecialPricePage.btnF3, "Click on F3");
-        if (Utility_Functions.xWaitForElementPresent(driver, SqlStatementPage.sqlTitle, 5)) {
+        if (Utility_Functions.xWaitForElementPresent(ownDriver, SqlStatementPage.sqlTitle, 5)) {
             //	click(SpecialPricePage.btnF3,"Click on F3");
             sendKeys(SqlStatementPage.choiceTxtBox, "2");
-            Utility_Functions.actionKey(Keys.ENTER, driver);
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         } else {
             throw new NoSuchElementException("Could not find :" + SqlStatementPage.sqlTitle);
         }

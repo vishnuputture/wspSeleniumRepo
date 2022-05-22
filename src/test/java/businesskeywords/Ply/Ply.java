@@ -54,6 +54,7 @@ public class Ply extends ReusableLib {
 
     CommonActions commonObj;
     WebDriver d;
+	private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -65,13 +66,14 @@ public class Ply extends ReusableLib {
     public Ply(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        d=driver.getWebDriver();
+        d=helper.getGSDriver().getWebDriver();
+		ownDriver=helper.getGSDriver();
     }
     
  public void fixedPaymentValidationBA() {
     	click(PlyPage.paymentsAuditMenu,"Navigate to payments audit page");
-    	if(Utility_Functions.xWaitForElementPresent(driver,PlyPage.plyPageTitle, 5)) {
-			String title = Utility_Functions.getText(driver,PlyPage.plyPageTitle);
+    	if(Utility_Functions.xWaitForElementPresent(ownDriver,PlyPage.plyPageTitle, 5)) {
+			String title = Utility_Functions.getText(ownDriver,PlyPage.plyPageTitle);
 			System.out.println("Text: "+title);
 			Utility_Functions.xAssertEquals(report, "My Account Payment Maintenace", title.trim(), "Validating Ply page title");
 		}else {
@@ -79,7 +81,7 @@ public class Ply extends ReusableLib {
 			throw new NoSuchElementException("Could not find :"+PlyPage.plyPageTitle);
 		}
     	
-    	List<WebElement> auditRecords = driver.findElements(By.xpath("//div[text()='"+Utility_Functions.xGetJsonData("FixedPaymntConfirmNoBA")+"']"));
+    	List<WebElement> auditRecords = ownDriver.findElements(By.xpath("//div[text()='"+Utility_Functions.xGetJsonData("FixedPaymntConfirmNoBA")+"']"));
     	
     	if(auditRecords.size()<1) {
     		report.updateTestLog("Find payment confirmation record", "Fixed payment confirmation record not found", Status.FAIL);
@@ -90,8 +92,8 @@ public class Ply extends ReusableLib {
  
  public void fixedPaymentValidationCC() {
  	click(PlyPage.paymentsAuditMenu,"Navigate to payments audit page");
- 	if(Utility_Functions.xWaitForElementPresent(driver,PlyPage.plyPageTitle, 5)) {
-			String title = Utility_Functions.getText(driver,PlyPage.plyPageTitle);
+ 	if(Utility_Functions.xWaitForElementPresent(ownDriver,PlyPage.plyPageTitle, 5)) {
+			String title = Utility_Functions.getText(ownDriver,PlyPage.plyPageTitle);
 			System.out.println("Text: "+title);
 			Utility_Functions.xAssertEquals(report, "My Account Payment Maintenace", title.trim(), "Validating Ply page title");
 		}else {
@@ -99,7 +101,7 @@ public class Ply extends ReusableLib {
 			throw new NoSuchElementException("Could not find :"+PlyPage.plyPageTitle);
 		}
  	
- 	List<WebElement> auditRecords = driver.findElements(By.xpath("//div[text()='"+Utility_Functions.xGetJsonData("FixedPaymntConfirmNoCC")+"']"));
+ 	List<WebElement> auditRecords = ownDriver.findElements(By.xpath("//div[text()='"+Utility_Functions.xGetJsonData("FixedPaymntConfirmNoCC")+"']"));
  	
  	if(auditRecords.size()<1) {
  		report.updateTestLog("Find payment confirmation record", "Fixed payment confirmation record not found", Status.FAIL);

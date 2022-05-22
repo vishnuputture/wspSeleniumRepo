@@ -122,6 +122,16 @@ https://www.eclipse.org/downloads
 	
 	Right click on a test case and select run as testng
 
+**Steps to run tests on selenium docker grid :**
+
+	Install docker on the host machine
+
+    In the resources folder run the powershell command - `docker-compose -f docker-compose.yml up`
+	
+	Follow the same steps mentioned for running from xml suites
+
+    After the execution is over , run the command - `docker-compose -f docker-compose.yml down`
+
 **Available Suites**
 
      CreateSalesOrder

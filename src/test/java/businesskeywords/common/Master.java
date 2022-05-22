@@ -1,5 +1,6 @@
 package businesskeywords.common;
 
+import com.winSupply.framework.selenium.FrameworkDriver;
 import org.openqa.selenium.Keys;
 
 import com.winSupply.core.Helper;
@@ -14,6 +15,7 @@ import supportLibraries.Utility_Functions;
 
 public class Master extends ReusableLib {
     CommonActions commonObj;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -24,7 +26,7 @@ public class Master extends ReusableLib {
     public Master(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -41,7 +43,7 @@ public class Master extends ReusableLib {
 
     public void goToPly() {
 		sendKeys(MasterPage.sqlTxtBox,"ply","Go to PLY application");
-		Utility_Functions.actionKey(Keys.ENTER, driver);
+		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 	}
     
     public void navigateToSPAApplication() {
@@ -62,7 +64,7 @@ public class Master extends ReusableLib {
     
     public void runPriceSheetBatch() {
     	sendKeys(MasterPage.sqlTxtBox,"call is202cl");
-    	Utility_Functions.actionKey(Keys.ENTER, driver);
+    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
 

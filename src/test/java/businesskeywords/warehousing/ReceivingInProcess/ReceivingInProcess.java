@@ -31,6 +31,7 @@ public class ReceivingInProcess extends ReusableLib {
     CommonActions commonObj;
     binMaintenance binMain;
     CreatePurchaseOrder createPurchaseOrder;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -43,13 +44,14 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj = new CommonActions(helper);
         binMain = new binMaintenance(helper);
         createPurchaseOrder = new CreatePurchaseOrder(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
      * Keyword to Navigate to ReceivingInProcess
      */
     public void navigateToReceivingInProcess() {
-        driver.get(properties.getProperty("ReceivingInProcess"));
+        ownDriver.get(properties.getProperty("ReceivingInProcess"));
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
@@ -75,7 +77,7 @@ public class ReceivingInProcess extends ReusableLib {
     public void searchFilterUI() {
         clickSearchIcon();
         String[] actText = {"Purchase Order", "User ID", "Vendor"};
-        List<WebElement> els = driver.findElements(ReceivingInProcessPage.searchLabels);
+        List<WebElement> els = ownDriver.findElements(ReceivingInProcessPage.searchLabels);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -120,10 +122,10 @@ public class ReceivingInProcess extends ReusableLib {
             commonObj.validateText(By.xpath("//tr/td/span"), userId, "User id is present" + userId);
             clickSearchIcon();
         }
-        String vendor = driver.findElements(By.xpath("//tr/td")).get(1).getText();
+        String vendor = ownDriver.findElements(By.xpath("//tr/td")).get(1).getText();
         clearText(searchField("User ID"));
         searchAndApplyFilter("Vendor", vendor);
-        Utility_Functions.xAssertEquals(report, driver.findElements(By.xpath("//tr/td")).get(1).getText(), vendor, "");
+        Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//tr/td")).get(1).getText(), vendor, "");
     }
 
     /**
@@ -131,7 +133,7 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public String getUserId() {
         String userID = null;
-        List<WebElement> list = driver.findElements(By.xpath("//tr/td/span"));
+        List<WebElement> list = ownDriver.findElements(By.xpath("//tr/td/span"));
         for (WebElement element : list) {
             if (element.getText().trim().equals("")) {
             } else {
@@ -249,7 +251,7 @@ public class ReceivingInProcess extends ReusableLib {
     public void searchFilterRemainingUI() {
         clickSearchIcon();
         String[] actText = {"Item Number", "Item Description"};
-        List<WebElement> els = driver.findElements(ReceivingInProcessPage.searchLabels);
+        List<WebElement> els = ownDriver.findElements(ReceivingInProcessPage.searchLabels);
         int i = 0;
         for (WebElement el : els) {
             if (el.getText().trim().contains(actText[i])) {
@@ -308,7 +310,7 @@ public class ReceivingInProcess extends ReusableLib {
     }
 
     public void openNewTab() {
-        Utility_Functions.openNewTab(driver);
+        Utility_Functions.openNewTab(ownDriver);
     }
 
     /**
@@ -316,9 +318,9 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void navigateToRFGun() {
         openNewTab();
-        driver.get(properties.getProperty("RF_Gun"));
+        ownDriver.get(properties.getProperty("RF_Gun"));
         Utility_Functions.timeWait(4);
-        if (Utility_Functions.isAlert(driver)) {
+        if (Utility_Functions.isAlert(ownDriver)) {
         }
         sendKeys(ReceivingInProcessPage.userRF, properties.getProperty("VPNUsn"), "Enter RF user name");
         Utility_Functions.timeWait(3);
@@ -334,7 +336,7 @@ public class ReceivingInProcess extends ReusableLib {
     public void searchPo() {
         Utility_Functions.timeWait(4);
         sendKeys(ReceivingInProcessPage.searchPo, Utility_Functions.xGetJsonData("PONumber"), "search Item Or PO");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     public void processPurchase() {
@@ -391,27 +393,27 @@ public class ReceivingInProcess extends ReusableLib {
         int size = 0;
         sendKeys(ReceivingInProcessPage.scanBarCode, "A");
         Utility_Functions.timeWait(4);
-        size = driver.findElements(By.xpath("//ul/li")).size();
+        size = ownDriver.findElements(By.xpath("//ul/li")).size();
         if (size == 0) {
             Utility_Functions.timeWait(5);
-            size = driver.findElements(By.xpath("//ul/li")).size();
+            size = ownDriver.findElements(By.xpath("//ul/li")).size();
         }
-        click(driver.findElements(By.xpath("//ul/li")).get(size - 1), "Select Location");
+        click(ownDriver.findElements(By.xpath("//ul/li")).get(size - 1), "Select Location");
         Utility_Functions.timeWait(2);
         Utility_Functions.xUpdateJson("BinLocation", getAttribute(ReceivingInProcessPage.scanBarCode, "value"));
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.timeWait(5);
     }
 
     public void navigateBack() {
-        driver.navigate().back();
+        ownDriver.navigate().back();
         Utility_Functions.timeWait(4);
     }
 
     public void enterScanBarCodeNotReceiveRfGun() {
         sendKeys(ReceivingInProcessPage.scanBarCode, Utility_Functions.xGetJsonData("BinLocation"));
         Utility_Functions.timeWait(4);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.timeWait(1);
         commonObj.validateText(spanElement("not available for RF Gun Receiving"), Utility_Functions.xGetJsonData("BinLocation") + " is not available for RF Gun Receiving.", Utility_Functions.xGetJsonData("BinLocation") + " is not available for RF Gun Receiving. is present");
     }
@@ -435,7 +437,7 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void switchBackToReceivingInProcess() {
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSwitchToWindow(driver, 0);
+        Utility_Functions.xSwitchToWindow(ownDriver, 0);
     }
 
     /**
@@ -453,7 +455,7 @@ public class ReceivingInProcess extends ReusableLib {
     }
 
     public void switchToNextWindow() {
-        Utility_Functions.xSwitchToWindow(driver, report, 1);
+        Utility_Functions.xSwitchToWindow(ownDriver, report, 1);
     }
 
     public void verifyPoNotFound() {
@@ -472,7 +474,7 @@ public class ReceivingInProcess extends ReusableLib {
         if (isDisplayed(WorkWithSalesQuotesPage.proc)) {
             click(WorkWithSalesQuotesPage.proc, "Click on process");
             Utility_Functions.timeWait(2);
-            Utility_Functions.actionKey(Keys.ENTER, driver);
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         }
     }
 
@@ -482,7 +484,7 @@ public class ReceivingInProcess extends ReusableLib {
     public void verifyReceivedOpenLine() {
         Utility_Functions.timeWait(4);
         if (isDisplayed(ReceivingInProcessPage.refreshPoListLink)) {
-            Utility_Functions.xClickHiddenElement(driver, ReceivingInProcessPage.refreshPoListLink);
+            Utility_Functions.xClickHiddenElement(ownDriver, ReceivingInProcessPage.refreshPoListLink);
         }
         Utility_Functions.timeWait(4);
         commonObj.validateText(By.xpath("//tr/td/a"), Utility_Functions.xGetJsonData("PONumber"), "Result PO number found");
@@ -528,8 +530,8 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.validateText(getRecField("UNASSIGNED"), Utility_Functions.xGetJsonData("BinLocation"), "'UNASSIGNED' Bin location for item " + getItem("UNASSIGNED"));
         commonObj.validateText(getRecField("Closed"), "Closed", "Closed Open Qty is present for item " + getItem("Closed"));
         commonObj.validateText(getRecField("1"), "1", "1 Qty Received is present for item " + getItem("1"));
-        int closeCount = driver.findElements(getRecField("Closed")).size();
-        int unassigned = driver.findElements(getRecField("UNASSIGNED")).size();
+        int closeCount = ownDriver.findElements(getRecField("Closed")).size();
+        int unassigned = ownDriver.findElements(getRecField("UNASSIGNED")).size();
         Utility_Functions.xAssertEquals(report, closeCount, 2, "Closed status is present for the item");
         Utility_Functions.xAssertEquals(report, unassigned, 2, "unassigned Bin Location is present for the item");
         if (isDisplayed(getRecField("0"))) {
@@ -544,8 +546,8 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.validateText(getRecField("UNASSIGNED"), Utility_Functions.xGetJsonData("BinLocation"), "'UNASSIGNED' Bin location for item " + getItem("UNASSIGNED"));
         commonObj.validateText(getRecField("Closed"), "Closed", "Closed Open Qty is present for item " + getItem("Closed"));
         commonObj.validateText(getRecField("1"), "1", "1 Qty Received is present for item " + getItem("1"));
-        int closeCount = driver.findElements(getRecField("Closed")).size();
-        int unassigned = driver.findElements(getRecField("UNASSIGNED")).size();
+        int closeCount = ownDriver.findElements(getRecField("Closed")).size();
+        int unassigned = ownDriver.findElements(getRecField("UNASSIGNED")).size();
         Utility_Functions.xAssertEquals(report, closeCount, 1, "Closed status is present for the item");
         Utility_Functions.xAssertEquals(report, unassigned, 1, "unassigned Bin Location is present for the item");
         if (isDisplayed(getRecField("0"))) {
@@ -633,7 +635,7 @@ public class ReceivingInProcess extends ReusableLib {
         click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
         String error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
         if (error.contains("F8 to accept")) {
-            Utility_Functions.actionKey(Keys.F8, driver);
+            Utility_Functions.actionKey(Keys.F8, ownDriver);
         }
         error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
         if (error.contains("WARNING- Price field is zero or blank")) {
@@ -647,12 +649,12 @@ public class ReceivingInProcess extends ReusableLib {
         }
         error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
         if (error.contains("F4 Overrides")) {
-            Utility_Functions.actionKey(Keys.F4, driver);
+            Utility_Functions.actionKey(Keys.F4, ownDriver);
         }
         if (getText(PurchaseOrderDetailsPage.errorMsgPOD).trim().contains("WARNING- Cost variance -- F5 to accept.  Average cost is")) {
-            Utility_Functions.xScrollIntoView(driver, PurchaseOrderDetailsPage.errorMsgPOD);
+            Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderDetailsPage.errorMsgPOD);
             commonObj.verifyElementContainsText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is", "Verify Cost Variance Warning message");
-            Utility_Functions.actionKey(Keys.F5, driver);
+            Utility_Functions.actionKey(Keys.F5, ownDriver);
         }
     }
 
@@ -736,7 +738,7 @@ public class ReceivingInProcess extends ReusableLib {
         int count = 0;
         if(lstSearchResults.size()>0){
             for (WebElement element : lstSearchResults){
-                Utility_Functions.xScrollIntoView(driver, element);
+                Utility_Functions.xScrollIntoView(ownDriver, element);
                 if (element.isDisplayed())
                     count++;
             }
@@ -778,7 +780,7 @@ public class ReceivingInProcess extends ReusableLib {
     public void clickFilterByVendorBtn() {
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
         waitForElementPresent(ReceivingInProcessPage.btnFilterByVendor);
-        Utility_Functions.xScrollIntoView(driver, ReceivingInProcessPage.btnFilterByVendor);
+        Utility_Functions.xScrollIntoView(ownDriver, ReceivingInProcessPage.btnFilterByVendor);
 
         click(ReceivingInProcessPage.btnFilterByVendor, "Click [Filter by Vendor] button");
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
@@ -847,7 +849,7 @@ public class ReceivingInProcess extends ReusableLib {
                 report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
         }else{
             int random = Utility_Functions.xRandomFunction(0, lstChkBxSelectPO.size()-1);
-            Utility_Functions.xScrollIntoView(driver, lstChkBxSelectPO.get(random));
+            Utility_Functions.xScrollIntoView(ownDriver, lstChkBxSelectPO.get(random));
             click(lstChkBxSelectPO.get(random), "Selected random PO from Search Results list");
             Utility_Functions.timeWait(2);
 
@@ -885,7 +887,7 @@ public class ReceivingInProcess extends ReusableLib {
                 report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
         }else{
             for (int i=0; i<count; i++){
-                Utility_Functions.xScrollIntoView(driver, lstChkBxSelectPO.get(i));
+                Utility_Functions.xScrollIntoView(ownDriver, lstChkBxSelectPO.get(i));
                 click(lstChkBxSelectPO.get(i), "Selected ["+i+1+"th] PO from Search Results list");
                 Utility_Functions.timeWait(2);
 
@@ -909,7 +911,7 @@ public class ReceivingInProcess extends ReusableLib {
         List<WebElement> lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
         int count = 0;
         for (WebElement element : lstChkBxSelectPO){
-            Utility_Functions.xScrollIntoView(driver, element);
+            Utility_Functions.xScrollIntoView(ownDriver, element);
             boolean chkbxIsSelected = element.getAttribute("class").contains("selected-checkbox");
             if (!chkbxIsSelected)
                 count++;
@@ -938,7 +940,7 @@ public class ReceivingInProcess extends ReusableLib {
         click(ReceivingInProcessPage.btnConfirm, "Click [Confirm] button");
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         clickSkipBtnIfPresent();
-        Utility_Functions.actionKey(Keys.ESCAPE, driver);
+        Utility_Functions.actionKey(Keys.ESCAPE, ownDriver);
     }
 
     /**
@@ -965,7 +967,7 @@ public class ReceivingInProcess extends ReusableLib {
         sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as ["+bin+"] in [Scan Location] box");
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
 
-        boolean isMsgDisplayed = Utility_Functions.xWaitForElementPresent(driver, ReceivingInProcessPage.msg, globalWait);
+        boolean isMsgDisplayed = Utility_Functions.xWaitForElementPresent(ownDriver, ReceivingInProcessPage.msg, globalWait);
         if (isMsgDisplayed)
             report.updateTestLog("Verify notification is displayed", "Notification is displayed", Status.PASS);
         else
@@ -989,7 +991,7 @@ public class ReceivingInProcess extends ReusableLib {
         sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as ["+bin+"] in [Scan Location] box");
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
 
-        boolean isMsgDisplayed = Utility_Functions.xWaitForElementPresent(driver, ReceivingInProcessPage.msg, globalWait);
+        boolean isMsgDisplayed = Utility_Functions.xWaitForElementPresent(ownDriver, ReceivingInProcessPage.msg, globalWait);
         if (isMsgDisplayed)
             report.updateTestLog("Verify notification is displayed", "Notification is displayed", Status.PASS);
         else

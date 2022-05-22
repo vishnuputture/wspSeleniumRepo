@@ -21,6 +21,7 @@ public class TestParameters {
 	 * @param currentTestcase The current test case
 	 */
 	public TestParameters(String currentScenario, String currentTestcase) {
+		System.out.println("scenario :"+currentScenario+" test case: "+currentTestcase);
 		this.currentScenario = currentScenario;
 		this.currentTestcase = currentTestcase;
 		
