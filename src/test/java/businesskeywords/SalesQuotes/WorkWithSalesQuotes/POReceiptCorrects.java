@@ -155,7 +155,8 @@ public class POReceiptCorrects extends ReusableLib {
         String poNo = enterPoNo();
         commonObj.validateText(InventoryReceiptPage.headerIR, "inventory receipts", "inventory receipts Header is present");
         commonObj.validateText(InventoryReceiptPage.poInqIR, poNo, "Po number matches");
-        commonObj.validateText(InventoryReceiptPage.ReceivedByIN, properties.getProperty("UserName").toUpperCase(Locale.ROOT), "Received By matches");
+        String user = getProperties(getProperties("ENV") + "UserName").toUpperCase(Locale.ROOT);
+        commonObj.validateText(InventoryReceiptPage.ReceivedByIN, user, "Received By matches");
         exitIR();
     }
 
