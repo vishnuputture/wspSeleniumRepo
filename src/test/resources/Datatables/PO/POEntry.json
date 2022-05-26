@@ -105,12 +105,12 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "001570",
+      "SalesOrderNo": "001681",
       "QtyOrdered": "25",
       "VendorNumber": "000388",
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "032179"
+      "PONumber": "032468"
     },
     {
       "TC_ID": "Tc_311_VerifySalesOrderCreated"

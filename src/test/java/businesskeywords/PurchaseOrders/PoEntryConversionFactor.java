@@ -94,6 +94,7 @@ public class PoEntryConversionFactor extends ReusableLib {
         {
             Utility_Functions.actionKey(Keys.ENTER,driver);
         }
+        Utility_Functions.xUpdateJson("PONumber",getText(PurchaseOrderDetailsPage.orderNo2));
     }
 
     /**
