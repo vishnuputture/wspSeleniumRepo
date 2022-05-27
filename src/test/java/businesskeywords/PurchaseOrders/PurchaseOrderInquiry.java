@@ -415,32 +415,32 @@ public class PurchaseOrderInquiry extends ReusableLib {
     }
 
     public void navigateToOpenOrderByItemPage() {
-        Utility_Functions.xSelectDropdownByName(driver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "5-Order By Item", "Select [5-Order By Item]");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "5-Order By Item", "Select [5-Order By Item]");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(SpecialPriceAllowancePage.header, "Open Orders By Item", "[Open Orders By Item] header is present");
     }
 
     public void navigateToItemLedgerPage() {
-        Utility_Functions.xSelectDropdownByName(driver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "6-Item Ledger", "Select [6-Item Ledger]");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "6-Item Ledger", "Select [6-Item Ledger]");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(PurchaseOrderInquiryPage.hdrItemLedger, "Item Ledger (I-385)", "[Item Ledger (I-385)] header is present");
     }
 
     public void navigateToBuyersInquiryPage() {
-        Utility_Functions.xSelectDropdownByName(driver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "7-Buyers Inquiry", "Select [7-Buyers Inquiry]");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "7-Buyers Inquiry", "Select [7-Buyers Inquiry]");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(PurchaseOrderInquiryPage.hdrBuyersInquiry, "Buyer's Inquiry", "Validate [Buyer's Inquiry] page header");
     }
 
     public void navigateToVPNRevisionsPage() {
-        Utility_Functions.xSelectDropdownByName(driver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "8-VPN Revisions", "Select [8-VPN Revisions]");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "8-VPN Revisions", "Select [8-VPN Revisions]");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(PurchaseOrderInquiryPage.hdrBuyersWorksheet, "vendor part number revisions - (i-733-a)", "Validate [vendor part number revisions - (i-733-a)] page header");
     }
 
     public void navigateToLocalCompanyInformationPage() {
-        Utility_Functions.xSelectDropdownByName(driver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "10-Local Company Usage", "Select [10-Local Company Usage]");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "10-Local Company Usage", "Select [10-Local Company Usage]");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(By.xpath("//span[text()='Local Company Information']"), "Local Company Information", "Validate [Local Company Information] page header");
     }
 
@@ -472,7 +472,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
     }
 
     public void verifyNextBackExitButtonItemLedger() {
-        Utility_Functions.xSelectDropdownByName(driver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "6-Item Ledger", "Select [6-Item Ledger]");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, PurchaseOrderInquiryPage.detailsOptionsColumn, "6-Item Ledger", "Select [6-Item Ledger]");
         click(PurchaseOrderInquiryPage.btnSubmit, "Click [Next] Button");
         commonObj.validateText(PurchaseOrderInquiryPage.hdrItemLedger, "Item Ledger (I-385)", "[Item Ledger (I-385)] header is present");
         clickOnExitBtn();
@@ -500,7 +500,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
 
     public void validateClosedItems() {
         commonObj.validateText(PurchaseOrderInquiryPage.statusPoDetails, "CLOSED", "[CLOSED] status is present");
-        int rowCount = driver.findElements(By.xpath("//div[contains(text(),'" + Utility_Functions.xGetJsonData("FullyReceivedItem") + "')]")).size();
+        int rowCount = ownDriver.findElements(By.xpath("//div[contains(text(),'" + Utility_Functions.xGetJsonData("FullyReceivedItem") + "')]")).size();
         Utility_Functions.xAssertEquals(report, "" + rowCount + "", "2", "Two closed records are present");
     }
 
@@ -582,16 +582,16 @@ public class PurchaseOrderInquiry extends ReusableLib {
     }
 
     public void pressF9() {
-        Utility_Functions.actionKey(Keys.F9, driver);
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
     }
 
     public void verifyCalendarPicker() {
         click(PurchaseOrderInquiryPage.calendarIcon, "Click Calendar Icon");
         click(PurchaseOrderInquiryPage.yearPicker);
         click(PurchaseOrderInquiryPage.firstDay, "Select day");
-        click(driver.findElements(PurchaseOrderInquiryPage.calendarIcon).get(1));
+        click(ownDriver.findElements(PurchaseOrderInquiryPage.calendarIcon).get(1));
         click(PurchaseOrderInquiryPage.firstDay, "Select day");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateElementExists(PurchaseOrderInquiryPage.gridExist, "Records are present");
     }
 
@@ -645,8 +645,8 @@ public class PurchaseOrderInquiry extends ReusableLib {
         clickUntilStatusVisible();
         Utility_Functions.xUpdateJson("POItemQty", "");
         clickPOEntry();
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         verifyPoDetailsWithLineNoAction();
     }
 }
