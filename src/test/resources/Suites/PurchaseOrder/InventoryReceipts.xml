@@ -48,8 +48,8 @@
                     <include name="Tc_979_PartialReceivingStockPOItemsInventoryReceiptsScreen"></include>
                     <include name="Tc_406_VerifyOpenPODetails"></include>
                     <include name="Tc_408_VerifyPoEntryDetailsOpenPO"></include>
-                    <include name="Tc_407_VerifyClosedPODetails"></include>
                     <include name="Tc_410_VerifyPoEntryDetailsClosedPO"></include>
+                    <include name="Tc_407_VerifyClosedPODetails"></include>
                     <include name="Tc_391_VerifyClosedPO"></include>
                     <include name="Tc_395_VerifyCloseItemManyTimes"></include>
                     <include name="Tc_400_VerifyMoreInfoLink"></include>
