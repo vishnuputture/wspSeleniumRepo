@@ -937,11 +937,11 @@ public class binMaintenance extends ReusableLib {
         int i = 0;
         while (i == 0) {
             try {
-                Utility_Functions.xScrollIntoView(driver, By.xpath("//td[contains(text(),'" + binLoc + "')]"));
+                Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//td[contains(text(),'" + binLoc + "')]"));
                 commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLoc + "')]"), binLoc + " Bin location is created");
                 break;
             } catch (Exception e) {
-                Utility_Functions.xClickHiddenElement(driver,driver.findElements(By.xpath("//a[text()='›']")).get(1));
+                Utility_Functions.xClickHiddenElement(ownDriver,ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
                 Utility_Functions.timeWait(4);
             }
         }
@@ -1123,7 +1123,7 @@ public class binMaintenance extends ReusableLib {
         String zName = Utility_Functions.xGetJsonData("zoneName").toLowerCase();
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " created successfully.", "'Zone " + zName + " created successfully.' message is present");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver,ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
+        Utility_Functions.xScrollIntoView(ownDriver,ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
         Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
         Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).get(0).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
     }
@@ -1981,11 +1981,11 @@ public class binMaintenance extends ReusableLib {
         int i = 0;
         while (i == 0) {
             try {
-                Utility_Functions.xScrollIntoView(driver, By.xpath("//td[contains(text(),'" + binLocation + "')]"));
+                Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//td[contains(text(),'" + binLocation + "')]"));
                 commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLocation + "')]"), binLocation + " Bin location is created");
                 break;
             } catch (Exception e) {
-                Utility_Functions.xClickHiddenElement(driver,driver.findElements(By.xpath("//a[text()='›']")).get(1));
+                Utility_Functions.xClickHiddenElement(ownDriver,ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
                 Utility_Functions.timeWait(4);
             }
         }

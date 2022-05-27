@@ -206,7 +206,7 @@ public class SalesOrders extends ReusableLib{
 
 	public void selectDeliveryInformation(){
 		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-		Utility_Functions.xSelectDropdownByVisibleText(driver,SalesOrdersPage.shipViaDropDown,jsonData.getData("ShipVia"));
+		Utility_Functions.xSelectDropdownByVisibleText(ownDriver,SalesOrdersPage.shipViaDropDown,jsonData.getData("ShipVia"));
 		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 	}
 

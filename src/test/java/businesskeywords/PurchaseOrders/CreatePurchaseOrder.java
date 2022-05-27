@@ -304,7 +304,7 @@ public class CreatePurchaseOrder extends ReusableLib {
     }
 
     public void enter() {
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     public void validateCostOptionFunc() {
@@ -649,7 +649,7 @@ public class CreatePurchaseOrder extends ReusableLib {
         String sateZipCode = stateZip[3].replace("-", "");
         sendKeys(PurchaseOrderEntryPage.firstVendor, "1" + Keys.ENTER, "Select Customer No");
         Utility_Functions.timeWait(4);
-        Utility_Functions.xScrollIntoView(driver, PurchaseOrderEntryPage.vendorNo);
+        Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderEntryPage.vendorNo);
         commonObj.validateText(PurchaseOrderEntryPage.vendorNo, address.trim(), "Customer Address is present");
         commonObj.validateText(PurchaseOrderEntryPage.stateCode, stateZip[2].trim(), "State: " + stateZip[2] + " is present");
         commonObj.validateText(PurchaseOrderEntryPage.zipCode, sateZipCode.trim(), "Zip: " + sateZipCode + " is present");
@@ -666,7 +666,7 @@ public class CreatePurchaseOrder extends ReusableLib {
     }
 
     public void processSo() {
-        Utility_Functions.actionKey(Keys.F9, driver);
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
         try {
             if (isDisplayed(SalesOrdersPage.continuebtn)) {
                 click(SalesOrdersPage.continuebtn);
@@ -713,7 +713,7 @@ public class CreatePurchaseOrder extends ReusableLib {
     }
 
     public void exitSalesOrderEntry(){
-        Utility_Functions.xClickHiddenElement(driver,SpecialPricePage.btnF3);
+        Utility_Functions.xClickHiddenElement(ownDriver,SpecialPricePage.btnF3);
     }
 
     public void soFieldVerification(){
@@ -757,7 +757,7 @@ public class CreatePurchaseOrder extends ReusableLib {
     }
 
     public void deleteOrderNo(){
-        Utility_Functions.actionKey(Keys.F6,driver);
+        Utility_Functions.actionKey(Keys.F6,ownDriver);
         typeShipmentD();
         Utility_Functions.timeWait(4);
         commonObj.validateText(PurchaseOrderDetailsPage.errorMsg,"ERROR","[ERROR] is present");
@@ -817,26 +817,26 @@ public class CreatePurchaseOrder extends ReusableLib {
     }
 
     public void changeMailDetails(){
-        int size=driver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
-        sendKeys(driver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"2"+Keys.ENTER,"Enter [2] into input field");
+        int size=ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
+        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"2"+Keys.ENTER,"Enter [2] into input field");
         verifyPreferences();
         commonObj.validateText(By.xpath("//div[contains(text(),'"+jsonData.getData("nameAppear")+"')]"),jsonData.getData("nameAppear"),"Contact field is updated");
         commonObj.validateText(By.xpath("//div[contains(text(),'"+jsonData.getData("emailAddress")+"')]"),jsonData.getData("emailAddress"),"Email address field is updated");
     }
 
     public void selectMailDetails(){
-        int size=driver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
-        sendKeys(driver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"1"+Keys.ENTER,"Enter [1] into input field");
+        int size=ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
+        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"1"+Keys.ENTER,"Enter [1] into input field");
         Utility_Functions.timeWait(2);
-        String color=driver.findElement(By.xpath("//div[contains(text(),'"+jsonData.getData("nameAppear")+"')]")).getCssValue("color");
+        String color=ownDriver.findElement(By.xpath("//div[contains(text(),'"+jsonData.getData("nameAppear")+"')]")).getCssValue("color");
         Utility_Functions.xAssertEquals(report,color,"rgba(0, 86, 156, 1)","Mail Id is selected and turned into blue color");
     }
 
     public void deselectMailDetails(){
-        int size=driver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
-        sendKeys(driver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"4"+Keys.ENTER,"Enter [1] into input field");
+        int size=ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
+        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"4"+Keys.ENTER,"Enter [1] into input field");
         Utility_Functions.timeWait(3);
-        String color=driver.findElement(By.xpath("//div[contains(text(),'"+jsonData.getData("nameAppear")+"')]")).getCssValue("color");
+        String color=ownDriver.findElement(By.xpath("//div[contains(text(),'"+jsonData.getData("nameAppear")+"')]")).getCssValue("color");
         Utility_Functions.xAssertEquals(report,color,"rgba(0, 0, 0, 1)","Mail Id is selected and turned into blue color");
     }
 
