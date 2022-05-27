@@ -2,6 +2,7 @@ package businesskeywords.Inventory.CycleCostAdj;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import pages.inventory.CostAdjustmentPage;
@@ -12,6 +13,7 @@ import java.text.DecimalFormat;
 public class CycleCostAdjust extends ReusableLib {
     CommonActions commonObj = new CommonActions(helper);
     public static int exp_Number;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -22,6 +24,7 @@ public class CycleCostAdjust extends ReusableLib {
 
     public CycleCostAdjust(Helper helper) {
         super(helper);
+        ownDriver=helper.getGSDriver();
     }
 
 
@@ -67,15 +70,15 @@ public class CycleCostAdjust extends ReusableLib {
         int onH = Integer.parseInt(noSpaceStr);
         int res = num - onH;
         System.out.println("res: " + res);
-        String quantityValue = driver.findElement(CostAdjustmentPage.quantity).getText();
+        String quantityValue = ownDriver.findElement(CostAdjustmentPage.quantity).getText();
         int qnt = Integer.parseInt(quantityValue);
         System.out.println("qnt: " + qnt);
         Utility_Functions.xAssertEquals(report, qnt, res, "Quantity: ");
         selectExplanation("Other");
         click(CostAdjustmentPage.process, "Click on Process");
-        Utility_Functions.xIsElementDisplayed(report, driver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
+        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
         click(CostAdjustmentPage.postBtn, "Click On Post Button and Record(s) should be processed");
-        click(driver.findElement(CostAdjustmentPage.continueBtn), "Click on Continue button");
+        click(ownDriver.findElement(CostAdjustmentPage.continueBtn), "Click on Continue button");
         return quantityValue;
     }
 
@@ -86,13 +89,13 @@ public class CycleCostAdjust extends ReusableLib {
          */
         public void navLedger () {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xmouseOver(driver, CostAdjustmentPage.itemLedger);
+        Utility_Functions.xmouseOver(ownDriver, CostAdjustmentPage.itemLedger);
         click(CostAdjustmentPage.itemLedger);
         click(CostAdjustmentPage.itemLedSearch);
         sendKeys(CostAdjustmentPage.includeYes, "Y");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         sendKeys(CostAdjustmentPage.optBox, "1", "Item Number already Created in Item Master should be entered");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
         /**
@@ -112,13 +115,13 @@ public class CycleCostAdjust extends ReusableLib {
         public void validateItemLedgerFiled () {
         String value = validValue();
         navLedger();
-        Utility_Functions.waitForElementVisible(driver, CostAdjustmentPage.units, 10);
-        String unit = driver.findElement(CostAdjustmentPage.units).getText();
+        Utility_Functions.waitForElementVisible(ownDriver, CostAdjustmentPage.units, 10);
+        String unit = ownDriver.findElement(CostAdjustmentPage.units).getText();
         System.out.println("unit: " + unit);
-        String explanation = driver.findElement(CostAdjustmentPage.explanationLedger).getText();
+        String explanation = ownDriver.findElement(CostAdjustmentPage.explanationLedger).getText();
         System.out.println("explanation: " + explanation);
         System.out.println("exp_Number: " + exp_Number);
-        Utility_Functions.xAssertEquals(report, driver.findElement(CostAdjustmentPage.qtyAfter).getText(), "" + exp_Number + "", "Qlt After");
+        Utility_Functions.xAssertEquals(report, ownDriver.findElement(CostAdjustmentPage.qtyAfter).getText(), "" + exp_Number + "", "Qlt After");
         Utility_Functions.xAssertEquals(report, value, unit, "Units: ");
         String exp = explanation.replaceAll("\\s", "");
         Utility_Functions.xAssertEquals(report, exp.toUpperCase(), "OTHER", "Explanation: ");
@@ -132,7 +135,7 @@ public class CycleCostAdjust extends ReusableLib {
         public void validateUpadtedCount () {
         click(CostAdjustmentPage.cycleCountAdj, "Click Cycle Cost Adjustments Program");
         selectQuantity("687");
-        String error = driver.findElement(CostAdjustmentPage.countFiled).getAttribute("title");
+        String error = ownDriver.findElement(CostAdjustmentPage.countFiled).getAttribute("title");
         Utility_Functions.xAssertEquals(report, error, "Warning: Quantity exceeds limit of 500. Ensure value is correct.", "Error: ");
         int num = Utility_Functions.genRandNum(99);
         String noSpaceStr = selectQuantity("" + num + "");
@@ -144,21 +147,21 @@ public class CycleCostAdjust extends ReusableLib {
 
         int res = num - onH;
         System.out.println("res: " + res);
-        int qnt = Integer.parseInt(driver.findElement(CostAdjustmentPage.quantity).getText());
+        int qnt = Integer.parseInt(ownDriver.findElement(CostAdjustmentPage.quantity).getText());
         System.out.println("qnt: " + qnt);
         Utility_Functions.xAssertEquals(report, qnt, res, "Quantity: ");
         sendKeys(CostAdjustmentPage.explanation, "OTHER@#097", "Enter alpha numeric value along with special characters in the explanation box");
         selectExplanation("Other");
         click(CostAdjustmentPage.process, "Click on Process");
-        Utility_Functions.xWaitForElementVisible(driver, driver.findElement(CostAdjustmentPage.procConfm), 15);
-        Utility_Functions.xIsElementDisplayed(report, driver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
+        Utility_Functions.xWaitForElementVisible(ownDriver, ownDriver.findElement(CostAdjustmentPage.procConfm), 15);
+        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
         click(CostAdjustmentPage.cancelBtn, "Click On Cancel Button");
-        Utility_Functions.xIsElementDisplayed(report, driver.findElement(CostAdjustmentPage.quantity), "No adjustment is made for the item");
+        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(CostAdjustmentPage.quantity), "No adjustment is made for the item");
         click(CostAdjustmentPage.process, "Click on Process");
-        Utility_Functions.xIsElementDisplayed(report, driver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
+        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
         click(CostAdjustmentPage.postBtn, "Click On Post Button and Record(s) should be processed");
-        click(driver.findElement(CostAdjustmentPage.continueBtn), "Click on Continue button");
-        Utility_Functions.xWaitForElementDisappear(driver, CostAdjustmentPage.quantity, 3);
+        click(ownDriver.findElement(CostAdjustmentPage.continueBtn), "Click on Continue button");
+        Utility_Functions.xWaitForElementDisappear(ownDriver, CostAdjustmentPage.quantity, 3);
     }
 
         /**
@@ -169,10 +172,10 @@ public class CycleCostAdjust extends ReusableLib {
         public void nagValidation () {
         click(CostAdjustmentPage.cycleCountAdj, "Click Cycle Cost Adjustments Program");
         selectQuantity("-12");
-        String color = driver.findElement(CostAdjustmentPage.countFiled).getCssValue("border-color");
+        String color = ownDriver.findElement(CostAdjustmentPage.countFiled).getCssValue("border-color");
         System.out.println("color: " + color);
         Utility_Functions.xAssertEquals(report, color, "rgb(204, 0, 0)", "Error Color: ");
-        String error = driver.findElement(CostAdjustmentPage.countFiled).getAttribute("title");
+        String error = ownDriver.findElement(CostAdjustmentPage.countFiled).getAttribute("title");
         Utility_Functions.xAssertEquals(report, error, "Quantity is missing or invalid", "Error: ");
     }
 
@@ -193,15 +196,15 @@ public class CycleCostAdjust extends ReusableLib {
         public String selectQuantity (String count){
         sendKeys(CostAdjustmentPage.countFiled, count, "Quantity");
         click(CostAdjustmentPage.searchIcon);
-        Utility_Functions.xWaitForElementVisible(driver, CostAdjustmentPage.includeYes, 15);
+        Utility_Functions.xWaitForElementVisible(ownDriver, CostAdjustmentPage.includeYes, 15);
         sendKeys(CostAdjustmentPage.includeYes, "Y");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         sendKeys(CostAdjustmentPage.optBox, "1", "Item Number already Created in Item Master should be entered");
-        String onHold = driver.findElement(CostAdjustmentPage.onHold).getText();
+        String onHold = ownDriver.findElement(CostAdjustmentPage.onHold).getText();
         System.out.println("onHold: " + onHold);
         String noSpaceStr = onHold.replaceAll("\\s", "");
         System.out.println(noSpaceStr);
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         return noSpaceStr;
     }
 
@@ -219,15 +222,15 @@ public class CycleCostAdjust extends ReusableLib {
         exp_Number = num;
         Utility_Functions.timeWait(2);
         sendKeys(CostAdjustmentPage.optBox, "1", "Item Number already Created in Item Master should be entered");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         getCount();
         getAdjQt();
         getAmount();
         click(CostAdjustmentPage.process, "Click on Process");
-        Utility_Functions.xIsElementDisplayed(report, driver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
+        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
         click(CostAdjustmentPage.postBtn, "Click On Post Button and Record(s) should be processed");
-        click(driver.findElement(CostAdjustmentPage.continueBtn), "Click on Continue button");
-        Utility_Functions.xWaitForElementDisappear(driver, CostAdjustmentPage.quantity, 3);
+        click(ownDriver.findElement(CostAdjustmentPage.continueBtn), "Click on Continue button");
+        Utility_Functions.xWaitForElementDisappear(ownDriver, CostAdjustmentPage.quantity, 3);
     }
 
         /**
@@ -238,7 +241,7 @@ public class CycleCostAdjust extends ReusableLib {
         public int getCount () {
         int cont = exp_Number + exp_Number;
         System.out.println("cont: " + cont);
-        String countNumb = driver.findElement(CostAdjustmentPage.countMod).getText();
+        String countNumb = ownDriver.findElement(CostAdjustmentPage.countMod).getText();
         System.out.println("countNumb: " + countNumb);
         String exp = countNumb.replaceAll("\\s", "");
         int cn = Integer.parseInt(exp);
@@ -252,16 +255,16 @@ public class CycleCostAdjust extends ReusableLib {
          *
          */
         public int getAdjQt () {
-        String fAdjQt = driver.findElement(CostAdjustmentPage.firRowAdj).getText();
+        String fAdjQt = ownDriver.findElement(CostAdjustmentPage.firRowAdj).getText();
         String adjAxp = fAdjQt.replaceAll(".00", "");
-        String seAdjQt = driver.findElement(CostAdjustmentPage.secRowAdj).getText();
+        String seAdjQt = ownDriver.findElement(CostAdjustmentPage.secRowAdj).getText();
         String secExp = seAdjQt.replaceAll(".00", "");
         System.out.println("fAdjQt: " + adjAxp);
         System.out.println("seAdjQt: " + secExp);
         int fRow = Integer.parseInt(adjAxp);
         int sRow = Integer.parseInt(secExp);
         int adjQt = fRow + sRow;
-        String qnt = driver.findElement(CostAdjustmentPage.adjQtyMod).getText();
+        String qnt = ownDriver.findElement(CostAdjustmentPage.adjQtyMod).getText();
         int adjustQt = Integer.parseInt(qnt);
         Utility_Functions.xAssertEquals(report, adjQt, adjustQt, "AdjQt: ");
         return adjustQt;
@@ -273,9 +276,9 @@ public class CycleCostAdjust extends ReusableLib {
          *
          */
         public String getAmount () {
-        String fAmount = driver.findElement(CostAdjustmentPage.firRowAmt).getText();
+        String fAmount = ownDriver.findElement(CostAdjustmentPage.firRowAmt).getText();
         String fAmountxp = fAmount.replaceAll(",", "");
-        String seAmount = driver.findElement(CostAdjustmentPage.secRowAmt).getText();
+        String seAmount = ownDriver.findElement(CostAdjustmentPage.secRowAmt).getText();
         String seAmountxp = seAmount.replaceAll(",", "");
         System.out.println("fAmount: " + fAmountxp);
         System.out.println("seAmount: " + seAmountxp);
@@ -287,7 +290,7 @@ public class CycleCostAdjust extends ReusableLib {
         System.out.println(d1);
 
         double amt = d + d1;
-        String amont = driver.findElement(CostAdjustmentPage.amountyMod).getText();
+        String amont = ownDriver.findElement(CostAdjustmentPage.amountyMod).getText();
         double amount = Double.parseDouble(amont);
         System.out.println("amount : "+amount);
         Utility_Functions.xAssertEquals(report, "" + amt + "", "" + amount + "", "Amount: ");

@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.winSupply.framework.FrameworkException;
 import com.winSupply.framework.TestParameters;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.openqa.selenium.Platform;
 
 /**
@@ -28,7 +29,9 @@ public class SeleniumTestParameters extends TestParameters {
 	private ExtentReports extentReport;
 
 	public SeleniumTestParameters(String currentScenario, String currentTestcase) {
+
 		super(currentScenario, currentTestcase);
+
 		installApplication = false;
 	}
 

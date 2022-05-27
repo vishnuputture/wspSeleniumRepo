@@ -2,6 +2,7 @@ package businesskeywords.warehousing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,7 @@ public class Manifests extends ReusableLib {
 
     CommonActions commonObj;
     Trucks truckObj;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -31,6 +33,7 @@ public class Manifests extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         truckObj = new Trucks(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -50,7 +53,7 @@ public class Manifests extends ReusableLib {
      */
     public void verifyManifestListUI() {
         String[] actText = {"Manifest Number", "Delivery Date", "Orders", "Delivered Orders", "Stops", "Status", "Driver", "Truck", "Actions"};
-        List<WebElement> els = driver.findElements(By.xpath("//th"));
+        List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -58,11 +61,11 @@ public class Manifests extends ReusableLib {
         }
         commonObj.validateElementExists(TruckPage.helpIcon, "Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
-        int size = driver.findElements(TruckPage.pagination).size();
+        int size = ownDriver.findElements(TruckPage.pagination).size();
         Utility_Functions.xAssertEquals(report, size, 4, "Next page and previous page arrow icon is present");
-        String page = Utility_Functions.getText(driver, TruckPage.currentPage);
-        commonObj.validateElementExists(TruckPage.currentPage, "Current Page " + page + " " + Utility_Functions.getText(driver, TruckPage.outOf) + "");
-        List<WebElement> elm = driver.findElements(TruckPage.show);
+        String page = Utility_Functions.getText(ownDriver, TruckPage.currentPage);
+        commonObj.validateElementExists(TruckPage.currentPage, "Current Page " + page + " " + Utility_Functions.getText(ownDriver, TruckPage.outOf) + "");
+        List<WebElement> elm = ownDriver.findElements(TruckPage.show);
         String[] acText = {"10", "15", "30"};
         int j = 0;
         for (WebElement el : elm) {
@@ -83,9 +86,9 @@ public class Manifests extends ReusableLib {
      * Keyword to Verify Pagination against current page
      */
     public void selectPage(int actPageNo, String expPage, String arrowIcon) {
-        click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
-        Utility_Functions.xScrollWindow(driver);
-        String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+        click(ownDriver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
+        Utility_Functions.xScrollWindow(ownDriver);
+        String pageNo = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
         Utility_Functions.timeWait(2);
     }
@@ -95,20 +98,20 @@ public class Manifests extends ReusableLib {
      */
     public void paginationManifest() {
         int size = 2;
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
         } else {
-            click(driver.findElements(DriversPage.pageArrow).get(2));
-            Utility_Functions.xScrollWindow(driver);
-            while (!Utility_Functions.xIsDisplayed(driver, DriversPage.lastPage)) {
+            click(ownDriver.findElements(DriversPage.pageArrow).get(2));
+            Utility_Functions.xScrollWindow(ownDriver);
+            while (!Utility_Functions.xIsDisplayed(ownDriver, DriversPage.lastPage)) {
                 size++;
-                click(driver.findElements(DriversPage.pageArrow).get(2));
-                Utility_Functions.xScrollWindow(driver);
+                click(ownDriver.findElements(DriversPage.pageArrow).get(2));
+                Utility_Functions.xScrollWindow(ownDriver);
             }
-            click(driver.findElements(DriversPage.pageArrow).get(0));
-            Utility_Functions.xScrollWindow(driver);
+            click(ownDriver.findElements(DriversPage.pageArrow).get(0));
+            Utility_Functions.xScrollWindow(ownDriver);
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
             selectPage(3, "" + size + "", "Right double Arrow (>>)");
@@ -127,7 +130,7 @@ public class Manifests extends ReusableLib {
      */
     public void uiCreateManifest() {
         String[] actText = {"Delivery Date", "Start Time", "Truck (Optional)", "Notes to Driver (optional)"};
-        List<WebElement> els = driver.findElements(ManifestsPage.createManLabel);
+        List<WebElement> els = ownDriver.findElements(ManifestsPage.createManLabel);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -165,7 +168,7 @@ public class Manifests extends ReusableLib {
     }
 
     public WebElement truckDriverDrop(String label) {
-        return driver.findElement(By.xpath("//label[text()='" + label + "']/parent::div/descendant::option[@class='ng-star-inserted']"));
+        return ownDriver.findElement(By.xpath("//label[text()='" + label + "']/parent::div/descendant::option[@class='ng-star-inserted']"));
     }
 
     public void fillDetails() {
@@ -178,14 +181,14 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(3);
         String truckName = Utility_Functions.xGetJsonData("TruckName");
         System.out.println("truckName...." + truckName);
-        click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
+        click(ownDriver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
         click(ManifestsPage.notes);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
+        Utility_Functions.xMouseClick(ownDriver, ManifestsPage.driverEle);
         Utility_Functions.timeWait(2);
         String driverName = Utility_Functions.xGetJsonData("Driver");
         System.out.println("driverName...." + driverName);
-        click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
+        click(ownDriver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
         Utility_Functions.timeWait(2);
@@ -193,7 +196,7 @@ public class Manifests extends ReusableLib {
 
     public void verifyManifestNum() {
         Utility_Functions.timeWait(5);
-        String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
+        String maniNo = Utility_Functions.getText(ownDriver, truckObj.getTruck("Manifest Number"));
         Utility_Functions.xUpdateJson("ManFest", maniNo);
         commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
         commonObj.validateElementExists(ManifestsPage.mobileIcon, "Generate icon is present");
@@ -204,7 +207,7 @@ public class Manifests extends ReusableLib {
      */
     public void createManifest() {
         fillDetails();
-        Utility_Functions.xScrollIntoView(driver, ManifestsPage.addOrderNo);
+        Utility_Functions.xScrollIntoView(ownDriver, ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.addOrderNo, Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Enter shipment number");
         click(ManifestsPage.addButton, "Click Add button");
@@ -225,13 +228,13 @@ public class Manifests extends ReusableLib {
         click(truckDriverDrop("Truck (Optional)"), "Select truck from the drop down");
         click(ManifestsPage.notes);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
+        Utility_Functions.xMouseClick(ownDriver, ManifestsPage.driverEle);
         Utility_Functions.timeWait(2);
         click(truckDriverDrop("Driver (Optional)"), "Select driver from the drop down");
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollIntoView(driver, ManifestsPage.addOrderNo);
+        Utility_Functions.xScrollIntoView(ownDriver, ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.addOrderNo, Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Enter first shipment number");
         click(ManifestsPage.addButton, "Click Add button");
@@ -243,7 +246,7 @@ public class Manifests extends ReusableLib {
         commonObj.validateText(ManifestsPage.orderAddedMessage, "Order " + Utility_Functions.xGetJsonData("SalesOrder") + "-02 successfully added to manifest", "Order is added");
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
         Utility_Functions.timeWait(5);
-        String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
+        String maniNo = Utility_Functions.getText(ownDriver, truckObj.getTruck("Manifest Number"));
         Utility_Functions.xUpdateJson("ManifestNo", maniNo);
         commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
     }
@@ -258,15 +261,15 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.truckEle);
         Utility_Functions.timeWait(3);
         String truckName = Utility_Functions.xGetJsonData("TruckName");
-        click(driver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
+        click(ownDriver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
         click(ManifestsPage.notes);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(driver, ManifestsPage.driverEle);
+        Utility_Functions.xMouseClick(ownDriver, ManifestsPage.driverEle);
         String driverName = Utility_Functions.xGetJsonData("Driver");
-        click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
+        click(ownDriver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
         sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollIntoView(driver, ManifestsPage.addOrderNo);
+        Utility_Functions.xScrollIntoView(ownDriver, ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
         click(ManifestsPage.addPOBtn, "CLick Add PO button");
         Utility_Functions.timeWait(5);
@@ -274,21 +277,21 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(3);
         click(btn(" Add to Manifest "), "Click Add to Manifest Button");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver, By.xpath("//div[contains(@class,'order-header')]/span"));
+        Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//div[contains(@class,'order-header')]/span"));
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
         Utility_Functions.timeWait(3);
         ifExist();
         commonObj.validateElementExists(ManifestsPage.successMsg, "'Manifest successfully created.' message is present");
-        String maniNo = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
+        String maniNo = Utility_Functions.getText(ownDriver, truckObj.getTruck("Manifest Number"));
         Utility_Functions.xUpdateJson("ManifestNo", maniNo);
         commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
     }
 
     public void ifExist() {
         if (isDisplayed(ManifestsPage.ifErrorExist)) {
-            click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'')]")), "Select Driver from the drop down");
+            click(ownDriver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'')]")), "Select Driver from the drop down");
             Utility_Functions.timeWait(2);
-            click(driver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'')]")), "Select Driver from the drop down");
+            click(ownDriver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'')]")), "Select Driver from the drop down");
             Utility_Functions.timeWait(2);
             click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
             Utility_Functions.timeWait(3);
@@ -301,11 +304,11 @@ public class Manifests extends ReusableLib {
     public void searchFiltersManifestUI() {
         click(TruckPage.filterSearch, "Click Search Filter icon");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
         String[] actText = {"Manifest Number", "Delivery Date", "Start Time", "Status", "Driver", "Truck", "Customer", "Customer PO Number", "Order Number", "Job Name"};
-        List<WebElement> els = driver.findElements(TruckPage.searchFiltersLabel);
+        List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -325,18 +328,18 @@ public class Manifests extends ReusableLib {
      */
     public void navigateToManifestOrder() {
         Utility_Functions.timeWait(4);
-        String manNo = Utility_Functions.getText(driver, getRowVal("Manifest Number")).trim();
+        String manNo = Utility_Functions.getText(ownDriver, getRowVal("Manifest Number")).trim();
         Utility_Functions.xUpdateJson("ManifestNumber", manNo);
-        if (Utility_Functions.xIsDisplayed(driver, ManifestsPage.generatedIcon)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, ManifestsPage.generatedIcon)) {
             click(ManifestsPage.generatedIcon);
         }
-        Utility_Functions.xmouseOver(driver, ManifestsPage.orderColLink);
+        Utility_Functions.xmouseOver(ownDriver, ManifestsPage.orderColLink);
         Utility_Functions.timeWait(2);
         /*String salesOrderCount= Utility_Functions.getText(driver,ManifestsPage.soPoOrders);
         String PurchaseOrder=driver.findElements(ManifestsPage.soPoOrders).get(1).getText();*/
         click(ManifestsPage.orderColLink, "Click on order number link from orders column");
         Utility_Functions.timeWait(4);
-        String header = Utility_Functions.getText(driver, ManifestsPage.manifestOrderHeader).trim();
+        String header = Utility_Functions.getText(ownDriver, ManifestsPage.manifestOrderHeader).trim();
         Utility_Functions.xAssertEquals(report, header, "MANIFEST #: " + manNo + " - ORDERS", "Manifest Orders Header: ");
     }
 
@@ -345,7 +348,7 @@ public class Manifests extends ReusableLib {
     }
 
     public By lbl(String label) {
-        int size = driver.findElements(By.xpath("//*[text()='" + label + "']")).size();
+        int size = ownDriver.findElements(By.xpath("//*[text()='" + label + "']")).size();
         return By.xpath("(//*[text()='" + label + "'])[" + size + "]");
     }
 
@@ -369,7 +372,7 @@ public class Manifests extends ReusableLib {
      * Keyword to verify functionality of save note button and expand-Collapse Session
      */
     public void saveNote() {
-        if (Utility_Functions.xIsDisplayed(driver, btn("Save Notes"))) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, btn("Save Notes"))) {
             sendKeys(ManifestsPage.manageNote, "2:1 order and wait for order");
             click(btn("Save Notes"), "Click Save Button");
             Utility_Functions.timeWait(1);
@@ -380,10 +383,10 @@ public class Manifests extends ReusableLib {
         click(btn("Save Notes"), "Click Save Button");
         Utility_Functions.timeWait(1);
         commonObj.validateText(ManifestsPage.successMsg, "Manager notes saved successfully", "Successful message:");
-        click(driver.findElements(ManifestsPage.collapseIcon).get(1), "Click Collapse Icon");
+        click(ownDriver.findElements(ManifestsPage.collapseIcon).get(1), "Click Collapse Icon");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(isCollapsed("false"), "Session is collapsed");
-        click(driver.findElements(ManifestsPage.collapseIcon).get(1), "Click Expand Icon");
+        click(ownDriver.findElements(ManifestsPage.collapseIcon).get(1), "Click Expand Icon");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(isCollapsed("true"), "Session is expanded");
     }
@@ -397,7 +400,7 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.soStatus, "Delivered", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
-        click(driver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
+        click(ownDriver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.manStatus, "Delivered", "Verify status: ");
     }
@@ -405,21 +408,21 @@ public class Manifests extends ReusableLib {
     public void deleteMan() {
         Utility_Functions.timeWait(4);
         int count=1;
-        int size = driver.findElements(TruckPage.manifestCount).size();
+        int size = ownDriver.findElements(TruckPage.manifestCount).size();
         for (int i = 1; i <= size; i++) {
             Utility_Functions.timeWait(4);
-            String man = Utility_Functions.getText(driver, By.xpath("(//td/a[contains(text(),'0')])[" + count + "]"));
-            Utility_Functions.xClickHiddenElement(driver, By.xpath("//td/a[contains(text(),'" + man + "')]"));
+            String man = Utility_Functions.getText(ownDriver, By.xpath("(//td/a[contains(text(),'0')])[" + count + "]"));
+            Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td/a[contains(text(),'" + man + "')]"));
             Utility_Functions.timeWait(5);
             if (isDisplayed(ManifestsPage.deleteManifest)) {
                 click(ManifestsPage.deleteManifest, "Click Delete Manifest");
                 if (isDisplayed(TruckPage.deleteConfPopUp)) {
                     commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
-                    click(driver.findElements(ManifestsPage.delButton).get(0), "Click No Button");
+                    click(ownDriver.findElements(ManifestsPage.delButton).get(0), "Click No Button");
                     commonObj.validateText(By.xpath("//h2[text()=' Manifest #: " + man + " ']"), "Manifest #: " + man + "", "Manifest Number Screen Header: ");
                     click(ManifestsPage.deleteManifest, "Click Delete Manifest");
                     commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
-                    click(driver.findElements(ManifestsPage.delButton).get(1), "Click Yes Button");
+                    click(ownDriver.findElements(ManifestsPage.delButton).get(1), "Click Yes Button");
                 }
                 Utility_Functions.timeWait(3);
                 String exp = "Manifest #" + man + " successfully deleted.";
@@ -427,7 +430,7 @@ public class Manifests extends ReusableLib {
             }else {
                 count++;
             }
-            driver.navigate().back();
+            ownDriver.navigate().back();
             Utility_Functions.timeWait(2);
         }
     }
@@ -436,27 +439,27 @@ public class Manifests extends ReusableLib {
      * Keyword to Delete Manifest
      */
     public void deleteManifestList() {
-        int size1 = driver.findElements(TruckPage.deleteInProgress).size();
+        int size1 = ownDriver.findElements(TruckPage.deleteInProgress).size();
         for (int j = 0; j < size1; j++) {
-            Utility_Functions.xClickHiddenElement(driver, TruckPage.deleteInProgress);
+            Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteInProgress);
             Utility_Functions.timeWait(3);
-            int size = driver.findElements(ManifestsPage.updateStatusDrop).size();
+            int size = ownDriver.findElements(ManifestsPage.updateStatusDrop).size();
             for (int i = 0; i < size; i++) {
-                Utility_Functions.xScrollIntoView(driver, ManifestsPage.updateStatusDrop);
+                Utility_Functions.xScrollIntoView(ownDriver, ManifestsPage.updateStatusDrop);
                 Utility_Functions.timeWait(3);
                 try {
-                    Utility_Functions.xClickHiddenElement(driver, driver.findElements(ManifestsPage.updateStatusDrop).get(i));
+                    Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(ManifestsPage.updateStatusDrop).get(i));
                 } catch (Exception e) {
-                    Utility_Functions.xClickHiddenElement(driver, driver.findElements(ManifestsPage.updateStatusDrop).get(i + 1));
+                    Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(ManifestsPage.updateStatusDrop).get(i + 1));
                 }
                 try {
-                    Utility_Functions.xClickHiddenElement(driver, ManifestsPage.updateStatusSO);
+                    Utility_Functions.xClickHiddenElement(ownDriver, ManifestsPage.updateStatusSO);
                 } catch (Exception e) {
-                    Utility_Functions.xClickHiddenElement(driver, ManifestsPage.updateStatusPOPick);
+                    Utility_Functions.xClickHiddenElement(ownDriver, ManifestsPage.updateStatusPOPick);
                 }
                 Utility_Functions.timeWait(5);
             }
-            driver.navigate().back();
+            ownDriver.navigate().back();
             Utility_Functions.timeWait(3);
         }
         deleteMan();
@@ -467,12 +470,12 @@ public class Manifests extends ReusableLib {
      */
     public void updateStatusNotDeliveredSO() {
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
-        click(driver.findElements(ManifestsPage.updateStatusSO).get(1), "Click Not Delivered");
+        click(ownDriver.findElements(ManifestsPage.updateStatusSO).get(1), "Click Not Delivered");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.soStatus, "Not Delivered", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.notDeliveredRedIcon, "Stop icon changed to Red color Cross mark");
         //commonObj.validateElementExists(ManifestsPage.warningIcon, "In progress Icon is present");
-        click(driver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
+        click(ownDriver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.manStatus, "Not Delivered", "Verify status: ");
     }
@@ -487,7 +490,7 @@ public class Manifests extends ReusableLib {
         commonObj.validateText(ManifestsPage.soStatus, "Delivered", "Verify the status: ");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(ManifestsPage.warningIcon, "In progress Icon is present");
-        click(driver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
+        click(ownDriver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.inProgressStatus, "In Process", "Verify status: ");
     }
@@ -499,14 +502,14 @@ public class Manifests extends ReusableLib {
         Utility_Functions.timeWait(3);
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xHoverElementClk(driver.findElement(ManifestsPage.updateStatusPOPick), driver);
+        Utility_Functions.xHoverElementClk(ownDriver.findElement(ManifestsPage.updateStatusPOPick), ownDriver);
         // click(ManifestsPage.updateStatusPOPick, "Click Picked Up");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.pickedUpStatus, "Picked Up", "Verify the status: ");
         commonObj.validateElementExists(ManifestsPage.deliveredGreenIcon, "Stop icon changed to green color tick mark");
         click(ManifestsPage.updateStatusDrop, "Click Update Status Drop down");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xHoverElementClk(driver.findElement(ManifestsPage.updateStatusPONotPick), driver);
+        Utility_Functions.xHoverElementClk(ownDriver.findElement(ManifestsPage.updateStatusPONotPick), ownDriver);
         //click(ManifestsPage.updateStatusPONotPick, "Click Not Picked Up");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.notPickedUpStatus, "Not Picked Up", "Verify the status: ");
@@ -564,7 +567,7 @@ public class Manifests extends ReusableLib {
      * Keyword to verify Save Adjustment and Return to Orders Button
      */
     public void saveAdjReturnToOrderBtn() {
-        click(driver.findElements(DriversPage.crossIcon).get(1), "Click Cross icon(Close icon)");
+        click(ownDriver.findElements(DriversPage.crossIcon).get(1), "Click Cross icon(Close icon)");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
         click(btn(" Packing List "), "Click Packing List Button");
@@ -577,20 +580,20 @@ public class Manifests extends ReusableLib {
         sendKeys(ManifestsPage.deliveredInput, "1", "Update delivered count");
         click(btn("Save Adjustments"), "Click Save Adjustments");
         Utility_Functions.timeWait(5);
-        Utility_Functions.xScrollWindowTop(driver);
-        Utility_Functions.xScrollWindowTop(driver);
-        click(driver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
+        Utility_Functions.xScrollWindowTop(ownDriver);
+        Utility_Functions.xScrollWindowTop(ownDriver);
+        click(ownDriver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
         Utility_Functions.timeWait(3);
 
         click(btn(" Packing List "), "Click Packing List Button");
         commonObj.validateText(ManifestsPage.orderNoHeader, "ORDER NUMBERs " + Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Order numbers header: ");
         click(ManifestsPage.expandAll, "Click Expand All Link");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver, ManifestsPage.deliveredInput);
+        Utility_Functions.xScrollIntoView(ownDriver, ManifestsPage.deliveredInput);
         Utility_Functions.timeWait(2);
-        String actVal = driver.findElement(ManifestsPage.deliveredInput).getAttribute("ng-reflect-model");
+        String actVal = ownDriver.findElement(ManifestsPage.deliveredInput).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, "1", actVal, "");
-        click(driver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
+        click(ownDriver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
     }
@@ -600,7 +603,7 @@ public class Manifests extends ReusableLib {
      */
     public void saveAdjReturnToOrderBtnPO() {
         Utility_Functions.timeWait(2);
-        click(driver.findElements(DriversPage.crossIcon).get(1), "Click Cross icon(Close icon)");
+        click(ownDriver.findElements(DriversPage.crossIcon).get(1), "Click Cross icon(Close icon)");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
         navigateToOrderNumberPO();
@@ -609,9 +612,9 @@ public class Manifests extends ReusableLib {
         sendKeys(ManifestsPage.pickUpCount, "0", "Update Pick Up count");
         click(btn("Save Adjustments"), "Click Save Adjustments");
         Utility_Functions.timeWait(5);
-        Utility_Functions.xScrollWindowTop(driver);
-        Utility_Functions.xScrollWindowTop(driver);
-        click(driver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
+        Utility_Functions.xScrollWindowTop(ownDriver);
+        Utility_Functions.xScrollWindowTop(ownDriver);
+        click(ownDriver.findElements(btn("Return to Orders")).get(1), "Click Return To Order");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
     }
@@ -636,17 +639,17 @@ public class Manifests extends ReusableLib {
      * Keyword to verify delete Manifest
      */
     public void deleteManifest() {
-        String man = Utility_Functions.getText(driver, truckObj.getTruck("Manifest Number"));
-        Utility_Functions.xClickHiddenElement(driver, By.xpath("//td/a"));
+        String man = Utility_Functions.getText(ownDriver, truckObj.getTruck("Manifest Number"));
+        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td/a"));
         Utility_Functions.timeWait(5);
         commonObj.validateText(By.xpath("//h2[text()=' Manifest #: " + man + " ']"), "Manifest #: " + man + "", "Manifest Number Screen Header: ");
         click(ManifestsPage.deleteManifest, "Click Delete Manifest");
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
-        click(driver.findElements(ManifestsPage.delButton).get(0), "Click No Button");
+        click(ownDriver.findElements(ManifestsPage.delButton).get(0), "Click No Button");
         commonObj.validateText(By.xpath("//h2[text()=' Manifest #: " + man + " ']"), "Manifest #: " + man + "", "Manifest Number Screen Header: ");
         click(ManifestsPage.deleteManifest, "Click Delete Manifest");
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Confirmation Pop Up is present");
-        click(driver.findElements(ManifestsPage.delButton).get(1), "Click Yes Button");
+        click(ownDriver.findElements(ManifestsPage.delButton).get(1), "Click Yes Button");
         Utility_Functions.timeWait(3);
         String exp = "Manifest #" + man + " successfully deleted.";
         commonObj.validateText(TruckPage.deletePopUp, exp, "Deleted Manifest Successful message is present");
@@ -657,8 +660,8 @@ public class Manifests extends ReusableLib {
      */
     public void closeAllManifest() {
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, ManifestsPage.closeIcon)) {
-            int size = driver.findElements(ManifestsPage.closeIcon).size();
+        if (Utility_Functions.xIsDisplayed(ownDriver, ManifestsPage.closeIcon)) {
+            int size = ownDriver.findElements(ManifestsPage.closeIcon).size();
             for (int i = 0; i < size; i++) {
                 Utility_Functions.timeWait(3);
                 click(ManifestsPage.closeIcon, "Click CLose manifest icon");

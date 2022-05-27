@@ -34,21 +34,22 @@ import java.util.List;
 
 public class CreatePurchaseOrder extends ReusableLib {
     CommonActions commonObj;
-    public static String customeraddress1;
-    public static String customeraddress2;
-
+    public static    String  customeraddress1;
+    public static    String  customeraddress2;
+    private FrameworkDriver ownDriver;
     public CreatePurchaseOrder(Helper helper) {
 
         super(helper);
         commonObj = new CommonActions(helper);
+        ownDriver=helper.getGSDriver();
     }
 
-    public void navigateFromPODetailsToMaster() {
-        click(SpecialPriceAllowancePage.btnF11, "Click [F11 Header] Button");
-        Utility_Functions.xScrollWindow(driver);
-        click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
-        click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
-        click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
+    public void navigateFromPODetailsToMaster()  {
+        click(SpecialPriceAllowancePage.btnF11,"Click [F11 Header] Button");
+        Utility_Functions.xScrollWindow(ownDriver);
+        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
+        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
+        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
     }
 
     public void validatePOHeadingTitle() {
@@ -201,27 +202,29 @@ public class CreatePurchaseOrder extends ReusableLib {
 
         if (Double.parseDouble(discount) > 0) {
 
-            double extAmtCalc = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
-                    * Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim())
-                    * (1 - (Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.disc).getAttribute("value").trim())) / 100);
+            double extAmtCalc = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
+                    * Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim())
+                    * (1 - (Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.disc).getAttribute("value").trim())) / 100);
             Utility_Functions.timeWait(5);
-            double avgPrice = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
+            double avgPrice = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
             String formattedavgPrice = String.format("%.4f", avgPrice);
 
             commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is     " +
                     formattedavgPrice, "Verifying Cost variance validation");
-            String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
+            String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
 
 
             Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), extendedAmt);
-        } else {
-            double extAmtCalc = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
-                    * Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
+        }
+        else
+        {
+                        double extAmtCalc = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
+                    * Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
             Utility_Functions.timeWait(5);
-            double avgPrice = Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
+            double avgPrice = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
             String formattedavgPrice = String.format("%.4f", avgPrice);
 
-            String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(driver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
+            String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
 
 
             Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), extendedAmt);
@@ -252,9 +255,9 @@ public class CreatePurchaseOrder extends ReusableLib {
         sendKeys(PurchaseOrderDetailsPage.extendedAmount, String.valueOf(Keys.ENTER));
         Utility_Functions.timeWait(5);
 
-        Utility_Functions.xWaitForElementPresent(driver, driver.findElements(PurchaseOrderDetailsPage.getLineItemsList), 5);
+        Utility_Functions.xWaitForElementPresent(ownDriver,ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList),5);
 
-        List<WebElement> items = driver.findElements(PurchaseOrderDetailsPage.getLineItemsList);
+        List<WebElement> items=ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList);
 
         double itemsAmt = 0;
         for (WebElement e : items) {
@@ -264,9 +267,9 @@ public class CreatePurchaseOrder extends ReusableLib {
             itemsAmt += Double.parseDouble(formattedPrice);
         }
         Utility_Functions.timeWait(5);
-        Utility_Functions.getText(driver, PurchaseOrderDetailsPage.amountHeader);
-        String totalAmtHeader = Utility_Functions.getText(driver, PurchaseOrderDetailsPage.amountHeader).trim();
-        Utility_Functions.xAssertEquals(report, String.format("%.2f", itemsAmt), totalAmtHeader);
+        Utility_Functions.getText(ownDriver,PurchaseOrderDetailsPage.amountHeader);
+       String totalAmtHeader= Utility_Functions.getText(ownDriver,PurchaseOrderDetailsPage.amountHeader).trim();
+       Utility_Functions.xAssertEquals(report,String.format("%.2f",itemsAmt),totalAmtHeader);
     }
 
 
@@ -334,35 +337,37 @@ public class CreatePurchaseOrder extends ReusableLib {
         click(PurchaseOrderEntryPage.customerNo);
         Utility_Functions.timeWait(5);
 
-        customeraddress1 = Utility_Functions.getText(driver, MailingMasterSearchPage.firstaddressLine1, "innerText").toLowerCase().replace(" ", "").trim();
-        customeraddress2 = Utility_Functions.getText(driver, MailingMasterSearchPage.firstaddressLine2, "innerText").toLowerCase().replace(" ", "").trim();
-        sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1" + Keys.ENTER, "Select Customer No");
+    customeraddress1 = Utility_Functions.getText(ownDriver,MailingMasterSearchPage.firstaddressLine1,"innerText").toLowerCase().replace(" ","").trim();
+     customeraddress2=Utility_Functions.getText(ownDriver,MailingMasterSearchPage.firstaddressLine2,"innerText").toLowerCase().replace(" ","").trim();
+        sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1"+Keys.ENTER,"Select Customer No");
         Utility_Functions.timeWait(5);
 
         commonObj.validateText(PurchaseOrderEntryPage.errorMsgPO, "ERROR - Vendor or Order Number cannot be blank", " Validate Vendor Or Order blank after Customer selection");
 
         Utility_Functions.timeWait(2);
-        Assert.assertNotNull(driver.findElement(PurchaseOrderEntryPage.orderNoInput).getAttribute("value"), "Validate Order No is auto populated");
+        Assert.assertNotNull(ownDriver.findElement(PurchaseOrderEntryPage.orderNoInput).getAttribute("value"),"Validate Order No is auto populated");
 
     }
 
-    public void addPOWithPOPriceAndDisc() {
-        applyCostPriceAndDisc(jsonData.getData("POCostOption"), jsonData.getData("quantityOrdered"),
-                jsonData.getData("discount"));
-        sendKeys(PurchaseOrderDetailsPage.extendedAmount, String.valueOf(Keys.F5));
-        Utility_Functions.timeWait(5);
-        Utility_Functions.xWaitForElementPresent(driver, driver.findElements(PurchaseOrderDetailsPage.getLineItemsList), 5);
+    public void addPOWithPOPriceAndDisc()
+    {
+      applyCostPriceAndDisc(jsonData.getData("POCostOption"), jsonData.getData("quantityOrdered"),
+              jsonData.getData("discount"));
+      sendKeys(PurchaseOrderDetailsPage.extendedAmount,String.valueOf(Keys.F5));
+      Utility_Functions.timeWait(5);
+      Utility_Functions.xWaitForElementPresent(ownDriver,ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList),5);
 
-        Utility_Functions.xIsElementDisplayed(report, driver.findElement(PurchaseOrderDetailsPage.getLineItemsList), "Added Line Item displayed");
+      Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(PurchaseOrderDetailsPage.getLineItemsList),"Added Line Item displayed");
 
 
     }
 
-    public void validateShipmentType() {
-        System.out.println("Customer Page Address One=" + CreatePurchaseOrder.customeraddress1);
-        System.out.println("Customer Page Address Two=" + CreatePurchaseOrder.customeraddress2);
-        String shipto = Utility_Functions.getText(driver, PurchaseOrderEntryPage.shipToinput, "value").replace(" ", "").toLowerCase().trim();
-        String toaddress = Utility_Functions.getText(driver, PurchaseOrderEntryPage.toaddressLine1, "value").replace(" ", "").toLowerCase().trim();
+    public void validateShipmentType()
+    {
+      System.out.println("Customer Page Address One="+CreatePurchaseOrder.customeraddress1);
+      System.out.println("Customer Page Address Two="+CreatePurchaseOrder.customeraddress2);
+      String shipto=Utility_Functions.getText(ownDriver,PurchaseOrderEntryPage.shipToinput,"value").replace(" ","").toLowerCase().trim();
+      String toaddress=Utility_Functions.getText(ownDriver,PurchaseOrderEntryPage.toaddressLine1,"value").replace(" ","").toLowerCase().trim();
 
         System.out.println("PO Order Ship Address1=" + shipto);
         System.out.println("PO Order To Address1=" + toaddress);
@@ -378,11 +383,11 @@ public class CreatePurchaseOrder extends ReusableLib {
         applyCostPriceAndDisc(jsonData.getData("listCostOption"), jsonData.getData("quantityOrdered"), jsonData.getData("nodiscount"));
         sendKeys(PurchaseOrderDetailsPage.extendedAmount, String.valueOf(Keys.ENTER));
         Utility_Functions.timeWait(8);
-        System.out.println("Validation Msg" + Utility_Functions.getText(driver.findElement(PurchaseOrderDetailsPage.errorMsgPOD), "outerText"));
+        System.out.println("Validation Msg"+Utility_Functions.getText(ownDriver.findElement(PurchaseOrderDetailsPage.errorMsgPOD),"outerText"));
 
-        //    commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD," ERROR - Discount can NOT be blank when using list price F4 Overrides","No Discount validation");
-        String message = Utility_Functions.getText(driver.findElement(PurchaseOrderDetailsPage.errorMsgPOD), "outerText").replace(" ", " ").trim();
-        Utility_Functions.xAssertEquals(report, "ERROR - Discount can NOT be blank when using list price F4 Overrides", message,
+    //    commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD," ERROR - Discount can NOT be blank when using list price F4 Overrides","No Discount validation");
+       String message=Utility_Functions.getText(ownDriver.findElement(PurchaseOrderDetailsPage.errorMsgPOD),"outerText").replace(" "," ").trim();
+        Utility_Functions.xAssertEquals(report,"ERROR - Discount can NOT be blank when using list price F4 Overrides",message,
                 "No Discount validation");
     }
 
@@ -409,8 +414,8 @@ public class CreatePurchaseOrder extends ReusableLib {
         Utility_Functions.timeWait(5);
 
 
-        Utility_Functions.xAssertEquals(report, jsonData.getData("validFrieght"), driver.findElement(PurchaseOrderEntryPage.enterFreightCharges),
-                "value", "Validate selected Frieght FFA");
+        Utility_Functions.xAssertEquals(report,jsonData.getData("validFrieght"),ownDriver.findElement(PurchaseOrderEntryPage.enterFreightCharges),
+                  "value","Validate selected Frieght FFA");
 
 
     }
@@ -472,8 +477,8 @@ public class CreatePurchaseOrder extends ReusableLib {
     /**
      * Keyword to verify error in Purchase Order Details page
      */
-    public void verifyError(String expected) {
-        Utility_Functions.xScrollIntoView(driver, PurchaseOrderDetailsPage.errorMsgPOD);
+    public void verifyError(String expected){
+        Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderDetailsPage.errorMsgPOD);
         String actual = getText(PurchaseOrderDetailsPage.errorMsgPOD).trim();
         Utility_Functions.xAssertEquals(report, expected, actual, "Validating error message in Purchase Order Details page");
     }
@@ -500,8 +505,8 @@ public class CreatePurchaseOrder extends ReusableLib {
         click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
         Utility_Functions.timeWait(5);
         String error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
-        if (error.contains("F8 to accept")) {
-            Utility_Functions.actionKey(Keys.F8, driver);
+        if (error.contains("F8 to accept")){
+            Utility_Functions.actionKey(Keys.F8, ownDriver);
         }
         error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
         if (error.contains("WARNING- Price field is zero or blank")) {
@@ -516,15 +521,15 @@ public class CreatePurchaseOrder extends ReusableLib {
             Utility_Functions.timeWait(3);
         }
         error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
-        if (error.contains("F4 Overrides")) {
-            Utility_Functions.actionKey(Keys.F4, driver);
+        if (error.contains("F4 Overrides")){
+            Utility_Functions.actionKey(Keys.F4, ownDriver);
         }
         try {
-            Utility_Functions.xScrollIntoView(driver, PurchaseOrderDetailsPage.errorMsgPOD);
+            Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderDetailsPage.errorMsgPOD);
             if(getText(PurchaseOrderDetailsPage.errorMsgPOD).equals("WARNING- Cost variance -- F5 to accept.  Average cost is")) {
                 commonObj.verifyElementContainsText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is", "Verify Cost Variance Warning message");
                 getConvFactorValue();
-                Utility_Functions.actionKey(Keys.F5, driver);
+                Utility_Functions.actionKey(Keys.F5, ownDriver);
             }else {
                 throw new NoSuchElementException("Not found");
             }

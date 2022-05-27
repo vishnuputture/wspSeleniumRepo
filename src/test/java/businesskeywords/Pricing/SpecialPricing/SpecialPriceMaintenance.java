@@ -4,6 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.*;
 
 import org.openqa.selenium.WebElement;
@@ -29,10 +30,12 @@ public class SpecialPriceMaintenance extends ReusableLib {
      * @param helper The {@link Helper} object
      */
     private CommonActions commonObj;
+    private FrameworkDriver ownDriver;
 
     public SpecialPriceMaintenance(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     public void validateSpPriceMntncTitle(){
@@ -59,7 +62,7 @@ public class SpecialPriceMaintenance extends ReusableLib {
 
         String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";
         sendKeys(By.xpath(optXpath), "4");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         click(SpecialPricePage.btnProcessF9);
         click(SpecialPricePage.btnF3);
@@ -81,10 +84,10 @@ public class SpecialPriceMaintenance extends ReusableLib {
             commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");*/
         }
         sendKeys(SpecialPricePage.posToCustNo, "0");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";
         sendKeys(By.xpath(optXpath), "4");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         click(SpecialPricePage.btnProcessF9, "Processing special price delete request");
     }
@@ -106,14 +109,14 @@ public class SpecialPriceMaintenance extends ReusableLib {
             commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");*/
         }
         sendKeys(SpecialPricePage.posToCustNo, "0");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        List<WebElement> eleList = driver.findElements(SpecialPricePage.selectPricingRecordBox);
+        List<WebElement> eleList = ownDriver.findElements(SpecialPricePage.selectPricingRecordBox);
         if (eleList.size() > 0) {
             for (WebElement element : eleList) {
                 sendKeys(element, "4","");
             }
-            Utility_Functions.actionKey(Keys.ENTER, driver);
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
             waitForElementDisappear(MasterPage.loadingAnime, globalWait);
             click(SpecialPricePage.btnProcessF9, "Processing special price delete request");
         }
@@ -154,15 +157,15 @@ public class SpecialPriceMaintenance extends ReusableLib {
             }
         }
         sendKeys(SpecialPricePage.posToCustNo, jsonData.getData("filterCustNum"), "Entering customer number to filter");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         if (custNumList.length > 0) {
             Arrays.sort(custNumList);
             //String[] custNumStringList=Arrays.stream(custNumIntList).sorted().mapToObj(String::valueOf).toArray(String[]::new);
             for (int i = 0; i < custNumList.length; i++) {
-                Utility_Functions.xAssertEquals(report, custNumList[i], driver.findElement(By.xpath("//div[starts-with(@id,'D_1" + i + "')]")).getText(), "Validating filtered result");
+                Utility_Functions.xAssertEquals(report, custNumList[i], ownDriver.findElement(By.xpath("//div[starts-with(@id,'D_1" + i + "')]")).getText(), "Validating filtered result");
             }
         } else {
-            if (!Utility_Functions.isExist(driver, SpecialPricePage.selectPricingRecordBox)) {
+            if (!Utility_Functions.isExist(ownDriver, SpecialPricePage.selectPricingRecordBox)) {
                 report.updateTestLog("VerifyRecord", "No special price record should be displayed", Status.PASS);
             } else {
                 report.updateTestLog("VerifyRecord", "No special price record should be displayed", Status.FAIL);
@@ -185,10 +188,10 @@ public class SpecialPriceMaintenance extends ReusableLib {
             e.printStackTrace();
         }
         sendKeys(SpecialPricePage.posToItemNo, jsonData.getData("filterItemNum"), "Entering item number to filter");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         for (int i = 0; i < custNumList.length; i++) {
-            Utility_Functions.xAssertEquals(report, custNumList[i], driver.findElement(By.xpath("//div[starts-with(@id,'D_1" + i + "')]")).getText(), "Validating filtered result");
-            Utility_Functions.xAssertEquals(report, itemNumList[i], driver.findElement(By.xpath("//div[@id='D_1" + i + "_13']")).getText(), "Validating filtered result");
+            Utility_Functions.xAssertEquals(report, custNumList[i], ownDriver.findElement(By.xpath("//div[starts-with(@id,'D_1" + i + "')]")).getText(), "Validating filtered result");
+            Utility_Functions.xAssertEquals(report, itemNumList[i], ownDriver.findElement(By.xpath("//div[@id='D_1" + i + "_13']")).getText(), "Validating filtered result");
         }
 
         click(SpecialPricePage.sortByCustNumBtn, "");
@@ -200,15 +203,15 @@ public class SpecialPriceMaintenance extends ReusableLib {
      */
     public void positionCustItemEnd() {
         sendKeys(SpecialPricePage.posToItemNo, jsonData.getData("filterItemNum"), "Entering item number to filter");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
-        if (!Utility_Functions.isExist(driver, SpecialPricePage.selectPricingRecordBox)) {
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        if (!Utility_Functions.isExist(ownDriver, SpecialPricePage.selectPricingRecordBox)) {
             report.updateTestLog("VerifyRecord", "No special price record should be displayed", Status.PASS);
             commonObj.validateText(SpecialPricePage.noItemMsgLbl, "No Pricing Records to Display", "Validating special price message for no records");
         } else {
             report.updateTestLog("VerifyRecord", "No special price record should be displayed", Status.FAIL);
         }
-        driver.findElement(SpecialPricePage.posToItemNo).clear();
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        ownDriver.findElement(SpecialPricePage.posToItemNo).clear();
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         click(SpecialPricePage.sortByCustNumBtn, "");
 
     }
@@ -217,7 +220,7 @@ public class SpecialPriceMaintenance extends ReusableLib {
      * This method validates that proper error message is displayed when no special price record is available for display on the special price maintenance page
      */
     public void validateNoSpecialPriceMessage() {
-        if (!Utility_Functions.isExist(driver, SpecialPricePage.selectPricingRecordBox)) {
+        if (!Utility_Functions.isExist(ownDriver, SpecialPricePage.selectPricingRecordBox)) {
             report.updateTestLog("VerifyRecord", "No special price record should be displayed", Status.PASS);
             commonObj.validateText(SpecialPricePage.noItemMsgLbl, "No Pricing Records to Display", "Validating special price message for no records");
         } else {
@@ -238,10 +241,10 @@ public class SpecialPriceMaintenance extends ReusableLib {
             e.printStackTrace();
         }
         sendKeys(SpecialPricePage.posToItemNo, jsonData.getData("filterItemNum"), "Entering item number to filter");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         for (int i = 0; i < custNumList.length; i++) {
-            Utility_Functions.xAssertEquals(report, custNumList[i], driver.findElement(By.xpath("//div[starts-with(@id,'D_1" + i + "')]")).getText(), "Validating filtered result");
-            Utility_Functions.xAssertEquals(report, itemNumList[i], driver.findElement(By.xpath("//div[@id='D_1" + i + "_13']")).getText(), "Validating filtered result");
+            Utility_Functions.xAssertEquals(report, custNumList[i], ownDriver.findElement(By.xpath("//div[starts-with(@id,'D_1" + i + "')]")).getText(), "Validating filtered result");
+            Utility_Functions.xAssertEquals(report, itemNumList[i], ownDriver.findElement(By.xpath("//div[@id='D_1" + i + "_13']")).getText(), "Validating filtered result");
         }
 
         click(SpecialPricePage.sortByCustNumBtn, "");
@@ -278,10 +281,10 @@ public class SpecialPriceMaintenance extends ReusableLib {
 
         String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";
         sendKeys(By.xpath(optXpath), "4");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         // 	click(SpecialPricePage.btnProcessF9);
-        Utility_Functions.xScrollIntoView(driver, driver.findElement(SpecialPricePage.papMessage));
-        String res = driver.findElement(SpecialPricePage.papMessage).getText();
+        Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElement(SpecialPricePage.papMessage));
+        String res = ownDriver.findElement(SpecialPricePage.papMessage).getText();
         System.out.println(res);
         Utility_Functions.xAssertEquals(report, "Price as Parent records are display only", res, "Validating pap record exists");
         click(SpecialPricePage.btnF3);

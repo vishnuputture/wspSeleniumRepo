@@ -68,6 +68,7 @@ public class WebDriverFactory {
     			// disable ephemeral flash permissions flag
     			options.addArguments("--disable-features=EnableEphemeralFlashPermission");
 
+
 //    	    options.addArguments("--disable-web-security");
 //    			options.addArguments("--allow-running-insecure-content");
 
@@ -90,7 +91,10 @@ public class WebDriverFactory {
     				//System.setProperty("webdriver.chrome.driver", path);
     				
     				//driver = new ChromeDriver(capabilities);
+                    if (!headless.toUpperCase().equals("NO")){
+                        options.addArguments("--headless");
 
+                    }
 
     			options.addArguments("--disable-web-security");
     			options.addArguments("--allow-running-insecure-content");

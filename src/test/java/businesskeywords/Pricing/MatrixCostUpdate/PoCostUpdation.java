@@ -2,6 +2,7 @@ package businesskeywords.Pricing.MatrixCostUpdate;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -12,6 +13,7 @@ public class PoCostUpdation extends ReusableLib {
     CommonActions commonObj = new CommonActions(helper);
     ProposedMtxCostUpdation propMtrxUpd=new ProposedMtxCostUpdation(helper);
     MatrixCostUpdate mtxCostUpd=new MatrixCostUpdate(helper);
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -22,6 +24,7 @@ public class PoCostUpdation extends ReusableLib {
 
     public PoCostUpdation(Helper helper) {
         super(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -59,7 +62,7 @@ public class PoCostUpdation extends ReusableLib {
      *
      */
     public void unSelectAndSelectChekBox() {
-        String checked=driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        String checked=ownDriver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
         System.out.println("Is it checked  : "+checked);
         try{
             checked.equals("true");
@@ -69,13 +72,13 @@ public class PoCostUpdation extends ReusableLib {
             System.out.println("Disabled the Update Matrix Cost checkBox");
         }
         mtxCostUpd.navigateToAverageCost();
-        String color=driver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
+        String color=ownDriver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
         System.out.println("Color : "+color);
         Utility_Functions.xAssertEquals(report,color,"rgba(51, 153, 0, 1)","Average Cost Column values are green");
         click(MatrixCostUpdatePage.checkBox,"Select Check Box");
         waitForElementClickable(MatrixCostUpdatePage.saveButton,3);
         click(MatrixCostUpdatePage.saveButton);
-        Utility_Functions.xIsElementDisplayed(report,driver.findElement(MatrixCostUpdatePage.continueButton),"Verify 'No changes to Update' PopUp is displayed");
+        Utility_Functions.xIsElementDisplayed(report,ownDriver.findElement(MatrixCostUpdatePage.continueButton),"Verify 'No changes to Update' PopUp is displayed");
         waitForElementClickable(MatrixCostUpdatePage.continueButton,3);
         click(MatrixCostUpdatePage.continueButton,"Click continue button");
     }
@@ -86,7 +89,7 @@ public class PoCostUpdation extends ReusableLib {
      *
      */
     public void unSelToAvgCost() {
-        String checked = driver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
+        String checked = ownDriver.findElement(MatrixCostUpdatePage.checkBox).getAttribute("checked");
         System.out.println("Is it checked  : " + checked);
         try {
             checked.equals("true");
@@ -96,7 +99,7 @@ public class PoCostUpdation extends ReusableLib {
             System.out.println("Disabled the Update Matrix Cost checkBox");
         }
         mtxCostUpd.navigateToAverageCost();
-        String color = driver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
+        String color = ownDriver.findElement(MatrixCostUpdatePage.avgColor).getCssValue("color");
         System.out.println("Color : " + color);
         Utility_Functions.xAssertEquals(report, color, "rgba(51, 153, 0, 1)", "Average Cost Column values are green");
     }
@@ -110,10 +113,10 @@ public class PoCostUpdation extends ReusableLib {
     public void validatePoValue(String value){
         try {
             String decValue=updateField(value,MatrixCostUpdatePage.poField);
-            String exp_pOValue = driver.findElement(MatrixCostUpdatePage.poField).getAttribute("value");
+            String exp_pOValue = ownDriver.findElement(MatrixCostUpdatePage.poField).getAttribute("value");
             Utility_Functions.xAssertEquals(report,decValue,exp_pOValue,"PO value updated");
         }catch (Exception e){
-            Utility_Functions.xIsElementDisplayed(report, driver.findElement(MatrixCostUpdatePage.invalidErrorPopUp), "Invalid input PopUp"+value);
+            Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(MatrixCostUpdatePage.invalidErrorPopUp), "Invalid input PopUp"+value);
         }
     }
 
@@ -142,7 +145,7 @@ public class PoCostUpdation extends ReusableLib {
         }
         System.out.println("Dec value "+decValue);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSendKeys(driver, report, by, fieldValue, "Enter "+fieldValue+" into Field");
+        Utility_Functions.xSendKeys(ownDriver, report, by, fieldValue, "Enter "+fieldValue+" into Field");
         click(MatrixCostUpdatePage.saveButton, "Click Save Changes Button");
         click(MatrixCostUpdatePage.updateButton, "Click Update Button");
         Utility_Functions.timeWait(2);

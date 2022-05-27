@@ -4,6 +4,7 @@ import businesskeywords.common.Login;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -24,6 +25,7 @@ public class binMaintenance extends ReusableLib {
     CommonActions commonObj;
     businesskeywords.SPO.Spo sp;
     Login login;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -36,6 +38,7 @@ public class binMaintenance extends ReusableLib {
         commonObj = new CommonActions(helper);
         sp = new businesskeywords.SPO.Spo(helper);
         login = new Login(helper);
+        ownDriver=helper.getGSDriver();
     }
 
     /**
@@ -51,7 +54,7 @@ public class binMaintenance extends ReusableLib {
             url = properties.getProperty(prodUrl);
 
         }
-        driver.get(url);
+        ownDriver.get(url);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
@@ -213,11 +216,11 @@ public class binMaintenance extends ReusableLib {
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Clear All Filter button is disabled");
         click(BinMaintenancePage.itemNumberContains, "Enable item Number Contains check box");
         Utility_Functions.timeWait(2);
-        Boolean bl = Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.buttonDis);
+        Boolean bl = Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.buttonDis);
         Utility_Functions.xAssertEquals(report, bl, false, "Clear All Filter button is enabled");
-        Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
+        Utility_Functions.xClickHiddenElement(ownDriver, BinMaintenancePage.clearFilter);
         Utility_Functions.timeWait(2);
-        Boolean bl1 = driver.findElement(BinMaintenancePage.itemNumberContains).isSelected();
+        Boolean bl1 = ownDriver.findElement(BinMaintenancePage.itemNumberContains).isSelected();
         Utility_Functions.xAssertEquals(report, bl1, false, "After Click Clear All Filter, item Number Contains check box is disabled");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Clear All Filter button is disabled");
@@ -256,9 +259,9 @@ public class binMaintenance extends ReusableLib {
         click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         enableAsteriskItem(by, "Disable");
-        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, tabs("Item Number")), false, "Item number result Filter is removed");
-        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, tabs(checkBoxName)), false, checkBoxName + " result Filter is removed");
-        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(driver, tabs("Clear Filters ")), false, "Clear Filters result Filter is removed");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(ownDriver, tabs("Item Number")), false, "Item number result Filter is removed");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(ownDriver, tabs(checkBoxName)), false, checkBoxName + " result Filter is removed");
+        Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(ownDriver, tabs("Clear Filters ")), false, "Clear Filters result Filter is removed");
         Utility_Functions.timeWait(3);
         click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
@@ -285,11 +288,11 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(BinMaintenancePage.itemNumberContains, "Enable item Number Contains check box");
         Utility_Functions.timeWait(2);
-        Boolean bl1 = driver.findElement(BinMaintenancePage.itemNumberContains).isSelected();
+        Boolean bl1 = ownDriver.findElement(BinMaintenancePage.itemNumberContains).isSelected();
         Utility_Functions.xAssertEquals(report, bl1, true, "After Click Clear All Filter, item Number Contains check box is enabled");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Apply filter button is disabled");
-        Utility_Functions.xAssertEquals(report, driver.findElement(BinMaintenancePage.itemNumber).getAttribute("ng-reflect-model"), "~" + itemNumber, "");
+        Utility_Functions.xAssertEquals(report, ownDriver.findElement(BinMaintenancePage.itemNumber).getAttribute("ng-reflect-model"), "~" + itemNumber, "");
     }
 
     /**
@@ -341,14 +344,14 @@ public class binMaintenance extends ReusableLib {
         click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        String desc = driver.findElement(By.xpath("//td/div")).getText().trim();
+        String desc = ownDriver.findElement(By.xpath("//td/div")).getText().trim();
         Utility_Functions.xUpdateJson("ItemNmDescription", desc);
         click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.itemDescription, desc, "Enter description");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        if (driver.findElements(BinMaintenancePage.itemBinManItemDet).size() > 1) {
+        if (ownDriver.findElements(BinMaintenancePage.itemBinManItemDet).size() > 1) {
             click(By.xpath("//td/a"));
             Utility_Functions.timeWait(3);
         }
@@ -378,7 +381,7 @@ public class binMaintenance extends ReusableLib {
         click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        String itemCount = Utility_Functions.getText(driver, BinMaintenancePage.itemCount);
+        String itemCount = Utility_Functions.getText(ownDriver, BinMaintenancePage.itemCount);
         commonObj.validateElementExists(BinMaintenancePage.itemCount, "Total item present on Item Maintenance Tab: " + itemCount);
     }
 
@@ -388,7 +391,7 @@ public class binMaintenance extends ReusableLib {
         click(BinMaintenancePage.includeJobItems, "Enable Exclude Job Items");
         click(BinMaintenancePage.excludeZZ98Items, "Enable Exclude ZZ98 Items");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
+        Utility_Functions.xClickHiddenElement(ownDriver, BinMaintenancePage.clearFilter);
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(BinMaintenancePage.isCheckBoxEnabled, "All filters are cleared");
     }
@@ -400,7 +403,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(5);
         String[] syms = {"=", "<", ">"};
         for (String sym : syms) {
-            if (Utility_Functions.xIsDisplayed(driver, TruckPage.filterSearch)) {
+            if (Utility_Functions.xIsDisplayed(ownDriver, TruckPage.filterSearch)) {
                 click(TruckPage.filterSearch, "Click Search icon");
                 Utility_Functions.timeWait(2);
             }
@@ -412,7 +415,7 @@ public class binMaintenance extends ReusableLib {
             sendKeys(BinMaintenancePage.onHandFilter, "-1", "Enter on hand quantity");
             click(BinMaintenancePage.applyFilter, "Click Apply filter");
             Utility_Functions.timeWait(4);
-            if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td[text()='-1']"))) {
+            if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td[text()='-1']"))) {
                 commonObj.validateText(By.xpath("//td[text()='-1']"), "-1", "On Hand is filtered");
             }
         }
@@ -425,7 +428,7 @@ public class binMaintenance extends ReusableLib {
         enableContainsFilter();
         commonObj.validateText(BinMaintenancePage.selectAllCheckbox, "Select All Items", "'Select All Items' check box is present");
         String[] actText = {"Item Number", "Description", "Manufacturer", "Product Group", "Vendor", "Bins", "On Hand"};
-        List<WebElement> els = driver.findElements(By.xpath("//th"));
+        List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         for (int i = 0; i < 4; i++) {
             Utility_Functions.xAssertEquals(report, els.get(i).getText().trim(), actText[i], "");
             i++;
@@ -438,14 +441,14 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify Page Count
      */
     public void valPageCount(int pageNum) {
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
         try {
             click(By.xpath("//nav[@id='itemDetailsPagination1']/descendant::span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
         } catch (Exception e) {
             click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
         }
-        int ItemCount = driver.findElements(BinMaintenancePage.itemCountSP).size();
+        int ItemCount = ownDriver.findElements(BinMaintenancePage.itemCountSP).size();
         if (ItemCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + ItemCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Item Count");
         } else {
@@ -457,11 +460,11 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify functionality of Page Count
      */
     public void funPageCountItemMaintenance() {
-        Utility_Functions.xScrollWindow(driver);
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
-            int itemCount = driver.findElements(BinMaintenancePage.itemCountSP).size();
+        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
+            int itemCount = ownDriver.findElements(BinMaintenancePage.itemCountSP).size();
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having Item count " + itemCount + "");
         } else {
             valPageCount(10);
@@ -476,10 +479,10 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify Page Count for [Bin Maintenance]
      */
     public void valPageCountBins(int pageNum) {
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
         click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
-        int ItemCount = driver.findElements(BinMaintenancePage.binsCountSP).size();
+        int ItemCount = ownDriver.findElements(BinMaintenancePage.binsCountSP).size();
         if (ItemCount == pageNum) {
             Utility_Functions.xAssertEquals(report, "" + ItemCount + "", "" + pageNum + "", "'" + pageNum + "' is in disable state and showing " + pageNum + " Bin Count");
         } else {
@@ -491,11 +494,11 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify functionality of Page Count for [Bin Maintenance]
      */
     public void funPageCountBinMaintenance() {
-        Utility_Functions.xScrollWindow(driver);
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
-            int itemCount = driver.findElements(BinMaintenancePage.binsCountSP).size();
+        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
+            int itemCount = ownDriver.findElements(BinMaintenancePage.binsCountSP).size();
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having Item count " + itemCount + "");
         } else {
             valPageCountBins(10);
@@ -511,14 +514,14 @@ public class binMaintenance extends ReusableLib {
      */
     public void selectPage(int actPageNo, String expPage, String arrowIcon) {
         try {
-            click(driver.findElements(BinMaintenancePage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
-            Utility_Functions.xScrollWindow(driver);
-            String pageNo = driver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
+            click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
+            Utility_Functions.xScrollWindow(ownDriver);
+            String pageNo = ownDriver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
             Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
         } catch (Exception e) {
-            click(driver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
-            Utility_Functions.xScrollWindow(driver);
-            String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+            click(ownDriver.findElements(DriversPage.pageArrow).get(actPageNo), "Click on " + arrowIcon + " Present below the Right Corner of the page");
+            Utility_Functions.xScrollWindow(ownDriver);
+            String pageNo = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
             Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
         }
         Utility_Functions.timeWait(2);
@@ -529,32 +532,32 @@ public class binMaintenance extends ReusableLib {
      */
     public void paginationItemMaintenance() {
         int size = 2;
-        Utility_Functions.xScrollWindow(driver);
+        Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(driver, DriversPage.onePage)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
         } else {
             try {
-                click(driver.findElements(BinMaintenancePage.pageArrow).get(2));
-                Utility_Functions.xScrollWindow(driver);
-                click(driver.findElements(BinMaintenancePage.pageArrow).get(0));
+                click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(2));
+                Utility_Functions.xScrollWindow(ownDriver);
+                click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(0));
             } catch (Exception e) {
-                click(driver.findElements(DriversPage.pageArrow).get(2));
-                Utility_Functions.xScrollWindow(driver);
-                click(driver.findElements(DriversPage.pageArrow).get(0));
+                click(ownDriver.findElements(DriversPage.pageArrow).get(2));
+                Utility_Functions.xScrollWindow(ownDriver);
+                click(ownDriver.findElements(DriversPage.pageArrow).get(0));
             }
-            Utility_Functions.xScrollWindow(driver);
+            Utility_Functions.xScrollWindow(ownDriver);
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
             try {
-                click(driver.findElements(BinMaintenancePage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
-                Utility_Functions.xScrollWindow(driver);
-                String pageNo = driver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
+                click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
+                Utility_Functions.xScrollWindow(ownDriver);
+                String pageNo = ownDriver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
                 Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
             } catch (Exception e) {
-                click(driver.findElements(DriversPage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
-                Utility_Functions.xScrollWindow(driver);
-                String pageNo = driver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+                click(ownDriver.findElements(DriversPage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
+                Utility_Functions.xScrollWindow(ownDriver);
+                String pageNo = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
                 Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
             }
             Utility_Functions.timeWait(2);
@@ -566,13 +569,13 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify functionality of Zone drop down
      */
     public void verifyZoneDropDown() {
-        int size = driver.findElements(BinMaintenancePage.zoneDropFilter).size();
+        int size = ownDriver.findElements(BinMaintenancePage.zoneDropFilter).size();
         for (int i = 1; i < size; i++) {
-            String option = driver.findElements(BinMaintenancePage.zoneIdDropDown).get(i).getText().trim();
-            Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.zoneIdDropDown), option, "Select '" + option + "' option from the drop down ");
+            String option = ownDriver.findElements(BinMaintenancePage.zoneIdDropDown).get(i).getText().trim();
+            Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.zoneIdDropDown), option, "Select '" + option + "' option from the drop down ");
             click(BinMaintenancePage.applyFilter, "Click apply filter");
             Utility_Functions.timeWait(3);
-            String itemCount = Utility_Functions.getText(driver, BinMaintenancePage.itemCount);
+            String itemCount = Utility_Functions.getText(ownDriver, BinMaintenancePage.itemCount);
             commonObj.validateElementExists(BinMaintenancePage.itemCount, "Total item present on Item Maintenance Tab: " + itemCount);
             validateItemHeader();
             //commonObj.validateElementExists(By.xpath("//td[contains(text(),'')]"));
@@ -586,22 +589,22 @@ public class binMaintenance extends ReusableLib {
     public void verifySelectAllCheckBox() {
         click(BinMaintenancePage.selectAllCheckbox, "Enable 'Select All Items' check box");
         Utility_Functions.timeWait(2);
-        int size = driver.findElements(BinMaintenancePage.highlightRow).size();
+        int size = ownDriver.findElements(BinMaintenancePage.highlightRow).size();
         Utility_Functions.xAssertEquals(report, size, 10, "All items are Selected");
         Utility_Functions.timeWait(2);
         click(By.xpath("//tr[2]"), "Deselect one item from the list");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xAssertEquals(report, driver.findElements(BinMaintenancePage.highlightRow).size(), 9, "One record is Deselected");
+        Utility_Functions.xAssertEquals(report, ownDriver.findElements(BinMaintenancePage.highlightRow).size(), 9, "One record is Deselected");
         click(BinMaintenancePage.selectAllCheckbox, "Click 'Select All Items' check box");
         Utility_Functions.timeWait(2);
         click(BinMaintenancePage.selectAllCheckbox, "Click 'Deselect All Items' check box");
         Utility_Functions.timeWait(2);
-        Boolean count = Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.highlightRow);
+        Boolean count = Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.highlightRow);
         Utility_Functions.xAssertEquals(report, count, false, "All items are Deselected");
         Utility_Functions.timeWait(2);
         click(By.xpath("//tr[2]"), "Select one item from the list");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xAssertEquals(report, driver.findElements(BinMaintenancePage.highlightRow).size(), 1, "One record is Selected");
+        Utility_Functions.xAssertEquals(report, ownDriver.findElements(BinMaintenancePage.highlightRow).size(), 1, "One record is Selected");
     }
 
     public void validateNegQty() {
@@ -664,7 +667,7 @@ public class binMaintenance extends ReusableLib {
         login.siteLogin();
         sp.validateItemMasterTitle();
         sendKeys(SalesOrdersPage.itemNumber, val.get(0).toString(), "Enter item number");
-        Utility_Functions.actionKey(Keys.ENTER, driver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.timeWait(4);
         String[] manufacturerCode = getAttribute(ItemMasterPage.manufacturerCode, "value").trim().split("-");
         String[] productCode = getAttribute(ItemMasterPage.productCode, "value").trim().split("-");
@@ -695,12 +698,12 @@ public class binMaintenance extends ReusableLib {
         verifyIcons();
         String[] actText = {"Bin Location", "Zone", "Status", "Bin Type", "Bin Min", "Bin Max", "Action"};
         for (int i = 0; i <= 6; i++) {
-            Utility_Functions.xAssertEquals(report, driver.findElement(By.xpath("//th[contains(text(),'" + actText[i] + "')]")).getText().trim(), actText[i], "");
+            Utility_Functions.xAssertEquals(report, ownDriver.findElement(By.xpath("//th[contains(text(),'" + actText[i] + "')]")).getText().trim(), actText[i], "");
             i++;
         }
         String[] actButton = {"Back", " Edit Bin ", "Create Bin", "Add Bin"};
         for (int i = 0; i < 4; i++) {
-            Utility_Functions.xAssertEquals(report, driver.findElement(button(actButton[i])).getText(), actButton[i], "");
+            Utility_Functions.xAssertEquals(report, ownDriver.findElement(button(actButton[i])).getText(), actButton[i], "");
             i++;
         }
     }
@@ -712,10 +715,10 @@ public class binMaintenance extends ReusableLib {
         {
             click(getBinLocation(""), "Select item from the list");
             Utility_Functions.timeWait(2);
-            Utility_Functions.xAssertEquals(report, driver.findElements(BinMaintenancePage.highlightRow).size(), 1, "One record is Selected");
+            Utility_Functions.xAssertEquals(report, ownDriver.findElements(BinMaintenancePage.highlightRow).size(), 1, "One record is Selected");
             click(getBinLocation(""), "Select item from the list");
             Utility_Functions.timeWait(2);
-            Boolean count = Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.highlightRow);
+            Boolean count = Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.highlightRow);
             Utility_Functions.xAssertEquals(report, count, false, "item is Deselected");
         }
     }
@@ -729,13 +732,13 @@ public class binMaintenance extends ReusableLib {
         click(tabs("Primary"), "Click Primary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.primaryOpt), "Secondary", "Select secondary option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.primaryOpt), "Secondary", "Select secondary option from the drop down ");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Cannot set primary bin to secondary", "Error toaster 'Cannot set primary bin to secondary' is present");
-        int size = driver.findElements(BinMaintenancePage.primaryOpt).size();
+        int size = ownDriver.findElements(BinMaintenancePage.primaryOpt).size();
         if (size == 2) {
             size = size - 1;
         }
@@ -751,13 +754,13 @@ public class binMaintenance extends ReusableLib {
         click(tabs("Secondary"), "Click Secondary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.secondaryOpt), "Temporary", "Select Temporary option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.secondaryOpt), "Temporary", "Select Temporary option from the drop down ");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Updated.", "'Bin-item is successfully Updated.' is present");
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.temporaryOpt), "Secondary", "And then Select Secondary option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.temporaryOpt), "Secondary", "And then Select Secondary option from the drop down ");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Updated.", "'Bin-item is successfully Updated.' is present");
     }
@@ -765,7 +768,7 @@ public class binMaintenance extends ReusableLib {
     public void isPrimaryItemDelete() {
         if (getText(BinMaintenancePage.toaster).equals("Cannot delete primary if secondary/temporary bin exists")) {
             commonObj.validateText(BinMaintenancePage.toaster, "Cannot delete primary if secondary/temporary bin exists", "'Cannot delete primary if secondary/temporary bin exists' is present");
-            click(driver.findElements(BinMaintenancePage.deleteIcon).get(1), "Click delete icon");
+            click(ownDriver.findElements(BinMaintenancePage.deleteIcon).get(1), "Click delete icon");
             Utility_Functions.timeWait(2);
             commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
             click(button("Yes"), "Click 'Yes' Button");
@@ -782,7 +785,7 @@ public class binMaintenance extends ReusableLib {
         click(tabs("Primary"), "Click Primary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
         click(BinMaintenancePage.deleteIcon, "Click delete icon");
@@ -806,7 +809,7 @@ public class binMaintenance extends ReusableLib {
         click(tabs("Primary"), "Click Primary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
         click(BinMaintenancePage.editIcon, "Click Edit Icon");
@@ -822,7 +825,7 @@ public class binMaintenance extends ReusableLib {
         click(BinMaintenancePage.editIcon, "Click Edit Icon");
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.editTextBox, "1", "Enter Bin min as 1");
-        sendKeys(driver.findElements(BinMaintenancePage.editTextBox).get(1), "10", "Enter Bin max as 10");
+        sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "10", "Enter Bin max as 10");
         Utility_Functions.timeWait(3);
         click(BinMaintenancePage.saveIcon, "Click Save icon");
         Utility_Functions.timeWait(3);
@@ -837,11 +840,11 @@ public class binMaintenance extends ReusableLib {
     public void verifyBinMinMax() {
         clickEditButton();
         clearText(BinMaintenancePage.editTextBox);
-        Utility_Functions.xClearAndSendKeys(driver, driver.findElements(BinMaintenancePage.editTextBox).get(1), "");
+        Utility_Functions.xClearAndSendKeys(ownDriver, ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "");
         sendKeys(BinMaintenancePage.editTextBox, "ASDD#$", "Enter special character and alphabets into Bin min as ASDD#$");
-        sendKeys(driver.findElements(BinMaintenancePage.editTextBox).get(1), "Auto#$", "Enter special character and alphabets into Bin Max as 'Auto#$'");
+        sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "Auto#$", "Enter special character and alphabets into Bin Max as 'Auto#$'");
         sendKeys(BinMaintenancePage.editTextBox, "10011111111111", "Enter more than 10 number into Bin min");
-        sendKeys(driver.findElements(BinMaintenancePage.editTextBox).get(1), "12345678901", "Enter 10 into Bin Max");
+        sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "12345678901", "Enter 10 into Bin Max");
         click(BinMaintenancePage.saveIcon, "Click Save icon");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin Item updated successfully.", "'Bin Item updated successfully.' is present");
@@ -850,7 +853,7 @@ public class binMaintenance extends ReusableLib {
         click(BinMaintenancePage.editIcon, "Click Edit Icon");
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.editTextBox, "10", "Enter number 10 into Bin min");
-        sendKeys(driver.findElements(BinMaintenancePage.editTextBox).get(1), "5", "Enter number 5 into Bin Max");
+        sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "5", "Enter number 5 into Bin Max");
         Utility_Functions.timeWait(2);
         click(BinMaintenancePage.saveIcon, "Click Save icon");
         Utility_Functions.timeWait(3);
@@ -875,15 +878,15 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void changeStatus(String binLocation, String status) {
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.zoneIdDropDown), "Test", "Select Test option from the drop down ");
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.zoneIdDropDown), "Test", "Select Test option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
         Utility_Functions.timeWait(2);
         try {
-            click(driver.findElements(button("Save ")).get(1), "Click Save button");
+            click(ownDriver.findElements(button("Save ")).get(1), "Click Save button");
         } catch (Exception e) {
             click(BinMaintenancePage.stagingArea);
             Utility_Functions.timeWait(2);
-            click(driver.findElements(button("Save ")).get(0), "Click Save button");
+            click(ownDriver.findElements(button("Save ")).get(0), "Click Save button");
         }
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Selected Bins updated successfully.", "'Selected Bins updated successfully.' is present");
@@ -900,7 +903,7 @@ public class binMaintenance extends ReusableLib {
     public void verifyEditBinPopUp() {
         clickEditButton();
         String binLocation = navigateToEditBinPopUp();
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.binConditionId), "No Change", "Select No Change option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.binConditionId), "No Change", "Select No Change option from the drop down ");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
         String[] statuses = {"Good", "Defective", "Damaged", "No Change"};
@@ -911,13 +914,13 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void enterRequiredData() {
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.createBinCondition), jsonData.getData("BinCondition"), "Select 'Good' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.createBinCondition), jsonData.getData("BinCondition"), "Select 'Good' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(1), jsonData.getData("BinZone"), "Select 'Test' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElements(BinMaintenancePage.createBinCondition).get(1), jsonData.getData("BinZone"), "Select 'Test' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(2), jsonData.getData("Picking"), "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElements(BinMaintenancePage.createBinCondition).get(2), jsonData.getData("Picking"), "Select 'RF Gun' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElements(BinMaintenancePage.createBinCondition).get(3), jsonData.getData("Receiving"), "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElements(BinMaintenancePage.createBinCondition).get(3), jsonData.getData("Receiving"), "Select 'RF Gun' option from the drop down ");
         Utility_Functions.timeWait(2);
     }
 
@@ -928,7 +931,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xUpdateJson("itemLocation", "" + binLoc + "");
         sendKeys(BinMaintenancePage.createBinLabel, "" + binLoc + "", "Enter Bin Location");
         enterRequiredData();
-        click(driver.findElement(button("Create ")), "Click Save button");
+        click(ownDriver.findElement(button("Create ")), "Click Save button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully", "'Bin and Bin-item are created successfully' is present");
         int i = 0;
@@ -963,7 +966,7 @@ public class binMaintenance extends ReusableLib {
         for (String textLabel : textLabels) {
             commonObj.validateText(By.xpath("//label[text()='" + textLabel + "' and contains(@for,'createBin')]"), textLabel.trim(), textLabel + " text box is present");
         }
-        click(driver.findElements((button("Cancel "))).get(1), "Click Cancel button");
+        click(ownDriver.findElements((button("Cancel "))).get(1), "Click Cancel button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
         createBin();
@@ -979,7 +982,7 @@ public class binMaintenance extends ReusableLib {
         sendKeys(BinMaintenancePage.createBinLabel, Utility_Functions.xGetJsonData("itemLocation"), "Enter Bin Location");
         Utility_Functions.timeWait(2);
         enterRequiredData();
-        click(driver.findElement(button("Create ")), "Click Save button");
+        click(ownDriver.findElement(button("Create ")), "Click Save button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin Location already exists", "'Bin Location already exists' is present");
     }
@@ -999,7 +1002,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.addBinLoc, binLct, "Enter Bin Location");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(driver, report, driver.findElement(BinMaintenancePage.addBinZoneDrop), "Test", "Select 'Test' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.addBinZoneDrop), "Test", "Select 'Test' option from the drop down ");
         Utility_Functions.timeWait(2);
         click(BinMaintenancePage.addSave, "Click Save button");
         Utility_Functions.timeWait(2);
@@ -1011,7 +1014,7 @@ public class binMaintenance extends ReusableLib {
         click(tabs("Primary"), "Click Primary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
-        if (Utility_Functions.xIsDisplayed(driver, By.xpath("//td/a"))) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
     }
@@ -1067,7 +1070,7 @@ public class binMaintenance extends ReusableLib {
 
     public void validateAlreadyExistZoneAbrv() {
         Utility_Functions.timeWait(2);
-        if (!Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.toaster)) {
+        if (!Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.toaster)) {
             click(button(" Cancel "));
             Utility_Functions.timeWait(2);
             deleteZoneIcon();
@@ -1120,16 +1123,16 @@ public class binMaintenance extends ReusableLib {
         String zName = Utility_Functions.xGetJsonData("zoneName").toLowerCase();
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " created successfully.", "'Zone " + zName + " created successfully.' message is present");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(driver,driver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
-        Utility_Functions.xAssertEquals(report, driver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
-        Utility_Functions.xAssertEquals(report, driver.findElements(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).get(0).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
+        Utility_Functions.xScrollIntoView(driver,ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
+        Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
+        Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).get(0).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
     }
 
     public String expandZone() {
         Utility_Functions.timeWait(3);
         String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
-        WebElement expand = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/a"));
-        Utility_Functions.xScrollIntoView(driver, expand);
+        WebElement expand = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/a"));
+        Utility_Functions.xScrollIntoView(ownDriver, expand);
         Utility_Functions.timeWait(2);
         click(expand, "Expand Zone detail");
         Utility_Functions.timeWait(2);
@@ -1137,7 +1140,7 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void clickEditIcon(String zoneAbv) {
-        WebElement editIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"));
+        WebElement editIcon = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"));
         click(editIcon, "Click Edit icon");
         Utility_Functions.timeWait(2);
     }
@@ -1157,7 +1160,7 @@ public class binMaintenance extends ReusableLib {
     public void clickDeleteZoneIcon() {
         String zoneAbv = clickEditZoneIcon();
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
-        WebElement deleteIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
+        WebElement deleteIcon = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
         Utility_Functions.timeWait(2);
         click(deleteIcon, "Click Delete Icon");
         Utility_Functions.timeWait(2);
@@ -1170,7 +1173,7 @@ public class binMaintenance extends ReusableLib {
     public void deleteZoneIcon() {
         String zoneAbv = clickEditZoneIcon();
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
-        WebElement deleteIcon = driver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
+        WebElement deleteIcon = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
         Utility_Functions.timeWait(2);
         click(deleteIcon, "Click Delete Icon");
         Utility_Functions.timeWait(2);
@@ -1256,7 +1259,7 @@ public class binMaintenance extends ReusableLib {
         for (String count : rowsCount) {
             commonObj.validateElementExists(By.xpath("//nav[@id='binMaintenancePagination']//following::span[text()='" + count + "']"), "Rows Count " + count + " is present");
         }
-        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.btnShowRowsCount);
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(ownDriver, BinMaintenancePage.btnShowRowsCount);
         if (lstElement.get(0).getAttribute("class").contains("selected-count")) {
             report.updateTestLog("Verify show rows count", "Verify show rows count [10] is set by default", Status.PASS);
         }
@@ -1269,7 +1272,7 @@ public class binMaintenance extends ReusableLib {
         try {
             click(button("Create New Bin"), "Click on [Create New Bin] button");
         } catch (Exception e) {
-            Utility_Functions.xClickHiddenElement(driver, button("Create New Bin"));
+            Utility_Functions.xClickHiddenElement(ownDriver, button("Create New Bin"));
         }
         waitForVisible(BinMaintenancePage.hdrCreateNewBinPopup);
     }
@@ -1359,9 +1362,9 @@ public class binMaintenance extends ReusableLib {
      */
     public void selectDropdownsCreateNewBinPopup(String condition, String zones, String picking, String receiving) {
         String[] texts = {condition, zones, picking, receiving};
-        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.lstDropdownsCreateNewBinPopup);
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(ownDriver, BinMaintenancePage.lstDropdownsCreateNewBinPopup);
         for (int i = 0; i < lstElement.size(); i++) {
-            Utility_Functions.xSelectDropdownByName(driver, report, lstElement.get(i), texts[i], "selected value [" + texts[i] + "] in drodpown");
+            Utility_Functions.xSelectDropdownByName(ownDriver, report, lstElement.get(i), texts[i], "selected value [" + texts[i] + "] in drodpown");
             Utility_Functions.timeWait(1);
         }
     }
@@ -1404,10 +1407,10 @@ public class binMaintenance extends ReusableLib {
     public void selectDropdownOptionCreateNewBinPopup(String binLocation, String condition, String zones, String
             picking, String receiving) {
         sendKeys(BinMaintenancePage.tbxBinLocation, binLocation, "Entering [" + binLocation + "] in Bin Location textbox");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnConditionCreateBinPopup, condition, "Selected option [" + condition + "] in Condition dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnZoneCreateBinPopup, zones, "Selected option [" + zones + "] in Zoned dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnPickingCreateBinPopup, picking, "Selected option [" + picking + "] in Picking dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnReceivingCreateBinPopup, receiving, "Selected option [" + receiving + "] in Receiving dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnConditionCreateBinPopup, condition, "Selected option [" + condition + "] in Condition dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnZoneCreateBinPopup, zones, "Selected option [" + zones + "] in Zoned dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnPickingCreateBinPopup, picking, "Selected option [" + picking + "] in Picking dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnReceivingCreateBinPopup, receiving, "Selected option [" + receiving + "] in Receiving dropdown");
     }
 
     /**
@@ -1470,7 +1473,7 @@ public class binMaintenance extends ReusableLib {
     public String selectFirstRecordBinMaintenance() {
         waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
         String selectedBin = "";
-        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.binsCountSP);
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(ownDriver, BinMaintenancePage.binsCountSP);
 
         if (!lstElement.isEmpty()) {
             selectedBin = Utility_Functions.xClickgetTextofFirstElementfromList(lstElement);
@@ -1512,10 +1515,10 @@ public class binMaintenance extends ReusableLib {
      * Keyword to select value in Edit Bin popup and verify in table for first row
      */
     public void selectRandomDropdownValueAndVerifyAfterSave() {
-        String zone = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnZoneEditBinPopup);
-        String condition = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnConditionEditBinPopup);
-        String receiving = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnReceivingEditBinPopup);
-        String picking = Utility_Functions.xSelectDropdownByNameRandomValue(driver, BinMaintenancePage.ddnPickingEditBinPopup);
+        String zone = Utility_Functions.xSelectDropdownByNameRandomValue(ownDriver, BinMaintenancePage.ddnZoneEditBinPopup);
+        String condition = Utility_Functions.xSelectDropdownByNameRandomValue(ownDriver, BinMaintenancePage.ddnConditionEditBinPopup);
+        String receiving = Utility_Functions.xSelectDropdownByNameRandomValue(ownDriver, BinMaintenancePage.ddnReceivingEditBinPopup);
+        String picking = Utility_Functions.xSelectDropdownByNameRandomValue(ownDriver, BinMaintenancePage.ddnPickingEditBinPopup);
         click(BinMaintenancePage.btnSavEdiBinPopup, "Click [Save] button");
         waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
 
@@ -1541,7 +1544,7 @@ public class binMaintenance extends ReusableLib {
      */
     public void selectMultiRecordsBinMaintenance(int count) {
         int flag = 0;
-        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(driver, BinMaintenancePage.binsCountSP);
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(ownDriver, BinMaintenancePage.binsCountSP);
         if (!lstElement.isEmpty()) {
             if (count < lstElement.size()) {
                 for (int i = 0; i < count; i++) {
@@ -1593,13 +1596,13 @@ public class binMaintenance extends ReusableLib {
      */
     public void selectDropdownOptionEditMultipleBinsPopup(String condition, String zones, String picking, String
             receiving, String specialHandling, String availableToSell, String stagingArea) {
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnConditionEditBinPopup, condition, "Selected option [" + condition + "] in Condition dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnZoneEditBinPopup, zones, "Selected option [" + zones + "] in Zoned dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnPickingEditBinPopup, picking, "Selected option [" + picking + "] in Picking dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnReceivingEditBinPopup, receiving, "Selected option [" + receiving + "] in Receiving dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnSpclHndlngEditBinPopup, specialHandling, "Selected option [" + specialHandling + "] in Special Handling dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnAvailToSellEditBinPopup, availableToSell, "Selected option [" + availableToSell + "] in Available To Sell dropdown");
-        Utility_Functions.xSelectDropdownByName(driver, report, BinMaintenancePage.ddnStgAreaEditBinPopup, stagingArea, "Selected option [" + stagingArea + "] in Staging Area dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnConditionEditBinPopup, condition, "Selected option [" + condition + "] in Condition dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnZoneEditBinPopup, zones, "Selected option [" + zones + "] in Zoned dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnPickingEditBinPopup, picking, "Selected option [" + picking + "] in Picking dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnReceivingEditBinPopup, receiving, "Selected option [" + receiving + "] in Receiving dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnSpclHndlngEditBinPopup, specialHandling, "Selected option [" + specialHandling + "] in Special Handling dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnAvailToSellEditBinPopup, availableToSell, "Selected option [" + availableToSell + "] in Available To Sell dropdown");
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnStgAreaEditBinPopup, stagingArea, "Selected option [" + stagingArea + "] in Staging Area dropdown");
     }
 
     /**
@@ -1608,7 +1611,7 @@ public class binMaintenance extends ReusableLib {
     public void vrfyRowValueInBinTable(By element, String expectedText, int rowCount) {
         int flag = 0;
         List<WebElement> lstElements = getListElement(element);
-        List<String> lstText = Utility_Functions.xGetTextVisibleListString(driver, lstElements);
+        List<String> lstText = Utility_Functions.xGetTextVisibleListString(ownDriver, lstElements);
 
         for (String text : lstText) {
             if (text.equalsIgnoreCase(expectedText))
@@ -1763,7 +1766,7 @@ public class binMaintenance extends ReusableLib {
      */
     public void validateListValue(List<WebElement> lstElement, String valueExpected) {
         int flag = 0;
-        List<String> lstElementValue = Utility_Functions.xGetTextVisibleListString(driver, lstElement);
+        List<String> lstElementValue = Utility_Functions.xGetTextVisibleListString(ownDriver, lstElement);
         for (String value : lstElementValue) {
             if (value.equalsIgnoreCase(valueExpected))
                 flag++;
@@ -1801,7 +1804,7 @@ public class binMaintenance extends ReusableLib {
     public void isZoneFieldsEditable(String label, String text) {
         boolean isDisabled = false;
         try {
-            isDisabled = driver.findElement(zoneDisabledFields(label, text)).isDisplayed();
+            isDisabled = ownDriver.findElement(zoneDisabledFields(label, text)).isDisplayed();
             throw new Exception("Zone Field should Enable");
         } catch (Exception e) {
             Utility_Functions.xAssertEquals(report, isDisabled, false, label + " field is Enabled");
@@ -1828,7 +1831,7 @@ public class binMaintenance extends ReusableLib {
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
         isZoneFieldDisabled("Zone Name", zoneName);
         isZoneFieldDisabled("Abbreviation", zoneAvr);
-        Boolean bl1 = driver.findElement(BinMaintenancePage.pickSequence).isEnabled();
+        Boolean bl1 = ownDriver.findElement(BinMaintenancePage.pickSequence).isEnabled();
         Utility_Functions.xAssertEquals(report, bl1, false, "Pick Sequence field is disabled");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
@@ -1841,7 +1844,7 @@ public class binMaintenance extends ReusableLib {
     public void validatePickSeqField(String zoneName, String validVal, String inValidVal) {
         Utility_Functions.timeWait(2);
         sendKeys(pickSequence(zoneName), validVal, "Enter '" + validVal + "' into Pick Sequence text field");
-        boolean bl = Utility_Functions.xIsDisplayed(driver, BinMaintenancePage.pickSeqError);
+        boolean bl = Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.pickSeqError);
         Utility_Functions.xAssertEquals(report, bl, false, "Error message is disappeared");
         sendKeys(pickSequence(zoneName), "100000");
         sendKeys(pickSequence(zoneName), inValidVal, "Enter '" + inValidVal + "' into Pick Sequence text field");
@@ -1900,14 +1903,14 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify Apply Clear Filter
      */
     public void verifyApplyClearFilter() {
-        Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
+        Utility_Functions.xClickHiddenElement(ownDriver, BinMaintenancePage.clearFilter);
         Utility_Functions.timeWait(2);
         commonObj.validateText(tabs("Item Number is missing."), "Item Number is missing.", "'Item Number is missing.' message is present");
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Apply Filter button is disabled");
         click(TruckPage.filtersCrossIcon, "Click 'x' icon");
         Utility_Functions.timeWait(2);
         try {
-            Utility_Functions.xIsDisplayed(driver, TruckPage.searchFilterPanelTitle);
+            Utility_Functions.xIsDisplayed(ownDriver, TruckPage.searchFilterPanelTitle);
         } catch (Exception e) {
             Utility_Functions.xAssertEquals(report, false, false, "Search Filter is disappeared");
         }
@@ -1931,7 +1934,7 @@ public class binMaintenance extends ReusableLib {
         commonObj.validateText(By.xpath("//h2"), "ITEM-BIN LEDGER", "Navigate back to 'ITEM-BIN LEDGER' Page");
         click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(driver, BinMaintenancePage.clearFilter);
+        Utility_Functions.xClickHiddenElement(ownDriver, BinMaintenancePage.clearFilter);
         commonObj.validateText(tabs("Item Number is missing."), "Item Number is missing.", "'Item Number is missing.' message is present");
     }
 

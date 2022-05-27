@@ -2,6 +2,7 @@ package businesskeywords.warehousing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,7 @@ public class DeliveredOrders extends ReusableLib {
     Manifests manFest;
     Drivers drv;
     Trucks truck;
+    private FrameworkDriver ownDriver;
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -32,6 +34,7 @@ public class DeliveredOrders extends ReusableLib {
         manFest = new Manifests(helper);
         drv=new Drivers(helper);
         truck=new Trucks(helper);
+        ownDriver=helper.getGSDriver();
         }
 
     /**
@@ -51,7 +54,7 @@ public class DeliveredOrders extends ReusableLib {
      */
     public void deliveredOrdersUI() {
         String[] actText={"Order Number","Date/Time","PO No.","Manifest No.","Delivered To","Shipment Status","Manifest Status","Driver","Truck","Ship Via"};
-        List<WebElement> els=driver.findElements(By.xpath("//th"));
+        List<WebElement> els=ownDriver.findElements(By.xpath("//th"));
         int i=0;
         for(WebElement el:els){
             Utility_Functions.xAssertEquals(report,el.getText().trim(),actText[i],"");
@@ -60,11 +63,11 @@ public class DeliveredOrders extends ReusableLib {
         commonObj.validateElementExists(TruckPage.helpIcon,"Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch,"Search filter icon is present");
         commonObj.validateElementExists(DeliveredOrdersPage.exportButton,"Export button is present");
-        int size=driver.findElements(TruckPage.pagination).size();
+        int size=ownDriver.findElements(TruckPage.pagination).size();
         Utility_Functions.xAssertEquals(report,size,4,"Next page and previous page arrow icon is present");
-        String page=Utility_Functions.getText(driver,TruckPage.currentPage);
-        commonObj.validateElementExists(TruckPage.currentPage,"Current Page "+page+" "+Utility_Functions.getText(driver,TruckPage.outOf)+"");
-        List<WebElement> elm=driver.findElements(TruckPage.show);
+        String page=Utility_Functions.getText(ownDriver,TruckPage.currentPage);
+        commonObj.validateElementExists(TruckPage.currentPage,"Current Page "+page+" "+Utility_Functions.getText(ownDriver,TruckPage.outOf)+"");
+        List<WebElement> elm=ownDriver.findElements(TruckPage.show);
         String[] acText={"10","15","30"};
         int j=0;
         for(WebElement el:elm){
@@ -81,7 +84,7 @@ public class DeliveredOrders extends ReusableLib {
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
         String[] actText = {"Order Number", "Date Delivered Range", "Customer PO Number", "Delivered To","Ship Via", "Shipment Status", "Manifest Order Status", "Driver", "Truck", "Manifest Number"};
-        List<WebElement> els = driver.findElements(TruckPage.searchFiltersLabel);
+        List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
@@ -103,17 +106,17 @@ public class DeliveredOrders extends ReusableLib {
         click(TruckPage.filterSearch, "Click search filter icon");
         Utility_Functions.timeWait(1);
         sendKeys(filterField("Order Number"), Utility_Functions.xGetJsonData("SalesOrder"), "Enter Order Number");
-        Utility_Functions.xMouseClick(driver, DeliveredOrdersPage.truckDrop);
+        Utility_Functions.xMouseClick(ownDriver, DeliveredOrdersPage.truckDrop);
         Utility_Functions.timeWait(2);
         String truckName = Utility_Functions.xGetJsonData("TruckName");
         System.out.println("truckName...." + truckName);
-        click(driver.findElement(By.xpath("//label[text()='Truck']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
+        click(ownDriver.findElement(By.xpath("//label[text()='Truck']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(driver, DeliveredOrdersPage.driverDrop);
+        Utility_Functions.xMouseClick(ownDriver, DeliveredOrdersPage.driverDrop);
         Utility_Functions.timeWait(2);
         String driverName = Utility_Functions.xGetJsonData("Driver");
         System.out.println("driverName...." + driverName);
-        click(driver.findElement(By.xpath("//label[text()='Driver']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
+        click(ownDriver.findElement(By.xpath("//label[text()='Driver']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
         Utility_Functions.timeWait(2);
         sendKeys(filterField("Manifest Number"), Utility_Functions.xGetJsonData("ManifestNumber"), "Enter Manifest Number");
         click(TruckPage.applyFilter, "Click Apply Filters");

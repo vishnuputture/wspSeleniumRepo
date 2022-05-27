@@ -9,13 +9,19 @@ public class AverageCost extends TestConfigurations {
 
     @Test(groups = {"DB","UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_21_SearchItemData(SeleniumTestParameters testParameters) {
+        System.out.println("test 1");
+       // System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
+        System.out.println("test 2");
         CoreScript coreScript = new CoreScript(testParameters);
+        System.out.println("test 3");
         coreScript.driveTestExecution();
+        System.out.println("test 4");
         tearDownTestRunner(testParameters, coreScript);
     }
     @Test(groups = {"DB"}, dataProvider = "DB", dataProviderClass = TestConfigurations.class)
     public void Tc_22_UpdateItemData(SeleniumTestParameters testParameters) {
+       //System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to update item In ItemMaster");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
