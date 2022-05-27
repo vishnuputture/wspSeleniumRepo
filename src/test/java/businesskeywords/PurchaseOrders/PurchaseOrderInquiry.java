@@ -167,6 +167,13 @@ public class PurchaseOrderInquiry extends ReusableLib {
         Utility_Functions.xAssertEquals(report, itemNumber, itemNumberActual, "Validate Item Number textbox value");
     }
 
+    public void navigateToItemLedger(){
+        String itemNumber = getElement(PurchaseOrderInquiryPage.itemNumber).getText().trim();
+        click(PurchaseOrderInquiryPage.btnItemLedger, "Click [Item Ledger] Button");
+        String itemNumberActual = getAttribute(PurchaseOrderInquiryPage.tbxItemNumber, "value");
+        Utility_Functions.xAssertEquals(report, itemNumber, itemNumberActual, "Validate Item Number textbox value");
+    }
+
     /**
      * Keyword to come back to Inventory Receipts from Item Ledger Page
      */

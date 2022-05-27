@@ -28,7 +28,7 @@
       "Tc_375_VerifyOptionAvailablePoInquiryDetails": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,validateOptions,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut",
       "Tc_380_VerifyPositionToLine": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,verifyPositionToLine,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut",
       "Tc_385_VerifyItemNumberField": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,verifyItemNumberField,clickOnF12ReturnBtn,signOut",
-      "Tc_390_VerifyNextBackExitItemLedger": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,verifyNextBackExitButtonItemLedger,vrfyQtyAndItemLedgerDetails,verifyItemLedgerUI,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut",
+      "Tc_390_VerifyNextBackExitItemLedger": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,verifyNextBackExitButtonItemLedger,navigateToItemLedger,verifyItemLedgerUI,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut",
       "TC_CreatePOWithTwoLineItem": "launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberQty,exitToMaster,signOut",
       "Tc_979_PartialReceivingStockPOItemsInventoryReceiptsScreen": "launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberQty,exitToMaster,redirectToMasterPage,navigateToInventoryReceipt,enterExistingPONumberRFGun,clickReceiveInProcessLink,switchToNextWindow,selectCompany,verifyReceiveSearchPo,switchBackToReceivingInProcess,enterQtyReceivedAndProcess,confirmFreight,switchToNextWindow,verifyReceiveSearchPo,switchBackToReceivingInProcess,navigatePOInquiryToMaster,signOut",
       "Tc_406_VerifyOpenPODetails": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,validateAmount,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut",
@@ -43,8 +43,7 @@
       "Tc_411_VerifyCustomerNumberFieldItemLedger": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,navigateToItemLedgerPage,verifyCustomerLedger,clickOnExitBtn,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut",
       "Tc_412_VerifySourceFieldItemLedger": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,navigateToItemLedgerPage,verifySourceFieldLedger,clickOnExitBtn,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut",
       "Tc_413_VerifyCalendarFieldItemLedger": "launchApp,siteLogin,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,navigateToItemLedgerPage,verifyCalendarPicker,clickOnExitBtn,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut",
-      "TC_427_VerifyPOHasNoItemInPoDetails": "launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,pressF9,exitToMaster,clickOnF12ReturnBtn,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,validatePOForNoItem,clickOnF12ReturnBtn,clickOnF12ReturnBtn,signOut"
-
+      "TC_427_VerifyPOHasNoItemInPoDetails": "launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,pressF9,exitToMaster,clickOnF12ReturnBtn,navigateToPurchaseOrderInquiry,enterPONumberAndSelectAction,validatePOForNoItem"
     }
   ],
   "General_Data": [
@@ -224,12 +223,12 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "001682",
+      "SalesOrderNo": "001739",
       "QtyOrdered": "25",
       "VendorNumber": "000388",
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "032469"
+      "PONumber": "032620"
     },
     {
       "TC_ID": "Tc_358_VerifyPOInquiryDetailsUI",
