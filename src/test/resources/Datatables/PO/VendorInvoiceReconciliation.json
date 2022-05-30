@@ -1,0 +1,14 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_433_vendorInvoiceRecUI": "launchApp,siteLogin,navigateToVendorInvoiceRec,vendorInvoiceRecUI,exitVendorInvoiceRec,signOut",
+      "Tc_435_verifyReceiverDocFields": "launchApp,siteLogin,navigateToVendorInvoiceRec,vendorInvoiceRecUI,exitVendorInvoiceRec,signOut"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_433_vendorInvoiceRecUI",
+      "Title": "Test case UI of Vendor Invoice Reconciliation Page"
+    }
+  ]
+}

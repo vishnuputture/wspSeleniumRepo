@@ -142,12 +142,12 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "001676",
+      "SalesOrderNo": "001751",
       "QtyOrdered": "25",
       "VendorNumber": "000388",
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "032451"
+      "PONumber": "032657"
     },
     {
       "TC_ID": "Tc_968_ReceiveDirectPOInRFGun",
@@ -226,7 +226,7 @@
     },
     {
       "TC_ID": "Tc_767_verifyCreateNewBinWithNotAvailableReceiving",
-      "BinLocation": "TEST26706",
+      "BinLocation": "TEST85843",
       "BinCondition": "Good",
       "BinZones": "Default",
       "BinPicking": "Manual Picking & Staging",
@@ -283,7 +283,7 @@
       "Title": "Test case to verify Assign alternate item number in RF Gun",
       "Count": "3",
       "ItemNo": "AABABM200",
-      "AlternateItemNo": "TEST3751498"
+      "AlternateItemNo": "TEST9706247"
     }
   ]
 }

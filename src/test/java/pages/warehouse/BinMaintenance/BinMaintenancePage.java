@@ -47,6 +47,7 @@ public class BinMaintenancePage {
     public static  By binsCountSP=By.xpath("//tbody/tr/td[@class='pl-3']");
     public static  By highlightRow=By.xpath("//tr[contains(@class,'ui-state-highlight')]");
     public static  By toaster=By.xpath("//div[@class='ui-toast-summary']");
+    public static  By nSellable=By.id("sellable");
     public static  By primaryOpt=By.xpath("//select[@ng-reflect-model='Primary']");
     public static  By secondaryOpt=By.xpath("//select[@ng-reflect-model='Secondary']");
     public static  By temporaryOpt=By.xpath("//select[@ng-reflect-model='Temporary']");
@@ -99,7 +100,7 @@ public class BinMaintenancePage {
 
     public static By hdrEditBinPopup = By.xpath("//div[@class='modal-header']/h2[contains(text(),'EDIT ')]");
     public static By btnCancelEditBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Cancel')]");
-    public static By btnSaveEdiBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Create')]");
+    public static By btnSaveEdiBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Save')]");
     public static By btnSavEdiBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Save')]");
     public static By ddnZoneEditBinPopup = By.xpath("//form//label[contains(text(),'Zone')]//following-sibling::select");
     public static By ddnConditionEditBinPopup = By.xpath("//form//label[contains(text(),'Condition')]//following-sibling::select");

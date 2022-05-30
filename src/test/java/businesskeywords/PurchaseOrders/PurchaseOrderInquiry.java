@@ -461,7 +461,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
         click(PurchaseOrderInquiryPage.exitCustInfo, "Exit from [Local Company Information Screen]");
     }
 
-    public void verifyItemNumberField() {
+    public void verifyItemNumberFields() {
         sendKeysAndEnter(PurchaseOrderInquiryPage.itemNumberTextBox, jsonData.getData("alphaNumeric"), "Enter Alphanumeric value into Item Number Input field");
         vrfyNoDetailLineToDisplay();
         sendKeysAndEnter(PurchaseOrderInquiryPage.itemNumberTextBox, jsonData.getData("InvalidItemNumber"), "Enter Invalid Item Number value into Item Number Input field");

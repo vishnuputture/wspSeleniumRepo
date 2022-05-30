@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="none" thread-count="1">
-   <!-- <test name="ReceivingInProcess">
+     <test name="ReceivingInProcess">
 
-        <classes>
-            <class name="testcases.ReceivingInProcess">
-                <methods>
-                    <include name="Tc_957_SearchFilterUI"></include>
-                    <include name="Tc_958_SearchFilterFunctionality"></include>
-                    <include name="Tc_956_clearAllApplyFilterFunctionality"></include>
-                    <include name="Tc_946_verifyPurchaseOrderInputField"></include>
-                    <include name="Tc_947_verifyUserIdInputField"></include>
-                    <include name="Tc_948_verifyVendorInputField"></include>
+         <classes>
+             <class name="testcases.ReceivingInProcess">
+                 <methods>
+                     <include name="Tc_957_SearchFilterUI"></include>
+                     <include name="Tc_958_SearchFilterFunctionality"></include>
+                     <include name="Tc_956_clearAllApplyFilterFunctionality"></include>
+                     <include name="Tc_946_verifyPurchaseOrderInputField"></include>
+                     <include name="Tc_947_verifyUserIdInputField"></include>
+                     <include name="Tc_948_verifyVendorInputField"></include>
 
-                    <include name="Tc_945_receivingInProcessUI"></include>
-                    <include name="Tc_959_sortingFunctionality"></include>
-                    <include name="Tc_960_SearchFilterRemainingUI"></include>
-                    <include name="Tc_961_SearchFilterRemainFunctionality"></include>
-                    <include name="Tc_962_clearAllApplyFilterFunctionality"></include>
-                    <include name="Tc_949_verifyItemNoInputField"></include>
+                     <include name="Tc_945_receivingInProcessUI"></include>
+                     <include name="Tc_959_sortingFunctionality"></include>
+                     <include name="Tc_960_SearchFilterRemainingUI"></include>
+                     <include name="Tc_961_SearchFilterRemainFunctionality"></include>
+                     <include name="Tc_962_clearAllApplyFilterFunctionality"></include>
+                     <include name="Tc_949_verifyItemNoInputField"></include>
 
-                    <include name="Tc_950_verifyItemDescriptionInputField"></include>
-                    <include name="Tc_951_verifyRemainingUI"></include>
-                    <include name="TC_CreatePOWithTwoLineItem"></include>
-                    <include name="Tc_965_ReceiveItemsStockPORFGun"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>-->
+                     <include name="Tc_950_verifyItemDescriptionInputField"></include>
+                     <include name="Tc_951_verifyRemainingUI"></include>
+                     <include name="TC_CreatePOWithTwoLineItem"></include>
+                     <include name="Tc_965_ReceiveItemsStockPORFGun"></include>
+                 </methods>
+             </class>
+         </classes>
+     </test>
 
     <test name="ReceivingInProcess1">
         <classes>
@@ -49,7 +49,7 @@
         </classes>
     </test>
 
-    <!--<test name="ReceivingInProcess2">
+    <test name="ReceivingInProcess2">
         <classes>
             <class name="testcases.ReceivingInProcess">
                 <methods>
@@ -79,5 +79,5 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
 </suite>

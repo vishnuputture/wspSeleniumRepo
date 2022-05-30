@@ -38,7 +38,7 @@ public class binMaintenance extends ReusableLib {
         commonObj = new CommonActions(helper);
         sp = new businesskeywords.SPO.Spo(helper);
         login = new Login(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -877,10 +877,7 @@ public class binMaintenance extends ReusableLib {
         return binLocation;
     }
 
-    public void changeStatus(String binLocation, String status) {
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.zoneIdDropDown), "Test", "Select Test option from the drop down ");
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
-        Utility_Functions.timeWait(2);
+    public void clickSaveBtn(){
         try {
             click(ownDriver.findElements(button("Save ")).get(1), "Click Save button");
         } catch (Exception e) {
@@ -888,6 +885,24 @@ public class binMaintenance extends ReusableLib {
             Utility_Functions.timeWait(2);
             click(ownDriver.findElements(button("Save ")).get(0), "Click Save button");
         }
+    }
+
+    public void validateDefectiveStatus(String status) {
+        if(getAttribute(BinMaintenancePage.nSellable,"ng-reflect-model").equals("true")) {
+            if (status.equals("Defective")) {
+                commonObj.validateText(BinMaintenancePage.toaster, "Sellable must be N when bin condition is defective", "'Sellable must be N when bin condition is defective' is present");
+                click(BinMaintenancePage.nSellable);
+                clickSaveBtn();
+            }
+        }
+    }
+
+    public void changeStatus(String binLocation, String status) {
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.zoneIdDropDown), "Test", "Select Test option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
+        Utility_Functions.timeWait(2);
+        clickSaveBtn();
+        validateDefectiveStatus(status);
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Selected Bins updated successfully.", "'Selected Bins updated successfully.' is present");
         if (status.equals("No Change")) {
@@ -941,7 +956,7 @@ public class binMaintenance extends ReusableLib {
                 commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLoc + "')]"), binLoc + " Bin location is created");
                 break;
             } catch (Exception e) {
-                Utility_Functions.xClickHiddenElement(ownDriver,ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
+                Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
                 Utility_Functions.timeWait(4);
             }
         }
@@ -1123,7 +1138,7 @@ public class binMaintenance extends ReusableLib {
         String zName = Utility_Functions.xGetJsonData("zoneName").toLowerCase();
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " created successfully.", "'Zone " + zName + " created successfully.' message is present");
         Utility_Functions.timeWait(3);
-        Utility_Functions.xScrollIntoView(ownDriver,ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
+        Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
         Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
         Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).get(0).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
     }
@@ -1985,7 +2000,7 @@ public class binMaintenance extends ReusableLib {
                 commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLocation + "')]"), binLocation + " Bin location is created");
                 break;
             } catch (Exception e) {
-                Utility_Functions.xClickHiddenElement(ownDriver,ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
+                Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
                 Utility_Functions.timeWait(4);
             }
         }
