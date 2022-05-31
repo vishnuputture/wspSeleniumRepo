@@ -42,10 +42,16 @@ public class VendorInvoiceReconciliationPage extends ReusableLib {
     public static By allocationMethod = By.id("D_14_19");
     public static By qtyManual = By.id("D_15_32");
     public static By dollarCustPayFreight = By.id("D_16_32");
+    public static By selMult = By.id("D_12_5");
     public static By byWeightNotAllowed = By.id("D_17_26");
     public static By boxHeader=By.xpath("//div[@class='box-header']");
     public static By f4Prompt=By.id("btnCF04");
     public static By newDoc=By.id("btnCF05");
     public static By moreKeys=By.id("btnCF24");
-
+    public static By warningMessage=By.id("D_23_2");
+    public static By browseHeader=By.id("D_2_28");
+    public static By searchVendor=By.id("I_5_26");
+    public static By getVendorName=By.id("D_12_12");
+    public static By recDoc=By.id("D_12_39");
+    public static By noRecords=By.id("D_13_20");
 }
