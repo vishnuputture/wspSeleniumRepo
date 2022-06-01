@@ -204,6 +204,12 @@ public class SalesOrders extends ReusableLib{
 		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 	}
 
+	public void selectDeliveryInformation(){
+		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+		Utility_Functions.xSelectDropdownByVisibleText(ownDriver,SalesOrdersPage.shipViaDropDown,jsonData.getData("ShipVia"));
+		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+	}
+
 	/**
 	 * Keyword to select Items in Sales Order page
 	 */
@@ -213,6 +219,7 @@ public class SalesOrders extends ReusableLib{
 		sendKeys(SalesOrdersPage.qtyToShip,jsonData.getData("QtyShip"),"Entering quantity to ship");
 		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 		jsonData.putData("SalesOrderNo", ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
+		Utility_Functions.xUpdateJson("SalesOrderNumber", ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 	}
 
 	/**

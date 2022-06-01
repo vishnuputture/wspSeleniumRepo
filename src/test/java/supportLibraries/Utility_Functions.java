@@ -167,6 +167,12 @@ public class Utility_Functions extends ReusableLib {
         return val;
     }
 
+    public static String xGetCurrentDate(String format) {
+        DateFormat dateFormat = new SimpleDateFormat(format);
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
     public static void copyResultsIntoShareFolder(String srcdir, String destdir) {
 
         String reportPath = System.getProperty("user.dir");
@@ -521,7 +527,6 @@ public class Utility_Functions extends ReusableLib {
     }
 
 
-
     /**
      * Funtion ot Get properties value from DBQueries property fiile
      *
@@ -635,7 +640,7 @@ public class Utility_Functions extends ReusableLib {
     }
 
     public static String getText(FrameworkDriver driver, By element) {
-    	xHighlight(driver, driver.findElement(element), "red");
+        xHighlight(driver, driver.findElement(element), "red");
         return driver.findElement(element).getText();
     }
 
@@ -1001,8 +1006,8 @@ public class Utility_Functions extends ReusableLib {
 
     public static boolean validateLinks(List<WebElement> list, String webElementText) {
         for (WebElement element : list) {
-            System.out.println("Util "+element.getText());
-            System.out.println("Web text "+webElementText);
+            System.out.println("Util " + element.getText());
+            System.out.println("Web text " + webElementText);
             if (element.getText().equals(webElementText)) {
                 return true;
             }
@@ -1241,13 +1246,13 @@ public class Utility_Functions extends ReusableLib {
             actualVal = actualVal.replace("$", "").trim();
         }
         Assert.assertEquals(actualVal, expValue, CstmMsg);
-     
+
         report.updateTestLog("VerifyVal",
                 CstmMsg + " Expected text '" + expValue + "' is matching With Actual Text '" + actualVal + "'",
                 Status.PASS);
 
     }
-    
+
     /**
      * Assert two String value are unequal
      *
@@ -1261,7 +1266,7 @@ public class Utility_Functions extends ReusableLib {
             actualVal = actualVal.replace("$", "").trim();
         }
         Assert.assertNotEquals(actualVal, expValue, CstmMsg);
-     
+
         report.updateTestLog("VerifyVal",
                 CstmMsg + " Expected text '" + expValue + "' not matching With Actual Text '" + actualVal + "'",
                 Status.PASS);
@@ -1717,26 +1722,26 @@ public class Utility_Functions extends ReusableLib {
      * @param Pwd
      * @return
      */
-    public static Statement xDBConntion(String dbname, String UserName, String Pwd,String dbType) {
+    public static Statement xDBConntion(String dbname, String UserName, String Pwd, String dbType) {
         String url = getDBUrl(dbname);
         // Load Oracle jdbc driver
         try {
             // Class.forName("org.postgresql.FrameworkDriver");
-        	switch(dbType) {
-        	case "db2":
-        		Class.forName("com.ibm.db2.jcc.DB2Driver");
-        		break;
-        	case "oracle":
-        		Class.forName("oracle.jdbc.driver.OracleDriver");
-        		break;
-        	default:
-        		throw new ClassNotFoundException();
-        	}
-           
+            switch (dbType) {
+                case "db2":
+                    Class.forName("com.ibm.db2.jcc.DB2Driver");
+                    break;
+                case "oracle":
+                    Class.forName("oracle.jdbc.driver.OracleDriver");
+                    break;
+                default:
+                    throw new ClassNotFoundException();
+            }
+
             Connection con = DriverManager.getConnection(url, UserName, Pwd);
             // Create Statement Object
             Statement stmt = con.createStatement();
-        //    System.out.println("db statement: "+stmt.toString());
+            //    System.out.println("db statement: "+stmt.toString());
             return stmt;
         } catch (ClassNotFoundException e1) {
 
@@ -1749,7 +1754,8 @@ public class Utility_Functions extends ReusableLib {
         }
 
     }
-    public static Connection xDBConnectionWise(String dbname, String UserName, String Pwd,String dbType) {
+
+    public static Connection xDBConnectionWise(String dbname, String UserName, String Pwd, String dbType) {
         String url = getDBUrl(dbname);
         // Load Oracle jdbc driver
         try {
@@ -1773,49 +1779,44 @@ public class Utility_Functions extends ReusableLib {
 
             e1.printStackTrace();
             return null;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
 
             e.printStackTrace();
             return null;
         }
     }
 
-    public static Statement xDBStatementWise(Connection con)
-    {
-        try
-        {
+    public static Statement xDBStatementWise(Connection con) {
+        try {
             Statement stmt = con.createStatement();
             //    System.out.println("db statement: "+stmt.toString());
             return stmt;
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static void xDBCloseConnection(Connection con)
-    {
-        if(con!=null)
-        {
-        try {
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void xDBCloseConnection(Connection con) {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public static String getDBUrl(String dbname) {
         String url = "";
-     //   String dbEnv = properties.getProperty("DBEnv");
+        //   String dbEnv = properties.getProperty("DBEnv");
         switch (dbname) {
             case "db2":
-            url= "jdbc:as400://windev1.winwholesale.com;naming=system";
-            break;
+                url = "jdbc:as400://windev1.winwholesale.com;naming=system";
+                break;
             case "sql-server":
-            url="";
-            break;
+                url = "";
+                break;
         }
         return url;
     }
@@ -2201,8 +2202,8 @@ public class Utility_Functions extends ReusableLib {
     public static boolean actionKey(Keys key, FrameworkDriver driver) {
         Actions builder = new Actions(driver.getWebDriver());
         builder.sendKeys(key).build().perform();
-        By loadingAnime=By.id("_pui_loading_animation");
-        xWaitForElementDisappear(driver,loadingAnime,20);
+        By loadingAnime = By.id("_pui_loading_animation");
+        xWaitForElementDisappear(driver, loadingAnime, 20);
         timeWait(1);
         return true;
     }
@@ -2322,12 +2323,14 @@ public class Utility_Functions extends ReusableLib {
         JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
         js.executeScript(mouseScript, el);
     }
+
     public static void xMouseClick(FrameworkDriver driver, By el) {
 
         String mouseScript = "arguments[0].click();";
         JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
         js.executeScript(mouseScript, driver.findElement(el));
     }
+
     public static boolean xMouseDoubleClick(FrameworkDriver driver, WebElement el) {
 
         Actions builder = new Actions(driver.getWebDriver());
@@ -2385,7 +2388,7 @@ public class Utility_Functions extends ReusableLib {
         return true;
     }
 
-    public static void contextClickOnElement(FrameworkDriver driver,By e){
+    public static void contextClickOnElement(FrameworkDriver driver, By e) {
         Actions builder = new Actions(driver.getWebDriver());
         builder.contextClick(driver.findElement(e)).perform();
     }
@@ -2413,7 +2416,7 @@ public class Utility_Functions extends ReusableLib {
      */
     public static int xRandomFunction(int min, int max) {
         Random random = new Random();
-        int value = (int) (random.nextInt((max - min)+1) + min);
+        int value = (int) (random.nextInt((max - min) + 1) + min);
         return value;
     }
 
@@ -2714,7 +2717,7 @@ public class Utility_Functions extends ReusableLib {
             if (timeout >= 2) {
                 break;
             }
-            JavascriptExecutor js = (JavascriptExecutor)driver;
+            JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollBy(0,200)", "");
             timeWait(2);
         }
@@ -2817,9 +2820,9 @@ public class Utility_Functions extends ReusableLib {
         }
 
     }
-    
+
     public static int xGetSelectOptionCount(FrameworkDriver driver, WebElement e) {
-    	try {
+        try {
             xWaitForElementPresent(driver, e, 15);
             xWaitForElementClickable(driver, e, 15);
             Select answer = new Select(e);
@@ -2847,12 +2850,12 @@ public class Utility_Functions extends ReusableLib {
         answer.selectByIndex(index);
 
     }
-    
-    public static String xgetSelectedDropdownValue(FrameworkDriver driver,By e) {
 
-    	 Select answer = new Select(driver.findElement(e));
-    	 
-    	 return answer.getFirstSelectedOption().getText();
+    public static String xgetSelectedDropdownValue(FrameworkDriver driver, By e) {
+
+        Select answer = new Select(driver.findElement(e));
+
+        return answer.getFirstSelectedOption().getText();
         //answer.selectByIndex(index);
 
     }
@@ -2895,9 +2898,9 @@ public class Utility_Functions extends ReusableLib {
         String selectedOption = dropdown.getFirstSelectedOption().getText().trim();
         String selectOption = "";
         List<WebElement> lstOptions = dropdown.getOptions();
-        for(int i=0; i<lstOptions.size(); i++){
+        for (int i = 0; i < lstOptions.size(); i++) {
             String option = lstOptions.get(i).getText().trim();
-            if(option.equalsIgnoreCase(selectedOption)){
+            if (option.equalsIgnoreCase(selectedOption)) {
                 dropdown.selectByVisibleText(option);
                 selectOption = option;
                 break;
@@ -3055,7 +3058,7 @@ public class Utility_Functions extends ReusableLib {
         }
         dropdown.selectByValue(value);
     }
-    
+
     public static void xSelectDropdownByVisibleText(FrameworkDriver driver, By e, String value) {
         xWaitForElementPresent(driver, e, 10);
         xWaitForElementClickable(driver, e, 10);
@@ -3091,12 +3094,12 @@ public class Utility_Functions extends ReusableLib {
         List<WebElement> elements = dropdown.getOptions();
         List<String> lstElementText = new ArrayList<String>();
         if (elements.size() > 0) {
-            for (WebElement ele : elements){
+            for (WebElement ele : elements) {
                 String text = ele.getText();
                 if (!text.isEmpty())
                     lstElementText.add(text);
             }
-        }else
+        } else
             timeWait(1);
         return lstElementText;
 
@@ -3105,7 +3108,7 @@ public class Utility_Functions extends ReusableLib {
     public static void xSelectDropdownByValue(WebElement e, String value) {
         Select dropdown = new Select(e);
         dropdown.selectByValue(value);
-        
+
     }
 
     public static void xSelectRadio(FrameworkDriver driver, WebElement el) {
@@ -3175,14 +3178,15 @@ public class Utility_Functions extends ReusableLib {
 
     public static void xSendKeyBoardkeys(FrameworkDriver driver, By el, String input, Keys Key) {
 
-            WebElement wb = driver.findElement(el);
-            xWaitForElementPresent(driver,el,30);
-            wb.sendKeys(input);
-          //  xSendKeys(wb,input);
-            wb.sendKeys(Key);
+        WebElement wb = driver.findElement(el);
+        xWaitForElementPresent(driver, el, 30);
+        wb.sendKeys(input);
+        //  xSendKeys(wb,input);
+        wb.sendKeys(Key);
 
 
     }
+
     /**
      * Method to Send Keyboard keys in Loop
      *
@@ -3226,9 +3230,10 @@ public class Utility_Functions extends ReusableLib {
         el.sendKeys(keyName);
 
     }
+
     public static void xSendKeys(FrameworkDriver driver, By el, Keys keyName) {
         // xHighlight(driver, el, "blue");
-        WebElement webel= driver.findElement(el);
+        WebElement webel = driver.findElement(el);
         webel.sendKeys(keyName);
 
     }
@@ -3746,13 +3751,13 @@ public class Utility_Functions extends ReusableLib {
         File rtnFile = null;
         try {
             FileReader fr = new FileReader(fileName);
-            
-             rtnFile = new File(fileName);
-             if(rtnFile.length()<1) {
-            	 rtnFile.delete();
-            	 throw new Exception();
-             }
-            
+
+            rtnFile = new File(fileName);
+            if (rtnFile.length() < 1) {
+                rtnFile.delete();
+                throw new Exception();
+            }
+
             return rtnFile;
 
         } catch (Exception e) {
@@ -3822,25 +3827,24 @@ public class Utility_Functions extends ReusableLib {
 
         } catch (Exception e) {
             // TODO: handle exception
-        	e.printStackTrace();
+            e.printStackTrace();
         }
 
     }
-    
+
     @SuppressWarnings("unchecked")
     public static void xUpdateJsonWithArray(String Key, String value) {
         try {
-           createJsonFile(jsonFile);
+            createJsonFile(jsonFile);
             Object obj = new JSONParser().parse(new FileReader(jsonFile));
-            
+
             JSONArray valArray = new JSONArray();
-            
-            
+
 
             // typecasting obj to JSONObject
             JSONObject jo = (JSONObject) obj;
             valArray = (JSONArray) jo.getOrDefault(Key, valArray);
-            
+
             valArray.add(value);
 
             jo.put(Key, valArray);
@@ -3853,8 +3857,8 @@ public class Utility_Functions extends ReusableLib {
 
         } catch (Exception e) {
             // TODO: handle exception
-        	e.printStackTrace();
-        	
+            e.printStackTrace();
+
         }
 
     }
@@ -4184,7 +4188,7 @@ public class Utility_Functions extends ReusableLib {
         FluentWait<WebDriver> wait = new WebDriverWait(driver.getWebDriver(), timeWait)
                 .ignoring(StaleElementReferenceException.class);
         wait.until(ExpectedConditions.visibilityOf(el));
-      
+
         return true;
     }
 
@@ -4804,6 +4808,7 @@ public class Utility_Functions extends ReusableLib {
 
     }
 //#######################----------------##################################################//
+
     /**
      * Assert two String value are equal
      *
@@ -4813,7 +4818,7 @@ public class Utility_Functions extends ReusableLib {
      * @param Replace   Character to be replaced
      * @param CstmMsg   pass Custom Message
      */
-    public static void xAssertEquals(Report report, String expValue, String actualVal,String Replace, String CstmMsg) {
+    public static void xAssertEquals(Report report, String expValue, String actualVal, String Replace, String CstmMsg) {
         if (actualVal.contains(Replace)) {
             actualVal = actualVal.replace(Replace, "").trim();
         }
@@ -4826,11 +4831,9 @@ public class Utility_Functions extends ReusableLib {
     }
 
     /**
-     *
      * Validate Field present on the page
-     *
      */
-    public static List<String> ValidateFieldsPresentonPage(Report report,List<String> List1, List<WebElement> WebElements,
+    public static List<String> ValidateFieldsPresentonPage(Report report, List<String> List1, List<WebElement> WebElements,
                                                            String TextToBeDisplayed) {
         List<String> WebElementsList = new ArrayList<String>();
         List<String> WebElementsList1 = new ArrayList<String>();
@@ -4839,11 +4842,11 @@ public class Utility_Functions extends ReusableLib {
         }
         for (String str : List1) {
             if (WebElementsList.contains(str)) {
-                System.out.println("'"+str+"' Present on the page");
+                System.out.println("'" + str + "' Present on the page");
                 WebElementsList1.add(str);
-            }else{
+            } else {
                 report.updateTestLog(TextToBeDisplayed,
-                        "Text: '"+str+"' Not present on the page",
+                        "Text: '" + str + "' Not present on the page",
                         Status.FAIL);
             }
         }
@@ -4854,9 +4857,7 @@ public class Utility_Functions extends ReusableLib {
     }
 
     /**
-     *
      * Generate Random Number
-     *
      */
     public static int genRandNum(int number) {
         Random random = new Random();
@@ -4865,9 +4866,7 @@ public class Utility_Functions extends ReusableLib {
     }
 
     /**
-     *
      * This Method to Right Click on the Element
-     *
      */
     public static void rightClick(FrameworkDriver driver, By element) {
         Actions builder = new Actions(driver.getWebDriver());
@@ -4876,28 +4875,26 @@ public class Utility_Functions extends ReusableLib {
     }
 
     /**
-     *
      * This Method to get the list of string
-     *
      */
     public static List<String> xGetTextVisibleListString(FrameworkDriver driver, List<WebElement> eleList) {
         List<String> webElementsList = new ArrayList<String>();
-        for (WebElement ele:eleList) {
+        for (WebElement ele : eleList) {
             if (ele.isDisplayed()) {
-                if(ele.getText().isEmpty()){
+                if (ele.getText().isEmpty()) {
                     webElementsList.add(ele.getAttribute("value"));
-                }else {
+                } else {
                     webElementsList.add(ele.getText());
                 }
             }
         }
         return webElementsList;
     }
-    
+
     public static void openNewTab(FrameworkDriver driver) {
-    	((JavascriptExecutor)driver.getWebDriver()).executeScript("window.open('about:blank','_blank');");
-    	
-    	Set<String> handles = driver.getWindowHandles();
+        ((JavascriptExecutor) driver.getWebDriver()).executeScript("window.open('about:blank','_blank');");
+
+        Set<String> handles = driver.getWindowHandles();
         String currentWindowHandle = driver.getWindowHandle();
         Utility_Functions.xUpdateJson("ParentWindow", currentWindowHandle);
         for (String handle : handles) {
@@ -4907,15 +4904,15 @@ public class Utility_Functions extends ReusableLib {
         }
     }
 
-    public static String getRandomName(){
+    public static String getRandomName() {
         Faker faker = new Faker();
 
         String name = faker.name().fullName();
-        String[] splitName=name.split(" ");
+        String[] splitName = name.split(" ");
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
         String[] streetAddress = faker.address().streetAddress().split(" ");
-        String getRandomName="TestAuto:"+firstName+"_"+lastName+"-"+streetAddress[0];
+        String getRandomName = "TestAuto:" + firstName + "_" + lastName + "-" + streetAddress[0];
         return getRandomName;
     }
 }

@@ -38,7 +38,7 @@ public class binMaintenance extends ReusableLib {
         commonObj = new CommonActions(helper);
         sp = new businesskeywords.SPO.Spo(helper);
         login = new Login(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -877,19 +877,32 @@ public class binMaintenance extends ReusableLib {
         return binLocation;
     }
 
+    public void clickSaveBtn(){
+        try {
+            click(ownDriver.findElements(button("Save ")).get(1), "Click Save button");
+        } catch (Exception e) {
+            click(BinMaintenancePage.stagingArea);
+            Utility_Functions.timeWait(2);
+            click(ownDriver.findElements(button("Save ")).get(0), "Click Save button");
+        }
+    }
+
+    public void validateDefectiveStatus(String status) {
+        if(getAttribute(BinMaintenancePage.nSellable,"ng-reflect-model").equals("true")) {
+            if (status.equals("Defective")) {
+                commonObj.validateText(BinMaintenancePage.toaster, "Sellable must be N when bin condition is defective", "'Sellable must be N when bin condition is defective' is present");
+                click(BinMaintenancePage.nSellable);
+                clickSaveBtn();
+            }
+        }
+    }
+
     public void changeStatus(String binLocation, String status) {
         Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.zoneIdDropDown), "Test", "Select Test option from the drop down ");
         Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.binConditionId), status, "Select '" + status + "' option from the drop down ");
         Utility_Functions.timeWait(2);
-        try {
-
-            click(BinMaintenancePage.btnSaveEdiBinPopup, "Click Save button");
-
-        } catch (Exception e) {
-            click(BinMaintenancePage.stagingArea);
-            Utility_Functions.timeWait(2);
-            click(ownDriver.findElements(button("Save ")).get(1), "Click Save button");
-        }
+        clickSaveBtn();
+        validateDefectiveStatus(status);
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Selected Bins updated successfully.", "'Selected Bins updated successfully.' is present");
         if (status.equals("No Change")) {
@@ -933,12 +946,20 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xUpdateJson("itemLocation", "" + binLoc + "");
         sendKeys(BinMaintenancePage.createBinLabel, "" + binLoc + "", "Enter Bin Location");
         enterRequiredData();
-
         click(ownDriver.findElement(button("Create ")), "Click Save button");
-
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully", "'Bin and Bin-item are created successfully' is present");
-        commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLoc + "')]"), binLoc + " Bin location is created");
+        int i = 0;
+        while (i == 0) {
+            try {
+                Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//td[contains(text(),'" + binLoc + "')]"));
+                commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLoc + "')]"), binLoc + " Bin location is created");
+                break;
+            } catch (Exception e) {
+                Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
+                Utility_Functions.timeWait(4);
+            }
+        }
         commonObj.validateText(getStatus("" + binLoc + ""), "Good", "For bin location: " + binLoc + " status is Good");
         commonObj.validateText(getZone("" + binLoc + ""), "QS", "For bin location: " + binLoc + " Zone is TS");
     }
@@ -958,7 +979,7 @@ public class binMaintenance extends ReusableLib {
         }
         String[] textLabels = {" Bin Location", "Condition", "Zone", "Picking", "Receiving"};
         for (String textLabel : textLabels) {
-            commonObj.validateText(By.xpath("//create-bin-component//label[text()='" + textLabel + "']"), textLabel.trim(), textLabel + " text box is present");
+            commonObj.validateText(By.xpath("//label[text()='" + textLabel + "' and contains(@for,'createBin')]"), textLabel.trim(), textLabel + " text box is present");
         }
         click(ownDriver.findElements((button("Cancel "))).get(1), "Click Cancel button");
         Utility_Functions.timeWait(2);
@@ -972,13 +993,11 @@ public class binMaintenance extends ReusableLib {
     public void verifyCreateDuplicateBin() {
         click(button("Create Bin"), "Click 'Create Bin' button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(BinMaintenancePage.createBinPopup, "CREATE BIN AND ASSIGN", "CREATE BIN AND ASSIGN popup is present");
+        commonObj.validateText(BinMaintenancePage.createBinPopup, "Create Bin and Assign", "[Create Bin and Assign] popup is present");
         sendKeys(BinMaintenancePage.createBinLabel, Utility_Functions.xGetJsonData("itemLocation"), "Enter Bin Location");
         Utility_Functions.timeWait(2);
         enterRequiredData();
-
-        click(BinMaintenancePage.btnSaveCreateNewBinpopup, "Click Save button");
-
+        click(ownDriver.findElement(button("Create ")), "Click Save button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin Location already exists", "'Bin Location already exists' is present");
     }
@@ -1118,8 +1137,10 @@ public class binMaintenance extends ReusableLib {
         validateAlreadyExistZoneAbrv();
         String zName = Utility_Functions.xGetJsonData("zoneName").toLowerCase();
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " created successfully.", "'Zone " + zName + " created successfully.' message is present");
-        Utility_Functions.xAssertEquals(report, ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zName + "']")).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
-        Utility_Functions.xAssertEquals(report, ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
+        Utility_Functions.timeWait(3);
+        Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
+        Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
+        Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).get(0).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
     }
 
     public String expandZone() {
@@ -1285,7 +1306,7 @@ public class binMaintenance extends ReusableLib {
             commonObj.validateElementExists(By.xpath("//label[contains(text(),'" + label + "')]//following-sibling::select"), "Dropdown [" + label + "] is present");
         }
         commonObj.validateElementExists(BinMaintenancePage.btnCancelCreateNewBinpopup, "[Cancel] button is present");
-        commonObj.validateElementExists(BinMaintenancePage.btnSaveCreateNewBinpopup, "[Save] button is present");
+        commonObj.validateElementExists(button("Create "), "[Create] button is present");
     }
 
     /**
@@ -1370,7 +1391,7 @@ public class binMaintenance extends ReusableLib {
         clickCreateNewBinBtn();
         String binLocation = "TEST" + Utility_Functions.xRandomFunction(99999);
         jsonData.putData("BinLocation", binLocation);
-        Utility_Functions.xUpdateJson("BinLocation",binLocation);
+        Utility_Functions.xUpdateJson("BinLocation", binLocation);
         String condition = jsonData.getData("BinCondition");
         String zones = jsonData.getData("BinZones");
         String picking = jsonData.getData("BinPicking");
@@ -1387,7 +1408,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(1);
         selectUnselectChbxCreateNewBinPopup(BinMaintenancePage.chbxStagingArea, stagingArea);
 
-        click(BinMaintenancePage.btnSaveCreateNewBinpopup, "Click [Save] button");
+        click(BinMaintenancePage.btnSaveCreateNewBinpopup, "Click [Create] button");
         waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
         waitForVisible(BinMaintenancePage.toastMsg);
         commonObj.validateText(BinMaintenancePage.toastMsg, "Bin " + binLocation + " created successfully.", "Bin Creates Successfully message is displayed");
@@ -1398,7 +1419,8 @@ public class binMaintenance extends ReusableLib {
     /**
      * Keyword to enter data in [Create New Bin] popup
      */
-    public void selectDropdownOptionCreateNewBinPopup(String binLocation, String condition, String zones, String picking, String receiving) {
+    public void selectDropdownOptionCreateNewBinPopup(String binLocation, String condition, String zones, String
+            picking, String receiving) {
         sendKeys(BinMaintenancePage.tbxBinLocation, binLocation, "Entering [" + binLocation + "] in Bin Location textbox");
         Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnConditionCreateBinPopup, condition, "Selected option [" + condition + "] in Condition dropdown");
         Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnZoneCreateBinPopup, zones, "Selected option [" + zones + "] in Zoned dropdown");
@@ -1436,7 +1458,8 @@ public class binMaintenance extends ReusableLib {
     /**
      * Keyword to verify data in first row from records table - Bin Maintenance
      */
-    public void vrfyFirstRowValueInBinTable(String binLocation, String condition, String zones, String avlToSell, String items) {
+    public void vrfyFirstRowValueInBinTable(String binLocation, String condition, String zones, String
+            avlToSell, String items) {
         String actual = getText(BinMaintenancePage.tdBinFirstRow);
         Utility_Functions.xAssertEquals(report, binLocation, actual, "Verify [Bin] value in records table");
         actual = getText(BinMaintenancePage.tdZoneFirstRow);
@@ -1500,7 +1523,7 @@ public class binMaintenance extends ReusableLib {
             commonObj.validateElementExists(By.xpath("//form//label[contains(text(),'" + label + "')]//following-sibling::select"), "Dropdown [" + label + "] is present");
         }
         commonObj.validateElementExists(BinMaintenancePage.btnCancelEditBinPopup, "[Cancel] button is present");
-        commonObj.validateElementExists(BinMaintenancePage.btnSaveEdiBinPopup, "[Save] button is present");
+        commonObj.validateElementExists(BinMaintenancePage.btnSavEdiBinPopup, "[Save] button is present");
     }
 
     /**
@@ -1511,7 +1534,7 @@ public class binMaintenance extends ReusableLib {
         String condition = Utility_Functions.xSelectDropdownByNameRandomValue(ownDriver, BinMaintenancePage.ddnConditionEditBinPopup);
         String receiving = Utility_Functions.xSelectDropdownByNameRandomValue(ownDriver, BinMaintenancePage.ddnReceivingEditBinPopup);
         String picking = Utility_Functions.xSelectDropdownByNameRandomValue(ownDriver, BinMaintenancePage.ddnPickingEditBinPopup);
-        click(BinMaintenancePage.btnSaveEdiBinPopup, "Click [Save] button");
+        click(BinMaintenancePage.btnSavEdiBinPopup, "Click [Save] button");
         waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
 
         String actual = getText(BinMaintenancePage.tdZoneFirstRow);
@@ -1573,7 +1596,7 @@ public class binMaintenance extends ReusableLib {
         String stagingArea = jsonData.getData("BinStagingArea");
 
         selectDropdownOptionEditMultipleBinsPopup(condition, zones, picking, receiving, specialHandling, availableToSell, stagingArea);
-        click(BinMaintenancePage.btnSaveEdiBinPopup, "Click [Save] button");
+        click(BinMaintenancePage.btnSavEdiBinPopup, "Click [Save] button");
         waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
         commonObj.validateText(BinMaintenancePage.toastMsg, "Selected Bins updated successfully.", "Bins Updated Successfully message is displayed");
         Utility_Functions.timeWait(2);
@@ -1586,7 +1609,8 @@ public class binMaintenance extends ReusableLib {
     /**
      * Keyword to enter data in [Edit Multiple Bins] popup
      */
-    public void selectDropdownOptionEditMultipleBinsPopup(String condition, String zones, String picking, String receiving, String specialHandling, String availableToSell, String stagingArea) {
+    public void selectDropdownOptionEditMultipleBinsPopup(String condition, String zones, String picking, String
+            receiving, String specialHandling, String availableToSell, String stagingArea) {
         Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnConditionEditBinPopup, condition, "Selected option [" + condition + "] in Condition dropdown");
         Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnZoneEditBinPopup, zones, "Selected option [" + zones + "] in Zoned dropdown");
         Utility_Functions.xSelectDropdownByName(ownDriver, report, BinMaintenancePage.ddnPickingEditBinPopup, picking, "Selected option [" + picking + "] in Picking dropdown");
@@ -1969,6 +1993,16 @@ public class binMaintenance extends ReusableLib {
         sendKeys(BinMaintenancePage.binLocationFilter, binLocation, "Enter Bin location");
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
         navigateToItemBinMain();
-        commonObj.validateText(By.xpath("//td[contains(text(),'" + binLocation + "')]"), binLocation, binLocation + " is present");
+        int i = 0;
+        while (i == 0) {
+            try {
+                Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//td[contains(text(),'" + binLocation + "')]"));
+                commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLocation + "')]"), binLocation + " Bin location is created");
+                break;
+            } catch (Exception e) {
+                Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
+                Utility_Functions.timeWait(4);
+            }
+        }
     }
 }

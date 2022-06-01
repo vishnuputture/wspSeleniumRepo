@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Inventory" parallel="none" thread-count="1">
+
+    <test name="AverageCost">
+        <classes>
+            <class name="testcases.Inventory.AverageCost">
+                <methods>
+                    <include name="Tc_21_SearchItemData"></include>
+                    <include name="Tc_22_UpdateItemData"></include>
+                    <include name="Tc_23_UpdateItemQuantity"></include>
+                    <include name="Tc_24_UpdateItemAVGCost"></include>
+                    <include name="Tc_25_ValidateItemCreation"></include>
+                    <include name="Tc_27_ValidateItemUpdate"></include>
+                    <include name="Tc_28_ValidateReceiveCorrection"></include>
+                    <include name="Tc_31_ValidateMultipleReceiveCorrection"></include>
+                    <include name="Tc_29_ValidateCostAdjustmentProcess"></include>
+                    <include name="Tc_30_ValidateCostAdjustmentLedger"></include>
+                    <include name="Tc_32_ValidateMultipleCostAdjustment"></include>
+                    <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
+                    <include name="Tc_26_ValidateItemDeletion"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
