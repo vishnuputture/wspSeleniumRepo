@@ -195,6 +195,18 @@ public class CommonActions extends ReusableLib {
 		}
 	}
 
+	/**
+	 * This method verifies that the actual text contains expected text
+	 */
+	public void validateContainsText(String textExpected, String textActual, String msg) {
+		boolean flag = textActual.trim().contains(textExpected.trim());
+		if (flag)
+			report.updateTestLog("Verify text", msg, Status.PASS);
+		else
+			report.updateTestLog("Verify text", msg, Status.FAIL);
+		Assert.assertTrue(msg, flag);
+	}
+
 
 	public void validateElementExists(By ele, String msg) {
         if(Utility_Functions.xWaitForElementPresent(ownDriver,ele, 5)) {

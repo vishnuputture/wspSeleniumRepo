@@ -2,20 +2,21 @@ package businesskeywords.PurchaseOrders;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.junit.validator.ValidateWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import pages.PurchaseOrders.MailingMasterSearchPage;
-import pages.PurchaseOrders.PurchaseOrderEntryPage;
-import pages.PurchaseOrders.PurchaseOrderInquiryPage;
-import pages.PurchaseOrders.VendorInvoiceReconciliationPage;
+import org.openqa.selenium.NoSuchElementException;
+import pages.PurchaseOrders.*;
+import pages.common.MasterPage;
 import pages.inventory.OptionsConstantsPage;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import software.amazon.awssdk.services.glacier.model.PurchaseProvisionedCapacityRequest;
+import software.amazon.awssdk.services.securityhub.model.Note;
 import supportLibraries.Utility_Functions;
 
 public class VendorInvoiceReconciliation extends ReusableLib {
@@ -246,4 +247,266 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
         validateVendor();
     }
+
+    /**
+     * Keyword to enter Receiver Doc.
+     */
+    public void enterReceiverDoc() {
+        String receiverDoc = jsonData.getData("ReceiverDoc");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.receiverDoc, receiverDoc, "Enter Receiver Doc as ["+receiverDoc+"]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        String text = getAttribute(VendorInvoiceReconciliationPage.receiverDoc, "value");
+        Utility_Functions.xAssertEquals(report, receiverDoc, text, "Receiver Doc ["+receiverDoc+"] selected successfully");
+    }
+
+    /**
+     * Keyword to select random Receiver Doc.
+     */
+    public void selectRandomReceiverDoc() {
+        navigateToReceiverDocBrowser();
+        int count = Utility_Functions.xRandomFunction(0, 5);
+        while(count>0){
+            click(VendorInvoiceReconciliationPage.btnDown);
+            waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+            count--;
+        }
+        String selectedRecDoc = getText(VendorInvoiceReconciliationPage.recDoc);
+        jsonData.putData("ReceiverDoc", selectedRecDoc);
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.selectVendor, "1", "Selecting Vendor having Rec Doc as ["+selectedRecDoc+"]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        if(Utility_Functions.xWaitForElementPresent(ownDriver, VendorInvoiceReconciliationPage.receiverDoc, 5)) {
+            String text = getAttribute(VendorInvoiceReconciliationPage.receiverDoc, "value");
+            Utility_Functions.xAssertEquals(report, selectedRecDoc, text, "Receiver Doc ["+selectedRecDoc+"] selected successfully");
+        }else {
+            System.out.println("Text: Not found");
+            throw new NoSuchElementException("Could not find :"+VendorInvoiceReconciliationPage.receiverDoc);
+        }
+    }
+
+    /**
+     * Keyword to search and select Receiver Doc.
+     */
+    public void vrfySelectReceiverDoc() {
+        searchReceiverDocPositionToRecDoc();
+        String selectedRecDoc = getText(VendorInvoiceReconciliationPage.recDocFifth);
+        jsonData.putData("ReceiverDoc", selectedRecDoc);
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.selectVendorFifth, "1", "Selecting Vendor having Rec Doc as ["+selectedRecDoc+"]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        String text = getAttribute(VendorInvoiceReconciliationPage.receiverDoc, "value");
+        Utility_Functions.xAssertEquals(report, selectedRecDoc, text, "Receiver Doc ["+selectedRecDoc+"] selected successfully");
+    }
+
+    /**
+     * Keyword to navigate to [Receiver Document Browse] page and set [Position to Rec Doc]
+     */
+    public void searchReceiverDocPositionToRecDoc() {
+        navigateToReceiverDocBrowser();
+        Utility_Functions.actionKey(Keys.F10, ownDriver);
+        Utility_Functions.actionKey(Keys.F10, ownDriver);
+    }
+
+    /**
+     * Keyword to verify Invoice Total and Detail Total are same
+     */
+    public void verifyInvoiceAndDetailTotal() {
+        String invoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value");
+        String detailTotal = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.detailedValue);
+        Utility_Functions.xAssertEquals(report, invoiceTotal, detailTotal, "Invoice Total and Detail Total are displaying same value ["+invoiceTotal+"]");
+
+        String gmMgrAmount = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.gmMarginAmt);
+        Utility_Functions.xAssertEquals(report, "              ", gmMgrAmount, "GM Mgr Amount field is displaying blank");
+    }
+
+    /**
+     * Keyword to verify GM Mgr Amount after editing Invoice Total
+     */
+    public void verifyGMMgrAmount() {
+        String invoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value");
+        if (invoiceTotal.contains(",")){
+            invoiceTotal = invoiceTotal.replaceAll(",", "");
+        }
+        float num = Float.parseFloat(invoiceTotal)+1;
+        String invoiceTotalEdit = Float.toString(num);
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.invoiceTotalTextBox, invoiceTotalEdit, "Entering ["+invoiceTotalEdit+"] in Invoice Total textbox");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        String gmMgrAmount = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.gmMarginAmt).trim();
+        Utility_Functions.xAssertEquals(report, "1.00-", gmMgrAmount, "GM Mgr Amount field is auto-calculated");
+    }
+
+    /**
+     * Keyword to enter Due Date same as Received Date
+     */
+    public void enterDueDateSameAsReceivedDate() {
+        String receivedDate = getAttribute(VendorInvoiceReconciliationPage.receivedDate, "value");
+        receivedDate = getText(VendorInvoiceReconciliationPage.receivedDate);
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.dueDateTextBox, receivedDate, "Entering Due Date same as Received Date ["+receivedDate+"]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    /**
+     * Keyword to accept Invoice by pressing F9
+     */
+    public void acceptInvoice() {
+        ensureFreightCharges();
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Discount percentage and amount are ZERO.  Press F9 to accept invoice.", "validating warning message");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrGMMPage, "Vendor Invoice Reconciliation - Gross Margin Manager", "Validating [Vendor Invoice Reconciliation - Gross Margin Manager] page title");
+        vrfyGMMgrPage();
+    }
+
+    /**
+     * Keyword to accept Invoice by pressing F9 without editing Total Invoice
+     */
+    public void acceptInvoiceNoEdit() {
+        ensureDueDate();
+        ensureFreightCharges();
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Discount percentage and amount are ZERO.  Press F9 to accept invoice.", "validating warning message");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+    }
+
+    /**
+     * Keyword to add Freight Charges if not present
+     */
+    public void ensureFreightCharges() {
+        String freightCharges = getText(VendorInvoiceReconciliationPage.freightCharges).trim();
+        if (freightCharges.isEmpty()){
+            sendKeysAndEnter(VendorInvoiceReconciliationPage.freightCharges, "FFA", "Entering Freight Charges as [FFA]");
+        }
+    }
+
+    /**
+     * Keyword to enter Due Date is NOT already present
+     */
+    public void ensureDueDate() {
+        String dueDate = getText(VendorInvoiceReconciliationPage.dueDateTextBox).trim();
+        if (dueDate.isEmpty()){
+            enterDueDateSameAsReceivedDate();
+        }
+    }
+
+    /**
+     * Keyword to verify Gross Margin Manager Page
+     */
+    public void vrfyGMMgrPage() {
+        String gmMgrAmount = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.gmManagerAmount).trim();
+        Utility_Functions.xAssertEquals(report, "1.00-", gmMgrAmount, "Validating auto-calculated field [The Gross Margin Manager Amount]");
+
+        String recordGMMgr = getAttribute(VendorInvoiceReconciliationPage.recordThisGMManager, "value").trim();
+        Utility_Functions.xAssertEquals(report, "Y", recordGMMgr, "Valudating default value for question [Do you wish to record this GM Manager?]");
+    }
+
+    /**
+     * Keyword to verify Gross Margin Manager Page warning after pressing F9 without entering description
+     */
+    public void vrfyGMMgrWarning() {
+        sendKeys(VendorInvoiceReconciliationPage.recordThisGMManager, "N", "Entering [N] in [Do you wish to record this GM Manager?] field");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessageGMMgr, "Enter a description when NOT recording GM/Mgr.", "validating warning message");
+
+        sendKeys(VendorInvoiceReconciliationPage.recordThisGMManager, "Y", "Entering [N] in [Do you wish to record this GM Manager?] field");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessageGMMgr, "Enter a description when recording GM/Mgr.", "validating warning message");
+    }
+
+    /**
+     * Keyword to accept Invoice by pressing F9
+     */
+    public void acceptInvoiceGMMgrPage() {
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.explanation, "Testing Purpose", "Entering data in [Please key an explanation.] field");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessageGMMgr, "Please press F9 to accept the GM/Mgr.", "validating warning message");
+
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.vendorInvoiceRecHeader, "Vendor Invoice Reconciliation", "Validating [Vendor Invoice Reconciliation] page title");
+    }
+
+    /**
+     * Keyword to verify details in [Vendor Invoice Reconciliation] after Accept Invoice operation
+     */
+    public void vrfyVIRPageDetailsAfterAccept() {
+        String disabled = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "class");
+        commonObj.validateContainsText("readOnly", disabled, "Validating [Invoice Total] field");
+
+        String gmMgrAmount = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.gmMarginAmt).trim();
+        Utility_Functions.xAssertEquals(report, "1.00-", gmMgrAmount, "GM Mgr Amount field is auto-calculated");
+
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "INVOICED - Make adjustments, press F9 to accept", "validating warning message");
+    }
+
+    /**
+     * Keyword to verify warning for selecting already invoiced Receiver Doc.
+     */
+    public void vrfyInvoicedWarning() {
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "INVOICED - Make adjustments, press F9 to accept", "validating warning message");
+    }
+
+    /**
+     * Keyword to validate [Position to Receiver Doc.]
+     */
+    public void vrfyPositionToRecDoc() {
+        searchReceiverDocPositionToRecDoc();
+        String recDocInvoiced = jsonData.getData("ReceiverDoc");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.positionToRecDoc, recDocInvoiced, "Entering data in [Position to Rec Doc] field");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        String recDoc = getText(VendorInvoiceReconciliationPage.recDoc);
+        if (!recDocInvoiced.equalsIgnoreCase(recDoc.trim()))
+            report.updateTestLog("Verify Rec Doc number", "Verify Rec Doc number", Status.PASS);
+        else
+            report.updateTestLog("Verify Rec Doc number", "Verify Rec Doc number", Status.FAIL);
+
+        Utility_Functions.actionKey(Keys.F6, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.recDoc, recDocInvoiced, "Validating Rec Doc Number after pressing [F6]");
+    }
+
+    /**
+     * Keyword to navigate to [Vendor Note Revisions] page
+     */
+    public void navigateToVendorNoteRevisions() {
+        Utility_Functions.actionKey(Keys.F12, ownDriver);
+        commonObj.validateText(VendorNotesPage.hdrVendorNotes, "Vendor Note Revisions", "Validating [Vendor Note Revisions] page title");
+
+        String action = getAttribute(VendorNotesPage.actionVendorNotes, "value").trim();
+        Utility_Functions.xAssertEquals(report, "I", action, "Validating Action field value in [Vendor Note Revisions] page");
+    }
+
+    /**
+     * Keyword to validate warnings in [Vendor Note Revisions] page
+     */
+    public void vrfyVendorNotesWarningWhenNoSelection() {
+        sendKeys(VendorNotesPage.actionVendorNotes, "A", "Entering [A] in Action field");
+        sendKeysAndEnter(VendorNotesPage.Line1VendorNotes, "Test Notes", "Entering data in vendor notes line 1");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.validateText(VendorNotesPage.erroMsgVendorNotes, "V000000 - Invalid Vendor Number.  Vendor must exist in file.", "Validating warning msg in [Vendor Note Revisions] page");
+    }
+
+    /**
+     * Keyword to navigate back to [Vendor Invoice Reconciliation] page
+     */
+    public void backToVIRPage() {
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        commonObj.purchaseOrderToVendorInvoiceReconciliation();
+    }
+
+    /**
+     * Keyword to add notes in [Vendor Note Revisions] page
+     */
+    public void addVendorNotes() {
+        String vendorNote = "Test Automation Notes "+Utility_Functions.xRandomFunction();
+        sendKeys(VendorNotesPage.actionVendorNotes, "A", "Entering [A] in Action field");
+        sendKeysAndEnter(VendorNotesPage.Line1VendorNotes, vendorNote, "Entering data in vendor notes line 1");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.verifyElementContainsText(VendorNotesPage.erroMsgVendorNotes, "- Vendor Notes Changed.", "Validating success msg in [Vendor Note Revisions] page");
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+    }
+
+
 }

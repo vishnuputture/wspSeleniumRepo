@@ -54,4 +54,24 @@ public class VendorInvoiceReconciliationPage extends ReusableLib {
     public static By getVendorName=By.id("D_12_12");
     public static By recDoc=By.id("D_12_39");
     public static By noRecords=By.id("D_13_20");
+    public static By recDocFifth=By.id("D_16_39");
+    public static By selectVendorFifth = By.id("I_16_2");
+
+    /************************************************** Receiver Document Browse page elements **************************************************/
+
+    public static By btnDown=By.id("down_button");
+    public static By positionToRecDoc=By.id("I_4_26");
+
+    /************************************* Vendor Invoice Reconciliation - Gross Margin Manager page elements *************************************/
+
+    public static By hdrGMMPage=By.id("D_1_17");
+    public static By gmManagerAmount=By.id("D_4_51");
+    public static By recordThisGMManager=By.id("I_9_51");
+    public static By warningMessageGMMgr=By.id("D_23_1");
+    public static By explanation=By.id("I_11_51");
+
+
+
+
+
 }

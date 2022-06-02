@@ -1,51 +1,75 @@
 {
-  "Business_Flow": [
+  "Business_Flow":[
     {
-      "Tc_433_vendorInvoiceRecUI": "launchApp,siteLogin,navigateToVendorInvoiceRec,vendorInvoiceRecUI,exitVendorInvoiceRec,signOut",
-      "Tc_435_verifyReceiverDocFields": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyReceiverDocField,exitVendorInvoiceRec,signOut",
-      "Tc_437_verifyReceiverDocBrowse": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyReceiverDocBrowse,exitVendorInvoiceRec,signOut",
-      "Tc_440_verifySearchReceiverDocNo": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchReceiverDocNo,clickReturn,exitVendorInvoiceRec,signOut",
-      "Tc_441_verifySearchRecDocVdrName": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDocVdrName,clickReturn,exitVendorInvoiceRec,signOut",
-      "Tc_443_verifySearchReferenceDocNo": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDoc,clickReturn,exitVendorInvoiceRec,signOut",
-      "Tc_444_verifySearchVdrInvoice": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchVendorInvoice,clickReturn,exitVendorInvoiceRec,signOut"
+      "Tc_433_vendorInvoiceRecUI":"launchApp,siteLogin,navigateToVendorInvoiceRec,vendorInvoiceRecUI,exitVendorInvoiceRec,signOut",
+      "Tc_435_verifyReceiverDocFields":"launchApp,siteLogin,navigateToVendorInvoiceRec,verifyReceiverDocField,exitVendorInvoiceRec,signOut",
+      "Tc_437_verifyReceiverDocBrowse":"launchApp,siteLogin,navigateToVendorInvoiceRec,verifyReceiverDocBrowse,exitVendorInvoiceRec,signOut",
+      "Tc_440_verifySearchReceiverDocNo":"launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchReceiverDocNo,clickReturn,exitVendorInvoiceRec,signOut",
+      "Tc_441_verifySearchRecDocVdrName":"launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDocVdrName,clickReturn,exitVendorInvoiceRec,signOut",
+      "Tc_443_verifySearchReferenceDocNo":"launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDoc,clickReturn,exitVendorInvoiceRec,signOut",
+      "Tc_444_verifySearchVdrInvoice":"launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchVendorInvoice,clickReturn,exitVendorInvoiceRec,signOut",
+      "TC_454_VerifyGMMgrAmount":"launchApp,siteLogin,navigateToVendorInvoiceRec,selectRandomReceiverDoc,verifyInvoiceAndDetailTotal,verifyGMMgrAmount,exitVendorInvoiceRec,signOut",
+      "TC_455_VerifyGrossMarginManagerPage":"launchApp,siteLogin,navigateToVendorInvoiceRec,selectRandomReceiverDoc,enterDueDateSameAsReceivedDate,verifyInvoiceAndDetailTotal,verifyGMMgrAmount,acceptInvoice,vrfyGMMgrWarning,acceptInvoiceGMMgrPage,enterReceiverDoc,vrfyVIRPageDetailsAfterAccept,exitVendorInvoiceRec,signOut",
+      "TC_459_VerifyFunctionalityOfF6KeyInReceiverDocumentBrowsePage":"launchApp,siteLogin,navigateToVendorInvoiceRec,vrfySelectReceiverDoc,acceptInvoiceNoEdit,enterReceiverDoc,vrfyInvoicedWarning,vrfyPositionToRecDoc,clickReturn,exitVendorInvoiceRec,signOut",
+      "TC_461_VerifyFunctionalityOfF12KeyInVendorInvoiceReconciliationPage":"launchApp,siteLogin,navigateToVendorInvoiceRec,navigateToVendorNoteRevisions,vrfyVendorNotesWarningWhenNoSelection,backToVIRPage,selectRandomReceiverDoc,navigateToVendorNoteRevisions,addVendorNotes,exitVendorInvoiceRec,signOut"
     }
   ],
-  "General_Data": [
+  "General_Data":[
     {
-      "TC_ID": "Tc_433_vendorInvoiceRecUI",
-      "Title": "Test case UI of Vendor Invoice Reconciliation Page"
+      "TC_ID":"Tc_433_vendorInvoiceRecUI",
+      "Title":"Test case UI of Vendor Invoice Reconciliation Page"
     },
     {
-      "TC_ID": "Tc_435_verifyReceiverDocFields",
-      "Title": "Test case verify Receiver Doc Field",
-      "SpecialCharacter": "!!@#$$%%^^",
-      "zero": "000000000",
-      "TenNumeric": "12345678912",
-      "AlphaNumeric": "12WdeER23"
+      "TC_ID":"Tc_435_verifyReceiverDocFields",
+      "Title":"Test case verify Receiver Doc Field",
+      "SpecialCharacter":"!!@#$$%%^^",
+      "zero":"000000000",
+      "TenNumeric":"12345678912",
+      "AlphaNumeric":"12WdeER23"
     },
     {
-      "TC_ID": "Tc_440_verifySearchReceiverDocNo",
-      "Title": "Test case verify Search Receiver Doc No"
+      "TC_ID":"Tc_440_verifySearchReceiverDocNo",
+      "Title":"Test case verify Search Receiver Doc No"
     },
     {
-      "TC_ID": "Tc_441_verifySearchRecDocVdrName",
-      "Title": "Test case verify Search Rec Doc Vdr Name"
+      "TC_ID":"Tc_441_verifySearchRecDocVdrName",
+      "Title":"Test case verify Search Rec Doc Vdr Name"
     },
     {
-      "TC_ID": "Tc_443_verifySearchReferenceDocNo",
-      "Title": "Test case verify Search Reference Document Number",
-      "SpecialCharacter": "!!@#$",
-      "zero": "0000",
-      "TenNumeric": "1234567891",
-      "AlphaNumeric": "1WeR3"
+      "TC_ID":"Tc_443_verifySearchReferenceDocNo",
+      "Title":"Test case verify Search Reference Document Number",
+      "SpecialCharacter":"!!@#$",
+      "zero":"0000",
+      "TenNumeric":"1234567891",
+      "AlphaNumeric":"1WeR3"
     },
     {
-      "TC_ID": "Tc_444_verifySearchVdrInvoice",
-      "Title": "Test case verify Search Vdr Invoice",
-      "SpecialCharacter": "!!@#$",
-      "zero": "0000",
-      "TenNumeric": "1234567891",
-      "AlphaNumeric": "1WeR3"
+      "TC_ID":"Tc_444_verifySearchVdrInvoice",
+      "Title":"Test case verify Search Vdr Invoice",
+      "SpecialCharacter":"!!@#$",
+      "zero":"0000",
+      "TenNumeric":"1234567891",
+      "AlphaNumeric":"1WeR3"
+    },
+    {
+      "TC_ID":"TC_454_VerifyGMMgrAmount",
+      "Title":"Test case to verify GM Mgr Amount",
+      "ReceiverDoc":"000042469"
+    },
+    {
+      "TC_ID":"TC_455_VerifyGrossMarginManagerPage",
+      "Title":"Test case to verify Gross Margin Manager page",
+      "ReceiverDoc":"000041340"
+    },
+    {
+      "TC_ID":"TC_459_VerifyFunctionalityOfF6KeyInReceiverDocumentBrowsePage",
+      "Title":"Test case to verify functionality of F6 key in Receiver Document Browse page",
+      "ReceiverDoc":"000041124"
+    },
+    {
+      "TC_ID":"TC_461_VerifyFunctionalityOfF12KeyInVendorInvoiceReconciliationPage",
+      "Title":"Test case to verify functionality of F12 on Vendor Invoice Reconciliation page",
+      "ReceiverDoc":"000042469"
     }
   ]
 }
