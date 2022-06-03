@@ -162,9 +162,57 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         String vendorNumber = getText(OptionsConstantsPage.vendorNumber);
         sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1" + Keys.ENTER, "Select Customer No");
         Utility_Functions.timeWait(4);
-        if(!isDisplayed(VendorInvoiceReconciliationPage.noRecords)){
+        if (!isDisplayed(VendorInvoiceReconciliationPage.noRecords)) {
             Utility_Functions.xAssertEquals(report, vendorNumber, getText(VendorInvoiceReconciliationPage.selMult), "The records get sorted based on vendor number");
+            clearText(VendorInvoiceReconciliationPage.searchVendor);
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         }
+        getDetailsPoRecDate();
+        getDetailsVdrInvTotal();
+    }
+
+    public void selectVendor(){
+        sendKeys(VendorInvoiceReconciliationPage.selectVendor, "1" + Keys.ENTER, "Select Customer No");
+    }
+
+    public void getDetailsPoRecDate() {
+        if (getText(VendorInvoiceReconciliationPage.poCol).equals("P.O.")) {
+            click(PricingMatrixPage.copyRow, "Click [F2=Vend Inv/Total Cost]");
+        }
+        Utility_Functions.xUpdateJson("Vendor", getText(VendorInvoiceReconciliationPage.selMult).trim());
+        Utility_Functions.xUpdateJson("VendorName", getText(VendorInvoiceReconciliationPage.getVendorName).trim());
+        Utility_Functions.xUpdateJson("RecDoc", getText(VendorInvoiceReconciliationPage.recDoc).trim());
+        Utility_Functions.xUpdateJson("VendorInvoice", getText(VendorInvoiceReconciliationPage.recInvVal).trim());
+        Utility_Functions.xUpdateJson("TotalCost", getText(VendorInvoiceReconciliationPage.totalCostVal).trim());
+    }
+
+    public void getDetailsVdrInvTotal() {
+        if (!getText(VendorInvoiceReconciliationPage.poCol).equals("P.O.")) {
+            click(PricingMatrixPage.copyRow, "Click [F2=PO/Rec Date/Due Date]");
+        }
+        Utility_Functions.xUpdateJson("P.O.", getText(VendorInvoiceReconciliationPage.recInvVal).trim());
+        Utility_Functions.xUpdateJson("Rcv Date", getText(VendorInvoiceReconciliationPage.venInvVal).trim());
+        Utility_Functions.xUpdateJson("DueDate", getText(VendorInvoiceReconciliationPage.totalCostVal).trim());
+        if(!isDisplayed(PricingMatrixPage.selectRowTxtBox)){
+            click(PricingMatrixPage.copyRow);
+        }
+    }
+
+    public String getDetails(String data){
+        return Utility_Functions.xGetJsonData(data);
+    }
+
+    public void verifyVendorInvDetails() {
+        Utility_Functions.xAssertEquals(report,getDetails("Vendor"),getAttribute(VendorInvoiceReconciliationPage.originalVendor,"value"),"Original Vendor matches");
+        commonObj.validateText(VendorInvoiceReconciliationPage.vendor, getDetails("VendorName"), "Vendor Name Matches: "+getDetails("VendorName"));
+        Utility_Functions.xAssertEquals(report,getDetails("RecDoc"),getAttribute(VendorInvoiceReconciliationPage.receiverDoc,"value"),"Receiver Doc matches");
+        commonObj.validateText(VendorInvoiceReconciliationPage.totalNetDue, getDetails("TotalCost"), "Total Net Due Matches: "+getDetails("TotalCost"));
+        commonObj.validateText(VendorInvoiceReconciliationPage.detailedValue, getDetails("TotalCost"), "Detail Total Matches: "+getDetails("TotalCost"));
+        commonObj.validateText(VendorInvoiceReconciliationPage.orderNo, getDetails("P.O."), "Order No Matches: "+getDetails("P.O."));
+        commonObj.validateText(VendorInvoiceReconciliationPage.receivedDate, getDetails("Rcv Date"), "Received Date Matches: "+getDetails("Rcv Date"));
+        Utility_Functions.xAssertEquals(report,getDetails("DueDate"),getAttribute(VendorInvoiceReconciliationPage.dueDateTextBox,"value").trim(),"Due date matches");
+        Utility_Functions.xAssertEquals(report,getDetails("TotalCost"),getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox,"value").trim(),"Invoice Total matches");
+        Utility_Functions.xAssertEquals(report,getDetails("VendorInvoice"),getAttribute(VendorInvoiceReconciliationPage.vendorInvTextBox,"value").trim(),"Vendor Inv# matches");
     }
 
     /**
@@ -180,7 +228,7 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         validateVendor();
     }
 
-    public void clickReturn(){
+    public void clickReturn() {
         click(PurchaseOrderInquiryPage.btnF12Return, "Click [F12=Return]");
     }
 
@@ -190,14 +238,14 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         return getText(VendorInvoiceReconciliationPage.getVendorName);
     }
 
-    public String positionToRecDoc(){
+    public String positionToRecDoc() {
         changeToPositionToVendorName();
         click(CustomerGroupMaintenancePage.sort, "Click [F10=Sort by Rec Doc]");
         commonObj.validateText(SpecialPriceAllowancePage.textSearchHeader, "Position to Rec Doc . .", "Changed to [Position to Rec Doc . .]");
         return getText(VendorInvoiceReconciliationPage.recDoc);
     }
 
-    public void positionToVdrInvoice(){
+    public void positionToVdrInvoice() {
         changeToPositionToVendorName();
         click(CustomerGroupMaintenancePage.sort, "Click [F10=Sort by Rec Doc]");
         commonObj.validateText(SpecialPriceAllowancePage.textSearchHeader, "Position to Rec Doc . .", "Changed to [Position to Rec Doc . .]");
@@ -205,14 +253,48 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         commonObj.validateText(SpecialPriceAllowancePage.textSearchHeader, "Position to Vend Inv  .", "Changed to [Position to Vend Inv  .]");
     }
 
+    public void positionToTotalCost() {
+        positionToVdrInvoice();
+        click(CustomerGroupMaintenancePage.sort, "Click [F10=Total Cost]");
+        commonObj.validateText(SpecialPriceAllowancePage.textSearchHeader, "Position to Total Cost.", "Changed to [Position to Total Cost]");
+    }
+
+    public By divTag(String text) {
+        return By.xpath("//div[text()='" + text + "']");
+    }
+
+    public void changedPoRecDateDueDate() {
+        navigateToReceiverDocBrowser();
+        click(PricingMatrixPage.copyRow, "Click [F2=PO/Rec Date/Due Date]");
+        commonObj.validateText(VendorInvoiceReconciliationPage.poCol, "P.O.", "Column Changed to [P.O.]");
+        commonObj.validateText(VendorInvoiceReconciliationPage.rcvDateCol, "Rcv Date", "Column Changed to [Rcv Date]");
+        commonObj.validateText(VendorInvoiceReconciliationPage.dueDateCol, "Due Date", "Column Changed to [Due Date]");
+    }
+
+    public void positionToPO() {
+        positionToRecDoc();
+        click(CustomerGroupMaintenancePage.sort, "Click [F10=P.O.]");
+        commonObj.validateText(SpecialPriceAllowancePage.textSearchHeader, "Position to P.O.  . . .", "Changed to [Position to P.O.  . . .]");
+    }
+
+    public void positionToRcvDate() {
+        positionToPO();
+        click(CustomerGroupMaintenancePage.sort, "Click [F10=RCV Date]");
+        commonObj.validateText(VendorInvoiceReconciliationPage.rvcDatePrompt, "Position to Rcv Date  »", "Changed to [Position to Rcv Date  »]");
+    }
+
+    public void changePositionToRcvDate() {
+        positionToPO();
+    }
+
     /**
      * This method verify Search Receiver Doc Vendor Name
      */
     public void verifySearchRecDocVdrName() {
         navigateToReceiverDocBrowser();
-        String vendorName=changeToPositionToVendorName();
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,vendorName,"Enter Vendor Name");
-        commonObj.validateText(VendorInvoiceReconciliationPage.getVendorName, vendorName, "Vendor Name Sorted "+vendorName);
+        String vendorName = changeToPositionToVendorName();
+        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, vendorName, "Enter Vendor Name");
+        commonObj.validateText(VendorInvoiceReconciliationPage.getVendorName, vendorName, "Vendor Name Sorted " + vendorName);
         click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
         validateVendor();
     }
@@ -222,13 +304,9 @@ public class VendorInvoiceReconciliation extends ReusableLib {
      */
     public void verifySearchRecDoc() {
         navigateToReceiverDocBrowser();
-        String recDoc=positionToRecDoc();
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,jsonData.getData("SpecialCharacter"),"Enter Vendor Name as "+jsonData.getData("SpecialCharacter"));
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,jsonData.getData("zero"),"Enter Vendor Name as "+jsonData.getData("zero"));
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,jsonData.getData("TenNumeric"),"Enter Vendor Name as "+jsonData.getData("TenNumeric"));
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,jsonData.getData("AlphaNumeric"),"Enter Vendor Name as "+jsonData.getData("AlphaNumeric"));
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,recDoc,"Enter Vendor Name");
-        commonObj.validateText(VendorInvoiceReconciliationPage.recDoc, recDoc, "Vendor Name Sorted "+recDoc);
+        String recDoc = positionToRecDoc();
+        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, recDoc, "Enter Vendor Name");
+        commonObj.validateText(VendorInvoiceReconciliationPage.recDoc, recDoc, "Vendor Name Sorted " + recDoc);
         click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
         validateVendor();
     }
@@ -239,10 +317,43 @@ public class VendorInvoiceReconciliation extends ReusableLib {
     public void verifySearchVendorInvoice() {
         navigateToReceiverDocBrowser();
         positionToVdrInvoice();
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,jsonData.getData("SpecialCharacter"),"Enter Vendor Name as "+jsonData.getData("SpecialCharacter"));
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,jsonData.getData("zero"),"Enter Vendor Name as "+jsonData.getData("zero"));
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,jsonData.getData("TenNumeric"),"Enter Vendor Name as "+jsonData.getData("TenNumeric"));
-        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox,jsonData.getData("AlphaNumeric"),"Enter Vendor Name as "+jsonData.getData("AlphaNumeric"));
+        click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
+        validateVendor();
+    }
+
+    /**
+     * This method verify Search Position To Total Cost
+     */
+    public void verifySearchTotalCost() {
+        navigateToReceiverDocBrowser();
+        positionToTotalCost();
+        click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
+        validateVendor();
+    }
+
+    public void validateSortedField(){
+        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, jsonData.getData("TenNumeric"), "Enter Vendor Name as " + jsonData.getData("TenNumeric"));
+        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, jsonData.getData("AlphaNumeric"), "Enter Vendor Name as " + jsonData.getData("AlphaNumeric"));
+        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, jsonData.getData("SpecialCharacter"), "Enter Vendor Name as " + jsonData.getData("SpecialCharacter"));
+        sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, jsonData.getData("zero"), "Enter Vendor Name as " + jsonData.getData("zero"));
+    }
+
+    /**
+     * This method verify Position To PO
+     */
+    public void verifyPositionToPO() {
+        changedPoRecDateDueDate();
+        positionToPO();
+        click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
+        validateVendor();
+    }
+
+    /**
+     * This method verify Position To RCV Date
+     */
+    public void verifyPositionToRcvDate() {
+        changedPoRecDateDueDate();
+        positionToRcvDate();
         click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
         validateVendor();
     }

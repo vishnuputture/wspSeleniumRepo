@@ -69,4 +69,31 @@ public class VendorInvoiceReconciliation extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_445_verifySearchTotalCost(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test case verify Search Total Cost");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_447_verifyRecDocPositionToPO(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test to verify that user should be able to pull the receiver document numbers using the Position to  PO field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_450_verifyRecDateFilter(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test to verify that user should be able to see the list of receiver document numbers, using the received date as filter");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

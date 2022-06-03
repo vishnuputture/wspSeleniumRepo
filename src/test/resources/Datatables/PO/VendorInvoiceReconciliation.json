@@ -4,10 +4,13 @@
       "Tc_433_vendorInvoiceRecUI": "launchApp,siteLogin,navigateToVendorInvoiceRec,vendorInvoiceRecUI,exitVendorInvoiceRec,signOut",
       "Tc_435_verifyReceiverDocFields": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyReceiverDocField,exitVendorInvoiceRec,signOut",
       "Tc_437_verifyReceiverDocBrowse": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyReceiverDocBrowse,exitVendorInvoiceRec,signOut",
-      "Tc_440_verifySearchReceiverDocNo": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchReceiverDocNo,clickReturn,exitVendorInvoiceRec,signOut",
-      "Tc_441_verifySearchRecDocVdrName": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDocVdrName,clickReturn,exitVendorInvoiceRec,signOut",
-      "Tc_443_verifySearchReferenceDocNo": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDoc,clickReturn,exitVendorInvoiceRec,signOut",
-      "Tc_444_verifySearchVdrInvoice": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchVendorInvoice,clickReturn,exitVendorInvoiceRec,signOut"
+      "Tc_440_verifySearchReceiverDocNo": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchReceiverDocNo,validateSortedField,clickReturn,exitVendorInvoiceRec,signOut",
+      "Tc_441_verifySearchRecDocVdrName": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDocVdrName,validateSortedField,clickReturn,verifySearchRecDocVdrName,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_443_verifySearchReferenceDocNo": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDoc,validateSortedField,clickReturn,verifySearchRecDoc,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_444_verifySearchVdrInvoice": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchVendorInvoice,validateSortedField,clickReturn,verifySearchVendorInvoice,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_445_verifySearchTotalCost": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchTotalCost,validateSortedField,clickReturn,verifySearchTotalCost,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_447_verifyRecDocPositionToPO": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyPositionToPO,validateSortedField,clickReturn,verifyPositionToPO,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_450_verifyRecDateFilter": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyPositionToRcvDate,validateSortedField,clickReturn,verifyPositionToRcvDate,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut"
     }
   ],
   "General_Data": [
@@ -25,11 +28,19 @@
     },
     {
       "TC_ID": "Tc_440_verifySearchReceiverDocNo",
-      "Title": "Test case verify Search Receiver Doc No"
+      "Title": "Test case verify Search Receiver Doc No",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
     },
     {
       "TC_ID": "Tc_441_verifySearchRecDocVdrName",
-      "Title": "Test case verify Search Rec Doc Vdr Name"
+      "Title": "Test case verify Search Rec Doc Vdr Name",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
     },
     {
       "TC_ID": "Tc_443_verifySearchReferenceDocNo",
@@ -42,6 +53,30 @@
     {
       "TC_ID": "Tc_444_verifySearchVdrInvoice",
       "Title": "Test case verify Search Vdr Invoice",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_445_verifySearchTotalCost",
+      "Title": "Test case verify Search Total Cost",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_447_verifyRecDocPositionToPO",
+      "Title": "Test to verify that user should be able to pull the receiver document numbers using the \"Position to  PO\" field",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_450_verifyRecDateFilter",
+      "Title": "Test to verify that user should be able to see the list of receiver document numbers, using the received date as filter",
       "SpecialCharacter": "!!@#$",
       "zero": "0000",
       "TenNumeric": "1234567891",

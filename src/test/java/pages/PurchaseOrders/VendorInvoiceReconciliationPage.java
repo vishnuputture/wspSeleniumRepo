@@ -54,4 +54,11 @@ public class VendorInvoiceReconciliationPage extends ReusableLib {
     public static By getVendorName=By.id("D_12_12");
     public static By recDoc=By.id("D_12_39");
     public static By noRecords=By.id("D_13_20");
+    public static By poCol=By.id("D_11_49");
+    public static By rcvDateCol=By.id("D_11_56");
+    public static By dueDateCol=By.id("D_11_65");
+    public static By recInvVal=By.id("D_12_49");
+    public static By venInvVal=By.id("D_12_56");
+    public static By totalCostVal=By.id("D_12_65");
+    public static By rvcDatePrompt=By.xpath("//div[@id='D_4_2']/a");
 }
