@@ -96,4 +96,37 @@ public class VendorInvoiceReconciliation extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_452_verifyPOMore(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test to verify that user should be able to filter the receiver document numbers using PO number");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreatePoDirect(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Direct Po");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CompleteReceivingStockPOItemsInventoryReceiptsScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to Complete Receiving Stock PO Items Inventory Receipts Screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_453_verifyDueDateField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user should be able to validate that \"Due Date\" is greater than or equal to received date");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

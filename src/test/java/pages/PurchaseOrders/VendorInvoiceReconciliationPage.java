@@ -61,4 +61,5 @@ public class VendorInvoiceReconciliationPage extends ReusableLib {
     public static By venInvVal=By.id("D_12_56");
     public static By totalCostVal=By.id("D_12_65");
     public static By rvcDatePrompt=By.xpath("//div[@id='D_4_2']/a");
+    public static By moreLink=By.id("btnPageDown");
 }

@@ -450,6 +450,7 @@ public class ReceivingInProcess extends ReusableLib {
 
     public void clickReceiveInProcessLink() {
         Utility_Functions.timeWait(4);
+        Utility_Functions.xUpdateJson("RecDocumentNo",getText(ReceivingInProcessPage.recDocNo));
         click(By.xpath("//a[text()='Receiving in Process']"));
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }

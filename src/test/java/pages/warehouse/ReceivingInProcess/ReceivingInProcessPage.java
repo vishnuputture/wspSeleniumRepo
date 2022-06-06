@@ -28,6 +28,7 @@ public class ReceivingInProcessPage {
     public static By remainingCount=By.xpath("//ion-col[contains(text(),' Remaining: ')]");
     public static By tickIcon=By.xpath("//i[@onfocusclass='win-success']");
     public static By lastArrow=By.xpath("//a[text()='»']");
+    public static By recDocNo=By.id("RC1CTL_WKRDOC");
 
     public static By pageLoadSpinner = By.xpath("//i[contains(@class,'fa-spinner')]");
     public static By lblNoResultsFound = By.xpath("//i[text()='No results found']");

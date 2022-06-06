@@ -4,7 +4,6 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-import org.junit.validator.ValidateWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.PurchaseOrders.MailingMasterSearchPage;
@@ -15,8 +14,11 @@ import pages.inventory.OptionsConstantsPage;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
-import software.amazon.awssdk.services.glacier.model.PurchaseProvisionedCapacityRequest;
 import supportLibraries.Utility_Functions;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class VendorInvoiceReconciliation extends ReusableLib {
 
@@ -171,7 +173,7 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         getDetailsVdrInvTotal();
     }
 
-    public void selectVendor(){
+    public void selectVendor() {
         sendKeys(VendorInvoiceReconciliationPage.selectVendor, "1" + Keys.ENTER, "Select Customer No");
     }
 
@@ -193,26 +195,26 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         Utility_Functions.xUpdateJson("P.O.", getText(VendorInvoiceReconciliationPage.recInvVal).trim());
         Utility_Functions.xUpdateJson("Rcv Date", getText(VendorInvoiceReconciliationPage.venInvVal).trim());
         Utility_Functions.xUpdateJson("DueDate", getText(VendorInvoiceReconciliationPage.totalCostVal).trim());
-        if(!isDisplayed(PricingMatrixPage.selectRowTxtBox)){
+        if (!isDisplayed(PricingMatrixPage.selectRowTxtBox)) {
             click(PricingMatrixPage.copyRow);
         }
     }
 
-    public String getDetails(String data){
+    public String getDetails(String data) {
         return Utility_Functions.xGetJsonData(data);
     }
 
     public void verifyVendorInvDetails() {
-        Utility_Functions.xAssertEquals(report,getDetails("Vendor"),getAttribute(VendorInvoiceReconciliationPage.originalVendor,"value"),"Original Vendor matches");
-        commonObj.validateText(VendorInvoiceReconciliationPage.vendor, getDetails("VendorName"), "Vendor Name Matches: "+getDetails("VendorName"));
-        Utility_Functions.xAssertEquals(report,getDetails("RecDoc"),getAttribute(VendorInvoiceReconciliationPage.receiverDoc,"value"),"Receiver Doc matches");
-        commonObj.validateText(VendorInvoiceReconciliationPage.totalNetDue, getDetails("TotalCost"), "Total Net Due Matches: "+getDetails("TotalCost"));
-        commonObj.validateText(VendorInvoiceReconciliationPage.detailedValue, getDetails("TotalCost"), "Detail Total Matches: "+getDetails("TotalCost"));
-        commonObj.validateText(VendorInvoiceReconciliationPage.orderNo, getDetails("P.O."), "Order No Matches: "+getDetails("P.O."));
-        commonObj.validateText(VendorInvoiceReconciliationPage.receivedDate, getDetails("Rcv Date"), "Received Date Matches: "+getDetails("Rcv Date"));
-        Utility_Functions.xAssertEquals(report,getDetails("DueDate"),getAttribute(VendorInvoiceReconciliationPage.dueDateTextBox,"value").trim(),"Due date matches");
-        Utility_Functions.xAssertEquals(report,getDetails("TotalCost"),getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox,"value").trim(),"Invoice Total matches");
-        Utility_Functions.xAssertEquals(report,getDetails("VendorInvoice"),getAttribute(VendorInvoiceReconciliationPage.vendorInvTextBox,"value").trim(),"Vendor Inv# matches");
+        Utility_Functions.xAssertEquals(report, getDetails("Vendor"), getAttribute(VendorInvoiceReconciliationPage.originalVendor, "value"), "Original Vendor matches");
+        commonObj.validateText(VendorInvoiceReconciliationPage.vendor, getDetails("VendorName"), "Vendor Name Matches: " + getDetails("VendorName"));
+        Utility_Functions.xAssertEquals(report, getDetails("RecDoc"), getAttribute(VendorInvoiceReconciliationPage.receiverDoc, "value"), "Receiver Doc matches");
+        commonObj.validateText(VendorInvoiceReconciliationPage.totalNetDue, getDetails("TotalCost"), "Total Net Due Matches: " + getDetails("TotalCost"));
+        commonObj.validateText(VendorInvoiceReconciliationPage.detailedValue, getDetails("TotalCost"), "Detail Total Matches: " + getDetails("TotalCost"));
+        commonObj.validateText(VendorInvoiceReconciliationPage.orderNo, getDetails("P.O."), "Order No Matches: " + getDetails("P.O."));
+        commonObj.validateText(VendorInvoiceReconciliationPage.receivedDate, getDetails("Rcv Date"), "Received Date Matches: " + getDetails("Rcv Date"));
+        Utility_Functions.xAssertEquals(report, getDetails("DueDate"), getAttribute(VendorInvoiceReconciliationPage.dueDateTextBox, "value").trim(), "Due date matches");
+        Utility_Functions.xAssertEquals(report, getDetails("TotalCost"), getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value").trim(), "Invoice Total matches");
+        Utility_Functions.xAssertEquals(report, getDetails("VendorInvoice"), getAttribute(VendorInvoiceReconciliationPage.vendorInvTextBox, "value").trim(), "Vendor Inv# matches");
     }
 
     /**
@@ -331,7 +333,7 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         validateVendor();
     }
 
-    public void validateSortedField(){
+    public void validateSortedField() {
         sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, jsonData.getData("TenNumeric"), "Enter Vendor Name as " + jsonData.getData("TenNumeric"));
         sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, jsonData.getData("AlphaNumeric"), "Enter Vendor Name as " + jsonData.getData("AlphaNumeric"));
         sendKeysAndEnter(PricingMatrixPage.selectRowTxtBox, jsonData.getData("SpecialCharacter"), "Enter Vendor Name as " + jsonData.getData("SpecialCharacter"));
@@ -351,10 +353,48 @@ public class VendorInvoiceReconciliation extends ReusableLib {
     /**
      * This method verify Position To RCV Date
      */
+    public void verifyPOMore() {
+        changedPoRecDateDueDate();
+        positionToPO();
+        click(VendorInvoiceReconciliationPage.moreLink, "Click [More...] link");
+        click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
+        validateVendor();
+    }
+
+    /**
+     * This method verify Position To RCV Date
+     */
     public void verifyPositionToRcvDate() {
         changedPoRecDateDueDate();
         positionToRcvDate();
         click(VendorInvoiceReconciliationPage.searchVendor, "Click [Search Vendor ] Text Box");
         validateVendor();
+    }
+
+    public String yesterday() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
+        return dateFormat.format(cal.getTime());
+    }
+
+    /**
+     * This method verify Due date field from Rec doc Inventory
+     */
+    public void verifyDueDate() {
+        String recDoc=Utility_Functions.xGetJsonData("RecDocumentNo");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.receiverDoc,recDoc,"Enter Receiver Doc.: ["+recDoc+"]");
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Invalid Date", "[Invalid Date] warning is present");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.dueDateTextBox,jsonData.getData("InvalidDate"),"Enter Due Date.: ["+jsonData.getData("InvalidDate")+"]");
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Invalid Date", "[Invalid Date] warning is present");
+        String date=yesterday();
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.dueDateTextBox,date,"Enter Due Date.: ["+date+"]");
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Due Date must be on or after received date", "[Due Date must be on or after received date] warning is present");
+        String currentDate=Utility_Functions.xGetCurrentDate("MM/dd/yy");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.dueDateTextBox,currentDate,"Enter Due Date.: ["+currentDate+"]");
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Invalid Freight Charges Code", "[Invalid Freight Charges Code] warning is present");
+        click(VendorInvoiceReconciliationPage.newDoc,"Click [F5=New Doc]");
+        String recDocEty=getAttribute(VendorInvoiceReconciliationPage.receiverDoc,"value");
+        Utility_Functions.xAssertEquals(report,recDocEty,"","New Doc is present");
     }
 }
