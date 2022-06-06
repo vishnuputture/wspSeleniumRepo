@@ -105,4 +105,58 @@ public class VendorInvoiceReconciliation extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_464_VerifyOptionsAvailableOnDetailPage(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test case to verify options available on Detail page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_469_VerifyFreightAmountInVIRPage(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test case to verify the freight amount in vendor invoice reconciliation page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_481_VerifyCreationOfDebitMemoForQuantityDifference(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test case to verify creation of debit memo for the quantity difference");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_482_VerifyCreationOfDebitMemoForCostDifference(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test case to verify creation of debit memo for the cost difference");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_486_VerifyCreationOfDebitMemoForItemsNotOnPO(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test case to verify creation of debit memo for items not on PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_487_VerifySpecialNotesOnDebitMemoProcessPage(SeleniumTestParameters testParameters) {
+        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        testParameters.setCurrentTestDescription("Test case to verify [Special Notes] on Debit Memo Process page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

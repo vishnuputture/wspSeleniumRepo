@@ -19,6 +19,8 @@ import software.amazon.awssdk.services.glacier.model.PurchaseProvisionedCapacity
 import software.amazon.awssdk.services.securityhub.model.Note;
 import supportLibraries.Utility_Functions;
 
+import java.util.Locale;
+
 public class VendorInvoiceReconciliation extends ReusableLib {
 
     CommonActions commonObj;
@@ -312,12 +314,27 @@ public class VendorInvoiceReconciliation extends ReusableLib {
      * Keyword to verify Invoice Total and Detail Total are same
      */
     public void verifyInvoiceAndDetailTotal() {
-        String invoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value");
-        String detailTotal = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.detailedValue);
-        Utility_Functions.xAssertEquals(report, invoiceTotal, detailTotal, "Invoice Total and Detail Total are displaying same value ["+invoiceTotal+"]");
+        String txtInvoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value").trim();
+        double it = Double.parseDouble(txtInvoiceTotal);
 
-        String gmMgrAmount = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.gmMarginAmt);
-        Utility_Functions.xAssertEquals(report, "              ", gmMgrAmount, "GM Mgr Amount field is displaying blank");
+        String txtFreightAmount = getAttribute(VendorInvoiceReconciliationPage.freightAmountTextBox, "value").trim();
+        double fa = Double.parseDouble(txtFreightAmount);
+
+        double dtExpected = it-fa;
+        String expectedDetailTotal = Double.toString(dtExpected);
+
+        String txtDetailTotal = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.detailedValue).trim();
+        double dt = Double.parseDouble(txtDetailTotal);
+        String actualDetailTotal = Double.toString(dt);
+        Utility_Functions.xAssertEquals(report, expectedDetailTotal, actualDetailTotal, "Detail Total is displaying value ["+actualDetailTotal+"]");
+    }
+
+    /**
+     * Keyword to verify Invoice Total and Detail Total are same
+     */
+    public void verifyInvoiceAndDetailTotalNoEdit() {
+        String txtInvoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value").trim();
+        commonObj.validateText(VendorInvoiceReconciliationPage.detailedValue, txtInvoiceTotal, "Validating [Detail Total] field");
     }
 
     /**
@@ -335,6 +352,9 @@ public class VendorInvoiceReconciliation extends ReusableLib {
 
         String gmMgrAmount = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.gmMarginAmt).trim();
         Utility_Functions.xAssertEquals(report, "1.00-", gmMgrAmount, "GM Mgr Amount field is auto-calculated");
+
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.invoiceTotalTextBox, invoiceTotal, "Resetting Invoice Total tbx to ["+invoiceTotal+"]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
     /**
@@ -368,6 +388,14 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Discount percentage and amount are ZERO.  Press F9 to accept invoice.", "validating warning message");
         Utility_Functions.actionKey(Keys.F9, ownDriver);
+    }
+
+    /**
+     * Keyword to accept Invoice by pressing F9 after editing Total Invoice
+     */
+    public void acceptInvoicePostEdit() {
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrGMMPage, "Vendor Invoice Reconciliation - Gross Margin Manager", "Validating [Vendor Invoice Reconciliation - Gross Margin Manager] page title");
     }
 
     /**
@@ -409,7 +437,7 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         commonObj.validateText(VendorInvoiceReconciliationPage.warningMessageGMMgr, "Enter a description when NOT recording GM/Mgr.", "validating warning message");
 
-        sendKeys(VendorInvoiceReconciliationPage.recordThisGMManager, "Y", "Entering [N] in [Do you wish to record this GM Manager?] field");
+        sendKeys(VendorInvoiceReconciliationPage.recordThisGMManager, "Y", "Entering [Y] in [Do you wish to record this GM Manager?] field");
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         commonObj.validateText(VendorInvoiceReconciliationPage.warningMessageGMMgr, "Enter a description when recording GM/Mgr.", "validating warning message");
     }
@@ -427,6 +455,18 @@ public class VendorInvoiceReconciliation extends ReusableLib {
     }
 
     /**
+     * Keyword to accept Invoice having Debit Memo by pressing F9
+     */
+    public void acceptInvoiceWithDebitMemoGMMgrPage() {
+        sendKeys(VendorInvoiceReconciliationPage.recordThisGMManager, "Y", "Entering [Y] in [Do you wish to record this GM Manager?] field");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.explanation, "Testing Purpose", "Entering data in [Please key an explanation.] field");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessageGMMgr, "Please press F9 to accept the GM/Mgr.", "validating warning message");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrDebitMemoProcessPage, "Debit Memo Process", "Validating [Debit Memo Process] page title");
+    }
+
+    /**
      * Keyword to verify details in [Vendor Invoice Reconciliation] after Accept Invoice operation
      */
     public void vrfyVIRPageDetailsAfterAccept() {
@@ -436,14 +476,14 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         String gmMgrAmount = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.gmMarginAmt).trim();
         Utility_Functions.xAssertEquals(report, "1.00-", gmMgrAmount, "GM Mgr Amount field is auto-calculated");
 
-        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "INVOICED - Make adjustments, press F9 to accept", "validating warning message");
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Receiver Doc has been submitted for VIR.", "validating warning message");
     }
 
     /**
      * Keyword to verify warning for selecting already invoiced Receiver Doc.
      */
     public void vrfyInvoicedWarning() {
-        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "INVOICED - Make adjustments, press F9 to accept", "validating warning message");
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Receiver Doc has been submitted for VIR.", "validating warning message");
     }
 
     /**
@@ -455,7 +495,7 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         sendKeysAndEnter(VendorInvoiceReconciliationPage.positionToRecDoc, recDocInvoiced, "Entering data in [Position to Rec Doc] field");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
-        String recDoc = getText(VendorInvoiceReconciliationPage.recDoc);
+        String recDoc = getText(VendorInvoiceReconciliationPage.recDoc).trim();
         if (!recDocInvoiced.equalsIgnoreCase(recDoc.trim()))
             report.updateTestLog("Verify Rec Doc number", "Verify Rec Doc number", Status.PASS);
         else
@@ -507,6 +547,261 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         commonObj.verifyElementContainsText(VendorNotesPage.erroMsgVendorNotes, "- Vendor Notes Changed.", "Validating success msg in [Vendor Note Revisions] page");
         Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
+
+    /**
+     * Keyword to navigate to [Order Details] page
+     */
+    public void navigateToOrderDetailsFromVIR() {
+        String orderNo = getText(VendorInvoiceReconciliationPage.orderNo).trim();
+        String invoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value").trim();
+
+        Utility_Functions.actionKey(Keys.F11, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.tbxOrderNumber, orderNo, "Validating order number");
+        commonObj.validateText(VendorInvoiceReconciliationPage.tbxInvoiceTotal, invoiceTotal, "Validating Invoice Total");
+    }
+
+    /**
+     * Keyword to verify Actions btn in [Order Details] page
+     */
+    public void vrfyActionsBtnInOrderDetailsPage() {
+        Utility_Functions.actionKey(Keys.F1, ownDriver);
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.divHeader, "Vendor Part Number", "Clicking on [F1=Vendor Part #] > Validating [Vendor Part Number] header");
+        Utility_Functions.actionKey(Keys.F1, ownDriver);
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.divHeader, "Stock Number", "Clicking on [F1=Stock #] > Validating [Stock Number] header");
+        Utility_Functions.actionKey(Keys.F1, ownDriver);
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.divHeader, "Description", "Clicking on [F1=Description] > Validating [Description] header");
+        Utility_Functions.actionKey(Keys.F2, ownDriver);
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.divHeader, "Extd. Cost", "Clicking on [F2=Extend Cost] > Validating [Extd. Cost] header");
+        Utility_Functions.actionKey(Keys.F2, ownDriver);
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.divHeader, "Unit Cost", "Clicking on [F2=Unit Cost] > Validating [Unit Cost] header");
+
+        /************************************************** Remove below steps after confirming **************************************************/
+        Utility_Functions.actionKey(Keys.F11, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.vendorInvoiceRecHeader, "Vendor Invoice Reconciliation", "Validating [Vendor Invoice Reconciliation] page title");
+    }
+
+    /**
+     * Keyword to verify Actions btn in [Notes Management - Inquiry] page
+     */
+    public void vrfyActionsBtnInNotesManagementPage() {
+        //click(VendorInvoiceReconciliationPage.tbxQtyRcvd);
+        Utility_Functions.actionKey(Keys.F1, ownDriver);
+        Utility_Functions.xMoveToElment(getElement(VendorInvoiceReconciliationPage.tbxQtyRcvd), ownDriver);
+        Utility_Functions.timeWait(10);
+        Utility_Functions.xClickHiddenElement(ownDriver, VendorInvoiceReconciliationPage.btnF18);
+        //click(VendorInvoiceReconciliationPage.btnF18, "Clicked on [F18=Notes] button");
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrNotesManagementPage, "Notes Management - Inquiry", "Validating [Notes Management - Inquiry] page header");
+        Utility_Functions.actionKey(Keys.F11, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrLastUserColumn, "Last User", "Clicking on [F11=Show User/Date] > Validating [Last User] column header");
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrChgDateColumn, "Chg Date", "Clicking on [F11=Show User/Date] > Validating [Chg Date] column header");
+        Utility_Functions.actionKey(Keys.F11, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrNoteColumn, "Note", "Clicking on [F11=Show Note Data] > Validating [Note] column header");
+        Utility_Functions.actionKey(Keys.F12, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.lblOrderNumber, "Order Number :", "Clicking on [F12=Cancel] > Validating [Order Details page]");
+        Utility_Functions.actionKey(Keys.F11, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.vendorInvoiceRecHeader, "Vendor Invoice Reconciliation", "Validating [Vendor Invoice Reconciliation] page title");
+    }
+
+    /**
+     * Keyword to validate VIR details like - ReceivedDate, FreightCharges, etc
+     */
+    public void vrfyVIRDetails() {
+        String rcvdDate = jsonData.getData("ReceivedDate");
+        if (rcvdDate.charAt(0)=='0'){
+            rcvdDate  = rcvdDate.substring(1);
+        }
+        String fCode = jsonData.getData("FCode");
+
+        commonObj.validateText(VendorInvoiceReconciliationPage.receivedDate, rcvdDate, "Validating Received Date");
+        String actualFreightCode = getAttribute(VendorInvoiceReconciliationPage.freightCharges, "value").trim();
+        Utility_Functions.xAssertEquals(report, fCode, actualFreightCode, "Validating Freight Charges code");
+        String actualFreightAmount = getAttribute(VendorInvoiceReconciliationPage.freightAmountTextBox, "value").trim();
+        Utility_Functions.xAssertEquals(report, "10.00", actualFreightAmount, "Validating Freight Amount");
+        String allocMethod = getAttribute(VendorInvoiceReconciliationPage.allocMethodTextBox, "value").trim();
+        Utility_Functions.xAssertEquals(report, "M", allocMethod, "Validating  Alloc. Method");
+    }
+
+    /**
+     * Keyword to enter Debit Memo and Discount Amount data in VIR page
+     */
+    public void vrfyDebitMemoAndAmount() {
+        vrfyDebitMemo();
+        String amount = jsonData.getData("DiscAmount");
+        double am = Double.parseDouble(amount);
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.amountTextBox, amount, "Entering data in [-or- Amount] field");
+
+        String invoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value");
+        if (invoiceTotal.contains(",")){
+            invoiceTotal = invoiceTotal.replaceAll(",", "");
+        }
+        double it = Double.parseDouble(invoiceTotal);
+        String totalAmountExpected = Double.toString(it-am);
+
+        String totalNetDue = getText(VendorInvoiceReconciliationPage.totalNetDue);
+        if (totalNetDue.contains(",")){
+            totalNetDue = totalNetDue.replaceAll(",", "");
+        }
+        double tnd = Double.parseDouble(totalNetDue);
+        String totalNetDueActual = Double.toString(tnd);
+        Utility_Functions.xAssertEquals(report, totalAmountExpected, totalNetDueActual, "Validating [Total Net Due] field");
+    }
+
+    /**
+     * Keyword to enter Debit Memo and Discount Percentage data in VIR page
+     */
+    public void vrfyDebitMemoAndDiscount() {
+        vrfyDebitMemo();
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.debitMemoTextBox, "0", "Resetting [Debit Memo] field");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.amountTextBox, "0", "Resetting data in [Debit Memo] field");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.freightAmountTextBox, "0", "Resetting [Freight Amount] field");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.discountPercentTextBox, "0", "Resetting [Disc. Percent] field");
+
+        String percentage = jsonData.getData("DiscPercentage");
+        double dp = Double.parseDouble(percentage);
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.discountPercentTextBox, percentage, "Entering data in [Disc. Percent] field");
+
+        String invoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value");
+        if (invoiceTotal.contains(",")){
+            invoiceTotal = invoiceTotal.replaceAll(",", "");
+        }
+        double it = Double.parseDouble(invoiceTotal);
+        double discountValue = (it/100)*dp;
+        String totalNetDueExpected = Double.toString(it-discountValue);
+
+        String totalNetDue = getText(VendorInvoiceReconciliationPage.totalNetDue);
+        if (totalNetDue.contains(",")){
+            totalNetDue = totalNetDue.replaceAll(",", "");
+        }
+        double tnd = Double.parseDouble(totalNetDue);
+        String totalNetDueActual = Double.toString(tnd);
+        Utility_Functions.xAssertEquals(report, totalNetDueExpected, totalNetDueActual, "Validating [Total Net Due] field");
+
+        String debitMemo = jsonData.getData("DebitMemo");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.debitMemoTextBox, debitMemo, "Entering data in [Debit Memo] field");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.freightAmountTextBox, "10", "Resetting [Freight Amount] field");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.discountPercentTextBox, percentage, "Entering data in [Disc. Percent] field");
+    }
+
+    /**
+     * Keyword to validate Debit Memo in VIR page
+     */
+    public void vrfyDebitMemo() {
+        String debitMemo = jsonData.getData("DebitMemo");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.debitMemoTextBox, "0", "Resetting [Debit Memo] field");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.amountTextBox, "0", "Resetting data in [Debit Memo] field");
+
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.debitMemoTextBox, debitMemo, "Entering data in [Debit Memo] field");
+        commonObj.validateText(VendorInvoiceReconciliationPage.gmMarginAmt, debitMemo, "Validating [GM Mgr Amount] is set as Debit Memo");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Discount percentage and amount are ZERO.  Press F9 to accept invoice.", "validating warning message");
+    }
+
+        /**
+         * Keyword to verify details in Debit Memo Process page
+         */
+    public void vrfyDebitMemoProcess() {
+        String order = jsonData.getData("OrderNo");
+        String receiverDoc = jsonData.getData("ReceiverDoc");
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.tbxOrderNumber, order, "Validating [Order Number] field");
+        commonObj.validateText(VendorInvoiceReconciliationPage.tbxInvoiceTotal, receiverDoc, "Validating [Receiver Doc] field");
+
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrDebitMemoSummaryPage, "Debit Memo Summary", "Validating [Debit Memo Summary] page title");
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.tbxInvoiceTotal, order, "Validating [Order Number] field");
+        commonObj.validateText(VendorInvoiceReconciliationPage.tbxReceiverDocDebitMemoSummary, receiverDoc, "Validating [Receiver Doc] field");
+    }
+
+    /**
+     * Keyword to verify details in Debit Memo Process page
+     */
+    public void vrfyDebitMemoProcessDetails() {
+        String order = jsonData.getData("OrderNo");
+        String receiverDoc = jsonData.getData("ReceiverDoc");
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.tbxOrderNumber, order, "Validating [Order Number] field");
+        commonObj.validateText(VendorInvoiceReconciliationPage.tbxInvoiceTotal, receiverDoc, "Validating [Receiver Doc] field");
+    }
+
+    /**
+     * Keyword to verify the functionality of [Note] in Debit Memo Summary page
+     */
+    public void vrfyNotesDebitMemoSummaryPage(){
+        click(VendorInvoiceReconciliationPage.lnkNote, "Click [Note] link");
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrVIRComments, "VIR Comments for A/P Portal In", "Validating [VIR Comments for A/P Portal In] popup header");
+        click(VendorInvoiceReconciliationPage.btnMore, "Click [More] button");
+        Utility_Functions.actionKey(Keys.F12, ownDriver);
+        Utility_Functions.xWaitForElementDisappear(ownDriver, VendorInvoiceReconciliationPage.hdrVIRComments, globalWait);
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+
+        Utility_Functions.timeWait(2);
+        if (Utility_Functions.xIsDisplayed(ownDriver, VendorInvoiceReconciliationPage.txtWarning)){
+            Utility_Functions.actionKey(Keys.F9, ownDriver);
+        }
+        commonObj.validateText(VendorInvoiceReconciliationPage.vendorInvoiceRecHeader, "Vendor Invoice Reconciliation", "Validating [Vendor Invoice Reconciliation] page title");
+    }
+
+    /**
+     * Keyword to get Order Number from VIR page
+     */
+    public void getOrderNo(){
+        String order = getText(VendorInvoiceReconciliationPage.orderNo);
+        jsonData.putData("OrderNo", order);
+    }
+
+    /**
+     * Keyword to verify navigation from Debit Memo Process page to Debit Memo Process-Other Items page
+     */
+    public void vrfyNavDebitMemoProcessToOtherItems() {
+        String order = jsonData.getData("OrderNo");
+        String receiverDoc = jsonData.getData("ReceiverDoc");
+        Utility_Functions.actionKey(Keys.F5, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrDebitMemoProcessOtherItemsPage, "Debit Memo Process-Other Items", "Validating [Debit Memo Process-Other Items] page title");
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.tbxOrderNumber, order, "Validating [Order Number] field");
+        commonObj.validateText(VendorInvoiceReconciliationPage.tbxInvoiceTotal, receiverDoc, "Validating [Receiver Doc] field");
+    }
+
+    /**
+     * Keyword to verify navigation from Debit Memo Process-Other Items page to Special Notes page
+     */
+    public void vrfySpecialNotes() {
+        vrfyNavDebitMemoProcessToSpclNotes();
+
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrDebitMemoProcessOtherItemsPage, "Debit Memo Process-Other Items", "Validating [Debit Memo Process-Other Items] page title");
+
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.tbxItemDescription, "Test Comments", "Entering data in [Item Description] field");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrDebitMemoProcessPage, "Debit Memo Process", "Validating [Debit Memo Process] page title");
+    }
+
+    /**
+     * Keyword to verify navigation from Debit Memo Process page to Special Notes page
+     */
+    public void vrfyNavDebitMemoProcessToSpclNotes() {
+        String order = jsonData.getData("OrderNo");
+        String receiverDoc = jsonData.getData("ReceiverDoc");
+        Utility_Functions.actionKey(Keys.F12, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrDebitMemoSummaryPage, "Additional Notes", "Validating [Additional Notes] page title");
+        commonObj.verifyElementContainsText(VendorInvoiceReconciliationPage.tbxInvoiceTotal, order, "Validating [Order Number] field");
+        commonObj.validateText(VendorInvoiceReconciliationPage.tbxReceiverDocDebitMemoSummary, receiverDoc, "Validating [Receiver Doc] field");
+    }
+
+    /**
+     * Keyword to add notes in Special Notes page and then verify
+     */
+    public void addSpclNotesAndVerify() {
+        String spclNotes = "test special notes";
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.tbxAdditionalNotesLine, spclNotes, "Entering data in [Special Notes] Line1 field");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        Utility_Functions.actionKey(Keys.F12, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.hdrDebitMemoSummaryPage, "Additional Notes", "Validating [Additional Notes] page title");
+
+        String spclNotesActual = getAttribute(VendorInvoiceReconciliationPage.tbxAdditionalNotesLine, "value").trim().toLowerCase(Locale.ROOT);
+        Utility_Functions.xAssertEquals(report, spclNotes, spclNotesActual, "Validating [Special Notes] field value as added previously");
+
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+        commonObj.validateText(VendorInvoiceReconciliationPage.vendorInvoiceRecHeader, "Vendor Invoice Reconciliation", "Validating [Vendor Invoice Reconciliation] page title");
+    }
+
 
 
 }

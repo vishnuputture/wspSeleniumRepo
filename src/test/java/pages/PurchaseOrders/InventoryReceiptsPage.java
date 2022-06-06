@@ -25,7 +25,12 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By btnCancelPO = By.xpath("//input[@value='Cancel Purchase Order']");
     public static By btnPOInquiry = By.id("op18_cf01");
     public static By purchaseOrderInquiry = By.xpath("//a[text()='Purchase Order Inquiry']");
-
+    public static By tbxFreightCost = By.id("VUF.1");
+    public static By receiverDocument = By.id("RCFCTL_WKRDOC");
+    public static By receivedDate = By.id("RCFCTL_VDDTSH");
+    public static By freightCode = By.id("RCFCTL_VDFRT");
+    public static By freightAmount = By.id("FAMT");
+    public static By grossMargin = By.id("VDGMMR");
 
     /**************************************** Sales Order Inquiry page ****************************************/
 
@@ -46,8 +51,9 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By btnUpdateOnHandQty = By.id("btnCF21");
     public static By btnUpdateSO = By.id("btnCF18");
 
+    /**************************************** Freight Allocation popup ****************************************/
 
-
-
+    public static By allocateFreight = By.id("DEFFRT");
+    public static By amountToAllocate = By.id("VDFAMT");
 
 }
