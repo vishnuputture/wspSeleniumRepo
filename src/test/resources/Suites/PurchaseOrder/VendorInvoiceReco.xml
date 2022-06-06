@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression" parallel="none" thread-count="1">
+	<test name="VendorInvoiceReconciliation">
+		<classes>
+			<class name="testcases.PO.VendorInvoiceReconciliation">
+				<methods>
+					<include name="Tc_433_vendorInvoiceRecUI"></include>
+					<include name="Tc_435_verifyReceiverDocFields"></include>
+					<include name="Tc_437_verifyReceiverDocBrowse"></include>
+					<include name="Tc_440_verifySearchReceiverDocNo"></include>
+					<include name="Tc_441_verifySearchRecDocVdrName"></include>
+					<include name="Tc_443_verifySearchReferenceDocNo"></include>
+					<include name="Tc_444_verifySearchVdrInvoice"></include>
+					<include name="Tc_445_verifySearchTotalCost"></include>
+					<include name="Tc_447_verifyRecDocPositionToPO"></include>
+					<include name="Tc_450_verifyRecDateFilter"></include>
+					<include name="Tc_452_verifyRecDateFilter"></include>
+					<include name="Tc_CreatePoDirect"></include>
+					<include name="Tc_CompleteReceivingStockPOItemsInventoryReceiptsScreen"></include>
+					<include name="Tc_453_verifyDueDateField"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

@@ -1,0 +1,127 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_433_vendorInvoiceRecUI": "launchApp,siteLogin,navigateToVendorInvoiceRec,vendorInvoiceRecUI,exitVendorInvoiceRec,signOut",
+      "Tc_435_verifyReceiverDocFields": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyReceiverDocField,exitVendorInvoiceRec,signOut",
+      "Tc_437_verifyReceiverDocBrowse": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyReceiverDocBrowse,exitVendorInvoiceRec,signOut",
+      "Tc_440_verifySearchReceiverDocNo": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchReceiverDocNo,validateSortedField,clickReturn,exitVendorInvoiceRec,signOut",
+      "Tc_441_verifySearchRecDocVdrName": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDocVdrName,validateSortedField,clickReturn,verifySearchRecDocVdrName,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_443_verifySearchReferenceDocNo": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchRecDoc,validateSortedField,clickReturn,verifySearchRecDoc,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_444_verifySearchVdrInvoice": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchVendorInvoice,validateSortedField,clickReturn,verifySearchVendorInvoice,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_445_verifySearchTotalCost": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifySearchTotalCost,validateSortedField,clickReturn,verifySearchTotalCost,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_447_verifyRecDocPositionToPO": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyPositionToPO,validateSortedField,clickReturn,verifyPositionToPO,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_450_verifyRecDateFilter": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyPositionToRcvDate,validateSortedField,clickReturn,verifyPositionToRcvDate,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_452_verifyPOMore": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyPOMore,validateSortedField,clickReturn,verifyPOMore,selectVendor,verifyVendorInvDetails,exitVendorInvoiceRec,signOut",
+      "Tc_CreatePoDirect": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
+      "Tc_CompleteReceivingStockPOItemsInventoryReceiptsScreen": "launchApp,siteLogin,navigateToInventoryReceipt,enterExistingPONumberRFGun,clickReceiveInProcessLink,switchToNextWindow,selectCompany,verifyReceiveSearchPo,switchBackToReceivingInProcess,enterQtyReceivedAndProcess,confirmFreight,switchToNextWindow,verifyReceiveSearchPo,switchBackToReceivingInProcess,navigatePOInquiryToMaster,signOut",
+      "Tc_453_verifyDueDateField": "launchApp,siteLogin,navigateToVendorInvoiceRec,verifyDueDate,exitVendorInvoiceRec,signOut"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_433_vendorInvoiceRecUI",
+      "Title": "Test case UI of Vendor Invoice Reconciliation Page"
+    },
+    {
+      "TC_ID": "Tc_435_verifyReceiverDocFields",
+      "Title": "Test case verify Receiver Doc Field",
+      "SpecialCharacter": "!!@#$$%%^^",
+      "zero": "000000000",
+      "TenNumeric": "12345678912",
+      "AlphaNumeric": "12WdeER23"
+    },
+    {
+      "TC_ID": "Tc_440_verifySearchReceiverDocNo",
+      "Title": "Test case verify Search Receiver Doc No",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_441_verifySearchRecDocVdrName",
+      "Title": "Test case verify Search Rec Doc Vdr Name",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_443_verifySearchReferenceDocNo",
+      "Title": "Test case verify Search Reference Document Number",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_444_verifySearchVdrInvoice",
+      "Title": "Test case verify Search Vdr Invoice",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_445_verifySearchTotalCost",
+      "Title": "Test case verify Search Total Cost",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_447_verifyRecDocPositionToPO",
+      "Title": "Test to verify that user should be able to pull the receiver document numbers using the \"Position to  PO\" field",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_450_verifyRecDateFilter",
+      "Title": "Test to verify that user should be able to filter the receiver document numbers using PO number",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_452_verifyPOMore",
+      "SpecialCharacter": "!!@#$",
+      "zero": "0000",
+      "TenNumeric": "1234567891",
+      "AlphaNumeric": "1WeR3"
+    },
+    {
+      "TC_ID": "Tc_CreatePoDirect",
+      "Title": "Test case to Create Purchase order",
+      "accountNo": "099599",
+      "DirectShip": "Yes",
+      "ShipVia": "BEST WAY",
+      "QtyOrder": "50",
+      "itemNo": "AABABM200",
+      "QtyShip": "50",
+      "SalesOrderNo": "001811",
+      "QtyOrdered": "25",
+      "VendorNumber": "000388",
+      "CostOption": "1",
+      "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
+      "PONumber": "032762"
+    },
+    {
+      "TC_ID": "Tc_CompleteReceivingStockPOItemsInventoryReceiptsScreen",
+      "Title": "Test to Complete Receiving Stock PO Items Inventory Receipts Screen",
+      "QtyReceived": "10",
+      "ItemNo1": "AABABM100",
+      "QtyOrdered": "10",
+      "ReceivedPercentage": "100%",
+      "ReceivedQty": "10"
+    },
+    {
+      "TC_ID": "Tc_453_verifyDueDateField",
+      "Title": "Test to verify that user should be able to validate that \"Due Date\" is greater than or equal to received date",
+      "InvalidDate": "13/13/22"
+    }
+  ]
+}

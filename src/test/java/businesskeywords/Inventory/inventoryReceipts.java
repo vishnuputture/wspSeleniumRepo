@@ -9,6 +9,7 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptsPage;
+import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import pages.warehouse.ReceivingInProcess.ReceivingInProcessPage;
@@ -123,6 +124,8 @@ public class inventoryReceipts extends ReusableLib {
         Utility_Functions.timeWait(2);
         String qty = jsonData.getData("QtyReceived");
         sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, qty, "Enter Quantity Received");
+        String itemNum=getText(WorkWithSalesQuotesPage.itemNo).trim();
+        Utility_Functions.xUpdateJson("FullyReceivedItem",itemNum);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);

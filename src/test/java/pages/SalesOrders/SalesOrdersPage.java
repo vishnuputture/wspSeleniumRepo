@@ -12,6 +12,15 @@ public class SalesOrdersPage extends ReusableLib {
 	    }
 	public static By pageTitle = By.id("wob-app-header");
 	public static By billToAcct = By.id("inBillToAcct");
+	public static By billName = By.id("inBillToAcct_copy");
+	public static By billCity = By.id("outBillToCity");
+	public static By billState = By.id("outBillToState");
+	public static By billZipCode = By.id("outBillToZipCode");
+	public static By inShipToAcct = By.id("inShipToAcct");
+	public static By outSaveCustName = By.id("outSaveCustName");
+	public static By outShipToCity = By.id("outShipToCity");
+	public static By outShipToState = By.id("outShipToState");
+	public static By outShipToZipCode = By.id("outShipToZipCode");
 	public static By deliveryTypeDropDown = By.id("ddbDeliveryType");
 	public static By directShipDropDown = By.id("ddbDirectShip");
 	public static By shipViaDropDown = By.id("ddbShipViaLabel");
