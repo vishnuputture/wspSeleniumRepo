@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.OptionsConstantsPage;
 import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.PurchaseOrders.VendorInformationPage;
-import pages.SalesQuotes.WorkWithSalesQuotesPage;
+import pages.SalesQuotes.OldWorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
 
@@ -32,7 +32,6 @@ import java.util.Date;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 
 public class CommonActions extends ReusableLib {
@@ -398,7 +397,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void navigationToWorkingSalesQuotes() {
-		click(WorkWithSalesQuotesPage.workingSalesQuotes,"Click on Working Sales Sales Quotes");
+		click(OldWorkWithSalesQuotesPage.workingSalesQuotes,"Click on Working Sales Sales Quotes");
 	}
 
 	/**

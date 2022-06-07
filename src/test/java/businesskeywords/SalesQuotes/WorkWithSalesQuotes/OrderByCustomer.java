@@ -1,14 +1,10 @@
 package businesskeywords.SalesQuotes.WorkWithSalesQuotes;
 
-import businesskeywords.SalesQuotes.WorkWithSalesQuotes.WorkWithSalesQuote;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-import org.aspectj.weaver.ast.Or;
 import org.openqa.selenium.Keys;
-import pages.OrderProcessingPage;
-import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.pricing.OrderByCustomerPage;
 import supportLibraries.Utility_Functions;
 
