@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Pricing" parallel="tests" thread-count="2">
+    <test name="WISE">
+        <classes>
+            <class name="testcases.Pricing.Wise">
+                <methods>
+                    <include name="Tc_19_ValidateCustomerNumber"></include>
+                    <include name="Tc_20_ValidateItemNumber"></include>
+                    <include name="Tc_22_ValidateDBafterAdd"></include>
+                    <include name="Tc_5_ValidatePositiontoCustomerNumber_Beginning"></include>
+                    <include name="Tc_9_ValidatePositiontoCustomerNumber_Middle"></include>
+                    <include name="Tc_10_ValidatePositiontoCustomerNumber_End"></include>
+                    <include name="Tc_11_ValidatePositiontoItemNumber_Beginning"></include>
+                    <include name="Tc_17_NavigateToAddSpecialScreen"></include>
+                    <include name="Tc_13_ValidatePositiontoItemNumber_Middle"></include>
+                    <include name="Tc_23_ValidateDBAfterDelete"></include>
+                    <include name="Tc_API_updatePricing"></include>
+                    <include name="Tc_API_validatePricing"></include>
+                    <include name="Tc_2_ValidateNoSpecialPriceMessage"></include>
+                    <include name="Tc_3_ValidateDefaultFiltersSplPricing"></include>
+                    <include name="Tc_12_ValidatePositiontoItemNumber_End"></include>
+                    <include name="Tc_24_InsertPAPRecordToDelete"></include>
+                    <include name="Tc_21_E2E"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
