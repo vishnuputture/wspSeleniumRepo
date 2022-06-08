@@ -12,18 +12,19 @@ public class POEntry extends TestConfigurations {
         testParameters.setCurrentTestDescription("Test case UI for  Purchase Order Heading");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
-       // tearDownTestRunner(testParameters, coreScript);
-    }
-/*
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_204_ORDER_IN_USE_popup_when_user_IAD_particular_Order_No(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("ORDER IN USE popup when user I/A/D particular Order No");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
+        // tearDownTestRunner(testParameters, coreScript);
     }
 
-*/
+    /*
+        @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+        public void Tc_204_ORDER_IN_USE_popup_when_user_IAD_particular_Order_No(SeleniumTestParameters testParameters) {
+            testParameters.setCurrentTestDescription("ORDER IN USE popup when user I/A/D particular Order No");
+            CoreScript coreScript = new CoreScript(testParameters);
+            coreScript.driveTestExecution();
+            tearDownTestRunner(testParameters, coreScript);
+        }
+
+    */
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_205_Purchase_Order_DetailsUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case UI for  Purchase Order Details");
@@ -56,21 +57,21 @@ public class POEntry extends TestConfigurations {
         tearDownTestRunner(testParameters, coreScript);
     }
 
-        @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-        public void Tc_209_Verify_the_functionality_of_Type_Shipment_S(SeleniumTestParameters testParameters) {
-            testParameters.setCurrentTestDescription("Verify the functionality of Type Shipment : S");
-            CoreScript coreScript = new CoreScript(testParameters);
-            coreScript.driveTestExecution();
-            tearDownTestRunner(testParameters, coreScript);
-        }
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_209_Verify_the_functionality_of_Type_Shipment_S(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality of Type Shipment : S");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
-            @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-            public void Tc_210_Verify_the_error_message(SeleniumTestParameters testParameters) {
-                testParameters.setCurrentTestDescription("Verify the error message");
-                CoreScript coreScript = new CoreScript(testParameters);
-                coreScript.driveTestExecution();
-                tearDownTestRunner(testParameters, coreScript);
-            }
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_210_Verify_the_error_message(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the error message");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount(SeleniumTestParameters testParameters) {
@@ -95,25 +96,26 @@ public class POEntry extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-/*
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Verify error message inquiring line item that does not exist and NMRQ: Verify error\n" +
-                "message Freight Charges code is not selected");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
 
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_215_Verify_the_functionality_of_Ship_Date_and_Line_item_have_different_Ship_Date(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Verify the functionality of Ship Date and NMRQ: Verify the functionality of Line item\n" +
-                "have different Ship Date");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
-*/
+    /*
+        @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+        public void Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected(SeleniumTestParameters testParameters) {
+            testParameters.setCurrentTestDescription("Verify error message inquiring line item that does not exist and NMRQ: Verify error\n" +
+                    "message Freight Charges code is not selected");
+            CoreScript coreScript = new CoreScript(testParameters);
+            coreScript.driveTestExecution();
+            tearDownTestRunner(testParameters, coreScript);
+        }
+
+        @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+        public void Tc_215_Verify_the_functionality_of_Ship_Date_and_Line_item_have_different_Ship_Date(SeleniumTestParameters testParameters) {
+            testParameters.setCurrentTestDescription("Verify the functionality of Ship Date and NMRQ: Verify the functionality of Line item\n" +
+                    "have different Ship Date");
+            CoreScript coreScript = new CoreScript(testParameters);
+            coreScript.driveTestExecution();
+            tearDownTestRunner(testParameters, coreScript);
+        }
+    */
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_216_Verify_the_functionality_of_Freight_Charges(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify the functionality of Freight Charges");
@@ -128,14 +130,133 @@ public class POEntry extends TestConfigurations {
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
-
-
     }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_308_CreateSOUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Create SO UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreatePo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Creation of SO from stock PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_310_SoFromStockPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Creation of SO from stock PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_311_VerifySalesOrderCreated(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Sales Order Created");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_309_verifyF21Preferences(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Sales Order Created");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_314_verifyErrorMessageEmailFaxOptions(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Sales Order Created");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_315_verifySelectChangeDeselect(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Sales Order Created");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_321_verifyClosedMail(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Sales Order Created");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreatePoDirect(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Direct Po");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_312_VerifyCannotCreateSoForDirectPo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Create SO For Direct PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_316_verifyFieldExpansionOrderNo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality of Field Expansion Order Number");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_317_verifyFieldExpansionSONoField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality of Field Expansion Sales Order Number Fields");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_318_verifyFieldExpansionRelatedSaleField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality of Field Expansion Related Sales Fields");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_319_InquiryOrderNumber(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality of Order Number and Line No");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_335_deleteOrderNumber(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality of Delete Order Number");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_339_deleteDirectOrderNumber(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality of Delete Order Number");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

@@ -47,6 +47,7 @@ public class BinMaintenancePage {
     public static  By binsCountSP=By.xpath("//tbody/tr/td[@class='pl-3']");
     public static  By highlightRow=By.xpath("//tr[contains(@class,'ui-state-highlight')]");
     public static  By toaster=By.xpath("//div[@class='ui-toast-summary']");
+    public static  By nSellable=By.id("sellable");
     public static  By primaryOpt=By.xpath("//select[@ng-reflect-model='Primary']");
     public static  By secondaryOpt=By.xpath("//select[@ng-reflect-model='Secondary']");
     public static  By temporaryOpt=By.xpath("//select[@ng-reflect-model='Temporary']");
@@ -59,7 +60,7 @@ public class BinMaintenancePage {
     public static  By getItemVal=By.xpath("//table[@role='grid']/descendant::th[contains(text(),'Bin Location')]/ancestor::thead/following-sibling::tbody/descendant::td");
     public static  By zoneIdDropDown=By.xpath("//select[@name='zoneId']");
     public static  By goToItemBinLedger=By.xpath("//a[@title='Go To Item Bin Ledger']");
-    public static  By createBinPopup=By.xpath(" //h2[text()='CREATE BIN AND ASSIGN' or text()='Create Bin and Assign']");
+    public static  By createBinPopup=By.xpath("//h2[text()='Create Bin and Assign']");
 
     /******************************************** Bin Maintenance table elements ********************************************/
 
@@ -82,13 +83,13 @@ public class BinMaintenancePage {
 
     /******************************************** Create New Bin popup elements ********************************************/
 
-    public static By hdrCreateNewBinPopup = By.xpath("//h2[text()='CREATE NEW BIN' or text()='Create New Bin']");
+    public static By hdrCreateNewBinPopup = By.xpath("//h2[text()='Create New Bin']");
     public static By chbxAvailableToSell = By.xpath("//label[text()='Available to Sell']//preceding-sibling::input[@type='checkbox']");
     public static By chbxSpecialHandling = By.xpath("//label[text()='Special Handling']//preceding-sibling::input[@type='checkbox']");
     public static By chbxStagingArea = By.xpath("//label[text()='Staging Area']//preceding-sibling::input[@type='checkbox']");
     public static By tbxBinLocation = By.xpath("//label[contains(text(),'Bin Location')]//following-sibling::input");
     public static By btnCancelCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Cancel')]");
-    public static By btnSaveCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Save') or contains(text(),'Create')]");
+    public static By btnSaveCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Create')]");
     public static By lstDropdownsCreateNewBinPopup = By.id("createBinCondition");
     public static By ddnZoneCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Zone')]//following-sibling::select");
     public static By ddnConditionCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Condition')]//following-sibling::select");
@@ -100,6 +101,7 @@ public class BinMaintenancePage {
     public static By hdrEditBinPopup = By.xpath("//div[@class='modal-header']/h2[contains(text(),'EDIT ')]");
     public static By btnCancelEditBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Cancel')]");
     public static By btnSaveEdiBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Save')]");
+    public static By btnSavEdiBinPopup = By.xpath("//edit-multiple-bin//button[contains(text(),'Save')]");
     public static By ddnZoneEditBinPopup = By.xpath("//form//label[contains(text(),'Zone')]//following-sibling::select");
     public static By ddnConditionEditBinPopup = By.xpath("//form//label[contains(text(),'Condition')]//following-sibling::select");
     public static By ddnReceivingEditBinPopup = By.xpath("//form//label[contains(text(),'Receiving')]//following-sibling::select");
