@@ -5,9 +5,15 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
-import pages.SalesQuotes.OldWorkWithSalesQuotesPage;
+import pages.SalesOrders.SalesOrdersPage;
+import pages.SalesQuotes.WorkWithSalesQuotesPage;
+import pages.SalesQuotes.SalesQuotesPage;
 import pages.SalesQuotes.SalesQuoteConversionToSalesOrderPage;
+import pages.SalesQuotes.SalesQuoteDetailLinesConversionRecapPage;
+import pages.SalesQuotes.SalesQuoteDetailLinesPage;
+import pages.PurchaseOrders.MailingMasterSearchPage;
 import supportLibraries.Utility_Functions;
+import testcases.SalesOrders.SalesOrders;
 
 public class WorkWithSalesQuote extends ReusableLib {
 
@@ -42,8 +48,8 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void clickNextBtn() {
-        waitForElementClickable(OldWorkWithSalesQuotesPage.nextBtn,10);
-        click(OldWorkWithSalesQuotesPage.nextBtn, "Click Next Button");
+        waitForElementClickable(WorkWithSalesQuotesPage.nextBtn,10);
+        click(WorkWithSalesQuotesPage.nextBtn, "Click Next Button");
     }
 
     /**
@@ -51,8 +57,8 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void clickBackBtn() {
-        waitForElementClickable(OldWorkWithSalesQuotesPage.backBtn,10);
-        click(OldWorkWithSalesQuotesPage.backBtn, "Click back Button");
+        waitForElementClickable(SalesQuoteDetailLinesPage.backBtn,10);
+        click(SalesQuoteDetailLinesPage.backBtn, "Click back Button");
     }
 
     /**
@@ -60,11 +66,11 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void createQuote() {
-        click(OldWorkWithSalesQuotesPage.createQuote,"Click Create Quote");
+        click(WorkWithSalesQuotesPage.createQuote,"Click Create Quote");
         String custNumber=jsonData.getData("CustNum");
         String jobName=jsonData.getData("JobName");
-        Utility_Functions.xSendKeys(ownDriver.findElement(OldWorkWithSalesQuotesPage.custNumberCret),custNumber);
-        Utility_Functions.xSendKeys(ownDriver.findElement(OldWorkWithSalesQuotesPage.quoteJobName),jobName);
+        Utility_Functions.xSendKeys(ownDriver.findElement(WorkWithSalesQuotesPage.custNumberCret),custNumber);
+        Utility_Functions.xSendKeys(ownDriver.findElement(WorkWithSalesQuotesPage.quoteJobName),jobName);
         clickNextBtn();
         clickNextBtn();
     }
@@ -74,20 +80,20 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void addItemToQuote() {
-        Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(OldWorkWithSalesQuotesPage.typeItem),0);
-        waitForVisible(OldWorkWithSalesQuotesPage.itemNumber);
+        Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesQuoteDetailLinesPage.typeItem),0);
+        waitForVisible(SalesQuoteDetailLinesPage.itemNumber);
         System.out.println("After Item no Wait");
-        String itemNo=Utility_Functions.getText(ownDriver, OldWorkWithSalesQuotesPage.itemNumber);
+        String itemNo=Utility_Functions.getText(ownDriver, SalesQuoteDetailLinesPage.itemNumber);
         Utility_Functions.xUpdateJson("SQItem",itemNo);
         System.out.println("itemNo: "+itemNo);
         String desc=jsonData.getData("TestDescription");
 
-        sendKey(OldWorkWithSalesQuotesPage.testDesc,desc);
-        sendKey(OldWorkWithSalesQuotesPage.mtxCost,"1");
-        sendKey(OldWorkWithSalesQuotesPage.poCost,"1");
-        sendKey(OldWorkWithSalesQuotesPage.listPrc,"2");
-        click(OldWorkWithSalesQuotesPage.accept,"Click F9=Accept");
-        sendKey(OldWorkWithSalesQuotesPage.qty,"1");
+        sendKey(SalesQuoteDetailLinesPage.testDesc,desc);
+        sendKey(SalesQuoteDetailLinesPage.mtxCost,"1");
+        sendKey(SalesQuoteDetailLinesPage.poCost,"1");
+        sendKey(SalesQuoteDetailLinesPage.listPrc,"2");
+        click(SalesQuoteDetailLinesPage.accept,"Click F9=Accept");
+        sendKey(SalesQuoteDetailLinesPage.qty,"1");
     }
 
     public void verifyQuoteDetails()
@@ -95,7 +101,7 @@ public class WorkWithSalesQuote extends ReusableLib {
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        String itemNm=ownDriver.findElement(OldWorkWithSalesQuotesPage.itemNumberItem).getText();
+        String itemNm=ownDriver.findElement(SalesQuoteDetailLinesPage.itemNumberItem).getText();
         itemN = itemNm.trim();
         Utility_Functions.xAssertEquals(report,itemN,Utility_Functions.xGetJsonData("SQItem"),"Item Number: ");
         clickBackBtn();
@@ -106,23 +112,23 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void convertSaleOrd() {
-        click(OldWorkWithSalesQuotesPage.convert,"Click Convert");
-        click(OldWorkWithSalesQuotesPage.overRide,"Click Override");
+        click(SalesQuotesPage.convert,"Click Convert");
+        click(SalesQuotesPage.overRide,"Click Override");
         sendKey(SalesQuoteConversionToSalesOrderPage.salesOrderQtyShipped, "1");
-        click(OldWorkWithSalesQuotesPage.nextBtn,"Click Next Button");
-        String itemNo=ownDriver.findElement(OldWorkWithSalesQuotesPage.itemConvert).getText();
+        click(SalesQuotesPage.nextBtn,"Click Next Button");
+        String itemNo=ownDriver.findElement(SalesQuoteDetailLinesConversionRecapPage.itemConvert).getText();
         String act_desc=jsonData.getData("TestDescription");
         String act_Qty=jsonData.getData("Quantity");
-        String qty=ownDriver.findElement(OldWorkWithSalesQuotesPage.qtyConvert).getText().trim();
-        String backQty=ownDriver.findElement(OldWorkWithSalesQuotesPage.backOrdQty).getText().trim();
-        String exp_desc=ownDriver.findElement(OldWorkWithSalesQuotesPage.itemDescConvert).getText().trim();
+        String qty=ownDriver.findElement(SalesQuoteDetailLinesConversionRecapPage.qtyConvert).getText().trim();
+        String backQty=ownDriver.findElement(SalesQuoteDetailLinesConversionRecapPage.backOrdQty).getText().trim();
+        String exp_desc=ownDriver.findElement(SalesQuoteDetailLinesConversionRecapPage.itemDescConvert).getText().trim();
         String expItemNo=itemNo.trim();
         Utility_Functions.xAssertEquals(report,expItemNo,itemN,"Item Number: ");
 
         Utility_Functions.xAssertEquals(report,exp_desc,act_desc,"Item Description: ");
         Utility_Functions.xAssertEquals(report,qty,act_Qty+".0","Original Quantity: ");
         Utility_Functions.xAssertEquals(report,backQty,"1.0","Back order quantity: ");
-        click(OldWorkWithSalesQuotesPage.process,"Click Process Button");
+        click(SalesQuoteDetailLinesConversionRecapPage.process,"Click Process Button");
     }
 
 
@@ -132,11 +138,11 @@ public class WorkWithSalesQuote extends ReusableLib {
      */
     public String validateCustJobName() {
         System.out.println("validateCustJobName");
-        String cust=ownDriver.findElement(OldWorkWithSalesQuotesPage.billToAcc).getAttribute("value");
+        String cust=ownDriver.findElement(SalesOrdersPage.billToAcct).getAttribute("value");
         System.out.println("cust: "+cust);
-        String jobNm=ownDriver.findElement(OldWorkWithSalesQuotesPage.txtJobName).getAttribute("value");
+        String jobNm=ownDriver.findElement(SalesOrdersPage.txtJobName).getAttribute("value");
         System.out.println("jobNm: "+jobNm);
-        salesOrder=ownDriver.findElement(OldWorkWithSalesQuotesPage.salesOrderNum).getAttribute("value");
+        salesOrder=ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value");
         Utility_Functions.xUpdateJson("SOSmoke",salesOrder);
         Utility_Functions.xUpdateJsonWithArray("SOSmoke1",salesOrder);
         System.out.println("Sales Order: "+salesOrder);
@@ -144,7 +150,7 @@ public class WorkWithSalesQuote extends ReusableLib {
         String jobName=jsonData.getData("JobName");
         Utility_Functions.xAssertEquals(report,custNumber,cust,"Customer Number: ");
         Utility_Functions.xAssertEquals(report,jobName,jobNm,"Job Name: ");
-        click(OldWorkWithSalesQuotesPage.nextButton,"Click Next Button");
+        click(SalesOrdersPage.btnNext,"Click Next Button");
         return salesOrder;
     }
 
@@ -153,11 +159,11 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void inventoryInformation() {
-        click(OldWorkWithSalesQuotesPage.itemsTab);
-        String itemNo=Utility_Functions.getText(ownDriver, OldWorkWithSalesQuotesPage.ordInfItemNo);
-        String itemDesc=Utility_Functions.getText(ownDriver, OldWorkWithSalesQuotesPage.ordInfItemDesc);
-        String bckQty=Utility_Functions.getText(ownDriver, OldWorkWithSalesQuotesPage.ordInfBackOrd);
-        String qty=ownDriver.findElement(OldWorkWithSalesQuotesPage.ordInfQty).getAttribute("value");
+        click(SalesOrdersPage.itemsTab);
+        String itemNo=Utility_Functions.getText(ownDriver, SalesOrdersPage.ordInfItemNo);
+        String itemDesc=Utility_Functions.getText(ownDriver, SalesOrdersPage.ordInfItemDesc);
+        String bckQty=Utility_Functions.getText(ownDriver, SalesOrdersPage.ordInfBackOrd);
+        String qty=ownDriver.findElement(SalesOrdersPage.ordInfQty).getAttribute("value");
         String testDesc=jsonData.getData("TestDescription");
         Utility_Functions.xAssertEquals(report,itemN,itemNo,"Item Number: ");
         Utility_Functions.xAssertEquals(report,itemDesc,testDesc,"Item Description: ");
@@ -170,7 +176,7 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void shipmentTab() {
-        click(OldWorkWithSalesQuotesPage.shipmentTab,"Click Shipments Tab");
+        click(SalesOrdersPage.shipmentTab,"Click Shipments Tab");
     }
 
     /**
@@ -178,7 +184,7 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void saveExt() {
-        click(OldWorkWithSalesQuotesPage.saveExt,"Click Save & Exit Button");
+        click(SalesOrdersPage.btnSaveExit,"Click Save & Exit Button");
     }
 
     /**
@@ -186,7 +192,7 @@ public class WorkWithSalesQuote extends ReusableLib {
      *
      */
     public void clkExit() {
-        click(OldWorkWithSalesQuotesPage.extBtn,"Click Exit Button");
+        click(SalesOrdersPage.btnExit,"Click Exit Button");
     }
 
     /**
@@ -195,26 +201,26 @@ public class WorkWithSalesQuote extends ReusableLib {
      */
       public void createPurchaseOrd() {
         shipmentTab();
-        Utility_Functions.rightClick(ownDriver, OldWorkWithSalesQuotesPage.rgtClk);
-        click(OldWorkWithSalesQuotesPage.crtPcsOrd,"Click create Purchase order");
-        click(OldWorkWithSalesQuotesPage.cntEntShp,"Click Convert Entire Shipment");
-        click(OldWorkWithSalesQuotesPage.nextButton,"Click Next Button");
-        click(OldWorkWithSalesQuotesPage.searchBtn);
-        sendKey(OldWorkWithSalesQuotesPage.sltOpt,"1");
+        Utility_Functions.rightClick(ownDriver, SalesOrdersPage.rgtClk);
+        click(SalesOrdersPage.crtPcsOrd,"Click create Purchase order");
+        click(SalesOrdersPage.cntEntShp,"Click Convert Entire Shipment");
+        click(SalesOrdersPage.btnNext,"Click Next Button");
+        click(SalesOrdersPage.searchBtn);
+        sendKey(MailingMasterSearchPage.firstCustomerSelect,"1");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(OldWorkWithSalesQuotesPage.freightCode),1);
-        click(OldWorkWithSalesQuotesPage.createPO,"Click Create PO Button");
-        purchaseOrder=Utility_Functions.getText(ownDriver, OldWorkWithSalesQuotesPage.purchaseOrdNo);
+        Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.ddnFreightCode),1);
+        click(SalesOrdersPage.btnCreatePO,"Click Create PO Button");
+        purchaseOrder=Utility_Functions.getText(ownDriver, SalesOrdersPage.txtPONumber);
         Utility_Functions.xUpdateJson("POSmoke",purchaseOrder);
         Utility_Functions.xUpdateJsonWithArray("POSmoke1",purchaseOrder);
         System.out.println("purchaseOrder: "+purchaseOrder);
-        click(OldWorkWithSalesQuotesPage.backBtn,"Click Back Button");
-        String RelPO=Utility_Functions.getText(ownDriver, OldWorkWithSalesQuotesPage.relatedPO);
+        click(SalesOrdersPage.btnBack,"Click Back Button");
+        String RelPO=Utility_Functions.getText(ownDriver, SalesOrdersPage.relatedPO);
         Utility_Functions.xAssertEquals(report,"Related P.O.",RelPO,"Related P.O.: ");
         saveExt();
         clkExit();
-        click(OldWorkWithSalesQuotesPage.saleQExtBtn,"Click Exit Button");
-        click(OldWorkWithSalesQuotesPage.saleQExtBtn,"Click Exit Button");
+        click(WorkWithSalesQuotesPage.saleQExtBtn,"Click Exit Button");
+        click(WorkWithSalesQuotesPage.saleQExtBtn,"Click Exit Button");
     }
 
 

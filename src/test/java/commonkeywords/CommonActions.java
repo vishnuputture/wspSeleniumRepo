@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.OptionsConstantsPage;
 import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.PurchaseOrders.VendorInformationPage;
-import pages.SalesQuotes.OldWorkWithSalesQuotesPage;
+import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
 
@@ -397,7 +397,7 @@ public class CommonActions extends ReusableLib {
 	 *
 	 */
 	public void navigationToWorkingSalesQuotes() {
-		click(OldWorkWithSalesQuotesPage.workingSalesQuotes,"Click on Working Sales Sales Quotes");
+		click(WorkWithSalesQuotesPage.workingSalesQuotes,"Click on Working Sales Sales Quotes");
 	}
 
 	/**

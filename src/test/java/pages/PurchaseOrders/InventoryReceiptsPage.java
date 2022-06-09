@@ -13,8 +13,8 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By pageTitle = By.id("OP18_heading");
     public static By tbxPONumber = By.id("VDORNM");
     public static By tbxQtyRcvd = By.id("VQR.1");
-    public static By btnExit = By.xpath("//input[@value='Exit']");
-    public static By btnProcess = By.xpath("//input[@value='Process']");
+    public static By btnExit = By.id("RC1CTL_linkCF03");
+    public static By btnProcess = By.id("RC1CTL_linkCF09");
     public static By chbxEnableDisableCost = By.id("Checkbox2");
     public static By growlText = By.className("growl-text");
     public static By lstUnitCostTbx = By.xpath("//input[starts-with(@id,'VUC')]");

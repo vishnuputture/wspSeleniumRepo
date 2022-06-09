@@ -13,7 +13,6 @@ import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptsPage;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.SPO.SpoPage;
-import pages.SalesQuotes.OldWorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import pages.warehouse.BinMaintenance.BinMaintenancePage;
@@ -467,8 +466,8 @@ public class ReceivingInProcess extends ReusableLib {
 
     public void confirmFreight() {
         Utility_Functions.timeWait(6);
-        if (isDisplayed(OldWorkWithSalesQuotesPage.proc)) {
-            click(OldWorkWithSalesQuotesPage.proc, "Click on process");
+        if (isDisplayed(InventoryReceiptsPage.btnProcess)) {
+            click(InventoryReceiptsPage.btnProcess, "Click on process");
             Utility_Functions.timeWait(2);
             Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         }

@@ -12,6 +12,7 @@ public class SalesOrdersPage extends ReusableLib {
 	    }
 	public static By pageTitle = By.id("wob-app-header");
 	public static By billToAcct = By.id("inBillToAcct");
+	public static By txtJobName=By.id("txtJobname");
 	public static By deliveryTypeDropDown = By.id("ddbDeliveryType");
 	public static By directShipDropDown = By.id("ddbDirectShip");
 	public static By shipViaDropDown = By.id("ddbShipViaLabel");
@@ -42,6 +43,13 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By contextOptionCreatePO = By.xpath("//td[text()='Create Purchase Order']");
 	public static By contextOptionCreatePOSelectedItem = By.xpath("//*[text()='Convert Entire Shipment']"); ////*[contains(text(),'Convert']
 	public static By shipmentItemName = By.id("outItemNumb.1");
+	public static By ordInfItemNo=By.id("outItemNumber.1");
+	public static By ordInfItemDesc=By.id("outSbfItemDesc3.1");
+	public static By ordInfBackOrd = By.id("outQtyBackorder.1");
+	public static By ordInfQty=By.id("outSbfQtyOrd.1");
+	public static By rgtClk = By.id("My Account.1");
+	public static By crtPcsOrd = By.xpath("//td[text()='Create Purchase Order']");
+	public static By cntEntShp = By.xpath("//td[text()='Convert Entire Shipment']");
 	public static By contextOptionDeleteItem = By.xpath("//td[text()='Delete Item From Shipment']");
 	public static By updateShipmentBtn = By.id("btnSave");
 	public static By maintainShipmentBtn = By.id("btnCreateNewShipment");
@@ -71,12 +79,15 @@ public class SalesOrdersPage extends ReusableLib {
 
 	public static By hdrCreatePO=By.xpath("//h3[text()='Create Purchase Order']");
 	public static By btnNext=By.id("btnNext");
-	public static By btnBack=By.id("btnNext");
+	public static By btnBack=By.id("btnBack");
+	public static By btnCancel=By.id("btnCancel");
+	public static By searchBtn=By.id("imgVendorSearch");
 	public static By hdrBuildPO=By.xpath("//h3[text()='Build Purchase Order for All Items on a Shipment']");
 	public static By tbxVendorNumber = By.id("inVendorNumber");
 	public static By ddnFreightCode = By.id("slbFreightCode"); //Full Frt Allowed/ NO Frt Chrg.
 	public static By btnCreatePO = By.id("btnAdd");
-
+	public static By txtPONumber = By.id("outPONumber.1");
+	public static By relatedPO=By.id("Related_PO.1");
 	public static By hdrRelatedPO=By.xpath("//h3[text()='Related Purchase Orders']");
-	public static By txtPONumber = By.xpath("//div[@id='outPONumber.1']/a");
+
 }

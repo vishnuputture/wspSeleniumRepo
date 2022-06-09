@@ -11,7 +11,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import pages.PurchaseOrders.VendorInformationPage;
 import pages.SPO.SpoPage;
-import pages.SalesQuotes.OldWorkWithSalesQuotesPage;
+import pages.PurchaseOrders.MailingMasterSearchPage; //Figure out what to replace this with
 import pages.common.MasterPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemLedgerPage;
@@ -113,7 +113,7 @@ public class Spo extends ReusableLib {
         sendKeys(PricingMatrixPage.txtBoxAction, Utility_Functions.xGetJsonData("VendorCode"), "Enter Copied(From Item Master) vendor code");
         sendKeys(OptionsConstantsPage.descriptionLine, "smith", "Enter Description Line 1");
         click(SpecialPriceAllowancePage.assignedGroups, "Click F2-Vendor Alpha Search");
-        sendKeys(OldWorkWithSalesQuotesPage.sltOpt, "1", "Select Vendor number");
+        sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1", "Select Vendor number");
         String VendorNumber = Utility_Functions.getText(ownDriver, OptionsConstantsPage.vendorNumber);
         Utility_Functions.xUpdateJson("VendorNumber", VendorNumber);
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
