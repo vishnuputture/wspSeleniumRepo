@@ -1,12 +1,21 @@
 {
   "Business_Flow": [
     {
-      "Tc_521_SalesPersonInquiryUI": "launchApp,siteLogin,navigateToSalesPersonScreen,verifySalesPersonScreenUI,exitFromSAlesPersonScreen,signOut"
+      "Tc_521_SalesPersonInquiryUI": "launchApp,siteLogin,navigateToSalesPersonScreen,verifySalesPersonScreenUI,exitFromSAlesPersonScreen,signOut",
+      "Tc_518_NavigateNextPreviousScreen": "launchApp,siteLogin,navigateToSalesPersonScreen,navigateNextBackLink,exitFromSAlesPersonScreen,signOut",
+      "Tc_533_verifySearchItem": "launchApp,siteLogin,navigateToSalesPersonScreen,verifySearchItem,exitFromSAlesPersonScreen,signOut"
     }
   ],
   "General_Data": [
     {
       "TC_ID": "Tc_521_SalesPersonInquiryUI"
+    },
+    {
+      "TC_ID": "Tc_518_NavigateNextPreviousScreen",
+      "ItemNo": "*99599013999"
+    },
+    {
+      "TC_ID": "Tc_533_verifySearchItem"
     }
   ]
 }

@@ -25,4 +25,9 @@ public class SalesPersonPage extends ReusableLib {
     public static By grossMargCalculation = By.id("VDMUP");
     public static By qtyCalculation = By.id("VDQTY");
     public static By extTolCalculation = By.id("VDNET");
+    public static By itemDescription = By.id("D_11_28");
+    public static By mfPDVN = By.id("D_11_25");
+    public static By itemDesc = By.id("IMDSC1");
+    public static By customerNote = By.xpath("//div[@id='CustomerNotes_copy']/a");
+    public static By searchIconForItem=By.xpath("//div[@id='fontAwesome1']/i");
 }

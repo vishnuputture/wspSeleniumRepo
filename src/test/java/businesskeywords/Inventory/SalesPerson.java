@@ -1,12 +1,20 @@
 package businesskeywords.Inventory;
+
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import org.openqa.selenium.By;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.Keys;
+import pages.PurchaseOrders.PurchaseOrderDetailsPage;
+import pages.inventory.ItemMasterPage;
 import pages.inventory.SalesPersonPage;
 import pages.pricing.OrderByCustomerPage;
+import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
+import supportLibraries.Utility_Functions;
+
+import java.beans.PersistenceDelegate;
 
 public class SalesPerson extends ReusableLib {
 
@@ -39,7 +47,7 @@ public class SalesPerson extends ReusableLib {
     }
 
     public By linkElement(String text) {
-        return By.xpath("//a[text()='" + text + "']");
+        return By.xpath("(//a[text()='" + text + "'])[1]");
     }
 
     public By hElement(String text) {
@@ -53,25 +61,35 @@ public class SalesPerson extends ReusableLib {
     }
 
     public void verifyCalculationLabels() {
-        String[] headers = {"Cost:", "Gross Margin % :", "Price:", "Quantity:","List Price:","Matrix Cost:","Gross Margin $:","Bin Location:","WSS Net Price:","Margin Percent:"};
-        for (String header : headers)
-            commonObj.validateText(By.xpath("//h3[text()='" + header + "']"), header, header + " header is present");
+        String[] labels = {"Cost:", "Price:", "Quantity:"};
+        for (String label : labels)
+            commonObj.validateText(By.xpath("//div[text()='" + label + "']"), label, label + " header is present");
     }
 
     public void verifyInventoryLabels() {
-        String[] headers = {"INVENTORY", "QUANTITY", "DIRECT SHIPS", "QUANTITY BREAK","Manufacturer:","Available to Sell:","with Receipts:","Selling UOM:","Package Qty:","PURCHASING","On BO:","On SO:","Unscheduled:","On PO:","In Hold:","On Hand:","L/T:","Conversion Factor:","Package Qty:","Weight(lbs):","Purchase UOM:","On SQ:","No Quantity Breaks Available"};
-        for (String header : headers)
-            commonObj.validateText(By.xpath("//h3[text()='" + header + "']"), header, header + " header is present");
+        String[] labels = {"Inventory", "Quantity", "Direct", "Purchasing"};
+        for (String label : labels)
+            commonObj.validateElementExists(By.xpath("//div[contains(text(),'" + label + "')]"), label + " header is present");
     }
 
     public By divElement(String text) {
         return By.xpath("//div[text()='" + text + "']");
     }
 
+    public By linkIdEle(String id) {
+        return By.xpath("//div[@id='" + id + "']/a");
+    }
+
     public void verifyLinks() {
-        String links[] = {"< Previous Item", "Next Item >", "Alternate Item", "Customer Notes", "Direct/Job Qty", "IOV", "Item-Bin Maintenance", "Item Ledger", "Job Usage", "Kit Maintenance", "Orders by Item", "Preferred Co. Usage", "Quotes by Item", "Rich Data"};
+        int i = 0;
+        String links[] = {"Hyperlink1", "Hyperlink2", "alternateItem", "CustomerNotes_copy", "directjobqty_copy", "inventoryOverValue_copy", "lnkItemBinMaint", "itemLedger", "jobUsage", "kitMaintenance", "ordersByItem", "preferedCompanyUsage", "quotesByItem", "richData"};
+        String linksText[] = {"< Previous Item", "Next Item >", "Alternate Item", "Customer Notes", "Direct/Job Qty", "IOV", "Item-Bin Maintenance", "Item Ledger", "Job Usage", "Kit Maintenance", "Orders by Item", "Preferred Co. Usage", "Quotes by Item", "Rich Data", ""};
         for (String link : links)
-            commonObj.validateText(linkElement(link), link, link + " is present");
+            while (!linksText[i].equals("")) {
+                commonObj.validateText(linkIdEle(link), linksText[i], linksText[i] + " is present");
+                i++;
+                break;
+            }
     }
 
     public void verifyTextBoxFields() {
@@ -95,5 +113,47 @@ public class SalesPerson extends ReusableLib {
         verifyHeaders();
         verifyCalculationLabels();
         verifyInventoryLabels();
+    }
+
+    public String navigateToNextItem() {
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("ItemNo"), "Enter Item Number");
+        click(linkIdEle("Hyperlink2"), "Click [Next Item >]");
+        String nextItem = getAttribute(SalesPersonPage.searchForItem, "value").trim();
+        if (nextItem.equals(jsonData.getData("ItemNo"))) {
+            try {
+                throw new Exception("Doesn't move to Next Item");
+            } catch (Exception e) {
+            }
+        }
+        return nextItem;
+    }
+
+    public void navigateNextBackLink() {
+        navigateToNextItem();
+        click(linkIdEle("Hyperlink1"), "Click [Previous Item]");
+        String previousItem = getAttribute(SalesPersonPage.searchForItem, "value").trim();
+        Utility_Functions.xAssertEquals(report, jsonData.getData("ItemNo"), previousItem, "");
+    }
+
+    public void navigateToItemMasterBrowser(){
+        click(SalesPersonPage.searchForItem,"Click [Search For Item] input field");
+        Utility_Functions.actionKey(Keys.F4,ownDriver);
+        commonObj.validateText(PurchaseOrderDetailsPage.poPrintSendHeader,"Item Master Browse - Local" , "[Item Master Browse - Local] title is present");
+    }
+
+    public void verifyItemDetails(){
+        String itemNo=getText(ItemMasterPage.itemNumber);
+        String itemDesc=getText(SalesPersonPage.itemDescription).trim();
+        sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField2,"1","Select an Item");
+        String itemNum = getAttribute(SalesPersonPage.searchForItem, "value").trim();
+        Utility_Functions.xAssertEquals(report,itemNum,itemNo,"");
+        commonObj.validateText(SalesPersonPage.itemDesc,itemDesc , itemDesc+" is present");
+    }
+
+    public void verifySearchItem(){
+        navigateToItemMasterBrowser();
+        verifyItemDetails();
+        click(SalesPersonPage.searchIconForItem,"Click Search Icon");
+        verifyItemDetails();
     }
 }
