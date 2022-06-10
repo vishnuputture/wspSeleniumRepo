@@ -2,7 +2,7 @@
 	"Business_Flow": [
 		{
 			"SalesQuotesToPO": "launchApp,siteLogin,navigateToWorkingSalesQuote,createQuote,addItemToQuote,verifyQuoteDetails,convertSaleOrd,validateCustJobName,inventoryInformation,createPurchaseOrd,exitSalesQuotesToMasterPage,signOut",
-			"CheckInventoryReceipts": "launchApp,siteLogin,navigateToInventoryReceipts,inventReceipt,exitPurchaseToMasterPage",
+			"CheckInventoryReceipts": "launchApp,siteLogin,navigateToInventoryReceipt,inventReceipt,exitPurchaseToMasterPage",
 			"InquiryOrdersByCustomer": "launchApp,siteLogin,navigateToOrderByCustomer,validBOQty,exitOrderByCustomer",
 			"OrderShippingConfirmation": "launchApp,siteLogin,navigateToShippingConfirmation,orderConfirmation,exitShippingConfirmation,navigateToOrderByCustomer,orderStatus,exitOrderByCustomer",
 			"PrintReportInvoices": "launchApp,siteLogin,navigateToPrintInvoicesProgram,createInvoices,exitReportMenu",

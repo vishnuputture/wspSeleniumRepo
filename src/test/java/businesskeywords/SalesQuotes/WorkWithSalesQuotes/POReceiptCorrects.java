@@ -7,6 +7,7 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.PurchaseOrders.InventoryReceiptPage;
+import pages.PurchaseOrders.InventoryReceiptsPage;
 import pages.PurchaseOrders.PoEntryConversionFactorPage;
 import pages.PurchaseOrders.PurchaseOrderInquiryPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
@@ -57,7 +58,7 @@ public class POReceiptCorrects extends ReusableLib {
         Utility_Functions.xAssertEquals(report, imNo, Utility_Functions.xGetJsonData("SQItem"), "Item Number: ");
         Utility_Functions.xAssertEquals(report, testDesc, itmDesc, "Item Description: ");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xGetJsonData("SOSmoke") + "-01", relSaleOrd, "Related Sale Order: ");
-        click(InventoryReceiptPage.processBtn, "Click Process button");
+        click(InventoryReceiptsPage.btnProcess, "Click Process button");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         click(InventoryReceiptPage.exitBtn, "Click Exit Button");
     }
