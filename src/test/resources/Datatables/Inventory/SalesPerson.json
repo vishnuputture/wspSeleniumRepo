@@ -1,0 +1,12 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_521_SalesPersonInquiryUI": "launchApp,siteLogin,navigateToSalesPersonScreen,verifySalesPersonScreenUI,exitFromSAlesPersonScreen,signOut"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_521_SalesPersonInquiryUI"
+    }
+  ]
+}

@@ -20,6 +20,7 @@ import pages.common.SqlStatementPage;
 import pages.inventory.AlternateItemNumberPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemMasterPage;
+import pages.inventory.SalesPersonPage;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.OrderByCustomerPage;
 import pages.pricing.SpecialPricePage;
@@ -55,6 +56,17 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void masterToInventory() {
 		click(MasterPage.inventoryMenu,"Click inventory management");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from Inventory to Sales Person Screen
+	 *
+	 */
+	public void inventoryToSalesPerson() {
+		click(MasterPage.salesPersonMenu,"Click [Inquiry - Salesperson]");
+		validateText(SalesPersonPage.salesPersonInquiryTitle, "Salesperson Inquiry", "Validating Sales Person page title");
 	}
 
 	/**
