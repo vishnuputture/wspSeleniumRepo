@@ -1156,6 +1156,7 @@ public class binMaintenance extends ReusableLib {
 
     public void clickEditIcon(String zoneAbv) {
         WebElement editIcon = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"));
+        Utility_Functions.xScrollIntoView(ownDriver, editIcon);
         click(editIcon, "Click Edit icon");
         Utility_Functions.timeWait(2);
     }
