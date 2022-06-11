@@ -54,6 +54,14 @@ public class VendorInvoiceReconciliationPage extends ReusableLib {
     public static By getVendorName=By.id("D_12_12");
     public static By recDoc=By.id("D_12_39");
     public static By noRecords=By.id("D_13_20");
+    public static By poCol=By.id("D_11_49");
+    public static By rcvDateCol=By.id("D_11_56");
+    public static By dueDateCol=By.id("D_11_65");
+    public static By recInvVal=By.id("D_12_49");
+    public static By venInvVal=By.id("D_12_56");
+    public static By totalCostVal=By.id("D_12_65");
+    public static By rvcDatePrompt=By.xpath("//div[@id='D_4_2']/a");
+    public static By moreLink=By.id("btnPageDown");
     public static By recDocFifth=By.id("D_16_39");
     public static By selectVendorFifth=By.id("I_16_2");
     public static By btnF1=By.id("btnCF01");
@@ -102,6 +110,4 @@ public class VendorInvoiceReconciliationPage extends ReusableLib {
     public static By hdrDebitMemoProcessOtherItemsPage=By.id("D_1_14");
     public static By tbxItemDescription=By.id("I_8_9");
     public static By tbxAdditionalNotesLine=By.id("I_7_3");
-
-
 }
