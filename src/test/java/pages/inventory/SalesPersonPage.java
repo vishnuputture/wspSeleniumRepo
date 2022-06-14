@@ -18,6 +18,11 @@ public class SalesPersonPage extends ReusableLib {
     public static By customerSearchIcon = By.xpath("//div[@id='fontAwesome2']/i[@class='fa fa-search']");
     public static By pricingColSearchIcon = By.xpath("//div[@id='fontAwesome3']/i[@class='fa fa-search']");
     public static By rowStatic=By.id("constant49");
+    public static By noRow=By.id("FMMSG");
+    public static By fMROW=By.id("FMROW");
+    public static By mutlType=By.id("FMTORC");
+    public static By mutlValue=By.id("FMMULT1");
+    public static By positionPricingColumn=By.id("I_4_34");
     public static By attachIcon=By.xpath("//i[@class='fa fa-paperclip']");
     public static By viewIcon=By.xpath("//i[@class='fa fa-eye']");
     public static By costCalculation = By.id("VDCOST");
@@ -28,6 +33,8 @@ public class SalesPersonPage extends ReusableLib {
     public static By itemDescription = By.id("D_11_28");
     public static By mfPDVN = By.id("D_11_25");
     public static By itemDesc = By.id("IMDSC1");
+    public static By errorItem= By.id("MSG1");
+    public static By invalidColumn= By.id("MSG3");
     public static By customerNote = By.xpath("//div[@id='CustomerNotes_copy']/a");
     public static By searchIconForItem=By.xpath("//div[@id='fontAwesome1']/i");
 }

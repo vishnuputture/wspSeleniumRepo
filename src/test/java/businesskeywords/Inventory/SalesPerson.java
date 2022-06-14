@@ -135,25 +135,107 @@ public class SalesPerson extends ReusableLib {
         Utility_Functions.xAssertEquals(report, jsonData.getData("ItemNo"), previousItem, "");
     }
 
-    public void navigateToItemMasterBrowser(){
-        click(SalesPersonPage.searchForItem,"Click [Search For Item] input field");
-        Utility_Functions.actionKey(Keys.F4,ownDriver);
-        commonObj.validateText(PurchaseOrderDetailsPage.poPrintSendHeader,"Item Master Browse - Local" , "[Item Master Browse - Local] title is present");
+    public void navigateToItemMasterBrowser() {
+        click(SalesPersonPage.searchForItem, "Click [Search For Item] input field");
+        Utility_Functions.actionKey(Keys.F4, ownDriver);
+        commonObj.validateText(PurchaseOrderDetailsPage.poPrintSendHeader, "Item Master Browse - Local", "[Item Master Browse - Local] title is present");
     }
 
-    public void verifyItemDetails(){
-        String itemNo=getText(ItemMasterPage.itemNumber);
-        String itemDesc=getText(SalesPersonPage.itemDescription).trim();
-        sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField2,"1","Select an Item");
+    public void navigateToMatrixColumnBrowser() {
+        click(SalesPersonPage.pricingColumn, "Click [F4 - Search for Pricing Columns] input field");
+        Utility_Functions.actionKey(Keys.F4, ownDriver);
+        commonObj.validateText(SpecialPriceAllowancePage.header, "Matrix Column Browse", "[Matrix Column Browse] title is present");
+    }
+
+    public void verifyItemDetails() {
+        String itemNo = getText(ItemMasterPage.itemNumber);
+        String itemDesc = getText(SalesPersonPage.itemDescription).trim();
+        sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField2, "1", "Select an Item");
         String itemNum = getAttribute(SalesPersonPage.searchForItem, "value").trim();
-        Utility_Functions.xAssertEquals(report,itemNum,itemNo,"");
-        commonObj.validateText(SalesPersonPage.itemDesc,itemDesc , itemDesc+" is present");
+        Utility_Functions.xAssertEquals(report, itemNum, itemNo, "");
+        commonObj.validateText(SalesPersonPage.itemDesc, itemDesc, itemDesc + " is present");
     }
 
-    public void verifySearchItem(){
+    public void verifySearchItem() {
         navigateToItemMasterBrowser();
         verifyItemDetails();
-        click(SalesPersonPage.searchIconForItem,"Click Search Icon");
+        click(SalesPersonPage.searchIconForItem, "Click Search Icon");
         verifyItemDetails();
+    }
+
+    public void invalidItemValidation(String data){
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData(data), "Enter [" + jsonData.getData(data) + "] into Search FOr Item field");
+        commonObj.validateText(SalesPersonPage.errorItem, "E501", "[E501] is present");
+    }
+
+    public void verifySearchItemField() {
+        invalidItemValidation("InvalidNumber");
+        invalidItemValidation("AlphaNumeric");
+        invalidItemValidation("NegativeNumber");
+        invalidItemValidation("SpecialCharacterNumber");
+    }
+
+    public void verifyPricingColumn() {
+        navigateToItemMasterBrowser();
+        verifyItemDetails();
+        navigateToMatrixColumnBrowser();
+        String columnName = getText(SpecialPriceAllowancePage.gName).trim();
+        sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField1, "1", "Select an Item");
+        String columnNm = getAttribute(SalesPersonPage.pricingColumn, "value").trim();
+        Utility_Functions.xAssertEquals(report,columnName,columnNm,"");
+        click(SalesPersonPage.pricingColumn, "Click [F4 - Search for Pricing Columns] input field");
+        click(SalesPersonPage.pricingColSearchIcon,"Click Search Icon");
+        String clnName = getText(SpecialPriceAllowancePage.gName).trim();
+        sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField1, "1", "Select an Item");
+        String clnNm = getAttribute(SalesPersonPage.pricingColumn, "value").trim();
+        Utility_Functions.xAssertEquals(report,clnName,clnNm,"");
+    }
+
+    public void verifyPricingNoRow(){
+        navigateToItemMasterBrowser();
+        verifyItemDetails();
+        navigateToMatrixColumnBrowser();
+        String columnName = getText(SpecialPriceAllowancePage.gName).trim();
+        sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField1, "1", "Select an Item");
+        String columnNm = getAttribute(SalesPersonPage.pricingColumn, "value").trim();
+        Utility_Functions.xAssertEquals(report,columnName,columnNm,"");
+        commonObj.validateText(SalesPersonPage.noRow, "No Row", "[No Row] is present");
+    }
+
+    public void verifyOnlyRowPricing(){
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("ItemNo"),"Search For Item" );
+        commonObj.validateElementExists(SalesPersonPage.fMROW, getText(SalesPersonPage.fMROW) + " Row is present");
+    }
+
+    public void verifyOnlyMultiplierPricing(){
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("ItemNo"),"Search For Item" );
+        commonObj.validateElementExists(SalesPersonPage.fMROW, getText(SalesPersonPage.fMROW) + " Row is present");
+        navigateToMatrixColumnBrowser();
+        sendKeysAndEnter(SalesPersonPage.positionPricingColumn, jsonData.getData("ColumnName"),"Search For Pricing Column" );
+        sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField1, "1", "Select an Item");
+        commonObj.validateElementExists(SalesPersonPage.noRow, getText(SalesPersonPage.noRow) + "[No Mult] is present");
+    }
+
+    public void verifyMultiplierPricing(){
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("ItemNo"),"Search For Item" );
+        commonObj.validateElementExists(SalesPersonPage.fMROW, getText(SalesPersonPage.fMROW) + " Row is present");
+        navigateToMatrixColumnBrowser();
+        sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField1, "1", "Select an Item");
+        commonObj.validateElementExists(SalesPersonPage.mutlType, "Multiplier Type: "+getText(SalesPersonPage.mutlType) + " is present");
+        commonObj.validateElementExists(SalesPersonPage.mutlValue, "Multiplier Value: "+getText(SalesPersonPage.mutlValue) + " is present");
+    }
+
+    public void invalidColumnValidation(String data){
+        sendKeysAndEnter(SalesPersonPage.pricingColumn, jsonData.getData(data), "Enter [" + jsonData.getData(data) + "] into Pricing Column field");
+        commonObj.validateText(SalesPersonPage.invalidColumn, "Invalid Column", "[Invalid Column] is present");
+    }
+
+    public void verifyPricingColumnField() {
+        navigateToItemMasterBrowser();
+        verifyItemDetails();
+        invalidColumnValidation("InvalidNumber");
+        invalidColumnValidation("AlphaNumeric");
+        invalidColumnValidation("NegativeNumber");
+        invalidColumnValidation("SpecialCharacterNumber");
     }
 }
