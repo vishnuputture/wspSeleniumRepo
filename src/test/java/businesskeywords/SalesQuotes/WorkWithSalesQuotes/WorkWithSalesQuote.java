@@ -5,6 +5,7 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
+import pages.SalesOrders.CustomerNotesPage;
 import pages.SalesOrders.SalesOrdersPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.SalesQuotes.SalesQuotesPage;
@@ -129,6 +130,10 @@ public class WorkWithSalesQuote extends ReusableLib {
         Utility_Functions.xAssertEquals(report,qty,act_Qty+".0","Original Quantity: ");
         Utility_Functions.xAssertEquals(report,backQty,"1.0","Back order quantity: ");
         click(SalesQuoteDetailLinesConversionRecapPage.process,"Click Process Button");
+        if(isDisplayed(CustomerNotesPage.customerNotesRevisionsHeader))
+        {
+            click(CustomerNotesPage.btnExit, "Exiting customer notes");
+        }
     }
 
 
