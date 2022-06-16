@@ -37,4 +37,51 @@ public class SalesPersonPage extends ReusableLib {
     public static By invalidColumn= By.id("MSG3");
     public static By customerNote = By.xpath("//div[@id='CustomerNotes_copy']/a");
     public static By searchIconForItem=By.xpath("//div[@id='fontAwesome1']/i");
+    public static By hdrItemNotes=By.xpath("//h3[text()='Item Notes']");
+    public static By itemNotes1=By.id("IXN$1");
+
+    /********************************** Quick View **********************************/
+
+    public static By listPrice=By.id("outListPrice");
+    public static By matrixCost=By.id("IBCSTA1");
+    public static By grossMargin=By.id("DSMUPA1");
+    public static By marginPercent=By.id("IBMUP1");
+
+    /********************************** Inventory tab **********************************/
+
+    public static By hdrInventory=By.id("OutputField4");
+    public static By hdrQuantity=By.id("OutputField5");
+    public static By hdrDirectShips=By.id("DSJILBL");
+    public static By hdrPurchasing=By.id("OutputField6");
+    public static By hdrQuantityBreak=By.id("QTYDS");
+
+    public static By lblInventoryAvaiToSell=By.id("constant22");
+    public static By lblInventoryWithReceipts=By.id("constant23");
+    public static By lblInventorySelling=By.id("constant37");
+    public static By lblInventoryPackage=By.id("constant38");
+
+    public static By lblQtyOnHand=By.id("constant24");
+    public static By lblQtyInHold=By.id("constant25");
+    public static By lblQtyOnPO=By.id("constant26");
+    public static By lblQtyUnscheduled=By.id("lblUnscheduled");
+    public static By lblQtyOnSO=By.id("constant27");
+    public static By lblQtyOnBO=By.id("constant41");
+    public static By lblQtyOnSQ=By.id("lblOnSalesQuote");
+
+    public static By lblDirShipOnHand=By.id("constant44");
+    public static By lblDirShipInHold=By.id("constant45");
+    public static By lblDirShipOnPO=By.id("constant46");
+    public static By lblDirShipOnSO=By.id("constant47");
+    public static By lblDirShipOnBO=By.id("constant48");
+
+    public static By lblPrchsngPurchase=By.id("constant42");
+    public static By lblPrchsngWeight=By.id("constant40");
+    public static By lblPrchsngPckg=By.id("constant43");
+    public static By lblPrchsngConvFact=By.id("constant39");
+    public static By lblPrchsngLT=By.id("constant36");
+
+    public static By tabItemBinDetails=By.xpath("//span[contains(text(),'Item-Bin Details')]");
+    public static By lstBinDetailsTableHeader=By.xpath("//div[@id='BinGrid']/div[@class='cell header-cell']/div");
+    public static By lnkExportToExcel=By.xpath("//div[@id='BinGrid']//following-sibling::div[contains(@class,'win-table-paging-bar paging-bar')]//span[contains(@class,'csv-paging-link') and text()='Export to Excel']");
+    public static By lblTotal=By.id("OutputField7");
 }

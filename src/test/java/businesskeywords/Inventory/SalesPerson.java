@@ -2,11 +2,14 @@ package businesskeywords.Inventory;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import org.openqa.selenium.By;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
+import pages.common.MasterPage;
 import pages.inventory.ItemMasterPage;
 import pages.inventory.SalesPersonPage;
 import pages.pricing.OrderByCustomerPage;
@@ -15,6 +18,7 @@ import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
 
 import java.beans.PersistenceDelegate;
+import java.util.List;
 
 public class SalesPerson extends ReusableLib {
 
@@ -237,5 +241,126 @@ public class SalesPerson extends ReusableLib {
         invalidColumnValidation("AlphaNumeric");
         invalidColumnValidation("NegativeNumber");
         invalidColumnValidation("SpecialCharacterNumber");
+    }
+
+    /**
+     * Keyword to enter Item No in [Search for Item] textbox in SalesPerson Inquiry Page
+     */
+    public void searchForItem(){
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("ItemNo"),"Search For Item" );
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    /**
+     * Keyword to enter Item No from Integration4.json in [Search for Item] textbox in SalesPerson Inquiry Page
+     */
+    public void searchForItem2(){
+        sendKeysAndEnter(SalesPersonPage.searchForItem, Utility_Functions.xGetJsonData("ItemNoMaster"), "Search For Item" );
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    /**
+     * Keyword to validate details in [Quick View] section after entering Item No
+     */
+    public void vrfyQuickView(){
+        String costTxt = getAttribute(SalesPersonPage.costCalculation, "value");
+        String priceTxt = getAttribute(SalesPersonPage.priceCalculation, "value");
+        if (priceTxt.contains(",")){
+            priceTxt = priceTxt.replaceAll(",", "");
+        }
+        double price = Double.parseDouble(priceTxt);
+
+        String grossMarginPercentTxt = getAttribute(SalesPersonPage.grossMargCalculation, "value");
+        if (grossMarginPercentTxt.contains("-")){
+            grossMarginPercentTxt = grossMarginPercentTxt.replaceAll("-", "");
+        }
+        double grossMarginPercent = Double.parseDouble(grossMarginPercentTxt);
+        double grossMarginValue = (grossMarginPercent/100)*price;
+        String expectedGrossMarginValue = Double.toString(grossMarginValue);
+
+        String grossMarginQVText = getText(SalesPersonPage.grossMargin);
+        if (grossMarginQVText.contains(",")){
+            grossMarginQVText = grossMarginQVText.replaceAll(",", "");
+        }
+        if (grossMarginQVText.contains("-")){
+            grossMarginQVText = grossMarginQVText.replaceAll("-", "");
+        }
+        double grossMarginQV = Double.parseDouble(grossMarginQVText);
+        String actualGrossMarginValue = Double.toString(grossMarginQV);
+
+        Utility_Functions.xAssertEquals(report, expectedGrossMarginValue, actualGrossMarginValue, "Quick View [Gross Margin $] is displayed properly");
+        commonObj.validateText(SalesPersonPage.listPrice, priceTxt.trim(), "Quick View [List Price] is displayed properly");
+        commonObj.validateText(SalesPersonPage.matrixCost, costTxt.trim(), "Quick View [Matrix Cost] is displayed properly");
+        commonObj.validateText(SalesPersonPage.marginPercent, getAttribute(SalesPersonPage.grossMargCalculation, "value").trim(), "Quick View [Margin Percent] is displayed properly");
+    }
+
+    /**
+     * Keyword to validate Item Notes in SalesPerson Inquiry Page
+     */
+    public void vrfyItemNotes(){
+        commonObj.validateElementExists(SalesPersonPage.hdrItemNotes, "The [Item Notes] section is present");
+        String itemNotesExpected = jsonData.getData("ItemNotes");
+        commonObj.validateText(SalesPersonPage.itemNotes1, itemNotesExpected, "Validating Item Notes");
+    }
+
+    /**
+     * Keyword to validate Inventory section sub-headers in SalesPerson Inquiry Page
+     */
+    public void vrfyInventoryHeaders(){
+        commonObj.validateElementExists(SalesPersonPage.hdrInventory, "Header [Inventory] is present");
+        commonObj.validateElementExists(SalesPersonPage.hdrQuantity, "Header [Quantity] is present");
+        commonObj.validateElementExists(SalesPersonPage.hdrDirectShips, "Header [Direct Ships] is present");
+        commonObj.validateElementExists(SalesPersonPage.hdrPurchasing, "Header [Purchasing] is present");
+        commonObj.validateElementExists(SalesPersonPage.hdrQuantityBreak, "Header [Quantity Break] is present");
+    }
+
+    /**
+     * Keyword to validate Inventory section field labels in SalesPerson Inquiry Page
+     */
+    public void vrfyInventoryTabFieldLabels(){
+        commonObj.validateElementExists(SalesPersonPage.lblInventoryAvaiToSell, "Field label [Available to Sell:] is present under Inventory");
+        commonObj.validateElementExists(SalesPersonPage.lblInventoryWithReceipts, "Field label [with Receipts:] is present under Inventory");
+        commonObj.validateElementExists(SalesPersonPage.lblInventorySelling, "Field label [Selling UOM:] is present under Inventory");
+        commonObj.validateElementExists(SalesPersonPage.lblInventoryPackage, "Field label [Package Qty:] is present under Inventory");
+
+        commonObj.validateElementExists(SalesPersonPage.lblQtyOnHand, "Field label [On Hand:] is present under Quantity");
+        commonObj.validateElementExists(SalesPersonPage.lblQtyInHold, "Field label [In Hold:] is present under Quantity");
+        commonObj.validateElementExists(SalesPersonPage.lblQtyOnPO, "Field label [On PO:] is present under Quantity");
+        commonObj.validateElementExists(SalesPersonPage.lblQtyUnscheduled, "Field label [Unscheduled:] is present under Quantity");
+        commonObj.validateElementExists(SalesPersonPage.lblQtyOnSO, "Field label [On SO:] is present under Quantity");
+        commonObj.validateElementExists(SalesPersonPage.lblQtyOnBO, "Field label [On BO:] is present under Quantity");
+        commonObj.validateElementExists(SalesPersonPage.lblQtyOnSQ, "Field label [On SQ:] is present under Quantity");
+
+        commonObj.validateElementExists(SalesPersonPage.lblDirShipOnHand, "Field label [On Hand:] is present under Direct Ships");
+        commonObj.validateElementExists(SalesPersonPage.lblDirShipInHold, "Field label [In Hold:] is present under Direct Ships");
+        commonObj.validateElementExists(SalesPersonPage.lblDirShipOnPO, "Field label [On PO:] is present under Direct Ships");
+        commonObj.validateElementExists(SalesPersonPage.lblDirShipOnSO, "Field label [On SO:] is present under Direct Ships");
+        commonObj.validateElementExists(SalesPersonPage.lblDirShipOnBO, "Field label [On BO:] is present under Direct Ships");
+
+        commonObj.validateElementExists(SalesPersonPage.lblPrchsngPurchase, "Field label [Purchase UOM:] is present under Purchasing");
+        commonObj.validateElementExists(SalesPersonPage.lblPrchsngWeight, "Field label [Weight(lbs):] is present under Purchasing");
+        commonObj.validateElementExists(SalesPersonPage.lblPrchsngPckg, "Field label [Package Qty:] is present under Purchasing");
+        commonObj.validateElementExists(SalesPersonPage.lblPrchsngConvFact, "Field label [Conversion Factor:] is present under Purchasing");
+        commonObj.validateElementExists(SalesPersonPage.lblPrchsngLT, "Field label [L/T:] is present under Purchasing");
+    }
+
+    /**
+     * Keyword to validate Item-Bin Details section in SalesPerson Inquiry Page
+     */
+    public void vrfyItemBinDetailsTab(){
+        click(SalesPersonPage.tabItemBinDetails);
+
+        List<WebElement> lstTableHeaders = getListElement(SalesPersonPage.lstBinDetailsTableHeader);
+        List<String> lstHeaderText = Utility_Functions.xGetTextVisibleListString(ownDriver, lstTableHeaders);
+
+        String[] headers = {"Bin Location", "Bin Type", "Bin Condition", "Bin On Hand", "Available To Pick", "Bin Min", "Bin Max", "Zone"};
+        for (int i=0; i<headers.length; i++){
+            if (headers[i].equalsIgnoreCase(lstHeaderText.get(i).trim()))
+                report.updateTestLog("Verify Item Bin Details Headers", "Header ["+lstHeaderText.get(i)+"] is matching expected value ["+headers[i]+"]", Status.PASS);
+            else
+                report.updateTestLog("Verify Item Bin Details Headers", "Header ["+lstHeaderText.get(i)+"] is NOT matching expected value ["+headers[i]+"]", Status.FAIL);
+        }
+        commonObj.validateElementExists(SalesPersonPage.lnkExportToExcel, "Link to download excel is present under Purchasing");
+        commonObj.validateElementExists(SalesPersonPage.lblTotal, "Field label [Total On Hand + In Hold] is present under Purchasing");
     }
 }

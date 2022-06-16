@@ -1,68 +1,94 @@
 {
-  "Business_Flow": [
+  "Business_Flow":[
     {
-      "Tc_521_SalesPersonInquiryUI": "launchApp,siteLogin,navigateToSalesPersonScreen,verifySalesPersonScreenUI,exitFromSAlesPersonScreen,signOut",
-      "Tc_518_NavigateNextPreviousScreen": "launchApp,siteLogin,navigateToSalesPersonScreen,navigateNextBackLink,exitFromSAlesPersonScreen,signOut",
-      "Tc_519_verifyPricingColumn": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyPricingColumn,exitFromSAlesPersonScreen,signOut",
-      "Tc_533_verifySearchItem": "launchApp,siteLogin,navigateToSalesPersonScreen,verifySearchItem,exitFromSAlesPersonScreen,signOut",
-      "Tc_545_verifySearchAlternativeItem": "verifySearchItem,exitFromSAlesPersonScreen,signOut",
-      "Tc_528_verifySearchItemField": "launchApp,siteLogin,navigateToSalesPersonScreen,verifySearchItemField,exitFromSAlesPersonScreen,signOut",
-      "Tc_526_verifyPricingNoRow": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyPricingNoRow,exitFromSAlesPersonScreen,signOut",
-      "Tc_ValidateAddRowPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,addRow",
-      "Tc_527_verifyOnlyRowPricing": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyOnlyRowPricing,exitFromSAlesPersonScreen,signOut",
-      "Tc_529_verifyNoMultiplierPricing": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyOnlyMultiplierPricing,exitFromSAlesPersonScreen,signOut",
-      "Tc_544_verifyMultiplierPricing": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyMultiplierPricing,exitFromSAlesPersonScreen,signOut",
-      "Tc_534_verifyPricingColumnField": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyPricingColumnField,exitFromSAlesPersonScreen,signOut"
+      "Tc_521_SalesPersonInquiryUI":"launchApp,siteLogin,navigateToSalesPersonScreen,verifySalesPersonScreenUI,exitFromSAlesPersonScreen,signOut",
+      "Tc_518_NavigateNextPreviousScreen":"launchApp,siteLogin,navigateToSalesPersonScreen,navigateNextBackLink,exitFromSAlesPersonScreen,signOut",
+      "Tc_519_verifyPricingColumn":"launchApp,siteLogin,navigateToSalesPersonScreen,verifyPricingColumn,exitFromSAlesPersonScreen,signOut",
+      "Tc_533_verifySearchItem":"launchApp,siteLogin,navigateToSalesPersonScreen,verifySearchItem,exitFromSAlesPersonScreen,signOut",
+      "Tc_545_verifySearchAlternativeItem":"verifySearchItem,exitFromSAlesPersonScreen,signOut",
+      "Tc_528_verifySearchItemField":"launchApp,siteLogin,navigateToSalesPersonScreen,verifySearchItemField,exitFromSAlesPersonScreen,signOut",
+      "Tc_526_verifyPricingNoRow":"launchApp,siteLogin,navigateToSalesPersonScreen,verifyPricingNoRow,exitFromSAlesPersonScreen,signOut",
+      "Tc_ValidateAddRowPricingMatrix":"launchApp,siteLogin,validatePricingMatrixTitle,addRow",
+      "Tc_527_verifyOnlyRowPricing":"launchApp,siteLogin,navigateToSalesPersonScreen,verifyOnlyRowPricing,exitFromSAlesPersonScreen,signOut",
+      "Tc_529_verifyNoMultiplierPricing":"launchApp,siteLogin,navigateToSalesPersonScreen,verifyOnlyMultiplierPricing,exitFromSAlesPersonScreen,signOut",
+      "Tc_544_verifyMultiplierPricing":"launchApp,siteLogin,navigateToSalesPersonScreen,verifyMultiplierPricing,exitFromSAlesPersonScreen,signOut",
+      "Tc_534_verifyPricingColumnField":"launchApp,siteLogin,navigateToSalesPersonScreen,verifyPricingColumnField,exitFromSAlesPersonScreen,signOut",
+      "TC_541_VerifyOptionsAvailableUnderQUICKVIEW":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,vrfyQuickView,exitFromSAlesPersonScreen,signOut",
+      "TC_511_VerifyItemNotesInSalespersonInquiryPage":"launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,enterItemNotes,pressF3ExitBtn,pressF3ExitBtn,navigateToSalesPersonScreen,searchForItem2,vrfyItemNotes,exitFromSAlesPersonScreen,signOut",
+      "TC_514_FieldVerificationForItemNotes":"launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,enterItemNotes,pressF3ExitBtn,pressF3ExitBtn,navigateToSalesPersonScreen,searchForItem2,vrfyItemNotes,exitFromSAlesPersonScreen,signOut",
+      "TC_520_VerifyFieldsAvailableInInventoryTab":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,vrfyInventoryHeaders,vrfyInventoryTabFieldLabels,exitFromSAlesPersonScreen,signOut",
+      "TC_522_VerifyFieldsAvailableInItemBinDetailsTab":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,vrfyItemBinDetailsTab,exitFromSAlesPersonScreen,signOut"
+
     }
   ],
-  "General_Data": [
+  "General_Data":[
     {
-      "TC_ID": "Tc_521_SalesPersonInquiryUI"
+      "TC_ID":"Tc_521_SalesPersonInquiryUI"
     },
     {
-      "TC_ID": "Tc_518_NavigateNextPreviousScreen",
-      "ItemNo": "*99599013999"
+      "TC_ID":"Tc_518_NavigateNextPreviousScreen",
+      "ItemNo":"*99599013999"
     },
     {
-      "TC_ID": "Tc_519_verifyPricingColumn",
-      "ItemNo": "*99599013999"
+      "TC_ID":"Tc_519_verifyPricingColumn",
+      "ItemNo":"*99599013999"
     },
     {
-      "TC_ID": "Tc_533_verifySearchItem"
+      "TC_ID":"Tc_533_verifySearchItem"
     },
     {
-      "TC_ID": "Tc_528_verifySearchItemField",
-      "InvalidNumber": "102312",
-      "AlphaNumeric": "Asd123",
-      "NegativeNumber": "-123333",
-      "SpecialCharacterNumber": "@##234As"
+      "TC_ID":"Tc_528_verifySearchItemField",
+      "InvalidNumber":"102312",
+      "AlphaNumeric":"Asd123",
+      "NegativeNumber":"-123333",
+      "SpecialCharacterNumber":"@##234As"
     },
     {
-      "TC_ID": "Tc_526_verifyPricingNoRow"
+      "TC_ID":"Tc_526_verifyPricingNoRow"
     },
     {
-      "TC_ID": "Tc_ValidateAddRowPricingMatrix"
+      "TC_ID":"Tc_ValidateAddRowPricingMatrix"
     },
     {
-      "TC_ID": "Tc_527_verifyOnlyRowPricing",
-      "ItemNo": "*99599014002"
+      "TC_ID":"Tc_527_verifyOnlyRowPricing",
+      "ItemNo":"*99599014002"
     },
     {
-      "TC_ID": "Tc_529_verifyNoMultiplierPricing",
-      "ItemNo": "*99599014002",
-      "ColumnName": "DOX"
+      "TC_ID":"Tc_529_verifyNoMultiplierPricing",
+      "ItemNo":"*99599014002",
+      "ColumnName":"DOX"
     },
     {
-      "TC_ID": "Tc_544_verifyMultiplierPricing",
-      "ItemNo": "*99599014002"
+      "TC_ID":"Tc_544_verifyMultiplierPricing",
+      "ItemNo":"*99599014002"
     },
     {
-      "TC_ID": "Tc_534_verifyPricingColumnField",
-      "ItemNo": "*99599014002",
-      "InvalidNumber": "zaE",
-      "AlphaNumeric": "As123",
-      "NegativeNumber": "-1233",
-      "SpecialCharacterNumber": "@#2As"
+      "TC_ID":"Tc_534_verifyPricingColumnField",
+      "ItemNo":"*99599014002",
+      "InvalidNumber":"zaE",
+      "AlphaNumeric":"As123",
+      "NegativeNumber":"-1233",
+      "SpecialCharacterNumber":"@#2As"
+    },
+    {
+      "TC_ID":"TC_541_VerifyOptionsAvailableUnderQUICKVIEW",
+      "ItemNo":"*99599014002"
+    },
+    {
+      "TC_ID":"TC_511_VerifyItemNotesInSalespersonInquiryPage",
+      "ItemNotes":"Testing Item Notes !@#%^&*()4993417"
+    },
+    {
+      "TC_ID":"TC_514_FieldVerificationForItemNotes",
+      "ItemNotes":"Testing Item Notes !@#%^&*()3689667"
+    },
+    {
+      "TC_ID":"TC_520_VerifyFieldsAvailableInInventoryTab",
+      "ItemNo":"*99599014002"
+    },
+    {
+      "TC_ID":"TC_522_VerifyFieldsAvailableInItemBinDetailsTab",
+      "ItemNo":"*99599014002"
     }
   ]
 }
