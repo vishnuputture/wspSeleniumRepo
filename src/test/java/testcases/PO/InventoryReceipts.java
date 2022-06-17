@@ -154,7 +154,7 @@ public class InventoryReceipts extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_934_VerifyFunctionalityOfRefreshButton(SeleniumTestParameters testParameters) {
+    public void Tc_359_VerifyFunctionalityOfRefreshButton(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify the functionality of Refresh button in PURCHASE ORDER INQUIRY");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -180,6 +180,166 @@ public class InventoryReceipts extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_937_VerifyFunctionalityOfHyperlinks(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to verify the functionality of hyperlinks in PURCHASE ORDER INQUIRY");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_CreatePo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Creation of SO from stock PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_358_VerifyPOInquiryDetailsUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality PO Inquiry Details UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_375_VerifyOptionAvailablePoInquiryDetails(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality PO Inquiry Details Options column");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_380_VerifyPositionToLine(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the functionality Position To Line");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_385_VerifyItemNumberField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Item Number Field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_390_VerifyNextBackExitItemLedger(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify Next Back Exit Item Ledger");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_979_PartialReceivingStockPOItemsInventoryReceiptsScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Partial Receiving of Stock PO Items from inventory receipts screen");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_406_VerifyOpenPODetails(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Open PO Details");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_408_VerifyPoEntryDetailsOpenPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Po Entry Details Open PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_410_VerifyPoEntryDetailsClosedPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Po Entry Details Closed PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_407_VerifyClosedPODetails(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Closed PO Details");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_391_VerifyClosedPO(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Closed PO");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_395_VerifyCloseItemManyTimes(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Close Item Many Times");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_400_VerifyMoreInfoLink(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify More Info Link");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_378_VerifyItemLedgerUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Item Ledger UI");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_405_VerifyItemNumberFieldItemLedger(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Item Number Field Item Ledger");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_411_VerifyCustomerNumberFieldItemLedger(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Customer Number Field Item Ledger");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_412_VerifySourceFieldItemLedger(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Source Field Item Ledger");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_413_VerifyCalendarFieldItemLedger(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify Calendar Field Item Ledger");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_427_VerifyPOHasNoItemInPoDetails(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to Verify PO Has No Item In Po Details");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

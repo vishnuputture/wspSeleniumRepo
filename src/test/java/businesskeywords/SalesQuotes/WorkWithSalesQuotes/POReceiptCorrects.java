@@ -159,7 +159,11 @@ public class POReceiptCorrects extends ReusableLib {
         String poNo = enterPoNo();
         commonObj.validateText(InventoryReceiptPage.headerIR, "inventory receipts", "inventory receipts Header is present");
         commonObj.validateText(InventoryReceiptPage.poInqIR, poNo, "Po number matches");
-        commonObj.validateText(InventoryReceiptPage.ReceivedByIN, properties.getProperty("UserName").toUpperCase(Locale.ROOT), "Received By matches");
+        if(properties.getProperty("ENV").equals("STG")) {
+            commonObj.validateText(InventoryReceiptPage.ReceivedByIN, properties.getProperty("STGUserName").toUpperCase(Locale.ROOT), "Received By matches");
+        }else {
+            commonObj.validateText(InventoryReceiptPage.ReceivedByIN, properties.getProperty("PRODUserName").toUpperCase(Locale.ROOT), "Received By matches");
+        }
         exitIR();
     }
 
@@ -190,7 +194,11 @@ public class POReceiptCorrects extends ReusableLib {
         String poNo = Utility_Functions.xGetJsonData("PONumber");
         commonObj.validateText(InventoryReceiptPage.orderInUsePopUp, "ORDER IN USE", "'ORDER IN USE' popup is present");
         commonObj.validateText(InventoryReceiptPage.outOrderNum, poNo, "'Order #" + poNo + " is in use' is present");
-        commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty(getProperties("ENV")+"UserName"), "User id is matches");
+        if(properties.getProperty("ENV").equals("STG")) {
+            commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty("STGUserName"), "User id is matches");
+        }else {
+            commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty("PRODUserName"), "User id is matches");
+        }
         click(InventoryReceiptPage.btnContinue, "Click Continue button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
         click(SalesOrdersPage.btnExit, "Click Exit Button");

@@ -273,6 +273,7 @@ public class makePayments extends ReusableLib {
     }
 
     public void validateInvoiceCustomDateFilter() {
+        Utility_Functions.timeWait(5);
     	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, MakePaymentLandingPage.invoiceStatusDropDown, "All");
     	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, MakePaymentLandingPage.invoiceDatesDropDown, "Custom");
 
@@ -284,6 +285,7 @@ public class makePayments extends ReusableLib {
 		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
 		String strDate= formatter.format(dt);
 		Utility_Functions.timeWait(2);
+        Utility_Functions.timeWait(5);
 		sendKeys(MakePaymentLandingPage.dateFilterTo,strDate,"Entering to date");
 		c.add(Calendar.DATE, -2);
 		dt = c.getTime();

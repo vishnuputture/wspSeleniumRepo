@@ -2,19 +2,21 @@ package commonkeywords;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-
 import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import pages.OrderProcessingPage;
 import pages.PurchaseOrders.OptionsConstantsPage;
 import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.PurchaseOrders.VendorInformationPage;
+import pages.SalesAnalysisPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
-
-import pages.*;
 import pages.inventory.AlternateItemNumberPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemMasterPage;
@@ -30,9 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 
 public class CommonActions extends ReusableLib {
 
@@ -195,6 +194,18 @@ public class CommonActions extends ReusableLib {
 			System.out.println("Text: Not found");
 			throw new NoSuchElementException("Could not find :"+ele);
 		}
+	}
+
+	/**
+	 * This method verifies that the actual text contains expected text
+	 */
+	public void validateContainsText(String textExpected, String textActual, String msg) {
+		boolean flag = textActual.trim().contains(textExpected.trim());
+		if (flag)
+			report.updateTestLog("Verify text", msg, Status.PASS);
+		else
+			report.updateTestLog("Verify text", msg, Status.FAIL);
+		Assert.assertTrue(msg, flag);
 	}
 
 
@@ -436,6 +447,13 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void purchaseOrderToPurchaseOrderInquiry() {
 		click(MasterPage.inquiryPurchaseOrdersMenu,"Click [Inquiry - Purchase Orders] menu");
+	}
+
+	/**
+	 * This method navigates from Purchase Order Menu to Vendor Invoice Reconciliation Program
+	 */
+	public void purchaseOrderToVendorInvoiceReconciliation() {
+		click(MasterPage.vendorInvoiceReconciliation,"Click [Entry - Vendor Invoice Recon] menu");
 	}
 
 	/**

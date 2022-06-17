@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SPATesting" parallel="none" thread-count="1">
+	<test name="SPAScreenVerification">
+		<classes>
+			<class name="testcases.Pricing.SPA" >
+				<methods>
+					<include name="Tc_161_VerifySPAScreenHeader"></include>
+                    <include name="Tc_166_VerifySPAScreenInformation"></include>
+
+                    <include name="Tc_311_VerifyAddCustomersToGroupName"></include>
+                    <include name="Tc_315_VerifyEditCustomerGroup"></include>
+					<include name="Tc_316_VerifyDisplayCustomer"></include>
+                    <include name="Tc_317_VerifyDeleteGroupName"></include>
+					<include name="Tc_318_VerifyCustomerGroupSorting"></include>
+                    <include name="Tc_319_VerifyDeleteMultipleGroupName"></include>
+                    <include name="Tc_323_VerifySPAHideShowExpiredRecords"></include>
+                    <include name="Tc_322_VerifySPAAddRecords"></include>
+                    <include name="Tc_337_VerifySPASearchRecords"></include>
+                    <include name="Tc_326_VerifySPARecordDeletion"></include>
+
+					<include name="Tc_324_VerifySortingContract"></include>
+					<include name="Tc_325_VerifyEditContract"></include>
+					<include name="Tc_327_VerifyAssignMFPDCode"></include>
+					<include name="Tc_328_VerifyCopyContract"></include>
+					<include name="Tc_331_VerifyAssignIndividualItem"></include>
+					<include name="Tc_332_VerifyDisplayContractDetails"></include>
+					<include name="Tc_334_VerifyUpdateCost"></include>
+					<include name="Tc_336_VerifyLoadPriceSheet"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite> <!-- Suite -->

@@ -9,6 +9,7 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptsPage;
+import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import pages.warehouse.ReceivingInProcess.ReceivingInProcessPage;
@@ -123,6 +124,8 @@ public class inventoryReceipts extends ReusableLib {
         Utility_Functions.timeWait(2);
         String qty = jsonData.getData("QtyReceived");
         sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, qty, "Enter Quantity Received");
+        String itemNum=getText(WorkWithSalesQuotesPage.itemNo).trim();
+        Utility_Functions.xUpdateJson("FullyReceivedItem",itemNum);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
@@ -132,6 +135,43 @@ public class inventoryReceipts extends ReusableLib {
             click(ReceivingInProcessPage.skipBtn, "Click Skip Button");
             Utility_Functions.timeWait(2);
         }
+    }
+
+    /**
+     * Keyword to enter Quantity Received and process Order adding Freight Amount in Inventory Receipt page
+     */
+    public void processIROrderWIthFreightAmount() {
+        Utility_Functions.timeWait(2);
+        String qty = jsonData.getData("QtyReceived");
+        sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, qty, "Enter Quantity Received");
+        String itemNum=getText(WorkWithSalesQuotesPage.itemNo).trim();
+        Utility_Functions.xUpdateJson("FullyReceivedItem",itemNum);
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        sendKeys(InventoryReceiptsPage.allocateFreight, "Y", "Selecting [Y] for the question [Do you wish to allocate freight?]");
+        sendKeysAndEnter(InventoryReceiptsPage.amountToAllocate, "10", "Entering value in field [Amount to allocate]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        String receiverDoc = getText(InventoryReceiptsPage.receiverDocument).trim();
+        jsonData.putData("ReceiverDoc", receiverDoc);
+        String rcvdDate = getText(InventoryReceiptsPage.receivedDate).trim();
+        jsonData.putData("ReceivedDate", rcvdDate);
+        String fCode = getText(InventoryReceiptsPage.freightCode).trim();
+        jsonData.putData("FCode", fCode);
+        String fAmount = getText(InventoryReceiptsPage.freightAmount).trim();
+        jsonData.putData("FreightAmount", fAmount);
+        String gMargin = getText(InventoryReceiptsPage.grossMargin).trim();
+        jsonData.putData("GrossMargin", gMargin);
+
+        sendKeysAndEnter(InventoryReceiptsPage.tbxFreightCost, "10", "Entering value in field [Freight Cost]");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        Utility_Functions.timeWait(2);
+        commonObj.validateText(InventoryReceiptsPage.pageTitle, "inventory receipts -", "Validating Inventory Receipts page title");
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
 
     /**
