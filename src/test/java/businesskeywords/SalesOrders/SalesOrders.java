@@ -6,20 +6,13 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-import org.apache.hc.client5.http.auth.StandardAuthScheme;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.SalesOrders.*;
 import pages.common.MasterPage;
-import pages.pricing.pricingmatrix.PricingMatrixPage;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 
 import supportLibraries.Utility_Functions;
-
-import java.util.List;
 
 public class SalesOrders extends ReusableLib{
 
@@ -58,6 +51,13 @@ public class SalesOrders extends ReusableLib{
 	    	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesOrdersPage.shipViaDropDown, "DIRECT SHIP");
 	    }
 
+		public void fillInOtherFields(){
+			Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.deliveryTypeDropDown), 1);
+			sendKeys(SalesOrdersPage.txtJobName, jsonData.getData("JobName"), "Entering job name");
+			sendKeys(SalesOrdersPage.poNumberEntry, jsonData.getData("PONumber"), "Entering PO number");
+			sendKeys(SalesOrdersPage.placedByEntry, jsonData.getData("PlacedBy"), "Entering placed by");
+			Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.primarySalespersonDropDown), 0);
+		}
 		public void createSalesOrderCOD(){
 			sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to COD account number");
 			Utility_Functions.actionKey(Keys.ENTER, ownDriver);
@@ -67,7 +67,12 @@ public class SalesOrders extends ReusableLib{
 
 	    public void navigateToItemsTab() {
 	    	click(SalesOrdersPage.itemsTab,"Navigating to items tab");
-
+			if(isDisplayed(SalesOrdersPage.matrixError)){
+				click(SalesOrdersPage.closeError);
+				click(SalesOrdersPage.matrixSearch);
+				click(SalesOrdersPage.firstMatrixColumn);
+				click(SalesOrdersPage.itemsTab,"Navigating to items tab");
+			}
 	    }
 
 	    public void addItemsToSalesorder() {

@@ -12,7 +12,15 @@ public class SalesOrdersPage extends ReusableLib {
 	    }
 	public static By pageTitle = By.id("wob-app-header");
 	public static By billToAcct = By.id("inBillToAcct");
-	public static By txtJobName=By.id("txtJobname");
+	public static By txtJobName = By.id("txtJobname");
+	public static By poNumberEntry = By.id("inCustPO");
+	public static By placedByEntry = By.id("inPlacedBy");
+	public static By primarySalespersonDropDown = By.id("ddbPrimarySalesperson");
+	public static By matrixColumn = By.id("txtS2MatrixColumn");
+	public static By matrixError = By.xpath("//*[@id=\"5250\"]/div[138]");
+	public static By closeError = By.xpath("//*[@id=\"5250\"]/div[138]/div[2]");
+	public static By matrixSearch = By.xpath("//*[@id=\"faMatrixSearch\"]/i");
+	public static By firstMatrixColumn = By.id("OutMatrixID.1");
 	public static By deliveryTypeDropDown = By.id("ddbDeliveryType");
 	public static By directShipDropDown = By.id("ddbDirectShip");
 	public static By shipViaDropDown = By.id("ddbShipViaLabel");
