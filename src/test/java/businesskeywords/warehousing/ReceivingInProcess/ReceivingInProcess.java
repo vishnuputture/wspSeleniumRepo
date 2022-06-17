@@ -12,18 +12,13 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptsPage;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
-import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.SPO.SpoPage;
-import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
-import pages.inventory.ReceiveCorrectionPage;
 import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import pages.warehouse.ReceivingInProcess.ReceivingInProcessPage;
 import pages.warehouse.TruckPage;
-import software.amazon.awssdk.services.kendra.model.Search;
 import supportLibraries.Utility_Functions;
-import testcases.Pricing.MatrixCostUpdate;
 
 import java.util.List;
 
@@ -472,8 +467,8 @@ public class ReceivingInProcess extends ReusableLib {
 
     public void confirmFreight() {
         Utility_Functions.timeWait(6);
-        if (isDisplayed(WorkWithSalesQuotesPage.proc)) {
-            click(WorkWithSalesQuotesPage.proc, "Click on process");
+        if (isDisplayed(InventoryReceiptsPage.btnProcess)) {
+            click(InventoryReceiptsPage.btnProcess, "Click on process");
             Utility_Functions.timeWait(2);
             Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         }
