@@ -28,7 +28,7 @@
                     <include name="Tc_344_VerifySearchByName"></include>
                     <include name="Tc_344_VerifyFilterByManufacturer"></include>
                     <include name="Tc_344_VerifyFilterByStatus"></include>
-                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include> //not in pricing
+                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
                     <include name="Tc_344_VerifyFilterEffectiveDate"></include>
                     <include name="Tc_399_VerifyListPriceInputField"></include>
                 </methods>
@@ -43,7 +43,7 @@
                     <include name="Tc_753_ProcessNowSheetAvailableIngesting"></include>
                     <include name="Tc_754_ProcessNowSheetReadyToProcessIngesting"></include>
                     <include name="Tc_755_ProcessedNonEditable"></include>
-                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include> //not in pricing
+                    <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
                     <include name="Tc_767_ListPriceCal"></include>
                     <include name="Tc_768_PoCostCal"></include>
                     <include name="Tc_769_MatrixCostCal"></include>

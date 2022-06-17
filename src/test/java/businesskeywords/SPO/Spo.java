@@ -11,7 +11,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import pages.PurchaseOrders.VendorInformationPage;
 import pages.SPO.SpoPage;
-import pages.PurchaseOrders.MailingMasterSearchPage; //Figure out what to replace this with
+import pages.PurchaseOrders.MailingMasterSearchPage;
 import pages.common.MasterPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemLedgerPage;

@@ -193,7 +193,7 @@ public class POReceiptCorrects extends ReusableLib {
         commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty(getProperties("ENV")+"UserName"), "User id is matches");
         click(InventoryReceiptPage.btnContinue, "Click Continue button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
-        click(SalesOrdersPage.btnExit, "Click Exit Button"); //Replace with InventoryReceiptPage.exitBtn if broken
+        click(SalesOrdersPage.btnExit, "Click Exit Button");
     }
 
     public void verifyQtyField(String val, By by) {
