@@ -6,14 +6,15 @@ import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptPage;
+import pages.PurchaseOrders.InventoryReceiptsPage;
 import pages.PurchaseOrders.PoEntryConversionFactorPage;
+import pages.PurchaseOrders.PurchaseOrderInquiryPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
+import pages.SalesOrders.SalesOrdersPage;
 import pages.pricing.AddSpecialPricingPage;
 import supportLibraries.Utility_Functions;
 
-import java.awt.event.KeyEvent;
 import java.util.Locale;
 
 
@@ -47,19 +48,19 @@ public class POReceiptCorrects extends ReusableLib {
      * This method navigate To Inventory Receipt
      */
     public void inventReceipt() {
-        sendKey(WorkWithSalesQuotesPage.purcOrdNo, Utility_Functions.xGetJsonData("POSmoke"));
-        click(WorkWithSalesQuotesPage.process, "Click Process button");
-        String imNo = Utility_Functions.getText(ownDriver, WorkWithSalesQuotesPage.itemNo).trim();
-        String itmDesc = Utility_Functions.getText(ownDriver, WorkWithSalesQuotesPage.itmDesc).trim();
+        sendKey(InventoryReceiptPage.purchaseOrdNo, Utility_Functions.xGetJsonData("POSmoke"));
+        click(InventoryReceiptPage.processBtn, "Click Process button");
+        String imNo = Utility_Functions.getText(ownDriver, InventoryReceiptPage.itemNo).trim();
+        String itmDesc = Utility_Functions.getText(ownDriver, InventoryReceiptPage.itmDesc).trim();
         String testDesc = jsonData.getData("TestDescription");
-        String relSaleOrd = Utility_Functions.getText(ownDriver, WorkWithSalesQuotesPage.relSaleOrd);
-        sendKey(WorkWithSalesQuotesPage.qtyRec, "1");
+        String relSaleOrd = Utility_Functions.getText(ownDriver, InventoryReceiptPage.relSaleOrd);
+        sendKey(InventoryReceiptPage.qtyReceived, "1");
         Utility_Functions.xAssertEquals(report, imNo, Utility_Functions.xGetJsonData("SQItem"), "Item Number: ");
         Utility_Functions.xAssertEquals(report, testDesc, itmDesc, "Item Description: ");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xGetJsonData("SOSmoke") + "-01", relSaleOrd, "Related Sale Order: ");
-        click(WorkWithSalesQuotesPage.proc, "Click Process button");
+        click(InventoryReceiptsPage.btnProcess, "Click Process button");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");
+        click(InventoryReceiptPage.exitBtn, "Click Exit Button");
     }
 
     /**
@@ -91,7 +92,7 @@ public class POReceiptCorrects extends ReusableLib {
      * This method to exit from Purchase Order Inquiry
      */
     public void exitPoInqPage() {
-        Utility_Functions.xScrollIntoView(ownDriver, WorkWithSalesQuotesPage.saleQExtBtn);
+        Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderInquiryPage.btnExitPOInquiryDtls);
         click(AddSpecialPricingPage.btnF12, "Click Back button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
     }
@@ -103,7 +104,7 @@ public class POReceiptCorrects extends ReusableLib {
     }
 
     public void exitInventoryReceiptPage() {
-        click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");
+        click(InventoryReceiptPage.exitBtn, "Click Exit Button");
     }
 
     /**
@@ -167,8 +168,8 @@ public class POReceiptCorrects extends ReusableLib {
     }
 
     public void exitIR() {
-        Utility_Functions.xScrollIntoView(ownDriver, WorkWithSalesQuotesPage.proc);
-        click(WorkWithSalesQuotesPage.exitIR, "Click Exit Button");
+        Utility_Functions.xScrollIntoView(ownDriver, InventoryReceiptPage.processBtn);
+        click(InventoryReceiptPage.exitIR, "Click Exit Button");
     }
 
     /**
@@ -200,7 +201,7 @@ public class POReceiptCorrects extends ReusableLib {
         }
         click(InventoryReceiptPage.btnContinue, "Click Continue button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
-        click(WorkWithSalesQuotesPage.exitBtn, "Click Exit Button");
+        click(SalesOrdersPage.btnExit, "Click Exit Button");
     }
 
     public void verifyQtyField(String val, By by) {
