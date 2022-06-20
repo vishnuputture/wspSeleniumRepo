@@ -17,8 +17,12 @@
       "TC_511_VerifyItemNotesInSalespersonInquiryPage":"launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,enterItemNotes,pressF3ExitBtn,pressF3ExitBtn,navigateToSalesPersonScreen,searchForItem2,vrfyItemNotes,exitFromSAlesPersonScreen,signOut",
       "TC_514_FieldVerificationForItemNotes":"launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,enterItemNotes,pressF3ExitBtn,pressF3ExitBtn,navigateToSalesPersonScreen,searchForItem2,vrfyItemNotes,exitFromSAlesPersonScreen,signOut",
       "TC_520_VerifyFieldsAvailableInInventoryTab":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,vrfyInventoryHeaders,vrfyInventoryTabFieldLabels,exitFromSAlesPersonScreen,signOut",
-      "TC_522_VerifyFieldsAvailableInItemBinDetailsTab":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,vrfyItemBinDetailsTab,exitFromSAlesPersonScreen,signOut"
-
+      "TC_522_VerifyFieldsAvailableInItemBinDetailsTab":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,vrfyItemBinDetailsTab,exitFromSAlesPersonScreen,signOut",
+      "TC_508_VerifyAlternateCustomerNumberInSalesPersonInquiry":"launchApp,siteLogin,navigateToAlternateCustomerNumberRevisions,selectRandomCustomer,enterRandomAltCustNo,pressF3ExitBtn,pressF3ExitBtn,navigateToSalesPersonScreen,searchForItem,enterAltCustomerNumber,vrfyCustomerName,exitFromSAlesPersonScreen,signOut",
+      "TC_509_VerifyCustomerSearchUsingInvalidAlternateCustomerNumber":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,enterInvalidCustomerNumber,enterCustomerNumber,vrfyCustomerName,exitFromSAlesPersonScreen,signOut",
+      "TC_510_VerifyAddEditCustomerNotes":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,enterCustomerNumber,vrfyCustNotesNavigation,validateAddEditCustomerNotes,pressF3ExitBtn,exitFromSAlesPersonScreen,signOut",
+      "TC_517_ViewItemDetailsUsingItemNoAndCustNo":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,enterInvalidCustomerNumber,clearSearchForItem,enterCustomerNumber,enterInvalidItemNumber,searchForItem,enterCustomerNumber,exitFromSAlesPersonScreen,signOut",
+      "TC_532_VerifyFunctionalityOfCustomerInputField":"launchApp,siteLogin,navigateToSalesPersonScreen,searchForItem,vrfyCustTbxTooltip,navToCustSearchInSalesPersonInq,selectRandomCustomerInSalesPersonInq,enterCustomerNumber,vrfyCustomerName,navToCustSearchInSalesPersonInq,selectRandomCustomerInSalesPersonInq,exitFromSAlesPersonScreen,signOut"
     }
   ],
   "General_Data":[
@@ -89,6 +93,38 @@
     {
       "TC_ID":"TC_522_VerifyFieldsAvailableInItemBinDetailsTab",
       "ItemNo":"*99599014002"
+    },
+    {
+      "TC_ID":"TC_508_VerifyAlternateCustomerNumberInSalesPersonInquiry",
+      "ItemNo":"*99599014002",
+      "CustomerNumber":"000213",
+      "CustomerName":"ERIC BIRECKI",
+      "AltCustomerNumber":"TEST2299746"
+    },
+    {
+      "TC_ID":"TC_509_VerifyCustomerSearchUsingInvalidAlternateCustomerNumber",
+      "ItemNo":"*99599014002",
+      "InvalidCustomerNumber":"^%$&^$&",
+      "CustomerNumber":"000201",
+      "CustomerName":"ERIC BIRECKI"
+    },
+    {
+      "TC_ID":"TC_510_VerifyAddEditCustomerNotes",
+      "ItemNo":"*99599014002",
+      "CustomerNumber":"099599"
+    },
+    {
+      "TC_ID":"TC_517_ViewItemDetailsUsingItemNoAndCustNo",
+      "ItemNo":"*99599014002",
+      "InvalidItemNo":"^%$&^$&",
+      "InvalidCustomerNumber":"^%$&^$&",
+      "CustomerNumber":"099599"
+    },
+    {
+      "TC_ID":"TC_532_VerifyFunctionalityOfCustomerInputField",
+      "ItemNo":"*99599014002",
+      "CustomerNumber":"000201",
+      "CustomerName":"ERIC BIRECKI"
     }
   ]
 }

@@ -39,6 +39,10 @@ public class SalesPersonPage extends ReusableLib {
     public static By searchIconForItem=By.xpath("//div[@id='fontAwesome1']/i");
     public static By hdrItemNotes=By.xpath("//h3[text()='Item Notes']");
     public static By itemNotes1=By.id("IXN$1");
+    public static By tbxCustomer = By.id("VDCSTN");
+    public static By customerName = By.id("VDCNAM");
+    public static By msgItemNo = By.id("MSG1");
+    public static By custSearchIcon = By.xpath("//div[@title='Search for Customers']");
 
     /********************************** Quick View **********************************/
 
@@ -84,4 +88,14 @@ public class SalesPersonPage extends ReusableLib {
     public static By lstBinDetailsTableHeader=By.xpath("//div[@id='BinGrid']/div[@class='cell header-cell']/div");
     public static By lnkExportToExcel=By.xpath("//div[@id='BinGrid']//following-sibling::div[contains(@class,'win-table-paging-bar paging-bar')]//span[contains(@class,'csv-paging-link') and text()='Export to Excel']");
     public static By lblTotal=By.id("OutputField7");
+
+    /********************************** Customer Notes locators **********************************/
+
+    public static By actionCustomerNotes=By.xpath("//div[@id='CustomerNotes_copy']/a[text()='Customer Notes']");
+    public static By hdrCustomerNotesRevision=By.id("D_2_29");
+    public static By customerNotesLine1=By.id("I_7_10");
+    public static By tbxActions=By.id("I_4_12");
+    public static By tbxCustNoCustNotesPage=By.id("I_5_12");
+    public static By notificationMsg=By.id("D_23_3");
+
 }

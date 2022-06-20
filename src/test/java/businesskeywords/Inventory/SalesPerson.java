@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.common.MasterPage;
+import pages.inventory.AlternateCustomerPage;
 import pages.inventory.ItemMasterPage;
 import pages.inventory.SalesPersonPage;
 import pages.pricing.OrderByCustomerPage;
@@ -362,5 +363,165 @@ public class SalesPerson extends ReusableLib {
         }
         commonObj.validateElementExists(SalesPersonPage.lnkExportToExcel, "Link to download excel is present under Purchasing");
         commonObj.validateElementExists(SalesPersonPage.lblTotal, "Field label [Total On Hand + In Hold] is present under Purchasing");
+    }
+
+    /**
+     * Keyword to enter Alternate Customer Number in [Customer] textbox in SalesPerson Inquiry Page
+     */
+    public void enterAltCustomerNumber(){
+        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("AltCustomerNumber"),"Enter Alternate Customer Number");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        String custNoExpeccted = jsonData.getData("CustomerNumber");
+        String custNoActual = getAttribute(SalesPersonPage.tbxCustomer, "value");
+        Utility_Functions.xAssertEquals(report, custNoExpeccted, custNoActual, "Validating selected Customer Number");
+    }
+
+    /**
+     * Keyword to validate Customer Name in SalesPerson Inquiry Page
+     */
+    public void vrfyCustomerName(){
+        String custName = jsonData.getData("CustomerName");
+        commonObj.validateText(SalesPersonPage.customerName, custName, "Validating selected Customer Name");
+    }
+
+    /**
+     * Keyword to enter Invalid Customer Number in [Customer] textbox in SalesPerson Inquiry Page
+     */
+    public void enterInvalidCustomerNumber(){
+        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("InvalidCustomerNumber"),"Enter Invalid Customer Number");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.validateText(SalesPersonPage.customerName, "Invalid", "Validating invalid Customer Name");
+    }
+
+    /**
+     * Keyword to enter Customer Number in [Customer] textbox in SalesPerson Inquiry Page
+     */
+    public void enterCustomerNumber(){
+        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("CustomerNumber"),"Enter valid Customer Number");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+
+        String custNoExpeccted = jsonData.getData("CustomerNumber");
+        String custNoActual = getAttribute(SalesPersonPage.tbxCustomer, "value");
+        Utility_Functions.xAssertEquals(report, custNoExpeccted, custNoActual, "Validating selected Customer Number");
+    }
+
+    /**
+     * Keyword to enter Customer Number in [Customer] textbox in SalesPerson Inquiry Page
+     */
+    public void vrfyCustNotesNavigation(){
+        String custNumber = getAttribute(SalesPersonPage.tbxCustomer, "value");
+        click(SalesPersonPage.actionCustomerNotes,"Click Customer Notes action button");
+        commonObj.validateText(SalesPersonPage.hdrCustomerNotesRevision, "Customer Notes Revisions", "Validating page title");
+
+        String custNoActual = getAttribute(SalesPersonPage.tbxCustNoCustNotesPage, "value");
+        Utility_Functions.xAssertEquals(report, custNumber, custNoActual, "Validating selected Customer Number");
+
+        String actionsValue = getAttribute(SalesPersonPage.tbxActions, "value");
+        Utility_Functions.xAssertEquals(report, "I", actionsValue, "Validating Action textbox value");
+    }
+
+    /**
+     * Keyword to validate Add/Edit/Delete Customer Notes functionality
+     */
+    public void validateAddEditCustomerNotes(){
+        String customerNotes = "TESTING NOTES"+Utility_Functions.xRandomFunction();
+        sendKeys(SalesPersonPage.tbxActions, "A","Enter [A] in Action textbox");
+        sendKeysAndEnter(SalesPersonPage.customerNotesLine1, customerNotes,"Enter Customer Notes");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.verifyElementContainsText(SalesPersonPage.notificationMsg, "Customer Notes Changed", "Validating notification message");
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+        report.updateTestLog("Press [F3] exit button", "Press [F3] exit button",Status.PASS);
+        vrfyCustNotesNavigation();
+        String custNotesActual = getAttribute(SalesPersonPage.customerNotesLine1, "value");
+        Utility_Functions.xAssertEquals(report, customerNotes, custNotesActual, "Validating Customer Notes");
+
+        customerNotes = "TESTING NOTES"+Utility_Functions.xRandomFunction();
+        sendKeys(SalesPersonPage.tbxActions, "C","Enter [C] in Action textbox");
+        sendKeysAndEnter(SalesPersonPage.customerNotesLine1, customerNotes,"Enter Customer Notes");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.verifyElementContainsText(SalesPersonPage.notificationMsg, "Customer Notes Changed", "Validating notification message");
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+        report.updateTestLog("Press [F3] exit button", "Press [F3] exit button",Status.PASS);
+        vrfyCustNotesNavigation();
+        custNotesActual = getAttribute(SalesPersonPage.customerNotesLine1, "value");
+        Utility_Functions.xAssertEquals(report, customerNotes, custNotesActual, "Validating Customer Notes");
+
+        sendKeysAndEnter(SalesPersonPage.tbxActions, "D","Enter [D] in Action textbox");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.verifyElementContainsText(SalesPersonPage.notificationMsg, "All Customer Notes Will be Deleted.  Press Enter to Delete.", "Validating notification message");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        report.updateTestLog("Press [Enter] key", "Press [Enter] key to delete all notes",Status.PASS);
+        custNotesActual = getAttribute(SalesPersonPage.customerNotesLine1, "value");
+        Utility_Functions.xAssertEquals(report, "", custNotesActual, "Validating Customer Notes deleted");
+    }
+
+    /**
+     * Keyword to clear [Search For Item] textbox in SalesPerson Inquiry Page
+     */
+    public void clearSearchForItem() {
+        sendKeysAndEnter(SalesPersonPage.searchForItem, "","Clear [Search For Item] textbox");
+    }
+
+    /**
+     * Keyword to enter invalid Item No in [Search for Item] textbox in SalesPerson Inquiry Page
+     */
+    public void enterInvalidItemNumber(){
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("InvalidItemNo"),"Enter Invalid Item Number" );
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.validateText(SalesPersonPage.msgItemNo, "E501", "Validating error below [Search for Item] textbox");
+    }
+
+    /**
+     * Keyword to hover over Customer tbx and verify tooltip in SalesPerson Inquiry Page
+     */
+    public void vrfyCustTbxTooltip(){
+        Utility_Functions.xMoveToElment(getElement(SalesPersonPage.tbxCustomer), ownDriver);
+        Utility_Functions.timeWait(1);
+        String tooltip = getAttribute(SalesPersonPage.tbxCustomer, "title");
+        Utility_Functions.xAssertEquals(report, "F4 - Search for Customers", tooltip, "Validating Customer textbox tooltip");
+
+        Utility_Functions.xMoveToElment(getElement(SalesPersonPage.custSearchIcon), ownDriver);
+        Utility_Functions.timeWait(1);
+        tooltip = getAttribute(SalesPersonPage.custSearchIcon, "title");
+        Utility_Functions.xAssertEquals(report, "Search for Customers", tooltip, "Validating Customer Search icon tooltip");
+    }
+
+    /**
+     * Keyword to navigate to Customer Search by pressing [F4] key in SALESPERSON INQUIRY page
+     */
+    public void navToCustSearchInSalesPersonInq(){
+        click(SalesPersonPage.custSearchIcon, "Click Customer Search icon for navigation to Customer Search");
+        commonObj.validateText(AlternateCustomerPage.pageTitleMailingMasterSearch, "Mailing Master Search (O-946)", "Validating [Mailing Master Search] page title");
+    }
+
+    /**
+     * Keyword to navigate to Customer Search by clicking Search icon in SALESPERSON INQUIRY page
+     */
+    public void clickCustSearchIconSalesPersonInq(){
+        click(SalesPersonPage.tbxCustomer);
+        Utility_Functions.actionKey(Keys.F4, ownDriver);
+        report.updateTestLog("Press [F4] button on Customer Input field for navigation to Customer Search", "Press [F4] button",Status.PASS);
+        commonObj.validateText(AlternateCustomerPage.pageTitleMailingMasterSearch, "Mailing Master Search (O-946)", "Validating [Mailing Master Search] page title");
+    }
+
+    /**
+     * Keyword to select random Customer in SALESPERSON INQUIRY page
+     */
+    public String selectRandomCustomerInSalesPersonInq(){
+        int count = Utility_Functions.xRandomFunction(1, 10);
+        while(count>0){
+            click(AlternateCustomerPage.btnDown);
+            count--;
+        }
+        String customerNumber = getText(AlternateCustomerPage.acct1).trim();
+        String customerName = getText(AlternateCustomerPage.addLine1).trim();
+        sendKeysAndEnter(AlternateCustomerPage.opt1, "1", "Select Customer");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+        commonObj.validateText(SalesPersonPage.salesPersonInquiryTitle, "Salesperson Inquiry", "Validating [Salesperson Inquiry] page title");
+        String custNoActual = getAttribute(SalesPersonPage.tbxCustomer, "value");
+        Utility_Functions.xAssertEquals(report, customerNumber, custNoActual, "Validating selected Customer Number");
+        commonObj.validateText(SalesPersonPage.customerName, customerName, "Validating selected Customer Name");
+        return customerNumber;
     }
 }

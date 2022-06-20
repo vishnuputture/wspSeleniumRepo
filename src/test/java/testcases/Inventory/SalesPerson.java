@@ -134,4 +134,44 @@ public class SalesPerson extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_508_VerifyAlternateCustomerNumberInSalesPersonInquiry(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify alternative customer number in Salesperson Inquiry page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_509_VerifyCustomerSearchUsingInvalidAlternateCustomerNumber(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify alternative customer number in Salesperson Inquiry page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_510_VerifyAddEditCustomerNotes(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify alternative customer number in Salesperson Inquiry page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_517_ViewItemDetailsUsingItemNoAndCustNo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify user should be able to view the item details using the combination of item number and customer number in salesperson inquiry page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_532_VerifyFunctionalityOfCustomerInputField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify Functionality of Customer input field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

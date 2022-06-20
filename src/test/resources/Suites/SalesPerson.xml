@@ -11,6 +11,11 @@
                      <include name="TC_514_FieldVerificationForItemNotes"></include>
                      <include name="TC_520_VerifyFieldsAvailableInInventoryTab"></include>
                      <include name="TC_522_VerifyFieldsAvailableInItemBinDetailsTab"></include>
+                     <include name="TC_508_VerifyAlternateCustomerNumberInSalesPersonInquiry"></include>
+                     <include name="TC_509_VerifyCustomerSearchUsingInvalidAlternateCustomerNumber"></include>
+                     <include name="TC_510_VerifyAddEditCustomerNotes"></include>
+                     <include name="TC_517_ViewItemDetailsUsingItemNoAndCustNo"></include>
+                     <include name="TC_532_VerifyFunctionalityOfCustomerInputField"></include>
                  </methods>
              </class>
          </classes>
