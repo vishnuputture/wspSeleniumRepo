@@ -526,7 +526,7 @@ public class CreatePurchaseOrder extends ReusableLib {
         }
         try {
             Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderDetailsPage.errorMsgPOD);
-            if(getText(PurchaseOrderDetailsPage.errorMsgPOD).equals("WARNING- Cost variance -- F5 to accept.  Average cost is")) {
+            if(getText(PurchaseOrderDetailsPage.errorMsgPOD).contains("WARNING- Cost variance -- F5 to accept.  Average cost is")) {
                 commonObj.verifyElementContainsText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is", "Verify Cost Variance Warning message");
                 getConvFactorValue();
                 Utility_Functions.actionKey(Keys.F5, ownDriver);

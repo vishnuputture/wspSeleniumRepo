@@ -15,7 +15,7 @@
       "Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected": "",
       "Tc_215_Verify_the_functionality_of_Ship_Date_and_Line_item_have_different_Ship_Date": "",
       "Tc_216_Verify_the_functionality_of_Freight_Charges": "launchApp,siteLogin,validatePOHeadingTitle,findVendorWithoutFreightCharges,validateFrieghtCharges",
-      "Tc_217_Verify_the_functionality_of_Cost_Option": "launchApp,siteLogin,validatePOHeadingTitle,enquireOrderNo,validateCostOptionFunc",
+      "Tc_217_Verify_the_functionality_of_Cost_Option": "launchApp,siteLogin,validatePOHeadingTitle,enquireOrderNo,validateCostOptionFunc,pressF3ExitBtn,pressF3ExitBtn,signOut",
       "Tc_308_CreateSOUI": "launchApp,siteLogin,validatePOHeadingTitle,getVendor,navigateToCreateSo,verifyPoEntryUi,exitPoEntry,signOut",
       "Tc_CreatePo": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInformation,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
       "Tc_310_SoFromStockPO": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,navigateToCreateSo,selectCustNo,selectShipVia,processSo,exitPoEntry,signOut",
@@ -60,7 +60,7 @@
     },
     {
       "TC_ID": "Tc_217_Verify_the_functionality_of_Cost_Option",
-      "orderNo": "030458",
+      "orderNo": "032965",
       "invalidCostOption": "9999",
       "invalidCostOptionSpecialChar": "9999!@#$%^&*()",
       "validCostOption": "1"
