@@ -11,6 +11,7 @@
                     <!--<include name="Tc_23_UpdateItemQuantity"></include>
                     <include name="Tc_24_UpdateItemAVGCost"></include>
                     <include name="Tc_25_ValidateItemCreation"></include>
+                    <include name="Tc_26_ValidateItemDeletion"></include>
                     <include name="Tc_27_ValidateItemUpdate"></include>
                     <include name="Tc_28_ValidateReceiveCorrection"></include>
                     <include name="Tc_29_ValidateCostAdjustmentProcess"></include>

@@ -6,20 +6,13 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-import org.apache.hc.client5.http.auth.StandardAuthScheme;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.SalesOrders.*;
 import pages.common.MasterPage;
-import pages.pricing.pricingmatrix.PricingMatrixPage;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 
 import supportLibraries.Utility_Functions;
-
-import java.util.List;
 
 public class SalesOrders extends ReusableLib{
 
@@ -44,45 +37,60 @@ public class SalesOrders extends ReusableLib{
 	        commonObj.orderProcessingToSalesOrders();
 	        commonObj.validateText(SalesOrdersPage.pageTitle, "Sales Order Entry", "Validating sales orders page title");
 	    }
-	    
+
 	    public void validateSalesOrderFields() {
 	    	sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to account number");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-	    	
+			if(isDisplayed(CustomerNotesPage.customerNotesRevisionsHeader))
+			{
+				click(CustomerNotesPage.btnExit, "Exiting customer notes");
+			}
 	    	//Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.deliveryTypeDropDown), "Pick Up", "Validating selected delivery type");
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(ownDriver, SalesOrdersPage.directShipDropDown), "No", "Validating selected direct ship value");
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(ownDriver, SalesOrdersPage.shipCompleteDropDown), "No", "Validating selected ship complete value");
 	    	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesOrdersPage.shipViaDropDown, "DIRECT SHIP");
 	    }
 
+		public void fillInOtherFields(){
+			Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.deliveryTypeDropDown), 1);
+			sendKeys(SalesOrdersPage.txtJobName, jsonData.getData("JobName"), "Entering job name");
+			sendKeys(SalesOrdersPage.poNumberEntry, jsonData.getData("PONumber"), "Entering PO number");
+			sendKeys(SalesOrdersPage.placedByEntry, jsonData.getData("PlacedBy"), "Entering placed by");
+			Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.primarySalespersonDropDown), 0);
+		}
 		public void createSalesOrderCOD(){
 			sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to COD account number");
 			Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 		}
 
 
-	    
+
 	    public void navigateToItemsTab() {
 	    	click(SalesOrdersPage.itemsTab,"Navigating to items tab");
-	    	
+			if(isDisplayed(SalesOrdersPage.matrixError)){
+				click(SalesOrdersPage.closeError);
+				click(SalesOrdersPage.matrixSearch);
+				click(SalesOrdersPage.firstMatrixColumn);
+				click(SalesOrdersPage.itemsTab,"Navigating to items tab");
+			}
 	    }
-	    
+
 	    public void addItemsToSalesorder() {
 	    	sendKeys(SalesOrdersPage.qtyOrdered,"1","Entering ordered quantity");
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo1"),"Entering item Number");
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-	    	
+
 	    	sendKeys(SalesOrdersPage.qtyOrdered,"1","Entering ordered quantity");
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo2"),"Entering item Number");
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-	    	
+
 	    	Utility_Functions.xUpdateJsonWithArray("SalesOrderNo",ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 			Utility_Functions.xUpdateJson("SalesOrder",ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
-	    	
-	    	
-	    	
+
+
+
 	    }
 
 	    public void navigateToShipmentsTab()
@@ -159,7 +167,10 @@ public class SalesOrders extends ReusableLib{
 		public void loadLastOrder()
 		{
         click(SalesOrdersPage.loadSalesOrder,"click on load icon");
-
+		if(isDisplayed(CustomerNotesPage.customerNotesRevisionsHeader))
+        {
+				click(CustomerNotesPage.btnExit, "Exiting customer notes");
+		}
         Utility_Functions.timeWait(3);
         String status=Utility_Functions.xgetSelectedDropdownValue(ownDriver,SalesOrdersPage.orderStatus);
         Utility_Functions.xUpdateJson("CreatedSalesOrder", ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
@@ -175,11 +186,11 @@ public class SalesOrders extends ReusableLib{
 		}
 		}
 
-	    
+
 	    public void saveExitSalesOrders() {
 	    	click(SalesOrdersPage.btnSaveExit,"saving and exiting");
 	    	click(SalesOrdersPage.btnExit," exiting sales order");
-	    	
+
 	    }
 
 	public void saveExitSalesOrdersCreateShipment() {
@@ -254,5 +265,5 @@ public class SalesOrders extends ReusableLib{
 		//click(SalesOrdersPage.btnBack, "Click [Return to Sales Order] button");
 		commonObj.validateText(SalesOrdersPage.lblRelatedPO,"Related P.O.","Validating Related Purchase Orders label");
 	}
-	    
+
 }

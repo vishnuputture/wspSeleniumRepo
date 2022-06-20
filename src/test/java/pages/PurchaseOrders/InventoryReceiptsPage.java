@@ -13,8 +13,8 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By pageTitle = By.id("OP18_heading");
     public static By tbxPONumber = By.id("VDORNM");
     public static By tbxQtyRcvd = By.id("VQR.1");
-    public static By btnExit = By.xpath("//input[@value='Exit']");
-    public static By btnProcess = By.xpath("//input[@value='Process']");
+    public static By btnExit = By.id("RC1CTL_linkCF03");
+    public static By btnProcess = By.id("RC1CTL_linkCF09");
     public static By chbxEnableDisableCost = By.id("Checkbox2");
     public static By growlText = By.className("growl-text");
     public static By lstUnitCostTbx = By.xpath("//input[starts-with(@id,'VUC')]");
@@ -25,7 +25,12 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By btnCancelPO = By.xpath("//input[@value='Cancel Purchase Order']");
     public static By btnPOInquiry = By.id("op18_cf01");
     public static By purchaseOrderInquiry = By.xpath("//a[text()='Purchase Order Inquiry']");
-
+    public static By tbxFreightCost = By.id("VUF.1");
+    public static By receiverDocument = By.id("RCFCTL_WKRDOC");
+    public static By receivedDate = By.id("RCFCTL_VDDTSH");
+    public static By freightCode = By.id("RCFCTL_VDFRT");
+    public static By freightAmount = By.id("FAMT");
+    public static By grossMargin = By.id("VDGMMR");
 
     /**************************************** Sales Order Inquiry page ****************************************/
 
@@ -46,8 +51,9 @@ public class InventoryReceiptsPage extends ReusableLib{
     public static By btnUpdateOnHandQty = By.id("btnCF21");
     public static By btnUpdateSO = By.id("btnCF18");
 
+    /**************************************** Freight Allocation popup ****************************************/
 
-
-
+    public static By allocateFreight = By.id("DEFFRT");
+    public static By amountToAllocate = By.id("VDFAMT");
 
 }

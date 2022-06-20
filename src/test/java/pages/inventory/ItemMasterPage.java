@@ -33,6 +33,7 @@ public class ItemMasterPage extends ReusableLib{
     public static By tbxConvFactor = By.id("inCovFactor");
 
     public static By itemSearchIcon = By.id("faItemSearch");
+    public static By itemNotes1=By.id("inItemNotes1");
 
     /************************************ Item Master Browse - Local Page elements ************************************/
 

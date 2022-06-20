@@ -17,10 +17,7 @@ import pages.SalesAnalysisPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
-import pages.inventory.AlternateItemNumberPage;
-import pages.inventory.CostAdjustmentPage;
-import pages.inventory.ItemMasterPage;
-import pages.inventory.SalesPersonPage;
+import pages.inventory.*;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.OrderByCustomerPage;
 import pages.pricing.SpecialPricePage;
@@ -32,6 +29,7 @@ import supportLibraries.Utility_Functions;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
 
 public class CommonActions extends ReusableLib {
 
@@ -205,6 +203,18 @@ public class CommonActions extends ReusableLib {
 			System.out.println("Text: Not found");
 			throw new NoSuchElementException("Could not find :"+ele);
 		}
+	}
+
+	/**
+	 * This method verifies that the actual text contains expected text
+	 */
+	public void validateContainsText(String textExpected, String textActual, String msg) {
+		boolean flag = textActual.trim().contains(textExpected.trim());
+		if (flag)
+			report.updateTestLog("Verify text", msg, Status.PASS);
+		else
+			report.updateTestLog("Verify text", msg, Status.FAIL);
+		Assert.assertTrue(msg, flag);
 	}
 
 
@@ -570,5 +580,19 @@ public class CommonActions extends ReusableLib {
 		sendKeysAndEnter(CostAdjustmentPage.optBox, "1", "Select Item Number");
 		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 		return itemNumber;
+	}
+
+	/**
+	 * This method navigates from master to Mailing Master - Main Menu
+	 */
+	public void masterToMailingMaster() {
+		click(MasterPage.mailingMasterMenu,"Click [1 Mailing Master] menu button");
+	}
+
+	/**
+	 * This method navigates from Mailing Master - Main Menu to ALTERNATE ITEM NUMBER REVISIONS page
+	 */
+	public void mailingMasterToAlternateCustomerRevision() {
+		click(AlternateCustomerPage.revisionAlternateCustomerMenu,"Click [Revision - Alternate Customer] menu button");
 	}
 }
