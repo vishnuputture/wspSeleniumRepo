@@ -12,6 +12,7 @@ public class DriversPage {
     public static By driverNameCount=By.xpath("//tbody[@class='ui-table-tbody']/tr");
     public static By addNewDriver=By.xpath("//button[contains(text(),'New Driver')]");
     public static By newDriverHeader=By.xpath("//h2[starts-with(@class,'modal-title text')]");
+    public static By popupHeader=By.xpath("//span[@class='driver-modal-title']");
     public static By firstName=By.id("firstname");
     public static By lastname=By.id("lastname");
     public static By alias=By.id("alias");

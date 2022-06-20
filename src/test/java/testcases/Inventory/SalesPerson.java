@@ -88,6 +88,14 @@ public class SalesPerson extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_verifyActionLinks(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify selected item is in a Pricing Matrix row, but no column/customer is specified, multiplier is defined in the Pricing Matrix");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_534_verifyPricingColumnField(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test to verify the range of values accepted by 'Pricing Column' field");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -96,80 +104,72 @@ public class SalesPerson extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_541_VerifyOptionsAvailableUnderQUICKVIEW(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify the options available under QUICK VIEW");
+    public void Tc_530_verifyManuallyEnteredMultiplierValue(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that the manually entered multiplier value is reset when the item numbers are changed");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_511_VerifyItemNotesInSalespersonInquiryPage(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify Item Notes in Salesperson Inquiry Page");
+    public void Tc_535_verifyExtTotalCalculation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that extended total or 'Ext Total' is the amount calculated by multiplying the number of quantities of an item with its price");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_514_FieldVerificationForItemNotes(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify Field verification for Item Notes");
+    public void Tc_542_verifyResetMultiplierValue(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify 'Multiplier' value is reset when pricing column is changed or calculation is reset by clearing out sales price and multiplier fields");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_520_VerifyFieldsAvailableInInventoryTab(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify the fields available in 'Inventory' tab");
+    public void Tc_543_verifyToggleCostList(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user should be able to toggle between 'Cost Up' and 'List Down' in 'Calculations' section using shift + F9");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_522_VerifyFieldsAvailableInItemBinDetailsTab(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify the fields available in 'Inventory' tab");
+    public void Tc_546_verifyGrossMarginCalculation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the GM% Calculation");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_508_VerifyAlternateCustomerNumberInSalesPersonInquiry(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify alternative customer number in Salesperson Inquiry page");
+    public void Tc_547_verifyPriceCalculation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the Price Calculation");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_509_VerifyCustomerSearchUsingInvalidAlternateCustomerNumber(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify alternative customer number in Salesperson Inquiry page");
+    public void Tc_525_verifyMultiplierField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user should be able to verify the range of values accepted by 'Multiplier' field");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_510_VerifyAddEditCustomerNotes(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify alternative customer number in Salesperson Inquiry page");
+    public void Tc_548_verifyGrossMarginField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user should be able to verify the range of values accepted by 'Gross Margin' field");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_517_ViewItemDetailsUsingItemNoAndCustNo(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify user should be able to view the item details using the combination of item number and customer number in salesperson inquiry page");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
-
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_532_VerifyFunctionalityOfCustomerInputField(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Test to verify Functionality of Customer input field");
+    public void Tc_505_verifyActionTab(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the navigation to below pages from ACTIONS tab");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

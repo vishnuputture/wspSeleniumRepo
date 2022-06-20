@@ -216,6 +216,7 @@ public class createCost extends ReusableLib {
 
 
     	 click(ReceiveCorrectionPage.btnProcess,"Click on process");
+         Utility_Functions.timeWait(5);
     	 click(ReceiveCorrectionPage.btnContinuePop,"Click on continue");
 
     	 sendKeys(ownDriver.findElements(ReceiveCorrectionPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
