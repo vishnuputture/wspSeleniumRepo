@@ -28,8 +28,11 @@ public class MasterPage extends ReusableLib {
 	public static By pricingMatrix = By.xpath("//div[text()='20']/following-sibling::div/a[contains(text(),'Pricing')]");
 	public static By salesQuotes = By.xpath("//div[text()='13']/following-sibling::div/a[contains(text(),'Sales')]");
     public static By salesOrdersMenu = By.id("D_9_7");
-	public static By optionConstPageTitle = By.id("D_2_19");
+	public static By optionConstPageTitle = By.id("D_2_21");
 	public static By inquiryBuyerMenu =By.xpath("//div[text()='2']/following-sibling::div/a[contains(text(),'Buyer')]");
 	public static By inquiryPurchaseOrdersMenu =By.xpath("//div[text()='13']/following-sibling::div[@id='D_5_47']/a");
 	public static By vendorInvoiceReconciliation =By.xpath("//div[text()='8']/following-sibling::div[@id='D_12_7']/a");
+	public static By salesPersonMenu =By.xpath("//div[text()='1']/following-sibling::div[@id='D_5_7']/a");
+	public static By mailingMasterMenu =By.xpath("//div[text()='1']/following-sibling::div/a[contains(text(),'Mailing')]");
+
 }

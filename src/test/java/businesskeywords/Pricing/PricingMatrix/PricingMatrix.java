@@ -48,7 +48,6 @@ public class PricingMatrix extends ReusableLib {
     
     
     public void validatePricingMatrixTitle() throws NoSuchElementException {
-
         commonObj.masterToOrderProcessing();
         commonObj.navigateToOptionsAndConstantsMenu();
         commonObj.navigateToPricingMatrix();

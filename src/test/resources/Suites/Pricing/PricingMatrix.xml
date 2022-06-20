@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Pricing" parallel="none" thread-count="1">
+    <test name="PricingMatrix">
+        <classes>
+            <class name="testcases.Pricing.PricingMatrix">
+                <methods>
+                    <include name="Tc_188_ValidateNavigationToPricingMatrix"></include>
+                    <include name="Tc_191_ValidateFirstRowColPricingMatrix"></include>
+                    <include name="Tc_193_ValidateAddRowPricingMatrix"></include>
+                    <include name="Tc_194_ValidateCopyRowPricingMatrix"></include>
+                    <include name="Tc_195_ValidateAddColPricingMatrix"></include>
+                    <include name="Tc_196_ValidateCopyColPricingMatrix"></include>
+                    <include name="Tc_199_ValidateMoreKeysPricingMatrix"></include>
+                    <include name="Tc_197_ValidatePgLeftRightPricingMatrix"></include>
+                    <include name="Tc_198_ValidatePgUpDownPricingMatrix"></include>
+                    <include name="Tc_200_ValidateDisplayListPricingMatrix"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
