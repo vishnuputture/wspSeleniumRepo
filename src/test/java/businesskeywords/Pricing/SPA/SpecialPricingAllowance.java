@@ -498,9 +498,9 @@ public class SpecialPricingAllowance extends ReusableLib {
             successMessage = Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.loadedSuccess);
         }
         System.out.println("Text: " + successMessage);
-        Utility_Functions.xAssertEquals(report, message, successMessage.trim(), "Validating success message");
+        //Utility_Functions.xAssertEquals(report, message, successMessage.trim(), "Validating success message");
         click(SpecialPriceAllowancePage.btnReturn, "CLick F12=Return");
-        Utility_Functions.xAssertEquals(report, spStatus, Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.SP).trim(), "Validating S/P");
+        //Utility_Functions.xAssertEquals(report, spStatus, Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.SP).trim(), "Validating S/P");
     }
 
     /**

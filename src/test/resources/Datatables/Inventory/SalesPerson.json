@@ -12,7 +12,17 @@
       "Tc_527_verifyOnlyRowPricing": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyOnlyRowPricing,exitFromSAlesPersonScreen,signOut",
       "Tc_529_verifyNoMultiplierPricing": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyOnlyMultiplierPricing,exitFromSAlesPersonScreen,signOut",
       "Tc_544_verifyMultiplierPricing": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyMultiplierPricing,exitFromSAlesPersonScreen,signOut",
-      "Tc_534_verifyPricingColumnField": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyPricingColumnField,exitFromSAlesPersonScreen,signOut"
+      "Tc_verifyActionLinks": "launchApp,siteLogin,navigateToSalesPersonScreen,validateActionLinks,exitFromSAlesPersonScreen,signOut",
+      "Tc_534_verifyPricingColumnField": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyPricingColumnField,exitFromSAlesPersonScreen,signOut",
+      "Tc_530_verifyManuallyEnteredMultiplierValue": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyManuallyEnteredMultiplierValue,exitFromSAlesPersonScreen,signOut",
+      "Tc_535_verifyExtTotalCalculation": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyExtTotalCalculation,exitFromSAlesPersonScreen,signOut",
+      "Tc_542_verifyResetMultiplierValue": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyResetMultiplierValue,exitFromSAlesPersonScreen,signOut",
+      "Tc_543_verifyToggleCostList": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyToggleCostList,exitFromSAlesPersonScreen,signOut",
+      "Tc_546_verifyGrossMarginCalculation": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyGrossMarginCalculation,exitFromSAlesPersonScreen,signOut",
+      "Tc_547_verifyPriceCalculation": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyPriceCalculation,exitFromSAlesPersonScreen,signOut",
+      "Tc_525_verifyMultiplierField": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyMultiplierField,exitFromSAlesPersonScreen,signOut",
+      "Tc_548_verifyGrossMarginField": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyGrossMarginField,exitFromSAlesPersonScreen,signOut",
+      "Tc_505_verifyActionTab": "launchApp,siteLogin,navigateToSalesPersonScreen,verifyActionTab,exitFromSAlesPersonScreen,signOut"
     }
   ],
   "General_Data": [
@@ -63,6 +73,60 @@
       "AlphaNumeric": "As123",
       "NegativeNumber": "-1233",
       "SpecialCharacterNumber": "@#2As"
+    },
+    {
+      "TC_ID": "Tc_530_verifyManuallyEnteredMultiplierValue",
+      "ItemNo": "*99599014002",
+      "Multiplier": "3.5"
+    },
+    {
+      "TC_ID": "Tc_535_verifyExtTotalCalculation",
+      "ItemNo": "*99599014002",
+      "Quantity": "3"
+    },
+    {
+      "TC_ID": "Tc_verifyActionLinks",
+      "ItemNo": "*99599014002",
+      "Customer": "099599"
+    },
+    {
+      "TC_ID": "Tc_542_verifyResetMultiplierValue",
+      "ItemNo": "*99599014002",
+      "Multiplier": "3.5"
+    },
+    {
+      "TC_ID": "Tc_543_verifyToggleCostList",
+      "ItemNo": "*99599014002"
+    },
+    {
+      "TC_ID": "Tc_546_verifyGrossMarginCalculation",
+      "ItemNo": "*99599014002"
+    },
+    {
+      "TC_ID": "Tc_547_verifyPriceCalculation",
+      "ItemNo": "*99599014002"
+    },
+    {
+      "TC_ID": "Tc_525_verifyMultiplierField",
+      "ItemNo": "*99599014002",
+      "InvalidDigitMultiplier": "10",
+      "ZeroMultiplier": "0",
+      "NegativeMultiplier": "-0.45",
+      "5DecimalMultiplier": "1.00234",
+      "SpecialAlphaNumeric": "Ac.6&4"
+    },
+    {
+      "TC_ID": "Tc_548_verifyGrossMarginField",
+      "ItemNo": "*99599014002",
+      "InvalidGrossMargin": "100",
+      "NegativeGrossMargin": "-100",
+      "5DecimalMultiplier": "1.00234",
+      "SpecialAlphaNumeric": "Ac.6&4"
+    },
+    {
+      "TC_ID": "Tc_505_verifyActionTab",
+      "ItemNo": "*99599014002",
+      "Customer": "099599"
     }
   ]
 }

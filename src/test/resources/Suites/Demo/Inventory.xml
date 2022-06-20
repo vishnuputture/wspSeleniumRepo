@@ -8,7 +8,7 @@
                 <methods>
                     <include name="Tc_21_SearchItemData"></include>
                     <include name="Tc_22_UpdateItemData"></include>
-                    <include name="Tc_23_UpdateItemQuantity"></include>
+                    <!--<include name="Tc_23_UpdateItemQuantity"></include>
                     <include name="Tc_24_UpdateItemAVGCost"></include>
                     <include name="Tc_25_ValidateItemCreation"></include>
                     <include name="Tc_27_ValidateItemUpdate"></include>
@@ -17,12 +17,12 @@
                     <include name="Tc_30_ValidateCostAdjustmentLedger"></include>
                     <include name="Tc_31_ValidateMultipleReceiveCorrection"></include>
                     <include name="Tc_32_ValidateMultipleCostAdjustment"></include>
-                    <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
+                    <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>-->
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="CycleCostAdjust">
+    <!--<test name="CycleCostAdjust">
         <classes>
             <class name="testcases.Inventory.CycleCostAdjust">
                 <methods>
@@ -46,5 +46,5 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 </suite>

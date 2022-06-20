@@ -3,7 +3,7 @@
     <suite-files>
         <suite-file path="Inventory.xml"></suite-file>
         <suite-file path="PO.xml"></suite-file>
-        <suite-file path="Pricing.xml"></suite-file>
-        <suite-file path="Warehousing.xml"></suite-file>
+       <!-- <suite-file path="Pricing.xml"></suite-file>
+        <suite-file path="Warehousing.xml"></suite-file>-->
     </suite-files>
 </suite>

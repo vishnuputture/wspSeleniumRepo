@@ -199,9 +199,7 @@ public class Spo extends ReusableLib {
         if (Utility_Functions.xWaitForElementPresent(ownDriver, SpoPage.winLogin, 10)) {
             sendKeys(SpoPage.userName, properties.getProperty("SpoUserName"));
             sendKeys(SpoPage.password, Utility_Functions.xGetJsonData("spoPass"));
-            Utility_Functions.timeWait(2);
-            click(SpoPage.submit);
-            Utility_Functions.timeWait(5);
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,SpoPage.submit,"");
         }
     }
 
@@ -211,7 +209,7 @@ public class Spo extends ReusableLib {
     public void selectCompany() {
         winLogin();
         if (!Utility_Functions.xIsDisplayed(ownDriver, SpoPage.spoPageTitle)) {
-            click(SelfServicePriceSheetPage.companySelector);
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,SelfServicePriceSheetPage.companySelector,"");
             click(SelfServicePriceSheetPage.companyLabel);
             if (System.getProperty("company") == null) {
                 sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
@@ -219,7 +217,6 @@ public class Spo extends ReusableLib {
                 sendKey(SelfServicePriceSheetPage.winCompanyNumber, System.getProperty("company"));
             }
             click(SelfServicePriceSheetPage.selectButton);
-            Utility_Functions.timeWait(5);
         }
     }
 
