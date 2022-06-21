@@ -1,315 +1,315 @@
 {
-	"Business_Flow": [
-		{
-			"Tc_TruckUI": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,verifyAvailFieldTruck",
-			"Tc_TrucksHelpIcon": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,helpIconTruck",
-			"Tc_TrucksPagination": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,paginationTruck",
-			"Tc_TrucksPageCount": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,funPageCountTruck",
-			"Tc_AddNewTruckScreenUI": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,navigateToAddNewTruck,uiAddNewTruck",
-			"Tc_AddTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,navigateToAddNewTruck,addNewTruck",
-			"Tc_searchFiltersTruckUi": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,searchFiltersTruckUI",
-			"Tc_ApplyFilterTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,applyFilter",
-			"Tc_DriversUI": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,verifyAvailFieldDrivers",
-			"Tc_197_DriversHelpIcon": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,helpIcon",
-			"Tc_198_DriversPagination": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,pagination",
-			"Tc_200_DriversPageCount": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,funPageCount",
-			"Tc_209_AddNewDriverScreenUI": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,navigateToAddNewDriver,uiAddNewDriver",
-			"Tc_AddNewDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,navigateToAddNewDriver,addNewDriver",
-			"Tc_ApplyFilterDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver",
-			"Tc_ManifestListUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,verifyManifestListUI",
-			"Tc_235_ManifestListHelpIcon": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,helpIconManifest",
-			"Tc_236_ManifestListPagination": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,paginationManifest",
-			"Tc_238_ManifestListPageCount": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,funPageCount",
-			"Tc_240_CreateManifestUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,uiCreateManifest",
-			"Tc_241_collapseExpandSession": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,verifyAreaExpanded",
-			"Tc_CreateSalesOrderWISE": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut",
-			"TC_243_CreateManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifest",
-			"Tc_OrderNumberSO_UI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,orderNumberUISO",
-			"Tc_SaveAdjustment": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,SaveAdjReturnToOrderBtn",
-			"TC_SOUpdateStatusDelivered": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusDeliveredSO",
-			"Tc_DeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,searchFiltersDlvrdOrdrsdUI",
-			"Tc_DeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,deliveredOrdersUI",
-			"Tc_VerifyDeliveredOrders": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,pagination,funPageCount,verifyDeliveredOrders",
-			"TC_SOUpdateStatusNotDelivered": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusNotDeliveredSO",
-			"Tc_NotDeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,searchFiltersNotDlvrdOrdrsdUI",
-			"Tc_NotDeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,notDeliveredOrdersUI",
-			"Tc_VerifyNotDeliveredOrders": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,pagination,funPageCountNotDelivered,verifyNotDeliveredOrders",
-			"Tc_CloseManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,closeAllManifest",
-			"Tc_DeleteManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifest",
-			"Tc_CreateManifestNotDeliveredOrd": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,createManNotDeliveredOrder",
-			"Tc_AddToManifestNotDelOrd": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,addToManifestNotDelOrd",
-			"Tc_CreateManifestPO": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifestPO",
-			"Tc_OrderNumberPO_UI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,orderNumberUIPO",
-			"Tc_SaveAdjustmentPO": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,saveAdjReturnToOrderBtnPO",
-			"TC_POUpdateStatus": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusPO",
-			"TC_244_CreateManifestMultipleShipments": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut,navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifestMultiShip",
-			"Tc_InProgressStatus": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,inProgressStatus",
-			"TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,searchFiltersManifestUI",
-			"TC_295_ManifestOrderUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,manifestOrderUI",
-			"TC_297_SaveNoteExpandCollapse": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,saveNote",
-			"Tc_UpdateTruckUI": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,navigateToUpdateTruckPage,uiUpdateTruck",
-			"Tc_UpdateTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,applyFilter,navigateToUpdateTruckPage,updateTruck",
-			"Tc_DeleteTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,applyFilter,navigateToUpdateTruckPage,deleteTruck",
-			"Tc_UpdateDriverUI": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,navigateToUpdateDriverPage,updateDriverUI",
-			"Tc_UpdateDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,updateDriver",
-			"Tc_DeleteDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,deleteDriver",
-			"Tc_DeleteManifestList": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifestList,closeAllManifest,deleteManifestList,closeAllManifest,deleteManifestList"
-		}
-	],
-	"General_Data":[
-		{
-			"TC_ID": "Tc_TruckUI",
-			"Title": "UI of Trucks Screen"
-		},
-		{
-			"TC_ID": "Tc_TrucksHelpIcon",
-			"Title": "Verify functionality of Help (?)icon"
-		},
-		{
-			"TC_ID": "Tc_TrucksPagination",
-			"Title": "Verify functionality of Pagination"
-		},
-		{
-			"TC_ID": "Tc_TrucksPageCount",
-			"Title": "Verify functionality of Page Count"
-		},
-		{
-			"TC_ID": "Tc_AddNewTruckScreenUI",
-			"Title": "Verify functionality Add New Truck Screen UI"
-		},
-		{
-			"TC_ID": "Tc_AddTruck",
-			"Title": "Add New Truck",
-			"LicensePlateNum": "12345",
-			"MakeYear": "2020",
-			"Make": "Win-supply",
-			"Model": "TlV10",
-			"Vin": "T102345",
-			"EmptyWeight": "15TN",
-			"WeightLimit": "22TN"
-		},
-		{
-			"TC_ID": "Tc_searchFiltersTruckUi",
-			"Title": "Search Filters Truck Ui"
-		},
-		{
-			"TC_ID": "Tc_ApplyFilterTruck",
-			"Title": "Apply Filter",
-			"status":"Active",
-			"cDLRequired":"No"
-		},
-		{
-			"TC_ID": "Tc_DriversUI",
-			"Title": "UI of Drivers Screen"
-		},
-		{
-			"TC_ID": "Tc_197_DriversHelpIcon",
-			"Title": "Verify functionality of Help (?)icon"
-		},
-		{
-			"TC_ID": "Tc_198_DriversPagination",
-			"Title": "Verify functionality of Pagination"
-		},
-		{
-			"TC_ID": "Tc_200_DriversPageCount",
-			"Title": "Verify functionality of Page Count"
-		},
-		{
-			"TC_ID": "Tc_209_AddNewDriverScreenUI",
-			"Title": "UI of Add New Driver Screen"
-		},
-		{
-			"TC_ID": "Tc_AddNewDriver",
-			"Title": "Add New Driver",
-			"firstName": "QA",
-			"alias": "Testing"
-		},
-		{
-			"TC_ID": "Tc_ApplyFilterDriver",
-			"Title": "Apply filter Driver",
-			"firstName": "QA",
-			"alias": "Testing"
-		},
-		{
-			"TC_ID": "Tc_ManifestListUI",
-			"Title": "Verify Manifest List Screen UI"
-		},
-		{
-			"TC_ID": "Tc_235_ManifestListHelpIcon",
-			"Title": "Verify ManifestList Help Icon"
-		},
-		{
-			"TC_ID": "Tc_236_ManifestListPagination",
-			"Title": "Verify ManifestList Pagination"
-		},
-		{
-			"TC_ID": "Tc_238_ManifestListPageCount",
-			"Title": "Verify ManifestList Page Count"
-		},
-		{
-			"TC_ID": "Tc_240_CreateManifestUI",
-			"Title": "Verify Create new Manifest Ui"
-		},
-		{
-			"TC_ID": "Tc_241_collapseExpandSession",
-			"Title": "Verify collapse and expand icon"
-		},
-		{
-			"TC_ID": "Tc_CreateSalesOrderWISE",
-			"Title": "Verify Create Sales Order WISE",
-			"accountNo": "099599",
-			"itemNo1": "5105TCW158SS2",
-			"itemNo2": "AMN0159R00002P",
-			"Iteration": "1"
-		},
-		{
-			"TC_ID": "TC_243_CreateManifest",
-			"Title": "Verify Create new Manifest",
-			"accountNo": "099599",
-			"itemNo1": "5105TCW158SS2",
-			"itemNo2": "AMN0159R00002P",
-			"Iteration": "1"
-		},
-		{
-			"TC_ID": "Tc_OrderNumberSO_UI",
-			"Title": "Verify Order Number UI: Sales Order"
-		},
-		{
-			"TC_ID": "Tc_SaveAdjustment",
-			"Title": "Verify Save Adjustment Button"
-		},
-		{
-			"TC_ID": "TC_SOUpdateStatusDelivered",
-			"Title": "Verify Functionality Update status drop down delivered"
-		},
-		{
-			"TC_ID": "Tc_DeliveredOrdersSearchFilterUI",
-			"Title": "Verify Delivered Orders Search Filter UI"
-		},
-		{
-			"TC_ID": "Tc_DeliveredOrdersUI",
-			"Title": "Verify Delivered Orders UI"
-		},
-		{
-			"TC_ID": "Tc_VerifyDeliveredOrders",
-			"Title": "Verify filter Delivered Orders"
-		},
-		{
-			"TC_ID": "TC_SOUpdateStatusNotDelivered",
-			"Title": "Verify Functionality Update status drop down Not delivered"
-		},
-		{
-			"TC_ID": "Tc_NotDeliveredOrdersSearchFilterUI",
-			"Title": "Verify Not Delivered Orders Search Filter UI"
-		},
-		{
-			"TC_ID": "Tc_NotDeliveredOrdersUI",
-			"Title": "Verify Not Delivered Orders UI"
-		},
-		{
-			"TC_ID": "Tc_VerifyNotDeliveredOrders",
-			"Title": "Verify Not Delivered Orders"
-		},
-		{
-			"TC_ID": "Tc_CloseManifest",
-			"Title": "Verify Close Manifest"
-		},
-		{
-			"TC_ID": "Tc_DeleteManifest",
-			"Title": "Verify Delete Manifest"
-		},
-		{
-			"TC_ID": "Tc_CreateManifestNotDeliveredOrd",
-			"Title": "Verify Create Manifest for Not Delivered Order"
-		},
-		{
-			"TC_ID": "Tc_AddToManifestNotDelOrd",
-			"Title": "Verify Add To Manifest for Not Delivered Order"
-		},
-		{
-			"TC_ID": "Tc_CreateManifestPO",
-			"Title": "Verify Functionality ADD PO"
-		},
-		{
-			"TC_ID": "Tc_OrderNumberPO_UI",
-			"Title": "Verify Order Number PO UI"
-		},
-		{
-			"TC_ID": "Tc_SaveAdjustmentPO",
-			"Title": "Save Adjustment UI PO"
-		},
-		{
-			"TC_ID": "TC_POUpdateStatus",
-			"Title": "PO Update Status"
-		},
-		{
-			"TC_ID": "TC_244_CreateManifestMultipleShipments",
-			"Title": "Verify Create new Manifest",
-			"accountNo": "099599",
-			"itemNo1": "5105TCW158SS2",
-			"itemNo2": "AMN0159R00002P",
-			"Iteration": "1",
-			"LicensePlateNum": "12345",
-			"MakeYear": "2020",
-			"Make": "Win-supply",
-			"Model": "TlV10",
-			"Vin": "T102345",
-			"EmptyWeight": "15TN",
-			"WeightLimit": "22TN",
-			"firstName": "QA",
-			"alias": "Testing"
-		},
-		{
-			"TC_ID": "Tc_InProgressStatus",
-			"Title": "Verify In-Progress Status"
-		},
-		{
-			"TC_ID": "TC_258_ManifestSearchFilterUI",
-			"Title": "Verify Manifest Search Filter UI"
-		},
-		{
-			"TC_ID": "TC_295_ManifestOrderUI",
-			"Title": "Verify Manifest Orders UI"
-		},
-		{
-			"TC_ID": "TC_297_SaveNoteExpandCollapse",
-			"Title": "Verify Functionality of save note button"
-		},
-		{
-			"TC_ID": "Tc_UpdateTruckUI",
-			"Title": "Verify Update Truck Screen UI"
-		},
-		{
-			"TC_ID": "Tc_UpdateTruck",
-			"Title": "Verify Update Truck",
-			"status":"Active",
-			"cDLRequired":"No"
-		},
-		{
-			"TC_ID": "Tc_DeleteTruck",
-			"Title": "Verify Delete Truck Button",
-			"status":"Active",
-			"cDLRequired":"No"
-		},
-		{
-			"TC_ID": "Tc_DeleteDriver",
-			"Title": "Verify Delete Driver Button",
-			"firstName": "QA",
-			"alias": "Testing"
-		},
-		{
-			"TC_ID": "Tc_UpdateDriverUI",
-			"Title": "Verify Update Driver screen UI"
-		},
-		{
-			"TC_ID": "Tc_UpdateDriver",
-			"Title": "Verify Update Driver",
-			"alias": "Testing"
-		},
-		{
-			"TC_ID": "Tc_DeleteManifestList",
-			"Title": "Verify Update Driver",
-			"alias": "Testing"
-		}
-	]
+  "Business_Flow": [
+    {
+      "Tc_TruckUI": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,verifyAvailFieldTruck",
+      "Tc_TrucksHelpIcon": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,helpIconTruck",
+      "Tc_TrucksPagination": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,paginationTruck",
+      "Tc_TrucksPageCount": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,funPageCountTruck",
+      "Tc_AddNewTruckScreenUI": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,navigateToAddNewTruck,uiAddNewTruck",
+      "Tc_AddTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,navigateToAddNewTruck,addNewTruck",
+      "Tc_searchFiltersTruckUi": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,searchFiltersTruckUI",
+      "Tc_ApplyFilterTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,applyFilter",
+      "Tc_DriversUI": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,verifyAvailFieldDrivers",
+      "Tc_197_DriversHelpIcon": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,helpIcon",
+      "Tc_198_DriversPagination": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,pagination",
+      "Tc_200_DriversPageCount": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,funPageCount",
+      "Tc_209_AddNewDriverScreenUI": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,navigateToAddNewDriver,uiAddNewDriver",
+      "Tc_AddNewDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,navigateToAddNewDriver,addNewDriver",
+      "Tc_ApplyFilterDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver",
+      "Tc_ManifestListUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,verifyManifestListUI",
+      "Tc_235_ManifestListHelpIcon": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,helpIconManifest",
+      "Tc_236_ManifestListPagination": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,paginationManifest",
+      "Tc_238_ManifestListPageCount": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,funPageCount",
+      "Tc_240_CreateManifestUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,uiCreateManifest",
+      "Tc_241_collapseExpandSession": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,verifyAreaExpanded",
+      "Tc_CreateSalesOrderWISE": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut",
+      "TC_243_CreateManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifest",
+      "Tc_OrderNumberSO_UI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,orderNumberUISO",
+      "Tc_SaveAdjustment": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,SaveAdjReturnToOrderBtn",
+      "TC_SOUpdateStatusDelivered": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusDeliveredSO",
+      "Tc_DeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,searchFiltersDlvrdOrdrsdUI",
+      "Tc_DeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,deliveredOrdersUI",
+      "Tc_VerifyDeliveredOrders": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,pagination,funPageCount,verifyDeliveredOrders",
+      "TC_SOUpdateStatusNotDelivered": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusNotDeliveredSO",
+      "Tc_NotDeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,searchFiltersNotDlvrdOrdrsdUI",
+      "Tc_NotDeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,notDeliveredOrdersUI",
+      "Tc_VerifyNotDeliveredOrders": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,pagination,funPageCountNotDelivered,verifyNotDeliveredOrders",
+      "Tc_CloseManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,closeAllManifest",
+      "Tc_DeleteManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifest",
+      "Tc_CreateManifestNotDeliveredOrd": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,createManNotDeliveredOrder",
+      "Tc_AddToManifestNotDelOrd": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,addToManifestNotDelOrd",
+      "Tc_CreateManifestPO": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifestPO",
+      "Tc_OrderNumberPO_UI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,orderNumberUIPO",
+      "Tc_SaveAdjustmentPO": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,saveAdjReturnToOrderBtnPO",
+      "TC_POUpdateStatus": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusPO",
+      "TC_244_CreateManifestMultipleShipments": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentDeliveryType,deleteItemFromShipment,createShipment,saveExitSalesOrders,signOut,navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifestMultiShip",
+      "Tc_InProgressStatus": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,inProgressStatus",
+      "TC_258_ManifestSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,searchFiltersManifestUI",
+      "TC_295_ManifestOrderUI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,manifestOrderUI",
+      "TC_297_SaveNoteExpandCollapse": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,saveNote",
+      "Tc_UpdateTruckUI": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,navigateToUpdateTruckPage,uiUpdateTruck",
+      "Tc_UpdateTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,applyFilter,navigateToUpdateTruckPage,updateTruck",
+      "Tc_DeleteTruck": "navigateToShippingManifest,selectCompany,navigateToTrucksScreen,applyFilter,navigateToUpdateTruckPage,deleteTruck",
+      "Tc_UpdateDriverUI": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,navigateToUpdateDriverPage,updateDriverUI",
+      "Tc_UpdateDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,updateDriver",
+      "Tc_DeleteDriver": "navigateToShippingManifest,selectCompany,navigateToDriversScreen,applyFilterDriver,navigateToUpdateDriverPage,deleteDriver",
+      "Tc_DeleteManifestList": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifestList,closeAllManifest,deleteManifestList,closeAllManifest,deleteManifestList"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_TruckUI",
+      "Title": "UI of Trucks Screen"
+    },
+    {
+      "TC_ID": "Tc_TrucksHelpIcon",
+      "Title": "Verify functionality of Help (?)icon"
+    },
+    {
+      "TC_ID": "Tc_TrucksPagination",
+      "Title": "Verify functionality of Pagination"
+    },
+    {
+      "TC_ID": "Tc_TrucksPageCount",
+      "Title": "Verify functionality of Page Count"
+    },
+    {
+      "TC_ID": "Tc_AddNewTruckScreenUI",
+      "Title": "Verify functionality Add New Truck Screen UI"
+    },
+    {
+      "TC_ID": "Tc_AddTruck",
+      "Title": "Add New Truck",
+      "LicensePlateNum": "12345",
+      "MakeYear": "2020",
+      "Make": "Win-supply",
+      "Model": "TlV10",
+      "Vin": "T102345",
+      "EmptyWeight": "15TN",
+      "WeightLimit": "22TN"
+    },
+    {
+      "TC_ID": "Tc_searchFiltersTruckUi",
+      "Title": "Search Filters Truck Ui"
+    },
+    {
+      "TC_ID": "Tc_ApplyFilterTruck",
+      "Title": "Apply Filter",
+      "status": "Active",
+      "cDLRequired": "No"
+    },
+    {
+      "TC_ID": "Tc_DriversUI",
+      "Title": "UI of Drivers Screen"
+    },
+    {
+      "TC_ID": "Tc_197_DriversHelpIcon",
+      "Title": "Verify functionality of Help (?)icon"
+    },
+    {
+      "TC_ID": "Tc_198_DriversPagination",
+      "Title": "Verify functionality of Pagination"
+    },
+    {
+      "TC_ID": "Tc_200_DriversPageCount",
+      "Title": "Verify functionality of Page Count"
+    },
+    {
+      "TC_ID": "Tc_209_AddNewDriverScreenUI",
+      "Title": "UI of Add New Driver Screen"
+    },
+    {
+      "TC_ID": "Tc_AddNewDriver",
+      "Title": "Add New Driver",
+      "firstName": "QA",
+      "alias": "Testing"
+    },
+    {
+      "TC_ID": "Tc_ApplyFilterDriver",
+      "Title": "Apply filter Driver",
+      "firstName": "QA",
+      "alias": "Testing"
+    },
+    {
+      "TC_ID": "Tc_ManifestListUI",
+      "Title": "Verify Manifest List Screen UI"
+    },
+    {
+      "TC_ID": "Tc_235_ManifestListHelpIcon",
+      "Title": "Verify ManifestList Help Icon"
+    },
+    {
+      "TC_ID": "Tc_236_ManifestListPagination",
+      "Title": "Verify ManifestList Pagination"
+    },
+    {
+      "TC_ID": "Tc_238_ManifestListPageCount",
+      "Title": "Verify ManifestList Page Count"
+    },
+    {
+      "TC_ID": "Tc_240_CreateManifestUI",
+      "Title": "Verify Create new Manifest Ui"
+    },
+    {
+      "TC_ID": "Tc_241_collapseExpandSession",
+      "Title": "Verify collapse and expand icon"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISE",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "099599",
+      "itemNo1": "5105TCW158SS2",
+      "itemNo2": "AMN0159R00002P",
+      "Iteration": "1"
+    },
+    {
+      "TC_ID": "TC_243_CreateManifest",
+      "Title": "Verify Create new Manifest",
+      "accountNo": "099599",
+      "itemNo1": "5105TCW158SS2",
+      "itemNo2": "AMN0159R00002P",
+      "Iteration": "1"
+    },
+    {
+      "TC_ID": "Tc_OrderNumberSO_UI",
+      "Title": "Verify Order Number UI: Sales Order"
+    },
+    {
+      "TC_ID": "Tc_SaveAdjustment",
+      "Title": "Verify Save Adjustment Button"
+    },
+    {
+      "TC_ID": "TC_SOUpdateStatusDelivered",
+      "Title": "Verify Functionality Update status drop down delivered"
+    },
+    {
+      "TC_ID": "Tc_DeliveredOrdersSearchFilterUI",
+      "Title": "Verify Delivered Orders Search Filter UI"
+    },
+    {
+      "TC_ID": "Tc_DeliveredOrdersUI",
+      "Title": "Verify Delivered Orders UI"
+    },
+    {
+      "TC_ID": "Tc_VerifyDeliveredOrders",
+      "Title": "Verify filter Delivered Orders"
+    },
+    {
+      "TC_ID": "TC_SOUpdateStatusNotDelivered",
+      "Title": "Verify Functionality Update status drop down Not delivered"
+    },
+    {
+      "TC_ID": "Tc_NotDeliveredOrdersSearchFilterUI",
+      "Title": "Verify Not Delivered Orders Search Filter UI"
+    },
+    {
+      "TC_ID": "Tc_NotDeliveredOrdersUI",
+      "Title": "Verify Not Delivered Orders UI"
+    },
+    {
+      "TC_ID": "Tc_VerifyNotDeliveredOrders",
+      "Title": "Verify Not Delivered Orders"
+    },
+    {
+      "TC_ID": "Tc_CloseManifest",
+      "Title": "Verify Close Manifest"
+    },
+    {
+      "TC_ID": "Tc_DeleteManifest",
+      "Title": "Verify Delete Manifest"
+    },
+    {
+      "TC_ID": "Tc_CreateManifestNotDeliveredOrd",
+      "Title": "Verify Create Manifest for Not Delivered Order"
+    },
+    {
+      "TC_ID": "Tc_AddToManifestNotDelOrd",
+      "Title": "Verify Add To Manifest for Not Delivered Order"
+    },
+    {
+      "TC_ID": "Tc_CreateManifestPO",
+      "Title": "Verify Functionality ADD PO"
+    },
+    {
+      "TC_ID": "Tc_OrderNumberPO_UI",
+      "Title": "Verify Order Number PO UI"
+    },
+    {
+      "TC_ID": "Tc_SaveAdjustmentPO",
+      "Title": "Save Adjustment UI PO"
+    },
+    {
+      "TC_ID": "TC_POUpdateStatus",
+      "Title": "PO Update Status"
+    },
+    {
+      "TC_ID": "TC_244_CreateManifestMultipleShipments",
+      "Title": "Verify Create new Manifest",
+      "accountNo": "099599",
+      "itemNo1": "5105TCW158SS2",
+      "itemNo2": "AMN0159R00002P",
+      "Iteration": "1",
+      "LicensePlateNum": "12345",
+      "MakeYear": "2020",
+      "Make": "Win-supply",
+      "Model": "TlV10",
+      "Vin": "T102345",
+      "EmptyWeight": "15TN",
+      "WeightLimit": "22TN",
+      "firstName": "QA",
+      "alias": "Testing"
+    },
+    {
+      "TC_ID": "Tc_InProgressStatus",
+      "Title": "Verify In-Progress Status"
+    },
+    {
+      "TC_ID": "TC_258_ManifestSearchFilterUI",
+      "Title": "Verify Manifest Search Filter UI"
+    },
+    {
+      "TC_ID": "TC_295_ManifestOrderUI",
+      "Title": "Verify Manifest Orders UI"
+    },
+    {
+      "TC_ID": "TC_297_SaveNoteExpandCollapse",
+      "Title": "Verify Functionality of save note button"
+    },
+    {
+      "TC_ID": "Tc_UpdateTruckUI",
+      "Title": "Verify Update Truck Screen UI"
+    },
+    {
+      "TC_ID": "Tc_UpdateTruck",
+      "Title": "Verify Update Truck",
+      "status": "Active",
+      "cDLRequired": "No"
+    },
+    {
+      "TC_ID": "Tc_DeleteTruck",
+      "Title": "Verify Delete Truck Button",
+      "status": "Active",
+      "cDLRequired": "No"
+    },
+    {
+      "TC_ID": "Tc_DeleteDriver",
+      "Title": "Verify Delete Driver Button",
+      "firstName": "QA",
+      "alias": "Testing"
+    },
+    {
+      "TC_ID": "Tc_UpdateDriverUI",
+      "Title": "Verify Update Driver screen UI"
+    },
+    {
+      "TC_ID": "Tc_UpdateDriver",
+      "Title": "Verify Update Driver",
+      "alias": "Testing"
+    },
+    {
+      "TC_ID": "Tc_DeleteManifestList",
+      "Title": "Verify Update Driver",
+      "alias": "Testing"
+    }
+  ]
 }

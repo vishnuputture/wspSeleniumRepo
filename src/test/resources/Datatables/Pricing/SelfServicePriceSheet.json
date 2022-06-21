@@ -3,12 +3,12 @@
     {
       "Tc_286_SelfPriceSheetUi": "getPassword,launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,priceSheetUi",
       "TC_379_CreateValidPriceSheetWithoutNETPriceValue": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,addPriceSheetDetails,validateUpload",
-      "Tc_344_VerifySearchByName":"launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,filterSearchByName",
-      "Tc_344_VerifyFilterByManufacturer":"launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,filterByManufacturer",
-      "Tc_344_VerifyFilterByStatus":"launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,filterByStatus",
-      "Tc_344_VerifyFilterEffectiveDate":"launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,filterByEffectiveDate",
+      "Tc_344_VerifySearchByName": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,filterSearchByName",
+      "Tc_344_VerifyFilterByManufacturer": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,filterByManufacturer",
+      "Tc_344_VerifyFilterByStatus": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,filterByStatus",
+      "Tc_344_VerifyFilterEffectiveDate": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,filterByEffectiveDate",
       "TC_408_CreateValidPriceSheetWithNETPriceValue": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,addPriceSheetDetailsNetSheet,validateUpload",
-      "Tc_189_NavigatePriceSheetDetails":"launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyUploadedSheetDetails,verifyItemUpload",
+      "Tc_189_NavigatePriceSheetDetails": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyUploadedSheetDetails,verifyItemUpload",
       "Tc_363_FillPriceSheetAndSave": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,fillSheetDataNetPrice",
       "Tc_360_PriceSheetOnHold": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,sheetOnHold",
       "Tc_360_PriceSheetRemoveHold": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,unHoldSheet",
@@ -17,7 +17,7 @@
       "Tc_195_ValidatePriceSheetItemListCost": "launchApp,siteLogin,validateItemMasterTitle,validateListPrice",
       "Tc_196_ValidatePriceSheetItemMatrixCost": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,extractSheetDetails,openNewTab,launchApp,siteLogin,validateItemMasterTitle,validateMatrixPrice",
       "Tc_197_ValidatePriceSheetItemPoCost": "launchApp,siteLogin,validateItemMasterTitle,validatePoCost",
-      "Tc_399_VerifyListPriceInputField":"launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyListPriceRow",
+      "Tc_399_VerifyListPriceInputField": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,verifyListPriceRow",
       "Tc_753_ProcessNowSheetAvailableIngesting": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,processSheet,ingestingStatus",
       "Tc_754_ProcessNowSheetReadyToProcessIngesting": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,markReady,navigateToPriceSheetDetailsPage,processSheet,ingestingStatus",
       "Tc_755_ProcessedNonEditable": "launchSelfServicePriceSheet,winLogin,navigateToSelfServicePriceSheet,navigateToPriceSheetDetailsPage,processSheetNonEditable",
@@ -61,18 +61,18 @@
     },
     {
       "TC_ID": "Tc_195_ValidatePriceSheetItemListCost",
-      "WiseItem":"*99599014194",
-      "ListPrice":"12"
+      "WiseItem": "*99599014194",
+      "ListPrice": "12"
     },
     {
       "TC_ID": "Tc_196_ValidatePriceSheetItemMatrixCost",
-      "WiseItem":"*99599014194",
-      "MatrixCost":"12.5000"
+      "WiseItem": "*99599014194",
+      "MatrixCost": "12.5000"
     },
     {
       "TC_ID": "Tc_197_ValidatePriceSheetItemPoCost",
-      "WiseItem":"*99599014194",
-      "PoCost":"7.5000"
+      "WiseItem": "*99599014194",
+      "PoCost": "7.5000"
     },
     {
       "TC_ID": "Tc_344_VerifySearchByName"

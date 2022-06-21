@@ -1,20 +1,19 @@
 {
-	"Business_Flow": [
-		{
-			"CreateSalesOrder": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,fillInOtherFields,navigateToItemsTab,addItemsToSalesorder,saveExitSalesOrders,signOut"
-
-		}],
-	"General_Data": [
-		{
-			"TC_ID": "CreateSalesOrder",
-			"accountNo": "099599",
-			"JobName": "TEST AUTOMATION",
-			"PONumber": "16121",
-			"PlacedBy": "john doe",
-			"itemNo1": "5105TCW158SS2",
-			"itemNo2": "0023PBE0520",
-			"Iteration": "4"
-			
-		}
-	]
+  "Business_Flow": [
+    {
+      "CreateSalesOrder": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,fillInOtherFields,navigateToItemsTab,addItemsToSalesorder,saveExitSalesOrders,signOut"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "CreateSalesOrder",
+      "accountNo": "099599",
+      "JobName": "TEST AUTOMATION",
+      "PONumber": "16121",
+      "PlacedBy": "john doe",
+      "itemNo1": "5105TCW158SS2",
+      "itemNo2": "0023PBE0520",
+      "Iteration": "4"
+    }
+  ]
 }
