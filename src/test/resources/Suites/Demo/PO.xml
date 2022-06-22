@@ -8,7 +8,7 @@
                 <methods>
                     <include name="Tc_242_verifyItemNumberOnPO"></include>
                     <include name="Tc_245_verifyEditedItemNumberOnPO"></include>
-                    <include name="Tc_246_verifyExtendListPriceCalculation"></include>
+                    <!--<include name="Tc_246_verifyExtendListPriceCalculation"></include>
                     <include name="Tc_247_verifyExtendPoCostCalculation"></include>
                     <include name="Tc_248_verifyExtendLastCostCalculation"></include>
                     <include name="Tc_249_EditItemListPriceAndVerifyInPODetailsPage"></include>
@@ -18,12 +18,12 @@
                     <include name="Tc_253_VerifyItemDetailsAfterProcessingPO"></include>
                     <include name="Tc_256_VerifyLineItemAfterProcessingPO"></include>
                     <include name="Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO"></include>
-                    <include name="Tc_258_VerifyAddingDirectPOToRelatedSO"></include>
+                    <include name="Tc_258_VerifyAddingDirectPOToRelatedSO"></include>-->
                 </methods>
             </class>
         </classes>
     </test>
-    <test name="POEntry">
+    <!--<test name="POEntry">
         <classes>
             <class name="testcases.PO.POEntry">
                 <methods>
@@ -102,5 +102,5 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 </suite>

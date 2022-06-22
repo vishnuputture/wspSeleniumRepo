@@ -80,7 +80,7 @@ public class Utility_Functions extends ReusableLib {
 
     public Utility_Functions(Helper helper) {
         super(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
 
     }
 
@@ -4914,5 +4914,27 @@ public class Utility_Functions extends ReusableLib {
         String[] streetAddress = faker.address().streetAddress().split(" ");
         String getRandomName = "TestAuto:" + firstName + "_" + lastName + "-" + streetAddress[0];
         return getRandomName;
+    }
+
+    public static void waitTillClickHardSleep(Report report,FrameworkDriver driver,By el,String custMsg) {
+        int count = 0;
+        Boolean flag=true;
+        while (flag) {
+            try {
+                driver.findElement(el).click();
+                report.updateTestLog("Click", custMsg, Status.PASS);
+                flag=false;
+            } catch (Exception e) {
+                count++;
+                try {
+                    if (count == 30) {
+                        flag = false;
+                        throw new Exception("Element Not Found");
+                    }
+                    Thread.sleep(1000);
+                } catch (Exception ex) {
+                }
+            }
+        }
     }
 }

@@ -2,6 +2,45 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Pricing" parallel="tests" thread-count="2">
 
+    <test name="MatrixCostUpdate">
+        <classes>
+            <class name="testcases.Pricing.MatrixCostUpdate" >
+                <methods>
+                    <include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
+                    <include name="Tc_142_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
+                    <include name="Tc_143_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
+                    <include name="Tc_168_verify_the_functionality_of_PO_Cost_and_Proposed_Matrix_Cost_box_and_Save_ButtonTc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost"></include>
+                    <include name="Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button"></include>
+                    <include name="Tc_140_verify_the_functionality_of_Select_Function_Drop_Down"></include>
+                    <include name="Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons"></include>
+                    <include name="Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons"></include>
+                    <include name="TC_177_verify_the_functionality_of_adding_a_Row_to_Pricing_Matrix"></include>
+                    <include name="TC_179_verify_the_functionality_of_copying_Row_to_Pricing_Matrix"></include>
+                    <include name="Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
+                    <include name="Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
+                    <include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="PricingMatrix">
+        <classes>
+            <class name="testcases.Pricing.PricingMatrix" >
+                <methods>
+                    <include name="Tc_188_ValidateNavigationToPricingMatrix"></include>
+                    <include name="Tc_191_ValidateFirstRowColPricingMatrix"></include>
+                    <include name="Tc_193_ValidateAddRowPricingMatrix"></include>
+                    <include name="Tc_194_ValidateCopyRowPricingMatrix"></include>
+                    <include name="Tc_195_ValidateAddColPricingMatrix"></include>
+                    <include name="Tc_196_ValidateCopyColPricingMatrix"></include>
+                    <include name="Tc_199_ValidateMoreKeysPricingMatrix"></include>
+                    <include name="Tc_197_ValidatePgLeftRightPricingMatrix"></include>
+                    <include name="Tc_198_ValidatePgUpDownPricingMatrix"></include>
+                    <include name="Tc_200_ValidateDisplayListPricingMatrix"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
     <test name="SPAScreenVerification">
         <classes>
             <class name="testcases.Pricing.SPA" >

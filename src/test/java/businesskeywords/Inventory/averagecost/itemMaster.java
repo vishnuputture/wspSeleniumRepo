@@ -142,4 +142,14 @@ public class itemMaster extends ReusableLib {
         waitForVisible(ItemMasterPage.messageAddSuccessful);
         commonObj.validateText(ItemMasterPage.messageAddSuccessful, "Fields have recently been changed=>VERIFY CHANGES!", "Success message is displayed");
     }
+
+    /**
+     * Keyword to enter data in [Item Notes] in ITEM MASTER (I-347)
+     */
+    public void enterItemNotes(){
+        String itemNotes = "Testing Item Notes !@#%^&*()"+Utility_Functions.xRandomFunction();
+        sendKeysAndEnter(ItemMasterPage.itemNotes1, itemNotes, "Entered Item Notes as ["+itemNotes+"]");
+        commonObj.validateText(ItemMasterPage.messageAddSuccessful, "Fields have recently been changed=>VERIFY CHANGES!", "Validating Success Message");
+        jsonData.putData("ItemNotes", itemNotes);
+    }
 }

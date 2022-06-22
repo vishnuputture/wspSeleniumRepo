@@ -49,7 +49,6 @@ public class Trucks extends ReusableLib {
         click(SelfServicePriceSheetPage.companyLabel);
         sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
         click(SelfServicePriceSheetPage.selectButton);
-        Utility_Functions.timeWait(5);
     }
 
     public void callSelectCompany() {

@@ -175,7 +175,7 @@ public class Drivers extends ReusableLib {
     public void navigateToAddNewDriver() {
         click(DriversPage.addNewDriver, "Click on add new driver button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(DriversPage.newDriverHeader, "Add New Driver", "Verify Add new Driver Header");
+        commonObj.validateText(DriversPage.popupHeader, "New Driver", "Verify New Driver Header");
     }
 
     /**
@@ -262,7 +262,7 @@ public class Drivers extends ReusableLib {
         Utility_Functions.timeWait(3);
         Utility_Functions.xClickHiddenElement(ownDriver,By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
-        commonObj.validateText(DriversPage.updateDriverHeader, "Update Driver", "Update Driver Page header is present");
+        commonObj.validateText(DriversPage.popupHeader, "Driver Details", "Update Driver Page header is present");
     }
 
     /**

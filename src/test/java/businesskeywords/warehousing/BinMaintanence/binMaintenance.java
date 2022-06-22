@@ -4,6 +4,7 @@ import businesskeywords.common.Login;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.Util;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
@@ -62,6 +63,7 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify UI of Item-Bin Maintenance page when no search filters were applied
      */
     public void binMaintenanceUI() {
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"),"");
         commonObj.validateText(By.xpath("//h2"), "Item-Bin Maintenance", "Item-Bin Maintenance Header is present");
         commonObj.validateText(tabs("Item Maintenance"), "Item Maintenance", "Item Maintenance tab is present");
         commonObj.validateText(tabs("Bin Maintenance"), "Bin Maintenance", "Bin Maintenance tab is present");
@@ -73,7 +75,7 @@ public class binMaintenance extends ReusableLib {
      * Keyword to click [Bin Maintenance] tab
      */
     public void clickBinMaintenanceTab() {
-        click(tabs("Bin Maintenance"), "Click on [Bin Maintenance] tab");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,tabs("Bin Maintenance"), "Click on [Bin Maintenance] tab");
         waitForElementDisappear(MasterPage.loadingSpinner, globalWait);
     }
 
@@ -82,7 +84,7 @@ public class binMaintenance extends ReusableLib {
      */
     public void binMaintenanceUIDefault() {
         clickBinMaintenanceTab();
-        commonObj.validateText(By.xpath("//h2"), "Item-Bin Maintenance", "Item-Bin Maintenance Header is present");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"),"Item-Bin Maintenance Header is present");
         commonObj.validateText(tabs("Item Maintenance"), "Item Maintenance", "Item Maintenance tab is present");
         commonObj.validateText(tabs("Bin Maintenance"), "Bin Maintenance", "Bin Maintenance tab is present");
         commonObj.validateText(tabs("Apply filters to see results."), "Apply filters to see results.", "label [Apply filters to see results.] is present");
@@ -196,7 +198,7 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify Availability of Menu Icon
      */
     public void verifyAvailMenuIcon() {
-        click(BinMaintenancePage.menuIcon, "Click on main menu");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.menuIcon, "Click on main menu");
         String[] field = {"BIN LOCATIONS", "Receiving", "SHIPPING MANIFESTS", "Exceptions Queue", "Print Documents and Labels"};
         for (String label : field) {
             commonObj.validateText(tabs(label), label, label + " option is present");
@@ -205,7 +207,7 @@ public class binMaintenance extends ReusableLib {
 
     public void verifyApplyFilter() {
         commonObj.validateElementExists(TruckPage.searchFilterPanelTitle, "Search filter is present");
-        click(BinMaintenancePage.applyFilter, "Click Apply filter button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.applyFilter, "Click Apply filter button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(tabs("Apply filters to see results."), "Apply filters to see results.", "'Apply filters to see results.' message is present");
     }
@@ -230,17 +232,15 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify Apply Filter and Clear All Filter
      */
     public void verifyApplyClearAllFilter() {
-        click(TruckPage.filtersCrossIcon, "Click search close icon");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filtersCrossIcon, "Click search close icon");
         commonObj.validateElementExists(BinMaintenancePage.searchIcon, "Search icon is present");
-        click(TruckPage.filterSearch, "Click Search icon");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
         verifyApplyFilter();
         verifyClearAllFilter();
     }
 
     public void enableAsteriskItem(By by, String decision) {
-        click(by, decision + " exclude Asterisk Items check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,by, decision + " exclude Asterisk Items check box");
         click(BinMaintenancePage.itemNumberContains, decision + " contains check box");
         click(BinMaintenancePage.applyFilter, "Click Apply filter");
     }
@@ -249,21 +249,18 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify exclude * Items
      */
     public void verifyExcludeItems(By by, String checkBoxName) {
-        Utility_Functions.timeWait(3);
         enableAsteriskItem(by, "Enable");
         Utility_Functions.timeWait(2);
         commonObj.validateText(tabs("Item Number"), "Item Number", "'Item Number' filtered value is present at right top corner of the page");
         commonObj.validateText(tabs(checkBoxName), checkBoxName, checkBoxName + " filtered value is present at right top corner of the page");
         commonObj.validateText(tabs("Clear Filters "), "Clear Filters", "'Clear Filters ' filtered value is present at right top corner of the page");
-        Utility_Functions.timeWait(3);
-        click(TruckPage.filterSearch, "Click Search icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         enableAsteriskItem(by, "Disable");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(ownDriver, tabs("Item Number")), false, "Item number result Filter is removed");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(ownDriver, tabs(checkBoxName)), false, checkBoxName + " result Filter is removed");
         Utility_Functions.xAssertEquals(report, Utility_Functions.xIsDisplayed(ownDriver, tabs("Clear Filters ")), false, "Clear Filters result Filter is removed");
-        Utility_Functions.timeWait(3);
-        click(TruckPage.filterSearch, "Click Search icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
     }
 
@@ -271,6 +268,7 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify check box Filter
      */
     public void verifyExcludeAstJobZZ98Item() {
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.excludeAsteriskItems, "Exclude * Items");
         verifyExcludeItems(BinMaintenancePage.excludeAsteriskItems, "Exclude * Items");
         verifyExcludeItems(BinMaintenancePage.includeJobItems, "Exclude Job Items");
         verifyExcludeItems(BinMaintenancePage.excludeZZ98Items, "Exclude ZZ98 Items");
@@ -281,12 +279,11 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyContainsCheckBox() {
         String itemNumber = jsonData.getData("itemNo");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumber,"");
         sendKeys(BinMaintenancePage.itemNumber, itemNumber, "Enter " + itemNumber + " into Item number text field");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(4);
-        click(TruckPage.filterSearch, "Click Search icon");
-        Utility_Functions.timeWait(2);
-        click(BinMaintenancePage.itemNumberContains, "Enable item Number Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable item Number Contains check box");
         Utility_Functions.timeWait(2);
         Boolean bl1 = ownDriver.findElement(BinMaintenancePage.itemNumberContains).isSelected();
         Utility_Functions.xAssertEquals(report, bl1, true, "After Click Clear All Filter, item Number Contains check box is enabled");
@@ -300,14 +297,15 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifySuggestedMatchesPopUp() {
         String itemNumber = jsonData.getData("itemNo");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumber,"");
         sendKeys(BinMaintenancePage.itemNumber, itemNumber, "Enter " + itemNumber + " into Item number text field");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.matchesHeader,"");
         commonObj.validateText(BinMaintenancePage.matchesHeader, "SUGGESTED MATCHES", "'SUGGESTED MATCHES' popup message is present");
-        click(getColumnData("Item Number"), "Click Item Number");
-        Utility_Functions.timeWait(4);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,getColumnData("Item Number"), "Click Item Number");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "'Item-Bin Maintenance - Item Details' header is present");
-        click(button("Back"), "Click on back button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Back"), "Click on back button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h2"), "Item-Bin Maintenance", "Navigate back to 'Item-Bin Maintenance' Page");
     }
@@ -317,11 +315,12 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyItemNoField() {
         String negativeValue = jsonData.getData("negativeValue");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumber,"");
         sendKeys(BinMaintenancePage.itemNumber, negativeValue, "Enter " + negativeValue + " into Item number text field");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
         Utility_Functions.timeWait(3);
         commonObj.validateText(tabs("There are currently no results."), "There are currently no results.", "'There are currently no results.' message is present");
-        click(TruckPage.filterSearch, "Click Search icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         String alphaNum = jsonData.getData("alphaNumeric");
         sendKeys(BinMaintenancePage.itemNumber, alphaNum, "Enter " + alphaNum + " into Item number text field");
@@ -331,8 +330,9 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void validateAndBack() {
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "'Item-Bin Maintenance - Item Details' header is present");
-        click(button("Back"), "Click on back button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Back"), "Click on back button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h2"), "Item-Bin Maintenance", "Navigate back to 'Item-Bin Maintenance' Page");
     }
@@ -341,19 +341,16 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify the Item description filter
      */
     public void verifyItemDescriptionFilter() {
-        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
+        Utility_Functions.timeWait(2);
         String desc = ownDriver.findElement(By.xpath("//td/div")).getText().trim();
         Utility_Functions.xUpdateJson("ItemNmDescription", desc);
-        click(TruckPage.filterSearch, "Click Search icon");
-        Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.itemDescription, desc, "Enter description");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
         if (ownDriver.findElements(BinMaintenancePage.itemBinManItemDet).size() > 1) {
-            click(By.xpath("//td/a"));
-            Utility_Functions.timeWait(3);
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//td/a"),"");
         }
         validateAndBack();
     }
@@ -362,10 +359,9 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify the negative Scenarios for Item Description input field
      */
     public void verifyItemDescriptionField() {
-        click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.applyFilter, "Click apply filter");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
         commonObj.validateText(tabs("Apply filters to see results."), "Apply filters to see results.", "'Apply filters to see results.' message is present");
-        click(TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.itemDescription, "A", "Enter a single character 'A'");
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Apply Filter button is disabled");
@@ -378,15 +374,15 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void enableContainsFilter() {
-        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemCount,"Click Item COunt");
         String itemCount = Utility_Functions.getText(ownDriver, BinMaintenancePage.itemCount);
         commonObj.validateElementExists(BinMaintenancePage.itemCount, "Total item present on Item Maintenance Tab: " + itemCount);
     }
 
     public void verifyClearAllButton() {
-        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.excludeAsteriskItems, "Enable Exclude * Items");
         click(BinMaintenancePage.includeJobItems, "Enable Exclude Job Items");
         click(BinMaintenancePage.excludeZZ98Items, "Enable Exclude ZZ98 Items");
@@ -399,22 +395,22 @@ public class binMaintenance extends ReusableLib {
     public void verifyOnHand() {
         String symbl = getAttribute(BinMaintenancePage.onHand, "ng-reflect-model");
         Utility_Functions.xAssertEquals(report, symbl, "=", "By default On Hand Symbol '='");
-        click(BinMaintenancePage.onHand);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.onHand,"");
         Utility_Functions.timeWait(5);
         String[] syms = {"=", "<", ">"};
         for (String sym : syms) {
             if (Utility_Functions.xIsDisplayed(ownDriver, TruckPage.filterSearch)) {
-                click(TruckPage.filterSearch, "Click Search icon");
+                Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
                 Utility_Functions.timeWait(2);
             }
             if (!(sym.equals("="))) {
-                click(BinMaintenancePage.onHand);
+                Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.onHand,"");
             }
             commonObj.validateText(tabs(sym), sym, sym + " is present");
-            click(tabs(sym), sym + "is selected");
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,tabs(sym), sym + "is selected");
             sendKeys(BinMaintenancePage.onHandFilter, "-1", "Enter on hand quantity");
             click(BinMaintenancePage.applyFilter, "Click Apply filter");
-            Utility_Functions.timeWait(4);
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"),"");
             if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td[text()='-1']"))) {
                 commonObj.validateText(By.xpath("//td[text()='-1']"), "-1", "On Hand is filtered");
             }
@@ -609,8 +605,7 @@ public class binMaintenance extends ReusableLib {
 
     public void validateNegQty() {
         click(button(" Labels "), "Click Label button");
-        Utility_Functions.timeWait(2);
-        click(BinMaintenancePage.selectAllPop, "Click select All Items");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.selectAllPop, "Click select All Items");
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Print button is disabled");
         sendKeys(BinMaintenancePage.printQty0, "Auto$%", "Enter string 'Auto$' into Qty text field");
         commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Print button is disabled");
@@ -628,18 +623,18 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyLabelButton() {
         for (int i = 1; i < 4; i++) {
-            click(By.xpath("//tr[" + i + "]"), "Select item from the list");
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//tr[" + i + "]"), "Select item from the list");
             Utility_Functions.timeWait(2);
         }
-        click(button(" Labels "), "Click Label button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button(" Labels "), "Click Label button");
         commonObj.validateText(DriversPage.newDriverHeader, "Print Labels", "'Print Labels' popup is present");
-        click(button("Cancel "), "Click Cancel Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Cancel "), "Click Cancel Button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h2"), "Item-Bin Maintenance", "Item-Bin Maintenance Header is present");
-        click(button(" Labels "), "Click Label button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button(" Labels "), "Click Label button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(DriversPage.newDriverHeader, "Print Labels", "'Print Labels' popup is present");
-        click(button("Print"), "Click Print Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Print"), "Click Print Button");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Labels sent to printer.", "Toaster 'Labels sent to printer.' is present");
         validateNegQty();
@@ -682,7 +677,7 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void validateItemHeader() {
-        click(By.xpath("//td/a"));
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//td/a"),"");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
     }
@@ -713,10 +708,10 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifySelectDeselectItem() {
         {
-            click(getBinLocation(""), "Select item from the list");
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,getBinLocation(""), "Select item from the list");
             Utility_Functions.timeWait(2);
             Utility_Functions.xAssertEquals(report, ownDriver.findElements(BinMaintenancePage.highlightRow).size(), 1, "One record is Selected");
-            click(getBinLocation(""), "Select item from the list");
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,getBinLocation(""), "Select item from the list");
             Utility_Functions.timeWait(2);
             Boolean count = Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.highlightRow);
             Utility_Functions.xAssertEquals(report, count, false, "item is Deselected");
@@ -727,11 +722,11 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify secondary options from Bin Type Dropdown
      */
     public void verifySecondaryOptionsBinType() {
-        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.binType, "Click Bin Type drop down");
         click(tabs("Primary"), "Click Primary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"),"");
         if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
@@ -749,11 +744,11 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify Update Bin Type
      */
     public void verifyUpdateBinType() {
-        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.binType, "Click Bin Type drop down");
         click(tabs("Secondary"), "Click Secondary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"),"");
         if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
@@ -769,10 +764,10 @@ public class binMaintenance extends ReusableLib {
         if (getText(BinMaintenancePage.toaster).equals("Cannot delete primary if secondary/temporary bin exists")) {
             commonObj.validateText(BinMaintenancePage.toaster, "Cannot delete primary if secondary/temporary bin exists", "'Cannot delete primary if secondary/temporary bin exists' is present");
             click(ownDriver.findElements(BinMaintenancePage.deleteIcon).get(1), "Click delete icon");
-            Utility_Functions.timeWait(2);
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.deletePopup,"");
             commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
-            click(button("Yes"), "Click 'Yes' Button");
-            Utility_Functions.timeWait(3);
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Yes"), "Click 'Yes' Button");
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         }
     }
 
@@ -780,39 +775,39 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify Bin Item Delete Icon
      */
     public void verifyBinItemDeleteIcon() {
-        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.binType, "Click Bin Type drop down");
         click(tabs("Primary"), "Click Primary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"),"");
         if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
-        click(BinMaintenancePage.deleteIcon, "Click delete icon");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.deleteIcon, "Click delete icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.deletePopup,"");
         commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
-        click(button("No"), "Click 'No' Button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("No"), "Click 'No' Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
-        click(BinMaintenancePage.deleteIcon, "Click delete icon");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.deleteIcon, "Click delete icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.deletePopup,"");
         commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
-        click(button("Yes"), "Click 'Yes' Button");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Yes"), "Click 'Yes' Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         isPrimaryItemDelete();
         commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Deleted.", "'Bin-item is successfully Deleted.' is present");
     }
 
     public void clickEditButton() {
-        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.binType, "Click Bin Type drop down");
         click(tabs("Primary"), "Click Primary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"),"");
         if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
-        click(BinMaintenancePage.editIcon, "Click Edit Icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.editIcon, "Click Edit Icon");
         Utility_Functions.timeWait(2);
     }
 
@@ -821,14 +816,13 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyBinItemEditIcon() {
         clickEditButton();
-        click(BinMaintenancePage.cancelIcon, "Click Cancel Icon");
-        click(BinMaintenancePage.editIcon, "Click Edit Icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.cancelIcon, "Click Cancel Icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.editIcon, "Click Edit Icon");
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.editTextBox, "1", "Enter Bin min as 1");
         sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "10", "Enter Bin max as 10");
-        Utility_Functions.timeWait(3);
-        click(BinMaintenancePage.saveIcon, "Click Save icon");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.saveIcon, "Click Save icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         commonObj.validateText(BinMaintenancePage.toaster, "Bin Item updated successfully.", "'Bin Item updated successfully.' is present");
         commonObj.validateText(By.xpath("//div[text()=' 1 ']"), "1", "Bin min updated to 1");
         commonObj.validateText(By.xpath("//div[text()=' 10 ']"), "10", "Bin min updated to 10");
@@ -854,25 +848,20 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.editTextBox, "10", "Enter number 10 into Bin min");
         sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "5", "Enter number 5 into Bin Max");
-        Utility_Functions.timeWait(2);
-        click(BinMaintenancePage.saveIcon, "Click Save icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.saveIcon, "Click Save icon");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Bin Max qty must be greater than Bin Min qty", "'Bin Max qty must be greater than Bin Min qty' is present");
     }
 
     public void clickEditBin(String binLoc) {
-        System.out.println("binLocation " + binLoc);
-        click(button(" Edit Bin "), "Click Edit Button");
-        Utility_Functions.timeWait(3);
-        System.out.println("EDIT BIN - " + binLoc);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button(" Edit Bin "), "Click Edit Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2[text()='EDIT BIN - " + binLoc + "']"),"");
         commonObj.validateText(By.xpath("//h2[text()='EDIT BIN - " + binLoc + "']"), "EDIT BIN - " + binLoc, "'EDIT BIN - " + binLoc + "' Popup is present");
     }
 
     public String navigateToEditBinPopUp() {
         String binLocation = getText(BinMaintenancePage.getItemVal).trim();
-        Utility_Functions.timeWait(2);
-        click(BinMaintenancePage.primaryOpt);
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.primaryOpt,"");
         clickEditBin(binLocation);
         return binLocation;
     }
@@ -882,7 +871,6 @@ public class binMaintenance extends ReusableLib {
             click(ownDriver.findElements(button("Save ")).get(1), "Click Save button");
         } catch (Exception e) {
             click(BinMaintenancePage.stagingArea);
-            Utility_Functions.timeWait(2);
             click(ownDriver.findElements(button("Save ")).get(0), "Click Save button");
         }
     }
@@ -891,7 +879,7 @@ public class binMaintenance extends ReusableLib {
         if(getAttribute(BinMaintenancePage.nSellable,"ng-reflect-model").equals("true")) {
             if (status.equals("Defective")) {
                 commonObj.validateText(BinMaintenancePage.toaster, "Sellable must be N when bin condition is defective", "'Sellable must be N when bin condition is defective' is present");
-                click(BinMaintenancePage.nSellable);
+                Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.nSellable,"");
                 clickSaveBtn();
             }
         }
@@ -903,7 +891,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         clickSaveBtn();
         validateDefectiveStatus(status);
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         commonObj.validateText(BinMaintenancePage.toaster, "Selected Bins updated successfully.", "'Selected Bins updated successfully.' is present");
         if (status.equals("No Change")) {
             commonObj.validateText(getStatus(binLocation), "Damaged", "For bin location: " + binLocation + "No change in status");
@@ -940,14 +928,14 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void createBin() {
-        click(button("Create Bin"), "Click 'Create Bin' button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Create Bin"), "Click 'Create Bin' button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.createBinPopup,"");
         int binLoc = Utility_Functions.xRandomFunction();
         Utility_Functions.xUpdateJson("itemLocation", "" + binLoc + "");
         sendKeys(BinMaintenancePage.createBinLabel, "" + binLoc + "", "Enter Bin Location");
         enterRequiredData();
         click(ownDriver.findElement(button("Create ")), "Click Save button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully", "'Bin and Bin-item are created successfully' is present");
         int i = 0;
         while (i == 0) {
@@ -969,8 +957,8 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyCreateBinButton() {
         String itemLedger = getText(BinMaintenancePage.goToItemBinLedger);
-        click(button("Create Bin"), "Click 'Create Bin' button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Create Bin"), "Click 'Create Bin' button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.createBinPopup,"");
         commonObj.validateText(BinMaintenancePage.createBinPopup, "CREATE BIN AND ASSIGN", "CREATE BIN AND ASSIGN popup is present");
         commonObj.validateText(By.xpath("//div[text()='" + itemLedger + "']"), itemLedger, "Item Number " + itemLedger + " is present");
         String[] labels = {"Special Handling", "Available to Sell", "Staging Area"};
@@ -982,7 +970,7 @@ public class binMaintenance extends ReusableLib {
             commonObj.validateText(By.xpath("//label[text()='" + textLabel + "' and contains(@for,'createBin')]"), textLabel.trim(), textLabel + " text box is present");
         }
         click(ownDriver.findElements((button("Cancel "))).get(1), "Click Cancel button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
         createBin();
     }
@@ -991,44 +979,44 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify Create duplicate Bin
      */
     public void verifyCreateDuplicateBin() {
-        click(button("Create Bin"), "Click 'Create Bin' button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Create Bin"), "Click 'Create Bin' button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.createBinPopup,"");
         commonObj.validateText(BinMaintenancePage.createBinPopup, "Create Bin and Assign", "[Create Bin and Assign] popup is present");
         sendKeys(BinMaintenancePage.createBinLabel, Utility_Functions.xGetJsonData("itemLocation"), "Enter Bin Location");
         Utility_Functions.timeWait(2);
         enterRequiredData();
         click(ownDriver.findElement(button("Create ")), "Click Save button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.createBinPopup,"");
         commonObj.validateText(BinMaintenancePage.toaster, "Bin Location already exists", "'Bin Location already exists' is present");
     }
 
     public void addBinCancelBtn() {
-        click(button("Add Bin"), "Click 'Add Bin' button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Add Bin"), "Click 'Add Bin' button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.addBinPopup, "ADD BIN", "ADD BIN popup is present");
         Utility_Functions.timeWait(2);
-        click(BinMaintenancePage.addCancel, "Click Cancel Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.addCancel, "Click Cancel Button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
     }
 
     public void addBinSaveBtn(String binLct) {
-        click(button("Add Bin"), "Click 'Add Bin' button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Add Bin"), "Click 'Add Bin' button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.addBinLoc,"");
         sendKeys(BinMaintenancePage.addBinLoc, binLct, "Enter Bin Location");
         Utility_Functions.timeWait(2);
         Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.addBinZoneDrop), "Test", "Select 'Test' option from the drop down ");
         Utility_Functions.timeWait(2);
-        click(BinMaintenancePage.addSave, "Click Save button");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.addSave, "Click Save button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.toaster,"");
     }
 
     public void filterSecAndNavBinMainDetails() {
-        click(BinMaintenancePage.itemNumberContains, "Enable Contains check box");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.binType, "Click Bin Type drop down");
         click(tabs("Primary"), "Click Primary option");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"),"");
         if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
@@ -1039,9 +1027,8 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyAddBinButton() {
         String binLct = getText(getBinLocation("Secondary"));
-        click(deleteBinLocation(binLct), "Delete BinLocation: " + binLct);
-        Utility_Functions.timeWait(2);
-        click(button("Yes"));
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,deleteBinLocation(binLct), "Delete BinLocation: " + binLct);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Yes"),"Click YES");
         Utility_Functions.timeWait(3);
         addBinCancelBtn();
         addBinSaveBtn(binLct);
@@ -1055,8 +1042,8 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify Duplicate ADD Bin
      */
     public void verifyDuplicateAddBin() {
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
         String binLct = getText(getBinLocation("Secondary"));
-        Utility_Functions.timeWait(3);
         addBinSaveBtn(binLct);
         commonObj.validateText(BinMaintenancePage.toaster, "Item Bin association alredy exists", "'Item Bin association alredy exists' is present");
     }
@@ -1065,9 +1052,10 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Navigate to Zone Page
      */
     public void navigateZonePage() {
-        click(BinMaintenancePage.inboxIcon, "Click Inbox Icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.inboxIcon, "Click Inbox Icon");
         Utility_Functions.timeWait(2);
-        click(BinMaintenancePage.zone, "Navigate to zone page");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.zone, "Navigate to zone page");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.zoneHeader, "");
         commonObj.validateText(BinMaintenancePage.zoneHeader, "Zones", "Zones header is present");
     }
 
@@ -1086,7 +1074,7 @@ public class binMaintenance extends ReusableLib {
     public void validateAlreadyExistZoneAbrv() {
         Utility_Functions.timeWait(2);
         if (!Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.toaster)) {
-            click(button(" Cancel "));
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,button(" Cancel "),"");
             Utility_Functions.timeWait(2);
             deleteZoneIcon();
             createZoneAgain();
@@ -1097,21 +1085,21 @@ public class binMaintenance extends ReusableLib {
     public String createZoneAgain() {
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.zoneHeader, "Zones", "Zones header is present");
-        click(button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button(" New Zone "), "Click 'New Zone' button");
         Utility_Functions.timeWait(2);
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
         String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
         sendKeys(BinMaintenancePage.zoneName, zoneName, "Enter Zone Name");
         sendKeys(BinMaintenancePage.zoneAbv, zoneAbv, "Enter Zone Abbreviation as " + zoneAbv + "Q");
         Utility_Functions.timeWait(3);
-        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Save "), "Click 'Save' Button");
         return zoneAbv;
     }
 
     public String createZone() {
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.zoneHeader, "Zones", "Zones header is present");
-        click(button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button(" New Zone "), "Click 'New Zone' button");
         Utility_Functions.timeWait(2);
         int zoneName = Utility_Functions.xRandomFunction();
         String zoneAbv = Integer.toString(zoneName).substring(0, 1);
@@ -1120,7 +1108,7 @@ public class binMaintenance extends ReusableLib {
         sendKeys(BinMaintenancePage.zoneName, zoneName + "AutoQA", "Enter Zone Name");
         sendKeys(BinMaintenancePage.zoneAbv, zoneAbv + "Q", "Enter Zone Abbreviation as " + zoneAbv + "Q");
         Utility_Functions.timeWait(3);
-        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Save "), "Click 'Save' Button");
         Utility_Functions.timeWait(2);
         return zoneAbv;
     }
@@ -1130,9 +1118,9 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyNewZone() {
         Utility_Functions.timeWait(3);
-        click(button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button(" New Zone "), "Click 'New Zone' button");
         Utility_Functions.timeWait(2);
-        click(button(" Cancel "), "Click Cancel button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button(" Cancel "), "Click Cancel button");
         String zoneAbv = createZone();
         validateAlreadyExistZoneAbrv();
         String zName = Utility_Functions.xGetJsonData("zoneName").toLowerCase();
@@ -1155,8 +1143,7 @@ public class binMaintenance extends ReusableLib {
     }
 
     public void clickEditIcon(String zoneAbv) {
-        WebElement editIcon = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"));
-        click(editIcon, "Click Edit icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"), "Click Edit icon");
         Utility_Functions.timeWait(2);
     }
 
@@ -1179,7 +1166,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(deleteIcon, "Click Delete Icon");
         Utility_Functions.timeWait(2);
-        click(TruckPage.yesButtonPopUp, "Click Yes Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.yesButtonPopUp, "Click Yes Button");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zoneName + " deleted successfully.", "'Zone " + zoneName + " deleted successfully.' is present");
     }
@@ -1192,7 +1179,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(deleteIcon, "Click Delete Icon");
         Utility_Functions.timeWait(2);
-        click(TruckPage.yesButtonPopUp, "Click Yes Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.yesButtonPopUp, "Click Yes Button");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(BinMaintenancePage.toaster, getText(BinMaintenancePage.toaster) + " is present");
     }
@@ -1202,7 +1189,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.zoneName, zoneName, "Enter Zone Name");
         Utility_Functions.timeWait(2);
-        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Save "), "Click 'Save' Button");
         Utility_Functions.timeWait(3);
         commonObj.validateText(By.xpath("//div[text()='Zone " + zoneName + " already exists']"), "Zone " + zoneName + " already exists", "'Zone " + zoneName + " already exists' error message is present");
     }
@@ -1214,7 +1201,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.zoneAbv, zoneAbv, "Clear Zone name field and Enter Zone Abbreviation as " + zoneAbv + "Q");
         Utility_Functions.timeWait(2);
-        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Save "), "Click 'Save' Button");
         Utility_Functions.timeWait(3);
         commonObj.validateText(By.xpath("//div[text()='Zone " + zoneAbv + " already exists']"), "Zone " + zoneAbv + " already exists", "'Zone " + zoneAbv + " already exists' error message is present");
     }
@@ -1241,7 +1228,7 @@ public class binMaintenance extends ReusableLib {
         clearText(BinMaintenancePage.zoneAbv);
         sendKeys(BinMaintenancePage.zoneName, "  ", "Enter 2 Blank space into Zone Name text field");
         sendKeys(BinMaintenancePage.zoneAbv, "  ", "Enter 2 Blank space into Zone Abbreviation text field");
-        click(button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Save "), "Click 'Save' Button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.toaster, "Error while creating Zone.", "'Error while creating Zone.' error message is present");
     }
@@ -1831,9 +1818,8 @@ public class binMaintenance extends ReusableLib {
         String zName = zoneName + "a";
         Utility_Functions.xUpdateJson("zoneName", zName);
         sendKeys(By.xpath("//input[@ng-reflect-model='" + zoneName + "']"), zName, "Edit Zone Name");
-        Utility_Functions.timeWait(2);
-        click(saveButtonEditedZone(zName), "Click 'Save' Button");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,saveButtonEditedZone(zName), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.toaster,"Click Toaster message");
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " updated successfully.", "'Zone " + zName + " updated successfully.' message is present");
         commonObj.validateElementExists(zoneDisabledFields("Zone Name", zName), "Zone Name field is modified and disabled");
     }
@@ -1885,9 +1871,10 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Navigate to Item Bin Ledger
      */
     public void navigateItemBinLedgerPage() {
-        click(BinMaintenancePage.inboxIcon, "Click Inbox Icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.inboxIcon, "Click Inbox Icon");
         Utility_Functions.timeWait(2);
         click(BinMaintenancePage.itemBinLedger, "Navigate to item Bin Ledger page");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinLedgerHeader,"");
         commonObj.validateText(BinMaintenancePage.itemBinLedgerHeader, "ITEM-BIN LEDGER", "ITEM-BIN LEDGER header is present");
     }
 
@@ -1932,22 +1919,20 @@ public class binMaintenance extends ReusableLib {
     }
 
     public String navigateToItemBinMain() {
-        Utility_Functions.timeWait(3);
         String itemNumber = jsonData.getData("itemNumber");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumber,"");
         sendKeys(BinMaintenancePage.itemNumber, itemNumber, "Enter " + itemNumber + " into Item number text field");
         click(BinMaintenancePage.applyFilter, "Click apply filter");
-        Utility_Functions.timeWait(3);
-        click(By.xpath("//a[contains(text(),'" + itemNumber + "')]"), "Click Item Number");
-        Utility_Functions.timeWait(4);
-        commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "'Item-Bin Maintenance - Item Details' header is present");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//a[contains(text(),'" + itemNumber + "')]"), "Click Item Number");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"'Item-Bin Maintenance - Item Details' header is present");
         return itemNumber;
     }
 
     public void backAndClearFilter() {
-        click(button("Back"), "Click on back button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Back"), "Click on back button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h2"), "ITEM-BIN LEDGER", "Navigate back to 'ITEM-BIN LEDGER' Page");
-        click(TruckPage.filterSearch, "Click Search icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         Utility_Functions.xClickHiddenElement(ownDriver, BinMaintenancePage.clearFilter);
         commonObj.validateText(tabs("Item Number is missing."), "Item Number is missing.", "'Item Number is missing.' message is present");
@@ -1996,6 +1981,7 @@ public class binMaintenance extends ReusableLib {
         int i = 0;
         while (i == 0) {
             try {
+                Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"'Item-Bin Maintenance - Item Details' header is present");
                 Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//td[contains(text(),'" + binLocation + "')]"));
                 commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLocation + "')]"), binLocation + " Bin location is created");
                 break;

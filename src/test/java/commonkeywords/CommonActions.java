@@ -17,9 +17,7 @@ import pages.SalesAnalysisPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
-import pages.inventory.AlternateItemNumberPage;
-import pages.inventory.CostAdjustmentPage;
-import pages.inventory.ItemMasterPage;
+import pages.inventory.*;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.OrderByCustomerPage;
 import pages.pricing.SpecialPricePage;
@@ -56,6 +54,17 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void masterToInventory() {
 		click(MasterPage.inventoryMenu,"Click inventory management");
+	}
+
+	/**
+	 *
+	 *
+	 * This method navigates from Inventory to Sales Person Screen
+	 *
+	 */
+	public void inventoryToSalesPerson() {
+		click(MasterPage.salesPersonMenu,"Click [Inquiry - Salesperson]");
+		validateText(SalesPersonPage.salesPersonInquiryTitle, "Salesperson Inquiry", "Validating Sales Person page title");
 	}
 
 	/**
@@ -354,7 +363,7 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void navigateToOptionsAndConstantsMenu() {
 		click(MasterPage.optionAndConstantsMenu,"Click Options And Constants Menu");
-		validateText(MasterPage.optionConstPageTitle,"Inventory Management - Options and Constants","Lands on Inventory Management - Options and Constants");
+		validateText(MasterPage.optionConstPageTitle,"Order Processing - Options and Constants","Lands on Order Processing - Options and Constants");
 	}
 
 	/**
@@ -571,5 +580,19 @@ public class CommonActions extends ReusableLib {
 		sendKeysAndEnter(CostAdjustmentPage.optBox, "1", "Select Item Number");
 		waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 		return itemNumber;
+	}
+
+	/**
+	 * This method navigates from master to Mailing Master - Main Menu
+	 */
+	public void masterToMailingMaster() {
+		click(MasterPage.mailingMasterMenu,"Click [1 Mailing Master] menu button");
+	}
+
+	/**
+	 * This method navigates from Mailing Master - Main Menu to ALTERNATE ITEM NUMBER REVISIONS page
+	 */
+	public void mailingMasterToAlternateCustomerRevision() {
+		click(AlternateCustomerPage.revisionAlternateCustomerMenu,"Click [Revision - Alternate Customer] menu button");
 	}
 }

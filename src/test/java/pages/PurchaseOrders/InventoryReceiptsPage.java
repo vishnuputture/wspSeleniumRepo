@@ -55,4 +55,5 @@ public class InventoryReceiptsPage extends ReusableLib{
 
     public static By allocateFreight = By.id("DEFFRT");
     public static By amountToAllocate = By.id("VDFAMT");
+
 }

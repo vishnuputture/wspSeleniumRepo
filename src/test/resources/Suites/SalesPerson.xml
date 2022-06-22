@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Regression" parallel="none" thread-count="1">
+     <test name="SalesPerson">
+
+         <classes>
+             <class name="testcases.Inventory.SalesPerson">
+                 <methods>
+                     <include name="TC_541_VerifyOptionsAvailableUnderQUICKVIEW"></include>
+                     <include name="TC_511_VerifyItemNotesInSalespersonInquiryPage"></include>
+                     <include name="TC_514_FieldVerificationForItemNotes"></include>
+                     <include name="TC_520_VerifyFieldsAvailableInInventoryTab"></include>
+                     <include name="TC_522_VerifyFieldsAvailableInItemBinDetailsTab"></include>
+                     <include name="TC_508_VerifyAlternateCustomerNumberInSalesPersonInquiry"></include>
+                     <include name="TC_509_VerifyCustomerSearchUsingInvalidAlternateCustomerNumber"></include>
+                     <include name="TC_510_VerifyAddEditCustomerNotes"></include>
+                     <include name="TC_517_ViewItemDetailsUsingItemNoAndCustNo"></include>
+                     <include name="TC_532_VerifyFunctionalityOfCustomerInputField"></include>
+                 </methods>
+             </class>
+         </classes>
+     </test>
+</suite>
