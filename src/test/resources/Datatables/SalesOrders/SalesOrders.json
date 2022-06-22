@@ -11,6 +11,7 @@
       "JobName": "TEST AUTOMATION",
       "PONumber": "16121",
       "PlacedBy": "john doe",
+      "FilledBy": "someone",
       "itemNo1": "5105TCW158SS2",
       "itemNo2": "0023PBE0520",
       "Iteration": "4"

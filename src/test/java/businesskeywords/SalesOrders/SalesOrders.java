@@ -57,6 +57,8 @@ public class SalesOrders extends ReusableLib{
 			sendKeys(SalesOrdersPage.poNumberEntry, jsonData.getData("PONumber"), "Entering PO number");
 			sendKeys(SalesOrdersPage.placedByEntry, jsonData.getData("PlacedBy"), "Entering placed by");
 			Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.primarySalespersonDropDown), 0);
+			Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.writtenByDropDown), 0);
+			sendKeys(SalesOrdersPage.filledByEntry, jsonData.getData("FilledBy"), "Entering filled by");
 		}
 		public void createSalesOrderCOD(){
 			sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to COD account number");

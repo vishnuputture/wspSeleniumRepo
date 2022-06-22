@@ -17,6 +17,8 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By placedByEntry = By.id("inPlacedBy");
 	public static By primarySalespersonDropDown = By.id("ddbPrimarySalesperson");
 	public static By matrixColumn = By.id("txtS2MatrixColumn");
+	public static By writtenByDropDown = By.id("ddbWrittenBy");
+	public static By filledByEntry = By.id("txtFilledBy");
 	public static By matrixError = By.xpath("//*[@id=\"5250\"]/div[138]");
 	public static By closeError = By.xpath("//*[@id=\"5250\"]/div[138]/div[2]");
 	public static By matrixSearch = By.xpath("//*[@id=\"faMatrixSearch\"]/i");
@@ -35,7 +37,7 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By shipViaDropDown = By.id("ddbShipViaLabel");
 	public static By shipCompleteDropDown = By.id("ddbShipComplete");
 	public static By btnExit = By.id("btnExitBill");
-
+	public static By itemEntryIssueWindow = By.id("pnlItemEntryIssues");
 
 	//item tab
 	public static By itemsTab = By.xpath("//span[text()='Items'][@istab='true']");
