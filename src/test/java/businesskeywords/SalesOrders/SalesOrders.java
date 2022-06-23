@@ -47,10 +47,10 @@ public class SalesOrders extends ReusableLib{
 			if(isDisplayed(SalesOrdersPage.deliveryTypeError)) {
 				Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.deliveryTypeDropDown), 1);
 			}
+			Utility_Functions.timeWait(1);
 	    	//Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.deliveryTypeDropDown), "Pick Up", "Validating selected delivery type");
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(ownDriver, SalesOrdersPage.directShipDropDown), "No", "Validating selected direct ship value");
-	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(ownDriver, SalesOrdersPage.shipCompleteDropDown), "No", "Validating selected ship complete value");
-	    	Utility_Functions.xWaitForElementClickable(ownDriver, SalesOrdersPage.shipViaDropDown, 15);
+			Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(ownDriver, SalesOrdersPage.shipCompleteDropDown), "No", "Validating selected ship complete value");
 			Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesOrdersPage.shipViaDropDown, "DIRECT SHIP");
 	    }
 
