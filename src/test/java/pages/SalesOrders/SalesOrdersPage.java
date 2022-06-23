@@ -33,6 +33,7 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By outShipToState = By.id("outShipToState");
 	public static By outShipToZipCode = By.id("outShipToZipCode");
 	public static By deliveryTypeDropDown = By.id("ddbDeliveryType");
+	public static By deliveryTypeError = By.xpath("//*[@id=\"5250\"]/div[138]");
 	public static By directShipDropDown = By.id("ddbDirectShip");
 	public static By shipViaDropDown = By.id("ddbShipViaLabel");
 	public static By shipCompleteDropDown = By.id("ddbShipComplete");
