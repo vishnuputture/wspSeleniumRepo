@@ -86,10 +86,26 @@ public class SalesOrders extends ReusableLib{
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 
+			if(isDisplayed(SalesOrdersPage.itemAlreadyOnOrderWindow)){
+				Utility_Functions.xMouseDoubleClick(ownDriver, ownDriver.findElement(SalesOrdersPage.lineNumberToCombine));
+			}
+			if(isDisplayed(SalesOrdersPage.itemEntryIssueWindow)){
+				click(SalesOrdersPage.combineSelect);
+				click(SalesOrdersPage.continuebtn);
+			}
+
 	    	sendKeys(SalesOrdersPage.qtyOrdered,"1","Entering ordered quantity");
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo2"),"Entering item Number");
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+
+			if(isDisplayed(SalesOrdersPage.itemAlreadyOnOrderWindow)){
+				Utility_Functions.xMouseDoubleClick(ownDriver, ownDriver.findElement(SalesOrdersPage.lineNumberToCombine));
+			}
+			if(isDisplayed(SalesOrdersPage.itemEntryIssueWindow)){
+				click(SalesOrdersPage.combineSelect);
+				click(SalesOrdersPage.continuebtn);
+			}
 
 	    	Utility_Functions.xUpdateJsonWithArray("SalesOrderNo",ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 			Utility_Functions.xUpdateJson("SalesOrder",ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));

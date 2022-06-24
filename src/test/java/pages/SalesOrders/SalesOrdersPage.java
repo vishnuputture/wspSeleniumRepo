@@ -38,7 +38,6 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By shipViaDropDown = By.id("ddbShipViaLabel");
 	public static By shipCompleteDropDown = By.id("ddbShipComplete");
 	public static By btnExit = By.id("btnExitBill");
-	public static By itemEntryIssueWindow = By.id("pnlItemEntryIssues");
 
 	//item tab
 	public static By itemsTab = By.xpath("//span[text()='Items'][@istab='true']");
@@ -48,6 +47,10 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By salesOrderField = By.id("inOrderNum");
 	public static By btnSaveExit = By.id("btnSaveExit");
 	public static By closeTooltip = By.xpath("//div[@class='pui-tip-close']");
+	public static By itemEntryIssueWindow = By.id("pnlItemEntryIssues");
+	public static By combineSelect = By.id("rdbUserActChoice1.1");
+	public static By itemAlreadyOnOrderWindow = By.id("Dialog1");
+	public static By lineNumberToCombine = By.id("OutputField2.1");
 
 	//shipment tab
 	public static By shipmentTab = By.xpath("//span[text()='Shipments'][@istab='true']");
