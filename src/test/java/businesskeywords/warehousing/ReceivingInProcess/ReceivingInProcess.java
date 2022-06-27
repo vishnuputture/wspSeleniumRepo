@@ -69,7 +69,7 @@ public class ReceivingInProcess extends ReusableLib {
     /**
      * Keyword to Verify UI of Search Filter UI
      */
-    public void searchFilterUI() {
+    public void searchFilterRecUI() {
         clickSearchIcon();
         String[] actText = {"Purchase Order", "User ID", "Vendor"};
         List<WebElement> els = ownDriver.findElements(ReceivingInProcessPage.searchLabels);
@@ -87,14 +87,13 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to click search filter icon
      */
     public void clickSearchIcon() {
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(6);
         if (isDisplayed(ReceivingInProcessPage.clearFilterCrossIcon)) {
             click(ReceivingInProcessPage.clearFilterCrossIcon, "Click Vendor x");
-            Utility_Functions.timeWait(2);
         } else {
             click(TruckPage.filterSearch, "Click Search Filter icon");
         }
-        Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h1"), "Click on title of the page");
         commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
     }
 
@@ -144,7 +143,6 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void searchAndApplyFilter(String label, String val) {
         sendKeys(searchField(label), val, "Search " + val);
-        Utility_Functions.timeWait(2);
         click(ReceivingInProcessPage.applyFilterBtn, "Apply Filter");
     }
 
@@ -162,7 +160,7 @@ public class ReceivingInProcess extends ReusableLib {
         click(ReceivingInProcessPage.clearAllBtn, "Click Clear All Button");
         commonObj.validateText(TruckPage.applyFiltersDis, "apply filters", "Apply Filter button is disabled");
         commonObj.validateText(SpoPage.disClearAllFilter, "Clear All Filters", "Clear All Filters button is disabled");
-        click(TruckPage.filtersCrossIcon, "Click close icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filtersCrossIcon, "Click close icon");
     }
 
     /**
@@ -198,12 +196,12 @@ public class ReceivingInProcess extends ReusableLib {
     public void verifyVendorInputField() {
         clickSearchIcon();
         searchAndApplyFilter("Vendor", jsonData.getData("InValidVendor"));
-        commonObj.validateText(spanElement("There are no orders currently being received."), "There are no orders currently being received.", "'There are no orders currently being received.' message is present");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,spanElement("There are no orders currently being received."),  "'There are no orders currently being received.' message is present");
         click(ReceivingInProcessPage.clearFilterCrossIcon, "Click Vendor x");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h1"), "Search Filters panel title is present");
         commonObj.validateElementExists(By.xpath("//tr/td/a"), "Page is processed and all the records are present");
-        Utility_Functions.timeWait(3);
         searchAndApplyFilter("Vendor", jsonData.getData("AlphaNumericVendor"));
-        commonObj.validateText(spanElement("There are no orders currently being received."), "There are no orders currently being received.", "'There are no orders currently being received.' message is present");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,spanElement("There are no orders currently being received."),  "'There are no orders currently being received.' message is present");
     }
 
     /**
@@ -932,8 +930,7 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to click on [Confirm] button
      */
     public void clickConfirmBtn() {
-        waitForElementPresent(ReceivingInProcessPage.btnConfirm);
-        click(ReceivingInProcessPage.btnConfirm, "Click [Confirm] button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ReceivingInProcessPage.btnConfirm, "Click [Confirm] button");
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         clickSkipBtnIfPresent();
         Utility_Functions.actionKey(Keys.ESCAPE, ownDriver);
@@ -981,9 +978,8 @@ public class ReceivingInProcess extends ReusableLib {
         String bin = jsonData.getData("Bin");
         clickSkipBtnIfPresent();
         sendKeysAndTab(ReceivingInProcessPage.tbxQty, qty, "Enter Quantity as ["+qty+"] in [Qty] box");
-        Utility_Functions.timeWait(1);
-        click(ReceivingInProcessPage.btnSkip, "Click [Skip] button");
-        Utility_Functions.timeWait(1);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ReceivingInProcessPage.btnSkip, "Click [Skip] button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ReceivingInProcessPage.tbxScanLocation, "CLick San Location box");
         sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as ["+bin+"] in [Scan Location] box");
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
 
@@ -993,7 +989,6 @@ public class ReceivingInProcess extends ReusableLib {
         else
             report.updateTestLog("Verify notification is displayed", "Notification is NOT displayed", Status.FAIL);
 
-        Utility_Functions.timeWait(3);
     }
 
     /**

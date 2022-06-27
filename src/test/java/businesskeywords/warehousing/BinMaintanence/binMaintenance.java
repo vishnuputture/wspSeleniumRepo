@@ -307,7 +307,7 @@ public class binMaintenance extends ReusableLib {
         commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "'Item-Bin Maintenance - Item Details' header is present");
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Back"), "Click on back button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(By.xpath("//h2"), "Item-Bin Maintenance", "Navigate back to 'Item-Bin Maintenance' Page");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h2"), "Navigate back to 'Item-Bin Maintenance' Page");
     }
 
     /**
@@ -935,7 +935,7 @@ public class binMaintenance extends ReusableLib {
         sendKeys(BinMaintenancePage.createBinLabel, "" + binLoc + "", "Enter Bin Location");
         enterRequiredData();
         click(ownDriver.findElement(button("Create ")), "Click Save button");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.toaster,"");
         commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully", "'Bin and Bin-item are created successfully' is present");
         int i = 0;
         while (i == 0) {
@@ -1125,7 +1125,7 @@ public class binMaintenance extends ReusableLib {
         validateAlreadyExistZoneAbrv();
         String zName = Utility_Functions.xGetJsonData("zoneName").toLowerCase();
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " created successfully.", "'Zone " + zName + " created successfully.' message is present");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(6);
         Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
         Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
         Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).get(0).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
@@ -1981,6 +1981,7 @@ public class binMaintenance extends ReusableLib {
         int i = 0;
         while (i == 0) {
             try {
+                Utility_Functions.timeWait(5);
                 Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemBinManItemDet,"'Item-Bin Maintenance - Item Details' header is present");
                 Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//td[contains(text(),'" + binLocation + "')]"));
                 commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLocation + "')]"), binLocation + " Bin location is created");

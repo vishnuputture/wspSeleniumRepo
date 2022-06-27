@@ -159,11 +159,11 @@ public class VendorInvoiceReconciliation extends ReusableLib {
     }
 
     public void validateVendor() {
-        click(PricingMatrixPage.addCol, "Click [F4=Prompt]");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,PricingMatrixPage.addCol, "Click [F4=Prompt]");
         commonObj.validateText(PurchaseOrderInquiryPage.hdrPOPreferences, "Mailing Master Search (O-946)", "Validating [Mailing Master Search (O-946)] page title");
         String vendorNumber = getText(OptionsConstantsPage.vendorNumber);
         sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1" + Keys.ENTER, "Select Customer No");
-        Utility_Functions.timeWait(4);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,VendorInvoiceReconciliationPage.positionToRecDoc,"Click Position to");
         if (!isDisplayed(VendorInvoiceReconciliationPage.noRecords)) {
             Utility_Functions.xAssertEquals(report, vendorNumber, getText(VendorInvoiceReconciliationPage.selMult), "The records get sorted based on vendor number");
             clearText(VendorInvoiceReconciliationPage.searchVendor);
