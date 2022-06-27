@@ -75,7 +75,6 @@ public class WorkWithSalesQuote extends ReusableLib {
         clickNextBtn();
         Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesQuotesPage.costMethodDropDown),0);
         clickNextBtn();
-        clickNextBtn();
     }
 
     /**
@@ -108,7 +107,6 @@ public class WorkWithSalesQuote extends ReusableLib {
         itemN = itemNm.trim();
         Utility_Functions.xAssertEquals(report,itemN,Utility_Functions.xGetJsonData("SQItem"),"Item Number: ");
         clickBackBtn();
-        clickBackBtn();
     }
 
     /**
@@ -117,7 +115,7 @@ public class WorkWithSalesQuote extends ReusableLib {
      */
     public void convertSaleOrd() {
         click(SalesQuotesPage.convert,"Click Convert");
-        //click(SalesQuotesPage.overRide,"Click Override");
+        click(SalesQuotesPage.overRide,"Click Override");
         sendKey(SalesQuoteConversionToSalesOrderPage.salesOrderQtyShipped, "1");
         click(SalesQuotesPage.nextBtn,"Click Next Button");
         String itemNo=ownDriver.findElement(SalesQuoteDetailLinesConversionRecapPage.itemConvert).getText();
