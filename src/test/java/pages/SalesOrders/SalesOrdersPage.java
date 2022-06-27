@@ -35,7 +35,7 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By shipViaDropDown = By.id("ddbShipViaLabel");
 	public static By shipCompleteDropDown = By.id("ddbShipComplete");
 	public static By btnExit = By.id("btnExitBill");
-
+	public static By btnOk = By.xpath("//div[@id='btnOk']/span/span");
 
 	//item tab
 	public static By itemsTab = By.xpath("//span[text()='Items'][@istab='true']");
@@ -75,6 +75,7 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By btnCreateShipment = By.id("btnAddGoToNew");
 	public static By backOrder=By.id("inQtyBO.1");
 	//public static By btnSaveExitShipment = By.id("btnSaveExit");
+	public static By tbxUnitPrice=By.id("inUnitPrice");
 
 	//payments tab
 	public static By paymentMethodDropdown = By.id("PIpaymentMethod1");
