@@ -249,6 +249,12 @@ public class SalesOrders extends ReusableLib{
 		sendKeys(SalesOrdersPage.qtyOrdered,jsonData.getData("QtyOrder"),"Entering ordered quantity");
 		sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo"),"Entering item Number");
 		sendKeys(SalesOrdersPage.qtyToShip,jsonData.getData("QtyShip"),"Entering quantity to ship");
+
+		/************ Sometimes the Unit Price value is empty ************/
+		String text = getText(SalesOrdersPage.tbxUnitPrice);
+		if (text.isEmpty())
+			sendKeys(SalesOrdersPage.tbxUnitPrice,"100","Entering value in Unit Price");
+
 		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 		jsonData.putData("SalesOrderNo", ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 		Utility_Functions.xUpdateJson("SalesOrderNumber", ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));

@@ -324,7 +324,7 @@ public class Spo extends ReusableLib {
      * Keyword to Verify UI of Search Filter UI
      */
     public void searchFilterUI() {
-        click(TruckPage.filterSearch, "Click Search Filter icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filterSearch, "Click Search Filter icon");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
         String[] actText = {"Worksheet Name", "Cost Option", "Percentage of Target Met", "Target Metric", "Assigned User"};

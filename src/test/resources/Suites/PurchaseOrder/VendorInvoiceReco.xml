@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Regression" parallel="none" thread-count="1">
+<suite name="Domain - Inventory" parallel="tests" thread-count="2">
 	<test name="VendorInvoiceReconciliation">
 		<classes>
 			<class name="testcases.PO.VendorInvoiceReconciliation">
@@ -19,6 +19,16 @@
 					<include name="Tc_CreatePoDirect"></include>
 					<include name="Tc_CompleteReceivingStockPOItemsInventoryReceiptsScreen"></include>
 					<include name="Tc_453_verifyDueDateField"></include>
+					<include name="TC_454_VerifyGMMgrAmount"></include>
+					<include name="TC_455_VerifyGrossMarginManagerPage"></include>
+					<include name="TC_459_VerifyFunctionalityOfF6KeyInReceiverDocumentBrowsePage"></include>
+					<include name="TC_461_VerifyFunctionalityOfF12KeyInVendorInvoiceReconciliationPage"></include>
+					<include name="TC_464_VerifyOptionsAvailableOnDetailPage"></include>
+					<include name="TC_469_VerifyFreightAmountInVIRPage"></include>
+					<include name="TC_481_VerifyCreationOfDebitMemoForQuantityDifference"></include>
+					<include name="TC_482_VerifyCreationOfDebitMemoForCostDifference"></include>
+					<include name="TC_486_VerifyCreationOfDebitMemoForItemsNotOnPO"></include>
+					<include name="TC_487_VerifySpecialNotesOnDebitMemoProcessPage"></include>
 				</methods>
 			</class>
 		</classes>

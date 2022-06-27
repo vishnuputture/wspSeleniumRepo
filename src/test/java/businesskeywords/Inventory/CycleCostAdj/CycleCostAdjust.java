@@ -289,9 +289,9 @@ public class CycleCostAdjust extends ReusableLib {
         double d1 = Double.parseDouble(seAmountxp);
         System.out.println(d1);
 
-        double amt = d + d1;
+        float amt = (float) (d + d1);
         String amont = ownDriver.findElement(CostAdjustmentPage.amountyMod).getText();
-        double amount = Double.parseDouble(amont);
+        float amount = Float.parseFloat(amont);
         System.out.println("amount : "+amount);
         Utility_Functions.xAssertEquals(report, "" + amt + "", "" + amount + "", "Amount: ");
         return amont;
