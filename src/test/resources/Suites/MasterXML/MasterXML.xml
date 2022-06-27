@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Demo">
+    <suite-files>
+        <suite-file path="../Inventory/AverageCost.xml"></suite-file>
+        <suite-file path="../Inventory/CycleCostAdjustment.xml"></suite-file>
+        <suite-file path="../Inventory/ReceiptCorrection.xml"></suite-file>
+        <suite-file path="../CreateSalesOrder/CreateSaleOrder.xml"></suite-file>
+        <suite-file path="../Pricing/MatrixCostUpdate.xml"></suite-file>
+        <suite-file path="../Pricing/PricingMatrix.xml"></suite-file>
+        <suite-file path="../Pricing/SelfServicePriceSheet.xml"></suite-file>
+        <suite-file path="../Pricing/SPATesting.xml"></suite-file>
+        <suite-file path="../Pricing/Wise.xml"></suite-file>
+        <suite-file path="../PurchaseOrder/InventoryReceipts.xml"></suite-file>
+        <suite-file path="../PurchaseOrder/POConvFactorTest.xml"></suite-file>
+        <suite-file path="../PurchaseOrder/PoEntry.xml"></suite-file>
+        <suite-file path="../PurchaseOrder/PurchaseOrder.xml"></suite-file>
+        <suite-file path="../PurchaseOrder/VendorInvoiceReco.xml"></suite-file>
+        <suite-file path="../SalesQuotes/SalesQuotes.xml"></suite-file>
+        <suite-file path="../BinMaintenance.xml"></suite-file>
+        <suite-file path="../MakePayment.xml"></suite-file>
+        <suite-file path="../manifest.xml"></suite-file>
+        <suite-file path="../ReceivingInProcess.xml"></suite-file>
+        <suite-file path="../SalesPerson.xml"></suite-file>
+        <suite-file path="../spo.xml"></suite-file>
+        <suite-file path="../VendorInvoiceRecon.xml"></suite-file>
+        <suite-file path="../VendorInvoiceReconciliation.xml"></suite-file>
+        <suite-file path="../WorkWithSalesQuote.xml"></suite-file>
+    </suite-files>
+</suite>
