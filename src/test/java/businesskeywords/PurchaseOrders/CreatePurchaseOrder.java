@@ -297,6 +297,12 @@ public class CreatePurchaseOrder extends ReusableLib {
         Utility_Functions.timeWait(5);
     }
 
+    public void enquirePOrderNo2() {
+        sendKeys(PurchaseOrderEntryPage.actionInpput, "I", "Changing Action to I");
+        sendKeys(PurchaseOrderEntryPage.orderNoInput, jsonData.getData("PONumber") + Keys.ENTER, "Enter Order Order");
+        Utility_Functions.timeWait(5);
+    }
+
     public void typeShipmentD() {
         sendKeys(PurchaseOrderEntryPage.actionInpput, "D", "Changing Action to D");
         sendKeys(PurchaseOrderEntryPage.orderNoInput, Utility_Functions.xGetJsonData("PONumber") + Keys.ENTER, "Enter Order Order");
@@ -708,6 +714,11 @@ public class CreatePurchaseOrder extends ReusableLib {
     public void verifySalesOrderEntryFields() {
         sendKeys(SalesOrdersPage.salesOrderField,Utility_Functions.xGetJsonData("SalesOrder_POEntry")+Keys.ENTER,"Enter Sale Order");
         Utility_Functions.timeWait(4);
+
+        /**************************** Sometimes order in use popup is displayed ****************************/
+        if (Utility_Functions.xIsDisplayed(ownDriver, SalesOrdersPage.btnOk))
+            click(SalesOrdersPage.btnOk);
+
         billingInfo();
         shippingInfo();
     }
