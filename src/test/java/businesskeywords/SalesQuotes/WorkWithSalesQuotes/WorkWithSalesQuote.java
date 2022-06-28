@@ -115,7 +115,9 @@ public class WorkWithSalesQuote extends ReusableLib {
      */
     public void convertSaleOrd() {
         click(SalesQuotesPage.convert,"Click Convert");
-        click(SalesQuotesPage.overRide,"Click Override");
+        if(isDisplayed(ownDriver.findElement(SalesQuotesPage.statusHeader))){
+            click(SalesQuotesPage.overRide,"Click Override");
+        }
         sendKey(SalesQuoteConversionToSalesOrderPage.salesOrderQtyShipped, "1");
         click(SalesQuotesPage.nextBtn,"Click Next Button");
         String itemNo=ownDriver.findElement(SalesQuoteDetailLinesConversionRecapPage.itemConvert).getText();
