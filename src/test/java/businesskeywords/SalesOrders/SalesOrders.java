@@ -94,6 +94,10 @@ public class SalesOrders extends ReusableLib{
 				click(SalesOrdersPage.continuebtn);
 			}
 			Utility_Functions.timeWait(5);
+			if(ownDriver.isElementVisible(SalesOrdersPage.creditLimitHeader)){
+				click(SalesOrdersPage.creditLimitContinue);
+			}
+
 	    	sendKeys(SalesOrdersPage.qtyOrdered,"1","Entering ordered quantity");
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo2"),"Entering item Number");
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
@@ -107,11 +111,12 @@ public class SalesOrders extends ReusableLib{
 				click(SalesOrdersPage.continuebtn);
 			}
 			Utility_Functions.timeWait(5);
+			if(ownDriver.isElementVisible((SalesOrdersPage.creditLimitHeader))){
+				click(SalesOrdersPage.creditLimitContinue);
+			}
+
 	    	Utility_Functions.xUpdateJsonWithArray("SalesOrderNo",ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 			Utility_Functions.xUpdateJson("SalesOrder",ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
-
-
-
 	    }
 
 	    public void navigateToShipmentsTab()

@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 
 public class SalesOrdersPage extends ReusableLib {
 
-	 public SalesOrdersPage(Helper helper) {
+	public SalesOrdersPage(Helper helper) {
 	        super(helper);
 	    }
 	public static By pageTitle = By.id("wob-app-header");
@@ -52,6 +52,8 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By combineSelect = By.id("rdbUserActChoice1.1");
 	public static By itemAlreadyOnOrderWindow = By.id("Dialog1");
 	public static By lineNumberToCombine = By.id("OutputField2.1");
+	public static By creditLimitHeader = By.id("PnlCreditLimitExceeded");
+	public static By creditLimitContinue = By.id("CssButton1");
 
 	//shipment tab
 	public static By shipmentTab = By.xpath("//span[text()='Shipments'][@istab='true']");
