@@ -215,8 +215,13 @@ public class SalesOrders extends ReusableLib{
 
 	    public void saveExitSalesOrders() {
 	    	click(SalesOrdersPage.btnSaveExit,"saving and exiting");
+			if(ownDriver.isElementVisible(SerializedTrackingSelectionPage.serializedHeader)){
+				click(SerializedTrackingSelectionPage.btnEnterSerialNum);
+				sendKeys(SerializedTrackingSelectionPage.serialNumField, "123456789", "Entering serial number");
+				click(SerializedTrackingSelectionPage.btnProcessSerialNum);
+				click(SerializedTrackingSelectionPage.btnBack);
+			}
 	    	click(SalesOrdersPage.btnExit," exiting sales order");
-
 	    }
 
 	public void saveExitSalesOrdersCreateShipment() {
