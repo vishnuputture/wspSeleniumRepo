@@ -5,9 +5,9 @@
         <suite-file path="../Inventory/CycleCostAdjustment.xml"></suite-file>
         <suite-file path="../Inventory/ReceiptCorrection.xml"></suite-file>
         <suite-file path="../CreateSalesOrder/CreateSaleOrder.xml"></suite-file>
-        <suite-file path="../Pricing/MatrixCostUpdate.xml"></suite-file>
+        <!--<suite-file path="../Pricing/MatrixCostUpdate.xml"></suite-file>-->
         <suite-file path="../Pricing/PricingMatrix.xml"></suite-file>
-        <suite-file path="../Pricing/SelfServicePriceSheet.xml"></suite-file>
+        <!--<suite-file path="../Pricing/SelfServicePriceSheet.xml"></suite-file>-->
         <suite-file path="../Pricing/SPATesting.xml"></suite-file>
         <suite-file path="../Pricing/Wise.xml"></suite-file>
         <suite-file path="../PurchaseOrder/InventoryReceipts.xml"></suite-file>
@@ -17,8 +17,8 @@
         <suite-file path="../PurchaseOrder/VendorInvoiceReco.xml"></suite-file>
         <suite-file path="../SalesQuotes/SalesQuotes.xml"></suite-file>
         <suite-file path="../BinMaintenance.xml"></suite-file>
-        <suite-file path="../MakePayment.xml"></suite-file>
-        <suite-file path="../manifest.xml"></suite-file>
+        <!--<suite-file path="../MakePayment.xml"></suite-file>-->
+        <!--<suite-file path="../manifest.xml"></suite-file>-->
         <suite-file path="../ReceivingInProcess.xml"></suite-file>
         <suite-file path="../SalesPerson.xml"></suite-file>
         <suite-file path="../spo.xml"></suite-file>
