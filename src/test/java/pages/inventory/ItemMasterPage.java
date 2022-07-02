@@ -15,6 +15,7 @@ public class ItemMasterPage extends ReusableLib{
     public static By txtBoxDescription = By.xpath("//input[@title='Description Blank']");
     public static By itemDesc1=By.id("inItemDesc1");
     public static By itemDesc2=By.id("InItemDesc2");
+    public static By itemDetail=By.id("hdrItemDesc1");
     public static By txtBoxUOM = By.xpath("//input[@id='inSellingUOM']");
     public static By btnSave = By.xpath("//input[@id='btnSaveChanges']");
     public static By txtBoxSearch = By.xpath("//input[@id='inItemNumber']");
