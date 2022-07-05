@@ -11,11 +11,9 @@ public class LoginPage extends ReusableLib{
     }
     
     public static By userNametxtBox=By.id("I_6_53");
-    
     public static By passWordtxtBox = By.id("I_7_53");
-    
-    public static By pendingScreenTitle = By.xpath("//div[contains(text(),'Messages')]");
-    
+    public static By pendingScreenTitle = By.id("D_1_16");
+    public static By informationScreenTitle = By.id("D_1_31");
     public static By signOnPageTitle = By.id("D_1_23");
     
     
