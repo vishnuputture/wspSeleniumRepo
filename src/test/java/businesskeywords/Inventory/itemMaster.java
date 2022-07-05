@@ -7,9 +7,12 @@ import commonkeywords.CommonActions;
 import commonkeywords.DBCall;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import pages.PurchaseOrders.InventoryReceiptsPage;
+import pages.PurchaseOrders.PoEntryConversionFactorPage;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.PurchaseOrders.VendorInvoiceReconciliationPage;
+import pages.SalesOrders.SalesOrdersPage;
 import pages.common.MasterPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.inventory.ItemMasterPage;
@@ -173,6 +176,10 @@ public class itemMaster extends ReusableLib {
         return By.xpath("//div[@class='win-label']");
     }
 
+    public By selectCodes(String text) {
+        return By.xpath("//div[@class='cell odd']/div[text()='" + text + "']");
+    }
+
     public void exitItemMaster() {
         click(SpecialPriceAllowancePage.btnExit, "Click [F3=Exit]");
     }
@@ -287,7 +294,217 @@ public class itemMaster extends ReusableLib {
         Utility_Functions.xAssertEquals(report, desc2, jsonData.getData("Description2"), "Description Matches");
     }
 
-    public void verifyChangeMFPDVN() {
+    public void selectMFCode() {
+        click(ItemMasterPage.mfSearchIcon, "Click Manufactured search icon");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, selectCodes(jsonData.getData("MF")), "Select Manufacturer Code");
+    }
 
+    public void selectPDCode() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.pdSearchIcon, "Click Product search icon");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, selectCodes(jsonData.getData("PD")), "Select Product Code");
+    }
+
+    public void selectVNCode() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.vnSearchIcon, "Click Vendor search icon");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, selectCodes(jsonData.getData("VN")), "Select Vendor Code");
+    }
+
+    public void verifyChangeMFPDVN() {
+        selectMFCode();
+        selectPDCode();
+        selectVNCode();
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.manufacturerCode, "Wait for page to be loaded");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        String[] mfCode = getAttribute(ItemMasterPage.manufacturerCode, "value").split(" ");
+        String[] pdCode = getAttribute(ItemMasterPage.productCode, "value").split(" ");
+        String[] vnCode = getAttribute(ItemMasterPage.vendorCode, "value").split(" ");
+        Utility_Functions.xAssertEquals(report, mfCode[0], jsonData.getData("MF"), "");
+        Utility_Functions.xAssertEquals(report, pdCode[0], jsonData.getData("PD"), "");
+        Utility_Functions.xAssertEquals(report, vnCode[0], jsonData.getData("VN"), "");
+    }
+
+    public void verifyHistoryMonthsToRetain() {
+        sendKeysAndEnter(inputFields("inHstMntRtn"), jsonData.getData("HistoryMonths"), "Enter History Months to Retain");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        Utility_Functions.xAssertEquals(report, getAttribute(inputFields("inHstMntRtn"), "value"), jsonData.getData("HistoryMonths"), "");
+    }
+
+    public void verifyDescDesc2() {
+        click(ItemMasterPage.addItemAction, "Click on add item");
+        sendKeys(ItemMasterPage.txtBoxDescription, jsonData.getData("Description"), "Enter description for item number");
+        sendKeys(ItemMasterPage.txtBoxUOM, "EA", "Enter UOM");
+        click(ItemMasterPage.btnSave, "Click on save changes");
+        if (Utility_Functions.xWaitForElementPresent(ownDriver, ItemMasterPage.messageAddSuccessful, 10)) {
+            String successMessage = Utility_Functions.getText(ownDriver, ItemMasterPage.messageAddSuccessful);
+            System.out.println("Text: " + successMessage);
+            Utility_Functions.xAssertEquals(report, "Record successfully added !", successMessage.trim(), "Validating success message");
+        } else {
+            System.out.println("Text: Not found");
+            throw new NoSuchElementException("Could not find :" + ItemMasterPage.messageAddSuccessful);
+        }
+        commonObj.validateText(ItemMasterPage.itemDetail, jsonData.getData("Description").substring(0, 30), "[Description] is present");
+    }
+
+    public void selectInvalidMFCode(String mfCode) {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.manufacturerCode, "Wait for page to be loaded");
+        sendKeysAndEnter(ItemMasterPage.manufacturerCode, jsonData.getData(mfCode), "Enter Invalid Manufacture");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.manufacturerCode, "title"), "Invalid Manufacturer or Vendor Code.", "Validating Error message");
+    }
+
+    public void selectInvalidVNCode(String vnCode) {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.vendorCode, "Wait for page to be loaded");
+        sendKeysAndEnter(ItemMasterPage.vendorCode, jsonData.getData(vnCode), "Invalid Manufacturer or Vendor Code.");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.vendorCode, "title"), "Invalid Manufacturer or Vendor Code.", "Validating Error message");
+    }
+
+    public void selectInvalidPDCode(String pdCode) {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.productCode, "Wait for page to be loaded");
+        sendKeysAndEnter(ItemMasterPage.productCode, jsonData.getData(pdCode), "Enter Invalid Product Code");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.productCode, "title"), "Invalid Product Code", "Validating Error message");
+    }
+
+    public void verifyNegDescDesc2() {
+        selectInvalidMFCode("AlphaSpecialMF");
+        selectInvalidVNCode("AlphaSpecialVN");
+        selectInvalidPDCode("AlphaSpecialPD");
+        selectInvalidMFCode("AlphaNumericMF");
+        selectInvalidVNCode("AlphaNumericVN");
+        selectInvalidPDCode("AlphaNumericPD");
+        selectInvalidMFCode("InvalidVN");
+        selectInvalidVNCode("InvalidMF");
+        selectInvalidPDCode("InvalidPD");
+    }
+
+    public void itemType(String value) {
+        sendKeysAndEnter(ItemMasterPage.itemType, value, "Enter [" + value + "] into Item Type");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemType, "title"), "Can not change item type", "");
+    }
+
+    public void verifyItemType() {
+        clearText(ItemMasterPage.itemType);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemType, "title"), "Can not change item type", "");
+        itemType("A");
+        itemType("AA");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.historyMonth, "title"), "Invalid Number", "");
+        itemType("&");
+        itemType("2");
+    }
+
+    public void verifyUOMSearch() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.uomSearch, "Click UOM search Icon");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, selectCodes("BD"), "Select UOM Code");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.txtBoxUOM, "value"), "BD", "");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.txtBoxUOM, "Click [UOM] input field");
+        Utility_Functions.actionKey(Keys.F4, ownDriver);
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, SalesOrdersPage.btnBack, "Click [Cancel] Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.txtBoxUOM, "Wait for Page to be loaded");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.txtBoxUOM, "value"), "BD", "");
+        sendKeysAndEnter(ItemMasterPage.txtBoxUOM, jsonData.getData("UOM"), "Enter [" + jsonData.getData("UOM") + "] into UOM");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.txtBoxUOM, "value"), jsonData.getData("UOM"), "UOM matches");
+    }
+
+    public void verifyStdPkgQtyPoundStdPkg() {
+        sendKeysAndEnter(ItemMasterPage.stdPkgQty, jsonData.getData("StdPackageQty"), "Enter [" + jsonData.getData("StdPackageQty") + "] into Std. Package Quantity");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.stdPkgQty, "value"), jsonData.getData("StdPackageQty"), "Std. Package Quantity matches");
+        sendKeysAndEnter(ItemMasterPage.poundStdPkg, jsonData.getData("PoundsPerStdPkg"), "Enter [" + jsonData.getData("PoundsPerStdPkg") + "] into Std. Package Quantity");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkg, "value"), jsonData.getData("PoundsPerStdPkg") + ".000", "Std. Package Quantity matches");
+    }
+
+    public void verifyMOU(String uom) {
+        clearText(ItemMasterPage.txtBoxUOM);
+        sendKeysAndEnter(ItemMasterPage.txtBoxUOM, jsonData.getData(uom), "Enter [" + jsonData.getData(uom) + "] into UOM");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.txtBoxUOM, "title"), "Invalid U/M", "");
+        sendKeys(ItemMasterPage.txtBoxUOM, "EA", "Enter [EA] into UOM");
+    }
+
+    public void verifyPoundStdPkg(String poundStdPkg) {
+        clearText(ItemMasterPage.poundStdPkg);
+        sendKeysAndEnter(ItemMasterPage.poundStdPkg, jsonData.getData(poundStdPkg), "Enter [" + jsonData.getData(poundStdPkg) + "] into Pounds per Std Pkg:");
+        String numberOnly = jsonData.getData(poundStdPkg).replaceAll("[^1-9]", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkg, "value"), numberOnly+".000", "");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+    }
+
+    public void verifyStdPkgQty(String stdPkgQty) {
+        clearText(ItemMasterPage.stdPkgQty);
+        sendKeysAndEnter(ItemMasterPage.stdPkgQty, jsonData.getData(stdPkgQty), "Enter [" + jsonData.getData(stdPkgQty) + "] into Std. Package Quantity:");
+        String numberOnly = jsonData.getData(stdPkgQty).replaceAll("[^1-9]", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.stdPkgQty, "value"), numberOnly, "");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+    }
+
+    public void verifyUOMStdPkgQtyPndStdPkg() {
+        verifyMOU("UOMSpecialNum");
+        verifyMOU("UOMSpecialAlpha");
+        verifyMOU("UOMDecimal");
+        verifyStdPkgQty("StdPackageQtySpecialNum");
+        verifyStdPkgQty("StdPackageQtyDec");
+        verifyStdPkgQty("StdPackageQtySpecialAlphaNum");
+        verifyPoundStdPkg("PoundsPerStdPkgSpecialNum");
+        verifyPoundStdPkg("PoundsPerStdPkgDec");
+        verifyPoundStdPkg("PoundsPerStdPkgSpecialAlphaNum");
+    }
+
+    public void verifyUOMSearchPurchasing() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.uomSearchPur, "Click UOM search Icon");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, selectCodes("BD"), "Select UOM Code");
+        Utility_Functions.xAssertEquals(report, getAttribute(PoEntryConversionFactorPage.inPurchasingUOM, "value"), "BD", "");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, PoEntryConversionFactorPage.inPurchasingUOM, "Click [UOM] input field");
+        Utility_Functions.actionKey(Keys.F4, ownDriver);
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, SalesOrdersPage.btnBack, "Click [Cancel] Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, PoEntryConversionFactorPage.inPurchasingUOM, "Wait for Page to be loaded");
+        Utility_Functions.xAssertEquals(report, getAttribute(PoEntryConversionFactorPage.inPurchasingUOM, "value"), "BD", "");
+        sendKeysAndEnter(PoEntryConversionFactorPage.inPurchasingUOM, jsonData.getData("UOM"), "Enter [" + jsonData.getData("UOM") + "] into UOM");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        Utility_Functions.xAssertEquals(report, getAttribute(PoEntryConversionFactorPage.inPurchasingUOM, "value"), jsonData.getData("UOM"), "UOM matches");
+    }
+
+    public void verifyStdPkgQtyPoundStdPkgPurchasing() {
+        sendKeysAndEnter(ItemMasterPage.txtInputPkgQuantity, jsonData.getData("StdPackageQty"), "Enter [" + jsonData.getData("StdPackageQty") + "] into Std. Package Quantity");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.txtInputPkgQuantity, "value"), jsonData.getData("StdPackageQty"), "Std. Package Quantity matches");
+        sendKeysAndEnter(ItemMasterPage.poundStdPkgPur, jsonData.getData("PoundsPerStdPkg"), "Enter [" + jsonData.getData("PoundsPerStdPkg") + "] into Std. Package Quantity");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkgPur, "value"), jsonData.getData("PoundsPerStdPkg") + ".000", "Std. Package Quantity matches");
+    }
+
+    public void verifyMOUPurchasing(String uom) {
+        clearText(PoEntryConversionFactorPage.inPurchasingUOM);
+        sendKeysAndEnter(PoEntryConversionFactorPage.inPurchasingUOM, jsonData.getData(uom), "Enter [" + jsonData.getData(uom) + "] into UOM");
+        Utility_Functions.xAssertEquals(report, getAttribute(PoEntryConversionFactorPage.inPurchasingUOM, "title"), "Invalid U/M", "");
+        sendKeys(PoEntryConversionFactorPage.inPurchasingUOM, "EA", "Enter [EA] into UOM");
+    }
+
+    public void verifyPoundStdPkgPurchasing(String poundStdPkg) {
+        clearText(ItemMasterPage.poundStdPkgPur);
+        sendKeysAndEnter(ItemMasterPage.poundStdPkgPur, jsonData.getData(poundStdPkg), "Enter [" + jsonData.getData(poundStdPkg) + "] into Pounds per Std Pkg:");
+        String numberOnly = jsonData.getData(poundStdPkg).replaceAll("[^1-9]", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkgPur, "value"), numberOnly+".000", "");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+    }
+
+    public void verifyStdPkgQtyPurchasing(String stdPkgQty) {
+        clearText(ItemMasterPage.txtInputPkgQuantity);
+        sendKeysAndEnter(ItemMasterPage.txtInputPkgQuantity, jsonData.getData(stdPkgQty), "Enter [" + jsonData.getData(stdPkgQty) + "] into Std. Package Quantity:");
+        String numberOnly = jsonData.getData(stdPkgQty).replaceAll("[^1-9]", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.txtInputPkgQuantity, "value"), numberOnly, "");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+    }
+
+    public void verifyUOMStdPkgQtyPndStdPkgPurchasing() {
+        verifyMOUPurchasing("UOMSpecialNum");
+        verifyMOUPurchasing("UOMSpecialAlpha");
+        verifyMOUPurchasing("UOMDecimal");
+        verifyStdPkgQtyPurchasing("StdPackageQtySpecialNum");
+        verifyStdPkgQtyPurchasing("StdPackageQtyDec");
+        verifyStdPkgQtyPurchasing("StdPackageQtySpecialAlphaNum");
+        verifyPoundStdPkgPurchasing("PoundsPerStdPkgSpecialNum");
+        verifyPoundStdPkgPurchasing("PoundsPerStdPkgDec");
+        verifyPoundStdPkgPurchasing("PoundsPerStdPkgSpecialAlphaNum");
     }
 }
