@@ -85,8 +85,9 @@ public class SpecialPriceMaintenance extends ReusableLib {
         }
         sendKeys(SpecialPricePage.posToCustNo, "0");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";
-        sendKeys(By.xpath(optXpath), "4");
+        //String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";
+        //sendKeys(By.xpath(optXpath), "4");
+        sendKeys(SpecialPricePage.optEntryBox, "4");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         click(SpecialPricePage.btnProcessF9, "Processing special price delete request");
@@ -279,10 +280,11 @@ public class SpecialPriceMaintenance extends ReusableLib {
             commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");*/
         }
 
-        String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";
-        sendKeys(By.xpath(optXpath), "4");
+        //String optXpath = "//div[@class='A20'][text()='" + Utility_Functions.xGetJsonAsString("CustomerNo") + "']/preceding-sibling::input[1]";
+        //sendKeys(By.xpath(optXpath), "4");
+        sendKeys(SpecialPricePage.optEntryBox, "4");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        // 	click(SpecialPricePage.btnProcessF9);
+        //     click(SpecialPricePage.btnProcessF9);
         Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElement(SpecialPricePage.papMessage));
         String res = ownDriver.findElement(SpecialPricePage.papMessage).getText();
         System.out.println(res);

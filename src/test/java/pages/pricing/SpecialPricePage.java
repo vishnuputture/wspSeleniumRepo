@@ -12,7 +12,8 @@ public class SpecialPricePage extends ReusableLib {
 	 public static By specialPricingAdd=By.xpath("//input[@type='button'][@value='F6=Add'][@class='win-button-genie']");
 	 public static By btnF3=By.id("btnExit");
 	 public static By btnProcessF9=By.xpath("//input[@value='F9=Process'][@id='btnCF09']");
-	 public static By spclPriceTitle= By.xpath("//div[@class='app-header'][@id='D_2_15']");
+	 public static By spclPriceTitle= By.id("D_2_15");
+	 public static By optEntryBox= By.id("I_10_2");
 	 public static By selectPricingRecordBox= By.xpath("//input[contains(@id,'I_1')]");
 	 //public static By selectPricingRecordBox= By.xpath("//div[@class='A20'][contains(text(),'*')]/preceding-sibling::input[1]");
 	 public static By filterTxtBox = By.id("I_4_59");
