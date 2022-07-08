@@ -15,7 +15,8 @@ public class SalesQuotesPage extends ReusableLib {
     public static By convert=By.id("Convert");
     public static By quotesHeader=By.id("wbScrTitle");
     public static By quoteNum=By.id("S1NBR");
+    public static By costMethodDropDown=By.id("S1COSTU");
     public static By printSendBtn=By.id("btnCF08");
+    public static By statusHeader=By.id("OutputField1");
     public static By nextBtn=By.id("btnSubmit");
-
 }

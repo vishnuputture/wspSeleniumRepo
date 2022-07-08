@@ -19,7 +19,7 @@ public class ReceiveCorrectionPage extends ReusableLib{
 	 //public static By txtExplanationsecond = By.xpath("//div/input[@id='txtIEXPL.1']");
 	 public static By btnProcess = By.xpath("//input[@id='btnSubmit']");
 	 public static By lblOnHand = By.xpath("//div/div[contains(@id,'outIonhandqty.')]/a");
-	 public static By btnContinuePop = By.xpath("//input[@id='btnButton3']");
+	 public static By btnContinuePop = By.id("btnButton3");
 	 public static By lblTitle = By.xpath("//div[@id='outC1HDR']");
 	 public static By btnItemLedger = By.xpath("//div[contains(@id,'faItmBinLed.')]");
 }

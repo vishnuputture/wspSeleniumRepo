@@ -41,7 +41,8 @@
       "Tc_164_FixedPaymentByCC": "launchMakePayments,logInToMakePayments,navigateToFixedPayments,scrollToView,makeFixedPaymentByCC,fixedPayConfirmationCC",
       "Tc_165_ValidateFixedPaymentRecordBA": "launchApp,siteLogin,navigateToSalesAnalysis,goToPly,fixedPaymentValidationBA",
       "Tc_166_ValidateFixedPaymentRecordCC": "launchApp,siteLogin,navigateToSalesAnalysis,goToPly,fixedPaymentValidationCC"
-    }],
+    }
+  ],
   "General_Data": [
     {
       "TC_ID": "Tc_CreateSalesOrderInvoice",
@@ -203,7 +204,7 @@
       "userPassword": "Qwerty@1",
       "NameOnAccount": "AutomationTesting",
       "AccountName": "QATesting",
-      "AccountType":"Personal Savings",
+      "AccountType": "Personal Savings",
       "BankRoutingNumber": "998000057"
     },
     {
@@ -218,7 +219,7 @@
       "userPassword": "Qwerty@1",
       "NameOnAccount": "AutomationTesting",
       "AccountName": "QATesting",
-      "AccountType":"Personal Savings",
+      "AccountType": "Personal Savings",
       "BankRoutingNumber": "998000057"
     },
     {
@@ -227,7 +228,7 @@
       "userPassword": "Qwerty@1",
       "NameOnAccount": "AutomationTesting",
       "AccountName": "QATesting",
-      "AccountType":"Personal Savings",
+      "AccountType": "Personal Savings",
       "BankRoutingNumber": "998000057"
     },
     {
@@ -236,7 +237,7 @@
       "userPassword": "Qwerty@1",
       "NameOnAccount": "AutomationTesting",
       "AccountName": "QATesting",
-      "AccountType":"Personal Savings",
+      "AccountType": "Personal Savings",
       "BankRoutingNumber": "998000057"
     },
     {

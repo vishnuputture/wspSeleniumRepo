@@ -41,14 +41,17 @@ public class SalesOrders extends ReusableLib{
 	    public void validateSalesOrderFields() {
 	    	sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to account number");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-			if(isDisplayed(CustomerNotesPage.customerNotesRevisionsHeader))
-			{
+			if(isDisplayed(CustomerNotesPage.customerNotesRevisionsHeader)) {
 				click(CustomerNotesPage.btnExit, "Exiting customer notes");
 			}
+			if(isDisplayed(SalesOrdersPage.deliveryTypeError)) {
+				Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.deliveryTypeDropDown), 1);
+			}
+			Utility_Functions.timeWait(1);
 	    	//Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(driver, SalesOrdersPage.deliveryTypeDropDown), "Pick Up", "Validating selected delivery type");
 	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(ownDriver, SalesOrdersPage.directShipDropDown), "No", "Validating selected direct ship value");
-	    	Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(ownDriver, SalesOrdersPage.shipCompleteDropDown), "No", "Validating selected ship complete value");
-	    	Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesOrdersPage.shipViaDropDown, "DIRECT SHIP");
+			Utility_Functions.xAssertEquals(report, Utility_Functions.xgetSelectedDropdownValue(ownDriver, SalesOrdersPage.shipCompleteDropDown), "No", "Validating selected ship complete value");
+			Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesOrdersPage.shipViaDropDown, "DIRECT SHIP");
 	    }
 
 		public void fillInOtherFields(){
@@ -57,6 +60,8 @@ public class SalesOrders extends ReusableLib{
 			sendKeys(SalesOrdersPage.poNumberEntry, jsonData.getData("PONumber"), "Entering PO number");
 			sendKeys(SalesOrdersPage.placedByEntry, jsonData.getData("PlacedBy"), "Entering placed by");
 			Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.primarySalespersonDropDown), 0);
+			Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.writtenByDropDown), 0);
+			sendKeys(SalesOrdersPage.filledByEntry, jsonData.getData("FilledBy"), "Entering filled by");
 		}
 		public void createSalesOrderCOD(){
 			sendKeys(SalesOrdersPage.billToAcct,jsonData.getData("accountNo"),"Entering bill to COD account number");
@@ -81,16 +86,37 @@ public class SalesOrders extends ReusableLib{
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 
+			if(isDisplayed(SalesOrdersPage.itemAlreadyOnOrderWindow)){
+				Utility_Functions.xMouseDoubleClick(ownDriver, ownDriver.findElement(SalesOrdersPage.lineNumberToCombine));
+			}
+			if(isDisplayed(SalesOrdersPage.itemEntryIssueWindow)){
+				click(SalesOrdersPage.combineSelect);
+				click(SalesOrdersPage.continuebtn);
+			}
+			Utility_Functions.timeWait(5);
+			if(ownDriver.isElementVisible(SalesOrdersPage.creditLimitHeader)){
+				click(SalesOrdersPage.creditLimitContinue);
+			}
+
 	    	sendKeys(SalesOrdersPage.qtyOrdered,"1","Entering ordered quantity");
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo2"),"Entering item Number");
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 
+			if(isDisplayed(SalesOrdersPage.itemAlreadyOnOrderWindow)){
+				Utility_Functions.xMouseDoubleClick(ownDriver, ownDriver.findElement(SalesOrdersPage.lineNumberToCombine));
+			}
+			if(isDisplayed(SalesOrdersPage.itemEntryIssueWindow)){
+				click(SalesOrdersPage.combineSelect);
+				click(SalesOrdersPage.continuebtn);
+			}
+			Utility_Functions.timeWait(5);
+			if(ownDriver.isElementVisible((SalesOrdersPage.creditLimitHeader))){
+				click(SalesOrdersPage.creditLimitContinue);
+			}
+
 	    	Utility_Functions.xUpdateJsonWithArray("SalesOrderNo",ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 			Utility_Functions.xUpdateJson("SalesOrder",ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
-
-
-
 	    }
 
 	    public void navigateToShipmentsTab()
@@ -112,7 +138,9 @@ public class SalesOrders extends ReusableLib{
 			Utility_Functions.contextClickOnElement(ownDriver,SalesOrdersPage.shipmentItemName);
 			Utility_Functions.timeWait(5);
 			click(SalesOrdersPage.contextOptionDeleteItem,"Removing item from shipment");
-			click(SalesOrdersPage.updateShipmentBtn,"Updating shipment after removing item");
+			if(isDisplayed(SalesOrdersPage.updateShipmentBtn)) {
+				click(SalesOrdersPage.updateShipmentBtn, "Updating shipment after removing item");
+			}
 			Utility_Functions.timeWait(5);
 			click(SalesOrdersPage.maintainShipmentBtn, "Clicking on maintain shipment button");
 
@@ -189,8 +217,13 @@ public class SalesOrders extends ReusableLib{
 
 	    public void saveExitSalesOrders() {
 	    	click(SalesOrdersPage.btnSaveExit,"saving and exiting");
+			if(ownDriver.isElementVisible(SerializedTrackingSelectionPage.serializedHeader)){
+				click(SerializedTrackingSelectionPage.btnEnterSerialNum);
+				sendKeys(SerializedTrackingSelectionPage.serialNumField, "123456789", "Entering serial number");
+				click(SerializedTrackingSelectionPage.btnProcessSerialNum);
+				click(SerializedTrackingSelectionPage.btnBack);
+			}
 	    	click(SalesOrdersPage.btnExit," exiting sales order");
-
 	    }
 
 	public void saveExitSalesOrdersCreateShipment() {

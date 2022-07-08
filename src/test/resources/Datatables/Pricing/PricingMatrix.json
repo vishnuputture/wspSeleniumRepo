@@ -11,15 +11,13 @@
       "Tc_197_ValidatePgLeftRightPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,pgLeftRt",
       "Tc_198_ValidatePgUpDownPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,pgUpDn",
       "Tc_200_ValidateDisplayListPricingMatrix": "launchApp,siteLogin,validatePricingMatrixTitle,validateDispList"
-
-      
     }
   ],
   "General_Data": [
     {
       "TC_ID": "Tc_188_ValidateNavigationToPricingMatrix"
     },
-     {
+    {
       "TC_ID": "Tc_191_ValidateFirstRowColPricingMatrix"
     },
     {

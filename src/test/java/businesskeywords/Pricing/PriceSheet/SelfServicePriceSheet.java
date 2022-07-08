@@ -198,7 +198,7 @@ public class SelfServicePriceSheet extends ReusableLib {
 
     public void validateUpload() {
         String strdate = generateDate();
-        Utility_Functions.timeWait(4);
+        //Utility_Functions.timeWait(4);
         commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataName, Utility_Functions.xGetJsonData("priceSheetName"), "Name Matched");
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataManufacturer, jsonData.getData("Manufacturer"), "Manufacturer Matched");

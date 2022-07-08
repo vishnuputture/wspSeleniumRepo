@@ -1,4 +1,3 @@
-
 {
   "Business_Flow": [
     {
@@ -7,7 +6,7 @@
       "Tc_29_Negative_Quantity_to_Item": "launchApp,siteLogin,validateCycleCountAdj,nagValidation,exitFromCycleCostAdj,signOut",
       "Tc_30_Navigation_To_Item_Ledger_Screen": "launchApp,siteLogin,validateCycleCountAdj,navCycleCostAdjProgram,navLedger,exitItemLedgerProgram,exitFromCycleCostAdj,signOut",
       "Tc_31_Verify_Item_Ledger_Screen": "launchApp,siteLogin,validateCycleCountAdj,validateItemLedgerFiled,exitItemLedgerProgram,exitFromCycleCostAdj,signOut",
-      "Tc_28_assignment_of_quantity_to_multiple_items": "launchApp,siteLogin,validateCycleCountAdj,navCycleCostAdjProgram,verifyCount,exitFromCycleCostAdj,signOut",
+      "Tc_28_assignment_of_quantity_to_multiple_items": "launchApp,siteLogin,validateCycleCountAdj,navCycleCostAdjProgram,verifyCount,exitFromCycleCostAdj,signOut"
     }
   ],
   "General_Data": [
@@ -34,5 +33,6 @@
     {
       "TC_ID": "Tc_28_assignment_of_quantity_to_multiple_items",
       "Title": "To Verify assignment of quantity to multiple items"
-    }  ]
+    }
+  ]
 }

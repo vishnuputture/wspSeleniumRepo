@@ -1,65 +1,64 @@
 {
-	"Business_Flow": [
-		{
-			"SalesQuotesToPO": "launchApp,siteLogin,navigateToWorkingSalesQuote,createQuote,addItemToQuote,verifyQuoteDetails,convertSaleOrd,validateCustJobName,inventoryInformation,createPurchaseOrd,exitSalesQuotesToMasterPage,signOut",
-			"CheckInventoryReceipts": "launchApp,siteLogin,navigateToInventoryReceipt,inventReceipt,exitPurchaseToMasterPage",
-			"InquiryOrdersByCustomer": "launchApp,siteLogin,navigateToOrderByCustomer,validBOQty,exitOrderByCustomer",
-			"OrderShippingConfirmation": "launchApp,siteLogin,navigateToShippingConfirmation,orderConfirmation,exitShippingConfirmation,navigateToOrderByCustomer,orderStatus,exitOrderByCustomer",
-			"PrintReportInvoices": "launchApp,siteLogin,navigateToPrintInvoicesProgram,createInvoices,exitReportMenu",
-			"FinalInquiryOrderStatus":"launchApp,siteLogin,navigateToOrderByCustomer,orderStatusInvoice,exitOrderByCustomer,signOut"
-
-		}],
-	"General_Data": [
-		{
-			"TC_ID": "SalesQuotesToPO",
-			"Title": "Sales Quote",
-			"JobName": "TEST AUTOMATION",
-			"CustNum": "000300",
-			"TestDescription": "TEST AUTO",
-			"Quantity": "1",
-			"InProgressStatus": "In Process",
-			"Iteration": "2"
-
-		},
-		{
-			"TC_ID": "CheckInventoryReceipts",
-			"JobName": "TEST AUTOMATION",
-			"CustNum": "000300",
-			"TestDescription": "TEST AUTO",
-			"Quantity": "1",
-			"InProgressStatus": "In Process"
-		},
-		{
-			"TC_ID": "InquiryOrdersByCustomer",
-			"JobName": "TEST AUTOMATION",
-			"CustNum": "000300",
-			"TestDescription": "TEST AUTO",
-			"Quantity": "1",
-			"InProgressStatus": "In Process"
-		},
-		{
-			"TC_ID": "OrderShippingConfirmation",
-			"JobName": "TEST AUTOMATION",
-			"CustNum": "000300",
-			"TestDescription": "TEST AUTO",
-			"Quantity": "1",
-			"InProgressStatus": "In Process"
-		},
-		{
-			"TC_ID": "PrintReportInvoices",
-			"JobName": "TEST AUTOMATION",
-			"CustNum": "000300",
-			"TestDescription": "TEST AUTO",
-			"Quantity": "1",
-			"InProgressStatus": "In Process"
-		},
-		{
-			"TC_ID": "FinalInquiryOrderStatus",
-			"JobName": "TEST AUTOMATION",
-			"CustNum": "000300",
-			"TestDescription": "TEST AUTO",
-			"Quantity": "1",
-			"InProgressStatus": "In Process"
-		}
-	]
+  "Business_Flow": [
+    {
+      "SalesQuotesToPO": "launchApp,siteLogin,navigateToWorkingSalesQuote,createQuote,addItemToQuote,verifyQuoteDetails,convertSaleOrd,validateCustJobName,inventoryInformation,createPurchaseOrd,exitSalesQuotesToMasterPage,signOut",
+      "CheckInventoryReceipts": "launchApp,siteLogin,navigateToInventoryReceipt,inventReceipt,exitPurchaseToMasterPage",
+      "InquiryOrdersByCustomer": "launchApp,siteLogin,navigateToOrderByCustomer,validBOQty,exitOrderByCustomer",
+      "OrderShippingConfirmation": "launchApp,siteLogin,navigateToShippingConfirmation,orderConfirmation,exitShippingConfirmation,navigateToOrderByCustomer,orderStatus,exitOrderByCustomer",
+      "PrintReportInvoices": "launchApp,siteLogin,navigateToPrintInvoicesProgram,createInvoices,exitReportMenu",
+      "FinalInquiryOrderStatus": "launchApp,siteLogin,navigateToOrderByCustomer,orderStatusInvoice,exitOrderByCustomer,signOut"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "SalesQuotesToPO",
+      "Title": "Sales Quote",
+      "JobName": "TEST AUTOMATION",
+      "CustNum": "000300",
+      "TestDescription": "TEST AUTO",
+      "Quantity": "1",
+      "InProgressStatus": "In Process",
+      "Iteration": "2"
+    },
+    {
+      "TC_ID": "CheckInventoryReceipts",
+      "JobName": "TEST AUTOMATION",
+      "CustNum": "000300",
+      "TestDescription": "TEST AUTO",
+      "Quantity": "1",
+      "InProgressStatus": "In Process"
+    },
+    {
+      "TC_ID": "InquiryOrdersByCustomer",
+      "JobName": "TEST AUTOMATION",
+      "CustNum": "000300",
+      "TestDescription": "TEST AUTO",
+      "Quantity": "1",
+      "InProgressStatus": "In Process"
+    },
+    {
+      "TC_ID": "OrderShippingConfirmation",
+      "JobName": "TEST AUTOMATION",
+      "CustNum": "000300",
+      "TestDescription": "TEST AUTO",
+      "Quantity": "1",
+      "InProgressStatus": "In Process"
+    },
+    {
+      "TC_ID": "PrintReportInvoices",
+      "JobName": "TEST AUTOMATION",
+      "CustNum": "000300",
+      "TestDescription": "TEST AUTO",
+      "Quantity": "1",
+      "InProgressStatus": "In Process"
+    },
+    {
+      "TC_ID": "FinalInquiryOrderStatus",
+      "JobName": "TEST AUTOMATION",
+      "CustNum": "000300",
+      "TestDescription": "TEST AUTO",
+      "Quantity": "1",
+      "InProgressStatus": "In Process"
+    }
+  ]
 }
