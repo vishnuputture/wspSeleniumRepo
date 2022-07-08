@@ -226,7 +226,9 @@ public class makePayments extends ReusableLib {
     		Utility_Functions.xSelectDropdownByIndex(ownDriver,ownDriver.findElement(MakePaymentLandingPage.invoiceStatusDropDown),i);
     		Utility_Functions.timeWait(2);
     		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
-    		click(MakePaymentLandingPage.btnTableExpand);
+                if(i!=0) {
+                    click(MakePaymentLandingPage.btnTableExpand);
+                }
     		Utility_Functions.timeWait(4);
     		String temp = ownDriver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
     		int displayCount = 0;
@@ -252,7 +254,9 @@ public class makePayments extends ReusableLib {
     		Utility_Functions.xSelectDropdownByIndex(ownDriver,ownDriver.findElement(MakePaymentLandingPage.invoiceDatesDropDown),i);
     		Utility_Functions.timeWait(2);
     		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
-    		click(MakePaymentLandingPage.btnTableExpand);
+                if(i!=0){
+                    click(MakePaymentLandingPage.btnTableExpand);
+                }
     		Utility_Functions.timeWait(4);
     		String temp = ownDriver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
     		//System.out.println("count :"+temp.split("of")[0].trim().substring(1));
@@ -323,7 +327,9 @@ public class makePayments extends ReusableLib {
 
     	Utility_Functions.timeWait(2);
 		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
-			click(MakePaymentLandingPage.btnTableExpand);
+            if (isDisplayed(MakePaymentLandingPage.btnTableExpand)) {
+                click(MakePaymentLandingPage.btnTableExpand);
+            }
     		Utility_Functions.timeWait(4);
     		String temp = ownDriver.findElement(MakePaymentLandingPage.txtRecordCount).getText().split("of")[0].trim().substring(1);
     		//System.out.println("count :"+temp.split("of")[0].trim().substring(1));

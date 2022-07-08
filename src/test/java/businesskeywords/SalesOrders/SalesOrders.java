@@ -138,7 +138,9 @@ public class SalesOrders extends ReusableLib{
 			Utility_Functions.contextClickOnElement(ownDriver,SalesOrdersPage.shipmentItemName);
 			Utility_Functions.timeWait(5);
 			click(SalesOrdersPage.contextOptionDeleteItem,"Removing item from shipment");
-			click(SalesOrdersPage.updateShipmentBtn,"Updating shipment after removing item");
+			if(isDisplayed(SalesOrdersPage.updateShipmentBtn)) {
+				click(SalesOrdersPage.updateShipmentBtn, "Updating shipment after removing item");
+			}
 			Utility_Functions.timeWait(5);
 			click(SalesOrdersPage.maintainShipmentBtn, "Clicking on maintain shipment button");
 
