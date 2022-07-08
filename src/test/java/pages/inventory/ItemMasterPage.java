@@ -20,8 +20,18 @@ public class ItemMasterPage extends ReusableLib{
     public static By uomSearch=By.xpath("//div[@id='faSellingUOMSrch']/i[@class='fa fa-search']");
     public static By uomSearchPur=By.xpath("//div[@id='faPurchasingUOMSrch']/i[@class='fa fa-search']");
     public static By itemDesc2=By.id("InItemDesc2");
+    public static By calcMethod=By.id("inCalcMethod");
     public static By stdPkgQty=By.id("inStdPackQty");
+    public static By btnSerialized=By.id("btnSerialized");
+    public static By itemNote2=By.id("inItemNotes2");
+    public static By itemNote3=By.id("inItemNotes3");
+    public static By tipIcon=By.xpath("//div[@class='pui-tip-content']");
+    public static By verifySerializedBtn=By.xpath("//div[@id='btnSerialized']/descendant::span");
     public static By poundStdPkg=By.id("inPdsPerStdKG");
+    public static By purchasingMin=By.id("inPurchsingMin");
+    public static By purchasingMax=By.id("inPurchasingMax");
+    public static By inCovFactor=By.id("inCovFactor");
+    public static By inTaxable=By.id("inTaxable");
     public static By poundStdPkgPur=By.id("inPdsperStdKG");
     public static By itemDetail=By.id("hdrItemDesc1");
     public static By itemType=By.id("inItemType");

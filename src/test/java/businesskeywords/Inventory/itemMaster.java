@@ -23,6 +23,7 @@ import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import supportLibraries.Utility_Functions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class itemMaster extends ReusableLib {
 
@@ -426,7 +427,7 @@ public class itemMaster extends ReusableLib {
         clearText(ItemMasterPage.poundStdPkg);
         sendKeysAndEnter(ItemMasterPage.poundStdPkg, jsonData.getData(poundStdPkg), "Enter [" + jsonData.getData(poundStdPkg) + "] into Pounds per Std Pkg:");
         String numberOnly = jsonData.getData(poundStdPkg).replaceAll("[^1-9]", "");
-        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkg, "value"), numberOnly+".000", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkg, "value"), numberOnly + ".000", "");
         commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
     }
 
@@ -484,7 +485,7 @@ public class itemMaster extends ReusableLib {
         clearText(ItemMasterPage.poundStdPkgPur);
         sendKeysAndEnter(ItemMasterPage.poundStdPkgPur, jsonData.getData(poundStdPkg), "Enter [" + jsonData.getData(poundStdPkg) + "] into Pounds per Std Pkg:");
         String numberOnly = jsonData.getData(poundStdPkg).replaceAll("[^1-9]", "");
-        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkgPur, "value"), numberOnly+".000", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkgPur, "value"), numberOnly + ".000", "");
         commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
     }
 
@@ -506,5 +507,133 @@ public class itemMaster extends ReusableLib {
         verifyPoundStdPkgPurchasing("PoundsPerStdPkgSpecialNum");
         verifyPoundStdPkgPurchasing("PoundsPerStdPkgDec");
         verifyPoundStdPkgPurchasing("PoundsPerStdPkgSpecialAlphaNum");
+    }
+
+    public void verifyCalcMethod(String calcMethod) {
+        clearText(ItemMasterPage.calcMethod);
+        sendKeysAndEnter(ItemMasterPage.calcMethod, calcMethod, "Enter " + calcMethod + " into Calc Method:");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+    }
+
+    public void enterCalcMethodAndVerify(String calMethod) {
+        verifyCalcMethod(calMethod);
+        exitItemMaster();
+        inventoryToItemMasterScreen();
+        searchItem();
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.calcMethod, "value"), calMethod, "");
+    }
+
+    public void verifyChangeCalculationMethod() {
+        enterCalcMethodAndVerify("S");
+        enterCalcMethodAndVerify("C");
+        enterCalcMethodAndVerify("M");
+        enterCalcMethodAndVerify("Q");
+        enterCalcMethodAndVerify("X");
+    }
+
+    public void verifyPurchasingMinMax() {
+        verifyCalcMethod("X");
+        sendKeys(ItemMasterPage.purchasingMin, jsonData.getData("PurchasingMin"), "Enter [" + jsonData.getData("PurchasingMin") + "] into Purchasing Min");
+        sendKeysAndEnter(ItemMasterPage.purchasingMax, jsonData.getData("PurchasingMax"), "Enter [" + jsonData.getData("PurchasingMax") + "] into Purchasing Max And Hit Enter");
+        Utility_Functions.xAssertEquals(report, "Error - Maximum Quantity less than Minimun Quantity", getAttribute(ItemMasterPage.purchasingMin, "title"), "Error in Purchasing Min field");
+        Utility_Functions.xAssertEquals(report, "Error - Maximum Quantity less than Minimun Quantity", getAttribute(ItemMasterPage.purchasingMax, "title"), "Error in Purchasing Max field");
+        sendKeysAndEnter(ItemMasterPage.purchasingMin, "" + (Integer.parseInt(jsonData.getData("PurchasingMin")) + 100) + "", "Enter [" + (Integer.parseInt(jsonData.getData("PurchasingMin")) + 100) + "] into Purchasing Max And Hit Enter");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+    }
+
+    public void verifyConventionalFactor() {
+        successToasterMsg(ItemMasterPage.inCovFactor,"ConventionalFactor");
+        exitItemMaster();
+        inventoryToItemMasterScreen();
+        searchItem();
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.inCovFactor, "value"), jsonData.getData("ConventionalFactor") + ".000", "");
+    }
+
+    public void verifyTaxable(String option) {
+        Utility_Functions.xSelectDropdownByName(ownDriver, report, ItemMasterPage.inTaxable, option, "Select [" + option + "] Taxable");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        exitItemMaster();
+        inventoryToItemMasterScreen();
+        searchItem();
+        Utility_Functions.xAssertEquals(report, option.substring(0, 1), getAttribute(ItemMasterPage.inTaxable, "value"), "");
+    }
+
+    public void verifyTaxableOption() {
+        verifyTaxable("Yes");
+        verifyTaxable("No");
+    }
+
+    public void verifySerialized() {
+        String marginPX = ownDriver.findElement(ItemMasterPage.verifySerializedBtn).getCssValue("margin-right");
+        click(ItemMasterPage.btnSerialized, "Click Serialized");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+        if (!marginPX.equals(ownDriver.findElement(ItemMasterPage.verifySerializedBtn).getCssValue("margin-right"))) {
+        } else {
+            try {
+                throw new Exception("Serialized toggle not working");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void verifySerializedOption() {
+        verifySerialized();
+        verifySerialized();
+    }
+
+    public void verifyFieldCalc(String calcMethod){
+        clearText(ItemMasterPage.calcMethod);
+        sendKeysAndEnter(ItemMasterPage.calcMethod, jsonData.getData(calcMethod),"Enter calc method: "+jsonData.getData(calcMethod));
+        String errorTitle=getAttribute(ItemMasterPage.calcMethod,"title");
+        Utility_Functions.xAssertEquals(report, errorTitle, "Invalid EOQ", "");
+    }
+
+    public void verifyFieldCalculationMethod() {
+        successToasterMsg(ItemMasterPage.calcMethod,"TwoCharacterCalcMethod");
+        verifyFieldCalc("InvalidCalcMethod");
+        verifyFieldCalc("NumericCalcMethod");
+        verifyFieldCalc("SpecialCharCalcMethod");
+    }
+
+    public void verifyFieldConFactor(String conversionFactor,String errorMsg){
+        clearText(ItemMasterPage.tbxConvFactor);
+        sendKeysAndEnter(ItemMasterPage.tbxConvFactor, jsonData.getData(conversionFactor),"Enter Conversion Factor: "+jsonData.getData(conversionFactor));
+        commonObj.validateText(ItemMasterPage.tipIcon, errorMsg, "Message ["+errorMsg+"] is present");
+
+    }
+
+    public void successToasterMsg(By by,String data){
+        sendKeysAndEnter(by, jsonData.getData(data),"Enter "+ data.split("") +": "+jsonData.getData(data));
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+    }
+
+    public void verifyFieldConventionalFactor() {
+        successToasterMsg(ItemMasterPage.tbxConvFactor,"ZeroConvFact");
+        successToasterMsg(ItemMasterPage.tbxConvFactor,"NineDigitConvFact");
+        successToasterMsg(ItemMasterPage.tbxConvFactor,"SpecialDigitConvFact");
+        successToasterMsg(ItemMasterPage.tbxConvFactor,"NegativeConvFact");
+        verifyFieldConFactor("DecimalConvFact", jsonData.getData("DecimalConvFact")+" has too many decimal places. (max: 3)");
+        successToasterMsg(ItemMasterPage.tbxConvFactor,"ZeroConvFact");
+    }
+
+    public void verifyUIAbsoluteABC() {
+        sendKeys(ItemMasterPage.itemNotes1, jsonData.getData("ItemNote1"),"Enter Item Note in 1st line");
+        sendKeys(ItemMasterPage.itemNote2,jsonData.getData("ItemNote2"),"Enter Item Note in 2nd line");
+        sendKeysAndEnter(ItemMasterPage.itemNote3,jsonData.getData("ItemNote3"),"Enter Item Note in 3rd line");
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
+    }
+
+    public void verifyItemsNotes(){
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemNotes1,"value").replace("$", "").trim(), jsonData.getData("ItemNote1").toUpperCase().trim(), "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemNote2,"value").replace("$", "").trim(), jsonData.getData("ItemNote2").toUpperCase().trim(), "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemNote3,"value").replace("$", "").trim(), jsonData.getData("ItemNote3").toUpperCase().trim(), "");
+        clearText(ItemMasterPage.itemNotes1);
+        clearText(ItemMasterPage.itemNote2);
+        clearText(ItemMasterPage.itemNote3);
+        Utility_Functions.actionKey(Keys.ENTER,ownDriver);
+        commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
     }
 }
