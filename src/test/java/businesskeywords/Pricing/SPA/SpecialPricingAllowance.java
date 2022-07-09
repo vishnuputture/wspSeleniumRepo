@@ -422,7 +422,7 @@ public class SpecialPricingAllowance extends ReusableLib {
         Utility_Functions.xAssertEquals(report, groupName, val.get(0), "Group Name: ");
         Utility_Functions.xAssertEquals(report, groupNo, val.get(1).trim(), "Group No: ");
         click(SpecialPriceAllowancePage.btnDelete, "CLick F9=Delete Record");
-        sendKeysAndEnter(SpecialPriceAllowancePage.delSpaRec, "Y", "Delete Special Price Record");
+        //sendKeysAndEnter(SpecialPriceAllowancePage.delSpaRec, "Y", "Delete Special Price Record");
         verifySpaChangeContractTitle("Customer Group Browse ()");
         Boolean bl = Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//div[text()='" + grpName + "']"));
         Utility_Functions.xAssertEquals(report, "" + bl + "", "" + false + "", "Customer deleted from the group:");
@@ -610,7 +610,7 @@ public class SpecialPricingAllowance extends ReusableLib {
         Utility_Functions.waitForElementVisible(ownDriver, SpecialPriceAllowancePage.btnDelete, 10);
         click(SpecialPriceAllowancePage.btnDelete, "CLick F9=Delete Record");
         Utility_Functions.actionKey(Keys.F9, ownDriver);
-        sendKeysAndEnter(SpecialPriceAllowancePage.delSpaRec, "Y", "Delete Special Price Record");
+        //sendKeysAndEnter(SpecialPriceAllowancePage.delSpaRec, "Y", "Delete Special Price Record");
         Boolean bl = Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//div[text()='" + deleteRec + "']"));
         Utility_Functions.xAssertEquals(report, "" + bl + "", "" + false + "", "Item deleted:");
     }

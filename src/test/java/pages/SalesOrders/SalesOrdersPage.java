@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 
 public class SalesOrdersPage extends ReusableLib {
 
-	 public SalesOrdersPage(Helper helper) {
+	public SalesOrdersPage(Helper helper) {
 	        super(helper);
 	    }
 	public static By pageTitle = By.id("wob-app-header");
@@ -17,6 +17,8 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By placedByEntry = By.id("inPlacedBy");
 	public static By primarySalespersonDropDown = By.id("ddbPrimarySalesperson");
 	public static By matrixColumn = By.id("txtS2MatrixColumn");
+	public static By writtenByDropDown = By.id("ddbWrittenBy");
+	public static By filledByEntry = By.id("txtFilledBy");
 	public static By matrixError = By.xpath("//*[@id=\"5250\"]/div[138]");
 	public static By closeError = By.xpath("//*[@id=\"5250\"]/div[138]/div[2]");
 	public static By matrixSearch = By.xpath("//*[@id=\"faMatrixSearch\"]/i");
@@ -31,6 +33,7 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By outShipToState = By.id("outShipToState");
 	public static By outShipToZipCode = By.id("outShipToZipCode");
 	public static By deliveryTypeDropDown = By.id("ddbDeliveryType");
+	public static By deliveryTypeError = By.xpath("//*[@id=\"5250\"]/div[138]");
 	public static By directShipDropDown = By.id("ddbDirectShip");
 	public static By shipViaDropDown = By.id("ddbShipViaLabel");
 	public static By shipCompleteDropDown = By.id("ddbShipComplete");
@@ -45,6 +48,12 @@ public class SalesOrdersPage extends ReusableLib {
 	public static By salesOrderField = By.id("inOrderNum");
 	public static By btnSaveExit = By.id("btnSaveExit");
 	public static By closeTooltip = By.xpath("//div[@class='pui-tip-close']");
+	public static By itemEntryIssueWindow = By.id("pnlItemEntryIssues");
+	public static By combineSelect = By.id("rdbUserActChoice1.1");
+	public static By itemAlreadyOnOrderWindow = By.id("Dialog1");
+	public static By lineNumberToCombine = By.id("OutputField2.1");
+	public static By creditLimitHeader = By.id("PnlCreditLimitExceeded");
+	public static By creditLimitContinue = By.id("CssButton1");
 
 	//shipment tab
 	public static By shipmentTab = By.xpath("//span[text()='Shipments'][@istab='true']");

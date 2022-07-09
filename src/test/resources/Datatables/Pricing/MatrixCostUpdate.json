@@ -13,7 +13,6 @@
       "Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,unSelToLastCost,slctRecord,modifyPOCostField,exitMatrixToInventoryManagementMenu2Page,exitInventoryMenu2ToInventoryManagementMainMenuPage,validateItemMasterPOField,signOut",
       "Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,unSelectAndSelectChekBox,slctRecord,modifyPOCostField,exitMatrixToInventoryManagementMenu2Page,exitInventoryMenu2ToInventoryManagementMainMenuPage,validateItemMasterPOField,signOut",
       "Tc_168_verify_the_functionality_of_PO_Cost_and_Proposed_Matrix_Cost_box_and_Save_Button": "launchApp,siteLogin,navigateToMatrixCostUpdatePage,slctRecord,verifyPOFieldWithDiffValues,verifyProposedMtxFieldWithDiffValues,clkUpdatebtn,exitMatrixToInventoryManagementMenu2Page,signOut"
-
     }
   ],
   "General_Data": [

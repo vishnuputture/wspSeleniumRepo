@@ -73,6 +73,7 @@ public class WorkWithSalesQuote extends ReusableLib {
         Utility_Functions.xSendKeys(ownDriver.findElement(WorkWithSalesQuotesPage.custNumberCret),custNumber);
         Utility_Functions.xSendKeys(ownDriver.findElement(WorkWithSalesQuotesPage.quoteJobName),jobName);
         clickNextBtn();
+        Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesQuotesPage.costMethodDropDown),0);
         clickNextBtn();
     }
 
@@ -114,7 +115,9 @@ public class WorkWithSalesQuote extends ReusableLib {
      */
     public void convertSaleOrd() {
         click(SalesQuotesPage.convert,"Click Convert");
-        click(SalesQuotesPage.overRide,"Click Override");
+        if(isDisplayed(ownDriver.findElement(SalesQuotesPage.statusHeader))){
+            click(SalesQuotesPage.overRide,"Click Override");
+        }
         sendKey(SalesQuoteConversionToSalesOrderPage.salesOrderQtyShipped, "1");
         click(SalesQuotesPage.nextBtn,"Click Next Button");
         String itemNo=ownDriver.findElement(SalesQuoteDetailLinesConversionRecapPage.itemConvert).getText();

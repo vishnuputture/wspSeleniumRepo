@@ -62,7 +62,7 @@ public class Login extends ReusableLib {
         sendKeys(LoginPage.passWordtxtBox, password, "Entering password ******");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         ngWaitRequestToFinish();
-        if (Utility_Functions.xIsDisplayed(ownDriver, LoginPage.passwordExpiresMsg)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, LoginPage.informationScreenTitle)) {
             Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         }
         if (Utility_Functions.xIsDisplayed(ownDriver, LoginPage.pendingScreenTitle)) {
