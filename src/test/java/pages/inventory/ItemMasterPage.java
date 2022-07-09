@@ -32,12 +32,39 @@ public class ItemMasterPage extends ReusableLib{
     public static By productCode = By.id("inProductCode");
     public static By vendorCode = By.id("inVendorCode");
     public static By tbxConvFactor = By.id("inCovFactor");
+    public static By tbxPriceMatrixRow = By.id("inPrcMxtRow");
+    public static By btnSearchPriceMatrixRow = By.xpath("//div[@title='Search Price Matrix Row']/i[contains(@class,'fa-search')]");
 
     public static By itemSearchIcon = By.id("faItemSearch");
     public static By itemNotes1=By.id("inItemNotes1");
+    public static By tooltip=By.className("pui-tip-content");
+    public static By tbxQuantityBreak = By.id("inQtyBreak");
+    public static By btnSearchQuantityBreak = By.xpath("//div[@title='Search Quantity Break']/i[contains(@class,'fa-search')]");
+    public static By tbxLostSales = By.id("inLostSales");
+    public static By tbxExtraHistory = By.id("inExtraHistory");
+    public static By tbxFreightClassCode = By.id("inFrtClssCde");
+    public static By lblMonthsOnWise = By.id("lblMnthsnWise");
+    public static By lblAverage = By.id("inAverage");
+    public static By tbxGrossMargin = By.id("inGrsMrgPct");
+    public static By tbxMinGrossMargin = By.id("inMinGM");
 
     /************************************ Item Master Browse - Local Page elements ************************************/
 
     public static By btnDown = By.id("down_button");
     public static By itemNumber = By.id("D_11_6");
+
+    /************************************ Matrix Row Codes Page elements ************************************/
+
+    public static By hdrMatrixRowCodes = By.id("D_2_21");
+    public static By firstRow = By.id("D_11_6");
+    public static By hdrQtyBreakDiscountCodes = By.id("wbScrTitle");
+    public static By msgNoQtyBreakDiscountCodeRecords = By.id("constant4");
+
+    /************************************ Matrix Row Codes Page elements ************************************/
+
+    public static By tbxActionFCC = By.id("I_4_25");
+    public static By tbxFCC = By.id("I_6_25");
+    public static By tbxDescriptionFCC = By.id("I_8_25");
+    public static By lblCode = By.id("D_7_4");
+
 }

@@ -34,5 +34,8 @@ public class MasterPage extends ReusableLib {
 	public static By vendorInvoiceReconciliation =By.xpath("//div[text()='8']/following-sibling::div[@id='D_12_7']/a");
 	public static By salesPersonMenu =By.xpath("//div[text()='1']/following-sibling::div[@id='D_5_7']/a");
 	public static By mailingMasterMenu =By.xpath("//div[text()='1']/following-sibling::div/a[contains(text(),'Mailing')]");
-
+	public static By pageTitleInventoryManagement =By.id("D_2_25");
+	public static By menuOptionsAndConstants =By.xpath("//div[@id='D_16_47']/a[contains(text(),'Options')]");
+	public static By menuFreightClassCode =By.xpath("//div[@id='D_7_47']/a[contains(text(),'Freight')]");
+	public static By pageTitleFreightClassCode =By.id("D_2_28");
 }
