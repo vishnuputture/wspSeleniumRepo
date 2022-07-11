@@ -78,6 +78,7 @@ public class Trucks extends ReusableLib {
     public void navigateToTrucksScreen() {
         click(TruckPage.menuIconTruck);
         callSelectCompany();
+        Utility_Functions.timeWait(3);
         click(TruckPage.subMenuTruck, "Navigate to trucks page");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);

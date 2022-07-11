@@ -10,10 +10,10 @@ public class ShippingConfirmation extends ReusableLib {
         super(helper);
     }
 
-    public static By shipConf=By.xpath("//div[text()='6']/following-sibling::div/a[contains(text(),'Shipping')]");
-    public static By orderNum1=By.id("I_4_16");
-    public static By orderNum2=By.id("I_4_23");
-    public static By confOrder=By.id("btnAdd");
-    public static By exitShipConf=By.id("btnExit");
-    public static By qtyToShip=By.id("InQtyToShp.1");
+    public static By shipConf = By.xpath("//div[text()='6']/following-sibling::div/a[contains(text(),'Shipping')]");
+    public static By orderNum1 = By.id("I_4_16");
+    public static By orderNum2 = By.id("I_4_23");
+    public static By confOrder = By.id("btnAdd");
+    public static By exitShipConf = By.id("btnExit");
+    public static By qtyToShip = By.id("InQtyToShp.1");
 }

@@ -5,8 +5,11 @@ import com.winSupply.core.ReusableLib;
 import org.openqa.selenium.By;
 
 public class CustomerGroupMaintenancePage extends ReusableLib {
-    public CustomerGroupMaintenancePage(Helper helper) {super(helper);}
-    public static By custGrpMntnc =By.xpath("//div[text()='14']/following-sibling::div/a[contains(text(),'Customer')]");
+    public CustomerGroupMaintenancePage(Helper helper) {
+        super(helper);
+    }
+
+    public static By custGrpMntnc = By.xpath("//div[text()='14']/following-sibling::div/a[contains(text(),'Customer')]");
     public static By addGroupsCust = By.id("btnCF06");
     public static By groupNumber = By.id("D_4_21");
     public static By GroupNameMessage = By.id("D_24_2");
@@ -19,7 +22,7 @@ public class CustomerGroupMaintenancePage extends ReusableLib {
     public static By firCustNo = By.id("D_12_8");
     public static By secCustNo = By.id("D_13_8");
     public static By forCustNo = By.id("D_15_6");
-    public static By custName=By.id("D_13_6");
+    public static By custName = By.id("D_13_6");
     public static By selectDeSel = By.id("btnCF05");
     public static By sort = By.id("btnCF10");
     public static By submitBtn = By.id("btnCF09");
@@ -29,7 +32,7 @@ public class CustomerGroupMaintenancePage extends ReusableLib {
     public static By searchField = By.id("I_4_30");
     public static By searchGroup = By.id("D_10_6");
     public static By firGroupName = By.id("D_10_6");
-    public static By searchCustomerNo=By.id("I_7_33");
+    public static By searchCustomerNo = By.id("I_7_33");
     public static By secGroupName = By.id("D_11_6");
     public static By groupOptField1 = By.id("I_10_3");
     public static By groupNumber1 = By.id("D_10_38");
@@ -40,6 +43,6 @@ public class CustomerGroupMaintenancePage extends ReusableLib {
     public static By customerName = By.id("D_5_23");
     public static By groupOptField = By.xpath("//input[contains(@id,'I_') and @maxlength='1']");
     public static By getGroupName = By.xpath("//input[contains(@id,'I')]/following::div[@class='A20']");
-    public static By checkBoxList=By.xpath("//input[contains(@name,'InputField')]");
-    public static By customerNo=By.xpath("//input[contains(@id,'I')]/following::div[@class='A28' and contains(text(),'0')]");
+    public static By checkBoxList = By.xpath("//input[contains(@name,'InputField')]");
+    public static By customerNo = By.xpath("//input[contains(@id,'I')]/following::div[@class='A28' and contains(text(),'0')]");
 }

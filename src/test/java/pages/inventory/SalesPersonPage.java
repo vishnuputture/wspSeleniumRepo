@@ -17,14 +17,14 @@ public class SalesPersonPage extends ReusableLib {
     public static By itemNumberSearchIcon = By.xpath("//div[@id='fontAwesome1']/i[@class='fa fa-search']");
     public static By customerSearchIcon = By.xpath("//div[@id='fontAwesome2']/i[@class='fa fa-search']");
     public static By pricingColSearchIcon = By.xpath("//div[@id='fontAwesome3']/i[@class='fa fa-search']");
-    public static By rowStatic=By.id("constant49");
-    public static By noRow=By.id("FMMSG");
-    public static By fMROW=By.id("FMROW");
-    public static By mutlType=By.id("FMTORC");
-    public static By mutlValue=By.id("FMMULT1");
-    public static By positionPricingColumn=By.id("I_4_34");
-    public static By attachIcon=By.xpath("//i[@class='fa fa-paperclip']");
-    public static By viewIcon=By.xpath("//i[@class='fa fa-eye']");
+    public static By rowStatic = By.id("constant49");
+    public static By noRow = By.id("FMMSG");
+    public static By fMROW = By.id("FMROW");
+    public static By mutlType = By.id("FMTORC");
+    public static By mutlValue = By.id("FMMULT1");
+    public static By positionPricingColumn = By.id("I_4_34");
+    public static By attachIcon = By.xpath("//i[@class='fa fa-paperclip']");
+    public static By viewIcon = By.xpath("//i[@class='fa fa-eye']");
     public static By costCalculation = By.id("VDCOST");
     public static By priceCalculation = By.id("VDPRIC");
     public static By grossMargCalculation = By.id("VDMUP");
@@ -34,13 +34,13 @@ public class SalesPersonPage extends ReusableLib {
     public static By customMsg = By.id("CSTMSG");
     public static By itemDesc = By.id("IMDSC1");
     public static By grossMargin = By.id("VDMUP2");
-    public static By errorItem= By.id("MSG1");
-    public static By invalidColumn= By.id("MSG3");
+    public static By errorItem = By.id("MSG1");
+    public static By invalidColumn = By.id("MSG3");
     public static By listCalculation = By.id("VDLPRC");
-    public static By searchIconForItem=By.xpath("//div[@id='fontAwesome1']/i");
-    public static By multiplierTextField=By.id("VDMULT");
-    public static By f1Alt=By.id("D_4_1");
-    public static By noteStatement=By.id("I_7_10");
-    public static By wbScrTitle=By.id("wbScrTitle");
+    public static By searchIconForItem = By.xpath("//div[@id='fontAwesome1']/i");
+    public static By multiplierTextField = By.id("VDMULT");
+    public static By f1Alt = By.id("D_4_1");
+    public static By noteStatement = By.id("I_7_10");
+    public static By wbScrTitle = By.id("wbScrTitle");
 
 }
