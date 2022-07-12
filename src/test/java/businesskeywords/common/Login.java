@@ -2,7 +2,7 @@ package businesskeywords.common;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-
+import com.mattermost.MattermostAPIHandler;
 import com.winSupply.framework.selenium.FrameworkDriver;
 
 import org.openqa.selenium.By;
@@ -63,6 +63,7 @@ public class Login extends ReusableLib {
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         ngWaitRequestToFinish();
         if (Utility_Functions.xIsDisplayed(ownDriver, LoginPage.informationScreenTitle)) {
+            MattermostAPIHandler.postMessage(properties.getProperty("STGUserName") + " password will expire soon");
             Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         }
         if (Utility_Functions.xIsDisplayed(ownDriver, LoginPage.pendingScreenTitle)) {
