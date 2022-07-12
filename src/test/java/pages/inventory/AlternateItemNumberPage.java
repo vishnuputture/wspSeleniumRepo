@@ -4,7 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import org.openqa.selenium.By;
 
-public class AlternateItemNumberPage extends ReusableLib{
+public class AlternateItemNumberPage extends ReusableLib {
 
     public AlternateItemNumberPage(Helper helper) {
         super(helper);

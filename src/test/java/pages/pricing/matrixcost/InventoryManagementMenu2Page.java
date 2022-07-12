@@ -9,6 +9,6 @@ public class InventoryManagementMenu2Page extends ReusableLib {
         super(helper);
     }
 
-    public static By matrixCostUpdate=By.xpath("//div[text()='1']/following-sibling::div/a[contains(text(),'Matrix')]");
+    public static By matrixCostUpdate = By.xpath("//div[text()='1']/following-sibling::div/a[contains(text(),'Matrix')]");
 
 }

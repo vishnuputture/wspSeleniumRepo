@@ -43,6 +43,7 @@ public class DeliveredOrders extends ReusableLib {
     public void navigateToDeliveredOrdersScreen() {
         click(TruckPage.menuIconTruck);
         truck.callSelectCompany();
+        Utility_Functions.timeWait(3);
         click(DeliveredOrdersPage.subMenuDeliveredOrd, "Navigate to Delivered Orders page");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);

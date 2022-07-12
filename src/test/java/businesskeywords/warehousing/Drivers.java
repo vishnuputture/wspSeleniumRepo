@@ -89,6 +89,7 @@ public class Drivers extends ReusableLib {
      * Keyword to Verify functionality of Help (?)icon
      */
     public void helpIcon() {
+        Utility_Functions.timeWait(3);
         click(TruckPage.helpIcon);
         Utility_Functions.timeWait(3);
     }
@@ -241,6 +242,7 @@ public class Drivers extends ReusableLib {
      * Keyword to Apply filter
      */
     public void applyFilterDriver() {
+        Utility_Functions.timeWait(5);
         String rank = Utility_Functions.getText(ownDriver, getTruck("Rank"));
         String status = Utility_Functions.getText(ownDriver, getTruck("Status"));
         click(TruckPage.filterSearch, "Click search filter icon");

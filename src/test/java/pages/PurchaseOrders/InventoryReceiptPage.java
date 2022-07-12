@@ -33,9 +33,9 @@ public class InventoryReceiptPage {
     public static By ShipmentType = By.id("P1PTSHPTYP");
     public static By orderTotal = By.xpath("//div[contains(@id,'P1RECNME')]");
     public static By VendNameDet = By.id("outP4VENDNAME");
-    public static By itmDesc=By.id("DS.1");
-    public static By itemNo=By.id("IM.1");
-    public static By relSaleOrd=By.id("Hyperlink1.1");
-    public static By exitIR=By.id("RC1CTL_linkCF03");
+    public static By itmDesc = By.id("DS.1");
+    public static By itemNo = By.id("IM.1");
+    public static By relSaleOrd = By.id("Hyperlink1.1");
+    public static By exitIR = By.id("RC1CTL_linkCF03");
 
 }

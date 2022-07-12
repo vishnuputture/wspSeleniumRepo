@@ -10,10 +10,10 @@ public class FrieghtChargesPage extends ReusableLib {
         super(helper);
     }
 
-     public static By positionTo= By.id("I_3_19_W1");
-     public static By errMsg=By.id("D_10_4_W1");
+    public static By positionTo = By.id("I_3_19_W1");
+    public static By errMsg = By.id("D_10_4_W1");
 
-     public static By selectfirstCode=By.id("I_6_2_W1");
+    public static By selectfirstCode = By.id("I_6_2_W1");
 
 
 }
