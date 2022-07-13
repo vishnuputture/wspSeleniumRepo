@@ -9,6 +9,6 @@ public class InventoryManagementMainMenuPage extends ReusableLib {
         super(helper);
     }
 
-    public static By moreInventorySelections=By.xpath("//div[text()='21']/following-sibling::div/a[contains(text(),'More')]");
+    public static By moreInventorySelections = By.xpath("//div[text()='21']/following-sibling::div/a[contains(text(),'More')]");
 
 }

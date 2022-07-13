@@ -4,7 +4,6 @@ import businesskeywords.common.Login;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
-import com.winSupply.framework.Util;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
@@ -270,7 +269,7 @@ public class binMaintenance extends ReusableLib {
     public void verifyExcludeAstJobZZ98Item() {
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.excludeAsteriskItems, "Exclude * Items");
         verifyExcludeItems(BinMaintenancePage.excludeAsteriskItems, "Exclude * Items");
-        verifyExcludeItems(BinMaintenancePage.includeJobItems, "Exclude Job Items");
+        verifyExcludeItems(BinMaintenancePage.excludeJobItems, "Exclude Job Items");
         verifyExcludeItems(BinMaintenancePage.excludeZZ98Items, "Exclude ZZ98 Items");
     }
 
@@ -383,7 +382,7 @@ public class binMaintenance extends ReusableLib {
     public void verifyClearAllButton() {
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.excludeAsteriskItems, "Enable Exclude * Items");
-        click(BinMaintenancePage.includeJobItems, "Enable Exclude Job Items");
+        click(BinMaintenancePage.excludeJobItems, "Enable Exclude Job Items");
         click(BinMaintenancePage.excludeZZ98Items, "Enable Exclude ZZ98 Items");
         Utility_Functions.timeWait(2);
         Utility_Functions.xClickHiddenElement(ownDriver, BinMaintenancePage.clearFilter);
@@ -1004,6 +1003,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.addBinLoc,"");
         sendKeys(BinMaintenancePage.addBinLoc, binLct, "Enter Bin Location");
         Utility_Functions.timeWait(2);
+        // "Test" is not an option in the dropdown
         Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.addBinZoneDrop), "Test", "Select 'Test' option from the drop down ");
         Utility_Functions.timeWait(2);
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.addSave, "Click Save button");
@@ -1027,6 +1027,7 @@ public class binMaintenance extends ReusableLib {
     public void verifyAddBinButton() {
         String binLct = getText(getBinLocation("Secondary"));
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,deleteBinLocation(binLct), "Delete BinLocation: " + binLct);
+        Utility_Functions.timeWait(2);
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,button("Yes"),"Click YES");
         Utility_Functions.timeWait(3);
         addBinCancelBtn();
@@ -1970,6 +1971,7 @@ public class binMaintenance extends ReusableLib {
      * Keyword to verify Bin Location
      */
     public void verifyBinLocation() {
+        Utility_Functions.timeWait(2);
         createBin();
         backAndClearFilter();
         String binLocation = Utility_Functions.xGetJsonData("itemLocation");

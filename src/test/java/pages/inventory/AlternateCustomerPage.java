@@ -5,7 +5,7 @@ import com.winSupply.core.ReusableLib;
 import org.openqa.selenium.By;
 import software.amazon.awssdk.services.kendra.model.Search;
 
-public class AlternateCustomerPage extends ReusableLib{
+public class AlternateCustomerPage extends ReusableLib {
 
     public AlternateCustomerPage(Helper helper) {
         super(helper);

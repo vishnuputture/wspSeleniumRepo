@@ -20,7 +20,7 @@
       "Tc_334_VerifyUpdateCost": "launchApp,siteLogin,validateSPAApplicationTitle,updateCost,exitSPAApplication,signOut",
       "Tc_332_VerifyDisplayContractDetails": "launchApp,siteLogin,validateSPAApplicationTitle,displayContractDetail,exitSPAApplication,signOut",
       "Tc_327_VerifyAssignMFPDCode": "launchApp,siteLogin,validateSPAApplicationTitle,assignMfPdCode,exitSPAApplication,signOut",
-      "Tc_331_VerifyAssignIndividualItem": "launchApp,siteLogin,validateSPAApplicationTitle,assignIndividualItem,exitSPAApplication,signOut",
+      "Tc_331_VerifyAssignIndividualItem": "launchApp,siteLogin,validateSPAApplicationTitle,assignIndividualItem,exitSPAApplication,signOut"
     }
   ],
   "General_Data": [
@@ -39,22 +39,22 @@
       "Contract_Name": "Automation Active",
       "VendorNo": "000388",
       "GroupNo": "5"
-	},
-	{
+    },
+    {
       "TC_ID": "Tc_337_VerifySPASearchRecords",
       "Contract_Name": "Automation Search",
       "VendorNo": "000388",
       "GroupNo": "5",
       "InvalidSearchtext": "fhfjhfjhf"
-	},
-	{
+    },
+    {
       "TC_ID": "Tc_326_VerifySPARecordDeletion",
       "Contract_Name": "Automation Active Delete",
       "Expired_Contract_Name": "Automation Expired Delete",
       "VendorNo": "000388",
       "GroupNo": "5"
-	},
-	{
+    },
+    {
       "TC_ID": "Tc_311_VerifyAddCustomersToGroupName"
     },
     {
