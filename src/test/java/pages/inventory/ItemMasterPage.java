@@ -25,6 +25,9 @@ public class ItemMasterPage extends ReusableLib{
     public static By btnSerialized=By.id("btnSerialized");
     public static By itemNote2=By.id("inItemNotes2");
     public static By itemNote3=By.id("inItemNotes3");
+    public static By itemNum=By.id("D_2_11_W1");
+    public static By abcAbsoluteCalHeader=By.id("D_1_16_W1");
+    public static By itemDescription=By.id("D_2_31_W1");
     public static By tipIcon=By.xpath("//div[@class='pui-tip-content']");
     public static By verifySerializedBtn=By.xpath("//div[@id='btnSerialized']/descendant::span");
     public static By poundStdPkg=By.id("inPdsPerStdKG");

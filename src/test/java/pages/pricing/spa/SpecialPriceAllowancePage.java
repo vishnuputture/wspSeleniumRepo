@@ -27,6 +27,7 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By loadedSuccess = By.xpath("//div[@id='D_24_2'][contains(text(),'Special')]");
     public static By lblNoRecords = By.xpath("//div[@id='D_11_20'][contains(text(),'*')]");
     public static By succMesg = By.xpath("//div[@id='D_24_2']");
+    public static By indexes=By.id("I_13_3");
     public static By txtBoxSearchCon = By.id("I_4_32");
     public static By lblContractName = By.id("D_10_13");
     public static By txtBoxOption = By.id("I_10_3");
@@ -71,6 +72,7 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By rebateMulTp = By.id("D_12_62");
     public static By selMult = By.id("D_12_54");
     public static By showDesc = By.id("D_14_7");
+    public static By showDescn = By.id("D_12_7");
     public static By multiplierType = By.id("I_10_27");
     public static By rebateDisc = By.id("I_10_68");
     public static By mfCOde = By.id("I_13_30");

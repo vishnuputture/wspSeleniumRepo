@@ -8,7 +8,7 @@ public class BinMaintenancePage {
     public static  By onHand= By.id("ltgteg");
     public static  By itemNumberContains=By.id("itemNumberContains");
     public static  By excludeAsteriskItems=By.id("excludeAsteriskItems");
-    public static  By includeJobItems=By.id("includeJobItems");
+    public static  By includeJobItems=By.id("excludeJobItems");
     public static  By excludeZZ98Items=By.id("excludeZZ98Items");
     public static  By itemNumber=By.id("itemNumber");
     public static  By binType=By.id("binType");

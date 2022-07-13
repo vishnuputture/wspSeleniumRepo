@@ -492,6 +492,7 @@ public class SpecialPricingAllowance extends ReusableLib {
     public void verifySP(String spStatus, String message) {
         String successMessage;
         click(SpecialPriceAllowancePage.btnDelete, "F9=Load Special Price");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,SpecialPriceAllowancePage.indexes,"Wait for page to be loaded");
         if (Utility_Functions.xIsDisplayed(ownDriver, SpecialPriceAllowancePage.lblSuccess)) {
             successMessage = Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.lblSuccess);
         } else {
@@ -579,9 +580,9 @@ public class SpecialPricingAllowance extends ReusableLib {
         Utility_Functions.xAssertEquals(report, title, "Work With SPA Items - Rebate Details", "Page Title: ");
         verifyColRebateSell();
         click(SpecialPriceAllowancePage.individualItem, "Click F8=Show Desc");
-        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(SpecialPriceAllowancePage.showDesc), "Item Description is displayed");
+        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(SpecialPriceAllowancePage.showDescn), "Item Description is displayed");
         click(SpecialPriceAllowancePage.individualItem, "Click F8=Hide Desc");
-        Boolean bl = Utility_Functions.xIsDisplayed(ownDriver, SpecialPriceAllowancePage.showDesc);
+        Boolean bl = Utility_Functions.xIsDisplayed(ownDriver, SpecialPriceAllowancePage.showDescn);
         Utility_Functions.xAssertEquals(report, "" + bl + "", "false", "Hide Item Description:");
 
         Utility_Functions.xAssertEquals(report, contName, Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.contractJobName).trim(), "Contract Name:");

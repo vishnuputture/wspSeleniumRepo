@@ -288,7 +288,6 @@ public class binMaintenance extends ReusableLib {
         Boolean bl1 = ownDriver.findElement(BinMaintenancePage.itemNumberContains).isSelected();
         Utility_Functions.xAssertEquals(report, bl1, true, "After Click Clear All Filter, item Number Contains check box is enabled");
         Utility_Functions.timeWait(2);
-        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Apply filter button is disabled");
         Utility_Functions.xAssertEquals(report, ownDriver.findElement(BinMaintenancePage.itemNumber).getAttribute("ng-reflect-model"), "~" + itemNumber, "");
     }
 

@@ -13,6 +13,7 @@ import pages.PurchaseOrders.PurchaseOrderInquiryPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.SalesOrders.SalesOrdersPage;
 import pages.pricing.AddSpecialPricingPage;
+import pages.pricing.OrderByCustomerPage;
 import supportLibraries.Utility_Functions;
 
 import java.util.Locale;
@@ -104,7 +105,11 @@ public class POReceiptCorrects extends ReusableLib {
     }
 
     public void exitInventoryReceiptPage() {
-        click(InventoryReceiptPage.exitBtn, "Click Exit Button");
+        try {
+            click(InventoryReceiptPage.exitBtn, "Click Exit Button");
+        }catch (Exception e){
+            click(OrderByCustomerPage.exitutton, "Click Exit Button");
+        }
     }
 
     /**
@@ -168,7 +173,7 @@ public class POReceiptCorrects extends ReusableLib {
     }
 
     public void exitIR() {
-        Utility_Functions.xScrollIntoView(ownDriver, InventoryReceiptPage.processBtn);
+        Utility_Functions.xScrollIntoView(ownDriver, InventoryReceiptsPage.btnProcess);
         click(InventoryReceiptPage.exitIR, "Click Exit Button");
     }
 
@@ -201,7 +206,7 @@ public class POReceiptCorrects extends ReusableLib {
         }
         click(InventoryReceiptPage.btnContinue, "Click Continue button");
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
-        click(SalesOrdersPage.btnExit, "Click Exit Button");
+        click(InventoryReceiptPage.exitBtn, "Click Exit Button");
     }
 
     public void verifyQtyField(String val, By by) {
