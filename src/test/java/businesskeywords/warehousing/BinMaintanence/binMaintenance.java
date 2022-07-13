@@ -269,7 +269,7 @@ public class binMaintenance extends ReusableLib {
     public void verifyExcludeAstJobZZ98Item() {
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.excludeAsteriskItems, "Exclude * Items");
         verifyExcludeItems(BinMaintenancePage.excludeAsteriskItems, "Exclude * Items");
-        verifyExcludeItems(BinMaintenancePage.excludeJobItems, "Exclude Job Items");
+        verifyExcludeItems(BinMaintenancePage.includeJobItems, "Exclude Job Items");
         verifyExcludeItems(BinMaintenancePage.excludeZZ98Items, "Exclude ZZ98 Items");
     }
 
@@ -382,7 +382,7 @@ public class binMaintenance extends ReusableLib {
     public void verifyClearAllButton() {
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,BinMaintenancePage.itemNumberContains, "Enable Contains check box");
         click(BinMaintenancePage.excludeAsteriskItems, "Enable Exclude * Items");
-        click(BinMaintenancePage.excludeJobItems, "Enable Exclude Job Items");
+        click(BinMaintenancePage.includeJobItems, "Enable Exclude Job Items");
         click(BinMaintenancePage.excludeZZ98Items, "Enable Exclude ZZ98 Items");
         Utility_Functions.timeWait(2);
         Utility_Functions.xClickHiddenElement(ownDriver, BinMaintenancePage.clearFilter);
