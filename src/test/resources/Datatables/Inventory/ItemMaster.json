@@ -29,7 +29,27 @@
       "Tc_566_VerifyAlternateItemLink": "launchApp,siteLogin,validateItemMasterTitle,searchItem,verifyAlternateItemLink,exitItemMaster,signOut",
       "Tc_567_VerifyCreateNewItem": "launchApp,siteLogin,validateItemMasterTitle,searchItem,verifyCreateNewItem,exitItemMaster,signOut",
       "Tc_569_VerifyDeleteNewItem": "launchApp,siteLogin,validateItemMasterTitle,searchItem,verifyDeleteNewItem,exitItemMaster,signOut",
-      "Tc_583_VerifyDuplicateItem": "launchApp,siteLogin,validateItemMasterTitle,searchItem,verifyDuplicateItem,exitItemMaster,signOut"
+      "Tc_583_VerifyDuplicateItem": "launchApp,siteLogin,validateItemMasterTitle,searchItem,verifyDuplicateItem,exitItemMaster,signOut",
+      "Tc_550_VerifyMatrixFieldValueChange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,editMatrixField,pressF3ExitBtn,signOut",
+      "Tc_551_VerifyMatrixFieldRange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,validateMatrixField,pressF3ExitBtn,signOut",
+      "Tc_554_VerifyPOCostFieldValueChange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,editPOCostField,pressF3ExitBtn,signOut",
+      "Tc_560_VerifyPOCostFieldRange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,validatePOCostField,pressF3ExitBtn,signOut",
+      "Tc_561_VerifyPriceMatrixRowFieldRange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,editPriceMatrixRowField,pressF3ExitBtn,signOut",
+      "Tc_562_VerifyPriceMatrixRowFieldValueChange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,validatePriceMatrixRowField,pressF3ExitBtn,signOut",
+      "Tc_563_VerifyQuantityBreakFieldValueChange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,validateQuantityBreakField,pressF3ExitBtn,signOut",
+      "Tc_568_VerifyQuantityBreakFieldRange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,editQuantityBreakField,pressF3ExitBtn,signOut",
+      "Tc_570_VerifyLostSalesFieldValueChange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,editLostSalesField,pressF3ExitBtn,signOut",
+      "Tc_571_VerifyLostSalesFieldRange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,validateLostSalesField,pressF3ExitBtn,signOut",
+      "Tc_573_VerifyExtraHistoryFieldValueChange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,editExtraHistoryField,pressF3ExitBtn,signOut",
+      "Tc_574_VerifyExtraHistoryFieldRange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,validateExtraHistoryField,pressF3ExitBtn,signOut",
+      "Tc_575_VerifyAdditionOfFreightClassCode":"launchApp,siteLogin,navigateToAddFreightChargeCodePage,vrfyAddFreightClassCode,pressF3ExitBtn,pressF3ExitBtn,signOut",
+      "Tc_576_VerifyFreightClassCodeFieldValueChange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,vrfyFreightClassCodeField,pressF3ExitBtn,signOut",
+      "Tc_577_VerifyFreightClassCodeFieldRange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,vrfyFreightClassCodeFieldRange,pressF3ExitBtn,signOut",
+      "Tc_586_VerifyMonthsOnWiseField":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,vrfyMonthsOnWiseField,pressF3ExitBtn,signOut",
+      "Tc_599_VerifyUserCanChangeListPrice":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,editListPriceField,pressF3ExitBtn,signOut",
+      "Tc_600_VerifyListPriceFieldRange":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,vrfyListPriceFieldRange,pressF3ExitBtn,signOut",
+      "Tc_602_VerifyGrossMarginCalculation":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,vrfyGrossMarginCal,pressF3ExitBtn,signOut",
+      "Tc_613_VerifyUserCanChangeMinGrossMargin":"launchApp,siteLogin,navigateToItemMasterPage,selectRandomItem,editMinGrossMarginField,pressF3ExitBtn,signOut"
     }
   ],
   "General_Data": [
@@ -210,6 +230,68 @@
     {
       "TC_ID": "Tc_583_VerifyDuplicateItem",
       "validItemNo": "AABABM100"
+    },
+    {
+      "TC_ID":"Tc_550_VerifyMatrixFieldValueChange"
+    },
+    {
+      "TC_ID":"Tc_551_VerifyMatrixFieldRange"
+    },
+    {
+      "TC_ID":"Tc_554_VerifyPOCostFieldValueChange"
+    },
+    {
+      "TC_ID":"Tc_560_VerifyPOCostFieldRange"
+    },
+    {
+      "TC_ID":"Tc_561_VerifyPriceMatrixRowFieldRange"
+    },
+    {
+      "TC_ID":"Tc_562_VerifyPriceMatrixRowFieldValueChange",
+      "PriceMatrixRow":"JAQ",
+      "SelectedPriceMatrixRow":"HOY"
+    },
+    {
+      "TC_ID":"Tc_563_VerifyQuantityBreakFieldValueChange"
+    },
+    {
+      "TC_ID":"Tc_568_VerifyQuantityBreakFieldRange"
+    },
+    {
+      "TC_ID":"Tc_570_VerifyLostSalesFieldValueChange"
+    },
+    {
+      "TC_ID":"Tc_571_VerifyLostSalesFieldRange"
+    },
+    {
+      "TC_ID":"Tc_573_VerifyExtraHistoryFieldValueChange"
+    },
+    {
+      "TC_ID":"Tc_574_VerifyExtraHistoryFieldRange"
+    },
+    {
+      "TC_ID":"Tc_575_VerifyAdditionOfFreightClassCode"
+    },
+    {
+      "TC_ID":"Tc_576_VerifyFreightClassCodeFieldValueChange"
+    },
+    {
+      "TC_ID":"Tc_577_VerifyFreightClassCodeFieldRange"
+    },
+    {
+      "TC_ID":"Tc_586_VerifyMonthsOnWiseField"
+    },
+    {
+      "TC_ID":"Tc_599_VerifyUserCanChangeListPrice"
+    },
+    {
+      "TC_ID":"Tc_600_VerifyListPriceFieldRange"
+    },
+    {
+      "TC_ID":"Tc_602_VerifyGrossMarginCalculation"
+    },
+    {
+      "TC_ID":"Tc_613_VerifyUserCanChangeMinGrossMargin"
     }
   ]
 }

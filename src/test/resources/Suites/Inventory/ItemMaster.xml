@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Inventory" parallel="tests" thread-count="2">
+
+    <test name="ItemMaster">
+        <classes>
+            <class name="testcases.Inventory.ItemMaster">
+                <methods>
+                    <include name="Tc_550_VerifyMatrixFieldValueChange"></include>
+                    <include name="Tc_551_VerifyMatrixFieldRange"></include>
+                    <include name="Tc_554_VerifyPOCostFieldValueChange"></include>
+                    <include name="Tc_560_VerifyPOCostFieldRange"></include>
+                    <include name="Tc_561_VerifyPriceMatrixRowFieldRange"></include>
+                    <include name="Tc_562_VerifyPriceMatrixRowFieldValueChange"></include>
+                    <include name="Tc_568_VerifyQuantityBreakFieldRange"></include>
+                    <include name="Tc_563_VerifyQuantityBreakFieldValueChange"></include>
+                    <include name="Tc_570_VerifyLostSalesFieldValueChange"></include>
+                    <include name="Tc_571_VerifyLostSalesFieldRange"></include>
+                    <include name="Tc_573_VerifyExtraHistoryFieldValueChange"></include>
+                    <include name="Tc_574_VerifyExtraHistoryFieldRange"></include>
+                    <include name="Tc_575_VerifyAdditionOfFreightClassCode"></include>
+                    <include name="Tc_576_VerifyFreightClassCodeFieldValueChange"></include>
+                    <include name="Tc_577_VerifyFreightClassCodeFieldRange"></include>
+                    <include name="Tc_586_VerifyMonthsOnWiseField"></include>
+                    <include name="Tc_599_VerifyUserCanChangeListPrice"></include>
+                    <include name="Tc_600_VerifyListPriceFieldRange"></include>
+                    <include name="Tc_602_VerifyGrossMarginCalculation"></include>
+                    <include name="Tc_613_VerifyUserCanChangeMinGrossMargin"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
