@@ -316,7 +316,7 @@ public class ReceivingInProcess extends ReusableLib {
         if (Utility_Functions.isAlert(ownDriver)) {
         }
         sendKeys(ReceivingInProcessPage.userRF, properties.getProperty("VPNUsn"), "Enter RF user name");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(8);
         sendKeys(ReceivingInProcessPage.passwordRF, properties.getProperty("VPNPass"), "Enter RF Password");
         Utility_Functions.timeWait(4);
         click(ReceivingInProcessPage.loginBtn, "Click Login Button");
@@ -327,7 +327,7 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to search Item Or PO
      */
     public void searchPo() {
-        Utility_Functions.timeWait(4);
+        Utility_Functions.timeWait(6);
         sendKeys(ReceivingInProcessPage.searchPo, Utility_Functions.xGetJsonData("PONumber"), "search Item Or PO");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
@@ -438,7 +438,7 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void verifyReceiveSearchPo() {
         searchItem();
-        commonObj.validateText(spanElement("There are no orders currently being received."), "There are no orders currently being received.", "'There are no orders currently being received.' message is present");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,spanElement("There are no orders currently being received."),  "'There are no orders currently being received.' message is present");
     }
 
     public void clickReceiveInProcessLink() {

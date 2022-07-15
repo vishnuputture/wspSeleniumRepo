@@ -22,6 +22,7 @@ import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
+import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
@@ -207,6 +208,9 @@ public class Spo extends ReusableLib {
      */
     public void selectCompany() {
         winLogin();
+        if(isDisplayed(BinMaintenancePage.toasterCloseIcon)){
+            click(BinMaintenancePage.toasterCloseIcon);
+        }
         if (!Utility_Functions.xIsDisplayed(ownDriver, SpoPage.spoPageTitle)) {
             Utility_Functions.waitTillClickHardSleep(report,ownDriver,SelfServicePriceSheetPage.companySelector,"");
             click(SelfServicePriceSheetPage.companyLabel);

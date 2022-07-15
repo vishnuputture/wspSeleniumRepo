@@ -32,11 +32,11 @@ public class PurchaseOrderInquiryPage extends ReusableLib {
 
     public static By lnkBuyersInquiry = By.xpath("//a[text()='Buyers Inquiry']");
     public static By hdrBuyersInquiry = By.id("D_1_30");
-    public static By lnkBuyersWorksheet = By.xpath("//a[text()='Buyers Worksheet']");
+    public static By lnkBuyersWorksheet = By.xpath("//a[contains(text(),'Buyers')]");
     public static By hdrBuyersWorksheet = By.id("D_2_17");
-    public static By lnkPOEntry = By.xpath("//a[text()='PO Entry']");
+    public static By lnkPOEntry = By.xpath("//div[@id='D_6_7']/a[contains(text(),'Orders')]");
     public static By hdrPOEntry = By.id("D_1_16");
-    public static By lnkPOPreferences = By.xpath("//a[text()='PO Preferences']");
+    public static By lnkPOPreferences = By.xpath("//a[contains(text(),'Preferences')]");
     public static By hdrPOPreferences = By.id("D_2_26");
     public static By btnF12Return = By.id("btnCF12");
     public static By lineColumn = By.id("outP4LNID.1");

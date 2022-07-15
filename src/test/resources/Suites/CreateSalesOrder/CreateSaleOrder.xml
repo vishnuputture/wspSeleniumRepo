@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Regression" parallel="tests" thread-count="2">
-	<test name="SalesQuotes">
+    <test name="SalesQuotes">
 
-		<classes>
-			<class name="testcases.SalesOrders.SalesOrders">
-				<methods>
-					<include name="CreateSalesOrder"></include>
-				</methods>
-			</class>
-		</classes>
-	</test>
-</suite> <!-- Suite -->
+        <classes>
+            <class name="testcases.SalesOrders.SalesOrders">
+                <methods>
+                    <include name="CreateSalesOrder"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

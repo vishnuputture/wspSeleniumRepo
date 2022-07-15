@@ -7,12 +7,16 @@ import com.winSupply.framework.Status;
 import com.winSupply.framework.Util;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.SalesOrders.*;
+import pages.SalesQuotes.SalesQuoteDetailLinesPage;
 import pages.common.MasterPage;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 
+import pages.pricing.spa.CustomerGroupMaintenancePage;
+import software.amazon.awssdk.services.ec2.model.Purchase;
 import supportLibraries.Utility_Functions;
 
 public class SalesOrders extends ReusableLib{
@@ -281,8 +285,14 @@ public class SalesOrders extends ReusableLib{
 	public void selectItemsAndQty(){
 		sendKeys(SalesOrdersPage.qtyOrdered,jsonData.getData("QtyOrder"),"Entering ordered quantity");
 		sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo"),"Entering item Number");
+
+		/************ Sometimes the Unit Price value is empty ************/
+		String text = getText(SalesOrdersPage.tbxUnitPrice);
+		if (text.isEmpty())
+			sendKeys(SalesOrdersPage.tbxUnitPrice,"100","Entering value in Unit Price");
 		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 		jsonData.putData("SalesOrderNo", ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
+		Utility_Functions.xUpdateJson("SalesOrderNumber", ownDriver.findElement(SalesOrdersPage.salesOrderField).getAttribute("value"));
 	}
 
 	/**

@@ -595,4 +595,18 @@ public class CommonActions extends ReusableLib {
 	public void mailingMasterToAlternateCustomerRevision() {
 		click(AlternateCustomerPage.revisionAlternateCustomerMenu,"Click [Revision - Alternate Customer] menu button");
 	}
+
+	/**
+	 * This method navigates from order inventory to Options and Constants Menu page
+	 */
+	public void inventoryToOptionsAndConstants() {
+		click(MasterPage.menuOptionsAndConstants,"Click [24--> Options and Constants Menu] option");
+	}
+
+	/**
+	 * This method navigates from Inventory - Options and Constants Menu page to Revisions - Freight Class Code page
+	 */
+	public void inventoryOptionsAndConstantsToFreightClassCodePage() {
+		click(MasterPage.menuFreightClassCode,"Click [15 Revisions - Freight Class Code] option");
+	}
 }

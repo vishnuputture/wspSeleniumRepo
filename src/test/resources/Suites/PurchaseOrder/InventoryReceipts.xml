@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Domain - Inventory" parallel="tests" thread-count="2">
+<suite name="Domain - Inventory" parallel="none" thread-count="2">
 
-    <!--<test name="InventoryReceipt">
+    <test name="InventoryReceipt">
         <classes>
             <class name="testcases.PO.InventoryReceipts">
                 <methods>
@@ -12,10 +12,29 @@
                     <include name="Tc_904_PurchaseOrderNumberField"></include>
                     <include name="Tc_897_OrderInUse"></include>
                     <include name="Tc_905_QtyReceivedField"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="InventoryReceipt1">
+        <classes>
+            <class name="testcases.PO.InventoryReceipts">
+                <methods>
                     <include name="Tc_CreatePoDirect"></include>
                     <include name="Tc_906_changeUnitCost"></include>
                     <include name="Tc_907_VerifyUnitCostField"></include>
                     <include name="Tc_908_verifyPONumber"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="InventoryReceipt2">
+        <classes>
+            <class name="testcases.PO.InventoryReceipts">
+                <methods>
+                    <include name="Tc_CreatePoDirect"></include>
                     <include name="Tc_909_ValidateEnableDisableCostCheckbox"></include>
                     <include name="Tc_910_ValidateRelatedSOHyperlink"></include>
                     <include name="Tc_913_ValidatePreviousAndNextButtons"></include>
@@ -29,16 +48,15 @@
                     <include name="Tc_935_VerifyFunctionalityOfTypeDropdown"></include>
                     <include name="Tc_936_VerifyFunctionalityOfStatusDropdown"></include>
                     <include name="Tc_937_VerifyFunctionalityOfHyperlinks"></include>
-
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
     <test name="PODetails">
         <classes>
             <class name="testcases.PO.InventoryReceipts">
                 <methods>
-                    <!--<include name="Tc_CreatePo"></include>-->
+                    <include name="Tc_CreatePo"></include>
                     <include name="Tc_358_VerifyPOInquiryDetailsUI"></include>
                     <include name="Tc_375_VerifyOptionAvailablePoInquiryDetails"></include>
                     <include name="Tc_380_VerifyPositionToLine"></include>

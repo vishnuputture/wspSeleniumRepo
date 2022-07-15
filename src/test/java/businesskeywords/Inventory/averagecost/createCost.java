@@ -4,7 +4,6 @@ package businesskeywords.Inventory.averagecost;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
-
 import com.winSupply.framework.selenium.FrameworkDriver;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
@@ -16,9 +15,15 @@ import pages.inventory.ItemLedgerPage;
 
 import supportLibraries.Utility_Functions;
 import commonkeywords.*;
-
+import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import pages.inventory.CostAdjustmentPage;
+import pages.inventory.ItemLedgerPage;
+import pages.inventory.ItemMasterPage;
+import pages.inventory.ReceiveCorrectionPage;
+import supportLibraries.Utility_Functions;
 
 import java.util.List;
 
@@ -108,7 +113,6 @@ public class createCost extends ReusableLib {
         Utility_Functions.xwaitForElmntToDisappr(ownDriver, MasterPage.loadingAnime, 60, 1);
         click(ItemMasterPage.btnAlertContinue,"Click on alert button");
         Utility_Functions.xwaitForElmntToDisappr(ownDriver, MasterPage.loadingAnime, 60, 1);
-
         if (Utility_Functions.xWaitForElementPresent(ownDriver, ItemMasterPage.messageAddSuccessful, 10)) {
             String successMessage = Utility_Functions.getText(ownDriver,  ItemMasterPage.messageAddSuccessful);
             System.out.println("Text: " + successMessage);
