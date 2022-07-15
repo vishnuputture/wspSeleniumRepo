@@ -1,55 +1,44 @@
 package businesskeywords.PurchaseOrders;
 
-import businesskeywords.SalesOrders.SalesOrders;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import com.winSupply.framework.Report;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-import org.aspectj.weaver.bcel.Utility;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.Reporter;
 import pages.PurchaseOrders.*;
 import pages.SalesOrders.SalesOrdersPage;
-import pages.inventory.ItemMasterPage;
+import pages.common.MasterPage;
 import pages.pricing.SpecialPricePage;
 import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
-import pages.PurchaseOrders.CostOptionspage;
-import pages.PurchaseOrders.PurchaseOrderDetailsPage;
-import pages.PurchaseOrders.PurchaseOrderEntryPage;
-import pages.PurchaseOrders.VendorNotesPage;
-import pages.common.MasterPage;
 import supportLibraries.Utility_Functions;
 
-import java.security.Key;
-import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.List;
 
 public class CreatePurchaseOrder extends ReusableLib {
     CommonActions commonObj;
-    public static    String  customeraddress1;
-    public static    String  customeraddress2;
+    public static String customeraddress1;
+    public static String customeraddress2;
     private FrameworkDriver ownDriver;
+
     public CreatePurchaseOrder(Helper helper) {
 
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
-    public void navigateFromPODetailsToMaster()  {
-        click(SpecialPriceAllowancePage.btnF11,"Click [F11 Header] Button");
+    public void navigateFromPODetailsToMaster() {
+        click(SpecialPriceAllowancePage.btnF11, "Click [F11 Header] Button");
         Utility_Functions.xScrollWindow(ownDriver);
-        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
-        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
-        click(SpecialPriceAllowancePage.btnExit,"Click Exit Button");
+        click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
+        click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
+        click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
     }
 
     public void validatePOHeadingTitle() {
@@ -67,8 +56,8 @@ public class CreatePurchaseOrder extends ReusableLib {
         commonObj.validateElementExists(PurchaseOrderEntryPage.typeShipment, "Type Shipment is present");
     }
 
-    public void enterFreightCharges(){
-        sendKeys(PurchaseOrderEntryPage.enterFreightCharges, "FFA"+Keys.ENTER, "Entered FFA Frieght Code");
+    public void enterFreightCharges() {
+        sendKeys(PurchaseOrderEntryPage.enterFreightCharges, "FFA" + Keys.ENTER, "Entered FFA Frieght Code");
     }
 
     public void getVendor() {
@@ -215,10 +204,8 @@ public class CreatePurchaseOrder extends ReusableLib {
 
 
             Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), extendedAmt);
-        }
-        else
-        {
-                        double extAmtCalc = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
+        } else {
+            double extAmtCalc = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
                     * Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
             Utility_Functions.timeWait(5);
             double avgPrice = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
@@ -255,9 +242,9 @@ public class CreatePurchaseOrder extends ReusableLib {
         sendKeys(PurchaseOrderDetailsPage.extendedAmount, String.valueOf(Keys.ENTER));
         Utility_Functions.timeWait(5);
 
-        Utility_Functions.xWaitForElementPresent(ownDriver,ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList),5);
+        Utility_Functions.xWaitForElementPresent(ownDriver, ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList), 5);
 
-        List<WebElement> items=ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList);
+        List<WebElement> items = ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList);
 
         double itemsAmt = 0;
         for (WebElement e : items) {
@@ -267,9 +254,9 @@ public class CreatePurchaseOrder extends ReusableLib {
             itemsAmt += Double.parseDouble(formattedPrice);
         }
         Utility_Functions.timeWait(5);
-        Utility_Functions.getText(ownDriver,PurchaseOrderDetailsPage.amountHeader);
-       String totalAmtHeader= Utility_Functions.getText(ownDriver,PurchaseOrderDetailsPage.amountHeader).trim();
-       Utility_Functions.xAssertEquals(report,String.format("%.2f",itemsAmt),totalAmtHeader);
+        Utility_Functions.getText(ownDriver, PurchaseOrderDetailsPage.amountHeader);
+        String totalAmtHeader = Utility_Functions.getText(ownDriver, PurchaseOrderDetailsPage.amountHeader).trim();
+        Utility_Functions.xAssertEquals(report, String.format("%.2f", itemsAmt), totalAmtHeader);
     }
 
 
@@ -343,37 +330,35 @@ public class CreatePurchaseOrder extends ReusableLib {
         click(PurchaseOrderEntryPage.customerNo);
         Utility_Functions.timeWait(5);
 
-    customeraddress1 = Utility_Functions.getText(ownDriver,MailingMasterSearchPage.firstaddressLine1,"innerText").toLowerCase().replace(" ","").trim();
-     customeraddress2=Utility_Functions.getText(ownDriver,MailingMasterSearchPage.firstaddressLine2,"innerText").toLowerCase().replace(" ","").trim();
-        sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1"+Keys.ENTER,"Select Customer No");
+        customeraddress1 = Utility_Functions.getText(ownDriver, MailingMasterSearchPage.firstaddressLine1, "innerText").toLowerCase().replace(" ", "").trim();
+        customeraddress2 = Utility_Functions.getText(ownDriver, MailingMasterSearchPage.firstaddressLine2, "innerText").toLowerCase().replace(" ", "").trim();
+        sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1" + Keys.ENTER, "Select Customer No");
         Utility_Functions.timeWait(5);
 
         commonObj.validateText(PurchaseOrderEntryPage.errorMsgPO, "ERROR - Vendor or Order Number cannot be blank", " Validate Vendor Or Order blank after Customer selection");
 
         Utility_Functions.timeWait(2);
-        Assert.assertNotNull(ownDriver.findElement(PurchaseOrderEntryPage.orderNoInput).getAttribute("value"),"Validate Order No is auto populated");
+        Assert.assertNotNull(ownDriver.findElement(PurchaseOrderEntryPage.orderNoInput).getAttribute("value"), "Validate Order No is auto populated");
 
     }
 
-    public void addPOWithPOPriceAndDisc()
-    {
-      applyCostPriceAndDisc(jsonData.getData("POCostOption"), jsonData.getData("quantityOrdered"),
-              jsonData.getData("discount"));
-      sendKeys(PurchaseOrderDetailsPage.extendedAmount,String.valueOf(Keys.F5));
-      Utility_Functions.timeWait(5);
-      Utility_Functions.xWaitForElementPresent(ownDriver,ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList),5);
+    public void addPOWithPOPriceAndDisc() {
+        applyCostPriceAndDisc(jsonData.getData("POCostOption"), jsonData.getData("quantityOrdered"),
+                jsonData.getData("discount"));
+        sendKeys(PurchaseOrderDetailsPage.extendedAmount, String.valueOf(Keys.F5));
+        Utility_Functions.timeWait(5);
+        Utility_Functions.xWaitForElementPresent(ownDriver, ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList), 5);
 
-      Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(PurchaseOrderDetailsPage.getLineItemsList),"Added Line Item displayed");
+        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(PurchaseOrderDetailsPage.getLineItemsList), "Added Line Item displayed");
 
 
     }
 
-    public void validateShipmentType()
-    {
-      System.out.println("Customer Page Address One="+CreatePurchaseOrder.customeraddress1);
-      System.out.println("Customer Page Address Two="+CreatePurchaseOrder.customeraddress2);
-      String shipto=Utility_Functions.getText(ownDriver,PurchaseOrderEntryPage.shipToinput,"value").replace(" ","").toLowerCase().trim();
-      String toaddress=Utility_Functions.getText(ownDriver,PurchaseOrderEntryPage.toaddressLine1,"value").replace(" ","").toLowerCase().trim();
+    public void validateShipmentType() {
+        System.out.println("Customer Page Address One=" + CreatePurchaseOrder.customeraddress1);
+        System.out.println("Customer Page Address Two=" + CreatePurchaseOrder.customeraddress2);
+        String shipto = Utility_Functions.getText(ownDriver, PurchaseOrderEntryPage.shipToinput, "value").replace(" ", "").toLowerCase().trim();
+        String toaddress = Utility_Functions.getText(ownDriver, PurchaseOrderEntryPage.toaddressLine1, "value").replace(" ", "").toLowerCase().trim();
 
         System.out.println("PO Order Ship Address1=" + shipto);
         System.out.println("PO Order To Address1=" + toaddress);
@@ -389,11 +374,11 @@ public class CreatePurchaseOrder extends ReusableLib {
         applyCostPriceAndDisc(jsonData.getData("listCostOption"), jsonData.getData("quantityOrdered"), jsonData.getData("nodiscount"));
         sendKeys(PurchaseOrderDetailsPage.extendedAmount, String.valueOf(Keys.ENTER));
         Utility_Functions.timeWait(8);
-        System.out.println("Validation Msg"+Utility_Functions.getText(ownDriver.findElement(PurchaseOrderDetailsPage.errorMsgPOD),"outerText"));
+        System.out.println("Validation Msg" + Utility_Functions.getText(ownDriver.findElement(PurchaseOrderDetailsPage.errorMsgPOD), "outerText"));
 
-    //    commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD," ERROR - Discount can NOT be blank when using list price F4 Overrides","No Discount validation");
-       String message=Utility_Functions.getText(ownDriver.findElement(PurchaseOrderDetailsPage.errorMsgPOD),"outerText").replace(" "," ").trim();
-        Utility_Functions.xAssertEquals(report,"ERROR - Discount can NOT be blank when using list price F4 Overrides",message,
+        //    commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD," ERROR - Discount can NOT be blank when using list price F4 Overrides","No Discount validation");
+        String message = Utility_Functions.getText(ownDriver.findElement(PurchaseOrderDetailsPage.errorMsgPOD), "outerText").replace(" ", " ").trim();
+        Utility_Functions.xAssertEquals(report, "ERROR - Discount can NOT be blank when using list price F4 Overrides", message,
                 "No Discount validation");
     }
 
@@ -420,8 +405,8 @@ public class CreatePurchaseOrder extends ReusableLib {
         Utility_Functions.timeWait(5);
 
 
-        Utility_Functions.xAssertEquals(report,jsonData.getData("validFrieght"),ownDriver.findElement(PurchaseOrderEntryPage.enterFreightCharges),
-                  "value","Validate selected Frieght FFA");
+        Utility_Functions.xAssertEquals(report, jsonData.getData("validFrieght"), ownDriver.findElement(PurchaseOrderEntryPage.enterFreightCharges),
+                "value", "Validate selected Frieght FFA");
 
 
     }
@@ -483,7 +468,7 @@ public class CreatePurchaseOrder extends ReusableLib {
     /**
      * Keyword to verify error in Purchase Order Details page
      */
-    public void verifyError(String expected){
+    public void verifyError(String expected) {
         Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderDetailsPage.errorMsgPOD);
         String actual = getText(PurchaseOrderDetailsPage.errorMsgPOD).trim();
         Utility_Functions.xAssertEquals(report, expected, actual, "Validating error message in Purchase Order Details page");
@@ -511,7 +496,7 @@ public class CreatePurchaseOrder extends ReusableLib {
         click(PurchaseOrderDetailsPage.btnSubmit, "Clicked Submit button");
         Utility_Functions.timeWait(5);
         String error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
-        if (error.contains("F8 to accept")){
+        if (error.contains("F8 to accept")) {
             Utility_Functions.actionKey(Keys.F8, ownDriver);
         }
         error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
@@ -527,19 +512,19 @@ public class CreatePurchaseOrder extends ReusableLib {
             Utility_Functions.timeWait(3);
         }
         error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
-        if (error.contains("F4 Overrides")){
+        if (error.contains("F4 Overrides")) {
             Utility_Functions.actionKey(Keys.F4, ownDriver);
         }
         try {
             Utility_Functions.xScrollIntoView(ownDriver, PurchaseOrderDetailsPage.errorMsgPOD);
-            if(getText(PurchaseOrderDetailsPage.errorMsgPOD).contains("WARNING- Cost variance -- F5 to accept.  Average cost is")) {
+            if (getText(PurchaseOrderDetailsPage.errorMsgPOD).contains("WARNING- Cost variance -- F5 to accept.  Average cost is")) {
                 commonObj.verifyElementContainsText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is", "Verify Cost Variance Warning message");
                 getConvFactorValue();
                 Utility_Functions.actionKey(Keys.F5, ownDriver);
-            }else {
+            } else {
                 throw new NoSuchElementException("Not found");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
@@ -580,11 +565,11 @@ public class CreatePurchaseOrder extends ReusableLib {
         commonObj.validateText(SpecialPricePage.papMessage, "You must have a Related Sales Order # to process this Direct Ship.", "[You must have a Related Sales Order # to process this Direct Ship.] Error message is present");
     }
 
-    public void verifyOrderNo(){
+    public void verifyOrderNo() {
         String orderNumber = getAttribute(PurchaseOrderEntryPage.tbxOrderNumber, "value");
         click(SpecialPricePage.btnF3, "Click Exit Link");
-        String[] lastOrderNo=getText(PurchaseOrderEntryPage.lastOrderNo).split("--> ");
-        Utility_Functions.xAssertEquals(report,orderNumber,lastOrderNo[1],"");
+        String[] lastOrderNo = getText(PurchaseOrderEntryPage.lastOrderNo).split("--> ");
+        Utility_Functions.xAssertEquals(report, orderNumber, lastOrderNo[1], "");
     }
 
     public void typeShipFields() {
@@ -712,7 +697,7 @@ public class CreatePurchaseOrder extends ReusableLib {
     }
 
     public void verifySalesOrderEntryFields() {
-        sendKeys(SalesOrdersPage.salesOrderField,Utility_Functions.xGetJsonData("SalesOrder_POEntry")+Keys.ENTER,"Enter Sale Order");
+        sendKeys(SalesOrdersPage.salesOrderField, Utility_Functions.xGetJsonData("SalesOrder_POEntry") + Keys.ENTER, "Enter Sale Order");
         Utility_Functions.timeWait(4);
 
         /**************************** Sometimes order in use popup is displayed ****************************/
@@ -723,172 +708,172 @@ public class CreatePurchaseOrder extends ReusableLib {
         shippingInfo();
     }
 
-    public void exitSalesOrderEntry(){
-        Utility_Functions.xClickHiddenElement(ownDriver,SpecialPricePage.btnF3);
+    public void exitSalesOrderEntry() {
+        Utility_Functions.xClickHiddenElement(ownDriver, SpecialPricePage.btnF3);
     }
 
-    public void soFieldVerification(){
-        int orderNoLength=getText(PurchaseOrderEntryPage.orderNum).length();
-        Utility_Functions.xAssertEquals(report,orderNoLength,6,"");
-        int SOLength=getText(PurchaseOrderEntryPage.salesOrderNo).length();
-        Utility_Functions.xAssertEquals(report,SOLength,6,"");
-        int SOSuffixLength=getText(PurchaseOrderEntryPage.soSuffix).length();
-        Utility_Functions.xAssertEquals(report,SOSuffixLength,2,"");
+    public void soFieldVerification() {
+        int orderNoLength = getText(PurchaseOrderEntryPage.orderNum).length();
+        Utility_Functions.xAssertEquals(report, orderNoLength, 6, "");
+        int SOLength = getText(PurchaseOrderEntryPage.salesOrderNo).length();
+        Utility_Functions.xAssertEquals(report, SOLength, 6, "");
+        int SOSuffixLength = getText(PurchaseOrderEntryPage.soSuffix).length();
+        Utility_Functions.xAssertEquals(report, SOSuffixLength, 2, "");
     }
 
-    public void verifyActionCode(){
-        String actionCode=getAttribute(PurchaseOrderEntryPage.actionInpput,"value");
-        Utility_Functions.xAssertEquals(report,actionCode,"C","Action code changed to [C]");
+    public void verifyActionCode() {
+        String actionCode = getAttribute(PurchaseOrderEntryPage.actionInpput, "value");
+        Utility_Functions.xAssertEquals(report, actionCode, "C", "Action code changed to [C]");
     }
 
     public void verifyRelatedSO() {
         String relatedSO = Utility_Functions.xGetJsonData("SalesOrder_POEntry");
         sendKeysAndEnter(PurchaseOrderDetailsPage.relatedSo, relatedSO, "Enter Related SO without suffix");
-        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD,"ERROR - Related Sales Order Not Found.","[ERROR - Related Sales Order Not Found.] error message is found");
+        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "ERROR - Related Sales Order Not Found.", "[ERROR - Related Sales Order Not Found.] error message is found");
         Utility_Functions.timeWait(3);
         sendKeysAndEnter(PurchaseOrderDetailsPage.relatedSo, jsonData.getData("RelatedSONegativeValue"), "Enter Related SO Negative Value");
-        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD,"ERROR - Related Sales Order Not Found.","[ERROR - Related Sales Order Not Found.] error message is found");
+        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "ERROR - Related Sales Order Not Found.", "[ERROR - Related Sales Order Not Found.] error message is found");
         Utility_Functions.timeWait(3);
         sendKeysAndEnter(PurchaseOrderDetailsPage.relatedSo, jsonData.getData("RelatedSOZeroValue"), "Enter Related SO Zero Value");
-        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD,"ERROR - Related Sales Order Not Found.","[ERROR - Related Sales Order Not Found.] error message is found");
+        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "ERROR - Related Sales Order Not Found.", "[ERROR - Related Sales Order Not Found.] error message is found");
         Utility_Functions.timeWait(3);
         sendKeysAndEnter(PurchaseOrderDetailsPage.relatedSo, jsonData.getData("RelatedSOAlphaNumericValue"), "Enter Related SO Alpha Numeric Value");
-        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD,"ERROR - Related Sales Order Not Found.","[ERROR - Related Sales Order Not Found.] error message is found");
+        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "ERROR - Related Sales Order Not Found.", "[ERROR - Related Sales Order Not Found.] error message is found");
     }
 
-    public void verifyPoDetailsWithLineNoAction(){
-        sendKeys(PurchaseOrderDetailsPage.actionInput,"I","Enter [I] on Action");
-        sendKeys(PurchaseOrderDetailsPage.lineno,"1"+Keys.ENTER,"Enter [1] on Line No");
+    public void verifyPoDetailsWithLineNoAction() {
+        sendKeys(PurchaseOrderDetailsPage.actionInput, "I", "Enter [I] on Action");
+        sendKeys(PurchaseOrderDetailsPage.lineno, "1" + Keys.ENTER, "Enter [1] on Line No");
         Utility_Functions.timeWait(4);
-        String itemNo=jsonData.getData("itemNo");
-        String relatedSO=getAttribute(PurchaseOrderDetailsPage.relatedSo,"value");
-        String itemNoAct=getAttribute(PurchaseOrderDetailsPage.itemNumberPOD,"value");
-        Utility_Functions.xAssertEquals(report,itemNo,itemNoAct,"");
-        Utility_Functions.xAssertEquals(report,relatedSO,Utility_Functions.xGetJsonData("SalesOrderNumber"),"");
+        String itemNo = jsonData.getData("itemNo");
+        String relatedSO = getAttribute(PurchaseOrderDetailsPage.relatedSo, "value");
+        String itemNoAct = getAttribute(PurchaseOrderDetailsPage.itemNumberPOD, "value");
+        Utility_Functions.xAssertEquals(report, itemNo, itemNoAct, "");
+        Utility_Functions.xAssertEquals(report, relatedSO, Utility_Functions.xGetJsonData("SalesOrderNumber"), "");
     }
 
-    public void deleteOrderNo(){
-        Utility_Functions.actionKey(Keys.F6,ownDriver);
+    public void deleteOrderNo() {
+        Utility_Functions.actionKey(Keys.F6, ownDriver);
         typeShipmentD();
         Utility_Functions.timeWait(4);
-        commonObj.validateText(PurchaseOrderDetailsPage.errorMsg,"ERROR","[ERROR] is present");
-        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD,"ERROR - Order Number was not found","[ERROR - Order Number was not found] is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.errorMsg, "ERROR", "[ERROR] is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "ERROR - Order Number was not found", "[ERROR - Order Number was not found] is present");
     }
 
-    public void navigateToPoUserIdentifier(){
-        click(InventoryReceiptsPage.btnUpdateOnHandQty,"Click [F12=Preferences]");
+    public void navigateToPoUserIdentifier() {
+        click(InventoryReceiptsPage.btnUpdateOnHandQty, "Click [F12=Preferences]");
         Utility_Functions.timeWait(2);
     }
 
-    public void validateIdentifier(){
-        String nameAppear=getAttribute(PurchaseOrderDetailsPage.nameAppear,"value");
-        String emailAddress=getAttribute(PurchaseOrderDetailsPage.emailAddress,"value");
-        String CountryCode=getAttribute(PurchaseOrderDetailsPage.teleNo,"value");
-        String teleNo=getAttribute(PurchaseOrderDetailsPage.teleNo1,"value");
-        String teleNo1=getAttribute(PurchaseOrderDetailsPage.teleNo2,"value");
-        Utility_Functions.xAssertEquals(report,nameAppear,jsonData.getData("nameAppear"),"");
-        Utility_Functions.xAssertEquals(report,emailAddress,jsonData.getData("emailAddress"),"");
-        Utility_Functions.xAssertEquals(report,CountryCode,jsonData.getData("CountryCode"),"");
-        Utility_Functions.xAssertEquals(report,teleNo,jsonData.getData("teleNo"),"");
-        Utility_Functions.xAssertEquals(report,teleNo1,jsonData.getData("teleNo1"),"");
+    public void validateIdentifier() {
+        String nameAppear = getAttribute(PurchaseOrderDetailsPage.nameAppear, "value");
+        String emailAddress = getAttribute(PurchaseOrderDetailsPage.emailAddress, "value");
+        String CountryCode = getAttribute(PurchaseOrderDetailsPage.teleNo, "value");
+        String teleNo = getAttribute(PurchaseOrderDetailsPage.teleNo1, "value");
+        String teleNo1 = getAttribute(PurchaseOrderDetailsPage.teleNo2, "value");
+        Utility_Functions.xAssertEquals(report, nameAppear, jsonData.getData("nameAppear"), "");
+        Utility_Functions.xAssertEquals(report, emailAddress, jsonData.getData("emailAddress"), "");
+        Utility_Functions.xAssertEquals(report, CountryCode, jsonData.getData("CountryCode"), "");
+        Utility_Functions.xAssertEquals(report, teleNo, jsonData.getData("teleNo"), "");
+        Utility_Functions.xAssertEquals(report, teleNo1, jsonData.getData("teleNo1"), "");
     }
 
-    public void clickReturn(){
-        click(SpecialPriceAllowancePage.btnReturn,"Click [F12=Return]");
+    public void clickReturn() {
+        click(SpecialPriceAllowancePage.btnReturn, "Click [F12=Return]");
         Utility_Functions.timeWait(2);
     }
 
-    public void verifyPreferences(){
-        if(properties.getProperty("ENV").equals("PROD")){
-            commonObj.validateText(PurchaseOrderDetailsPage.userIdentifier,properties.getProperty("PRODUserName"),properties.getProperty("PRODUserName")+" User Identifier is present");
-        }else {
-            commonObj.validateText(PurchaseOrderDetailsPage.userIdentifier,properties.getProperty("STGUserName"),properties.getProperty("STGUserName")+" User Identifier is present");
+    public void verifyPreferences() {
+        if (properties.getProperty("ENV").equals("PROD")) {
+            commonObj.validateText(PurchaseOrderDetailsPage.userIdentifier, properties.getProperty("PRODUserName"), properties.getProperty("PRODUserName") + " User Identifier is present");
+        } else {
+            commonObj.validateText(PurchaseOrderDetailsPage.userIdentifier, properties.getProperty("STGUserName"), properties.getProperty("STGUserName") + " User Identifier is present");
         }
-        sendKeys(PurchaseOrderDetailsPage.nameAppear,jsonData.getData("nameAppear"),"Enter How Name Will Appear");
-        sendKeys(PurchaseOrderDetailsPage.emailAddress,jsonData.getData("emailAddress"),"Enter E-Mail Address");
-        sendKeys(PurchaseOrderDetailsPage.teleNo,jsonData.getData("CountryCode"));
-        sendKeys(PurchaseOrderDetailsPage.teleNo1,jsonData.getData("teleNo"));
-        sendKeys(PurchaseOrderDetailsPage.teleNo2,jsonData.getData("teleNo1"),"Enter Telephone Number");
+        sendKeys(PurchaseOrderDetailsPage.nameAppear, jsonData.getData("nameAppear"), "Enter How Name Will Appear");
+        sendKeys(PurchaseOrderDetailsPage.emailAddress, jsonData.getData("emailAddress"), "Enter E-Mail Address");
+        sendKeys(PurchaseOrderDetailsPage.teleNo, jsonData.getData("CountryCode"));
+        sendKeys(PurchaseOrderDetailsPage.teleNo1, jsonData.getData("teleNo"));
+        sendKeys(PurchaseOrderDetailsPage.teleNo2, jsonData.getData("teleNo1"), "Enter Telephone Number");
         enter();
         enter();
     }
 
-    public void verifyErrorMsgMailEDI(){
-        sendKeys(PurchaseOrderDetailsPage.sendViaMail,"Y","Enter Send Via Mail as [Y]");
-        sendKeys(PurchaseOrderDetailsPage.sendViaEDI,"Y","Enter Send Via EDI as [Y]");
+    public void verifyErrorMsgMailEDI() {
+        sendKeys(PurchaseOrderDetailsPage.sendViaMail, "Y", "Enter Send Via Mail as [Y]");
+        sendKeys(PurchaseOrderDetailsPage.sendViaEDI, "Y", "Enter Send Via EDI as [Y]");
         enter();
         Utility_Functions.timeWait(2);
-        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD,"ERROR - You may NOT Email an EDI order.","[ERROR - You may NOT Email an EDI order.] error message is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "ERROR - You may NOT Email an EDI order.", "[ERROR - You may NOT Email an EDI order.] error message is present");
     }
 
-    public void sendViaMail(){
-        sendKeys(PurchaseOrderDetailsPage.sendViaMail,"Y","Enter Send Via Mail as [Y]");
+    public void sendViaMail() {
+        sendKeys(PurchaseOrderDetailsPage.sendViaMail, "Y", "Enter Send Via Mail as [Y]");
         enter();
-        commonObj.validateText(PurchaseOrderDetailsPage.PODHeader,"Purchase Order Details","[Purchase Order Details] Header is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.PODHeader, "Purchase Order Details", "[Purchase Order Details] Header is present");
     }
 
-    public void changeMailDetails(){
-        int size=ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
-        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"2"+Keys.ENTER,"Enter [2] into input field");
+    public void changeMailDetails() {
+        int size = ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
+        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size - 1), "2" + Keys.ENTER, "Enter [2] into input field");
         verifyPreferences();
-        commonObj.validateText(By.xpath("//div[contains(text(),'"+jsonData.getData("nameAppear")+"')]"),jsonData.getData("nameAppear"),"Contact field is updated");
-        commonObj.validateText(By.xpath("//div[contains(text(),'"+jsonData.getData("emailAddress")+"')]"),jsonData.getData("emailAddress"),"Email address field is updated");
+        commonObj.validateText(By.xpath("//div[contains(text(),'" + jsonData.getData("nameAppear") + "')]"), jsonData.getData("nameAppear"), "Contact field is updated");
+        commonObj.validateText(By.xpath("//div[contains(text(),'" + jsonData.getData("emailAddress") + "')]"), jsonData.getData("emailAddress"), "Email address field is updated");
     }
 
-    public void selectMailDetails(){
-        int size=ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
-        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"1"+Keys.ENTER,"Enter [1] into input field");
+    public void selectMailDetails() {
+        int size = ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
+        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size - 1), "1" + Keys.ENTER, "Enter [1] into input field");
         Utility_Functions.timeWait(2);
-        String color=ownDriver.findElement(By.xpath("//div[contains(text(),'"+jsonData.getData("nameAppear")+"')]")).getCssValue("color");
-        Utility_Functions.xAssertEquals(report,color,"rgba(0, 86, 156, 1)","Mail Id is selected and turned into blue color");
+        String color = ownDriver.findElement(By.xpath("//div[contains(text(),'" + jsonData.getData("nameAppear") + "')]")).getCssValue("color");
+        Utility_Functions.xAssertEquals(report, color, "rgba(0, 86, 156, 1)", "Mail Id is selected and turned into blue color");
     }
 
-    public void deselectMailDetails(){
-        int size=ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
-        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size-1),"4"+Keys.ENTER,"Enter [1] into input field");
+    public void deselectMailDetails() {
+        int size = ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).size();
+        sendKeys(ownDriver.findElements(By.xpath("//div[contains(text(),'AutomationTest')]/preceding::input")).get(size - 1), "4" + Keys.ENTER, "Enter [1] into input field");
         Utility_Functions.timeWait(3);
-        String color=ownDriver.findElement(By.xpath("//div[contains(text(),'"+jsonData.getData("nameAppear")+"')]")).getCssValue("color");
-        Utility_Functions.xAssertEquals(report,color,"rgba(0, 0, 0, 1)","Mail Id is selected and turned into blue color");
+        String color = ownDriver.findElement(By.xpath("//div[contains(text(),'" + jsonData.getData("nameAppear") + "')]")).getCssValue("color");
+        Utility_Functions.xAssertEquals(report, color, "rgba(0, 0, 0, 1)", "Mail Id is selected and turned into blue color");
     }
 
-    public void exitFromPOSend(){
-        click(MatrixCostUpdatePage.exitButton,"Exit from Po Print/Send Page");
+    public void exitFromPOSend() {
+        click(MatrixCostUpdatePage.exitButton, "Exit from Po Print/Send Page");
     }
 
-    public void navigateToPoHeading(){
+    public void navigateToPoHeading() {
         click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
-        commonObj.validateText(PurchaseOrderDetailsPage.poPrintSendHeader,"Purchase Order Print/Send","[Purchase Order Print/Send] header is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.poPrintSendHeader, "Purchase Order Print/Send", "[Purchase Order Print/Send] header is present");
     }
 
-    public void confPopUp(){
+    public void confPopUp() {
         Utility_Functions.timeWait(2);
-        commonObj.validateText(PurchaseOrderDetailsPage.EditMailTextHeader,"Edit E-Mail Text","[Edit E-Mail Text] is present");
-        commonObj.validateText(PurchaseOrderDetailsPage.emailContact,jsonData.getData("nameAppear"),"E-Mail Contact "+jsonData.getData("nameAppear")+" is present");
-        commonObj.validateText(PurchaseOrderDetailsPage.emailAddressPopup,jsonData.getData("emailAddress"),"E-Mail Contact "+jsonData.getData("emailAddress")+" is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.EditMailTextHeader, "Edit E-Mail Text", "[Edit E-Mail Text] is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.emailContact, jsonData.getData("nameAppear"), "E-Mail Contact " + jsonData.getData("nameAppear") + " is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.emailAddressPopup, jsonData.getData("emailAddress"), "E-Mail Contact " + jsonData.getData("emailAddress") + " is present");
     }
 
-    public void editMailSubject(){
-        sendKeysAndEnter(PurchaseOrderDetailsPage.subjectEditMail,"Mail Has been sent to Vendor","Enter subject");
-        click(CustomerGroupMaintenancePage.submitBtn,"Click [F9=Process]");
+    public void editMailSubject() {
+        sendKeysAndEnter(PurchaseOrderDetailsPage.subjectEditMail, "Mail Has been sent to Vendor", "Enter subject");
+        click(CustomerGroupMaintenancePage.submitBtn, "Click [F9=Process]");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(CustomerGroupMaintenancePage.GroupNameMessage,"A purchase order has been emailed to a contact.","[A purchase order has been emailed to a contact.] is present");
+        commonObj.validateText(CustomerGroupMaintenancePage.GroupNameMessage, "A purchase order has been emailed to a contact.", "[A purchase order has been emailed to a contact.] is present");
     }
 
-    public void processMail(){
-        click(CustomerGroupMaintenancePage.submitBtn,"Click [F9=Process]");
+    public void processMail() {
+        click(CustomerGroupMaintenancePage.submitBtn, "Click [F9=Process]");
         Utility_Functions.timeWait(3);
         confPopUp();
-        click(CustomerGroupMaintenancePage.submitBtn,"Click [F9=Process]");
+        click(CustomerGroupMaintenancePage.submitBtn, "Click [F9=Process]");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(CustomerGroupMaintenancePage.GroupNameMessage,"A purchase order has been emailed to a contact.","[A purchase order has been emailed to a contact.] is present");
-        click(CustomerGroupMaintenancePage.submitBtn,"Click [F9=Process]");
+        commonObj.validateText(CustomerGroupMaintenancePage.GroupNameMessage, "A purchase order has been emailed to a contact.", "[A purchase order has been emailed to a contact.] is present");
+        click(CustomerGroupMaintenancePage.submitBtn, "Click [F9=Process]");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(PurchaseOrderDetailsPage.confirmPrintSendPopup,"Confirm Print/Send","[Confirm Print/Send] is present");
-        commonObj.validateText(PurchaseOrderDetailsPage.closedSentViaMail,"This PO is Closed and/or has already been sent via email.","[This PO is Closed and/or has already been sent via email.] is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.confirmPrintSendPopup, "Confirm Print/Send", "[Confirm Print/Send] is present");
+        commonObj.validateText(PurchaseOrderDetailsPage.closedSentViaMail, "This PO is Closed and/or has already been sent via email.", "[This PO is Closed and/or has already been sent via email.] is present");
         exitFromPOSend();
-        click(CustomerGroupMaintenancePage.submitBtn,"Click [F9=Process]");
-        sendKeys(PurchaseOrderDetailsPage.continueTextBox,"Y","Enter [Y]");
-        click(CustomerGroupMaintenancePage.submitBtn,"Click [F9=Process]");
+        click(CustomerGroupMaintenancePage.submitBtn, "Click [F9=Process]");
+        sendKeys(PurchaseOrderDetailsPage.continueTextBox, "Y", "Enter [Y]");
+        click(CustomerGroupMaintenancePage.submitBtn, "Click [F9=Process]");
         Utility_Functions.timeWait(2);
         editMailSubject();
     }

@@ -4,11 +4,8 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import commonkeywords.CommonActions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.inventory.AlternateItemNumberPage;
-import pages.inventory.BuyersInquiryPage;
-import pages.warehouse.ReceivingInProcess.ReceivingInProcessPage;
 
 import java.util.List;
 
@@ -42,7 +39,7 @@ public class AlternateItemNumber extends ReusableLib {
      */
     public void enterItemNumber() {
         String itemNo = jsonData.getData("ItemNo");
-        sendKeysAndEnter(AlternateItemNumberPage.tbxItemNumber, itemNo, "Enter Item Number ["+itemNo+"] in [Item Number] textbox");
+        sendKeysAndEnter(AlternateItemNumberPage.tbxItemNumber, itemNo, "Enter Item Number [" + itemNo + "] in [Item Number] textbox");
     }
 
     /**
@@ -57,12 +54,12 @@ public class AlternateItemNumber extends ReusableLib {
 
         List<WebElement> lstMoreAlternateItemsTbx = getListElement(AlternateItemNumberPage.lstTbxMoreItemNos);
         boolean flag = false;
-        for (WebElement element : lstMoreAlternateItemsTbx){
+        for (WebElement element : lstMoreAlternateItemsTbx) {
             String value = element.getAttribute("value");
-            if (!value.isEmpty()){
+            if (!value.isEmpty()) {
                 value.trim();
             }
-            if (value.equalsIgnoreCase(alternateItemNo)){
+            if (value.equalsIgnoreCase(alternateItemNo)) {
                 flag = true;
                 break;
             }

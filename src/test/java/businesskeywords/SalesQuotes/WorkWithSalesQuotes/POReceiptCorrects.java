@@ -11,7 +11,6 @@ import pages.PurchaseOrders.InventoryReceiptsPage;
 import pages.PurchaseOrders.PoEntryConversionFactorPage;
 import pages.PurchaseOrders.PurchaseOrderInquiryPage;
 import pages.SalesQuotes.WorkWithSalesQuotesPage;
-import pages.SalesOrders.SalesOrdersPage;
 import pages.pricing.AddSpecialPricingPage;
 import pages.pricing.OrderByCustomerPage;
 import supportLibraries.Utility_Functions;
@@ -32,7 +31,7 @@ public class POReceiptCorrects extends ReusableLib {
     public POReceiptCorrects(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /************************Inventory Receipt***********************/
@@ -107,7 +106,7 @@ public class POReceiptCorrects extends ReusableLib {
     public void exitInventoryReceiptPage() {
         try {
             click(InventoryReceiptPage.exitBtn, "Click Exit Button");
-        }catch (Exception e){
+        } catch (Exception e) {
             click(OrderByCustomerPage.exitutton, "Click Exit Button");
         }
     }
@@ -164,9 +163,9 @@ public class POReceiptCorrects extends ReusableLib {
         String poNo = enterPoNo();
         commonObj.validateText(InventoryReceiptPage.headerIR, "inventory receipts", "inventory receipts Header is present");
         commonObj.validateText(InventoryReceiptPage.poInqIR, poNo, "Po number matches");
-        if(properties.getProperty("ENV").equals("STG")) {
+        if (properties.getProperty("ENV").equals("STG")) {
             commonObj.validateText(InventoryReceiptPage.ReceivedByIN, properties.getProperty("STGUserName").toUpperCase(Locale.ROOT), "Received By matches");
-        }else {
+        } else {
             commonObj.validateText(InventoryReceiptPage.ReceivedByIN, properties.getProperty("PRODUserName").toUpperCase(Locale.ROOT), "Received By matches");
         }
         exitIR();
@@ -199,9 +198,9 @@ public class POReceiptCorrects extends ReusableLib {
         String poNo = Utility_Functions.xGetJsonData("PONumber");
         commonObj.validateText(InventoryReceiptPage.orderInUsePopUp, "ORDER IN USE", "'ORDER IN USE' popup is present");
         commonObj.validateText(InventoryReceiptPage.outOrderNum, poNo, "'Order #" + poNo + " is in use' is present");
-        if(properties.getProperty("ENV").equals("STG")) {
+        if (properties.getProperty("ENV").equals("STG")) {
             commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty("STGUserName"), "User id is matches");
-        }else {
+        } else {
             commonObj.validateText(InventoryReceiptPage.outUserId, properties.getProperty("PRODUserName"), "User id is matches");
         }
         click(InventoryReceiptPage.btnContinue, "Click Continue button");
@@ -220,13 +219,13 @@ public class POReceiptCorrects extends ReusableLib {
      * This method verify the functionality of Quantity Received Input Field
      */
     public void qtyReceivedField() {
-        verifyQtyField("negativeQtyReceived",InventoryReceiptPage.qtyReceived);
+        verifyQtyField("negativeQtyReceived", InventoryReceiptPage.qtyReceived);
         Utility_Functions.xAssertEquals(report, getAttribute(InventoryReceiptPage.qtyReceived, "title").trim(), "Qty Received Cannot be less than 0.", "");
-        verifyQtyField("blankSpaceQtyReceived",InventoryReceiptPage.qtyReceived);
+        verifyQtyField("blankSpaceQtyReceived", InventoryReceiptPage.qtyReceived);
         commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
-        verifyQtyField("zeroQtyReceived",InventoryReceiptPage.qtyReceived);
+        verifyQtyField("zeroQtyReceived", InventoryReceiptPage.qtyReceived);
         commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
-        verifyQtyField("alphaNumericQtyReceived",InventoryReceiptPage.qtyReceived);
+        verifyQtyField("alphaNumericQtyReceived", InventoryReceiptPage.qtyReceived);
         commonObj.validateText(InventoryReceiptPage.displayProgramMes, "Display Program Messages", "'Display Program Messages' Header is present");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
@@ -243,14 +242,14 @@ public class POReceiptCorrects extends ReusableLib {
      * This method to verify Unit Cost Field
      */
     public void verifyUnitCostField() {
-        verifyQtyField("negativeUnitCost",InventoryReceiptPage.unitCostField);
-        Boolean isToasterPresent=isDisplayed(PoEntryConversionFactorPage.toaster);
-        Utility_Functions.xAssertEquals(report,isToasterPresent,false,"Page is processed and 'F9 Accepts Order' toaster message is not present");
-        verifyQtyField("zeroUnitCost",InventoryReceiptPage.unitCostField);
+        verifyQtyField("negativeUnitCost", InventoryReceiptPage.unitCostField);
+        Boolean isToasterPresent = isDisplayed(PoEntryConversionFactorPage.toaster);
+        Utility_Functions.xAssertEquals(report, isToasterPresent, false, "Page is processed and 'F9 Accepts Order' toaster message is not present");
+        verifyQtyField("zeroUnitCost", InventoryReceiptPage.unitCostField);
         commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
-        verifyQtyField("blankSpaceUnitCost",InventoryReceiptPage.unitCostField);
+        verifyQtyField("blankSpaceUnitCost", InventoryReceiptPage.unitCostField);
         commonObj.validateText(PoEntryConversionFactorPage.toaster, "F9 Accepts Order", "'F9 Accepts Order' toaster message is present");
-        verifyQtyField("alphaNumericUnitCost",InventoryReceiptPage.unitCostField);
+        verifyQtyField("alphaNumericUnitCost", InventoryReceiptPage.unitCostField);
         commonObj.validateText(InventoryReceiptPage.displayProgramMes, "Display Program Messages", "'Display Program Messages' Header is present");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
@@ -262,7 +261,7 @@ public class POReceiptCorrects extends ReusableLib {
         String poNo = jsonData.getData(poNum);
         sendKeys(InventoryReceiptPage.purchaseOrdNo, poNo, "Enter Purchase Order Number");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        commonObj.validateText(PoEntryConversionFactorPage.toaster,"No Detail Lines exist for this Purchase Order","'No Detail Lines exist for this Purchase Order' toaster is present");
+        commonObj.validateText(PoEntryConversionFactorPage.toaster, "No Detail Lines exist for this Purchase Order", "'No Detail Lines exist for this Purchase Order' toaster is present");
     }
 
     /**

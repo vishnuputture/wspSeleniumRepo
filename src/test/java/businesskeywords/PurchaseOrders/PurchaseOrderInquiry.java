@@ -10,7 +10,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.OptionsConstantsPage;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
-import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.PurchaseOrders.PurchaseOrderInquiryPage;
 import pages.SalesOrders.SalesOrdersPage;
 import pages.common.MasterPage;
@@ -94,7 +93,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
     public void clickOnF12ReturnBtn() {
         try {
             click(PurchaseOrderInquiryPage.btnF12Return, "Click [F12=Return] button");
-        }catch (Exception e){
+        } catch (Exception e) {
             click(PurchaseOrderInquiryPage.btnExitItemLedger, "Click [Exit] button");
         }
     }
@@ -385,7 +384,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
     public void clickPOEntry() {
         try {
             click(PurchaseOrderInquiryPage.lnkPOEntry, "Click [PO Entry] link");
-        }catch (Exception e){
+        } catch (Exception e) {
             click(By.xpath("//a[text()='PO Entry']"), "Click [PO Entry] link");
         }
         commonObj.validateText(PurchaseOrderInquiryPage.hdrPOEntry, "Purchase Order Headings", "Validate [Purchase Order Headings] page header");

@@ -2,16 +2,11 @@ package businesskeywords.Pricing.SpecialPricing;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import commonkeywords.CommonActions;
+import commonkeywords.DBCall;
+import org.openqa.selenium.NoSuchElementException;
 import pages.pricing.AddSpecialPricingPage;
 import supportLibraries.Utility_Functions;
-import commonkeywords.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
 
@@ -56,8 +51,8 @@ public class AddSpecialPrice extends ReusableLib {
         commonObj.masterToOrderProcessing();
         commonObj.orderProcToSplPricing();
         commonObj.splPricingToAddPricing();
-        
-        
+
+
         commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");
     }
 
@@ -72,7 +67,7 @@ public class AddSpecialPrice extends ReusableLib {
         commonObj.splPricingToAddPricing();
         commonObj.validateText(AddSpecialPricingPage.addSpecialPriceTitle, "Add/Maintain Special Pricing", "Validating add special price page title");*/
         validateAddSpecialPriceTitle();
-        pageObj.enterCustNumber(jsonData.getData("InvalidCustNum"),"Entering invalid customer number");
+        pageObj.enterCustNumber(jsonData.getData("InvalidCustNum"), "Entering invalid customer number");
        /* sendKeys(AddSpecialPricingPage.custNumTxtBox, jsonData.getData("InvalidCustNum"), "Entering invalid customer number");
         Utility_Functions.actionKey(Keys.ENTER, driver);*/
 
@@ -94,7 +89,7 @@ public class AddSpecialPrice extends ReusableLib {
         /*sendKeys(AddSpecialPricingPage.custNumTxtBox, Utility_Functions.xGetJsonAsString("CustomerNo"), "Entering customer number");
         sendKeys(AddSpecialPricingPage.itemNumTxtBox, jsonData.getData("InvalidItemNum"), "Entering invalid item number");
         Utility_Functions.actionKey(Keys.ENTER, driver);*/
-        pageObj.enterCustItemNumber(Utility_Functions.xGetJsonAsString("CustomerNo"),"Entering customer number",jsonData.getData("InvalidItemNum"),"Entering invalid item number");
+        pageObj.enterCustItemNumber(Utility_Functions.xGetJsonAsString("CustomerNo"), "Entering customer number", jsonData.getData("InvalidItemNum"), "Entering invalid item number");
 
         commonObj.validateText(AddSpecialPricingPage.validationLbl, "Item Number does not exist", "Validating message for invalid item number");
 

@@ -14,6 +14,7 @@ public class fixedPayments extends ReusableLib {
     CommonActions commonObj;
     WebDriver d;
     private FrameworkDriver ownDriver;
+
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
      * objects wrapped by it
@@ -24,8 +25,8 @@ public class fixedPayments extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
 
-        ownDriver=helper.getGSDriver();
-        d=ownDriver.getWebDriver();
+        ownDriver = helper.getGSDriver();
+        d = ownDriver.getWebDriver();
     }
 
     public void scrollToView() {
@@ -38,8 +39,7 @@ public class fixedPayments extends ReusableLib {
      * Start of Fixed Payment Methods
      */
 
-    public void navigateToFixedPayments()
-    {
+    public void navigateToFixedPayments() {
         Utility_Functions.xHoverElementclicks(ownDriver.findElement(MakePaymentLandingPage.makePaymentdrpdwntext), ownDriver);
         click(MakePaymentLandingPage.fixedPayment);
         Utility_Functions.timeWait(3);
@@ -121,39 +121,32 @@ public class fixedPayments extends ReusableLib {
     }
 
 
+    public void fixedPayConfirmationCC() {
+        Utility_Functions.waitForElementVisible(ownDriver, FixedPaymentPage.paymentConfirmationHeader, 5);
 
-    public void fixedPayConfirmationCC()
-    {
-        Utility_Functions.waitForElementVisible(ownDriver,FixedPaymentPage.paymentConfirmationHeader,5);
+        String fixedNo = ownDriver.findElement(FixedPaymentPage.fixedConfirmationNumber).getText();
 
-        String fixedNo=ownDriver.findElement(FixedPaymentPage.fixedConfirmationNumber).getText();
+        Utility_Functions.xUpdateJson("FixedPaymntConfirmNoCC", fixedNo);
 
-        Utility_Functions.xUpdateJson("FixedPaymntConfirmNoCC",fixedNo);
-
-        if(fixedNo!="")
-        {
-            report.updateTestLog("Payment Confirmation Number",fixedNo,Status.PASS);
-        }else
-        {
-            report.updateTestLog("Payment Confirmation Number",fixedNo,Status.FAIL);
+        if (fixedNo != "") {
+            report.updateTestLog("Payment Confirmation Number", fixedNo, Status.PASS);
+        } else {
+            report.updateTestLog("Payment Confirmation Number", fixedNo, Status.FAIL);
         }
 
     }
 
-    public void fixedPayConfirmationBA()
-    {
-        Utility_Functions.waitForElementVisible(ownDriver,FixedPaymentPage.paymentConfirmationHeader,5);
+    public void fixedPayConfirmationBA() {
+        Utility_Functions.waitForElementVisible(ownDriver, FixedPaymentPage.paymentConfirmationHeader, 5);
 
-        String fixedNo=ownDriver.findElement(FixedPaymentPage.fixedConfirmationNumber).getText();
+        String fixedNo = ownDriver.findElement(FixedPaymentPage.fixedConfirmationNumber).getText();
 
-        Utility_Functions.xUpdateJson("FixedPaymntConfirmNoBA",fixedNo);
+        Utility_Functions.xUpdateJson("FixedPaymntConfirmNoBA", fixedNo);
 
-        if(fixedNo!="")
-        {
-            report.updateTestLog("Payment Confirmation Number",fixedNo,Status.PASS);
-        }else
-        {
-            report.updateTestLog("Payment Confirmation Number",fixedNo,Status.FAIL);
+        if (fixedNo != "") {
+            report.updateTestLog("Payment Confirmation Number", fixedNo, Status.PASS);
+        } else {
+            report.updateTestLog("Payment Confirmation Number", fixedNo, Status.FAIL);
         }
 
     }
