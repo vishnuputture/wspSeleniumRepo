@@ -7,6 +7,7 @@ import com.winSupply.framework.Status;
 
 import com.winSupply.framework.selenium.FrameworkDriver;
 import org.openqa.selenium.WebElement;
+import pages.common.MasterPage;
 import pages.inventory.ItemMasterPage;
 import pages.inventory.ReceiveCorrectionPage;
 import pages.pricing.PriceSheet.PriceSheetDetails;
@@ -101,8 +102,12 @@ public class createCost extends ReusableLib {
     public void deleteAvgCostItem() {
         sendKeys(ItemMasterPage.txtBoxSearch,Utility_Functions.xGetJsonAsString("CreatedCost"),"Entering search string");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        //Remove these waits if something gets fixed
+        Utility_Functions.xwaitForElmntToDisappr(ownDriver, MasterPage.loadingAnime, 60, 1);
         click(ItemMasterPage.deleteItemAction,"Click on delete action link");
+        Utility_Functions.xwaitForElmntToDisappr(ownDriver, MasterPage.loadingAnime, 60, 1);
         click(ItemMasterPage.btnAlertContinue,"Click on alert button");
+        Utility_Functions.xwaitForElmntToDisappr(ownDriver, MasterPage.loadingAnime, 60, 1);
 
         if (Utility_Functions.xWaitForElementPresent(ownDriver, ItemMasterPage.messageAddSuccessful, 10)) {
             String successMessage = Utility_Functions.getText(ownDriver,  ItemMasterPage.messageAddSuccessful);
@@ -211,16 +216,18 @@ public class createCost extends ReusableLib {
     		sendKeys(eleQuantityList.get(i),"100","Enter quantity");
     		sendKeys(eleItemNumberList.get(i),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
     		sendKeys(eleExplanationList.get(i),"Test data","Enter explanation");
+
     	}
     	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        Utility_Functions.timeWait(2);
 
-
-    	 click(ReceiveCorrectionPage.btnProcess,"Click on process");
-         Utility_Functions.timeWait(5);
-    	 click(ReceiveCorrectionPage.btnContinuePop,"Click on continue");
-
-    	 sendKeys(ownDriver.findElements(ReceiveCorrectionPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
-    	 Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        click(ReceiveCorrectionPage.btnProcess,"Click on process");
+        Utility_Functions.xWaitForElementDisappear(ownDriver, MasterPage.loadingAnime, 90);
+        if(isDisplayed(ReceiveCorrectionPage.popTitle)) {
+            click(ReceiveCorrectionPage.btnContinuePop,"Click on continue");
+        }
+        sendKeys(ownDriver.findElements(ReceiveCorrectionPage.txtItemNumber).get(0),Utility_Functions.xGetJsonAsString("CreatedCost"),"Enter item number");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
      	String onHandVal = Utility_Functions.getText(ownDriver.findElements(ReceiveCorrectionPage.lblOnHand).get(0));
 
      	Utility_Functions.xAssertEquals(report, "200", onHandVal.trim(), "Validating on hand value");

@@ -4,6 +4,7 @@ package businesskeywords.SalesOrders;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.Util;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import pages.SalesOrders.*;
@@ -71,7 +72,9 @@ public class SalesOrders extends ReusableLib{
 
 
 	    public void navigateToItemsTab() {
+			Utility_Functions.timeWait(5);
 	    	click(SalesOrdersPage.itemsTab,"Navigating to items tab");
+			click(SalesOrdersPage.itemsTab);
 			if(isDisplayed(SalesOrdersPage.matrixError)){
 				click(SalesOrdersPage.closeError);
 				click(SalesOrdersPage.matrixSearch);
