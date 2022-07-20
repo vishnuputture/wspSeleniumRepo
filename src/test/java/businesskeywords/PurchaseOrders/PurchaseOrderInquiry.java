@@ -194,6 +194,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      */
     public void selectStatus() {
         Utility_Functions.xSelectDropdownByName(ownDriver, PurchaseOrderInquiryPage.ddnStatus, jsonData.getData("Status"));
+        Utility_Functions.timeWait(1);
     }
 
     /**
@@ -214,8 +215,8 @@ public class PurchaseOrderInquiry extends ReusableLib {
         Utility_Functions.timeWait(2);
         List<WebElement> els = getListElement(PurchaseOrderInquiryPage.optField);
         for (int i = 0; i < els.size(); i++) {
-            Utility_Functions.timeWait(2);
             els = getListElement(PurchaseOrderInquiryPage.optField);
+            click(els.get(i));
             Utility_Functions.xSendKeys(ownDriver, els.get(i), "1" + Keys.ENTER);
             if (isDisplayed(PurchaseOrderInquiryPage.noResult1)) {
                 commonObj.validateText(PurchaseOrderInquiryPage.noResult1, "* No results to display based on the selected criteria.", "'* No results to display based on the selected criteria.' is present");
