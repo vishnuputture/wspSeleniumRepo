@@ -21,8 +21,7 @@
         <!--<suite-file path="../manifest.xml"></suite-file>-->
         <suite-file path="../ReceivingInProcess.xml"></suite-file>
         <suite-file path="../SalesPerson.xml"></suite-file>
-        <suite-file path="../spo.xml"></suite-file>
-        <suite-file path="../VendorInvoiceReconciliation.xml"></suite-file>
+        <!--<suite-file path="../spo.xml"></suite-file>-->
         <suite-file path="../WorkWithSalesQuote.xml"></suite-file>
     </suite-files>
 </suite>

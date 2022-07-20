@@ -142,7 +142,7 @@ public class createCost extends ReusableLib {
     	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
     	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	String temp=ownDriver.findElement(ItemMasterPage.txtBoxPoCost).getAttribute("value").trim();
-    	if(temp.equalsIgnoreCase(jsonData.getData("PoCost")))
+    	if(temp.equalsIgnoreCase(Utility_Functions.xGetJsonData("wisePO")))
         {
             report.updateTestLog("VerifyRecord", "Cost Matched", Status.PASS);
         }else

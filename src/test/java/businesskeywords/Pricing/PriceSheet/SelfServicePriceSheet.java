@@ -39,7 +39,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         login = new Login(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     public By linkEle(String val) {
@@ -59,12 +59,14 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     public void navigateToSelfServicePriceSheet() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h1"), "Wait for page to be loaded");
         click(SelfServicePriceSheetPage.companySelector);
         click(SelfServicePriceSheetPage.companyLabel);
         sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
         commonObj.validateText(SelfServicePriceSheetPage.selectButton, "Select", "Validating Select button");
         click(SelfServicePriceSheetPage.selectButton);
-        Utility_Functions.timeWait(6);
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, SelfServicePriceSheetPage.headerTitle, "Wait for page to be loaded");
+        // Utility_Functions.timeWait(6);
         commonObj.validateText(SelfServicePriceSheetPage.headerTitle, "SELF SERVICE PRICE SHEETS", "Validating Landing page title");
     }
 
@@ -192,6 +194,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
         Utility_Functions.timeWait(2);
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, SelfServicePriceSheetPage.successMessage, "Wait for page to be loaded");
         commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
         Utility_Functions.xUpdateJson("priceSheetName", name);
     }
@@ -214,6 +217,7 @@ public class SelfServicePriceSheet extends ReusableLib {
             Utility_Functions.timeWait(5);
             click(SelfServicePriceSheetPage.uploadedDataName);
         }
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, PriceSheetDetails.detailsPageHeader, "Wait for Page to be loaded");
         commonObj.validateText(PriceSheetDetails.detailsPageHeader, "Price Sheet Details", "inside Details Page");
     }
 
@@ -541,6 +545,7 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     public void fillSheetDataNetPrice() {
+        wisePo();
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -692,6 +697,12 @@ public class SelfServicePriceSheet extends ReusableLib {
         Double wisePriceDbl = Double.parseDouble(wisePrice);
         int wisePriceInt = Integer.parseInt(wisePriceDbl.toString().replace(".0", ""));
         calculatePoCost(wisePriceInt);
+    }
+
+    public void wisePo(){
+        String wiseListPrice = ownDriver.findElements(PriceSheetDetails.wiseListPriceChangePrice).get(3).getText();
+        String wisePrice = wiseListPrice.replace("$", "");
+        Utility_Functions.xUpdateJson("wisePO",wisePrice);
     }
 
     public void calculateMatrixCost(int wisePriceInt) {
