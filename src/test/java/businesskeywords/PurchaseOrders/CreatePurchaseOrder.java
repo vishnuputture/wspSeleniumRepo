@@ -42,7 +42,6 @@ public class CreatePurchaseOrder extends ReusableLib {
     }
 
     public void validatePOHeadingTitle() {
-
         commonObj.masterToPurchaseOrder();
         commonObj.navigateToPurchaseOrderEntry();
 
@@ -187,10 +186,9 @@ public class CreatePurchaseOrder extends ReusableLib {
         sendKeys(PurchaseOrderDetailsPage.quantityOrdered, quantity + Keys.ENTER, "Entered  Quantity Order");
         Utility_Functions.timeWait(5);
         sendKeys(PurchaseOrderDetailsPage.disc, discount + Keys.ENTER, "Entered Disc");
-        Utility_Functions.timeWait(5);
+        Utility_Functions.timeWait(15);
 
         if (Double.parseDouble(discount) > 0) {
-
             double extAmtCalc = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.quantityOrdered).getAttribute("value").trim())
                     * Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim())
                     * (1 - (Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.disc).getAttribute("value").trim())) / 100);
@@ -222,8 +220,6 @@ public class CreatePurchaseOrder extends ReusableLib {
     public void addPOWithListPriceAndDisc() {
         applyCostPriceAndDisc(jsonData.getData("listCostOption"), jsonData.getData("quantityOrdered"),
                 jsonData.getData("discount"));
-
-
     }
 
     public void addPOWithLastPriceAndDisc() {
@@ -245,7 +241,6 @@ public class CreatePurchaseOrder extends ReusableLib {
         Utility_Functions.xWaitForElementPresent(ownDriver, ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList), 5);
 
         List<WebElement> items = ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList);
-
         double itemsAmt = 0;
         for (WebElement e : items) {
             String itemValues[] = (e.getAttribute("outerText")).trim().split("[^A-Za-z0-9.]+");
@@ -357,6 +352,7 @@ public class CreatePurchaseOrder extends ReusableLib {
     public void validateShipmentType() {
         System.out.println("Customer Page Address One=" + CreatePurchaseOrder.customeraddress1);
         System.out.println("Customer Page Address Two=" + CreatePurchaseOrder.customeraddress2);
+        Utility_Functions.actionKey(Keys.F11, ownDriver);
         String shipto = Utility_Functions.getText(ownDriver, PurchaseOrderEntryPage.shipToinput, "value").replace(" ", "").toLowerCase().trim();
         String toaddress = Utility_Functions.getText(ownDriver, PurchaseOrderEntryPage.toaddressLine1, "value").replace(" ", "").toLowerCase().trim();
 
