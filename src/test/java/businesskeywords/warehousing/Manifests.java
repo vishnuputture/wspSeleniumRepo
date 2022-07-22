@@ -7,12 +7,9 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
-import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
-import pages.warehouse.DeliveredOrdersPage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.ManifestsPage;
 import pages.warehouse.TruckPage;
-import software.amazon.awssdk.services.route53domains.model.UnsupportedTldException;
 import supportLibraries.Utility_Functions;
 
 import java.util.List;
@@ -33,7 +30,7 @@ public class Manifests extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         truckObj = new Trucks(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -407,7 +404,7 @@ public class Manifests extends ReusableLib {
 
     public void deleteMan() {
         Utility_Functions.timeWait(4);
-        int count=1;
+        int count = 1;
         int size = ownDriver.findElements(TruckPage.manifestCount).size();
         for (int i = 1; i <= size; i++) {
             Utility_Functions.timeWait(4);
@@ -427,7 +424,7 @@ public class Manifests extends ReusableLib {
                 Utility_Functions.timeWait(3);
                 String exp = "Manifest #" + man + " successfully deleted.";
                 commonObj.validateElementExists(TruckPage.deletePopUp, exp);
-            }else {
+            } else {
                 count++;
             }
             ownDriver.navigate().back();

@@ -10,7 +10,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptPage;
 import pages.PurchaseOrders.InventoryReceiptsPage;
-
 import pages.common.MasterPage;
 import pages.pricing.OrderByCustomerPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;

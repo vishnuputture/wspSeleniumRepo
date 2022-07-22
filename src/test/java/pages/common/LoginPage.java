@@ -17,5 +17,5 @@ public class LoginPage extends ReusableLib {
     public static By signOnPageTitle = By.id("D_1_23");
 
     public static By passwordExpiresMsg = By.xpath("//div[contains(text(),'password')]");
-    
+
 }

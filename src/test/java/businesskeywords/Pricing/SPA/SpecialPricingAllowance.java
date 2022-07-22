@@ -3,26 +3,18 @@ package businesskeywords.Pricing.SPA;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
-
-import com.winSupply.framework.Util;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-
-import java.security.Key;
-import java.util.*;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-
-import pages.pricing.AddSpecialPricingPage;
-import pages.pricing.SpecialPricePage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
 
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class SpecialPricingAllowance extends ReusableLib {
     int count = 10;
@@ -32,7 +24,7 @@ public class SpecialPricingAllowance extends ReusableLib {
     public SpecialPricingAllowance(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     CommonActions commonObj;
@@ -492,7 +484,7 @@ public class SpecialPricingAllowance extends ReusableLib {
     public void verifySP(String spStatus, String message) {
         String successMessage;
         click(SpecialPriceAllowancePage.btnDelete, "F9=Load Special Price");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,SpecialPriceAllowancePage.indexes,"Wait for page to be loaded");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, SpecialPriceAllowancePage.indexes, "Wait for page to be loaded");
         if (Utility_Functions.xIsDisplayed(ownDriver, SpecialPriceAllowancePage.lblSuccess)) {
             successMessage = Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.lblSuccess);
         } else {

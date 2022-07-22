@@ -6,9 +6,6 @@ import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Keyboard;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.PurchaseOrders.PurchaseOrderInquiryPage;
 import pages.PurchaseOrders.VendorInvoiceReconciliationPage;
@@ -225,7 +222,7 @@ public class SalesPerson extends ReusableLib {
         commonObj.validateElementExists(SalesPersonPage.noRow, getText(SalesPersonPage.noRow) + "[No Mult] is present");
     }
 
-    public void choosePricingColumn(){
+    public void choosePricingColumn() {
         navigateToMatrixColumnBrowser();
         sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField1, "1", "Select an Item");
         commonObj.validateElementExists(SalesPersonPage.mutlType, "Multiplier Type: " + getText(SalesPersonPage.mutlType) + " is present");
@@ -252,7 +249,7 @@ public class SalesPerson extends ReusableLib {
         invalidColumnValidation("SpecialCharacterNumber");
     }
 
-    public void pressShiftF9(){
+    public void pressShiftF9() {
         try {
             Robot robot = new Robot();
             robot.keyPress(KeyEvent.VK_SHIFT);
@@ -290,28 +287,28 @@ public class SalesPerson extends ReusableLib {
     public void verifyResetMultiplierValue() {
         verifyMultiplierPricing();
         pressShiftF9();
-        String pricingCol=getText(SalesPersonPage.mutlValue);
+        String pricingCol = getText(SalesPersonPage.mutlValue);
         sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("Multiplier"), "Enter Multiplier value");
         commonObj.validateText(SalesPersonPage.mutlValue, jsonData.getData("Multiplier") + "000", jsonData.getData("Multiplier") + "000 is updated");
-        sendKeysAndEnter(SalesPersonPage.pricingColumn,"B","Enter different value into Pricing Column");
+        sendKeysAndEnter(SalesPersonPage.pricingColumn, "B", "Enter different value into Pricing Column");
         choosePricingColumn();
         commonObj.validateText(SalesPersonPage.mutlValue, pricingCol, "The Pricing Column matches");
     }
 
-    public By isHiddenVisibleElement(String id,String visibleORHidden){
-        return By.xpath("//div[@id='"+id+"' and contains(@style,'"+visibleORHidden+"')]");
+    public By isHiddenVisibleElement(String id, String visibleORHidden) {
+        return By.xpath("//div[@id='" + id + "' and contains(@style,'" + visibleORHidden + "')]");
     }
 
-    public void costVisible(){
-        String[] ids={"constant9","constant14","constant11"};
-        for(String id:ids)
-        commonObj.validateElementExists(isHiddenVisibleElement(id,"visible"), getText(isHiddenVisibleElement(id,"visible")) + " Label is Visible");
+    public void costVisible() {
+        String[] ids = {"constant9", "constant14", "constant11"};
+        for (String id : ids)
+            commonObj.validateElementExists(isHiddenVisibleElement(id, "visible"), getText(isHiddenVisibleElement(id, "visible")) + " Label is Visible");
     }
 
-    public void costIsHidden(){
-        String[] idEls={"constant10","constant15","constant19","constant11"};
-        for(String id:idEls)
-            commonObj.validateElementExists(isHiddenVisibleElement(id,"visible"), getText(isHiddenVisibleElement(id,"visible")) + " Label is visible");
+    public void costIsHidden() {
+        String[] idEls = {"constant10", "constant15", "constant19", "constant11"};
+        for (String id : idEls)
+            commonObj.validateElementExists(isHiddenVisibleElement(id, "visible"), getText(isHiddenVisibleElement(id, "visible")) + " Label is visible");
     }
 
     public void verifyToggleCostList() {
@@ -325,122 +322,122 @@ public class SalesPerson extends ReusableLib {
 
     public void verifyGrossMarginCalculation() {
         verifyMultiplierPricing();
-        Double price=Double.parseDouble(getAttribute(SalesPersonPage.priceCalculation,"value").trim());
-        Double cost=Double.parseDouble(getAttribute(SalesPersonPage.costCalculation,"value").trim());
-        Double costDiff=price-cost;
-        Double grossMargin=(costDiff/price)*100;
-        String grossMarginAct=getAttribute(SalesPersonPage.grossMargCalculation,"value").trim();
-        String grossMarginExp=grossMargin.toString().substring(0,5);
-        Utility_Functions.xAssertEquals(report,grossMarginAct,grossMarginExp,"");
+        Double price = Double.parseDouble(getAttribute(SalesPersonPage.priceCalculation, "value").trim());
+        Double cost = Double.parseDouble(getAttribute(SalesPersonPage.costCalculation, "value").trim());
+        Double costDiff = price - cost;
+        Double grossMargin = (costDiff / price) * 100;
+        String grossMarginAct = getAttribute(SalesPersonPage.grossMargCalculation, "value").trim();
+        String grossMarginExp = grossMargin.toString().substring(0, 5);
+        Utility_Functions.xAssertEquals(report, grossMarginAct, grossMarginExp, "");
     }
 
     public void verifyPriceCalculation() {
         verifyMultiplierPricing();
         pressShiftF9();
-        Double list=Double.parseDouble(getAttribute(SalesPersonPage.listCalculation,"value").trim());
-        Double multiplier=Double.parseDouble(getAttribute(SalesPersonPage.multiplierTextField,"value").trim());
-        Double price=list*multiplier;
-        String priceAct=getAttribute(SalesPersonPage.priceCalculation,"value").trim().substring(0,5);
-        Utility_Functions.xAssertEquals(report,priceAct,price.toString(),"");
+        Double list = Double.parseDouble(getAttribute(SalesPersonPage.listCalculation, "value").trim());
+        Double multiplier = Double.parseDouble(getAttribute(SalesPersonPage.multiplierTextField, "value").trim());
+        Double price = list * multiplier;
+        String priceAct = getAttribute(SalesPersonPage.priceCalculation, "value").trim().substring(0, 5);
+        Utility_Functions.xAssertEquals(report, priceAct, price.toString(), "");
     }
 
     public void verifyMultiplierField() {
         verifyMultiplierPricing();
         pressShiftF9();
-        String multiplier=getAttribute(SalesPersonPage.multiplierTextField,"value").trim();
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("InvalidDigitMultiplier"),"Edit the multiplier value in Multiplier field to greater than 9.999 " );
-        commonObj.validateText(SalesPersonPage.customMsg, "Mult Must Be <= 9.999 but was = "+jsonData.getData("InvalidDigitMultiplier"), "[Mult Must Be <= 9.999 but was = "+jsonData.getData("InvalidDigitMultiplier")+"] is present");
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("5DecimalMultiplier"),"Edit the multiplier value in Multiplier field to a number <=9.9999 and more than 4 digits after decimal point");
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("SpecialAlphaNumeric"),"Edit the multiplier value in Multiplier field to the combination of special characters and alphanumeric numbers");
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("ZeroMultiplier"),"Edit the multiplier value in Multiplier field to 0" );
-        Utility_Functions.xAssertEquals(report,multiplier,getAttribute(SalesPersonPage.multiplierTextField,"value").trim(),"Multiplier value reset to Original Value");
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("NegativeMultiplier"),"Edit the multiplier value in Multiplier field to Negative Value" );
-        commonObj.validateText(SalesPersonPage.customMsg, "(  Blank Price and Mult to Reset  )","[(Blank Price and Mult to Reset)] is present");
+        String multiplier = getAttribute(SalesPersonPage.multiplierTextField, "value").trim();
+        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("InvalidDigitMultiplier"), "Edit the multiplier value in Multiplier field to greater than 9.999 ");
+        commonObj.validateText(SalesPersonPage.customMsg, "Mult Must Be <= 9.999 but was = " + jsonData.getData("InvalidDigitMultiplier"), "[Mult Must Be <= 9.999 but was = " + jsonData.getData("InvalidDigitMultiplier") + "] is present");
+        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("5DecimalMultiplier"), "Edit the multiplier value in Multiplier field to a number <=9.9999 and more than 4 digits after decimal point");
+        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("SpecialAlphaNumeric"), "Edit the multiplier value in Multiplier field to the combination of special characters and alphanumeric numbers");
+        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("ZeroMultiplier"), "Edit the multiplier value in Multiplier field to 0");
+        Utility_Functions.xAssertEquals(report, multiplier, getAttribute(SalesPersonPage.multiplierTextField, "value").trim(), "Multiplier value reset to Original Value");
+        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("NegativeMultiplier"), "Edit the multiplier value in Multiplier field to Negative Value");
+        commonObj.validateText(SalesPersonPage.customMsg, "(  Blank Price and Mult to Reset  )", "[(Blank Price and Mult to Reset)] is present");
     }
 
-    public void grossMarginReset(String grossMarginAct,String value){
-        sendKeysAndEnter(SalesPersonPage.grossMargin, jsonData.getData(value),"Edit the multiplier value in Multiplier field to greater than 9.999 " );
-        Utility_Functions.xAssertEquals(report,grossMarginAct,getAttribute(SalesPersonPage.grossMargin,"value").trim(),"Gross Margin value reset to Original Value");
+    public void grossMarginReset(String grossMarginAct, String value) {
+        sendKeysAndEnter(SalesPersonPage.grossMargin, jsonData.getData(value), "Edit the multiplier value in Multiplier field to greater than 9.999 ");
+        Utility_Functions.xAssertEquals(report, grossMarginAct, getAttribute(SalesPersonPage.grossMargin, "value").trim(), "Gross Margin value reset to Original Value");
     }
 
     public void verifyGrossMarginField() {
         verifyMultiplierPricing();
         pressShiftF9();
-        String grossMarginAct=getAttribute(SalesPersonPage.grossMargin,"value").trim();
-        grossMarginReset(grossMarginAct,"InvalidGrossMargin");
-        grossMarginReset(grossMarginAct,"NegativeGrossMargin");
-        grossMarginReset(grossMarginAct,"5DecimalMultiplier");
-        grossMarginReset(grossMarginAct,"SpecialAlphaNumeric");
+        String grossMarginAct = getAttribute(SalesPersonPage.grossMargin, "value").trim();
+        grossMarginReset(grossMarginAct, "InvalidGrossMargin");
+        grossMarginReset(grossMarginAct, "NegativeGrossMargin");
+        grossMarginReset(grossMarginAct, "5DecimalMultiplier");
+        grossMarginReset(grossMarginAct, "SpecialAlphaNumeric");
     }
 
-    public void navigateToAlternativeItem(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("alternateItem"),"Click [Alternate Item] Link");
-        commonObj.validateText(SpecialPriceAllowancePage.header, "Alternate Stock Number Revisions","[Alternate Stock Number Revisions] header is present");
+    public void navigateToAlternativeItem() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("alternateItem"), "Click [Alternate Item] Link");
+        commonObj.validateText(SpecialPriceAllowancePage.header, "Alternate Stock Number Revisions", "[Alternate Stock Number Revisions] header is present");
     }
 
-    public void validateAlternateItemScreen(){
-        click(PricingMatrixPage.addRow,"Click [F1=Stk# Browse]");
-        commonObj.validateText(SalesPersonPage.f1Alt, "Stock Number:","Changes to [Stock Number:]");
-        click(SpecialPriceAllowancePage.btnExit,"Click [F3=Exit]");
+    public void validateAlternateItemScreen() {
+        click(PricingMatrixPage.addRow, "Click [F1=Stk# Browse]");
+        commonObj.validateText(SalesPersonPage.f1Alt, "Stock Number:", "Changes to [Stock Number:]");
+        click(SpecialPriceAllowancePage.btnExit, "Click [F3=Exit]");
         commonObj.validateText(SalesPersonPage.salesPersonInquiryTitle, "Salesperson Inquiry", "Validating Sales Person page title");
     }
 
-    public void enterCustomer(){
+    public void enterCustomer() {
         sendKeysAndEnter(SalesPersonPage.customerTextBox, jsonData.getData("Customer"), "Enter Customer");
     }
 
-    public void navigateToCustomerNotes(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("CustomerNotes_copy"),"Click [Customer Notes] Link");
-        commonObj.validateText(PurchaseOrderDetailsPage.poPrintSendHeader, "Customer Notes Revisions","[Customer Notes Revisions] header is present");
+    public void navigateToCustomerNotes() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("CustomerNotes_copy"), "Click [Customer Notes] Link");
+        commonObj.validateText(PurchaseOrderDetailsPage.poPrintSendHeader, "Customer Notes Revisions", "[Customer Notes Revisions] header is present");
     }
 
-    public void validateCustomerNotesScreen(){
-        sendKeys(VendorNotesPage.vendorInputVendorNotes,"A","Enter action [A]");
-        sendKeysAndEnter(SalesPersonPage.noteStatement,"Customer Notes - Automation Testing","Enter Note");
-        commonObj.validateText(VendorNotesPage.erroMsgVendorNotes, "c"+jsonData.getData("Customer")+" - Customer Notes Changed.","[c"+jsonData.getData("Customer")+" - Customer Notes Changed.] message is present");
-        click(SpecialPriceAllowancePage.btnExit,"Click [F3=Exit]");
+    public void validateCustomerNotesScreen() {
+        sendKeys(VendorNotesPage.vendorInputVendorNotes, "A", "Enter action [A]");
+        sendKeysAndEnter(SalesPersonPage.noteStatement, "Customer Notes - Automation Testing", "Enter Note");
+        commonObj.validateText(VendorNotesPage.erroMsgVendorNotes, "c" + jsonData.getData("Customer") + " - Customer Notes Changed.", "[c" + jsonData.getData("Customer") + " - Customer Notes Changed.] message is present");
+        click(SpecialPriceAllowancePage.btnExit, "Click [F3=Exit]");
         commonObj.validateText(SalesPersonPage.salesPersonInquiryTitle, "Salesperson Inquiry", "Validating Sales Person page title");
     }
 
-    public void navigateToIOVScreen(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("inventoryOverValue_copy"),"Click [IOV] Link");
-        commonObj.validateText(VendorInvoiceReconciliationPage.PoMainMenuHeader, "IOV Calculation","[IOV Calculation] header is present");
+    public void navigateToIOVScreen() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("inventoryOverValue_copy"), "Click [IOV] Link");
+        commonObj.validateText(VendorInvoiceReconciliationPage.PoMainMenuHeader, "IOV Calculation", "[IOV Calculation] header is present");
     }
 
-    public void navigateToItemBinScreen(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("lnkItemBinMaint"),"Click [Item-Bin Maintenance] Link");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver, SelfServicePriceSheetPage.companySelector,"[Item-Bin Maintenance - Item Details] header is present");
+    public void navigateToItemBinScreen() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("lnkItemBinMaint"), "Click [Item-Bin Maintenance] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, SelfServicePriceSheetPage.companySelector, "[Item-Bin Maintenance - Item Details] header is present");
         ownDriver.close();
     }
 
-    public void navigateToItemLedgerScreen(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("itemLedger"),"Click [Item Ledger] Link");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,PurchaseOrderInquiryPage.hdrItemLedger, "[Item Ledger (I-385)] header is present");
+    public void navigateToItemLedgerScreen() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("itemLedger"), "Click [Item Ledger] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, PurchaseOrderInquiryPage.hdrItemLedger, "[Item Ledger (I-385)] header is present");
     }
 
-    public void navigateToJobUsageScreen(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("jobUsage"),"Click [Job Usage] Link");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,PurchaseOrderDetailsPage.ediStat,"[Job Usage by Item Inquiry] header is present");
+    public void navigateToJobUsageScreen() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("jobUsage"), "Click [Job Usage] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, PurchaseOrderDetailsPage.ediStat, "[Job Usage by Item Inquiry] header is present");
     }
 
-    public void navigateToKitMaintenanceScreen(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("kitMaintenance"),"Click [Kit Maintenance] Link");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//span[text()='Kit Maintenance']"),"[Kit Maintenance] header is present");
+    public void navigateToKitMaintenanceScreen() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("kitMaintenance"), "Click [Kit Maintenance] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//span[text()='Kit Maintenance']"), "[Kit Maintenance] header is present");
     }
 
-    public void navigateToOrderByItemScreen(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("ordersByItem"),"Click [Orders by Item] Link");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,SpecialPriceAllowancePage.header,"[Open Orders By Item] header is present");
+    public void navigateToOrderByItemScreen() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("ordersByItem"), "Click [Orders by Item] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, SpecialPriceAllowancePage.header, "[Open Orders By Item] header is present");
     }
 
-    public void navigateToQuotesByItemScreen(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("quotesByItem"),"Click [Quotes by Item] Link");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,SalesPersonPage.wbScrTitle,"[SALES QUOTE DETAIL LINES] header is present");
+    public void navigateToQuotesByItemScreen() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("quotesByItem"), "Click [Quotes by Item] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, SalesPersonPage.wbScrTitle, "[SALES QUOTE DETAIL LINES] header is present");
     }
 
-    public void navigateToPreferredCoUsageScreen(){
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,linkIdEle("preferedCompanyUsage"),"Click [Preferred Co. Usage] Link");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//span[text()='Preferred Local Company Usage']"),"[Preferred Local Company Usage] header is present");
+    public void navigateToPreferredCoUsageScreen() {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("preferedCompanyUsage"), "Click [Preferred Co. Usage] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//span[text()='Preferred Local Company Usage']"), "[Preferred Local Company Usage] header is present");
     }
 
     public void verifyActionTab() {
@@ -451,25 +448,25 @@ public class SalesPerson extends ReusableLib {
         navigateToCustomerNotes();
         validateCustomerNotesScreen();
         navigateToIOVScreen();
-        click(SpecialPriceAllowancePage.btnExit,"Click [F3=Exit]");
+        click(SpecialPriceAllowancePage.btnExit, "Click [F3=Exit]");
         navigateToItemBinScreen();
     }
 
-    public void validateActionLinks(){
+    public void validateActionLinks() {
         verifyMultiplierPricing();
         enterCustomer();
         navigateToItemLedgerScreen();
-        click(SpecialPriceAllowancePage.btnExit,"Click [F3=Exit]");
+        click(SpecialPriceAllowancePage.btnExit, "Click [F3=Exit]");
         navigateToJobUsageScreen();
-        click(SpecialPriceAllowancePage.btnExit,"Click [F3=Exit]");
+        click(SpecialPriceAllowancePage.btnExit, "Click [F3=Exit]");
         navigateToKitMaintenanceScreen();
         click(By.xpath("//span[text()='F3-Exit']"));
         navigateToOrderByItemScreen();
-        click(SpecialPriceAllowancePage.btnExit,"Click [F3=Exit]");
+        click(SpecialPriceAllowancePage.btnExit, "Click [F3=Exit]");
         navigateToPreferredCoUsageScreen();
         click(By.xpath("//span[text()='F12-Back']"));
         navigateToQuotesByItemScreen();
-        click(CustomerGroupMaintenancePage.cancelBtn,"Click [Back]");
+        click(CustomerGroupMaintenancePage.cancelBtn, "Click [Back]");
         commonObj.validateText(SalesPersonPage.salesPersonInquiryTitle, "Salesperson Inquiry", "Validating Sales Person page title");
     }
 }

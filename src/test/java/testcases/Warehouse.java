@@ -97,7 +97,7 @@ public class Warehouse extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_209_AddNewDriverScreenUI(SeleniumTestParameters testParameters) {
-        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        System.out.println("Test case : " + testParameters.getCurrentTestcase() + " Thread " + Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case UI of Add New Driver Screen");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -170,7 +170,7 @@ public class Warehouse extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_240_CreateManifestUI(SeleniumTestParameters testParameters) {
-        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        System.out.println("Test case : " + testParameters.getCurrentTestcase() + " Thread " + Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Verify Create new Manifest Ui");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

@@ -9,7 +9,7 @@ public class ReceivingInProcess extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_957_SearchFilterUI(SeleniumTestParameters testParameters) {
-        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        System.out.println("Test case : " + testParameters.getCurrentTestcase() + " Thread " + Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to verify UI of Search Filter");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -18,7 +18,7 @@ public class ReceivingInProcess extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_958_SearchFilterFunctionality(SeleniumTestParameters testParameters) {
-        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        System.out.println("Test case : " + testParameters.getCurrentTestcase() + " Thread " + Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to Verify Search Filter Functionality");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

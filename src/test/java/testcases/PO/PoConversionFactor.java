@@ -49,7 +49,7 @@ public class PoConversionFactor extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_249_EditItemListPriceAndVerifyInPODetailsPage(SeleniumTestParameters testParameters) {
-        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        System.out.println("Test case : " + testParameters.getCurrentTestcase() + " Thread " + Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to Edit item number List Price from ITEM MASTER and verify in PO details page");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -58,7 +58,7 @@ public class PoConversionFactor extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_250_EditItemPOPriceAndVerifyInPODetailsPage(SeleniumTestParameters testParameters) {
-        System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        System.out.println("Test case : " + testParameters.getCurrentTestcase() + " Thread " + Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to Edit item number PO Price from ITEM MASTER and verify in PO details page");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

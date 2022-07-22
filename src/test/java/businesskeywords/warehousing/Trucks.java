@@ -10,11 +10,9 @@ import pages.common.MasterPage;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.warehouse.DeliveredOrdersPage;
 import pages.warehouse.DriversPage;
-import pages.warehouse.ManifestsPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -31,7 +29,7 @@ public class Trucks extends ReusableLib {
     public Trucks(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
 
@@ -345,7 +343,7 @@ public class Trucks extends ReusableLib {
      */
     public void navigateToUpdateTruckPage() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xClickHiddenElement(ownDriver,By.xpath("//td/a"));
+        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
     }
@@ -372,12 +370,12 @@ public class Trucks extends ReusableLib {
      */
     public void deleteTruck() {
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(ownDriver,TruckPage.deleteButton);
+        Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.noButtonPopUp, "Click No Button");
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
-        Utility_Functions.xClickHiddenElement(ownDriver,TruckPage.deleteButton);
+        Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.yesButtonPopUp, "Click Yes Button");
@@ -391,20 +389,19 @@ public class Trucks extends ReusableLib {
         }
     }
 
-        /**
-         * Keyword to Update Truck
-         *
-         */
-        public void updateTruck() {
-            click(TruckPage.statusDrop,"Click Status drop down");
-            click(DriversPage.inActive,"Select InActive From the status drop down");
-            Utility_Functions.timeWait(2);
-            click(TruckPage.newTruckPlateExpInput);
-            int size=ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).size()-1;
-            click(ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).get(size), "Select License Plate Expiration Date");
-            Utility_Functions.timeWait(2);
-            click(TruckPage.saveTruckButton,"Click Save Truck");
-            Utility_Functions.timeWait(3);
-            commonObj.validateText(TruckPage.deletePopUp,Utility_Functions.xGetJsonData("TruckName") + " successfully updated.","Truck Update message should display");
-        }
+    /**
+     * Keyword to Update Truck
+     */
+    public void updateTruck() {
+        click(TruckPage.statusDrop, "Click Status drop down");
+        click(DriversPage.inActive, "Select InActive From the status drop down");
+        Utility_Functions.timeWait(2);
+        click(TruckPage.newTruckPlateExpInput);
+        int size = ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).size() - 1;
+        click(ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).get(size), "Select License Plate Expiration Date");
+        Utility_Functions.timeWait(2);
+        click(TruckPage.saveTruckButton, "Click Save Truck");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(TruckPage.deletePopUp, Utility_Functions.xGetJsonData("TruckName") + " successfully updated.", "Truck Update message should display");
+    }
 }
