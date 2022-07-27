@@ -18,5 +18,6 @@
         <suite-file path="../MobileWarehousing/ReceivingInProcess.xml"></suite-file>
         <suite-file path="../Inventory/SalesPerson.xml"></suite-file>
         <suite-file path="../Pricing/WorkWithSalesQuote.xml"></suite-file>
+        <suite-file path="../Inventory/ItemMaster.xml"></suite-file>
     </suite-files>
 </suite>
