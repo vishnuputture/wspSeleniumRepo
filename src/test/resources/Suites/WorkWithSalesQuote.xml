@@ -7,8 +7,8 @@
             <class name="testcases.SalesQuotes.WorkWithSalesQuote">
                 <methods>
                     <include name="SalesQuotesToPO"></include>
-                    <include name="CheckInventoryReceipts"></include>
                     <include name="InquiryOrdersByCustomer"></include>
+                    <include name="CheckInventoryReceipts"></include>
                     <include name="OrderShippingConfirmation"></include>
                     <include name="PrintReportInvoices"></include>
                     <include name="FinalInquiryOrderStatus"></include>
