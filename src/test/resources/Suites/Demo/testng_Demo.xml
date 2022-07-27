@@ -32,7 +32,7 @@
                     <include name="Tc_29_Negative_Quantity_to_Item"></include>
                 </methods>
             </class>
-            <class name="testcases.SalesQuotes.WorkWithSalesQuote">
+            <class name="testcases.Pricing.WorkWithSalesQuote">
                 <methods>
                     <include name="SalesQuotesToPO"></include>
                     <include name="CheckInventoryReceipts"></include>
@@ -48,7 +48,7 @@
                     <include name="Tc_317_VerifyDeleteGroupName"></include>
                 </methods>
             </class>-->
-            <!--<class name="testcases.Warehouse">
+            <!--<class name="testcases.MobileWarehousing.Warehouse">
                 <methods>
                     <include name="Tc_AddTruck"></include>
                     <include name="Tc_AddNewDriver"></include>
@@ -58,7 +58,7 @@
             </class>-->
 
 
-            <class name="testcases.PO.PoConversionFactor">
+            <class name="testcases.Purchasing.PoConversionFactor">
                 <methods>
                     <include name="Tc_242_verifyItemNumberOnPO"></include>
                 </methods>

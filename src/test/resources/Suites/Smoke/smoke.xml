@@ -3,7 +3,7 @@
 <suite name="Regression" parallel="none" thread-count="1">
     <test name="SanityCheck">
         <classes>
-            <class name="testcases.SalesQuotes.WorkWithSalesQuote">
+            <class name="testcases.Pricing.WorkWithSalesQuote">
                 <methods>
                     <include name="SalesQuotesToPO"></include>
                     <include name="CheckInventoryReceipts"></include>

@@ -9,7 +9,7 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import pages.SalesOrders.SalesOrdersPage;
+import pages.pricing.SalesOrders.SalesOrdersPage;
 import pages.common.MasterPage;
 import pages.inventory.ItemMasterPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class binMaintenance extends ReusableLib {
     CommonActions commonObj;
-    businesskeywords.SPO.Spo sp;
+    businesskeywords.Purchasing.SPO.Spo sp;
     Login login;
     private FrameworkDriver ownDriver;
 
@@ -36,7 +36,7 @@ public class binMaintenance extends ReusableLib {
     public binMaintenance(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        sp = new businesskeywords.SPO.Spo(helper);
+        sp = new businesskeywords.Purchasing.SPO.Spo(helper);
         login = new Login(helper);
         ownDriver = helper.getGSDriver();
     }

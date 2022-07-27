@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Purchasing" parallel="tests" thread-count="2">
+	<test name="VendorInvoiceReconciliation">
+		<classes>
+			<class name="testcases.Purchasing.VendorInvoiceReconciliation">
+				<methods>
+					<include name="Tc_433_vendorInvoiceRecUI"></include>
+					<include name="Tc_435_verifyReceiverDocFields"></include>
+					<include name="Tc_437_verifyReceiverDocBrowse"></include>
+					<include name="Tc_440_verifySearchReceiverDocNo"></include>
+					<include name="Tc_441_verifySearchRecDocVdrName"></include>
+					<include name="Tc_443_verifySearchReferenceDocNo"></include>
+					<include name="Tc_444_verifySearchVdrInvoice"></include>
+					<include name="Tc_445_verifySearchTotalCost"></include>
+					<include name="Tc_447_verifyRecDocPositionToPO"></include>
+					<include name="Tc_450_verifyRecDateFilter"></include>
+					<include name="Tc_452_verifyRecDateFilter"></include>
+					<include name="Tc_CreatePoDirect"></include>
+					<include name="Tc_CompleteReceivingStockPOItemsInventoryReceiptsScreen"></include>
+					<include name="Tc_453_verifyDueDateField"></include>
+					<include name="TC_454_VerifyGMMgrAmount"></include>
+					<include name="TC_455_VerifyGrossMarginManagerPage"></include>
+					<include name="TC_459_VerifyFunctionalityOfF6KeyInReceiverDocumentBrowsePage"></include>
+					<include name="TC_461_VerifyFunctionalityOfF12KeyInVendorInvoiceReconciliationPage"></include>
+					<include name="TC_464_VerifyOptionsAvailableOnDetailPage"></include>
+					<include name="TC_469_VerifyFreightAmountInVIRPage"></include>
+					<include name="TC_481_VerifyCreationOfDebitMemoForQuantityDifference"></include>
+					<include name="TC_482_VerifyCreationOfDebitMemoForCostDifference"></include>
+					<include name="TC_486_VerifyCreationOfDebitMemoForItemsNotOnPO"></include>
+					<include name="TC_487_VerifySpecialNotesOnDebitMemoProcessPage"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

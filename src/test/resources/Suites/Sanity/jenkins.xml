@@ -94,7 +94,7 @@
                 </methods>
             </class>-->
 
-            <!--<class name="testcases.makePayments.makePayments">
+            <!--<class name="testcases.AccountReceivable.makePayments">
                 <methods>
                     <include name="Tc_139_clickHere_Link_SchedulePage"></include>
                     <include name="Tc_140_disabling_Terms_Condition_CheckBox_Enroll"></include>
@@ -119,7 +119,7 @@
                 </methods>
             </class>-->
 
-            <class name="testcases.Warehouse">
+            <class name="testcases.MobileWarehousing.Warehouse">
             <methods>
                 <include name="Tc_TruckUI"></include>
                 <include name="Tc_TrucksHelpIcon"></include>

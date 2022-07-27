@@ -1,6 +1,6 @@
 package businesskeywords.warehousing.ReceivingInProcess;
 
-import businesskeywords.PurchaseOrders.CreatePurchaseOrder;
+import businesskeywords.Purchasing.CreatePurchaseOrder;
 import businesskeywords.warehousing.BinMaintanence.binMaintenance;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -10,9 +10,9 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import pages.PurchaseOrders.InventoryReceiptsPage;
-import pages.PurchaseOrders.PurchaseOrderDetailsPage;
-import pages.SPO.SpoPage;
+import pages.Purchasing.InventoryReceiptsPage;
+import pages.Purchasing.PurchaseOrderDetailsPage;
+import pages.Purchasing.SPO.SpoPage;
 import pages.common.MasterPage;
 import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import pages.warehouse.BinMaintenance.BinMaintenancePage;

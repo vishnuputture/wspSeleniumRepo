@@ -1,6 +1,5 @@
 package businesskeywords.Pricing.PriceSheet;
 
-import bsh.util.Util;
 import businesskeywords.common.Login;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -10,12 +9,9 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import pages.SPO.SpoPage;
-import pages.SalesOrders.SalesOrdersPage;
+import pages.Purchasing.SPO.SpoPage;
 import pages.pricing.PriceSheet.PriceSheetDetails;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
-import pages.pricing.SpecialPricePage;
-import software.amazon.ion.Decimal;
 import supportLibraries.Utility_Functions;
 
 import java.io.File;
