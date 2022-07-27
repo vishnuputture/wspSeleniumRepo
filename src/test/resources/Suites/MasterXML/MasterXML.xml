@@ -14,7 +14,6 @@
         <suite-file path="../Purchasing/PurchaseOrder.xml"></suite-file>
         <suite-file path="../Purchasing/VendorInvoiceReco.xml"></suite-file>
         <suite-file path="../Pricing/SalesQuotes.xml"></suite-file>
-        <suite-file path="../MobileWarehousing/BinMaintenance.xml"></suite-file>
         <suite-file path="../AccountReceivable/MiscChargesAndAdjustments.xml"></suite-file>
         <suite-file path="../MobileWarehousing/ReceivingInProcess.xml"></suite-file>
         <suite-file path="../Inventory/SalesPerson.xml"></suite-file>
