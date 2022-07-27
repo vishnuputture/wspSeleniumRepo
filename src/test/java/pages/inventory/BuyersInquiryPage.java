@@ -4,7 +4,7 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import org.openqa.selenium.By;
 
-public class BuyersInquiryPage extends ReusableLib{
+public class BuyersInquiryPage extends ReusableLib {
 
     public BuyersInquiryPage(Helper helper) {
         super(helper);

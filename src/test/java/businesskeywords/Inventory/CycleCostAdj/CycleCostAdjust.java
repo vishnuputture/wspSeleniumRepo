@@ -8,8 +8,6 @@ import org.openqa.selenium.Keys;
 import pages.inventory.CostAdjustmentPage;
 import supportLibraries.Utility_Functions;
 
-import java.text.DecimalFormat;
-
 public class CycleCostAdjust extends ReusableLib {
     CommonActions commonObj = new CommonActions(helper);
     public static int exp_Number;
@@ -24,45 +22,37 @@ public class CycleCostAdjust extends ReusableLib {
 
     public CycleCostAdjust(Helper helper) {
         super(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
 
-        /**
-         *
-         * This method validates the Cycle Count Adjustment Option
-         *
-         */
-        public void validateCycleCountAdj () {
+    /**
+     * This method validates the Cycle Count Adjustment Option
+     */
+    public void validateCycleCountAdj() {
         commonObj.masterToInventory();
         commonObj.inventoryToInvAdjustments();
         commonObj.validateText(CostAdjustmentPage.cycleCountAdj, "cycle count adjustments", "Validating Cycle Cost Adjustment Option present in the menu under the option 1 Cycle Count Adjustments");
     }
 
-        /**
-         *
-         * This method to exit from Cycle cost Adjustment
-         *
-         */
-        public void exitFromCycleCostAdj () {
+    /**
+     * This method to exit from Cycle cost Adjustment
+     */
+    public void exitFromCycleCostAdj() {
         commonObj.exitFromCycleCostAdj();
     }
 
-        /**
-         *
-         * This method navigate to Cycle Count Adjustment Option and Enter Valid Value
-         *
-         */
-        public void navCycleCostAdjProgram () {
+    /**
+     * This method navigate to Cycle Count Adjustment Option and Enter Valid Value
+     */
+    public void navCycleCostAdjProgram() {
         click(CostAdjustmentPage.cycleCountAdj, "Click Cycle Cost Adjustments Program");
     }
 
-        /**
-         *
-         * This method navigate to Cycle Count Adjustment Option and Enter Valid Value
-         *
-         */
-        public String validValue () {
+    /**
+     * This method navigate to Cycle Count Adjustment Option and Enter Valid Value
+     */
+    public String validValue() {
         click(CostAdjustmentPage.cycleCountAdj, "Click Cycle Cost Adjustments Program");
         int num = Utility_Functions.genRandNum(99);
         exp_Number = num;
@@ -82,12 +72,10 @@ public class CycleCostAdjust extends ReusableLib {
         return quantityValue;
     }
 
-        /**
-         *
-         * This method navigate to Item Ledger
-         *
-         */
-        public void navLedger () {
+    /**
+     * This method navigate to Item Ledger
+     */
+    public void navLedger() {
         Utility_Functions.timeWait(3);
         Utility_Functions.xmouseOver(ownDriver, CostAdjustmentPage.itemLedger);
         click(CostAdjustmentPage.itemLedger);
@@ -98,21 +86,17 @@ public class CycleCostAdjust extends ReusableLib {
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
-        /**
-         *
-         * This method Exit from Item Ledger Program
-         *
-         */
-        public void exitItemLedgerProgram () {
+    /**
+     * This method Exit from Item Ledger Program
+     */
+    public void exitItemLedgerProgram() {
         click(CostAdjustmentPage.extBtnLedger, "Click on Exit Button");
     }
 
-        /**
-         *
-         * This method to validate Item Ledger Field
-         *
-         */
-        public void validateItemLedgerFiled () {
+    /**
+     * This method to validate Item Ledger Field
+     */
+    public void validateItemLedgerFiled() {
         String value = validValue();
         navLedger();
         Utility_Functions.waitForElementVisible(ownDriver, CostAdjustmentPage.units, 10);
@@ -127,12 +111,10 @@ public class CycleCostAdjust extends ReusableLib {
         Utility_Functions.xAssertEquals(report, exp.toUpperCase(), "OTHER", "Explanation: ");
     }
 
-        /**
-         *
-         * This method navigate to Cycle Count Adjustment Option
-         *
-         */
-        public void validateUpadtedCount () {
+    /**
+     * This method navigate to Cycle Count Adjustment Option
+     */
+    public void validateUpadtedCount() {
         click(CostAdjustmentPage.cycleCountAdj, "Click Cycle Cost Adjustments Program");
         selectQuantity("687");
         String error = ownDriver.findElement(CostAdjustmentPage.countFiled).getAttribute("title");
@@ -142,7 +124,7 @@ public class CycleCostAdjust extends ReusableLib {
         Utility_Functions.timeWait(5);
 
         int onH = 0;
-        if(!noSpaceStr.isEmpty())
+        if (!noSpaceStr.isEmpty())
             onH = Integer.parseInt(noSpaceStr);
 
         int res = num - onH;
@@ -164,12 +146,10 @@ public class CycleCostAdjust extends ReusableLib {
         Utility_Functions.xWaitForElementDisappear(ownDriver, CostAdjustmentPage.quantity, 3);
     }
 
-        /**
-         *
-         * This method to Negative value on Count Field
-         *
-         */
-        public void nagValidation () {
+    /**
+     * This method to Negative value on Count Field
+     */
+    public void nagValidation() {
         click(CostAdjustmentPage.cycleCountAdj, "Click Cycle Cost Adjustments Program");
         selectQuantity("-12");
         String color = ownDriver.findElement(CostAdjustmentPage.countFiled).getCssValue("border-color");
@@ -179,21 +159,17 @@ public class CycleCostAdjust extends ReusableLib {
         Utility_Functions.xAssertEquals(report, error, "Quantity is missing or invalid", "Error: ");
     }
 
-        /**
-         *
-         * This method to get Explanation
-         *
-         */
-        public void selectExplanation (String value){
+    /**
+     * This method to get Explanation
+     */
+    public void selectExplanation(String value) {
         sendKeys(CostAdjustmentPage.explanation, value, "Enter " + value + " to Explanation field");
     }
 
-        /**
-         *
-         * This method to get quantity
-         *
-         */
-        public String selectQuantity (String count){
+    /**
+     * This method to get quantity
+     */
+    public String selectQuantity(String count) {
         sendKeys(CostAdjustmentPage.countFiled, count, "Quantity");
         click(CostAdjustmentPage.searchIcon);
         Utility_Functions.xWaitForElementVisible(ownDriver, CostAdjustmentPage.includeYes, 15);
@@ -208,12 +184,10 @@ public class CycleCostAdjust extends ReusableLib {
         return noSpaceStr;
     }
 
-        /**
-         *
-         * This method to get Total adjusted value from the table
-         *
-         */
-        public void verifyCount () {
+    /**
+     * This method to get Total adjusted value from the table
+     */
+    public void verifyCount() {
         int num = Utility_Functions.genRandNum(99);
         selectQuantity("" + num + "");
         sendKeys(CostAdjustmentPage.countFiled2, "" + num + "", "Quantity");
@@ -233,12 +207,10 @@ public class CycleCostAdjust extends ReusableLib {
         Utility_Functions.xWaitForElementDisappear(ownDriver, CostAdjustmentPage.quantity, 3);
     }
 
-        /**
-         *
-         * This method to get count
-         *
-         */
-        public int getCount () {
+    /**
+     * This method to get count
+     */
+    public int getCount() {
         int cont = exp_Number + exp_Number;
         System.out.println("cont: " + cont);
         String countNumb = ownDriver.findElement(CostAdjustmentPage.countMod).getText();
@@ -249,12 +221,10 @@ public class CycleCostAdjust extends ReusableLib {
         return cn;
     }
 
-        /**
-         *
-         * This method to get Adj Quantity
-         *
-         */
-        public int getAdjQt () {
+    /**
+     * This method to get Adj Quantity
+     */
+    public int getAdjQt() {
         String fAdjQt = ownDriver.findElement(CostAdjustmentPage.firRowAdj).getText();
         String adjAxp = fAdjQt.replaceAll(".00", "");
         String seAdjQt = ownDriver.findElement(CostAdjustmentPage.secRowAdj).getText();
@@ -270,12 +240,10 @@ public class CycleCostAdjust extends ReusableLib {
         return adjustQt;
     }
 
-        /**
-         *
-         * This method to get Amount
-         *
-         */
-        public String getAmount () {
+    /**
+     * This method to get Amount
+     */
+    public String getAmount() {
         String fAmount = ownDriver.findElement(CostAdjustmentPage.firRowAmt).getText();
         String fAmountxp = fAmount.replaceAll(",", "");
         String seAmount = ownDriver.findElement(CostAdjustmentPage.secRowAmt).getText();
@@ -292,7 +260,7 @@ public class CycleCostAdjust extends ReusableLib {
         float amt = (float) (d + d1);
         String amont = ownDriver.findElement(CostAdjustmentPage.amountyMod).getText();
         float amount = Float.parseFloat(amont);
-        System.out.println("amount : "+amount);
+        System.out.println("amount : " + amount);
         Utility_Functions.xAssertEquals(report, "" + amt + "", "" + amount + "", "Amount: ");
         return amont;
     }

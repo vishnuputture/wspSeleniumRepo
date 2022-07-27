@@ -10,8 +10,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.InventoryReceiptPage;
 import pages.PurchaseOrders.InventoryReceiptsPage;
-
 import pages.common.MasterPage;
+import pages.pricing.OrderByCustomerPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import pages.warehouse.ReceivingInProcess.ReceivingInProcessPage;
 import supportLibraries.Utility_Functions;
@@ -35,7 +35,7 @@ public class inventoryReceipts extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         objPOEntryConvFactor = new PoEntryConversionFactor(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -52,8 +52,18 @@ public class inventoryReceipts extends ReusableLib {
      */
     public void navigateInventoryReceiptsToMaster() {
         Utility_Functions.xScrollWindow(ownDriver);
-        click(InventoryReceiptsPage.btnExit, "Click Exit Button");
-        click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
+        try {
+            click(InventoryReceiptsPage.btnExit, "Click Exit Button");
+        } catch (Exception e) {
+        }
+        try {
+            click(InventoryReceiptPage.exitBtn, "Click Exit Button");
+        } catch (Exception e) {
+        }
+        try {
+            click(SpecialPriceAllowancePage.btnExit, "Click Exit Button");
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -73,7 +83,7 @@ public class inventoryReceipts extends ReusableLib {
      * Keyword to enter existing PO Number in Inventory Receipts Page
      */
     public void enterExistingPONumber() {
-        String poNumber = jsonData.getData("PONumber");
+        String poNumber = Utility_Functions.xGetJsonData("PONumber");
         sendKeysAndEnter(InventoryReceiptsPage.tbxPONumber, poNumber, "Enter Purchase Order Number");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
@@ -125,8 +135,8 @@ public class inventoryReceipts extends ReusableLib {
         Utility_Functions.timeWait(2);
         String qty = jsonData.getData("QtyReceived");
         sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, qty, "Enter Quantity Received");
-        String itemNum=getText(InventoryReceiptPage.itemNo).trim();
-        Utility_Functions.xUpdateJson("FullyReceivedItem",itemNum);
+        String itemNum = getText(InventoryReceiptPage.itemNo).trim();
+        Utility_Functions.xUpdateJson("FullyReceivedItem", itemNum);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
@@ -145,8 +155,8 @@ public class inventoryReceipts extends ReusableLib {
         Utility_Functions.timeWait(2);
         String qty = jsonData.getData("QtyReceived");
         sendKeysAndEnter(InventoryReceiptsPage.tbxQtyRcvd, qty, "Enter Quantity Received");
-        String itemNum=getText(InventoryReceiptPage.itemNo).trim();
-        Utility_Functions.xUpdateJson("FullyReceivedItem",itemNum);
+        String itemNum = getText(InventoryReceiptPage.itemNo).trim();
+        Utility_Functions.xUpdateJson("FullyReceivedItem", itemNum);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
@@ -230,7 +240,7 @@ public class inventoryReceipts extends ReusableLib {
      * Keyword to navigate back to Inventory Receipts Page from Sales Order Inquiry
      */
     public void exitSalesOrderInquiry() {
-        click(InventoryReceiptsPage.btnExit, "Click [Exit] button in Sales Order Inquiry page");
+        click(OrderByCustomerPage.exitutton, "Click [Exit] button in Sales Order Inquiry page");
     }
 
     /**

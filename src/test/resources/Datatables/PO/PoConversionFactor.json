@@ -68,24 +68,24 @@
     },
     {
       "TC_ID": "Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry",
-      "itemNo": "DVTWG840205",
-      "WithReceipts": "5",
-      "OnPO": "4",
-      "AvailableToSell": "1",
+      "itemNo": "CAL462107",
+      "WithReceipts": "2",
+      "OnPO": "2",
+      "AvailableToSell": "",
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000"
     },
     {
       "TC_ID": "Tc_253_VerifyItemDetailsAfterProcessingPO",
-      "itemNo": "SMMATTRPD06",
-      "WithReceipts": "1",
-      "OnPO": "11",
-      "AvailableToSell": "-10",
+      "itemNo": "CAL462107",
+      "WithReceipts": "4",
+      "OnPO": "4",
+      "AvailableToSell": "",
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000",
-      "PONumber": "032805"
+      "PONumber": "033560"
     },
     {
       "TC_ID": "Tc_256_VerifyLineItemAfterProcessingPO",
@@ -96,7 +96,7 @@
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000",
-      "PONumber": "032806"
+      "PONumber": "033561"
     },
     {
       "TC_ID": "Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO",
@@ -106,7 +106,7 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "001837",
+      "SalesOrderNo": "002527",
       "QtyOrdered": "25",
       "CostOption": "1"
     },
@@ -118,12 +118,12 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "001838",
+      "SalesOrderNo": "002528",
       "QtyOrdered": "25",
       "VendorNumber": "000388",
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "032807",
+      "PONumber": "033288",
       "Action": "I",
       "ActionExpected": "C",
       "TypeShipmentExpected": "D"

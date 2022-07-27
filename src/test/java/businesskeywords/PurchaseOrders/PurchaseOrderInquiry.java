@@ -10,8 +10,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.PurchaseOrders.OptionsConstantsPage;
 import pages.PurchaseOrders.PurchaseOrderDetailsPage;
-import pages.PurchaseOrders.PurchaseOrderEntryPage;
 import pages.PurchaseOrders.PurchaseOrderInquiryPage;
+import pages.SalesOrders.SalesOrdersPage;
 import pages.common.MasterPage;
 import pages.inventory.CostAdjustmentPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
@@ -34,7 +34,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
     public PurchaseOrderInquiry(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -50,9 +50,9 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to click on [Exit] button in PURCHASE ORDER INQUIRY Page
      */
     public void clickExitBtnPOInquiry() {
-        //Utility_Functions.xScrollIntoView(driver, PurchaseOrderInquiryPage.btnExitPOInquiryDtls);
         Utility_Functions.xScrollPage(ownDriver);
-        click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
+        int count = ownDriver.findElements(PurchaseOrderInquiryPage.btnExitPOInquiryDtls).size();
+        click(ownDriver.findElements(PurchaseOrderInquiryPage.btnExitPOInquiryDtls).get(count - 1), "Click [Exit] button");
     }
 
     /**
@@ -74,32 +74,36 @@ public class PurchaseOrderInquiry extends ReusableLib {
     /**
      * Keyword to press [F3] Exit button
      */
-    public void pressF3ExitBtn(){
+    public void pressF3ExitBtn() {
         Utility_Functions.actionKey(Keys.F3, ownDriver);
-        report.updateTestLog("Press [F3] button", "Press [F3] button",Status.PASS);
+        report.updateTestLog("Press [F3] button", "Press [F3] button", Status.PASS);
     }
 
     /**
      * Keyword to press [F12] Exit button
      */
-    public void pressF12CancelBtn(){
+    public void pressF12CancelBtn() {
         Utility_Functions.actionKey(Keys.F12, ownDriver);
-        report.updateTestLog("Press [F12] button", "Press [F12] button",Status.PASS);
+        report.updateTestLog("Press [F12] button", "Press [F12] button", Status.PASS);
     }
 
     /**
      * Keyword to click on [Exit] button
      */
     public void clickOnF12ReturnBtn() {
-        click(PurchaseOrderInquiryPage.btnF12Return, "Click [F12=Return] button");
+        try {
+            click(PurchaseOrderInquiryPage.btnF12Return, "Click [F12=Return] button");
+        } catch (Exception e) {
+            click(PurchaseOrderInquiryPage.btnExitItemLedger, "Click [Exit] button");
+        }
     }
 
     /**
      * Keyword to exit to master from PURCHASE ORDER INQUIRY Page
      */
-    public void navigatePOInquiryToMaster(){
+    public void navigatePOInquiryToMaster() {
         Utility_Functions.xScrollPage(ownDriver);
-        if(isDisplayed(PurchaseOrderInquiryPage.btnExitPOInquiryDtls)) {
+        if (isDisplayed(PurchaseOrderInquiryPage.btnExitPOInquiryDtls)) {
             click(PurchaseOrderInquiryPage.btnExitPOInquiryDtls, "Click [Exit] button");
         }
         Utility_Functions.actionKey(Keys.F3, ownDriver);
@@ -170,7 +174,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
         Utility_Functions.xAssertEquals(report, itemNumber, itemNumberActual, "Validate Item Number textbox value");
     }
 
-    public void navigateToItemLedger(){
+    public void navigateToItemLedger() {
         String itemNumber = getElement(PurchaseOrderInquiryPage.itemNumber).getText().trim();
         click(PurchaseOrderInquiryPage.btnItemLedger, "Click [Item Ledger] Button");
         String itemNumberActual = getAttribute(PurchaseOrderInquiryPage.tbxItemNumber, "value");
@@ -190,6 +194,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
      */
     public void selectStatus() {
         Utility_Functions.xSelectDropdownByName(ownDriver, PurchaseOrderInquiryPage.ddnStatus, jsonData.getData("Status"));
+        Utility_Functions.timeWait(1);
     }
 
     /**
@@ -210,8 +215,8 @@ public class PurchaseOrderInquiry extends ReusableLib {
         Utility_Functions.timeWait(2);
         List<WebElement> els = getListElement(PurchaseOrderInquiryPage.optField);
         for (int i = 0; i < els.size(); i++) {
-            Utility_Functions.timeWait(2);
             els = getListElement(PurchaseOrderInquiryPage.optField);
+            click(els.get(i));
             Utility_Functions.xSendKeys(ownDriver, els.get(i), "1" + Keys.ENTER);
             if (isDisplayed(PurchaseOrderInquiryPage.noResult1)) {
                 commonObj.validateText(PurchaseOrderInquiryPage.noResult1, "* No results to display based on the selected criteria.", "'* No results to display based on the selected criteria.' is present");
@@ -221,6 +226,7 @@ public class PurchaseOrderInquiry extends ReusableLib {
             click(PurchaseOrderInquiryPage.orderBySearchIcon, "Click Order By Search Icon");
             Utility_Functions.timeWait(2);
         }
+        click(SalesOrdersPage.btnCancel, "Click [F12=Cancel]");
     }
 
     /**
@@ -377,7 +383,11 @@ public class PurchaseOrderInquiry extends ReusableLib {
      * Keyword to click on [PO Entry] link in PURCHASE ORDER INQUIRY Page
      */
     public void clickPOEntry() {
-        click(PurchaseOrderInquiryPage.lnkPOEntry, "Click [PO Entry] link");
+        try {
+            click(PurchaseOrderInquiryPage.lnkPOEntry, "Click [PO Entry] link");
+        } catch (Exception e) {
+            click(By.xpath("//a[text()='PO Entry']"), "Click [PO Entry] link");
+        }
         commonObj.validateText(PurchaseOrderInquiryPage.hdrPOEntry, "Purchase Order Headings", "Validate [Purchase Order Headings] page header");
     }
 
@@ -624,12 +634,12 @@ public class PurchaseOrderInquiry extends ReusableLib {
         String extPrice = getText(PurchaseOrderInquiryPage.extPriceColumn).replace(",", "").replace(".00", "").trim();
         int unitCost = line * qty;
         Utility_Functions.xUpdateJson("UnitPricePoDetails", "" + unitCost + "");
-        Utility_Functions.xAssertNotEquals(report, unitPrice, "" + unitCost + "", "");
+        Utility_Functions.xAssertEquals(report, unitPrice, "" + unitCost + "", "");
         int extCost = qty * unitCost;
         Utility_Functions.xUpdateJson("ExtPricePoDetails", "" + extCost + "");
         String amount = getText(PurchaseOrderInquiryPage.openAmount).replace("$", "").replace(",", "").replace(".00", "").trim();
-        Utility_Functions.xAssertNotEquals(report, extPrice, "" + extCost + "", "");
-        Utility_Functions.xAssertNotEquals(report, amount, "" + extCost + "", "");
+        Utility_Functions.xAssertEquals(report, extPrice, "" + extCost + "", "");
+        Utility_Functions.xAssertEquals(report, amount, "" + extCost + "", "");
     }
 
     public void verifyPoDetailsWithLineNoAction() {

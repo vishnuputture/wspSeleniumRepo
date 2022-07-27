@@ -22,14 +22,14 @@ public class ProposedMtxCostUpdation extends ReusableLib {
 
     public ProposedMtxCostUpdation(Helper helper) {
         super(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
      * This method to modify Proposed field with different values
      */
     public void verifyProposedMtxFieldWithDiffValues() {
-        MatrixCostUpdate mtxCostUpd=new MatrixCostUpdate(helper);
+        MatrixCostUpdate mtxCostUpd = new MatrixCostUpdate(helper);
         int randNumber = Utility_Functions.xRandomFunction();
         String validValue = Integer.toString(randNumber);
         mtxCostUpd.selectRecord(MatrixCostUpdatePage.radioButton);
@@ -45,25 +45,29 @@ public class ProposedMtxCostUpdation extends ReusableLib {
             click(MatrixCostUpdatePage.saveButton, "Click Save Changes Button");
             Utility_Functions.timeWait(5);
             System.out.println("After 3 sec");
-            Utility_Functions.xIsDisplayed(ownDriver,MatrixCostUpdatePage.infMessage);
+            Utility_Functions.xIsDisplayed(ownDriver, MatrixCostUpdatePage.infMessage);
             System.out.println("Present");
             try {
                 Utility_Functions.xClickIfAvlbl(ownDriver, ownDriver.findElement(MatrixCostUpdatePage.cbtn));
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
             System.out.println("Present");
             try {
                 Utility_Functions.xClickIfAvlbl(ownDriver, report, ownDriver.findElement(MatrixCostUpdatePage.cancelButton), "Click Cancel button");
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
             System.out.println("Present");
             Utility_Functions.timeWait(3);
             String exp_pOValue = ownDriver.findElement(field).getAttribute("value");
             System.out.println("exp_pOValue: " + exp_pOValue);
             String[] arrSplit = exp_pOValue.split("\\.");
             System.out.println("After Splite: " + arrSplit[0]);
-            if(fieldValue.equals("0")) {
-                Utility_Functions.xAssertEquals(report, exp_pOValue,".0000", "Field Matrix Cost value updated");
-            }else{Utility_Functions.xAssertEquals(report, fieldValue+".0000", arrSplit[0]+".0000", "Field Matrix Cost value updated");}
-            } catch (Exception e) {
+            if (fieldValue.equals("0")) {
+                Utility_Functions.xAssertEquals(report, exp_pOValue, ".0000", "Field Matrix Cost value updated");
+            } else {
+                Utility_Functions.xAssertEquals(report, fieldValue + ".0000", arrSplit[0] + ".0000", "Field Matrix Cost value updated");
+            }
+        } catch (Exception e) {
             Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(MatrixCostUpdatePage.invalidErrorPopUp), "Invalid input popUp " + fieldValue);
         }
     }

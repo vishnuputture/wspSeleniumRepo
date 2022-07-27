@@ -7,10 +7,10 @@ import org.testng.annotations.Test;
 
 public class AverageCost extends TestConfigurations {
 
-    @Test(groups = {"DB","UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    @Test(groups = {"DB", "UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_21_SearchItemData(SeleniumTestParameters testParameters) {
         System.out.println("test 1");
-       // System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        // System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
         System.out.println("test 2");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -19,14 +19,16 @@ public class AverageCost extends TestConfigurations {
         System.out.println("test 4");
         tearDownTestRunner(testParameters, coreScript);
     }
+
     @Test(groups = {"DB"}, dataProvider = "DB", dataProviderClass = TestConfigurations.class)
     public void Tc_22_UpdateItemData(SeleniumTestParameters testParameters) {
-       //System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        //System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to update item In ItemMaster");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
     @Test(groups = {"DB"}, dataProvider = "DB", dataProviderClass = TestConfigurations.class)
     public void Tc_23_UpdateItemQuantity(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to update on hand quantity");
@@ -34,6 +36,7 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
     @Test(groups = {"DB"}, dataProvider = "DB", dataProviderClass = TestConfigurations.class)
     public void Tc_24_UpdateItemAVGCost(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to update average cost");
@@ -41,7 +44,8 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    @Test(groups = {"UI","DB"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+
+    @Test(groups = {"UI", "DB"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_25_ValidateItemCreation(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to create average cost ");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -56,7 +60,7 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_27_ValidateItemUpdate(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to delete average cost ");
@@ -72,7 +76,7 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_31_ValidateMultipleReceiveCorrection(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to delete average cost ");
@@ -80,7 +84,7 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_29_ValidateCostAdjustmentProcess(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to delete average cost ");
@@ -88,7 +92,7 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_30_ValidateCostAdjustmentLedger(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to delete average cost ");
@@ -96,7 +100,7 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_32_ValidateMultipleCostAdjustment(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to delete average cost ");
@@ -104,7 +108,7 @@ public class AverageCost extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
-    
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_33_ValidateQuantityFieldReceiveCorrection(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to delete average cost ");

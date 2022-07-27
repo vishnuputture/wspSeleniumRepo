@@ -3,10 +3,9 @@ package testcases.Inventory;
 import com.winSupply.core.CoreScript;
 import com.winSupply.core.TestConfigurations;
 import com.winSupply.framework.selenium.SeleniumTestParameters;
-import org.apache.poi.util.SystemOutLogger;
 import org.testng.annotations.Test;
 
-public class CycleCostAdjust extends TestConfigurations{
+public class CycleCostAdjust extends TestConfigurations {
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_26_Navigation_to_Cycle_Count_Adjustments(SeleniumTestParameters testParameters) {
@@ -23,7 +22,7 @@ public class CycleCostAdjust extends TestConfigurations{
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_27_Verify_assignment_quantity_to_Item(SeleniumTestParameters testParameters) {
-       // System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
+        // System.out.println("Test case : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
         testParameters.setCurrentTestDescription("Test case to Verify assignment quantity to Item ");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

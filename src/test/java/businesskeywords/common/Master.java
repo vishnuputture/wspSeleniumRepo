@@ -1,16 +1,11 @@
 package businesskeywords.common;
 
-import com.winSupply.framework.selenium.FrameworkDriver;
-import org.openqa.selenium.Keys;
-
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-
+import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-
-import pages.OrderProcessingPage;
+import org.openqa.selenium.Keys;
 import pages.common.MasterPage;
-import pages.pricing.spa.CustomerGroupMaintenancePage;
 import supportLibraries.Utility_Functions;
 
 public class Master extends ReusableLib {
@@ -26,7 +21,7 @@ public class Master extends ReusableLib {
     public Master(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -42,10 +37,10 @@ public class Master extends ReusableLib {
     }
 
     public void goToPly() {
-		sendKeys(MasterPage.sqlTxtBox,"ply","Go to PLY application");
-		Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-	}
-    
+        sendKeys(MasterPage.sqlTxtBox, "ply", "Go to PLY application");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+    }
+
     public void navigateToSPAApplication() {
         commonObj.salesAnalysisToSPAApplication();
     }
@@ -61,10 +56,10 @@ public class Master extends ReusableLib {
     public void navigateToWorkingSalesQuotes() {
         commonObj.navigationToWorkingSalesQuotes();
     }
-    
+
     public void runPriceSheetBatch() {
-    	sendKeys(MasterPage.sqlTxtBox,"call is202cl");
-    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        sendKeys(MasterPage.sqlTxtBox, "call is202cl");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
 

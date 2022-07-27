@@ -7,7 +7,6 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
-import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
@@ -30,7 +29,7 @@ public class Drivers extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         truck = new Trucks(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -89,6 +88,7 @@ public class Drivers extends ReusableLib {
      * Keyword to Verify functionality of Help (?)icon
      */
     public void helpIcon() {
+        Utility_Functions.timeWait(3);
         click(TruckPage.helpIcon);
         Utility_Functions.timeWait(3);
     }
@@ -100,7 +100,7 @@ public class Drivers extends ReusableLib {
         Utility_Functions.timeWait(2);
         Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(ownDriver,ownDriver.findElements(DriversPage.pageArrow).get(actPageNo));
+        Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(DriversPage.pageArrow).get(actPageNo));
         Utility_Functions.xScrollWindow(ownDriver);
         String pageNo = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
         Utility_Functions.xAssertEquals(report, pageNo, expPage, "Moved to " + pageNo + " Page");
@@ -112,22 +112,22 @@ public class Drivers extends ReusableLib {
      */
     public void pagination() {
         int size = 2;
-        Utility_Functions.xScrollIntoView(ownDriver,DriversPage.pageArrow);
+        Utility_Functions.xScrollIntoView(ownDriver, DriversPage.pageArrow);
         Utility_Functions.timeWait(2);
         if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
         } else {
-            Utility_Functions.xClickHiddenElement(ownDriver,ownDriver.findElements(DriversPage.pageArrow).get(2));
-            Utility_Functions.xScrollIntoView(ownDriver,DriversPage.pageArrow);
+            Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(DriversPage.pageArrow).get(2));
+            Utility_Functions.xScrollIntoView(ownDriver, DriversPage.pageArrow);
             Utility_Functions.timeWait(2);
             while (!Utility_Functions.xIsDisplayed(ownDriver, DriversPage.lastPage)) {
                 size++;
-                Utility_Functions.xClickHiddenElement(ownDriver,ownDriver.findElements(DriversPage.pageArrow).get(2));
-                Utility_Functions.xScrollIntoView(ownDriver,DriversPage.pageArrow);
+                Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(DriversPage.pageArrow).get(2));
+                Utility_Functions.xScrollIntoView(ownDriver, DriversPage.pageArrow);
             }
             Utility_Functions.timeWait(2);
-            Utility_Functions.xClickHiddenElement(ownDriver,ownDriver.findElements(DriversPage.pageArrow).get(0));
-            Utility_Functions.xScrollIntoView(ownDriver,DriversPage.pageArrow);
+            Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(DriversPage.pageArrow).get(0));
+            Utility_Functions.xScrollIntoView(ownDriver, DriversPage.pageArrow);
             selectPage(2, "2", "Right Arrow (>)");
             selectPage(1, "1", "Left Arrow (<)");
             selectPage(3, "" + size + "", "Right double Arrow (>>)");
@@ -144,8 +144,8 @@ public class Drivers extends ReusableLib {
         Utility_Functions.timeWait(4);
         try {
             click(By.xpath("//span[text()='" + pageNum + "']"), "Click on '" + pageNum + "' Present below the Left corner of the page");
-        }catch (Exception e){
-            Utility_Functions.xClickHiddenElement(ownDriver,By.xpath("//span[text()='" + pageNum + "']"));
+        } catch (Exception e) {
+            Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//span[text()='" + pageNum + "']"));
         }
         int driverCount = ownDriver.findElements(DriversPage.driverNameCount).size();
         if (driverCount == pageNum) {
@@ -241,6 +241,7 @@ public class Drivers extends ReusableLib {
      * Keyword to Apply filter
      */
     public void applyFilterDriver() {
+        Utility_Functions.timeWait(5);
         String rank = Utility_Functions.getText(ownDriver, getTruck("Rank"));
         String status = Utility_Functions.getText(ownDriver, getTruck("Status"));
         click(TruckPage.filterSearch, "Click search filter icon");
@@ -260,7 +261,7 @@ public class Drivers extends ReusableLib {
      */
     public void navigateToUpdateDriverPage() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xClickHiddenElement(ownDriver,By.xpath("//td/a"));
+        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(DriversPage.popupHeader, "Driver Details", "Update Driver Page header is present");
     }
@@ -284,12 +285,11 @@ public class Drivers extends ReusableLib {
 
     /**
      * Keyword to delete Driver
-     *
      */
     public void deleteDriver() {
-        if (Utility_Functions.xIsDisplayed(ownDriver,DriversPage.deleteButtonDisable)) {
-            Utility_Functions.xHoverElementclicks(ownDriver.findElement(DriversPage.deleteButtonDisable),ownDriver);
-            commonObj.validateElementExists(DriversPage.deleteButtonDisable,"Delete Driver button is disabled and message: Driver is tied manifest history. you may change status to inactive");
+        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.deleteButtonDisable)) {
+            Utility_Functions.xHoverElementclicks(ownDriver.findElement(DriversPage.deleteButtonDisable), ownDriver);
+            commonObj.validateElementExists(DriversPage.deleteButtonDisable, "Delete Driver button is disabled and message: Driver is tied manifest history. you may change status to inactive");
         } else {
             click(TruckPage.deleteButton, "Click Delete Driver Button");
             commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Driver Confirmation Pop Up is present");
@@ -305,13 +305,12 @@ public class Drivers extends ReusableLib {
 
     /**
      * Keyword to Update Driver
-     *
      */
     public void updateDriver() {
-        click(DriversPage.statusDriver,"Click Status drop down");
-        click(DriversPage.inActive,"Select InActive From the status drop down");
-        click(DriversPage.saveDriver,"Click Save Driver");
+        click(DriversPage.statusDriver, "Click Status drop down");
+        click(DriversPage.inActive, "Select InActive From the status drop down");
+        click(DriversPage.saveDriver, "Click Save Driver");
         Utility_Functions.timeWait(3);
-        commonObj.validateText(TruckPage.deletePopUp,"Driver " + Utility_Functions.xGetJsonData("Driver") + " (" + jsonData.getData("alias") + ") successfully updated.","Driver Update message should display");
+        commonObj.validateText(TruckPage.deletePopUp, "Driver " + Utility_Functions.xGetJsonData("Driver") + " (" + jsonData.getData("alias") + ") successfully updated.", "Driver Update message should display");
     }
 }

@@ -3,11 +3,8 @@ package businesskeywords.Inventory;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import commonkeywords.CommonActions;
-import org.openqa.selenium.NoSuchElementException;
-import pages.PurchaseOrders.PurchaseOrderDetailsPage;
 import pages.common.MasterPage;
 import pages.inventory.BuyersInquiryPage;
-import pages.inventory.ItemMasterPage;
 import supportLibraries.Utility_Functions;
 
 
@@ -38,7 +35,7 @@ public class inquiryBuyer extends ReusableLib {
     /**
      * Keyword to select random Stock No in Buyer's Inquiry Page
      */
-    public void selectRandomStock(){
+    public void selectRandomStock() {
         click(BuyersInquiryPage.btnStockNo, "Click on [Stock No] button");
         String itemNo = commonObj.selectRandomItemNumber();
         jsonData.putData("itemNo", itemNo);
@@ -49,16 +46,16 @@ public class inquiryBuyer extends ReusableLib {
     /**
      * Keyword to select desired Stock No. in Buyer's Inquiry Page
      */
-    public void selectStock(){
+    public void selectStock() {
         String itemNo = jsonData.getData("itemNo");
-        sendKeysAndEnter(BuyersInquiryPage.tbxStockNo, itemNo,"Enter Stock No");
+        sendKeysAndEnter(BuyersInquiryPage.tbxStockNo, itemNo, "Enter Stock No");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
     /**
      * Keyword to get stock data from Buyer's Inquiry Page
      */
-    public void getStockData(){
+    public void getStockData() {
         String withReceipts = getText(BuyersInquiryPage.withReceipts).trim();
         jsonData.putData("WithReceipts", withReceipts);
         String onPO = getText(BuyersInquiryPage.onPO).trim();
@@ -70,28 +67,28 @@ public class inquiryBuyer extends ReusableLib {
     /**
      * Keyword to verify stock data from Purchase Order Page
      */
-    public void verifyStockData(){
+    public void verifyStockData() {
         int qty = Integer.parseInt(jsonData.getData("QtyOrdered"));
         String text = jsonData.getData("ConvFactor");
         double convFactor = Double.valueOf(text);
-        int diff = (int) (qty*convFactor);
+        int diff = (int) (qty * convFactor);
 
         String textWithReceipts = jsonData.getData("WithReceipts");
         int withReceiptsExpected;
-        if (textWithReceipts.isEmpty()){
+        if (textWithReceipts.isEmpty()) {
             textWithReceipts += diff;
             withReceiptsExpected = Integer.parseInt(textWithReceipts);
-        }else{
-            withReceiptsExpected = Integer.parseInt(textWithReceipts)+diff;
+        } else {
+            withReceiptsExpected = Integer.parseInt(textWithReceipts) + diff;
         }
 
         String textOnPO = jsonData.getData("OnPO");
         int onPOExpected;
-        if (textOnPO.isEmpty()){
+        if (textOnPO.isEmpty()) {
             textOnPO += diff;
             onPOExpected = Integer.parseInt(textOnPO);
-        }else{
-            onPOExpected = Integer.parseInt(textOnPO)+diff;
+        } else {
+            onPOExpected = Integer.parseInt(textOnPO) + diff;
         }
 
         int withReceiptsActual = Integer.parseInt(getText(BuyersInquiryPage.withReceipts).trim());

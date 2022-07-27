@@ -39,7 +39,7 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj = new CommonActions(helper);
         binMain = new binMaintenance(helper);
         createPurchaseOrder = new CreatePurchaseOrder(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -93,7 +93,7 @@ public class ReceivingInProcess extends ReusableLib {
         } else {
             click(TruckPage.filterSearch, "Click Search Filter icon");
         }
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h1"), "Click on title of the page");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h1"), "Click on title of the page");
         commonObj.validateText(By.xpath("//h1"), "Search Filters", "Search Filters panel title is present");
     }
 
@@ -110,7 +110,7 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.verifyElementContainsText(By.xpath("//tr/td/a"), jsonData.getData("PO"), "Filter results found");
         String userId = getUserId();
         clickSearchIcon();
-        if (userId!=null) {
+        if (userId != null) {
             clearText(searchField("Purchase Order"));
             searchAndApplyFilter("User ID", userId);
             commonObj.validateText(By.xpath("//tr/td/span"), userId, "User id is present" + userId);
@@ -160,7 +160,7 @@ public class ReceivingInProcess extends ReusableLib {
         click(ReceivingInProcessPage.clearAllBtn, "Click Clear All Button");
         commonObj.validateText(TruckPage.applyFiltersDis, "apply filters", "Apply Filter button is disabled");
         commonObj.validateText(SpoPage.disClearAllFilter, "Clear All Filters", "Clear All Filters button is disabled");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.filtersCrossIcon, "Click close icon");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.filtersCrossIcon, "Click close icon");
     }
 
     /**
@@ -196,12 +196,12 @@ public class ReceivingInProcess extends ReusableLib {
     public void verifyVendorInputField() {
         clickSearchIcon();
         searchAndApplyFilter("Vendor", jsonData.getData("InValidVendor"));
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,spanElement("There are no orders currently being received."),  "'There are no orders currently being received.' message is present");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, spanElement("There are no orders currently being received."), "'There are no orders currently being received.' message is present");
         click(ReceivingInProcessPage.clearFilterCrossIcon, "Click Vendor x");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//h1"), "Search Filters panel title is present");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h1"), "Search Filters panel title is present");
         commonObj.validateElementExists(By.xpath("//tr/td/a"), "Page is processed and all the records are present");
         searchAndApplyFilter("Vendor", jsonData.getData("AlphaNumericVendor"));
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,spanElement("There are no orders currently being received."),  "'There are no orders currently being received.' message is present");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, spanElement("There are no orders currently being received."), "'There are no orders currently being received.' message is present");
     }
 
     /**
@@ -316,7 +316,7 @@ public class ReceivingInProcess extends ReusableLib {
         if (Utility_Functions.isAlert(ownDriver)) {
         }
         sendKeys(ReceivingInProcessPage.userRF, properties.getProperty("VPNUsn"), "Enter RF user name");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(8);
         sendKeys(ReceivingInProcessPage.passwordRF, properties.getProperty("VPNPass"), "Enter RF Password");
         Utility_Functions.timeWait(4);
         click(ReceivingInProcessPage.loginBtn, "Click Login Button");
@@ -327,7 +327,7 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to search Item Or PO
      */
     public void searchPo() {
-        Utility_Functions.timeWait(4);
+        Utility_Functions.timeWait(6);
         sendKeys(ReceivingInProcessPage.searchPo, Utility_Functions.xGetJsonData("PONumber"), "search Item Or PO");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
@@ -438,12 +438,12 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void verifyReceiveSearchPo() {
         searchItem();
-        commonObj.validateText(spanElement("There are no orders currently being received."), "There are no orders currently being received.", "'There are no orders currently being received.' message is present");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, spanElement("There are no orders currently being received."), "'There are no orders currently being received.' message is present");
     }
 
     public void clickReceiveInProcessLink() {
         Utility_Functions.timeWait(4);
-        Utility_Functions.xUpdateJson("RecDocumentNo",getText(ReceivingInProcessPage.recDocNo));
+        Utility_Functions.xUpdateJson("RecDocumentNo", getText(ReceivingInProcessPage.recDocNo));
         click(By.xpath("//a[text()='Receiving in Process']"));
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
@@ -727,32 +727,32 @@ public class ReceivingInProcess extends ReusableLib {
     /**
      * Keyword to verify search results are displayed
      */
-    public void vrfyResultsDisplayed(){
+    public void vrfyResultsDisplayed() {
         List<WebElement> lstSearchResults = getListElement(ReceivingInProcessPage.lstVendorNameSearchResults);
         int count = 0;
-        if(lstSearchResults.size()>0){
-            for (WebElement element : lstSearchResults){
+        if (lstSearchResults.size() > 0) {
+            for (WebElement element : lstSearchResults) {
                 Utility_Functions.xScrollIntoView(ownDriver, element);
                 if (element.isDisplayed())
                     count++;
             }
-            if(count==lstSearchResults.size())
-                report.updateTestLog("Verify Search Results", "Search Results are displayed",Status.PASS);
+            if (count == lstSearchResults.size())
+                report.updateTestLog("Verify Search Results", "Search Results are displayed", Status.PASS);
             else
-                report.updateTestLog("Verify Search Results", "Search Results are NOT displayed",Status.FAIL);
-        }else
-            report.updateTestLog("Verify Search Results", "No Search Results",Status.PASS);
+                report.updateTestLog("Verify Search Results", "Search Results are NOT displayed", Status.FAIL);
+        } else
+            report.updateTestLog("Verify Search Results", "No Search Results", Status.PASS);
     }
 
     /**
      * Keyword to enter ItemNo/PO in search textbox
      */
     public void enterDataInSearchTbx(String itemNo) {
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         Utility_Functions.timeWait(2);
         waitForElementPresent(ReceivingInProcessPage.searchPo);
-        sendKeysAndEnter(ReceivingInProcessPage.searchPo, itemNo, "Enter Item Number "+itemNo+" in [Search Item Or PO] box");
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        sendKeysAndEnter(ReceivingInProcessPage.searchPo, itemNo, "Enter Item Number " + itemNo + " in [Search Item Or PO] box");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
     }
 
     /**
@@ -763,7 +763,7 @@ public class ReceivingInProcess extends ReusableLib {
         enterDataInSearchTbx(invalidItemNo);
         commonObj.validateText(ReceivingInProcessPage.lblNoResultsFound, "No results found", "Validating Search Results");
         click(ReceivingInProcessPage.btnClearSearch);
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
 
         searchUsingItemNo();
     }
@@ -772,12 +772,12 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to click on [Filter By Vendor] button
      */
     public void clickFilterByVendorBtn() {
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         waitForElementPresent(ReceivingInProcessPage.btnFilterByVendor);
         Utility_Functions.xScrollIntoView(ownDriver, ReceivingInProcessPage.btnFilterByVendor);
 
         click(ReceivingInProcessPage.btnFilterByVendor, "Click [Filter by Vendor] button");
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         waitForElementPresent(ReceivingInProcessPage.tbxSearchByVendor);
     }
 
@@ -795,21 +795,21 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to enter Vendor Name in search textbox
      */
     public void enterDataInSearchByVendorTbx(String vendorName) {
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         waitForElementPresent(ReceivingInProcessPage.tbxSearchByVendor);
-        sendKeys(ReceivingInProcessPage.tbxSearchByVendor, vendorName, "Enter Vendor Name "+vendorName+" in [Search by Vendor] box");
+        sendKeys(ReceivingInProcessPage.tbxSearchByVendor, vendorName, "Enter Vendor Name " + vendorName + " in [Search by Vendor] box");
         Utility_Functions.timeWait(5);
 
         List<WebElement> lstVendorNameOptions = getListElement(ReceivingInProcessPage.lstVendorNameOptions);
-        if (lstVendorNameOptions.size()==1){
+        if (lstVendorNameOptions.size() == 1) {
             String vendor = lstVendorNameOptions.get(0).getText();
-            click(lstVendorNameOptions.get(0), "Selected Vendor ["+vendor+"] from type-ahead list");
-        }else{
-            int random = Utility_Functions.xRandomFunction(0, lstVendorNameOptions.size()-1);
+            click(lstVendorNameOptions.get(0), "Selected Vendor [" + vendor + "] from type-ahead list");
+        } else {
+            int random = Utility_Functions.xRandomFunction(0, lstVendorNameOptions.size() - 1);
             String vendor = lstVendorNameOptions.get(random).getText();
-            click(lstVendorNameOptions.get(random), "Selected Vendor ["+vendor+"] from type-ahead list");
+            click(lstVendorNameOptions.get(random), "Selected Vendor [" + vendor + "] from type-ahead list");
         }
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
     }
 
     /**
@@ -817,11 +817,11 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void verifySearchByVendorName() {
         String invalidVendorName = jsonData.getData("InvalidVendorName");
-        sendKeysAndEnter(ReceivingInProcessPage.tbxSearchByVendor, invalidVendorName, "Enter invalid Vendor Name "+invalidVendorName+" in [Search by Vendor] box");
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        sendKeysAndEnter(ReceivingInProcessPage.tbxSearchByVendor, invalidVendorName, "Enter invalid Vendor Name " + invalidVendorName + " in [Search by Vendor] box");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         commonObj.validateText(ReceivingInProcessPage.lblNoResultsFound, "No results found", "Validating Search Results");
         click(ReceivingInProcessPage.btnClearVendorSearch, "Click clear vendor search button");
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
 
         searchByVendor();
     }
@@ -831,18 +831,18 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void selectRandomPOChkbxRFGun() {
         List<WebElement> lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
-        if (lstChkBxSelectPO.size()==1){
+        if (lstChkBxSelectPO.size() == 1) {
             click(lstChkBxSelectPO.get(0), "Selected first PO from Search Results list");
             Utility_Functions.timeWait(2);
 
             lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
             boolean chkbxIsSelected = lstChkBxSelectPO.get(0).getAttribute("class").contains("selected-checkbox");
             if (chkbxIsSelected)
-                report.updateTestLog("Verify PO Selected", "Verify PO Selected",Status.PASS);
+                report.updateTestLog("Verify PO Selected", "Verify PO Selected", Status.PASS);
             else
-                report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
-        }else{
-            int random = Utility_Functions.xRandomFunction(0, lstChkBxSelectPO.size()-1);
+                report.updateTestLog("Verify PO Selected", "failed to select PO", Status.FAIL);
+        } else {
+            int random = Utility_Functions.xRandomFunction(0, lstChkBxSelectPO.size() - 1);
             Utility_Functions.xScrollIntoView(ownDriver, lstChkBxSelectPO.get(random));
             click(lstChkBxSelectPO.get(random), "Selected random PO from Search Results list");
             Utility_Functions.timeWait(2);
@@ -850,9 +850,9 @@ public class ReceivingInProcess extends ReusableLib {
             lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
             boolean chkbxIsSelected = lstChkBxSelectPO.get(random).getAttribute("class").contains("selected-checkbox");
             if (chkbxIsSelected)
-                report.updateTestLog("Verify PO Selected", "Verify PO Selected",Status.PASS);
+                report.updateTestLog("Verify PO Selected", "Verify PO Selected", Status.PASS);
             else
-                report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
+                report.updateTestLog("Verify PO Selected", "failed to select PO", Status.FAIL);
         }
     }
 
@@ -869,28 +869,28 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void selectFirstNPOChkbxRFGun(int count) {
         List<WebElement> lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
-        if (lstChkBxSelectPO.size()==1){
+        if (lstChkBxSelectPO.size() == 1) {
             click(lstChkBxSelectPO.get(0), "Selected first PO from Search Results list");
             Utility_Functions.timeWait(2);
 
             lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
             boolean chkbxIsSelected = lstChkBxSelectPO.get(0).getAttribute("class").contains("selected-checkbox");
             if (chkbxIsSelected)
-                report.updateTestLog("Verify PO Selected", "Verify PO Selected",Status.PASS);
+                report.updateTestLog("Verify PO Selected", "Verify PO Selected", Status.PASS);
             else
-                report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
-        }else{
-            for (int i=0; i<count; i++){
+                report.updateTestLog("Verify PO Selected", "failed to select PO", Status.FAIL);
+        } else {
+            for (int i = 0; i < count; i++) {
                 Utility_Functions.xScrollIntoView(ownDriver, lstChkBxSelectPO.get(i));
-                click(lstChkBxSelectPO.get(i), "Selected ["+i+1+"th] PO from Search Results list");
+                click(lstChkBxSelectPO.get(i), "Selected [" + i + 1 + "th] PO from Search Results list");
                 Utility_Functions.timeWait(2);
 
                 lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
                 boolean chkbxIsSelected = lstChkBxSelectPO.get(i).getAttribute("class").contains("selected-checkbox");
                 if (chkbxIsSelected)
-                    report.updateTestLog("Verify PO Selected", "Verify PO Selected",Status.PASS);
+                    report.updateTestLog("Verify PO Selected", "Verify PO Selected", Status.PASS);
                 else
-                    report.updateTestLog("Verify PO Selected", "failed to select PO",Status.FAIL);
+                    report.updateTestLog("Verify PO Selected", "failed to select PO", Status.FAIL);
             }
         }
     }
@@ -898,19 +898,19 @@ public class ReceivingInProcess extends ReusableLib {
     /**
      * Keyword to click on [Cancel] button and validate PO checkbox gets deselected in Search Results
      */
-    public void clickCancelBtnRFGun(){
+    public void clickCancelBtnRFGun() {
         click(ReceivingInProcessPage.btnCancelPOSelection, "Click [Cancel]  button to deselect PO selection");
         Utility_Functions.timeWait(2);
 
         List<WebElement> lstChkBxSelectPO = getListElement(ReceivingInProcessPage.lstChkbxSelectPOSearchResults);
         int count = 0;
-        for (WebElement element : lstChkBxSelectPO){
+        for (WebElement element : lstChkBxSelectPO) {
             Utility_Functions.xScrollIntoView(ownDriver, element);
             boolean chkbxIsSelected = element.getAttribute("class").contains("selected-checkbox");
             if (!chkbxIsSelected)
                 count++;
         }
-        if (count==lstChkBxSelectPO.size())
+        if (count == lstChkBxSelectPO.size())
             report.updateTestLog("Verify PO selection is cleared", "Verify PO selection is cleared", Status.PASS);
         else
             report.updateTestLog("Verify PO selection is cleared", "failed to clear select PO", Status.FAIL);
@@ -922,7 +922,7 @@ public class ReceivingInProcess extends ReusableLib {
     public void clickReceivePOBtnRFGun() {
         click(ReceivingInProcessPage.btnReceivePO, "Click [Receive n PO(s)] button");
         Utility_Functions.timeWait(2);
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         Utility_Functions.timeWait(2);
     }
 
@@ -930,7 +930,7 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to click on [Confirm] button
      */
     public void clickConfirmBtn() {
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ReceivingInProcessPage.btnConfirm, "Click [Confirm] button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ReceivingInProcessPage.btnConfirm, "Click [Confirm] button");
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
         clickSkipBtnIfPresent();
         Utility_Functions.actionKey(Keys.ESCAPE, ownDriver);
@@ -941,7 +941,7 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void clickSkipBtnIfPresent() {
         Utility_Functions.timeWait(2);
-        if (isDisplayed(ReceivingInProcessPage.btnSkip)){
+        if (isDisplayed(ReceivingInProcessPage.btnSkip)) {
             click(ReceivingInProcessPage.btnSkip, "Click [Skip] button");
             Utility_Functions.timeWait(1);
         }
@@ -953,12 +953,12 @@ public class ReceivingInProcess extends ReusableLib {
     public void enterQtyAndBin() {
         String qty = jsonData.getData("Qty");
         String bin = jsonData.getData("Bin");
-        sendKeysAndTab(ReceivingInProcessPage.tbxQty, qty, "Enter Quantity as ["+qty+"] in [Qty] box");
+        sendKeysAndTab(ReceivingInProcessPage.tbxQty, qty, "Enter Quantity as [" + qty + "] in [Qty] box");
         Utility_Functions.timeWait(2);
         click(ReceivingInProcessPage.btnSkip, "Click [Skip] button");
         Utility_Functions.timeWait(2);
-        sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as ["+bin+"] in [Scan Location] box");
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as [" + bin + "] in [Scan Location] box");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
 
         boolean isMsgDisplayed = Utility_Functions.xWaitForElementPresent(ownDriver, ReceivingInProcessPage.msg, globalWait);
         if (isMsgDisplayed)
@@ -977,11 +977,11 @@ public class ReceivingInProcess extends ReusableLib {
         String qty = jsonData.getData("Qty");
         String bin = jsonData.getData("Bin");
         clickSkipBtnIfPresent();
-        sendKeysAndTab(ReceivingInProcessPage.tbxQty, qty, "Enter Quantity as ["+qty+"] in [Qty] box");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ReceivingInProcessPage.btnSkip, "Click [Skip] button");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ReceivingInProcessPage.tbxScanLocation, "CLick San Location box");
-        sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as ["+bin+"] in [Scan Location] box");
-        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner,globalWait);
+        sendKeysAndTab(ReceivingInProcessPage.tbxQty, qty, "Enter Quantity as [" + qty + "] in [Qty] box");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ReceivingInProcessPage.btnSkip, "Click [Skip] button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, ReceivingInProcessPage.tbxScanLocation, "CLick San Location box");
+        sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as [" + bin + "] in [Scan Location] box");
+        waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);
 
         boolean isMsgDisplayed = Utility_Functions.xWaitForElementPresent(ownDriver, ReceivingInProcessPage.msg, globalWait);
         if (isMsgDisplayed)
@@ -1019,9 +1019,9 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to enter random Alternate Item Number
      */
     public void enterRandomAlternateItemNumber() {
-        String randomAlternateItemNumber = "TEST"+Utility_Functions.xRandomFunction();
+        String randomAlternateItemNumber = "TEST" + Utility_Functions.xRandomFunction();
         jsonData.putData("AlternateItemNo", randomAlternateItemNumber);
-        sendKeys(ReceivingInProcessPage.tbxEnterAlternateItemNumber, randomAlternateItemNumber, "Enter random Alternate ItemNumber ["+randomAlternateItemNumber+"] in [Scan or enter new value] searchbar");
+        sendKeys(ReceivingInProcessPage.tbxEnterAlternateItemNumber, randomAlternateItemNumber, "Enter random Alternate ItemNumber [" + randomAlternateItemNumber + "] in [Scan or enter new value] searchbar");
         click(ReceivingInProcessPage.btnAddAlternateItem, "Click [Add Alternate Item Number] button");
         waitForElementPresent(ReceivingInProcessPage.msgAlternatePartNoAddedSuccess);
     }

@@ -8,8 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
 import pages.warehouse.DeliveredOrdersPage;
-import pages.warehouse.DriversPage;
-import pages.warehouse.ManifestsPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
@@ -32,10 +30,10 @@ public class DeliveredOrders extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         manFest = new Manifests(helper);
-        drv=new Drivers(helper);
-        truck=new Trucks(helper);
-        ownDriver=helper.getGSDriver();
-        }
+        drv = new Drivers(helper);
+        truck = new Trucks(helper);
+        ownDriver = helper.getGSDriver();
+    }
 
     /**
      * Keyword to Navigate to Delivered Orders Screen
@@ -43,6 +41,7 @@ public class DeliveredOrders extends ReusableLib {
     public void navigateToDeliveredOrdersScreen() {
         click(TruckPage.menuIconTruck);
         truck.callSelectCompany();
+        Utility_Functions.timeWait(3);
         click(DeliveredOrdersPage.subMenuDeliveredOrd, "Navigate to Delivered Orders page");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
@@ -53,25 +52,25 @@ public class DeliveredOrders extends ReusableLib {
      * Keyword to verify UI of Delivered Orders
      */
     public void deliveredOrdersUI() {
-        String[] actText={"Order Number","Date/Time","PO No.","Manifest No.","Delivered To","Shipment Status","Manifest Status","Driver","Truck","Ship Via"};
-        List<WebElement> els=ownDriver.findElements(By.xpath("//th"));
-        int i=0;
-        for(WebElement el:els){
-            Utility_Functions.xAssertEquals(report,el.getText().trim(),actText[i],"");
+        String[] actText = {"Order Number", "Date/Time", "PO No.", "Manifest No.", "Delivered To", "Shipment Status", "Manifest Status", "Driver", "Truck", "Ship Via"};
+        List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
+        int i = 0;
+        for (WebElement el : els) {
+            Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
             i++;
         }
-        commonObj.validateElementExists(TruckPage.helpIcon,"Help Icon '?' is present");
-        commonObj.validateElementExists(TruckPage.filterSearch,"Search filter icon is present");
-        commonObj.validateElementExists(DeliveredOrdersPage.exportButton,"Export button is present");
-        int size=ownDriver.findElements(TruckPage.pagination).size();
-        Utility_Functions.xAssertEquals(report,size,4,"Next page and previous page arrow icon is present");
-        String page=Utility_Functions.getText(ownDriver,TruckPage.currentPage);
-        commonObj.validateElementExists(TruckPage.currentPage,"Current Page "+page+" "+Utility_Functions.getText(ownDriver,TruckPage.outOf)+"");
-        List<WebElement> elm=ownDriver.findElements(TruckPage.show);
-        String[] acText={"10","15","30"};
-        int j=0;
-        for(WebElement el:elm){
-            Utility_Functions.xAssertEquals(report,el.getText().trim(),acText[j],"");
+        commonObj.validateElementExists(TruckPage.helpIcon, "Help Icon '?' is present");
+        commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
+        commonObj.validateElementExists(DeliveredOrdersPage.exportButton, "Export button is present");
+        int size = ownDriver.findElements(TruckPage.pagination).size();
+        Utility_Functions.xAssertEquals(report, size, 4, "Next page and previous page arrow icon is present");
+        String page = Utility_Functions.getText(ownDriver, TruckPage.currentPage);
+        commonObj.validateElementExists(TruckPage.currentPage, "Current Page " + page + " " + Utility_Functions.getText(ownDriver, TruckPage.outOf) + "");
+        List<WebElement> elm = ownDriver.findElements(TruckPage.show);
+        String[] acText = {"10", "15", "30"};
+        int j = 0;
+        for (WebElement el : elm) {
+            Utility_Functions.xAssertEquals(report, el.getText().trim(), acText[j], "");
             j++;
         }
     }
@@ -83,7 +82,7 @@ public class DeliveredOrders extends ReusableLib {
         click(TruckPage.filterSearch, "Click Search Filter icon");
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
-        String[] actText = {"Order Number", "Date Delivered Range", "Customer PO Number", "Delivered To","Ship Via", "Shipment Status", "Manifest Order Status", "Driver", "Truck", "Manifest Number"};
+        String[] actText = {"Order Number", "Date Delivered Range", "Customer PO Number", "Delivered To", "Ship Via", "Shipment Status", "Manifest Order Status", "Driver", "Truck", "Manifest Number"};
         List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {
@@ -94,8 +93,8 @@ public class DeliveredOrders extends ReusableLib {
         commonObj.validateText(TruckPage.applyFiltersDis, "Apply Filters", "Apply Filters button exist and button is disabled");
     }
 
-    public By filterField(String label){
-        return By.xpath("//label[text()='"+label+"']/parent::div/descendant::input");
+    public By filterField(String label) {
+        return By.xpath("//label[text()='" + label + "']/parent::div/descendant::input");
     }
 
     /**
@@ -121,11 +120,11 @@ public class DeliveredOrders extends ReusableLib {
         sendKeys(filterField("Manifest Number"), Utility_Functions.xGetJsonData("ManifestNumber"), "Enter Manifest Number");
         click(TruckPage.applyFilter, "Click Apply Filters");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(drv.getTruck("Order Number"), Utility_Functions.xGetJsonData("SalesOrder")+"-01", "After filter Order Number: ");
+        commonObj.validateText(drv.getTruck("Order Number"), Utility_Functions.xGetJsonData("SalesOrder") + "-01", "After filter Order Number: ");
         commonObj.validateText(drv.getTruck("Manifest Status"), "Delivered", "After filter Manifest Order Status: ");
         commonObj.validateText(drv.getTruck("Shipment Status"), "Open", "After filter Shipment Status: ");
         commonObj.validateText(drv.getTruck("Truck"), truckName, "After filter Truck Name: ");
         commonObj.validateText(drv.getTruck("Driver"), driverName, "After filter Driver Name: ");
-        commonObj.validateText(drv.getTruck("Manifest No."),Utility_Functions.xGetJsonData("ManifestNumber") , "After filter status: ");
+        commonObj.validateText(drv.getTruck("Manifest No."), Utility_Functions.xGetJsonData("ManifestNumber"), "After filter status: ");
     }
 }
