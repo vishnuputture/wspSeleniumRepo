@@ -33,9 +33,9 @@
                     <include name="Tc_OrderNumberSO_UI"></include>
                     <include name="Tc_SaveAdjustment"></include>
                     <include name="TC_SOUpdateStatusDelivered"></include>
-                    <include name="Tc_DeliveredOrdersSearchFilterUI"></include>
-                    <include name="Tc_DeliveredOrdersUI"></include>
-                    <include name="Tc_VerifyDeliveredOrders"></include>
+                    <include name="Tc_DeliveredShipmentsSearchFilterUI"></include>
+                    <include name="Tc_DeliveredShipmentsUI"></include>
+                    <include name="Tc_VerifyDeliveredShipments"></include>
                     <include name="TC_SOUpdateStatusNotDelivered"></include>
                     <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
                     <include name="Tc_NotDeliveredOrdersUI"></include>

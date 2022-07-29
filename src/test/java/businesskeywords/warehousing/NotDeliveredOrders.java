@@ -130,7 +130,7 @@ public class NotDeliveredOrders extends ReusableLib {
         int size = ownDriver.findElements(NotDeliveredOrdersPage.activeDay).size();
         click(ownDriver.findElements(NotDeliveredOrdersPage.activeDay).get(size - 1), "Select today date");
         String date = ownDriver.findElement(NotDeliveredOrdersPage.notDeliveredDate).getAttribute("ng-reflect-model");
-        Utility_Functions.xMouseClick(ownDriver, DeliveredOrdersPage.driverDrop);
+        Utility_Functions.xMouseClick(ownDriver, DeliveredShipmentsPage.driverDrop);
         Utility_Functions.timeWait(2);
         String driverName = Utility_Functions.xGetJsonData("Driver");
         System.out.println("driverName...." + driverName);

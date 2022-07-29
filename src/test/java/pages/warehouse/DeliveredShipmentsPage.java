@@ -2,7 +2,7 @@ package pages.warehouse;
 
 import org.openqa.selenium.By;
 
-public class DeliveredOrdersPage {
+public class DeliveredShipmentsPage {
 
     public static By subMenuDeliveredShip = By.xpath("//a[text()='Delivered Shipments ']");
     public static By deliveredShipmentsHeader = By.xpath("//h2[contains(text(),' Delivered Shipments')]");

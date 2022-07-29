@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
-import pages.warehouse.DeliveredOrdersPage;
+import pages.warehouse.DeliveredShipmentsPage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
@@ -51,7 +51,7 @@ public class Trucks extends ReusableLib {
 
     public void callSelectCompany() {
         Utility_Functions.timeWait(7);
-        if (Utility_Functions.xIsDisplayed(ownDriver, DeliveredOrdersPage.unAuth)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, DeliveredShipmentsPage.unAuth)) {
             selectCompany();
             click(TruckPage.menuIconTruck);
         }

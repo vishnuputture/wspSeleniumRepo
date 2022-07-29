@@ -27,9 +27,9 @@
       "Tc_OrderNumberSO_UI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,orderNumberUISO",
       "Tc_SaveAdjustment": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,SaveAdjReturnToOrderBtn",
       "TC_SOUpdateStatusDelivered": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusDeliveredSO",
-      "Tc_DeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,searchFiltersDlvrdOrdrsdUI",
-      "Tc_DeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,deliveredOrdersUI",
-      "Tc_VerifyDeliveredOrders": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,pagination,funPageCount,verifyDeliveredOrders",
+      "Tc_DeliveredShipmentsSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredShipmentsScreen,searchFiltersDlvrdShpmntUI",
+      "Tc_DeliveredShipmentsUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredShipmentsScreen,deliveredShipmentsUI",
+      "Tc_VerifyDeliveredShipments": "navigateToShippingManifest,selectCompany,navigateToDeliveredShipmentsScreen,pagination,funPageCount,verifyDeliveredShipments",
       "TC_SOUpdateStatusNotDelivered": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusNotDeliveredSO",
       "Tc_NotDeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,searchFiltersNotDlvrdOrdrsdUI",
       "Tc_NotDeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,notDeliveredOrdersUI",
@@ -183,15 +183,15 @@
       "Title": "Verify Functionality Update status drop down delivered"
     },
     {
-      "TC_ID": "Tc_DeliveredOrdersSearchFilterUI",
+      "TC_ID": "Tc_DeliveredShipmentsSearchFilterUI",
       "Title": "Verify Delivered Orders Search Filter UI"
     },
     {
-      "TC_ID": "Tc_DeliveredOrdersUI",
+      "TC_ID": "Tc_DeliveredShipmentsUI",
       "Title": "Verify Delivered Orders UI"
     },
     {
-      "TC_ID": "Tc_VerifyDeliveredOrders",
+      "TC_ID": "Tc_VerifyDeliveredShipments",
       "Title": "Verify filter Delivered Orders"
     },
     {

@@ -218,7 +218,7 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_DeliveredOrdersSearchFilterUI(SeleniumTestParameters testParameters) {
+    public void Tc_DeliveredShipmentsSearchFilterUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Delivered Orders Search Filter UI");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -226,7 +226,7 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_DeliveredOrdersUI(SeleniumTestParameters testParameters) {
+    public void Tc_DeliveredShipmentsUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify Delivered Orders UI");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -234,7 +234,7 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_VerifyDeliveredOrders(SeleniumTestParameters testParameters) {
+    public void Tc_VerifyDeliveredShipments(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Verify filter Delivered Orders");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
