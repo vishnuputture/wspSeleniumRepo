@@ -42,17 +42,17 @@ public class DeliveredOrders extends ReusableLib {
         click(TruckPage.menuIconTruck);
         truck.callSelectCompany();
         Utility_Functions.timeWait(3);
-        click(DeliveredOrdersPage.subMenuDeliveredOrd, "Navigate to Delivered Orders page");
+        click(DeliveredOrdersPage.subMenuDeliveredShip, "Navigate to Delivered Shipments page");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(DeliveredOrdersPage.deliveredOrdersHeader, "Delivered Orders", "Delivered Orders Screen Header is present");
+        commonObj.validateText(DeliveredOrdersPage.deliveredShipmentsHeader, "Delivered Shipments", "Delivered Shipments Screen Header is present");
     }
 
     /**
      * Keyword to verify UI of Delivered Orders
      */
     public void deliveredOrdersUI() {
-        String[] actText = {"Order Number", "Date/Time", "PO No.", "Manifest No.", "Delivered To", "Shipment Status", "Manifest Status", "Driver", "Truck", "Ship Via"};
+        String[] actText = {"Shipment", "Date/Time", "PO No.", "Manifest No.", "Delivered To", "Shipment Status", "Manifest Status", "Driver", "Truck", "Ship Via"};
         List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         int i = 0;
         for (WebElement el : els) {

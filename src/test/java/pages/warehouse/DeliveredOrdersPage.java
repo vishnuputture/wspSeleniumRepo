@@ -4,8 +4,8 @@ import org.openqa.selenium.By;
 
 public class DeliveredOrdersPage {
 
-    public static By subMenuDeliveredOrd = By.xpath("//a[text()='Delivered Orders ']");
-    public static By deliveredOrdersHeader = By.xpath("//h2[contains(text(),' Delivered Orders')]");
+    public static By subMenuDeliveredShip = By.xpath("//a[text()='Delivered Shipments ']");
+    public static By deliveredShipmentsHeader = By.xpath("//h2[contains(text(),' Delivered Shipments')]");
     public static By unAuth = By.xpath("//h1[text()='Unauthorized']");
     public static By exportButton = By.xpath("//button[contains(text(),'Export')]");
     public static By activeDay = By.xpath("//td[@class='day']");
