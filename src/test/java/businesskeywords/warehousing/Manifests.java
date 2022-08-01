@@ -138,7 +138,7 @@ public class Manifests extends ReusableLib {
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
         commonObj.validateElementExists(ManifestsPage.collapseIcon, "Collapse icon is present");
         commonObj.validateText(ManifestsPage.stopNOrderLab, "STOPS & ORDERS", "Verify STOPS & ORDERS text is present");
-        commonObj.validateText(ManifestsPage.addOrdNoLabel, "Add Order Number", "Add Order Number text is present");
+        commonObj.validateText(ManifestsPage.addShipmentLabel, "Add Shipment", "Add Shipment text is present");
         commonObj.validateText(ManifestsPage.addButton, "Add", "Add button is present");
         commonObj.validateText(ManifestsPage.addStopBtn, "Add Stop", "Add Stop button is present");
         commonObj.validateText(ManifestsPage.addPOBtn, "Add PO", "Add PO button is present");

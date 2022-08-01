@@ -61,7 +61,7 @@ public class Drivers extends ReusableLib {
      * Keyword to verify the availability of field again Drivers Screen
      */
     public void verifyAvailFieldDrivers() {
-        String[] actText = {"Driver Name", "Alias", "Rank", "Status", "CDL", "CDL Expiration", "Accept Adjustment"};
+        String[] actText = {"Driver Name", "Alias", "Status", "CDL", "CDL Expiration", "Accept Adjustment", "Rank"};
         List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         int i = 0;
         for (WebElement el : els) {
@@ -182,7 +182,7 @@ public class Drivers extends ReusableLib {
      * Keyword to verify the UI of Add New Driver Screen
      */
     public void uiAddNewDriver() {
-        String[] actText = {"First Name", "Last Name", "Alias", "Rank", "Status", "Accept Adjustments", "Employee", "Username", "Has CDL?"};
+        String[] actText = {"First Name", "Last Name", "Alias", "Rank", "Status", "Accept Adjustments", "Employee", "Username", "CDL?"};
         List<WebElement> els = ownDriver.findElements(DriversPage.addNewDriverLabel);
         int i = 0;
         for (WebElement el : els) {
