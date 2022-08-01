@@ -37,13 +37,13 @@
                     <include name="Tc_DeliveredShipmentsUI"></include>
                     <include name="Tc_VerifyDeliveredShipments"></include>
                     <include name="TC_SOUpdateStatusNotDelivered"></include>
-                    <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
-                    <include name="Tc_NotDeliveredOrdersUI"></include>
-                    <include name="Tc_VerifyNotDeliveredOrders"></include>
+                    <include name="Tc_NotDeliveredShipmentsSearchFilterUI"></include>
+                    <include name="Tc_NotDeliveredShipmentsUI"></include>
+                    <include name="Tc_VerifyNotDeliveredShipments"></include>
                     <include name="Tc_CloseManifest"></include>
                     <include name="Tc_DeleteManifest"></include>
-                    <include name="Tc_CreateManifestNotDeliveredOrd"></include>
-                    <include name="Tc_AddToManifestNotDelOrd"></include>
+                    <include name="Tc_CreateManifestNotDeliveredShip"></include>
+                    <include name="Tc_AddToManifestNotDelShip"></include>
                     <include name="Tc_CreateManifestPO"></include>
                     <include name="Tc_OrderNumberPO_UI"></include>
                     <include name="Tc_SaveAdjustmentPO"></include>
@@ -64,7 +64,7 @@
             </class>
         </classes>
     </test>
-    <test name="BinMaintenance">
+    <!--test name="BinMaintenance">
         <classes>
             <class name="testcases.BinMaintenance">
                 <methods>
@@ -206,5 +206,5 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test-->
 </suite>
