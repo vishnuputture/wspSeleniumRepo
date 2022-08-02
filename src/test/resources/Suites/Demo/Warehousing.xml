@@ -64,7 +64,7 @@
             </class>
         </classes>
     </test>
-    <!--test name="BinMaintenance">
+    <test name="BinMaintenance">
         <classes>
             <class name="testcases.BinMaintenance">
                 <methods>
@@ -206,5 +206,5 @@
                 </methods>
             </class>
         </classes>
-    </test-->
+    </test>
 </suite>
