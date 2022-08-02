@@ -2,10 +2,10 @@ package pages.warehouse;
 
 import org.openqa.selenium.By;
 
-public class NotDeliveredOrdersPage {
+public class NotDeliveredShipmentsPage {
 
-    public static By subMenuNotDeliveredOrd = By.xpath("//a[text()='Not Delivered Orders ']");
-    public static By notDeliveredOrdersHeader = By.xpath("//h2[contains(text(),'Not Delivered Orders')]");
+    public static By subMenuNotDeliveredShip = By.xpath("//a[text()='Not Delivered Shipments ']");
+    public static By notDeliveredShipmentsHeader = By.xpath("//h2[contains(text(),'Not Delivered Shipments')]");
     public static By addToManifestButton = By.xpath("//button[contains(text(),'Add to Manifest')]");
     public static By activeDay = By.xpath("//td[@class='day']");
     public static By notDeliveredDate = By.id("notDeliveredDate");

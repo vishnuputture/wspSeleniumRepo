@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
-import pages.warehouse.DeliveredOrdersPage;
+import pages.warehouse.DeliveredShipmentsPage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
@@ -51,7 +51,7 @@ public class Trucks extends ReusableLib {
 
     public void callSelectCompany() {
         Utility_Functions.timeWait(7);
-        if (Utility_Functions.xIsDisplayed(ownDriver, DeliveredOrdersPage.unAuth)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, DeliveredShipmentsPage.unAuth)) {
             selectCompany();
             click(TruckPage.menuIconTruck);
         }
@@ -87,7 +87,7 @@ public class Trucks extends ReusableLib {
      * Keyword to verify the availability of field again Truck Screen
      */
     public void verifyAvailFieldTruck() {
-        String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model"};
+        String[] actText = {"Truck Name", "License Plate Number", "Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model"};
         List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         int i = 0;
         for (WebElement el : els) {
@@ -190,7 +190,7 @@ public class Trucks extends ReusableLib {
     public void navigateToAddNewTruck() {
         click(TruckPage.addNewTruckBtn, "Click on add new Truck button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.addNewTruckHeader, "Add New Truck", "Verify Add new Truck Header");
+        commonObj.validateText(TruckPage.addNewTruckHeader, "New Truck", "Verify Add new Truck Header");
     }
 
     /**

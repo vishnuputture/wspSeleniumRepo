@@ -156,10 +156,10 @@
                     <include name="TC_243_CreateManifest"></include>
                     <include name="Tc_ManifestListUI"></include>
                     <include name="Tc_240_CreateManifestUI"></include>
-                    <include name="Tc_NotDeliveredOrdersUI"></include>
-                    <include name="Tc_DeliveredOrdersUI"></include>
-                    <include name="Tc_DeliveredOrdersSearchFilterUI"></include>
-                    <include name="Tc_NotDeliveredOrdersSearchFilterUI"></include>
+                    <include name="Tc_NotDeliveredShipmentsUI"></include>
+                    <include name="Tc_DeliveredShipmentsUI"></include>
+                    <include name="Tc_DeliveredShipmentsSearchFilterUI"></include>
+                    <include name="Tc_NotDeliveredShipmentsSearchFilterUI"></include>
                     <include name="TC_295_ManifestOrderUI"></include>
                     <include name="Tc_235_ManifestListHelpIcon"></include>
                     <include name="Tc_236_ManifestListPagination"></include>
@@ -169,13 +169,13 @@
                    <!-- <include name="Tc_SaveAdjustment"></include>-->
 
                     <include name="TC_SOUpdateStatusDelivered"></include>
-                    <include name="Tc_VerifyDeliveredOrders"></include>
+                    <include name="Tc_VerifyDeliveredShipments"></include>
                     <include name="Tc_DeleteTruck"></include>
                     <include name="Tc_DeleteDriver"></include>
 
                     <include name="TC_SOUpdateStatusNotDelivered"></include>
-                    <include name="Tc_VerifyNotDeliveredOrders"></include>
-                    <include name="Tc_CreateManifestNotDeliveredOrd"></include>
+                    <include name="Tc_VerifyNotDeliveredShipments"></include>
+                    <include name="Tc_CreateManifestNotDeliveredShip"></include>
                 </methods>
             </class>
         </classes>
@@ -188,7 +188,7 @@
                     <include name="Tc_CreateSalesOrderWISE"></include>
                     <include name="TC_243_CreateManifest"></include>
                     <include name="TC_SOUpdateStatusNotDelivered"></include>
-                    <include name="Tc_AddToManifestNotDelOrd"></include>
+                    <include name="Tc_AddToManifestNotDelShip"></include>
 
                     <include name="Tc_CreateManifestPO"></include>
                     <include name="Tc_OrderNumberPO_UI"></include>

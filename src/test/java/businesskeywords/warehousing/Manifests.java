@@ -138,7 +138,7 @@ public class Manifests extends ReusableLib {
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
         commonObj.validateElementExists(ManifestsPage.collapseIcon, "Collapse icon is present");
         commonObj.validateText(ManifestsPage.stopNOrderLab, "STOPS & ORDERS", "Verify STOPS & ORDERS text is present");
-        commonObj.validateText(ManifestsPage.addOrdNoLabel, "Add Order Number", "Add Order Number text is present");
+        commonObj.validateText(ManifestsPage.addShipmentLabel, "Add Shipment", "Add Shipment text is present");
         commonObj.validateText(ManifestsPage.addButton, "Add", "Add button is present");
         commonObj.validateText(ManifestsPage.addStopBtn, "Add Stop", "Add Stop button is present");
         commonObj.validateText(ManifestsPage.addPOBtn, "Add PO", "Add PO button is present");
@@ -304,7 +304,7 @@ public class Manifests extends ReusableLib {
         Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
-        String[] actText = {"Manifest Number", "Delivery Date", "Start Time", "Status", "Driver", "Truck", "Customer", "Customer PO Number", "Order Number", "Job Name"};
+        String[] actText = {"Manifest Number", "Delivery Date", "Start Time", "Status", "Driver", "Truck", "Customer", "Customer PO Number", "Shipment", "Job Name"};
         List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {
