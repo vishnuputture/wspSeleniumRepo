@@ -304,7 +304,7 @@ public class Manifests extends ReusableLib {
         Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
-        String[] actText = {"Manifest Number", "Delivery Date", "Start Time", "Status", "Driver", "Truck", "Customer", "Customer PO Number", "Order Number", "Job Name"};
+        String[] actText = {"Manifest Number", "Delivery Date", "Start Time", "Status", "Driver", "Truck", "Customer", "Customer PO Number", "Shipment", "Job Name"};
         List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {

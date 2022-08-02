@@ -199,16 +199,16 @@
       "Title": "Verify Functionality Update status drop down Not delivered"
     },
     {
-      "TC_ID": "Tc_NotDeliveredOrdersSearchFilterUI",
-      "Title": "Verify Not Delivered Orders Search Filter UI"
+      "TC_ID": "Tc_NotDeliveredShipmentsSearchFilterUI",
+      "Title": "Verify Not Delivered Shipments Search Filter UI"
     },
     {
-      "TC_ID": "Tc_NotDeliveredOrdersUI",
-      "Title": "Verify Not Delivered Orders UI"
+      "TC_ID": "Tc_NotDeliveredShipmentsUI",
+      "Title": "Verify Not Delivered Shipments UI"
     },
     {
-      "TC_ID": "Tc_VerifyNotDeliveredOrders",
-      "Title": "Verify Not Delivered Orders"
+      "TC_ID": "Tc_VerifyNotDeliveredShipments",
+      "Title": "Verify Not Delivered Shipments"
     },
     {
       "TC_ID": "Tc_CloseManifest",

@@ -27,7 +27,7 @@ public class ManifestsPage {
     public static By createStatus = By.xpath("//span[contains(text(),'Created')]");
     public static By firstStatus = By.xpath("//span[@class='manifest-status-text']");
     public static By mobileIcon = By.xpath("//i[@class='fa fa-generate']");
-    public static By addOrderNo = By.xpath("//input[@placeholder='Enter Order Number']");
+    public static By addOrderNo = By.xpath("//input[@placeholder='Enter Shipment']");
     public static By orderAddedMessage = By.xpath("//span[contains(@class,'ui-messages-summary')]");
     public static By orderColLink = By.xpath("//a[@class='ng-star-inserted']");
     public static By soPoOrders = By.xpath("//span[@class='float-right']");

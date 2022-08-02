@@ -125,7 +125,7 @@ public class NotDeliveredShipments extends ReusableLib {
         Utility_Functions.timeWait(8);
         click(TruckPage.filterSearch, "Click search filter icon");
         Utility_Functions.timeWait(1);
-        sendKeys(filterField("Order Number"), Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Enter Order Number");
+        sendKeys(filterField("Shipment"), Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Enter Shipment");
         click(NotDeliveredShipmentsPage.notDeliveredDate, "Click Not Delivered Date");
         int size = ownDriver.findElements(NotDeliveredShipmentsPage.activeDay).size();
         click(ownDriver.findElements(NotDeliveredShipmentsPage.activeDay).get(size - 1), "Select today date");
@@ -139,7 +139,7 @@ public class NotDeliveredShipments extends ReusableLib {
         sendKeys(filterField("Manifest Number"), Utility_Functions.xGetJsonData("ManifestNumber"), "Enter Manifest Number");
         click(TruckPage.applyFilter, "Click Apply Filters");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(drv.getTruck("Order Number"), Utility_Functions.xGetJsonData("SalesOrder") + "-01", "After filter Order Number: ");
+        commonObj.validateText(drv.getTruck("Shipment"), Utility_Functions.xGetJsonData("SalesOrder") + "-01", "After filter Shipment: ");
         commonObj.validateText(drv.getTruck("Driver "), driverName, "After filter Driver Name: ");
         commonObj.validateText(drv.getTruck("Date Not Delivered"), date, "After filter Date Not Delivered: ");
         commonObj.validateText(drv.getTruck("Manifest Number"), Utility_Functions.xGetJsonData("ManifestNumber"), "After filter status: ");
@@ -176,11 +176,11 @@ public class NotDeliveredShipments extends ReusableLib {
         int size = ownDriver.findElements(NotDeliveredShipmentsPage.addToManifestButton).size() - 1;
         click(ownDriver.findElements(NotDeliveredShipmentsPage.addToManifestButton).get(size), "Click Add to Manifest Number");
         Utility_Functions.timeWait(3);
-        commonObj.validateText(TruckPage.deletePopUp, "Order number " + Utility_Functions.xGetJsonData("SalesOrder") + "-01" + " successfully added to manifest " + manifestNo + ".", "");
+        commonObj.validateText(TruckPage.deletePopUp, "Shipment " + Utility_Functions.xGetJsonData("SalesOrder") + "-01" + " successfully added to manifest " + manifestNo + ".", "");
         manFest.navigateToManifestsScreen();
-        click(ManifestsPage.orderColLink, "Click on order number link from orders column");
+        click(ManifestsPage.orderColLink, "Click on shipment link from shipments column");
         Utility_Functions.timeWait(4);
-        commonObj.validateText(By.xpath("//label[contains(text(),'Order Number: " + Utility_Functions.xGetJsonData("SalesOrder") + "-01" + "')]"), "Order Number: " + Utility_Functions.xGetJsonData("SalesOrder") + "-01" + "", "");
+        commonObj.validateText(By.xpath("//label[contains(text(),'Shipment: " + Utility_Functions.xGetJsonData("SalesOrder") + "-01" + "')]"), "Shipment: " + Utility_Functions.xGetJsonData("SalesOrder") + "-01" + "", "");
     }
 
 }
