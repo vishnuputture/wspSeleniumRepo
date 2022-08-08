@@ -38,5 +38,5 @@ public class MasterPage extends ReusableLib {
     public static By menuOptionsAndConstants = By.xpath("//div[@id='D_16_47']/a[contains(text(),'Options')]");
     public static By menuFreightClassCode = By.xpath("//div[@id='D_7_47']/a[contains(text(),'Freight')]");
     public static By pageTitleFreightClassCode = By.id("D_2_28");
-    public static By accountReceivable = By.id("D_2_28");
+    public static By accountReceivable = By.xpath("//div[@id='D_13_7']/a");
 }
