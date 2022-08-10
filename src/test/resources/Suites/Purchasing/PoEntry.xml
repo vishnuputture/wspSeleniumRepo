@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Purchasing" parallel="tests" thread-count="2">
 	<test name="POEntry">
-
 		<classes>
 			<class name="testcases.Purchasing.POEntry">
 				<methods>
@@ -19,7 +18,15 @@
 					<include name="Tc_216_Verify_the_functionality_of_Freight_Charges"></include>
 					<include name="Tc_217_Verify_the_functionality_of_Cost_Option"></include>
 					<include name="Tc_308_CreateSOUI"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
 
+	<test name="POEntry1">
+		<classes>
+			<class name="testcases.Purchasing.POEntry">
+				<methods>
 					<include name="Tc_CreatePo"></include>
 					<include name="Tc_310_SoFromStockPO"></include>
 					<include name="Tc_311_VerifySalesOrderCreated"></include>
@@ -39,4 +46,4 @@
 			</class>
 		</classes>
 	</test>
-</suite> <!-- Suite -->
+</suite>

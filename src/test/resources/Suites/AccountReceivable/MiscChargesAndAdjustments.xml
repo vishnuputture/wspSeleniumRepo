@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Accounts Receivable" parallel="tests" thread-count="2">
     <test name="Misc Charges And Adjustments">
-
         <classes>
             <class name="testcases.AccountReceivable.MiscChargesAndAdjustments">
                 <methods>

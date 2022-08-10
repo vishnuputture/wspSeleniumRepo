@@ -15,7 +15,14 @@
 					<include name="Tc_445_verifySearchTotalCost"></include>
 					<include name="Tc_447_verifyRecDocPositionToPO"></include>
 					<include name="Tc_450_verifyRecDateFilter"></include>
-					<include name="Tc_452_verifyRecDateFilter"></include>
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="VendorInvoiceReconciliation1">
+		<classes>
+			<class name="testcases.Purchasing.VendorInvoiceReconciliation">
+				<methods>
 					<include name="Tc_CreatePoDirect"></include>
 					<include name="Tc_CompleteReceivingStockPOItemsInventoryReceiptsScreen"></include>
 					<include name="Tc_453_verifyDueDateField"></include>

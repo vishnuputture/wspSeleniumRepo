@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Mobile Warehousing" parallel="tests" thread-count="2">
-    <test name="SanityCheck">
+    <test name="BinMaintenance">
 
         <classes>
             <class name="testcases.MobileWarehousing.BinMaintenance">
@@ -38,6 +38,16 @@
                     <include name="Tc_836_verifyAddBinButton"></include>
                     <include name="Tc_837_verifyDuplicateAddBin"></include>
                     <include name="Tc_857_ItemBinLedgerPageUI"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="BinMaintenance">
+
+        <classes>
+            <class name="testcases.MobileWarehousing.BinMaintenance">
+                <methods>
                     <include name="Tc_858_verifyZoneUI"></include>
                     <include name="Tc_860_verifyApplyClearFilter"></include>
                     <include name="Tc_861_verifyItemNumberField"></include>
@@ -48,8 +58,6 @@
                     <include name="Tc_866_verifyEditZone"></include>
                     <include name="Tc_868_verifyPickSequence"></include>
                     <include name="Tc_869_verifyDeleteZOne"></include>
-
-
                     <include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"></include>
                     <include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"></include>
                     <include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"></include>

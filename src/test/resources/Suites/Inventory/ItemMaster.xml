@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Inventory" parallel="tests" thread-count="2">
-
     <test name="ItemMaster">
         <classes>
             <class name="testcases.Inventory.ItemMaster">
@@ -30,6 +29,15 @@
                     <include name="Tc_565_VerifyFieldCalculationMethod"></include>
                     <include name="Tc_592_VerifyFieldConventionalFactor"></include>
                     <include name="Tc_596_VerifyAddDeleteItemNote"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="ItemMaster1">
+        <classes>
+            <class name="testcases.Inventory.ItemMaster">
+                <methods>
                     <include name="Tc_555_VerifyABCHyperLink"></include>
                     <include name="Tc_566_VerifyAlternateItemLink"></include>
                     <include name="Tc_567_VerifyCreateNewItem"></include>

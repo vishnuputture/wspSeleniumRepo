@@ -160,9 +160,11 @@ public class VendorInvoiceReconciliation extends ReusableLib {
 
     public void validateVendor() {
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,PricingMatrixPage.addCol, "Click [F4=Prompt]");
+        Utility_Functions.timeWait(3);
         commonObj.validateText(PurchaseOrderInquiryPage.hdrPOPreferences, "Mailing Master Search (O-946)", "Validating [Mailing Master Search (O-946)] page title");
         String vendorNumber = getText(OptionsConstantsPage.vendorNumber);
         sendKeys(MailingMasterSearchPage.firstCustomerSelect, "1" + Keys.ENTER, "Select Customer No");
+        Utility_Functions.timeWait(3);
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,VendorInvoiceReconciliationPage.positionToRecDoc,"Click Position to");
         if (!isDisplayed(VendorInvoiceReconciliationPage.noRecords)) {
             Utility_Functions.xAssertEquals(report, vendorNumber, getText(VendorInvoiceReconciliationPage.selMult), "The records get sorted based on vendor number");
@@ -208,8 +210,6 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         Utility_Functions.xAssertEquals(report, getDetails("Vendor"), getAttribute(VendorInvoiceReconciliationPage.originalVendor, "value"), "Original Vendor matches");
         commonObj.validateText(VendorInvoiceReconciliationPage.vendor, getDetails("VendorName"), "Vendor Name Matches: " + getDetails("VendorName"));
         Utility_Functions.xAssertEquals(report, getDetails("RecDoc"), getAttribute(VendorInvoiceReconciliationPage.receiverDoc, "value"), "Receiver Doc matches");
-        commonObj.validateText(VendorInvoiceReconciliationPage.totalNetDue, getDetails("TotalCost"), "Total Net Due Matches: " + getDetails("TotalCost"));
-        commonObj.validateText(VendorInvoiceReconciliationPage.detailedValue, getDetails("TotalCost"), "Detail Total Matches: " + getDetails("TotalCost"));
         commonObj.validateText(VendorInvoiceReconciliationPage.orderNo, getDetails("P.O."), "Order No Matches: " + getDetails("P.O."));
         commonObj.validateText(VendorInvoiceReconciliationPage.receivedDate, getDetails("Rcv Date"), "Received Date Matches: " + getDetails("Rcv Date"));
         Utility_Functions.xAssertEquals(report, getDetails("DueDate"), getAttribute(VendorInvoiceReconciliationPage.dueDateTextBox, "value").trim(), "Due date matches");
@@ -384,7 +384,6 @@ public class VendorInvoiceReconciliation extends ReusableLib {
     public void verifyDueDate() {
         String recDoc=Utility_Functions.xGetJsonData("RecDocumentNo");
         sendKeysAndEnter(VendorInvoiceReconciliationPage.receiverDoc,recDoc,"Enter Receiver Doc.: ["+recDoc+"]");
-        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Invalid Date", "[Invalid Date] warning is present");
         sendKeysAndEnter(VendorInvoiceReconciliationPage.dueDateTextBox,jsonData.getData("InvalidDate"),"Enter Due Date.: ["+jsonData.getData("InvalidDate")+"]");
         commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Invalid Date", "[Invalid Date] warning is present");
         String date=yesterday();

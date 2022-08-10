@@ -2,7 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Accounts Receivable" parallel="tests" thread-count="2">
     <test name="MakePayment">
-
         <classes>
             <class name="testcases.AccountReceivable.makePayments">
                 <methods>
@@ -20,6 +19,19 @@
                     <include name="Tc_SortByInvoiceAmtDue"></include>
                     <include name="Tc_SortByInvoiceDate"></include>
                     <include name="Tc_SortByInvoicePaymentDueDate"></include>
+                    <include name="Tc_162_NavigateToFixedPayments"></include>
+                    <include name="Tc_163_FixedPaymentByBA"></include>
+                    <include name="Tc_164_FixedPaymentByCC"></include>
+                    <include name="Tc_165_ValidateFixedPaymentRecordBA"></include>
+                    <include name="Tc_166_ValidateFixedPaymentRecordCC"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="MakePayment1">
+        <classes>
+            <class name="testcases.AccountReceivable.makePayments">
+                <methods>
                     <include name="Tc_139_clickHere_Link_SchedulePage"></include>
                     <include name="Tc_140_disabling_Terms_Condition_CheckBox_Enroll"></include>
                     <include name="Tc_141_EnableTermsConditionCheckBoxAndEnroll"></include>
@@ -41,11 +53,6 @@
                     <include name="Tc_159_validateEnrollButtonOnReviewSession"></include>
                     <include name="Tc_160_validateEditSavedSchedulePayment"></include>
                     <include name="Tc_161_validateStopSavedSchedulePayment"></include>
-                    <include name="Tc_162_NavigateToFixedPayments"></include>
-                    <include name="Tc_163_FixedPaymentByBA"></include>
-                    <include name="Tc_164_FixedPaymentByCC"></include>
-                    <include name="Tc_165_ValidateFixedPaymentRecordBA"></include>
-                    <include name="Tc_166_ValidateFixedPaymentRecordCC"></include>
                 </methods>
             </class>
         </classes>
