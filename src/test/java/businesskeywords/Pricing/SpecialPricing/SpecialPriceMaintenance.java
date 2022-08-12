@@ -3,21 +3,17 @@ package businesskeywords.Pricing.SpecialPricing;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
-
 import com.winSupply.framework.selenium.FrameworkDriver;
-import commonkeywords.*;
-
-import org.openqa.selenium.WebElement;
-import pages.pricing.SpecialPricePage;
-
-import pages.common.MasterPage;
-
-import supportLibraries.Utility_Functions;
-
+import commonkeywords.CommonActions;
+import commonkeywords.DBCall;
 import org.apache.commons.lang3.ArrayUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import pages.common.MasterPage;
+import pages.pricing.SpecialPricePage;
+import supportLibraries.Utility_Functions;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,10 +31,10 @@ public class SpecialPriceMaintenance extends ReusableLib {
     public SpecialPriceMaintenance(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
-    public void validateSpPriceMntncTitle(){
+    public void validateSpPriceMntncTitle() {
         commonObj.masterToOrderProcessing();
         commonObj.orderProcToSplPricing();
         commonObj.validateText(SpecialPricePage.spclPriceTitle, "Special Price Maintenance", "Validating special price page title");
@@ -115,7 +111,7 @@ public class SpecialPriceMaintenance extends ReusableLib {
         List<WebElement> eleList = ownDriver.findElements(SpecialPricePage.selectPricingRecordBox);
         if (eleList.size() > 0) {
             for (WebElement element : eleList) {
-                sendKeys(element, "4","");
+                sendKeys(element, "4", "");
             }
             Utility_Functions.actionKey(Keys.ENTER, ownDriver);
             waitForElementDisappear(MasterPage.loadingAnime, globalWait);
@@ -291,10 +287,9 @@ public class SpecialPriceMaintenance extends ReusableLib {
         Utility_Functions.xAssertEquals(report, "Price as Parent records are display only", res, "Validating pap record exists");
         click(SpecialPricePage.btnF3);
     }
-    
-    public void cleanUp()
-    {
-    	DBCall.delteDBTableData();
+
+    public void cleanUp() {
+        DBCall.delteDBTableData();
     }
 
 }

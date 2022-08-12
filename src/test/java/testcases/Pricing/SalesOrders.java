@@ -8,12 +8,12 @@ import org.testng.annotations.Test;
 
 public class SalesOrders extends TestConfigurations {
 
-	 @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-	    public void CreateSalesOrder(SeleniumTestParameters testParameters) {
-	            testParameters.setCurrentTestDescription("Test case to create a sales order");
-	            CoreScript coreScript = new CoreScript(testParameters);
-	            coreScript.driveTestExecution();
-	            tearDownTestRunner(testParameters, coreScript);
-	        }
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void CreateSalesOrder(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to create a sales order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
 }

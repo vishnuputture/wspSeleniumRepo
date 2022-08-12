@@ -9,11 +9,11 @@ public class WorkWithSalesQuote extends TestConfigurations {
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void SalesQuotesToPO(SeleniumTestParameters testParameters) {
-            testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
-            CoreScript coreScript = new CoreScript(testParameters);
-            coreScript.driveTestExecution();
-            tearDownTestRunner(testParameters, coreScript);
-        }
+        testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
 
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
@@ -32,6 +32,7 @@ public class WorkWithSalesQuote extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void OrderShippingConfirmation(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
@@ -39,6 +40,7 @@ public class WorkWithSalesQuote extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void PrintReportInvoices(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");
@@ -46,6 +48,7 @@ public class WorkWithSalesQuote extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
     @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void FinalInquiryOrderStatus(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to Search Item in ItemMaster");

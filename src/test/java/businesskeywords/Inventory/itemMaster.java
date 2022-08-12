@@ -709,7 +709,7 @@ public class itemMaster extends ReusableLib {
     public void verifyDuplicateItem() {
         click(linkIdEle("lnkDuplicateItem"), "Click [Duplicate Item] link");
         String itemNo = getAttribute(ItemMasterPage.txtBoxSearch, "value");
-        String itemDesc=getText(ItemMasterPage.itemDetail);
+        String itemDesc = getText(ItemMasterPage.itemDetail);
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(InventoryReceiptsPage.growlText, "Record successfully added !", "Validating Toaster Message");
         exitItemMaster();
@@ -746,7 +746,7 @@ public class itemMaster extends ReusableLib {
         String maxValue = "99999999";
         sendKeysAndEnter(ItemMasterPage.txtBoxMatrix, maxValue, "Entering value greater than max accepted value in Matrix field");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        commonObj.validateText(ItemMasterPage.tooltip, maxValue+" has an incorrect data length or decimal position.", "Error tooltip is present");
+        commonObj.validateText(ItemMasterPage.tooltip, maxValue + " has an incorrect data length or decimal position.", "Error tooltip is present");
 
         clearText(ItemMasterPage.txtBoxMatrix);
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
@@ -788,7 +788,7 @@ public class itemMaster extends ReusableLib {
         String maxValue = "99999999";
         sendKeysAndEnter(ItemMasterPage.txtBoxPoCost, maxValue, "Entering value greater than max accepted value in PO Cost field");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        commonObj.validateText(ItemMasterPage.tooltip, maxValue+" has an incorrect data length or decimal position.", "Error tooltip is present");
+        commonObj.validateText(ItemMasterPage.tooltip, maxValue + " has an incorrect data length or decimal position.", "Error tooltip is present");
 
         clearText(ItemMasterPage.txtBoxPoCost);
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
@@ -1069,7 +1069,7 @@ public class itemMaster extends ReusableLib {
         searchItemMaster();
         String selectedvalue = getAttribute(ItemMasterPage.txtBoxListPrice, "value").trim();
         selectedvalue = selectedvalue.replaceAll(",", "");
-        Utility_Functions.xAssertEquals(report, random+".000000", selectedvalue, "Validating List Price field value after re-navigation");
+        Utility_Functions.xAssertEquals(report, random + ".000000", selectedvalue, "Validating List Price field value after re-navigation");
     }
 
     /**
@@ -1112,7 +1112,7 @@ public class itemMaster extends ReusableLib {
         String averagePriceText = averagePriceText1.replaceAll(",", "");
         float averagePrice = Float.parseFloat(averagePriceText);
 
-        float gm = ((listPrice-averagePrice)/listPrice)*100;
+        float gm = ((listPrice - averagePrice) / listPrice) * 100;
         String grossMarginExpected = String.format("%.02f", gm);
 
         String grossMarginActualText = getAttribute(ItemMasterPage.tbxGrossMargin, "value").trim();

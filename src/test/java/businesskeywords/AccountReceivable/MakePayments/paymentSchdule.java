@@ -33,7 +33,7 @@ public class paymentSchdule extends ReusableLib {
     public paymentSchdule(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
         d = ownDriver.getWebDriver();
     }
 

@@ -2,17 +2,13 @@ package businesskeywords.common;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-
-
-import pages.common.SqlStatementPage;
-
-import pages.pricing.SpecialPricePage;
-import supportLibraries.Utility_Functions;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import pages.common.SqlStatementPage;
+import pages.pricing.SpecialPricePage;
+import supportLibraries.Utility_Functions;
 
 public class SqlStatement extends ReusableLib {
 
@@ -28,7 +24,7 @@ public class SqlStatement extends ReusableLib {
     public SqlStatement(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
     /**
@@ -45,8 +41,8 @@ public class SqlStatement extends ReusableLib {
             System.out.println("Text: " + result);
             result = result.replaceAll("\\s", "");
             result = result.replaceAll("\\.0*$", "");
-            String cust_item= Utility_Functions.xGetJsonAsString("CustomerNo")+Utility_Functions.xGetJsonAsString("ItemNo");
-            Utility_Functions.xAssertEquals(report, "1"+Utility_Functions.xGetJsonAsString("CustomerNo")+Utility_Functions.xGetJsonAsString("ItemNo")+jsonData.getData("specialPrice"),result, "Validating result set");
+            String cust_item = Utility_Functions.xGetJsonAsString("CustomerNo") + Utility_Functions.xGetJsonAsString("ItemNo");
+            Utility_Functions.xAssertEquals(report, "1" + Utility_Functions.xGetJsonAsString("CustomerNo") + Utility_Functions.xGetJsonAsString("ItemNo") + jsonData.getData("specialPrice"), result, "Validating result set");
             //Utility_Functions.xAssertEquals(report, "1" + Utility_Functions.xGetJsonAsString("CustomerNo") + Utility_Functions.xGetJsonAsString("ItemNo"), result, "Validating result set");
         } else {
             System.out.println("Text: Not found");
@@ -78,12 +74,12 @@ public class SqlStatement extends ReusableLib {
 
 
     public void insertSpecialPricePAPRecord() {
-    	
-    
+
+
         commonObj.goToSqlApp();
 
 
-        commonObj.sqlInsertSpecialPricePAP(Utility_Functions.xGetJsonAsString("CustomerNo"), Utility_Functions.xGetJsonAsString("ItemNo"),jsonData.getData("Date1"), jsonData.getData("Date2"));
+        commonObj.sqlInsertSpecialPricePAP(Utility_Functions.xGetJsonAsString("CustomerNo"), Utility_Functions.xGetJsonAsString("ItemNo"), jsonData.getData("Date1"), jsonData.getData("Date2"));
 
         if (Utility_Functions.xWaitForElementPresent(ownDriver, SqlStatementPage.resultRowInsert, 5)) {
             String result = Utility_Functions.getText(ownDriver, SqlStatementPage.resultRowInsert);

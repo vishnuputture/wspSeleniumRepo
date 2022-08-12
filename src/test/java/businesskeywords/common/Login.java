@@ -1,8 +1,8 @@
 package businesskeywords.common;
 
+import com.mattermost.MattermostAPIHandler;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import com.mattermost.MattermostAPIHandler;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import org.openqa.selenium.Keys;
 import pages.common.LoginPage;
@@ -15,6 +15,7 @@ import java.util.List;
 public class Login extends ReusableLib {
 
     private FrameworkDriver ownDriver;
+
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
      * objects wrapped by it
@@ -25,7 +26,7 @@ public class Login extends ReusableLib {
 
     public Login(Helper helper) {
         super(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
 
@@ -64,15 +65,15 @@ public class Login extends ReusableLib {
             Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         }
 
-        if(env.equalsIgnoreCase("PROD")){
-            sendKeys(MasterPage.sqlTxtBox,"where");
+        if (env.equalsIgnoreCase("PROD")) {
+            sendKeys(MasterPage.sqlTxtBox, "where");
             Utility_Functions.actionKey(Keys.ENTER, ownDriver);
             String currentCompany = getText(MasterPage.companyLbl);
             Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-            String [] companyArr = getProperties("CompanyNumber").split(String.valueOf(','));
-            List <String> companyList = Arrays.asList(companyArr);
-            if(!companyList.contains(currentCompany)){
-                sendKeys(MasterPage.sqlTxtBox,"win "+companyList.get(0));
+            String[] companyArr = getProperties("CompanyNumber").split(String.valueOf(','));
+            List<String> companyList = Arrays.asList(companyArr);
+            if (!companyList.contains(currentCompany)) {
+                sendKeys(MasterPage.sqlTxtBox, "win " + companyList.get(0));
                 Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 
             }
@@ -80,8 +81,8 @@ public class Login extends ReusableLib {
     }
 
 
-    public void launchSelfServicePriceSheet(){
-        String url = properties.getProperty("URLPriceSheet"+properties.getProperty("ENV"));
+    public void launchSelfServicePriceSheet() {
+        String url = properties.getProperty("URLPriceSheet" + properties.getProperty("ENV"));
         ownDriver.get(url);
         ngWaitRequestToFinish();
     }
@@ -90,6 +91,6 @@ public class Login extends ReusableLib {
         String url = properties.getProperty("URLMakePayments");
 
         ownDriver.get(url);
-    //    ngWaitRequestToFinish();
+        //    ngWaitRequestToFinish();
     }
 }

@@ -29,7 +29,7 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By loadedSuccess = By.xpath("//div[@id='D_24_2'][contains(text(),'Special')]");
     public static By lblNoRecords = By.xpath("//div[@id='D_11_20'][contains(text(),'*')]");
     public static By succMesg = By.xpath("//div[@id='D_24_2']");
-    public static By indexes=By.id("I_13_3");
+    public static By indexes = By.id("I_13_3");
     public static By txtBoxSearchCon = By.id("I_4_32");
     public static By lblContractName = By.id("D_10_13");
     public static By txtBoxOption = By.id("I_10_3");

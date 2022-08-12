@@ -110,4 +110,84 @@ public class MiscChargesAndAdjustments extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_362_VerifyInvoiceNumberPrepopulation(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify 'Invoice Number' field is prepopulated with a number");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_367_VerifyInvoiceNumberCanBeChanged(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify that 'invoice number' value can be changed");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_368_VerifyTransactionTypeIsMandatory(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify that 'transaction type' is a mandatory field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_369_VerifyInvoiceAmountIsMandatory(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify 'invoice amount' is a mandatory field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_370_VerifyInvoiceDateCanBeGreaterThanCurrentDate(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify that 'invoice date' can be greater than current date");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_371_VerifyDisplayInEBPField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify 'Display in EBP' field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_373_VerifyCreationOfCreditDebitMemoWithoutAccountNo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify creation of Credit/Debit memo without the account number");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_374_VerifyCreationOfCreditMemo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify creation of credit memo");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_375_VerifyCreationOfDebitMemo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify creation of debit memo");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_376_VerifyCMDMTransactionCannotBeModified(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify that user cannot change or delete CM/DM transaction");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

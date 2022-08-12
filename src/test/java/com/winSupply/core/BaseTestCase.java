@@ -230,7 +230,7 @@ public abstract class BaseTestCase {
 		System.out.println("Test suite : "+testContext.getSuite().getName()+" Thread "+Thread.currentThread().getId());
 		if (getProperties("Mattermost_post_summary").equalsIgnoreCase("true")) {
 			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
-			MattermostAPIHandler.postMessage(channel, "After Test Suite: " + properties.getProperty("RunConfiguration") + "\n" +
+			MattermostAPIHandler.postMessage(channel, "After Test Suite: " + testContext.getSuite().getName() + "\n" +
 					"Failed tests: " + failedTestCase.size() + "/" + numberOfTests);
 		}
 

@@ -2,10 +2,30 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Inventory" parallel="tests" thread-count="2">
      <test name="SalesPerson">
-
          <classes>
              <class name="testcases.Inventory.SalesPerson">
                  <methods>
+                     <include name="Tc_521_SalesPersonInquiryUI"></include>
+                     <include name="Tc_518_NavigateNextPreviousScreen"></include>
+                     <include name="Tc_519_verifyPricingColumn"></include>
+                     <include name="Tc_533_verifySearchItem"></include>
+                     <include name="Tc_528_verifySearchItemField"></include>
+                     <include name="Tc_526_verifyPricingNoRow"></include>
+                     <include name="Tc_ValidateAddRowPricingMatrix"></include>
+                     <include name="Tc_527_verifyOnlyRowPricing"></include>
+                     <include name="Tc_529_verifyNoMultiplierPricing"></include>
+                     <include name="Tc_544_verifyMultiplierPricing"></include>
+                     <include name="Tc_verifyActionLinks"></include>
+                     <include name="Tc_534_verifyPricingColumnField"></include>
+                     <include name="Tc_530_verifyManuallyEnteredMultiplierValue"></include>
+                     <include name="Tc_535_verifyExtTotalCalculation"></include>
+                     <include name="Tc_542_verifyResetMultiplierValue"></include>
+                     <include name="Tc_543_verifyToggleCostList"></include>
+                     <include name="Tc_546_verifyGrossMarginCalculation"></include>
+                     <include name="Tc_547_verifyPriceCalculation"></include>
+                     <include name="Tc_525_verifyMultiplierField"></include>
+                     <include name="Tc_548_verifyGrossMarginField"></include>
+                     <include name="Tc_505_verifyActionTab"></include>
                      <include name="TC_541_VerifyOptionsAvailableUnderQUICKVIEW"></include>
                      <include name="TC_511_VerifyItemNotesInSalespersonInquiryPage"></include>
                      <include name="TC_514_FieldVerificationForItemNotes"></include>

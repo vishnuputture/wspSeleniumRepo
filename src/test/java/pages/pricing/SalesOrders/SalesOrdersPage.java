@@ -20,7 +20,7 @@ public class SalesOrdersPage extends ReusableLib {
     public static By matrixColumn = By.id("txtS2MatrixColumn");
     public static By writtenByDropDown = By.id("ddbWrittenBy");
     public static By filledByEntry = By.id("txtFilledBy");
-    public static By matrixError = By.xpath("//*[@id=\"5250\"]/div[138]");
+    public static By matrixError = By.xpath("//*[text()='Pricing Column not found']");
     public static By closeError = By.xpath("//*[@id=\"5250\"]/div[138]/div[2]");
     public static By matrixSearch = By.xpath("//*[@id=\"faMatrixSearch\"]/i");
     public static By firstMatrixColumn = By.id("OutMatrixID.1");

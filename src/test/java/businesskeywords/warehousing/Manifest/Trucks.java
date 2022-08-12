@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
-import pages.warehouse.DeliveredOrdersPage;
+import pages.warehouse.DeliveredShipmentsPage;
 import pages.warehouse.DriversPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
@@ -29,7 +29,7 @@ public class Trucks extends ReusableLib {
     public Trucks(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
-        ownDriver=helper.getGSDriver();
+        ownDriver = helper.getGSDriver();
     }
 
 
@@ -51,7 +51,7 @@ public class Trucks extends ReusableLib {
 
     public void callSelectCompany() {
         Utility_Functions.timeWait(7);
-        if (Utility_Functions.xIsDisplayed(ownDriver, DeliveredOrdersPage.unAuth)) {
+        if (Utility_Functions.xIsDisplayed(ownDriver, DeliveredShipmentsPage.unAuth)) {
             selectCompany();
             click(TruckPage.menuIconTruck);
         }
@@ -87,7 +87,7 @@ public class Trucks extends ReusableLib {
      * Keyword to verify the availability of field again Truck Screen
      */
     public void verifyAvailFieldTruck() {
-        String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model"};
+        String[] actText = {"Truck Name", "License Plate Number", "Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model"};
         List<WebElement> els = ownDriver.findElements(By.xpath("//th"));
         int i = 0;
         for (WebElement el : els) {
@@ -190,7 +190,7 @@ public class Trucks extends ReusableLib {
     public void navigateToAddNewTruck() {
         click(TruckPage.addNewTruckBtn, "Click on add new Truck button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.addNewTruckHeader, "Add New Truck", "Verify Add new Truck Header");
+        commonObj.validateText(TruckPage.addNewTruckHeader, "New Truck", "Verify Add new Truck Header");
     }
 
     /**
@@ -343,7 +343,7 @@ public class Trucks extends ReusableLib {
      */
     public void navigateToUpdateTruckPage() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xClickHiddenElement(ownDriver,By.xpath("//td/a"));
+        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td/a"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
     }
@@ -370,12 +370,12 @@ public class Trucks extends ReusableLib {
      */
     public void deleteTruck() {
         Utility_Functions.timeWait(2);
-        Utility_Functions.xClickHiddenElement(ownDriver,TruckPage.deleteButton);
+        Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.noButtonPopUp, "Click No Button");
         commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
-        Utility_Functions.xClickHiddenElement(ownDriver,TruckPage.deleteButton);
+        Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
         click(TruckPage.yesButtonPopUp, "Click Yes Button");
@@ -389,20 +389,19 @@ public class Trucks extends ReusableLib {
         }
     }
 
-        /**
-         * Keyword to Update Truck
-         *
-         */
-        public void updateTruck() {
-            click(TruckPage.statusDrop,"Click Status drop down");
-            click(DriversPage.inActive,"Select InActive From the status drop down");
-            Utility_Functions.timeWait(2);
-            click(TruckPage.newTruckPlateExpInput);
-            int size=ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).size()-1;
-            click(ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).get(size), "Select License Plate Expiration Date");
-            Utility_Functions.timeWait(2);
-            click(TruckPage.saveTruckButton,"Click Save Truck");
-            Utility_Functions.timeWait(3);
-            commonObj.validateText(TruckPage.deletePopUp,Utility_Functions.xGetJsonData("TruckName") + " successfully updated.","Truck Update message should display");
-        }
+    /**
+     * Keyword to Update Truck
+     */
+    public void updateTruck() {
+        click(TruckPage.statusDrop, "Click Status drop down");
+        click(DriversPage.inActive, "Select InActive From the status drop down");
+        Utility_Functions.timeWait(2);
+        click(TruckPage.newTruckPlateExpInput);
+        int size = ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).size() - 1;
+        click(ownDriver.findElements(TruckPage.licensePlateExpSelectInActive).get(size), "Select License Plate Expiration Date");
+        Utility_Functions.timeWait(2);
+        click(TruckPage.saveTruckButton, "Click Save Truck");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(TruckPage.deletePopUp, Utility_Functions.xGetJsonData("TruckName") + " successfully updated.", "Truck Update message should display");
+    }
 }

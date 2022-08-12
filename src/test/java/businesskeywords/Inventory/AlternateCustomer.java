@@ -7,7 +7,6 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
 import pages.common.MasterPage;
 import pages.inventory.AlternateCustomerPage;
-import pages.inventory.SalesPersonPage;
 import supportLibraries.Utility_Functions;
 
 public class AlternateCustomer extends ReusableLib {
@@ -39,10 +38,10 @@ public class AlternateCustomer extends ReusableLib {
     /**
      * Keyword to select random Customer in page - [Alternate Customer Number Revisions]
      */
-    public String selectRandomCustomer(){
+    public String selectRandomCustomer() {
         Utility_Functions.actionKey(Keys.F1, ownDriver);
         int count = Utility_Functions.xRandomFunction(1, 10);
-        while(count>0){
+        while (count > 0) {
             click(AlternateCustomerPage.btnDown);
             waitForElementDisappear(MasterPage.loadingAnime, globalWait);
             count--;
@@ -60,11 +59,11 @@ public class AlternateCustomer extends ReusableLib {
      * Keyword to enter Alternate Customer Numbers
      */
     public void enterRandomAltCustNo() {
-        String randomCustomerNumber = "TEST"+Utility_Functions.xRandomFunction();
-        String msgCustNo = randomCustomerNumber.substring(0, randomCustomerNumber.length()-1);
+        String randomCustomerNumber = "TEST" + Utility_Functions.xRandomFunction();
+        String msgCustNo = randomCustomerNumber.substring(0, randomCustomerNumber.length() - 1);
         sendKeysAndEnter(AlternateCustomerPage.tbxAltCustomerNo1, randomCustomerNumber, "Entering random Alternate Customer Number");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        commonObj.validateText(AlternateCustomerPage.notificationMsg, "Alternate customer number "+msgCustNo+" successfully added.", "Validating success message");
+        commonObj.validateText(AlternateCustomerPage.notificationMsg, "Alternate customer number " + msgCustNo + " successfully added.", "Validating success message");
         String customerNumber = getAttribute(AlternateCustomerPage.tbxCustomerNumber, "value");
         String customerName = getText(AlternateCustomerPage.lblCustomerName);
         jsonData.putData("CustomerNumber", customerNumber);

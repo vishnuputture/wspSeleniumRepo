@@ -27,17 +27,17 @@
       "Tc_OrderNumberSO_UI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,orderNumberUISO",
       "Tc_SaveAdjustment": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberSO,SaveAdjReturnToOrderBtn",
       "TC_SOUpdateStatusDelivered": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusDeliveredSO",
-      "Tc_DeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,searchFiltersDlvrdOrdrsdUI",
-      "Tc_DeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,deliveredOrdersUI",
-      "Tc_VerifyDeliveredOrders": "navigateToShippingManifest,selectCompany,navigateToDeliveredOrdersScreen,pagination,funPageCount,verifyDeliveredOrders",
+      "Tc_DeliveredShipmentsSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredShipmentsScreen,searchFiltersDlvrdShpmntUI",
+      "Tc_DeliveredShipmentsUI": "navigateToShippingManifest,selectCompany,navigateToDeliveredShipmentsScreen,deliveredShipmentsUI",
+      "Tc_VerifyDeliveredShipments": "navigateToShippingManifest,selectCompany,navigateToDeliveredShipmentsScreen,pagination,funPageCount,verifyDeliveredShipments",
       "TC_SOUpdateStatusNotDelivered": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,updateStatusNotDeliveredSO",
-      "Tc_NotDeliveredOrdersSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,searchFiltersNotDlvrdOrdrsdUI",
-      "Tc_NotDeliveredOrdersUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,notDeliveredOrdersUI",
-      "Tc_VerifyNotDeliveredOrders": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,pagination,funPageCountNotDelivered,verifyNotDeliveredOrders",
+      "Tc_NotDeliveredShipmentsSearchFilterUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredShipmentsScreen,searchFiltersNotDlvrdShpmntsUI",
+      "Tc_NotDeliveredShipmentsUI": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredShipmentsScreen,notDeliveredShipmentsUI",
+      "Tc_VerifyNotDeliveredShipments": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredShipmentsScreen,pagination,funPageCountNotDelivered,verifyNotDeliveredShipments",
       "Tc_CloseManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,closeAllManifest",
       "Tc_DeleteManifest": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,deleteManifest",
-      "Tc_CreateManifestNotDeliveredOrd": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,createManNotDeliveredOrder",
-      "Tc_AddToManifestNotDelOrd": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredOrdersScreen,addToManifestNotDelOrd",
+      "Tc_CreateManifestNotDeliveredShip": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredShipmentsScreen,createManNotDeliveredShipment",
+      "Tc_AddToManifestNotDelShip": "navigateToShippingManifest,selectCompany,navigateToNotDeliveredShipmentsScreen,addToManifestNotDelShip",
       "Tc_CreateManifestPO": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToCreateManifest,createManifestPO",
       "Tc_OrderNumberPO_UI": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,orderNumberUIPO",
       "Tc_SaveAdjustmentPO": "navigateToShippingManifest,selectCompany,navigateToManifestsScreen,navigateToManifestOrder,navigateToOrderNumberPO,saveAdjReturnToOrderBtnPO",
@@ -183,32 +183,32 @@
       "Title": "Verify Functionality Update status drop down delivered"
     },
     {
-      "TC_ID": "Tc_DeliveredOrdersSearchFilterUI",
-      "Title": "Verify Delivered Orders Search Filter UI"
+      "TC_ID": "Tc_DeliveredShipmentsSearchFilterUI",
+      "Title": "Verify Delivered Shipments Search Filter UI"
     },
     {
-      "TC_ID": "Tc_DeliveredOrdersUI",
-      "Title": "Verify Delivered Orders UI"
+      "TC_ID": "Tc_DeliveredShipmentsUI",
+      "Title": "Verify Delivered Shipments UI"
     },
     {
-      "TC_ID": "Tc_VerifyDeliveredOrders",
-      "Title": "Verify filter Delivered Orders"
+      "TC_ID": "Tc_VerifyDeliveredShipments",
+      "Title": "Verify filter Delivered Shipments"
     },
     {
       "TC_ID": "TC_SOUpdateStatusNotDelivered",
       "Title": "Verify Functionality Update status drop down Not delivered"
     },
     {
-      "TC_ID": "Tc_NotDeliveredOrdersSearchFilterUI",
-      "Title": "Verify Not Delivered Orders Search Filter UI"
+      "TC_ID": "Tc_NotDeliveredShipmentsSearchFilterUI",
+      "Title": "Verify Not Delivered Shipments Search Filter UI"
     },
     {
-      "TC_ID": "Tc_NotDeliveredOrdersUI",
-      "Title": "Verify Not Delivered Orders UI"
+      "TC_ID": "Tc_NotDeliveredShipmentsUI",
+      "Title": "Verify Not Delivered Shipments UI"
     },
     {
-      "TC_ID": "Tc_VerifyNotDeliveredOrders",
-      "Title": "Verify Not Delivered Orders"
+      "TC_ID": "Tc_VerifyNotDeliveredShipments",
+      "Title": "Verify Not Delivered Shipments"
     },
     {
       "TC_ID": "Tc_CloseManifest",
@@ -219,12 +219,12 @@
       "Title": "Verify Delete Manifest"
     },
     {
-      "TC_ID": "Tc_CreateManifestNotDeliveredOrd",
-      "Title": "Verify Create Manifest for Not Delivered Order"
+      "TC_ID": "Tc_CreateManifestNotDeliveredShip",
+      "Title": "Verify Create Manifest for Not Delivered Shipment"
     },
     {
-      "TC_ID": "Tc_AddToManifestNotDelOrd",
-      "Title": "Verify Add To Manifest for Not Delivered Order"
+      "TC_ID": "Tc_AddToManifestNotDelShip",
+      "Title": "Verify Add To Manifest for Not Delivered Shipment"
     },
     {
       "TC_ID": "Tc_CreateManifestPO",

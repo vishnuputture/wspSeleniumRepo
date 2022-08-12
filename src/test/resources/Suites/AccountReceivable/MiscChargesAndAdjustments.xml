@@ -2,6 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Accounts Receivable" parallel="tests" thread-count="2">
     <test name="Misc Charges And Adjustments">
+
         <classes>
             <class name="testcases.AccountReceivable.MiscChargesAndAdjustments">
                 <methods>
@@ -27,6 +28,25 @@
                     <include name="Tc_388_verifyMemoTypeField"></include>
                     <include name="Tc_389_verifyAccountNoField"></include>
                     <include name="Tc_390_verifyInvoiceCommentLines"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Misc Charges And Adjustment">
+        <classes>
+            <class name="testcases.AccountReceivable.MiscChargesAndAdjustments">
+                <methods>
+                    <include name="TC_362_VerifyInvoiceNumberPrepopulation"></include>
+                    <include name="TC_367_VerifyInvoiceNumberCanBeChanged"></include>
+                    <include name="TC_368_VerifyTransactionTypeIsMandatory"></include>
+                    <include name="TC_369_VerifyInvoiceAmountIsMandatory"></include>
+                    <include name="TC_370_VerifyInvoiceDateCanBeGreaterThanCurrentDate"></include>
+                    <include name="TC_371_VerifyDisplayInEBPField"></include>
+                    <include name="TC_373_VerifyCreationOfCreditDebitMemoWithoutAccountNo"></include>
+                    <include name="TC_374_VerifyCreationOfCreditMemo"></include>
+                    <include name="TC_375_VerifyCreationOfDebitMemo"></include>
+                    <include name="TC_376_VerifyCMDMTransactionCannotBeModified"></include>
+
                 </methods>
             </class>
         </classes>
