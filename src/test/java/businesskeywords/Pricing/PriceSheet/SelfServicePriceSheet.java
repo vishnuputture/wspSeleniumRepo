@@ -324,11 +324,14 @@ public class SelfServicePriceSheet extends ReusableLib {
     public void markReady() {
         processDatePick();
         Utility_Functions.timeWait(3);
-        click(PriceSheetDetails.markAsReadyButton);
+        try {
+            click(PriceSheetDetails.markAsReadyButton);
+        }catch (Exception e){
+            click(SelfServicePriceSheetPage.updateListPriceCheckBox, "Click Update List Price Check Box");
+            click(PriceSheetDetails.markAsReadyButton);
+        }
         Utility_Functions.timeWait(5);
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus, "Ready to Process", "Status Matched");
-
-
     }
 
     /**

@@ -7,7 +7,7 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.common.MasterPage;
-import pages.warehouse.DeliveredOrdersPage;
+import pages.warehouse.DeliveredShipmentsPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
@@ -42,10 +42,10 @@ public class DeliveredOrders extends ReusableLib {
         click(TruckPage.menuIconTruck);
         truck.callSelectCompany();
         Utility_Functions.timeWait(3);
-        click(DeliveredOrdersPage.subMenuDeliveredOrd, "Navigate to Delivered Orders page");
+        click(DeliveredShipmentsPage.subMenuDeliveredShip, "Navigate to Delivered Orders page");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(DeliveredOrdersPage.deliveredOrdersHeader, "Delivered Orders", "Delivered Orders Screen Header is present");
+        commonObj.validateText(DeliveredShipmentsPage.deliveredShipmentsHeader, "Delivered Orders", "Delivered Orders Screen Header is present");
     }
 
     /**
@@ -61,7 +61,7 @@ public class DeliveredOrders extends ReusableLib {
         }
         commonObj.validateElementExists(TruckPage.helpIcon,"Help Icon '?' is present");
         commonObj.validateElementExists(TruckPage.filterSearch,"Search filter icon is present");
-        commonObj.validateElementExists(DeliveredOrdersPage.exportButton,"Export button is present");
+        commonObj.validateElementExists(DeliveredShipmentsPage.exportButton,"Export button is present");
         int size=ownDriver.findElements(TruckPage.pagination).size();
         Utility_Functions.xAssertEquals(report,size,4,"Next page and previous page arrow icon is present");
         String page=Utility_Functions.getText(ownDriver,TruckPage.currentPage);
@@ -105,13 +105,13 @@ public class DeliveredOrders extends ReusableLib {
         click(TruckPage.filterSearch, "Click search filter icon");
         Utility_Functions.timeWait(1);
         sendKeys(filterField("Order Number"), Utility_Functions.xGetJsonData("SalesOrder"), "Enter Order Number");
-        Utility_Functions.xMouseClick(ownDriver, DeliveredOrdersPage.truckDrop);
+        Utility_Functions.xMouseClick(ownDriver, DeliveredShipmentsPage.truckDrop);
         Utility_Functions.timeWait(2);
         String truckName = Utility_Functions.xGetJsonData("TruckName");
         System.out.println("truckName...." + truckName);
         click(ownDriver.findElement(By.xpath("//label[text()='Truck']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(ownDriver, DeliveredOrdersPage.driverDrop);
+        Utility_Functions.xMouseClick(ownDriver, DeliveredShipmentsPage.driverDrop);
         Utility_Functions.timeWait(2);
         String driverName = Utility_Functions.xGetJsonData("Driver");
         System.out.println("driverName...." + driverName);

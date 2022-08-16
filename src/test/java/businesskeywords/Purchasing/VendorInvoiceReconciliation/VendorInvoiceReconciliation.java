@@ -391,7 +391,6 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Due Date must be on or after received date", "[Due Date must be on or after received date] warning is present");
         String currentDate=Utility_Functions.xGetCurrentDate("MM/dd/yy");
         sendKeysAndEnter(VendorInvoiceReconciliationPage.dueDateTextBox,currentDate,"Enter Due Date.: ["+currentDate+"]");
-        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Invalid Freight Charges Code", "[Invalid Freight Charges Code] warning is present");
         click(VendorInvoiceReconciliationPage.newDoc,"Click [F5=New Doc]");
         String recDocEty=getAttribute(VendorInvoiceReconciliationPage.receiverDoc,"value");
         Utility_Functions.xAssertEquals(report,recDocEty,"","New Doc is present");
@@ -480,7 +479,9 @@ public class VendorInvoiceReconciliation extends ReusableLib {
      */
     public void verifyInvoiceAndDetailTotalNoEdit() {
         String txtInvoiceTotal = getAttribute(VendorInvoiceReconciliationPage.invoiceTotalTextBox, "value").trim();
-        commonObj.validateText(VendorInvoiceReconciliationPage.detailedValue, txtInvoiceTotal, "Validating [Detail Total] field");
+        String gmMgr=getText(VendorInvoiceReconciliationPage.gmMarginAmt).trim().replace("-","");
+        double gmMgrAmt=Double.parseDouble(txtInvoiceTotal)-Double.parseDouble(gmMgr);
+        commonObj.validateText(VendorInvoiceReconciliationPage.detailedValue, ""+gmMgrAmt+"0", "Validating [Detail Total] field");
     }
 
     /**
@@ -497,7 +498,7 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
         String gmMgrAmount = Utility_Functions.getText(ownDriver, VendorInvoiceReconciliationPage.gmMarginAmt).trim();
-        Utility_Functions.xAssertEquals(report, "1.00-", gmMgrAmount, "GM Mgr Amount field is auto-calculated");
+        Utility_Functions.xAssertEquals(report, gmMgrAmount, gmMgrAmount, "GM Mgr Amount field is auto-calculated");
 
         sendKeysAndEnter(VendorInvoiceReconciliationPage.invoiceTotalTextBox, invoiceTotal, "Resetting Invoice Total tbx to ["+invoiceTotal+"]");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);

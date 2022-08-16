@@ -148,7 +148,7 @@
       "QtyOrder": "50",
       "itemNo": "AABABM200",
       "QtyShip": "50",
-      "SalesOrderNo": "002998",
+      "SalesOrderNo": "003808",
       "QtyOrdered": "1",
       "VendorNumber": "000388",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
@@ -175,7 +175,7 @@
     {
       "TC_ID": "TC_461_VerifyFunctionalityOfF12KeyInVendorInvoiceReconciliationPage",
       "Title": "Test case to verify functionality of F12 on Vendor Invoice Reconciliation page",
-      "ReceiverDoc": "000043757"
+      "ReceiverDoc": "000044348"
     },
     {
       "TC_ID": "TC_464_VerifyOptionsAvailableOnDetailPage",

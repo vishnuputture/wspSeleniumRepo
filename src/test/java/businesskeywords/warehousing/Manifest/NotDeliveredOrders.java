@@ -41,10 +41,10 @@ public class NotDeliveredOrders extends ReusableLib {
     public void navigateToNotDeliveredOrdersScreen() {
         click(TruckPage.menuIconTruck);
         truck.callSelectCompany();
-        click(NotDeliveredOrdersPage.subMenuNotDeliveredOrd, "Navigate to Not Delivered Orders page");
+        click(NotDeliveredShipmentsPage.subMenuNotDeliveredShip, "Navigate to Not Delivered Orders page");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(NotDeliveredOrdersPage.notDeliveredOrdersHeader, "Not Delivered Orders", "Not Delivered Orders Screen Header is present");
+        commonObj.validateText(NotDeliveredShipmentsPage.notDeliveredShipmentsHeader, "Not Delivered Orders", "Not Delivered Orders Screen Header is present");
     }
 
     /**
@@ -126,11 +126,11 @@ public class NotDeliveredOrders extends ReusableLib {
         click(TruckPage.filterSearch, "Click search filter icon");
         Utility_Functions.timeWait(1);
         sendKeys(filterField("Order Number"), Utility_Functions.xGetJsonData("SalesOrder")+"-01", "Enter Order Number");
-        click(NotDeliveredOrdersPage.notDeliveredDate,"Click Not Delivered Date");
-        int size=ownDriver.findElements(NotDeliveredOrdersPage.activeDay).size();
-        click(ownDriver.findElements(NotDeliveredOrdersPage.activeDay).get(size-1),"Select today date");
-        String date=ownDriver.findElement(NotDeliveredOrdersPage.notDeliveredDate).getAttribute("ng-reflect-model");
-        Utility_Functions.xMouseClick(ownDriver, DeliveredOrdersPage.driverDrop);
+        click(NotDeliveredShipmentsPage.notDeliveredDate,"Click Not Delivered Date");
+        int size=ownDriver.findElements(NotDeliveredShipmentsPage.activeDay).size();
+        click(ownDriver.findElements(NotDeliveredShipmentsPage.activeDay).get(size-1),"Select today date");
+        String date=ownDriver.findElement(NotDeliveredShipmentsPage.notDeliveredDate).getAttribute("ng-reflect-model");
+        Utility_Functions.xMouseClick(ownDriver, NotDeliveredShipmentsPage.notDeliveredDate);
         Utility_Functions.timeWait(2);
         String driverName = Utility_Functions.xGetJsonData("Driver");
         System.out.println("driverName...." + driverName);
@@ -151,11 +151,11 @@ public class NotDeliveredOrders extends ReusableLib {
      */
     public void createManNotDeliveredOrder() {
         verifyNotDeliveredOrders();
-        click(NotDeliveredOrdersPage.addToManifestButton,"CLick Add To Manifest button");
+        click(NotDeliveredShipmentsPage.addToManifestButton,"CLick Add To Manifest button");
         Utility_Functions.timeWait(7);
-        commonObj.validateText(NotDeliveredOrdersPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
+        commonObj.validateText(NotDeliveredShipmentsPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
         Utility_Functions.timeWait(7);
-        click(NotDeliveredOrdersPage.newManifestBtn,"Click New Manifest Button");
+        click(NotDeliveredShipmentsPage.newManifestBtn,"Click New Manifest Button");
         manFest.fillDetails();
         click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
         Utility_Functions.timeWait(5);
@@ -168,15 +168,15 @@ public class NotDeliveredOrders extends ReusableLib {
      */
     public void addToManifestNotDelOrd() {
         verifyNotDeliveredOrders();
-        click(NotDeliveredOrdersPage.addToManifestButton,"CLick Add To Manifest button");
+        click(NotDeliveredShipmentsPage.addToManifestButton,"CLick Add To Manifest button");
         Utility_Functions.timeWait(5);
-        commonObj.validateText(NotDeliveredOrdersPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
+        commonObj.validateText(NotDeliveredShipmentsPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
         Utility_Functions.timeWait(7);
-        String manifestNo=Utility_Functions.getText(ownDriver,NotDeliveredOrdersPage.selManNo);
+        String manifestNo=Utility_Functions.getText(ownDriver,NotDeliveredShipmentsPage.selManNo);
         click(truck.getTruck("Status"),"Select "+manifestNo+" manifest number");
         Utility_Functions.timeWait(2);
-        int size=ownDriver.findElements(NotDeliveredOrdersPage.addToManifestButton).size()-1;
-        click(ownDriver.findElements(NotDeliveredOrdersPage.addToManifestButton).get(size),"Click Add to Manifest Number");
+        int size=ownDriver.findElements(NotDeliveredShipmentsPage.addToManifestButton).size()-1;
+        click(ownDriver.findElements(NotDeliveredShipmentsPage.addToManifestButton).get(size),"Click Add to Manifest Number");
         Utility_Functions.timeWait(3);
         commonObj.validateText(TruckPage.deletePopUp,"Order number "+Utility_Functions.xGetJsonData("SalesOrder")+"-01"+" successfully added to manifest "+manifestNo+".","");
         manFest.navigateToManifestsScreen();

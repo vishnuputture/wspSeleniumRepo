@@ -18,7 +18,14 @@
                     <include name="Tc_322_VerifySPAAddRecords"></include>
                     <include name="Tc_337_VerifySPASearchRecords"></include>
                     <include name="Tc_326_VerifySPARecordDeletion"></include>
-
+				</methods>
+			</class>
+		</classes>
+	</test>
+	<test name="SPAScreenVerification1">
+		<classes>
+			<class name="testcases.Pricing.SPA" >
+				<methods>
 					<include name="Tc_324_VerifySortingContract"></include>
 					<include name="Tc_325_VerifyEditContract"></include>
 					<include name="Tc_327_VerifyAssignMFPDCode"></include>

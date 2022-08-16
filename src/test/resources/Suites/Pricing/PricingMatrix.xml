@@ -10,6 +10,15 @@
                     <include name="Tc_193_ValidateAddRowPricingMatrix"></include>
                     <include name="Tc_194_ValidateCopyRowPricingMatrix"></include>
                     <include name="Tc_195_ValidateAddColPricingMatrix"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="PricingMatrix1">
+        <classes>
+            <class name="testcases.Pricing.PricingMatrix">
+                <methods>
                     <include name="Tc_196_ValidateCopyColPricingMatrix"></include>
                     <include name="Tc_199_ValidateMoreKeysPricingMatrix"></include>
                     <include name="Tc_197_ValidatePgLeftRightPricingMatrix"></include>

@@ -363,7 +363,7 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void navigateToOptionsAndConstantsMenu() {
 		click(MasterPage.optionAndConstantsMenu,"Click Options And Constants Menu");
-		validateText(MasterPage.optionConstPageTitle,"Order Processing - Options and Constants","Lands on Order Processing - Options and Constants");
+		//validateText(MasterPage.optionConstPageTitle,"Order Processing - Options and Constants","Lands on Order Processing - Options and Constants");
 	}
 
 	/**

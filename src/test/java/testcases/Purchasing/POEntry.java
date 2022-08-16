@@ -74,6 +74,22 @@ public class POEntry extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_changeMultiplierToDisc(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the error message");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_changeDiscToMultiplier(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Verify the error message");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Calculation of Extended amount for List Price with Discount");
         CoreScript coreScript = new CoreScript(testParameters);

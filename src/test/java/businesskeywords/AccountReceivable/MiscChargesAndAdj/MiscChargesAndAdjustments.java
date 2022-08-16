@@ -7,7 +7,7 @@ import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import pages.AccountReceivable.MiscChargesAndAdjustmentsPage;
+import pages.AccountReceivable.MiscChargesAndAdjustmentsPage.MiscChargesAndAdjustmentsPage;
 import pages.Purchasing.OptionsConstantsPage;
 import pages.Purchasing.VendorInvoiceReconciliationPage;
 import pages.common.LoginPage;

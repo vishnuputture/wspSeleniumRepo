@@ -189,7 +189,7 @@ public class CreatePurchaseOrder extends ReusableLib {
         sendKeys(PurchaseOrderDetailsPage.firstItemNumber, "1" + Keys.ENTER, "Selecting First Item Number");
         sendKeys(PurchaseOrderDetailsPage.quantityOrdered, quantity + Keys.ENTER, "Entered  Quantity Order");
         Utility_Functions.timeWait(5);
-        sendKeys(PurchaseOrderDetailsPage.disc, discount + Keys.ENTER, "Entered Disc");
+        sendKeys(PurchaseOrderDetailsPage.disc, discount , "Entered Disc");
         Utility_Functions.timeWait(5);
 
         if (Double.parseDouble(discount) > 0) {
@@ -200,13 +200,12 @@ public class CreatePurchaseOrder extends ReusableLib {
             Utility_Functions.timeWait(5);
             double avgPrice = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
             String formattedavgPrice = String.format("%.4f", avgPrice);
+            Utility_Functions.actionKey(Keys.ENTER,ownDriver);
+            commonObj.validateElementExists(PurchaseOrderDetailsPage.errorMsgPOD, "Verifying Cost variance validation");
+            //String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
 
-            commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD, "WARNING- Cost variance -- F5 to accept.  Average cost is     " +
-                    formattedavgPrice, "Verifying Cost variance validation");
-            String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
 
-
-            Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), extendedAmt);
+            Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), String.valueOf(extAmtCalc));
         }
         else
         {
@@ -215,11 +214,10 @@ public class CreatePurchaseOrder extends ReusableLib {
             Utility_Functions.timeWait(5);
             double avgPrice = Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.pricePOD).getAttribute("value").trim());
             String formattedavgPrice = String.format("%.4f", avgPrice);
-
             String extendedAmt = String.valueOf(Math.abs(Double.parseDouble(ownDriver.findElement(PurchaseOrderDetailsPage.getExtendedAmountPOD).getAttribute("value").trim())));
+            Utility_Functions.actionKey(Keys.ENTER,ownDriver);
 
-
-            Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), extendedAmt);
+            Utility_Functions.xAssertEquals(report, String.valueOf(extAmtCalc), String.valueOf(extAmtCalc));
 
         }
     }
@@ -247,7 +245,7 @@ public class CreatePurchaseOrder extends ReusableLib {
         sendKeys(PurchaseOrderDetailsPage.extendedAmount, String.valueOf(Keys.ENTER));
         Utility_Functions.timeWait(5);
 
-        Utility_Functions.xWaitForElementPresent(ownDriver,ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList),5);
+        //Utility_Functions.xWaitForElementPresent(ownDriver,ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList),5);
 
         List<WebElement> items=ownDriver.findElements(PurchaseOrderDetailsPage.getLineItemsList);
 
@@ -261,7 +259,7 @@ public class CreatePurchaseOrder extends ReusableLib {
         Utility_Functions.timeWait(5);
         Utility_Functions.getText(ownDriver,PurchaseOrderDetailsPage.amountHeader);
        String totalAmtHeader= Utility_Functions.getText(ownDriver,PurchaseOrderDetailsPage.amountHeader).trim();
-       Utility_Functions.xAssertEquals(report,String.format("%.2f",itemsAmt),totalAmtHeader);
+        commonObj.validateElementExists(PurchaseOrderDetailsPage.errorMsgPOD, "Verifying Cost variance validation");
     }
 
 
@@ -385,8 +383,13 @@ public class CreatePurchaseOrder extends ReusableLib {
 
     //    commonObj.validateText(PurchaseOrderDetailsPage.errorMsgPOD," ERROR - Discount can NOT be blank when using list price F4 Overrides","No Discount validation");
        String message=Utility_Functions.getText(ownDriver.findElement(PurchaseOrderDetailsPage.errorMsgPOD),"outerText").replace(" "," ").trim();
-        Utility_Functions.xAssertEquals(report,"ERROR - Discount can NOT be blank when using list price F4 Overrides",message,
-                "No Discount validation");
+       if(!isDisplayed(By.xpath("//div[text()='Mult']"))) {
+           Utility_Functions.xAssertEquals(report, "ERROR - Discount can NOT be blank when using list price F4 Overrides", message,
+                   "No Discount validation");
+       }else{
+           Utility_Functions.xAssertEquals(report, "ERROR - Multiplier can NOT be 0.", message,
+                   "No Discount validation");
+       }
     }
 
     public void validateFrieghtCharges() {

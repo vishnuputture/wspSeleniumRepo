@@ -46,4 +46,19 @@ public class MiscChargesAndAdjustmentsPage extends ReusableLib {
     public static By debitMemo = By.id("D_10_31");
     public static By invoiceCommentLines=By.id("D_14_1");
 
+
+    public static By accountNoSuffixTxtBx = By.id("I_6_41");
+    public static By invoiceNoSuffixTbx=By.id("I_7_31");
+    public static By tbxDateShipped=By.id("I_21_22");
+    public static By tbxAccountName=By.id("D_6_44");
+    public static By tbxPrevInv=By.id("D_3_60");
+    public static By tbxPrevInvSuffix=By.id("D_3_69");
+    public static By tbxPrevName=By.id("D_4_60");
+
+    /************************************* Mailing Master Search page elements *************************************/
+    public static By acctNumber=By.id("D_8_75");
+    public static By pNumber=By.id("D_8_73");
+    public static By optBox=By.id("I_8_2");
+
+
 }
