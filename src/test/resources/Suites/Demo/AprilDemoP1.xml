@@ -3,7 +3,7 @@
 <suite name="Regression" parallel="none" thread-count="1">
     <test name="Check">
         <classes>
-            <class name="testcases.Warehouse">
+            <class name="testcases.MobileWarehousing.Warehouse">
                 <methods>
                     <!-- ############ UI Of the page ############ -->
 
@@ -32,7 +32,7 @@
     </test>
     <test name="SanityCheck1">
         <classes>
-            <class name="testcases.Warehouse">
+            <class name="testcases.MobileWarehousing.Warehouse">
                 <methods>
                     <include name="Tc_AddTruck"></include>
                     <include name="Tc_AddNewDriver"></include>
@@ -64,7 +64,7 @@
 
     <test name="SanityCheck2">
         <classes>
-            <class name="testcases.Warehouse">
+            <class name="testcases.MobileWarehousing.Warehouse">
                 <methods>
                     <include name="Tc_CreateSalesOrderWISE"></include>
                     <include name="TC_243_CreateManifest"></include>
@@ -86,7 +86,7 @@
     </test>
     <test name="CheckMakePayments">
         <classes>
-        <class name="testcases.makePayments.makePayments">
+        <class name="testcases.AccountReceivable.makePayments">
             <methods>
                 <include name="Tc_CreateSalesOrderInvoice"></include>
                 <include name="Tc_CreateSalesOrderWithMultipleShipment"></include>

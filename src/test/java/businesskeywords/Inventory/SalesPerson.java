@@ -8,10 +8,10 @@ import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import pages.PurchaseOrders.PurchaseOrderDetailsPage;
-import pages.PurchaseOrders.PurchaseOrderInquiryPage;
-import pages.PurchaseOrders.VendorInvoiceReconciliationPage;
-import pages.PurchaseOrders.VendorNotesPage;
+import pages.Purchasing.PurchaseOrderDetailsPage;
+import pages.Purchasing.PurchaseOrderInquiryPage;
+import pages.Purchasing.VendorInvoiceReconciliationPage;
+import pages.Purchasing.VendorNotesPage;
 import pages.common.MasterPage;
 import pages.inventory.AlternateCustomerPage;
 import pages.inventory.ItemMasterPage;
@@ -24,8 +24,8 @@ import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
 
 import java.awt.*;
-import java.util.List;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class SalesPerson extends ReusableLib {
 
