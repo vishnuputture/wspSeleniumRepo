@@ -114,7 +114,7 @@ public class createCost extends ReusableLib {
     	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
     	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	String temp=ownDriver.findElement(ItemMasterPage.txtBoxListPrice).getAttribute("value").trim();
-    	if(temp.equalsIgnoreCase(jsonData.getData("ListPrice")+".000000"))
+    	if(temp.equalsIgnoreCase(Utility_Functions.xGetJsonData("ListPrice")))
         {
             report.updateTestLog("VerifyRecord", "Price Matched", Status.PASS);
         }else
@@ -128,7 +128,7 @@ public class createCost extends ReusableLib {
     	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
     	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	String temp=ownDriver.findElement(ItemMasterPage.txtBoxMatrix).getAttribute("value").trim();
-    	if(temp.equalsIgnoreCase(jsonData.getData("MatrixCost")))
+    	if(temp.equalsIgnoreCase(Utility_Functions.xGetJsonData("MatrixCostMultiplier")))
         {
             report.updateTestLog("VerifyRecord", "Price Matched", Status.PASS);
         }else
@@ -142,7 +142,7 @@ public class createCost extends ReusableLib {
     	sendKeys(ItemMasterPage.txtBoxSearch,jsonData.getData("WiseItem"),"Entering search string");
     	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     	String temp=ownDriver.findElement(ItemMasterPage.txtBoxPoCost).getAttribute("value").trim();
-    	if(temp.equalsIgnoreCase(Utility_Functions.xGetJsonData("wisePO")))
+    	if(temp.equalsIgnoreCase(Utility_Functions.xGetJsonData("PoCostMultiplier")))
         {
             report.updateTestLog("VerifyRecord", "Cost Matched", Status.PASS);
         }else
