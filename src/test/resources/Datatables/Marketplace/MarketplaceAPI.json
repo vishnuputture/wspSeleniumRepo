@@ -1,0 +1,12 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_API_validateWiseAccount": "getWiseAccount"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_API_validateWiseAccount"
+    }
+  ]
+}
