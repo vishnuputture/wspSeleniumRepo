@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Pricing" parallel="tests" thread-count="2">
+
+    <test name="WorkWithSalesQuotes">
+        <classes>
+            <class name="testcases.Pricing.WorkWithSalesQuote">
+                <methods>
+                    <include name="SalesQuotesToPO"></include>
+                    <include name="InquiryOrdersByCustomer"></include>
+                    <include name="CheckInventoryReceipts"></include>
+                    <include name="OrderShippingConfirmation"></include>
+                    <include name="PrintReportInvoices"></include>
+                    <include name="FinalInquiryOrderStatus"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

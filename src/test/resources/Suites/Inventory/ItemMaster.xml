@@ -1,11 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Inventory" parallel="tests" thread-count="2">
-
     <test name="ItemMaster">
         <classes>
             <class name="testcases.Inventory.ItemMaster">
                 <methods>
+                    <include name="Tc_557_ItemMasterUI"></include>
+                    <include name="Tc_597_VerifySearchItemField"></include>
+                    <include name="Tc_595_VerifyPreviousNextItem"></include>
+                    <include name="Tc_601_VerifySearchInvalidItem"></include>
+                    <include name="Tc_603_VerifyItemDescription"></include>
+                    <include name="Tc_611_VerifyChangeMFPDVN"></include>
+                    <include name="Tc_615_VerifyHistoryMonthsToRetain"></include>
+                    <include name="Tc_606_VerifyDescDesc2"></include>
+                    <include name="Tc_612_VerifyNegChangeMFPDVN"></include>
+                    <include name="Tc_614_VerifyItemType"></include>
+                    <include name="Tc_578_VerifyUOMSearchSelling"></include>
+                    <include name="Tc_616_VerifyStdPkgQtyPoundStdPkgSelling"></include>
+                    <include name="Tc_620_VerifyUOMStdPkgQtyPndStdPkgSelling"></include>
+                    <include name="Tc_579_VerifyUOMSearchPurchasing"></include>
+                    <include name="Tc_556_VerifyStdPkgQtyPoundStdPkgPurchasing"></include>
+                    <include name="Tc_558_VerifyUOMStdPkgQtyPndStdPkgPurchasing"></include>
+                    <include name="Tc_564_VerifyChangeCalculationMethod"></include>
+                    <include name="Tc_572_VerifyPurchasingMinMax"></include>
+                    <include name="Tc_591_VerifyConventionalFactor"></include>
+                    <include name="Tc_593_VerifyTaxableOption"></include>
+                    <include name="Tc_594_VerifySerializedOption"></include>
+                    <include name="Tc_565_VerifyFieldCalculationMethod"></include>
+                    <include name="Tc_592_VerifyFieldConventionalFactor"></include>
+                    <include name="Tc_596_VerifyAddDeleteItemNote"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="ItemMaster1">
+        <classes>
+            <class name="testcases.Inventory.ItemMaster">
+                <methods>
+                    <include name="Tc_555_VerifyABCHyperLink"></include>
+                    <include name="Tc_566_VerifyAlternateItemLink"></include>
+                    <include name="Tc_567_VerifyCreateNewItem"></include>
+                    <include name="Tc_569_VerifyDeleteNewItem"></include>
+                    <include name="Tc_583_VerifyDuplicateItem"></include>
                     <include name="Tc_550_VerifyMatrixFieldValueChange"></include>
                     <include name="Tc_551_VerifyMatrixFieldRange"></include>
                     <include name="Tc_554_VerifyPOCostFieldValueChange"></include>

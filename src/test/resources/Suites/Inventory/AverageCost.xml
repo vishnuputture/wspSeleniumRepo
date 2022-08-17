@@ -7,18 +7,26 @@
             <class name="testcases.Inventory.AverageCost">
                 <methods>
                     <include name="Tc_21_SearchItemData"></include>
-                    <include name="Tc_22_UpdateItemData"></include>
-                    <include name="Tc_23_UpdateItemQuantity"></include>
-                    <include name="Tc_24_UpdateItemAVGCost"></include>
-                    <include name="Tc_25_ValidateItemCreation"></include>
                     <include name="Tc_27_ValidateItemUpdate"></include>
-                    <include name="Tc_28_ValidateReceiveCorrection"></include>
-                    <include name="Tc_31_ValidateMultipleReceiveCorrection"></include>
                     <include name="Tc_29_ValidateCostAdjustmentProcess"></include>
                     <include name="Tc_30_ValidateCostAdjustmentLedger"></include>
                     <include name="Tc_32_ValidateMultipleCostAdjustment"></include>
                     <include name="Tc_33_ValidateQuantityFieldReceiveCorrection"></include>
                     <include name="Tc_26_ValidateItemDeletion"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="AverageCos1t">
+        <classes>
+            <class name="testcases.Inventory.AverageCost">
+                <methods>
+                    <include name="Tc_25_ValidateItemCreation"></include>
+                    <include name="Tc_28_ValidateReceiveCorrection"></include>
+                    <include name="Tc_22_UpdateItemData"></include>
+                    <include name="Tc_23_UpdateItemQuantity"></include>
+                    <include name="Tc_24_UpdateItemAVGCost"></include>
+                    <include name="Tc_31_ValidateMultipleReceiveCorrection"></include>
                 </methods>
             </class>
         </classes>

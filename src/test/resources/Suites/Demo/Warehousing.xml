@@ -5,7 +5,7 @@
 
    <test name="Manifest">
         <classes>
-            <class name="testcases.Warehouse">
+            <class name="testcases.MobileWarehousing.Warehouse">
                 <methods>
                     <include name="Tc_TruckUI"></include>
                     <include name="Tc_TrucksHelpIcon"></include>
@@ -66,7 +66,7 @@
     </test>
     <test name="BinMaintenance">
         <classes>
-            <class name="testcases.BinMaintenance">
+            <class name="testcases.MobileWarehousing.BinMaintenance">
                 <methods>
                     <include name="Tc_748_ItemBinMaintenanceUI"/>
                     <include name="Tc_749_MainMenuOptions"/>
@@ -132,7 +132,7 @@
     </test>
     <test name="InventoryReceipts">
         <classes>
-            <class name="testcases.PO.InventoryReceipts">
+            <class name="testcases.MobileWarehousing.InventoryReceipts">
                 <methods>
                     <include name="Tc_902_InventoryReceiptUI"></include>
                     <include name="Tc_CreatePoDirect"></include>
@@ -164,7 +164,7 @@
     </test>
     <test name="ReceivingInProcess">
         <classes>
-            <class name="testcases.ReceivingInProcess">
+            <class name="testcases.MobileWarehousing.ReceivingInProcess">
                 <methods>
                     <include name="Tc_957_SearchFilterUI"></include>
                     <include name="Tc_958_SearchFilterFunctionality"></include>

@@ -4,7 +4,7 @@
 
     <test name="PurchaseOrderConversionFactors">
         <classes>
-            <class name="testcases.PO.PoConversionFactor">
+            <class name="testcases.Purchasing.PoConversionFactor">
                 <methods>
                     <include name="Tc_242_verifyItemNumberOnPO"></include>
                     <include name="Tc_245_verifyEditedItemNumberOnPO"></include>
@@ -25,7 +25,7 @@
     </test>
     <test name="POEntry">
         <classes>
-            <class name="testcases.PO.POEntry">
+            <class name="testcases.Purchasing.POEntry">
                 <methods>
                     <include name="Tc_203_PurchaseOrderHeadingUI"></include>
                     <include name="Tc_205_Purchase_Order_DetailsUI"></include>
@@ -63,7 +63,7 @@
     </test>
     <test name="SPO">
         <classes>
-            <class name="testcases.PO.Spo">
+            <class name="testcases.Purchasing.Spo">
                 <methods>
                     <include name="Tc_50_SuggestedPOUI"></include>
                     <include name="Tc_51_CreateNewWorksheetTemplateUI"></include>

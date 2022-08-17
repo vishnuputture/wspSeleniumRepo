@@ -10,11 +10,11 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import pages.OrderProcessingPage;
-import pages.PurchaseOrders.OptionsConstantsPage;
-import pages.PurchaseOrders.PurchaseOrderEntryPage;
-import pages.PurchaseOrders.VendorInformationPage;
+import pages.Purchasing.OptionsConstantsPage;
+import pages.Purchasing.PurchaseOrderEntryPage;
+import pages.Purchasing.VendorInformationPage;
 import pages.SalesAnalysisPage;
-import pages.SalesQuotes.WorkWithSalesQuotesPage;
+import pages.pricing.SalesQuotes.WorkWithSalesQuotesPage;
 import pages.common.MasterPage;
 import pages.common.SqlStatementPage;
 import pages.inventory.*;
@@ -363,7 +363,7 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void navigateToOptionsAndConstantsMenu() {
 		click(MasterPage.optionAndConstantsMenu,"Click Options And Constants Menu");
-		validateText(MasterPage.optionConstPageTitle,"Order Processing - Options and Constants","Lands on Order Processing - Options and Constants");
+		//validateText(MasterPage.optionConstPageTitle,"Order Processing - Options and Constants","Lands on Order Processing - Options and Constants");
 	}
 
 	/**

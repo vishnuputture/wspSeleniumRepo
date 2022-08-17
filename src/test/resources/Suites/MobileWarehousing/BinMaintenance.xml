@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Mobile Warehousing" parallel="tests" thread-count="2">
+    <test name="BinMaintenance">
+
+        <classes>
+            <class name="testcases.MobileWarehousing.BinMaintenance">
+                <methods>
+                    <include name="Tc_748_ItemBinMaintenanceUI"></include>
+                    <include name="Tc_749_MainMenuOptions"></include>
+                    <include name="Tc_753_verifyApplyClearAllFilter"></include>
+                    <include name="Tc_758_verifyFilterCheckBox"></include>
+                    <include name="Tc_759_verifyContainsCheckBox"></include>
+                    <include name="Tc_761_verifySuggestedMatchesPopUp"></include>
+                    <include name="Tc_763_verifyItemNoNegValue"></include>
+                    <include name="Tc_764_verifyItemDescriptionFilter"></include>
+                    <include name="Tc_765_verifyItemDescriptionField"></include>
+                    <include name="Tc_750_VerifyUIItemNumbersAreAvailable"></include>
+                    <include name="Tc_787_verifyOnHand"></include>
+                    <include name="Tc_790_verifyClearAllButton"></include>
+                    <include name="Tc_791_verifyPageCountItemMaintenance"></include>
+                    <include name="Tc_793_verifyPaginationItemMaintenance"></include>
+                    <include name="Tc_795_verifySelectAllCheckBox"></include>
+                    <include name="Tc_801_verifyLabelButton"></include>
+                    <include name="Tc_805_verifyItemDetailsMaster"></include>
+                    <include name="Tc_808_verifyItemDetailsUI"></include>
+                    <include name="Tc_809_verifyPaginationItemDetails"></include>
+                    <include name="Tc_810_verifyPageCountItemDetails"></include>
+                    <include name="Tc_811_verifySelectDeselectItem"></include>
+                    <include name="Tc_812_verifySecondaryOptionsBinType"></include>
+                    <include name="Tc_813_verifyUpdateBinType"></include>
+                    <include name="Tc_814_verifyBinItemDeleteIcon"></include>
+                    <include name="Tc_815_verifyBinItemEditIcon"></include>
+                    <include name="Tc_819_verifyBinMinMax"></include>
+                    <include name="Tc_824_verifyEditBinPopUp"></include>
+                    <include name="Tc_827_verifyCreateBinButton"></include>
+                    <include name="Tc_831_verifyCreateDuplicateBin"></include>
+                    <include name="Tc_836_verifyAddBinButton"></include>
+                    <include name="Tc_837_verifyDuplicateAddBin"></include>
+                    <include name="Tc_857_ItemBinLedgerPageUI"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="BinMaintenance">
+
+        <classes>
+            <class name="testcases.MobileWarehousing.BinMaintenance">
+                <methods>
+                    <include name="Tc_858_verifyZoneUI"></include>
+                    <include name="Tc_860_verifyApplyClearFilter"></include>
+                    <include name="Tc_861_verifyItemNumberField"></include>
+                    <include name="Tc_862_verifyNegItemNumberField"></include>
+                    <include name="Tc_863_verifyBinLocation"></include>
+                    <include name="Tc_864_verifyNewZone"></include>
+                    <include name="Tc_865_verifyDuplicateZone"></include>
+                    <include name="Tc_866_verifyEditZone"></include>
+                    <include name="Tc_868_verifyPickSequence"></include>
+                    <include name="Tc_869_verifyDeleteZOne"></include>
+                    <include name="Tc_751_verifyUIOfBinMaintenanceWhenNoDataPresent"></include>
+                    <include name="Tc_754_verifyUIOfBinMaintenanceWhenBinsAreAvailable"></include>
+                    <include name="Tc_755_verifyFunctionalityOfRowCountOfBinMaintenance"></include>
+                    <include name="Tc_756_verifyFunctionalityOfPaginationForBinMaintenanceTable"></include>
+                    <include name="Tc_757_verifyFunctionalityOfSelectAllBinsForBinMaintenanceTable"></include>
+                    <include name="Tc_766_verifyUIOfCreateNewBinPopup"></include>
+                    <include name="Tc_767_verifyCreateNewBinWithConditionGood"></include>
+                    <include name="Tc_768_verifyCreateNewBinWithConditionDamaged"></include>
+                    <include name="Tc_769_verifyCreateNewBinWithConditionDefective"></include>
+                    <include name="Tc_770_verifyCreateDuplicateBinErrorAndFieldVerification"></include>
+                    <include name="Tc_780_verifyEditBinsButtonFunctionality"></include>
+                    <include name="Tc_782_verifyEditBinsButtonFunctionalityForMultipleBins"></include>
+                    <include name="Tc_784_verifyBinWithItemsCannotBeDeleted"></include>
+                    <include name="Tc_785_verifyBinWithoutItemsCanBeDeleted"></include>
+                    <include name="Tc_786_verifyPrintBinLabelsFunctionality"></include>
+                    <include name="Tc_789_verifyPrintBinItemsLabelFunctionality"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
