@@ -1,12 +1,31 @@
 {
   "Business_Flow": [
     {
-      "Tc_API_validateWiseAccount": "getWiseAccount"
+      "Tc_API_validateWiseAccount": "getWiseAccount",
+      "Tc_API_validateLocalCompany": "getLocation"
     }
   ],
   "General_Data": [
     {
-      "TC_ID": "Tc_API_validateWiseAccount"
+      "TC_ID": "Tc_API_validateWiseAccount",
+      "UserId": "payzer",
+      "Password": "L0H43k!s4Wo",
+      "ClientId": "9f6d1e45f52647939ac6362bca8d9c0d",
+      "ClientSecret": "595Ca790cAD34631B6DDab06c37943Cb",
+      "FullName": "CARDIN, MARTIN",
+      "CompanyId": "00155"
+    },
+    {
+      "TC_ID": "Tc_API_validateLocalCompany",
+      "UserId": "payzer",
+      "Password": "L0H43k!s4Wo",
+      "ClientId": "9f6d1e45f52647939ac6362bca8d9c0d",
+      "ClientSecret": "595Ca790cAD34631B6DDab06c37943Cb",
+      "CompanyId": "00324",
+      "LocalCompanyName": "Winsupply N Austin TX Co.",
+      "EcmId": "22068660",
+      "PresidentName": "Denise C Corbin",
+      "ProspectAccount": "000300"
     }
   ]
 }
