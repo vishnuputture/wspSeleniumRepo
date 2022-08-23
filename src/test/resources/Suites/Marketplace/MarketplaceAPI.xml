@@ -7,6 +7,10 @@
                 <methods>
                     <include name="Tc_API_validateWiseAccount"></include>
                     <include name="Tc_API_validateLocalCompany"></include>
+                    <include name="Tc_API_validateInventory"></include>
+                    <include name="Tc_API_validatePricing"></include>
+                    <include name="Tc_API_validateTax"></include>
+                    <include name="Tc_API_validateOrders"></include>
                 </methods>
             </class>
         </classes>

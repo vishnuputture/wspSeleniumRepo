@@ -2,7 +2,11 @@
   "Business_Flow": [
     {
       "Tc_API_validateWiseAccount": "getWiseAccount",
-      "Tc_API_validateLocalCompany": "getLocation"
+      "Tc_API_validateLocalCompany": "getLocation",
+      "Tc_API_validateInventory": "postInventoryAvailability",
+      "Tc_API_validatePricing": "postItemPricing",
+      "Tc_API_validateTax": "postTaxCalculation",
+      "Tc_API_validateOrders": "postOrders"
     }
   ],
   "General_Data": [
@@ -26,6 +30,34 @@
       "EcmId": "22068660",
       "PresidentName": "Denise C Corbin",
       "ProspectAccount": "000300"
+    },
+    {
+      "TC_ID": "Tc_API_validateInventory",
+      "UserId": "sibi",
+      "Password": "2V2HCYprYa22",
+      "ClientId": "1d7c06f466874680b5c7d7f48475bcea",
+      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720"
+    },
+    {
+      "TC_ID": "Tc_API_validatePricing",
+      "UserId": "sibi",
+      "Password": "2V2HCYprYa22",
+      "ClientId": "1d7c06f466874680b5c7d7f48475bcea",
+      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720"
+    },
+    {
+      "TC_ID": "Tc_API_validateTax",
+      "UserId": "sibi",
+      "Password": "2V2HCYprYa22",
+      "ClientId": "1d7c06f466874680b5c7d7f48475bcea",
+      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720"
+    },
+    {
+      "TC_ID": "Tc_API_validateOrders",
+      "UserId": "payzer",
+      "Password": "L0H43k!s4Wo",
+      "ClientId": "9f6d1e45f52647939ac6362bca8d9c0d",
+      "ClientSecret": "595Ca790cAD34631B6DDab06c37943Cb"
     }
   ]
 }

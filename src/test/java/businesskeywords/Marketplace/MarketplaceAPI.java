@@ -36,4 +36,62 @@ public class MarketplaceAPI extends ReusableLib {
                 .body("localCompanyName", equalTo(jsonData.getData("LocalCompanyName"))).body("presidentFormalName", equalTo(jsonData.getData("PresidentName")))
                 .body("prospectAccount", equalTo(jsonData.getData("ProspectAccount"))).extract().response();
     }
+    public Map<String, Object> generateInventoryBody(){
+        String[] keys = new String[]{"00102", "00602", "00302", "00155", "00219", "00772", "00742"};
+        String[] types = new String[]{};
+        String[] nums = new String[]{"0171100244RC", "SUPCD355X440R", "000502810", "1657EJC6AA1S19", "10023517A101020", "1656GCR40N"};
+        Map<String, Object> map = new HashMap();
+        map.put("orgKeys", Arrays.asList(keys));
+        map.put("locationTypes", Arrays.asList(types));
+        map.put("itemNumbers", Arrays.asList(nums));
+
+        return map;
+    }
+    public void postInventoryAvailability(){
+        Map<String, Object> bodyFile = generateInventoryBody();
+        System.out.println(bodyFile);
+        RestAssured.baseURI = "http://mule4qa1:8091";
+
+        Response resp = given().auth().basic(jsonData.getData("UserId"), jsonData.getData("Password")).header("consumer", jsonData.getData("UserId"))
+                .header("client_id", jsonData.getData("ClientId")).header("client_secret", jsonData.getData("ClientSecret")).body(bodyFile).when()
+                .post("/marketplace/exp/v1/api/" + jsonData.getData("UserId") + "/inventoryAvailabilities").then().assertThat().statusCode(201).statusLine("HTTP/1.1 201 Created").body("count", equalTo("4"))
+                .body("companyNumber[0]", equalTo("00302")).body("itemNumber[1]", equalTo("000502810"))
+                .extract().repsonse();
+
+        if (resp.statusCode() == 201) {
+            report.updateTestLogAPI("VerifyVal", "" + " Expected Response Body '" + resp.getBody().asString(), Status.PASS);
+            report.updateTestLogAPI("VerifyVal", "" + " Expected Response Code '" + resp.getStatusCode() + "' is matching With Response Code '" + 201 + "'",
+                    Status.PASS);
+        } else {
+            report.updateTestLogAPI("VerifyVal", "" + " Expected Response Code '" + resp.getStatusCode() + "' is not matching With Response Code '" + 201 + "'",
+                    Status.FAIL);
+        }
+    }
+    public void postItemPricing(){
+        RestAssured.baseURI = "https://extapiqa.winwholesale.com";
+
+        /*Response resp = given().auth().basic(jsonData.getData("UserId"), jsonData.getData("Password")).header("consumer", jsonData.getData("UserId"))
+                .header("client_id", jsonData.getData("ClientId")).header("client_secret", jsonData.getData("ClientSecret"))
+                .when()
+                .then()
+                .extract().repsonse();*/
+    }
+    public void postTaxCalculation(){
+        RestAssured.baseURI = "https://extapiqa.winwholesale.com";
+
+       /* Response resp = given().auth().basic(jsonData.getData("UserId"), jsonData.getData("Password")).header("consumer", jsonData.getData("UserId"))
+                .header("client_id", jsonData.getData("ClientId")).header("client_secret", jsonData.getData("ClientSecret"))
+                .when()
+                .then()
+                .extract().repsonse(); */
+    }
+    public void postOrders(){
+        RestAssured.baseURI = "https://extapiqa.winwholesale.com";
+/*
+        Response resp = given().auth().basic(jsonData.getData("UserId"), jsonData.getData("Password")).header("consumer", jsonData.getData("UserId"))
+                .header("client_id", jsonData.getData("ClientId")).header("client_secret", jsonData.getData("ClientSecret"))
+                .when()
+                .then()
+                .extract().repsonse();*/
+    }
 }
