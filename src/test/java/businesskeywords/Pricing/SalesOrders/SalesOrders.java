@@ -85,7 +85,11 @@ public class SalesOrders extends ReusableLib{
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo1"),"Entering item Number");
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+			String text = getText(SalesOrdersPage.tbxUnitPrice);
+			if (text.isEmpty())
+				sendKeys(SalesOrdersPage.tbxUnitPrice,"1","Entering value in Unit Price");
 
+			Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 			if(isDisplayed(SalesOrdersPage.itemAlreadyOnOrderWindow)){
 				Utility_Functions.xMouseDoubleClick(ownDriver, ownDriver.findElement(SalesOrdersPage.lineNumberToCombine));
 			}
@@ -102,7 +106,11 @@ public class SalesOrders extends ReusableLib{
 	    	sendKeys(SalesOrdersPage.itemNumber,jsonData.getData("itemNo2"),"Entering item Number");
 	    	sendKeys(SalesOrdersPage.qtyToShip,"1","Entering quantity to ship");
 	    	Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+			String text1 = getText(SalesOrdersPage.tbxUnitPrice);
+			if (text1.isEmpty())
+				sendKeys(SalesOrdersPage.tbxUnitPrice,"1","Entering value in Unit Price");
 
+			Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 			if(isDisplayed(SalesOrdersPage.itemAlreadyOnOrderWindow)){
 				Utility_Functions.xMouseDoubleClick(ownDriver, ownDriver.findElement(SalesOrdersPage.lineNumberToCombine));
 			}
@@ -180,10 +188,12 @@ public class SalesOrders extends ReusableLib{
 			Utility_Functions.waitForElementVisible(ownDriver,SalesOrdersPage.printAndExitbtn,5);
 			click(SalesOrdersPage.printAndExitbtn,"Click on Print&Exit button");
 			Utility_Functions.timeWait(5);
-			Utility_Functions.xScrollIntoView(ownDriver,ownDriver.findElement(SalesOrdersPage.printAndExitbtn));
-			//click(SalesOrdersPage.printAndExitbtn,"Click on Print&Exit button");
-			Utility_Functions.xClickHiddenElement(ownDriver, SalesOrdersPage.printAndExitbtn);
-			click(SalesOrdersPage.btnContinue,"Click on continue button");
+			if(isDisplayed(SalesOrdersPage.printAndExitbtn)){
+				Utility_Functions.xScrollIntoView(ownDriver,ownDriver.findElement(SalesOrdersPage.printAndExitbtn));
+				//click(SalesOrdersPage.printAndExitbtn,"Click on Print&Exit button");
+				Utility_Functions.xClickHiddenElement(ownDriver, SalesOrdersPage.printAndExitbtn);
+				click(SalesOrdersPage.btnContinue,"Click on continue button");
+			}
 			Utility_Functions.timeWait(5);
 			Utility_Functions.xScrollIntoView(ownDriver,ownDriver.findElement(SalesOrdersPage.invoiceImage));
 			click(SalesOrdersPage.invoiceImage,"clicking invoice image");

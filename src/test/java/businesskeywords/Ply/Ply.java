@@ -53,7 +53,7 @@ public class Ply extends ReusableLib {
     	
     	List<WebElement> auditRecords = ownDriver.findElements(By.xpath("//div[text()='"+Utility_Functions.xGetJsonData("FixedPaymntConfirmNoBA")+"']"));
     	
-    	if(auditRecords.size()<1) {
+    	if(auditRecords.size()>1) {
     		report.updateTestLog("Find payment confirmation record", "Fixed payment confirmation record not found", Status.FAIL);
     	}else {
     		report.updateTestLog("Find payment confirmation record", "Fixed payment confirmation record found", Status.PASS);

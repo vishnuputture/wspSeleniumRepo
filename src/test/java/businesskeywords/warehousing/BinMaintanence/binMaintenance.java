@@ -457,15 +457,17 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
-            int itemCount = ownDriver.findElements(BinMaintenancePage.itemCountSP).size();
-            commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having Item count " + itemCount + "");
-        } else {
-            valPageCount(10);
-            valPageCount(15);
-            valPageCount(30);
-            valPageCount(30);
-            valPageCount(10);
+        if (!isDisplayed(By.xpath("//span[text()='There are no bins associated to this item.']"))) {
+            if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
+                int itemCount = ownDriver.findElements(BinMaintenancePage.itemCountSP).size();
+                commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having Item count " + itemCount + "");
+            } else {
+                valPageCount(10);
+                valPageCount(15);
+                valPageCount(30);
+                valPageCount(30);
+                valPageCount(10);
+            }
         }
     }
 
@@ -528,34 +530,36 @@ public class binMaintenance extends ReusableLib {
         int size = 2;
         Utility_Functions.xScrollWindow(ownDriver);
         Utility_Functions.timeWait(2);
-        if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
-            commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
-        } else {
-            try {
-                click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(2));
+        if (!isDisplayed(By.xpath("//span[text()='There are no bins associated to this item.']"))) {
+            if (Utility_Functions.xIsDisplayed(ownDriver, DriversPage.onePage)) {
+                commonObj.validateText(DriversPage.onePage, "of 1", "One page is available");
+            } else {
+                try {
+                    click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(2));
+                    Utility_Functions.xScrollWindow(ownDriver);
+                    click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(0));
+                } catch (Exception e) {
+                    click(ownDriver.findElements(DriversPage.pageArrow).get(2));
+                    Utility_Functions.xScrollWindow(ownDriver);
+                    click(ownDriver.findElements(DriversPage.pageArrow).get(0));
+                }
                 Utility_Functions.xScrollWindow(ownDriver);
-                click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(0));
-            } catch (Exception e) {
-                click(ownDriver.findElements(DriversPage.pageArrow).get(2));
-                Utility_Functions.xScrollWindow(ownDriver);
-                click(ownDriver.findElements(DriversPage.pageArrow).get(0));
+                selectPage(2, "2", "Right Arrow (>)");
+                selectPage(1, "1", "Left Arrow (<)");
+                try {
+                    click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
+                    Utility_Functions.xScrollWindow(ownDriver);
+                    String pageNo = ownDriver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
+                    Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
+                } catch (Exception e) {
+                    click(ownDriver.findElements(DriversPage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
+                    Utility_Functions.xScrollWindow(ownDriver);
+                    String pageNo = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
+                    Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
+                }
+                Utility_Functions.timeWait(2);
+                selectPage(0, "1", "Left double Arrow (<<)");
             }
-            Utility_Functions.xScrollWindow(ownDriver);
-            selectPage(2, "2", "Right Arrow (>)");
-            selectPage(1, "1", "Left Arrow (<)");
-            try {
-                click(ownDriver.findElements(BinMaintenancePage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
-                Utility_Functions.xScrollWindow(ownDriver);
-                String pageNo = ownDriver.findElement(BinMaintenancePage.currentPage).getAttribute("ng-reflect-model");
-                Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
-            } catch (Exception e) {
-                click(ownDriver.findElements(DriversPage.pageArrow).get(3), "Click on " + 3 + " Present below the Right Corner of the page");
-                Utility_Functions.xScrollWindow(ownDriver);
-                String pageNo = ownDriver.findElement(TruckPage.currentPage).getAttribute("ng-reflect-model");
-                Utility_Functions.xAssertEquals(report, pageNo, pageNo, "Moved to " + pageNo + " Page");
-            }
-            Utility_Functions.timeWait(2);
-            selectPage(0, "1", "Left double Arrow (<<)");
         }
     }
 
@@ -705,7 +709,7 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify the functionality of select/Deselect items
      */
     public void verifySelectDeselectItem() {
-        {
+        if (!isDisplayed(By.xpath("//span[text()='There are no bins associated to this item.']"))) {
             Utility_Functions.waitTillClickHardSleep(report, ownDriver, getBinLocation(""), "Select item from the list");
             Utility_Functions.timeWait(2);
             Utility_Functions.xAssertEquals(report, ownDriver.findElements(BinMaintenancePage.highlightRow).size(), 1, "One record is Selected");
@@ -728,14 +732,16 @@ public class binMaintenance extends ReusableLib {
         if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.primaryOpt), "Secondary", "Select secondary option from the drop down ");
-        Utility_Functions.timeWait(3);
-        commonObj.validateText(BinMaintenancePage.toaster, "Cannot set primary bin to secondary", "Error toaster 'Cannot set primary bin to secondary' is present");
-        int size = ownDriver.findElements(BinMaintenancePage.primaryOpt).size();
-        if (size == 2) {
-            size = size - 1;
+        if (!isDisplayed(By.xpath("//span[text()='There are currently no results.']"))) {
+            Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.primaryOpt), "Secondary", "Select secondary option from the drop down ");
+            Utility_Functions.timeWait(3);
+            commonObj.validateText(BinMaintenancePage.toaster, "Cannot set primary bin to secondary", "Error toaster 'Cannot set primary bin to secondary' is present");
+            int size = ownDriver.findElements(BinMaintenancePage.primaryOpt).size();
+            if (size == 2) {
+                size = size - 1;
+            }
+            Utility_Functions.xAssertEquals(report, size, 1, "Only one primary Bin Type is present as expected");
         }
-        Utility_Functions.xAssertEquals(report, size, 1, "Only one primary Bin Type is present as expected");
     }
 
     /**
@@ -750,12 +756,14 @@ public class binMaintenance extends ReusableLib {
         if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.secondaryOpt), "Temporary", "Select Temporary option from the drop down ");
-        Utility_Functions.timeWait(3);
-        commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Updated.", "'Bin-item is successfully Updated.' is present");
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.temporaryOpt), "Secondary", "And then Select Secondary option from the drop down ");
-        Utility_Functions.timeWait(3);
-        commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Updated.", "'Bin-item is successfully Updated.' is present");
+        if (!isDisplayed(By.xpath("//span[text()='There are currently no results.']"))) {
+            Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.secondaryOpt), "Temporary", "Select Temporary option from the drop down ");
+            Utility_Functions.timeWait(3);
+            commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Updated.", "'Bin-item is successfully Updated.' is present");
+            Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.temporaryOpt), "Secondary", "And then Select Secondary option from the drop down ");
+            Utility_Functions.timeWait(3);
+            commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Updated.", "'Bin-item is successfully Updated.' is present");
+        }
     }
 
     public void isPrimaryItemDelete() {
@@ -781,19 +789,23 @@ public class binMaintenance extends ReusableLib {
         if (Utility_Functions.xIsDisplayed(ownDriver, By.xpath("//td/a"))) {
             validateItemHeader();
         }
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.deleteIcon, "Click delete icon");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.deletePopup, "");
-        commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("No"), "Click 'No' Button");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.itemBinManItemDet, "");
-        commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.deleteIcon, "Click delete icon");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.deletePopup, "");
-        commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Yes"), "Click 'Yes' Button");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.itemBinManItemDet, "");
-        isPrimaryItemDelete();
-        commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Deleted.", "'Bin-item is successfully Deleted.' is present");
+        if (!isDisplayed(By.xpath("//span[text()='There are currently no results.']"))) {
+            if (getText(BinMaintenancePage.toaster).equals("Cannot delete primary if secondary/temporary bin exists")) {
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.deleteIcon, "Click delete icon");
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.deletePopup, "");
+                commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("No"), "Click 'No' Button");
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.itemBinManItemDet, "");
+                commonObj.validateText(BinMaintenancePage.itemBinManItemDet, "Item-Bin Maintenance - Item Details", "Item-Bin Maintenance - Item Details Header is present");
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.deleteIcon, "Click delete icon");
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.deletePopup, "");
+                commonObj.validateText(BinMaintenancePage.deletePopup, "Delete Bin Item", "'Delete Bin Item' popup is present");
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Yes"), "Click 'Yes' Button");
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.itemBinManItemDet, "");
+                isPrimaryItemDelete();
+                commonObj.validateText(BinMaintenancePage.toaster, "Bin-item is successfully Deleted.", "'Bin-item is successfully Deleted.' is present");
+            }
+        }
     }
 
     public void clickEditButton() {
@@ -817,13 +829,15 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.cancelIcon, "Click Cancel Icon");
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.editIcon, "Click Edit Icon");
         Utility_Functions.timeWait(2);
-        sendKeys(BinMaintenancePage.editTextBox, "1", "Enter Bin min as 1");
-        sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "10", "Enter Bin max as 10");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.saveIcon, "Click Save icon");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.itemBinManItemDet, "");
-        commonObj.validateText(BinMaintenancePage.toaster, "Bin Item updated successfully.", "'Bin Item updated successfully.' is present");
-        commonObj.validateText(By.xpath("//div[text()=' 1 ']"), "1", "Bin min updated to 1");
-        commonObj.validateText(By.xpath("//div[text()=' 10 ']"), "10", "Bin min updated to 10");
+        if (!isDisplayed(By.xpath("//span[text()='There are currently no results.']"))) {
+            sendKeys(BinMaintenancePage.editTextBox, "1", "Enter Bin min as 1");
+            sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "10", "Enter Bin max as 10");
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.saveIcon, "Click Save icon");
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.itemBinManItemDet, "");
+            commonObj.validateText(BinMaintenancePage.toaster, "Bin Item updated successfully.", "'Bin Item updated successfully.' is present");
+            commonObj.validateText(By.xpath("//div[text()=' 1 ']"), "1", "Bin min updated to 1");
+            commonObj.validateText(By.xpath("//div[text()=' 10 ']"), "10", "Bin min updated to 10");
+        }
     }
 
     /**
@@ -831,24 +845,26 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyBinMinMax() {
         clickEditButton();
-        clearText(BinMaintenancePage.editTextBox);
-        Utility_Functions.xClearAndSendKeys(ownDriver, ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "");
-        sendKeys(BinMaintenancePage.editTextBox, "ASDD#$", "Enter special character and alphabets into Bin min as ASDD#$");
-        sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "Auto#$", "Enter special character and alphabets into Bin Max as 'Auto#$'");
-        sendKeys(BinMaintenancePage.editTextBox, "10011111111111", "Enter more than 10 number into Bin min");
-        sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "12345678901", "Enter 10 into Bin Max");
-        click(BinMaintenancePage.saveIcon, "Click Save icon");
-        Utility_Functions.timeWait(3);
-        commonObj.validateText(BinMaintenancePage.toaster, "Bin Item updated successfully.", "'Bin Item updated successfully.' is present");
-        commonObj.validateText(By.xpath("//div[text()=' 1234567890 ']"), "1234567890", "Bin min holds max 10 number");
-        commonObj.validateText(By.xpath("//div[text()=' 1001111111 ']"), "1001111111", "Bin min holds max 10 number");
-        click(BinMaintenancePage.editIcon, "Click Edit Icon");
-        Utility_Functions.timeWait(2);
-        sendKeys(BinMaintenancePage.editTextBox, "10", "Enter number 10 into Bin min");
-        sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "5", "Enter number 5 into Bin Max");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.saveIcon, "Click Save icon");
-        Utility_Functions.timeWait(3);
-        commonObj.validateText(BinMaintenancePage.toaster, "Bin Max qty must be greater than Bin Min qty", "'Bin Max qty must be greater than Bin Min qty' is present");
+        if (!isDisplayed(By.xpath("//span[text()='There are currently no results.']"))) {
+            clearText(BinMaintenancePage.editTextBox);
+            Utility_Functions.xClearAndSendKeys(ownDriver, ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "");
+            sendKeys(BinMaintenancePage.editTextBox, "ASDD#$", "Enter special character and alphabets into Bin min as ASDD#$");
+            sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "Auto#$", "Enter special character and alphabets into Bin Max as 'Auto#$'");
+            sendKeys(BinMaintenancePage.editTextBox, "10011111111111", "Enter more than 10 number into Bin min");
+            sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "12345678901", "Enter 10 into Bin Max");
+            click(BinMaintenancePage.saveIcon, "Click Save icon");
+            Utility_Functions.timeWait(3);
+            commonObj.validateText(BinMaintenancePage.toaster, "Bin Item updated successfully.", "'Bin Item updated successfully.' is present");
+            commonObj.validateText(By.xpath("//div[text()=' 1234567890 ']"), "1234567890", "Bin min holds max 10 number");
+            commonObj.validateText(By.xpath("//div[text()=' 1001111111 ']"), "1001111111", "Bin min holds max 10 number");
+            click(BinMaintenancePage.editIcon, "Click Edit Icon");
+            Utility_Functions.timeWait(2);
+            sendKeys(BinMaintenancePage.editTextBox, "10", "Enter number 10 into Bin min");
+            sendKeys(ownDriver.findElements(BinMaintenancePage.editTextBox).get(1), "5", "Enter number 5 into Bin Max");
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.saveIcon, "Click Save icon");
+            Utility_Functions.timeWait(3);
+            commonObj.validateText(BinMaintenancePage.toaster, "Bin Max qty must be greater than Bin Min qty", "'Bin Max qty must be greater than Bin Min qty' is present");
+        }
     }
 
     public void clickEditBin(String binLoc) {
@@ -903,14 +919,16 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyEditBinPopUp() {
         clickEditButton();
-        String binLocation = navigateToEditBinPopUp();
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.binConditionId), "No Change", "Select No Change option from the drop down ");
-        Utility_Functions.timeWait(2);
-        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
-        String[] statuses = {"Good", "Defective", "Damaged", "No Change"};
-        for (String status : statuses) {
-            changeStatus(binLocation, status);
-            clickEditBin(binLocation);
+        if (!isDisplayed(By.xpath("//span[text()='There are currently no results.']"))) {
+            String binLocation = navigateToEditBinPopUp();
+            Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.binConditionId), "No Change", "Select No Change option from the drop down ");
+            Utility_Functions.timeWait(2);
+            commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+            String[] statuses = {"Good", "Defective", "Damaged", "No Change"};
+            for (String status : statuses) {
+                changeStatus(binLocation, status);
+                clickEditBin(binLocation);
+            }
         }
     }
 

@@ -46,16 +46,16 @@
   "General_Data": [
     {
       "TC_ID": "Tc_CreateSalesOrderInvoice",
-      "accountNo": "000233",
-      "itemNo1": "5105TCW158SS2",
-      "itemNo2": "0023PBE0520",
+      "accountNo": "099599",
+      "itemNo1": "0609CTS2100I34",
+      "itemNo2": "0609CTS2101B1",
       "Iteration": "5"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWithMultipleShipment",
       "accountNo": "099599",
-      "itemNo1": "5105TCW158SS2",
-      "itemNo2": "AMN0159R00002P",
+      "itemNo1": "0609CTS2100I34",
+      "itemNo2": "0609CTS2101B1",
       "Iteration": "1"
     },
     {
