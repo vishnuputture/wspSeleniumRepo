@@ -36,7 +36,8 @@
       "UserId": "sibi",
       "Password": "2V2HCYprYa22",
       "ClientId": "1d7c06f466874680b5c7d7f48475bcea",
-      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720"
+      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720",
+      "PayloadBody": "{\r\n\"orgKeys\": [\r\n\"00102\",\r\n\"00602\",\r\n\"00302\",\r\n\"00155\",\r\n\"00219\",\r\n\"00772\",\r\n\"00742\"\r\n],\r\n\"locationTypes\": [],\r\n\"itemNumbers\": [\r\n\"0171100244RC\",\r\n\"SUPCD355X440R\",\r\n\"000502810\",\r\n\"1657EJC6AA1S19\",\r\n\"10023517A101020\",\r\n\"1656GCR40N\"\r\n]\r\n}"
     },
     {
       "TC_ID": "Tc_API_validatePricing",
