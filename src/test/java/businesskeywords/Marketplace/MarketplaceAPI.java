@@ -108,18 +108,18 @@ public class MarketplaceAPI extends ReusableLib {
                 .header("consumer", jsonData.getData("UserId"))
                 .header("client_id", jsonData.getData("ClientId"))
                 .header("client_secret", jsonData.getData("ClientSecret"))
-                .body(jsonData.getData("bod"))
+                .header("Content-Type", "application/xml")
+                .body(jsonData.getData("PayloadBody"))
                 .when().post("/marketplace/exp/v1/api/" + jsonData.getData("UserId") + "/taxCalculations")
                 .then().assertThat().statusCode(201).statusLine("HTTP/1.1 201 Created")
-                /*.body("companyNumber", equalTo(jsonData.getData("CompanyId")))
-                .body("customerNumber", equalTo(jsonData.getData("CustomerId")))
-                .body("productPrices[2].productCode", equalTo(jsonData.getData("Product")))
-                .body("productPrices[4].quantityBreaks[0].quantity", equalTo(Integer.parseInt(jsonData.getData("Quantity"))))
-                .body("productPrices[5].quantityBreaks[0].price", equalTo(Float.parseFloat(jsonData.getData("Price"))))
-                .body("productPrices[9].quantityBreaks[1].priceSource", equalTo(jsonData.getData("PriceSource")))
-                .body("productPrices[14].quantityBreaks[0].minSellingQuantity", equalTo(Integer.parseInt(jsonData.getData("MinQuantity"))))
-                .body("productPrices[17].quantityBreaks[0].sellingUom", equalTo(jsonData.getData("UOM")))*/.extract().response();
-
+                .header("Content-Type", "text/xml; charset=UTF-8")
+                .body("Envelope.Body.VertexEnvelope.Login.UserName", equalTo(jsonData.getData("Username")))
+                .body("Envelope.Body.VertexEnvelope.QuotationResponse.Seller.Division", equalTo(jsonData.getData("Seller")))
+                .body("Envelope.Body.VertexEnvelope.QuotationResponse.Seller.PhysicalOrigin.City", equalTo(jsonData.getData("City")))
+                .body("Envelope.Body.VertexEnvelope.QuotationResponse.Customer.CustomerCode", equalTo(jsonData.getData("Customer")))
+                .body("Envelope.Body.VertexEnvelope.QuotationResponse.SubTotal", equalTo(jsonData.getData("Subtotal")))
+                .body("Envelope.Body.VertexEnvelope.QuotationResponse.LineItem.Product", equalTo(jsonData.getData("Product")))
+                .extract().response();
 
         if (resp.statusCode() == 201) {
             report.updateTestLogAPI("VerifyVal", "" + " Expected Response Body '" + resp.getBody().asString(), Status.PASS);
@@ -132,11 +132,24 @@ public class MarketplaceAPI extends ReusableLib {
     }
     public void postOrders(){
         RestAssured.baseURI = "https://extapiqa.winwholesale.com";
-/*
-        Response resp = given().auth().basic(jsonData.getData("UserId"), jsonData.getData("Password")).header("consumer", jsonData.getData("UserId"))
-                .header("client_id", jsonData.getData("ClientId")).header("client_secret", jsonData.getData("ClientSecret"))
-                .when()
-                .then()
-                .extract().repsonse();*/
+
+        /*Response resp = given().auth().basic(jsonData.getData("UserId"), jsonData.getData("Password"))
+                .header("consumer", jsonData.getData("UserId"))
+                .header("client_id", jsonData.getData("ClientId"))
+                .header("client_secret", jsonData.getData("ClientSecret"))
+                .body(jsonData.getData("PayloadBody"))
+                .when().post("/marketplace/exp/v1/api/" + jsonData.getData("UserId") + "/taxCalculations")
+                .then().assertThat().statusCode(200).statusLine("HTTP/1.1 200 OK")
+                .extract().response();
+
+
+        if (resp.statusCode() == 200) {
+            report.updateTestLogAPI("VerifyVal", "" + " Expected Response Body '" + resp.getBody().asString(), Status.PASS);
+            report.updateTestLogAPI("VerifyVal", "" + " Expected Response Code '" + resp.getStatusCode() + "' is matching With Response Code '" + 200 + "'",
+                    Status.PASS);
+        } else {
+            report.updateTestLogAPI("VerifyVal", "" + " Expected Response Code '" + resp.getStatusCode() + "' is not matching With Response Code '" + 200 + "'",
+                    Status.FAIL);
+        }*/
     }
 }

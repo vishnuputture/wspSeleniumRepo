@@ -69,7 +69,12 @@
       "ClientId": "1d7c06f466874680b5c7d7f48475bcea",
       "ClientSecret": "D743CA80538f429983D53d3f6d7f3720",
       "PayloadBody": "<?xml version='1.0' encoding='UTF-8'?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n<soapenv:Body>\n<VertexEnvelope xmlns=\"urn:vertexinc:o-series:tps:6:0\">\n<Login>\n<UserName>XXX</UserName>\n<Password>XXX</Password>\n</Login>\n<QuotationRequest locationCode=\"00914\"\n\treturnAssistedParametersIndicator=\"true\" documentDate=\"2019-11-18+04:12\"\n\ttransactionType=\"SALE\">\n<Seller>\n<Company>WIN</Company>\n<Division>00914</Division>\n<PhysicalOrigin>\n<StreetAddress1>307 Ridge St</StreetAddress1>\n<City>Charlottesville</City>\n<MainDivision>VA</MainDivision>\n<PostalCode>22902</PostalCode>\n</PhysicalOrigin>\n</Seller>\n<Customer>\n<CustomerCode>00914-014089</CustomerCode>\n<Destination>\n<StreetAddress1>307 Ridge St</StreetAddress1>\n<StreetAddress2></StreetAddress2>\n<City>Charlottesville</City>\n<MainDivision>VA</MainDivision>\n<PostalCode>22902</PostalCode>\n<Country>US</Country>\n</Destination>\n</Customer>\n<LineItem lineItemNumber=\"1\" lineItemId=\"78325030071\">\n<Product>DTIR2230</Product>\n<Quantity>1</Quantity>\n<UnitPrice>692.99</UnitPrice>\n<ExtendedPrice>692.99</ExtendedPrice>\n</LineItem>\n</QuotationRequest>\n</VertexEnvelope>\n</soapenv:Body>\n</soapenv:Envelope>",
-      "": ""
+      "Username": "XMLquas",
+      "Seller": "00914",
+      "City": "Charlottesville",
+      "Customer": "00914-014089",
+      "Subtotal": "692.99",
+      "Product": "DTIR2230"
     },
     {
       "TC_ID": "Tc_API_validateOrders",
