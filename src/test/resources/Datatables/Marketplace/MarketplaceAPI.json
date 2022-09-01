@@ -37,21 +37,39 @@
       "Password": "2V2HCYprYa22",
       "ClientId": "1d7c06f466874680b5c7d7f48475bcea",
       "ClientSecret": "D743CA80538f429983D53d3f6d7f3720",
-      "PayloadBody": "{\r\n\"orgKeys\": [\r\n\"00102\",\r\n\"00602\",\r\n\"00302\",\r\n\"00155\",\r\n\"00219\",\r\n\"00772\",\r\n\"00742\"\r\n],\r\n\"locationTypes\": [],\r\n\"itemNumbers\": [\r\n\"0171100244RC\",\r\n\"SUPCD355X440R\",\r\n\"000502810\",\r\n\"1657EJC6AA1S19\",\r\n\"10023517A101020\",\r\n\"1656GCR40N\"\r\n]\r\n}"
+      "PayloadBody": "{\r\n\"orgKeys\": [\r\n\"00102\",\r\n\"00602\",\r\n\"00302\",\r\n\"00155\",\r\n\"00219\",\r\n\"00772\",\r\n\"00742\"\r\n],\r\n\"locationTypes\": [],\r\n\"itemNumbers\": [\r\n\"0171100244RC\",\r\n\"SUPCD355X440R\",\r\n\"000502810\",\r\n\"1657EJC6AA1S19\",\r\n\"10023517A101020\",\r\n\"1656GCR40N\"\r\n]\r\n}",
+      "Count": "4",
+      "CompanyId": "00302",
+      "ItemNumber": "000502810",
+      "Quantity1": "3901",
+      "Quantity2": "17",
+      "Company1": "Winsupply Dayton DC LLC",
+      "Company2": "Winsupply Denver DC LLC"
     },
     {
       "TC_ID": "Tc_API_validatePricing",
       "UserId": "sibi",
       "Password": "2V2HCYprYa22",
       "ClientId": "1d7c06f466874680b5c7d7f48475bcea",
-      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720"
+      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720",
+      "PayloadBody": "{\n\"customerType\": \"lcCustomer\",\n\"stockItems\": [\n\"0609PVC430020\",\n\"0609PVC420020\",\n\"0609PVC4112\",\n\"0609PVC440020\",\n\"042514610\",\n\"042514410\",\n\"042514710\",\n\"042515010\",\n\"042514910\",\n\"042514810\",\n\"042515110\",\n\"042515210\",\n\"0609PVC73003952\",\n\"0609PVC720020\",\n\"0609PVC72003949\",\n\"0609PVC73003951\",\n\"0609PVC711220\",\n\"0609PVC7400\",\n\"0609PVC780020\",\n\"0609PVC74004020\"\n],\n\"companyNumber\": \"00155\",\n\"accountNumber\": \"002780\",\n\"masterCustomerNumber\": \"22068674\",\n\"nonStockItems\": []\n}",
+      "CompanyId": "00155",
+      "CustomerId": "002780",
+      "Product": "042515210",
+      "Quantity": "0",
+      "Price": "1.526881",
+      "PriceSource": "MQ",
+      "MinQuantity": "20",
+      "UOM": "EA"
     },
     {
       "TC_ID": "Tc_API_validateTax",
       "UserId": "sibi",
       "Password": "2V2HCYprYa22",
       "ClientId": "1d7c06f466874680b5c7d7f48475bcea",
-      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720"
+      "ClientSecret": "D743CA80538f429983D53d3f6d7f3720",
+      "PayloadBody": "<?xml version='1.0' encoding='UTF-8'?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\">\n<soapenv:Body>\n<VertexEnvelope xmlns=\"urn:vertexinc:o-series:tps:6:0\">\n<Login>\n<UserName>XXX</UserName>\n<Password>XXX</Password>\n</Login>\n<QuotationRequest locationCode=\"00914\"\n\treturnAssistedParametersIndicator=\"true\" documentDate=\"2019-11-18+04:12\"\n\ttransactionType=\"SALE\">\n<Seller>\n<Company>WIN</Company>\n<Division>00914</Division>\n<PhysicalOrigin>\n<StreetAddress1>307 Ridge St</StreetAddress1>\n<City>Charlottesville</City>\n<MainDivision>VA</MainDivision>\n<PostalCode>22902</PostalCode>\n</PhysicalOrigin>\n</Seller>\n<Customer>\n<CustomerCode>00914-014089</CustomerCode>\n<Destination>\n<StreetAddress1>307 Ridge St</StreetAddress1>\n<StreetAddress2></StreetAddress2>\n<City>Charlottesville</City>\n<MainDivision>VA</MainDivision>\n<PostalCode>22902</PostalCode>\n<Country>US</Country>\n</Destination>\n</Customer>\n<LineItem lineItemNumber=\"1\" lineItemId=\"78325030071\">\n<Product>DTIR2230</Product>\n<Quantity>1</Quantity>\n<UnitPrice>692.99</UnitPrice>\n<ExtendedPrice>692.99</ExtendedPrice>\n</LineItem>\n</QuotationRequest>\n</VertexEnvelope>\n</soapenv:Body>\n</soapenv:Envelope>",
+      "": ""
     },
     {
       "TC_ID": "Tc_API_validateOrders",
