@@ -203,8 +203,9 @@ public class makePayments extends ReusableLib {
     	for(int i=0 ;i<statusCount;i++ ) {
     		Utility_Functions.xSelectDropdownByIndex(ownDriver,ownDriver.findElement(MakePaymentLandingPage.invoiceStatusDropDown),i);
     		Utility_Functions.timeWait(2);
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,MakePaymentLandingPage.invoiceStatusDropDown,"");
     		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
-                if(i!=0) {
+                if(Utility_Functions.xIsDisplayed(ownDriver,MakePaymentLandingPage.btnTableExpand)) {
                     click(MakePaymentLandingPage.btnTableExpand);
                 }
     		Utility_Functions.timeWait(4);
@@ -231,8 +232,9 @@ public class makePayments extends ReusableLib {
     	for(int i=0 ;i<statusCount-1;i++ ) {
     		Utility_Functions.xSelectDropdownByIndex(ownDriver,ownDriver.findElement(MakePaymentLandingPage.invoiceDatesDropDown),i);
     		Utility_Functions.timeWait(2);
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,MakePaymentLandingPage.invoiceStatusDropDown,"");
     		if(!Utility_Functions.isExist(ownDriver, MakePaymentLandingPage.lblNoRecords)) {
-                if(i!=0){
+                if(Utility_Functions.xIsDisplayed(ownDriver,MakePaymentLandingPage.btnTableExpand)) {
                     click(MakePaymentLandingPage.btnTableExpand);
                 }
     		Utility_Functions.timeWait(4);
@@ -368,19 +370,20 @@ public class makePayments extends ReusableLib {
 
             click(InvoicePage.makePaymentBtn);
             Utility_Functions.timeWait(3);
-            commonObj.validateText(MakeAPaymentPage.pageTitle,"Make a Payment","User navigated To Make a Payment Page");
-       //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
-            click(MakeAPaymentPage.bankAccPay);
-            click((MakeAPaymentPage.saveContinuebtn));
-            Utility_Functions.timeWait(2);
-            click(MakeAPaymentPage.submitPaymentbtn);
-            Utility_Functions.timeWait(3);
-            commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
-            scrollToView();
-            String txt=ownDriver.findElement(MakeAPaymentPage.confirmationNumber).getText();
-            Utility_Functions.xUpdateJson("MPInvoiceNumberBA",txt);
-
-
+            if(isDisplayed(By.xpath("//div[contains(text(),'*Before you continue,')]"))){
+            }else {
+                commonObj.validateText(MakeAPaymentPage.pageTitle, "Make a Payment", "User navigated To Make a Payment Page");
+                //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
+                click(MakeAPaymentPage.bankAccPay);
+                click((MakeAPaymentPage.saveContinuebtn));
+                Utility_Functions.timeWait(2);
+                click(MakeAPaymentPage.submitPaymentbtn);
+                Utility_Functions.timeWait(3);
+                commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation, "Payment Confirmation", "Payment Successful");
+                scrollToView();
+                String txt = ownDriver.findElement(MakeAPaymentPage.confirmationNumber).getText();
+                Utility_Functions.xUpdateJson("MPInvoiceNumberBA", txt);
+            }
         }
 
     public void makeSinglePaymentCC()
