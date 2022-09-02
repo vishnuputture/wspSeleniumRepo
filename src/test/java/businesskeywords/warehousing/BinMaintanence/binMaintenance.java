@@ -6,6 +6,7 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import org.apache.tools.ant.taskdefs.Exec;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -935,11 +936,13 @@ public class binMaintenance extends ReusableLib {
     public void enterRequiredData() {
         Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.createBinCondition), jsonData.getData("BinCondition"), "Select 'Good' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElements(BinMaintenancePage.createBinCondition).get(1), jsonData.getData("BinZone"), "Select 'Test' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.zoneIdDropDown), jsonData.getData("BinZone"), "Select 'Test' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElements(BinMaintenancePage.createBinCondition).get(2), jsonData.getData("Picking"), "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.zoneId), "DEFAULT", "Select 'DEFAULTS' option from the drop down ");
         Utility_Functions.timeWait(2);
-        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElements(BinMaintenancePage.createBinCondition).get(3), jsonData.getData("Receiving"), "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.pickingId), jsonData.getData("Picking"), "Select 'RF Gun' option from the drop down ");
+        Utility_Functions.timeWait(2);
+        Utility_Functions.xSelectDropdownByNameIfAvlbl(ownDriver, report, ownDriver.findElement(BinMaintenancePage.receivingId), jsonData.getData("Receiving"), "Select 'RF Gun' option from the drop down ");
         Utility_Functions.timeWait(2);
     }
 
@@ -954,7 +957,7 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.toaster, "");
         commonObj.validateText(BinMaintenancePage.toaster, "Bin and Bin-item are created successfully", "'Bin and Bin-item are created successfully' is present");
         int i = 0;
-        while (i == 0) {
+        while (i >= 0) {
             try {
                 Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//td[contains(text(),'" + binLoc + "')]"));
                 commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + binLoc + "')]"), binLoc + " Bin location is created");
@@ -962,10 +965,18 @@ public class binMaintenance extends ReusableLib {
             } catch (Exception e) {
                 Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(By.xpath("//a[text()='›']")).get(1));
                 Utility_Functions.timeWait(4);
+                i++;
+                if (i == 20) {
+                    try {
+                        throw new Exception("Record not FOUND");
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
             }
         }
         commonObj.validateText(getStatus("" + binLoc + ""), "Good", "For bin location: " + binLoc + " status is Good");
-        commonObj.validateText(getZone("" + binLoc + ""), "QS", "For bin location: " + binLoc + " Zone is TS");
+        commonObj.validateText(getZone("" + binLoc + ""), "DF", "For bin location: " + binLoc + " Zone is TS");
     }
 
     /**
@@ -1081,18 +1092,17 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify Zone UI
      */
     public void verifyZoneUI() {
-        String[] labels = {"Zone Name", "Abbreviation", "Bins"};
+        String[] labels = {"Pick Sequence", "Zone", "Receiving", "Picking", "Retail", "Bins"};
         for (String label : labels) {
-            commonObj.validateText(By.xpath("//*[contains(text(),'" + label + "')]"), label, label + " is present");
+            commonObj.validateText(By.xpath("//label[text()='" + label + "']"), label, label + " is present");
         }
-        commonObj.validateText(button(" New Zone "), "New Zone", "'+ New Zone' button is present");
-        commonObj.validateElementExists(BinMaintenancePage.collapsedIcon, "Collapsed icon is present");
+        commonObj.validateText(button("Create New Zone"), "Create New Zone", "'Create New Zone' button is present");
     }
 
-    public void validateAlreadyExistZoneAbrv() {
+    public void validateAlreadyExistZoneAbrv(String Abbreviation) {
         Utility_Functions.timeWait(2);
-        if (!Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.toaster)) {
-            Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Cancel "), "");
+        if (getText(BinMaintenancePage.toaster).equals("Abbreviation " + Abbreviation + "Q already exists.")) {
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//a[text()='Cancel']"), "");
             Utility_Functions.timeWait(2);
             deleteZoneIcon();
             createZoneAgain();
@@ -1103,30 +1113,30 @@ public class binMaintenance extends ReusableLib {
     public String createZoneAgain() {
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.zoneHeader, "Zones", "Zones header is present");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Create New Zone"), "Click 'Create New Zone' button");
         Utility_Functions.timeWait(2);
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
         String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
         sendKeys(BinMaintenancePage.zoneName, zoneName, "Enter Zone Name");
         sendKeys(BinMaintenancePage.zoneAbv, zoneAbv, "Enter Zone Abbreviation as " + zoneAbv + "Q");
         Utility_Functions.timeWait(3);
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Create "), "Click 'Create' Button");
         return zoneAbv;
     }
 
     public String createZone() {
         Utility_Functions.timeWait(2);
         commonObj.validateText(BinMaintenancePage.zoneHeader, "Zones", "Zones header is present");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Create New Zone"), "Click 'Create New Zone' button");
         Utility_Functions.timeWait(2);
         int zoneName = Utility_Functions.xRandomFunction();
         String zoneAbv = Integer.toString(zoneName).substring(0, 1);
-        Utility_Functions.xUpdateJson("zoneName", "" + zoneName + "autoqa");
+        Utility_Functions.xUpdateJson("zoneName", "" + zoneName + "AutoQA");
         Utility_Functions.xUpdateJson("zoneAbv", zoneAbv + "Q");
         sendKeys(BinMaintenancePage.zoneName, zoneName + "AutoQA", "Enter Zone Name");
         sendKeys(BinMaintenancePage.zoneAbv, zoneAbv + "Q", "Enter Zone Abbreviation as " + zoneAbv + "Q");
         Utility_Functions.timeWait(3);
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Create "), "Click 'Create' Button");
         Utility_Functions.timeWait(2);
         return zoneAbv;
     }
@@ -1136,32 +1146,44 @@ public class binMaintenance extends ReusableLib {
      */
     public void verifyNewZone() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" New Zone "), "Click 'New Zone' button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Create New Zone"), "Click 'Create New Zone' button");
         Utility_Functions.timeWait(2);
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Cancel "), "Click Cancel button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//a[text()='Cancel']"), "Click Cancel button");
         String zoneAbv = createZone();
-        validateAlreadyExistZoneAbrv();
-        String zName = Utility_Functions.xGetJsonData("zoneName").toLowerCase();
+        validateAlreadyExistZoneAbrv(zoneAbv);
+        String zName = Utility_Functions.xGetJsonData("zoneName");
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " created successfully.", "'Zone " + zName + " created successfully.' message is present");
         Utility_Functions.timeWait(6);
-        Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0));
-        Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zName + "']")).get(0).getAttribute("ng-reflect-model"), zName, zName + " Zone Name is present");
-        Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).get(0).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
+        Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElement(By.xpath("//div[contains(text(),'" + zName + "')]")));
+        Utility_Functions.xAssertEquals(report, ownDriver.findElement(By.xpath("//div[contains(text(),'" + zName + "')]")).getText(), zName, zName + " Zone Name is present");
+        //Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "Q" + "']")).get(0).getAttribute("ng-reflect-model"), zoneAbv + "Q", zoneAbv + "q Zone Abbreviation is present");
     }
 
     public String expandZone() {
         Utility_Functions.timeWait(3);
         String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
-        WebElement expand = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/a"));
-        Utility_Functions.xScrollIntoView(ownDriver, expand);
-        Utility_Functions.timeWait(2);
-        click(expand, "Expand Zone detail");
-        Utility_Functions.timeWait(2);
+        List<WebElement> els = ownDriver.findElements(By.xpath("//div[contains(@class,'zone-row') and @id]"));
+        for (int i = 0; i < els.size(); i++) {
+            click(els.get(i));
+            Utility_Functions.timeWait(2);
+            if (isDisplayed(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']"))) {
+                Utility_Functions.timeWait(2);
+                click(button("Delete "), "Click Delete Icon");
+                Utility_Functions.timeWait(2);
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//*[contains(text(),'Delete Zone ?')]"), "Click [Delete Zone ?] Button");
+                Utility_Functions.timeWait(3);
+                /*String toaster=getText(BinMaintenancePage.toaster);
+                commonObj.validateElementExists(BinMaintenancePage.toaster, toaster + " is present");*/
+                break;
+            } else {
+                click(By.xpath("//a[text()='Cancel']"));
+            }
+        }
         return zoneAbv;
     }
 
-    public void clickEditIcon(String zoneAbv) {
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i"), "Click Edit icon");
+    public void clickEditIcon(String zoneName) {
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//div[contains(text(),'" + zoneName + "')]"), "Click Record row");
         Utility_Functions.timeWait(2);
     }
 
@@ -1170,7 +1192,7 @@ public class binMaintenance extends ReusableLib {
      */
     public String clickEditZoneIcon() {
         String zoneAbv = expandZone();
-        clickEditIcon(zoneAbv);
+        //clickEditIcon(zoneAbv);
         return zoneAbv;
     }
 
@@ -1178,28 +1200,22 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify delete Zone icon
      */
     public void clickDeleteZoneIcon() {
-        String zoneAbv = clickEditZoneIcon();
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
-        WebElement deleteIcon = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
+        click(By.xpath("//div[contains(text(),'"+zoneName+"')]"),"Click Record: "+zoneName);
         Utility_Functions.timeWait(2);
-        click(deleteIcon, "Click Delete Icon");
+        click(button("Delete "), "Click Delete Icon");
         Utility_Functions.timeWait(2);
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.yesButtonPopUp, "Click Yes Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//*[contains(text(),'Delete Zone ?')]"), "Click [Delete Zone ?] Button");
         Utility_Functions.timeWait(3);
         commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zoneName + " deleted successfully.", "'Zone " + zoneName + " deleted successfully.' is present");
+        Utility_Functions.timeWait(2);
+        Boolean bl=Utility_Functions.xIsDisplayed(ownDriver,By.xpath("//div[text()=' "+zoneName+" ']"));
+        Utility_Functions.xAssertEquals(report,false,bl,zoneName+" deleted from the grid");
     }
 
 
     public void deleteZoneIcon() {
-        String zoneAbv = clickEditZoneIcon();
-        String zoneName = Utility_Functions.xGetJsonData("zoneName");
-        WebElement deleteIcon = ownDriver.findElement(By.xpath("//input[@ng-reflect-model='" + zoneAbv + "']/ancestor::div/following-sibling::div/descendant::i[contains(@class,'trash zone-delete')]"));
-        Utility_Functions.timeWait(2);
-        click(deleteIcon, "Click Delete Icon");
-        Utility_Functions.timeWait(2);
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.yesButtonPopUp, "Click Yes Button");
-        Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(BinMaintenancePage.toaster, getText(BinMaintenancePage.toaster) + " is present");
+        clickEditZoneIcon();
     }
 
     public void verifyDuplicateZoneName(String zoneName) {
@@ -1207,9 +1223,9 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.zoneName, zoneName, "Enter Zone Name");
         Utility_Functions.timeWait(2);
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Create "), "Click 'Create' Button");
         Utility_Functions.timeWait(3);
-        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneName + " already exists']"), "Zone " + zoneName + " already exists", "'Zone " + zoneName + " already exists' error message is present");
+        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneName + " already exists.']"), "Zone " + zoneName + " already exists.", "'Zone " + zoneName + " already exists' error message is present");
     }
 
     public void verifyDuplicateZoneAbv(String zoneAbv) {
@@ -1219,16 +1235,16 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         sendKeys(BinMaintenancePage.zoneAbv, zoneAbv, "Clear Zone name field and Enter Zone Abbreviation as " + zoneAbv + "Q");
         Utility_Functions.timeWait(2);
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Create "), "Click 'Create' Button");
         Utility_Functions.timeWait(3);
-        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneAbv + " already exists']"), "Zone " + zoneAbv + " already exists", "'Zone " + zoneAbv + " already exists' error message is present");
+        commonObj.validateText(By.xpath("//div[text()='Abbreviation " + zoneAbv + " already exists.']"), "Abbreviation " + zoneAbv + " already exists.", "'Zone " + zoneAbv + " already exists' error message is present");
     }
 
     public String verifySaveButtonDisZoneName() {
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
         sendKeys(BinMaintenancePage.zoneName, zoneName + "AutoQA", "Enter Zone Name");
         Utility_Functions.timeWait(2);
-        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Create button is disabled");
         return zoneName;
     }
 
@@ -1236,7 +1252,7 @@ public class binMaintenance extends ReusableLib {
         String zoneAbv = Utility_Functions.xGetJsonData("zoneAbv");
         sendKeys(BinMaintenancePage.zoneAbv, zoneAbv, "Clear Zone name field and Enter Zone Abbreviation as " + zoneAbv + "Q");
         Utility_Functions.timeWait(2);
-        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Create button is disabled");
         return zoneAbv;
     }
 
@@ -1246,9 +1262,9 @@ public class binMaintenance extends ReusableLib {
         clearText(BinMaintenancePage.zoneAbv);
         sendKeys(BinMaintenancePage.zoneName, "  ", "Enter 2 Blank space into Zone Name text field");
         sendKeys(BinMaintenancePage.zoneAbv, "  ", "Enter 2 Blank space into Zone Abbreviation text field");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Save "), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Create "), "Click 'Create' Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(BinMaintenancePage.toaster, "Error while creating Zone.", "'Error while creating Zone.' error message is present");
+        commonObj.validateText(By.xpath("//div[text()='Error while creating Zone.']"), "Error while creating Zone.", "'Error while creating Zone.' error message is present");
     }
 
     /**
@@ -1344,13 +1360,13 @@ public class binMaintenance extends ReusableLib {
     public void vrfyCreateDuplicateBinErrorAndFields() {
         boolean isSaveEnabled = getElement(BinMaintenancePage.btnSaveCreateNewBinpopup).isEnabled();
         if (!isSaveEnabled)
-            report.updateTestLog("Verify Save Btn state", "[Save] button is disabled", Status.PASS);
+            report.updateTestLog("Verify Save Btn state", "[Create] button is disabled", Status.PASS);
         else
-            report.updateTestLog("Verify Save Btn state", "[Save] button is disabled", Status.FAIL);
+            report.updateTestLog("Verify Save Btn state", "[Create] button is disabled", Status.FAIL);
 
         vrfyBinLocationTextbox();
-        selectDropdownsCreateNewBinPopup("Good", "Default", "Automatic", "Manual");
-        click(BinMaintenancePage.btnSaveCreateNewBinpopup, "Click [Save] button");
+        selectDropdownsCreateNewBinPopup("Good", "DEFAULT", "Automatic", "Manual");
+        click(BinMaintenancePage.btnSaveCreateNewBinpopup, "Click [Create] button");
         waitForVisible(BinMaintenancePage.toastMsg);
         commonObj.validateText(BinMaintenancePage.toastMsg, "Bin Location already exists", "Duplicate Bin error message");
         click(BinMaintenancePage.btnCancelCreateNewBinpopup, "Click [Cancel] button");
@@ -1382,7 +1398,7 @@ public class binMaintenance extends ReusableLib {
      */
     public void selectDropdownsCreateNewBinPopup(String condition, String zones, String picking, String receiving) {
         String[] texts = {condition, zones, picking, receiving};
-        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(ownDriver, BinMaintenancePage.lstDropdownsCreateNewBinPopup);
+        List<WebElement> lstElement = Utility_Functions.findElementsByXpath(ownDriver, BinMaintenancePage.selectDropValue);
         for (int i = 0; i < lstElement.size(); i++) {
             Utility_Functions.xSelectDropdownByName(ownDriver, report, lstElement.get(i), texts[i], "selected value [" + texts[i] + "] in drodpown");
             Utility_Functions.timeWait(1);
@@ -1801,17 +1817,17 @@ public class binMaintenance extends ReusableLib {
      * Keyword to Verify duplicate Zone
      */
     public void verifyDuplicateZone() {
-        click(button(" New Zone "), "Click 'New Zone' button");
+        click(button("Create New Zone"), "Click 'Create New Zone' button");
         Utility_Functions.timeWait(2);
-        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
+        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Create button is disabled");
         String zoneName = verifySaveButtonDisZoneName();
         clearText(BinMaintenancePage.zoneName);
         String zoneAbv = verifySaveButtonDisZoneAvr();
         sendKeys(BinMaintenancePage.zoneName, zoneName, "Enter Zone Name");
-        click(button("Save "), "Click 'Save' Button");
+        click(button(" Create "), "Click 'Create' Button");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneName + " already exists']"), "Zone " + zoneName + " already exists", "'Zone " + zoneName + " already exists' error message is present");
-        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneAbv + " already exists']"), "Zone " + zoneAbv + " already exists", "'Zone " + zoneAbv + " already exists' error message is present");
+        commonObj.validateText(By.xpath("//div[text()='Zone " + zoneName + " already exists.']"), "Zone " + zoneName + " already exists.", "'Zone " + zoneName + " already exists' error message is present");
+        commonObj.validateText(By.xpath("//div[text()='Abbreviation " + zoneAbv + " already exists.']"), "Abbreviation " + zoneAbv + " already exists.", "'Zone " + zoneAbv + " already exists' error message is present");
         verifyDuplicateZoneName(zoneName);
         verifyDuplicateZoneAbv(zoneAbv);
         verifyBlankSpaceCreateZone();
@@ -1836,52 +1852,43 @@ public class binMaintenance extends ReusableLib {
         String zName = zoneName + "a";
         Utility_Functions.xUpdateJson("zoneName", zName);
         sendKeys(By.xpath("//input[@ng-reflect-model='" + zoneName + "']"), zName, "Edit Zone Name");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, saveButtonEditedZone(zName), "Click 'Save' Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Save "), "Click 'Save' Button");
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, BinMaintenancePage.toaster, "Click Toaster message");
-        commonObj.validateText(BinMaintenancePage.toaster, "Zone " + zName + " updated successfully.", "'Zone " + zName + " updated successfully.' message is present");
-        commonObj.validateElementExists(zoneDisabledFields("Zone Name", zName), "Zone Name field is modified and disabled");
+        commonObj.validateText(BinMaintenancePage.toaster, "zone updated successfully.", "'zone updated successfully.' message is present");
+        commonObj.validateElementExists(By.xpath("//div[contains(text(),'" + zName + "')]"), "Zone Name field is modified");
     }
 
     /**
      * Keyword to Verify Edit Zone
      */
     public void verifyEditZone() {
-        String zoneAvr = expandZone();
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
-        isZoneFieldDisabled("Zone Name", zoneName);
-        isZoneFieldDisabled("Abbreviation", zoneAvr);
-        Boolean bl1 = ownDriver.findElement(BinMaintenancePage.pickSequence).isEnabled();
-        Utility_Functions.xAssertEquals(report, bl1, false, "Pick Sequence field is disabled");
-        Utility_Functions.timeWait(2);
-        commonObj.validateElementExists(BinMaintenancePage.buttonDis, "Save button is disabled");
-        clickEditIcon(zoneAvr);
-        isZoneFieldsEditable("Zone Name", zoneName);
-        isZoneFieldsEditable("Abbreviation", zoneAvr);
+        clickEditIcon(zoneName);
         editZoneField(zoneName);
     }
 
     public void validatePickSeqField(String zoneName, String validVal, String inValidVal) {
         Utility_Functions.timeWait(2);
-        sendKeys(pickSequence(zoneName), validVal, "Enter '" + validVal + "' into Pick Sequence text field");
-        boolean bl = Utility_Functions.xIsDisplayed(ownDriver, BinMaintenancePage.pickSeqError);
-        Utility_Functions.xAssertEquals(report, bl, false, "Error message is disappeared");
-        sendKeys(pickSequence(zoneName), "100000");
-        sendKeys(pickSequence(zoneName), inValidVal, "Enter '" + inValidVal + "' into Pick Sequence text field");
-        Utility_Functions.timeWait(2);
-        commonObj.validateText(BinMaintenancePage.pickSeqError, "Please enter a pick sequence between 1-999.", "'Please enter a pick sequence between 1-999.' is present");
+        sendKeys(BinMaintenancePage.pickSequence, validVal, "Enter '" + validVal + "' into Pick Sequence text field");
+        click(button(" Save "), "Click [Save] Button");
+        Utility_Functions.timeWait(3);
+        commonObj.validateText(BinMaintenancePage.toaster, "zone updated successfully.", "'zone updated successfully.' message is present");
+        clickEditIcon(zoneName);
+        sendKeys(BinMaintenancePage.pickSequence, "100000");
+        sendKeys(BinMaintenancePage.pickSequence, inValidVal, "Enter '" + inValidVal + "' into Pick Sequence text field");
+        click(button(" Save "), "Click [Save] Button");
+        Utility_Functions.timeWait(4);
+        commonObj.validateText(BinMaintenancePage.toaster, "Error while updating Zone.", "'Error while updating Zone.' message is present");
     }
 
     /**
      * Keyword to Verify Pick sequence
      */
     public void verifyPickSequence() {
-        String zoneAvr = expandZone();
         String zoneName = Utility_Functions.xGetJsonData("zoneName");
-        clickEditIcon(zoneAvr);
+        clickEditIcon(zoneName);
         validatePickSeqField(zoneName, "1", "1000");
-        clearText(pickSequence(zoneName));
-        commonObj.validateText(BinMaintenancePage.pickSeqError, "Please enter a pick sequence between 1-999.", "'Please enter a pick sequence between 1-999.' is present");
-        validatePickSeqField(zoneName, "-1", "0");
+        validatePickSeqField(zoneName, "999", "0");
         validatePickSeqField(zoneName, "2.5", "#$%%FGH");
     }
 
@@ -1950,9 +1957,10 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, button("Back"), "Click on back button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("//h2"), "ITEM-BIN LEDGER", "Navigate back to 'ITEM-BIN LEDGER' Page");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.filterSearch, "Click Search icon");
+        //Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.filterSearch, "Click Search icon");
         Utility_Functions.timeWait(2);
         Utility_Functions.xClickHiddenElement(ownDriver, BinMaintenancePage.clearFilter);
+        Utility_Functions.timeWait(4);
         commonObj.validateText(tabs("Item Number is missing."), "Item Number is missing.", "'Item Number is missing.' message is present");
     }
 
