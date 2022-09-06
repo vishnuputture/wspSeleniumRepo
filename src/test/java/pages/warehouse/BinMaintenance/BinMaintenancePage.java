@@ -20,7 +20,7 @@ public class BinMaintenancePage {
     public static By createBinCondition = By.id("createBinCondition");
     public static By addSave = By.id("addSave");
     public static By addCancel = By.id("addCancel");
-    public static By pickSequence = By.id("PickSequence");
+    public static By pickSequence = By.id("pickSequence");
     public static By zoneName = By.id("zoneName");
     public static By zoneAbv = By.id("zoneAbv");
     public static By excelBtn = By.id("excelBtn");
@@ -59,6 +59,9 @@ public class BinMaintenancePage {
     public static By saveIcon = By.xpath("//i[@title='Save']");
     public static By getItemVal = By.xpath("//table[@role='grid']/descendant::th[contains(text(),'Bin Location')]/ancestor::thead/following-sibling::tbody/descendant::td");
     public static By zoneIdDropDown = By.xpath("//select[@name='zoneId']");
+    public static By pickingId=By.id("pickingId");
+    public static By receivingId=By.id("receivingId");
+    public static By zoneId=By.id("zoneId");
     public static By goToItemBinLedger = By.xpath("//a[@title='Go To Item Bin Ledger']");
     public static By createBinPopup = By.xpath("//h2[text()='Create Bin and Assign']");
 
@@ -91,6 +94,7 @@ public class BinMaintenancePage {
     public static By btnCancelCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Cancel')]");
     public static By btnSaveCreateNewBinpopup = By.xpath("//create-bin-component//button[contains(text(),'Create')]");
     public static By lstDropdownsCreateNewBinPopup = By.id("createBinCondition");
+    public static By selectDropValue=By.xpath("//label[@for='createBinCondition']/parent::div/select");
     public static By ddnZoneCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Zone')]//following-sibling::select");
     public static By ddnConditionCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Condition')]//following-sibling::select");
     public static By ddnReceivingCreateBinPopup = By.xpath("//create-bin-component//label[contains(text(),'Receiving')]//following-sibling::select");

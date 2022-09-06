@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Domain - Mobile Warehousing" parallel="none" thread-count="2">
-    <!--<test name="BinMaintenance">
+<suite name="Domain - Mobile Warehousing" parallel="tests" thread-count="2">
+    <test name="BinMaintenance">
 
         <classes>
             <class name="testcases.MobileWarehousing.BinMaintenance">
@@ -21,8 +21,8 @@
                     <include name="Tc_791_verifyPageCountItemMaintenance"></include>
                     <include name="Tc_793_verifyPaginationItemMaintenance"></include>
                     <include name="Tc_795_verifySelectAllCheckBox"></include>
-                    <include name="Tc_801_verifyLabelButton"></include>-->
-                   <!-- <include name="Tc_805_verifyItemDetailsMaster"></include>
+                    <include name="Tc_801_verifyLabelButton"></include>
+                    <include name="Tc_805_verifyItemDetailsMaster"></include>
                     <include name="Tc_808_verifyItemDetailsUI"></include>
                     <include name="Tc_809_verifyPaginationItemDetails"></include>
                     <include name="Tc_810_verifyPageCountItemDetails"></include>
@@ -41,7 +41,7 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
 
     <test name="BinMaintenance1">
 
