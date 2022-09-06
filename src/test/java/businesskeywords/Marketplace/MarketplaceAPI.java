@@ -133,15 +133,16 @@ public class MarketplaceAPI extends ReusableLib {
     public void postOrders(){
         RestAssured.baseURI = "https://extapiqa.winwholesale.com";
 
-        /*Response resp = given().auth().basic(jsonData.getData("UserId"), jsonData.getData("Password"))
+        Response resp = given().auth().basic(jsonData.getData("UserId"), jsonData.getData("Password"))
                 .header("consumer", jsonData.getData("UserId"))
                 .header("client_id", jsonData.getData("ClientId"))
                 .header("client_secret", jsonData.getData("ClientSecret"))
+                .header("Content-Type", "application/json")
                 .body(jsonData.getData("PayloadBody"))
-                .when().post("/marketplace/exp/v1/api/" + jsonData.getData("UserId") + "/taxCalculations")
+                .when().post("/marketplace/exp/v1/api/" + jsonData.getData("UserId") + "/orders")
                 .then().assertThat().statusCode(200).statusLine("HTTP/1.1 200 OK")
+                .body("message", equalTo("Order published successfully"))
                 .extract().response();
-
 
         if (resp.statusCode() == 200) {
             report.updateTestLogAPI("VerifyVal", "" + " Expected Response Body '" + resp.getBody().asString(), Status.PASS);
@@ -150,6 +151,6 @@ public class MarketplaceAPI extends ReusableLib {
         } else {
             report.updateTestLogAPI("VerifyVal", "" + " Expected Response Code '" + resp.getStatusCode() + "' is not matching With Response Code '" + 200 + "'",
                     Status.FAIL);
-        }*/
+        }
     }
 }
