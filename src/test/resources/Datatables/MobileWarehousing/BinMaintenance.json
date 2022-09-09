@@ -1,7 +1,7 @@
 {
   "Business_Flow": [
     {
-      "Tc_748_ItemBinMaintenanceUI": "navigateToBinMain,selectCompany,binMaintenanceUI",
+      "Tc_748_ItemBinMaintenanceUI": "getPassword,navigateToBinMain,selectCompany,binMaintenanceUI",
       "Tc_749_MainMenuOptions": "navigateToBinMain,selectCompany,verifyAvailMenuIcon",
       "Tc_753_verifyApplyClearAllFilter": "navigateToBinMain,selectCompany,verifyApplyClearAllFilter",
       "Tc_758_verifyFilterCheckBox": "navigateToBinMain,selectCompany,verifyExcludeAstJobZZ98Item",
@@ -33,7 +33,7 @@
       "Tc_836_verifyAddBinButton": "navigateToBinMain,selectCompany,filterSecAndNavBinMainDetails,verifyAddBinButton",
       "Tc_837_verifyDuplicateAddBin": "navigateToBinMain,selectCompany,filterSecAndNavBinMainDetails,verifyDuplicateAddBin",
       "Tc_857_ItemBinLedgerPageUI": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,itemBinLedgerPageUI",
-      "Tc_858_verifyZoneUI": "navigateToBinMain,selectCompany,navigateZonePage,verifyZoneUI",
+      "Tc_858_verifyZoneUI": "getPassword,navigateToBinMain,selectCompany,navigateZonePage,verifyZoneUI",
       "Tc_860_verifyApplyClearFilter": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyApplyClearFilter",
       "Tc_861_verifyItemNumberField": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyItemNumberField",
       "Tc_862_verifyNegItemNumberField": "navigateToBinMain,selectCompany,navigateItemBinLedgerPage,verifyNegItemNumberField",
@@ -278,7 +278,7 @@
     },
     {
       "TC_ID": "Tc_767_verifyCreateNewBinWithConditionGood",
-      "BinLocation": "TEST37906",
+      "BinLocation": "TEST107297",
       "BinCondition": "Good",
       "BinZones": "DEFAULT",
       "BinPicking": "Automatic",
@@ -290,7 +290,7 @@
     },
     {
       "TC_ID": "Tc_768_verifyCreateNewBinWithConditionDamaged",
-      "BinLocation": "TEST25319",
+      "BinLocation": "TEST68743",
       "BinCondition": "Damaged",
       "BinZones": "DEFAULT",
       "BinPicking": "Manual Picking & Staging",
@@ -302,7 +302,7 @@
     },
     {
       "TC_ID": "Tc_769_verifyCreateNewBinWithConditionDefective",
-      "BinLocation": "TEST39793",
+      "BinLocation": "TEST52793",
       "BinCondition": "Defective",
       "BinZones": "DEFAULT",
       "BinPicking": "Manual Picking & Staging",
@@ -336,7 +336,7 @@
     },
     {
       "TC_ID": "Tc_785_verifyBinWithoutItemsCanBeDeleted",
-      "BinLocation": "TEST97697",
+      "BinLocation": "TEST61948",
       "BinCondition": "Good",
       "BinZones": "DEFAULT",
       "BinPicking": "Automatic",

@@ -6,13 +6,12 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-import org.apache.tools.ant.taskdefs.Exec;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import pages.pricing.SalesOrders.SalesOrdersPage;
 import pages.common.MasterPage;
 import pages.inventory.ItemMasterPage;
+import pages.pricing.SalesOrders.SalesOrdersPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import pages.warehouse.DriversPage;
@@ -287,8 +286,6 @@ public class binMaintenance extends ReusableLib {
         Utility_Functions.timeWait(2);
         Boolean bl1 = ownDriver.findElement(BinMaintenancePage.itemNumberContains).isSelected();
         Utility_Functions.xAssertEquals(report, bl1, true, "After Click Clear All Filter, item Number Contains check box is enabled");
-        Utility_Functions.timeWait(2);
-        Utility_Functions.xAssertEquals(report, ownDriver.findElement(BinMaintenancePage.itemNumber).getAttribute("ng-reflect-model"), "~" + itemNumber, "");
     }
 
     /**
