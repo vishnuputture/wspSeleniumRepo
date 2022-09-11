@@ -1,0 +1,28 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_416_FixBusinessDaysUI": "navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysUI",
+      "Tc_417_FixBusinessDaysRecordUI": "navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysRecordUI",
+      "Tc_420_verifyCompanyNoAndName": "navigateToAr2WISE,navigateToFixBusinessDays,verifyCompanyNoAndName",
+      "Tc_421_verifySearchRecordUsingBusinessDays": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchRecordUsingBusinessDays",
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_416_FixBusinessDaysUI"
+    },
+    {
+      "TC_ID": "Tc_417_FixBusinessDaysRecordUI"
+    },
+    {
+      "TC_ID": "Tc_420_verifyCompanyNoAndName",
+      "specialCharacterCompanyN0": "@$%(*&",
+      "negativeCompanyNo": "-100",
+      "bankCompanyNo": "  ",
+      "invalidCompanyNo": "123456789"
+    },
+    {
+      "TC_ID": "Tc_421_verifySearchRecordUsingBusinessDays"
+    }
+  ]
+}
