@@ -532,7 +532,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         System.out.println(strPriceDate);
         codeGen();
         click(SelfServicePriceSheetPage.addPriceSheetbtn);
-        autoComplete(SelfServicePriceSheetPage.manufacturer, "koh", SelfServicePriceSheetPage.manufacturerList, jsonData.getData("Manufacturer"));
+        autoComplete(SelfServicePriceSheetPage.manufacturer, "kohl", SelfServicePriceSheetPage.manufacturerList, jsonData.getData("Manufacturer"));
         Utility_Functions.timeWait(5);
         System.out.println("DOne.....");
         sendKey(SelfServicePriceSheetPage.priceSheetName, name);
