@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 public class BinMaintenancePage {
 
     public static By itemMaintenanceTab = By.id("ui-tabpanel-0-label");
-    public static By onHand = By.id("ltgteg");
+    public static By onHand = By.xpath("//input[@name='searchTerm' and @id='ltgteg']");
     public static By itemNumberContains = By.id("itemNumberContains");
     public static By excludeAsteriskItems = By.id("excludeAsteriskItems");
     public static By includeJobItems = By.id("excludeJobItems");
@@ -48,7 +48,7 @@ public class BinMaintenancePage {
     public static By highlightRow = By.xpath("//tr[contains(@class,'ui-state-highlight')]");
     public static By toaster = By.xpath("//div[@class='ui-toast-summary']");
     public static By nSellable = By.id("sellable");
-    public static By primaryOpt = By.xpath("//select[@ng-reflect-model='Primary']");
+    public static By primaryOpt = By.xpath("//select");
     public static By secondaryOpt = By.xpath("//select[@ng-reflect-model='Secondary']");
     public static By temporaryOpt = By.xpath("//select[@ng-reflect-model='Temporary']");
     public static By deleteIcon = By.xpath("//i[@title='Delete']");

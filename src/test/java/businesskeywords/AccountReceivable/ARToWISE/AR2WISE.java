@@ -5,9 +5,12 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pages.AccountReceivable.AR2WISE.AR2WISEPage;
 import pages.common.MasterPage;
 import supportLibraries.Utility_Functions;
+
+import java.util.List;
 
 public class AR2WISE extends ReusableLib {
     CommonActions commonObj;
@@ -43,6 +46,14 @@ public class AR2WISE extends ReusableLib {
         return By.xpath("//button[text()='" + textName + "']");
     }
 
+    public By divTag(String text) {
+        return By.xpath("//div[text()='" + text + "']");
+    }
+
+    public By spanTag(String text) {
+        return By.xpath("//span[text()=\"" + text + "\"]");
+    }
+
     public By labelTag(String textName) {
         return By.xpath("//label[contains(text(),'" + textName + "')]");
     }
@@ -71,7 +82,7 @@ public class AR2WISE extends ReusableLib {
     public void fixBusinessDaysRecordUI() {
         selectCompany();
         String[] buttons = {" Customer Number ", " Customer Name ", " Invoice Number ", " Business Day ", " Document Type ", " Ship Date ", " Amount ", " Gross Margin Amount "};
-        for (String button : buttons){
+        for (String button : buttons) {
             commonObj.validateElementExists(buttonTag(button), "[" + button + "] is present");
         }
         commonObj.validateElementExists(AR2WISEPage.expandMinimize, "Expand-Hide Icon is present");
@@ -124,5 +135,120 @@ public class AR2WISE extends ReusableLib {
             Utility_Functions.xAssertEquals(report, businessDays, "0" + dropVal, "Validation matches");
         else
             Utility_Functions.xAssertEquals(report, businessDays, "" + dropVal, "Validation matches");
+    }
+
+    public void verifySearchError(String search) {
+        sendKeys(AR2WISEPage.searchAll, search, "Enter [" + search + "] into Search All text box");
+        if (!search.equals("  ")) {
+            commonObj.validateElementExists(divTag("0 of 0"), "No result found");
+            commonObj.validateText(AR2WISEPage.resultStatus, "Results hidden by '" + search + "' filter", "[Results hidden by '" + search + "' filter]");
+        } else {
+            commonObj.validateElementExists(By.xpath("//tr/td"), "For [Bank space] in [Search All] field Records are found");
+        }
+    }
+
+    public void verifySearchAllField() {
+        selectCompany();
+        for (int i = 1; i < 24; i++) {
+            selectBusinessDay(i);
+            if (!isDisplayed(AR2WISEPage.noResultFound)) {
+                break;
+            }
+        }
+        verifySearchError(jsonData.getData("searchSpecialCharacter"));
+        verifySearchError(jsonData.getData("searchNegative"));
+        verifySearchError(jsonData.getData("searchBank"));
+        verifySearchError(jsonData.getData("searchInvalid"));
+    }
+
+    public void searchResult(int index) {
+        String search = ownDriver.findElements(By.xpath("//tr/td")).get(index).getText();
+        if (search.contains("-")) {
+            String[] split = search.split("-");
+            sendKeys(AR2WISEPage.searchAll, split[0], "Enter [" + split[0] + "] into Search All Input Field");
+        } else {
+            sendKeys(AR2WISEPage.searchAll, search, "Enter [" + search + "] into Search All Input Field");
+        }
+        Utility_Functions.timeWait(3);
+        Utility_Functions.xAssertEquals(report, search, ownDriver.findElements(By.xpath("//tr/td")).get(index), "Validation matches [" + search + "]");
+    }
+
+    public void verifySearchResult() {
+        selectCompany();
+        for (int i = 0; i < 8; i++) {
+            if (i != 3 && i != 4) {
+                searchResult(i);
+            }
+        }
+        String search = ownDriver.findElements(By.xpath("//tr/td/preceding::select")).get(0).getAttribute("ng-reflect-model");
+        sendKeys(AR2WISEPage.searchAll, search, "Enter [" + search + "] into Search All Input Field");
+        Utility_Functions.xAssertEquals(report, search, ownDriver.findElements(By.xpath("//tr/td/preceding::select")).get(0).getAttribute("ng-reflect-model"), "Validation matches [" + search + "]");
+    }
+
+    public int itemCountSelect(String recordNo) {
+        Utility_Functions.timeWait(5);
+        Utility_Functions.xMouseClick(ownDriver, AR2WISEPage.arrowIcon);
+        try {
+            click(spanTag(recordNo), "Select [" + recordNo + "]");
+        } catch (Exception e) {
+            Utility_Functions.timeWait(4);
+            Utility_Functions.xMouseClick(ownDriver, By.xpath("//div[contains(@class,'mat-select-arrow-wrapper')]/div"));
+            click(spanTag(recordNo), "Select [" + recordNo + "]");
+        }
+        Utility_Functions.timeWait(2);
+        String[] records = getText(AR2WISEPage.totalRecords).split("of ");
+        int count = Integer.parseInt(records[1]);
+        commonObj.validateElementExists(By.xpath("//tr"), "Total records found [" + count + "] for " + recordNo + " option");
+        return count;
+    }
+
+    public void verifyItemPerPage() {
+        selectCompany();
+        itemCountSelect("10");
+        itemCountSelect("50");
+        itemCountSelect("90");
+        itemCountSelect("500");
+        itemCountSelect("1000");
+    }
+
+    public void verifyPagination() {
+        selectCompany();
+        int pageCount = itemCountSelect("10");
+        int sum = ownDriver.findElements(By.xpath("//tr")).size() - 1;
+        while (ownDriver.findElement(AR2WISEPage.nextPage).isEnabled()) {
+            Utility_Functions.xMouseClick(ownDriver, AR2WISEPage.nextPage);
+            int recordCount = ownDriver.findElements(By.xpath("//tr")).size() - 1;
+            sum = sum + recordCount;
+            try {
+                isDisplayed(ownDriver.findElement(AR2WISEPage.nextPage));
+            } catch (Exception e) {
+                click(AR2WISEPage.previousPage,"Verify Previous Arrow is enabled");
+                break;
+            }
+        }
+        Utility_Functions.xAssertEquals(report, sum, pageCount, "Count matches");
+    }
+
+    public void sortingCol(){
+        List<WebElement> ele=ownDriver.findElements(By.xpath("//tr/th"));
+        List<WebElement> els=ownDriver.findElements(By.xpath("//tr/td"));
+        int rowCount=ownDriver.findElements(By.xpath("//tr")).size();
+        int columnCount=ele.size();
+        for(int i=0;i<columnCount;i++){
+            click(ele.get(i),"Click ["+getText(AR2WISEPage.columnName).trim()+"]");
+            /*int j=0;
+            for(int k=j;k<rowCount;k++){
+                if(Integer.parseInt(els.get(i).getText().trim()Integer.parseInt(els.get(k+8).getText().trim())){
+                    j=k+8;
+                }else{
+
+                }
+            }*/
+        }
+    }
+
+    public void verifySortableColumn(){
+        selectCompany();
+        sortingCol();
     }
 }
