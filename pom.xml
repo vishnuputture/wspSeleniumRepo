@@ -90,7 +90,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<testNG.suiteXmlFile>src/test/resources/Suites/MasterXML/MasterXML.xml</testNG.suiteXmlFile>
+				<testNG.suiteXmlFile>src\test\resources\Suites\Demo\DemoSuite.xml</testNG.suiteXmlFile>
 			</properties>
 			<build>
 				<pluginManagement>

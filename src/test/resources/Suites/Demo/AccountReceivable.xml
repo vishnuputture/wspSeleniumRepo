@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Accounts Receivable" parallel="tests" thread-count="2">
+    <test name="MakePayment">
+        <classes>
+            <class name="testcases.AccountReceivable.makePayments">
+                <methods>
+                    <include name="Tc_CreateSalesOrderInvoice"></include>
+                    <include name="Tc_139_clickHere_Link_SchedulePage"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Misc Charges And Adjustments">
+        <classes>
+            <class name="testcases.AccountReceivable.MiscChargesAndAdjustments">
+                <methods>
+                    <include name="Tc_365_verifyUIMiscChargesAdjustmentsPage"></include>
+                    <include name="Tc_changeAutoInvoiceNo"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
