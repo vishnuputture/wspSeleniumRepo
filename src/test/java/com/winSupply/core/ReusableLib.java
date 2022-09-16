@@ -1357,6 +1357,7 @@ public abstract class ReusableLib {
             //wait for visibility
 
             waitForVisible(list);
+            Utility_Functions.timeWait(3);
             List<WebElement> listElm= helper.getGSDriver().findElements(list);
             for(int i=0;i<listElm.size();i++)
             {

@@ -3352,6 +3352,8 @@ public class Utility_Functions extends ReusableLib {
 
     public static void xSendkeysAndTab(WebElement el, String strVal) {
         xSendKeys(el, strVal);
+        Utility_Functions.timeWait(2);
+        el.click();
         el.sendKeys(Keys.TAB);
 
     }

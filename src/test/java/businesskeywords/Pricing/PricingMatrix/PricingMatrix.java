@@ -262,7 +262,7 @@ public class PricingMatrix extends ReusableLib {
         //String[] commonSet = {}
 
         for (int i = 0; i <= 1; i++) {
-            //click(PricingMatrixPage.btnF24,"Click on more buttons");
+            click(PricingMatrixPage.btnF24,"Click on more buttons");
             String[] buttonSet;
             if (i == 0) {
                 buttonSet = secondSet;
@@ -303,7 +303,7 @@ public class PricingMatrix extends ReusableLib {
     }
 
     public void validateDispList() {
-        //click(PricingMatrixPage.btnF24,"Click on more buttons");
+        click(PricingMatrixPage.btnF24,"Click on more buttons");
 
         String selectedRow = Utility_Functions.getText(ownDriver, PricingMatrixPage.firstRow);
 
