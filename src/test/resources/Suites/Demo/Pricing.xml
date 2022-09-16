@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Pricing" parallel="tests" thread-count="2">
-
-    <test name="MatrixCostUpdate">
-        <classes>
-            <class name="testcases.Pricing.MatrixCostUpdate" >
-                <methods>
-                    <include name="Tc_137_verify_Item_number_by_navigating_to_Item_Ledger"></include>
-                    <include name="Tc_142_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
-                    <include name="Tc_143_verify_ProposedMatrixCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
-                    <include name="Tc_168_verify_the_functionality_of_PO_Cost_and_Proposed_Matrix_Cost_box_and_Save_ButtonTc_154_verify_the_popup_message_when_user_switch_from_Average_Cost_to_Last_Cost"></include>
-                    <include name="Tc_145_verify_the_functionality_of_Update_Matrix_Cost_checkbox_and_radio_button"></include>
-                    <include name="Tc_140_verify_the_functionality_of_Select_Function_Drop_Down"></include>
-                    <include name="Tc_148_verify_the_functionality_of_Exclude_MC_Report_column_Radio_buttons"></include>
-                    <include name="Tc_149_verify_the_functionality_of_No_Action_column_Radio_buttons"></include>
-                    <include name="TC_177_verify_the_functionality_of_adding_a_Row_to_Pricing_Matrix"></include>
-                    <include name="TC_179_verify_the_functionality_of_copying_Row_to_Pricing_Matrix"></include>
-                    <include name="Tc_172_verify_POCost_values_and_its_update_on_Item_Master_when_Last_Cost_is_selected"></include>
-                    <include name="Tc_171_verify_POCost_values_and_its_update_on_Item_Master_when_Average_Cost_is_selected"></include>
-                    <include name="Tc_136_verify_the_navigation_UI_of_Matrix_Cost_Update_page"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
     <test name="PricingMatrix">
         <classes>
             <class name="testcases.Pricing.PricingMatrix" >
@@ -100,30 +78,6 @@
                 <methods>
                     <include name="Tc_286_SelfPriceSheetUi"></include>
                     <include name="TC_379_CreateValidPriceSheetWithoutNETPriceValue"></include>
-                    <include name="Tc_189_NavigatePriceSheetDetails"></include>
-                    <include name="Tc_363_FillPriceSheetAndSave"></include>
-                    <include name="Tc_360_PriceSheetOnHold"></include>
-                    <include name="Tc_360_PriceSheetRemoveHold"></include>
-                    <include name="Tc_367_PriceSheetMarkAsReady"></include>
-                    <include name="Tc_367_ValidatePriceSheetProcessed"></include>
-                    <include name="Tc_195_ValidatePriceSheetItemListCost"></include>
-                    <include name="Tc_196_ValidatePriceSheetItemMatrixCost"></include>
-                    <include name="Tc_197_ValidatePriceSheetItemPoCost"></include>
-                    <include name="Tc_344_VerifySearchByName"></include>
-                    <include name="Tc_344_VerifyFilterByManufacturer"></include>
-                    <include name="Tc_344_VerifyFilterByStatus"></include>
-                    <include name="Tc_344_VerifyFilterEffectiveDate"></include>
-                    <include name="Tc_399_VerifyListPriceInputField"></include>
-                    <include name="TC_408_CreateValidPriceSheetWithNETPriceValue"></include>
-                    <include name="Tc_753_ProcessNowSheetAvailableIngesting"></include>
-                    <include name="Tc_754_ProcessNowSheetReadyToProcessIngesting"></include>
-                    <include name="Tc_755_ProcessedNonEditable"></include>
-                    <include name="Tc_764_DeletePriceSheet"></include>
-                    <include name="Tc_767_ListPriceCal"></include>
-                    <include name="Tc_768_PoCostCal"></include>
-                    <include name="Tc_769_MatrixCostCal"></include>
-                    <include name="Tc_773_ProcessingErrorStatusNoIteNo"></include>
-                    <include name="Tc_774_SortByErrorFilter"></include>
                 </methods>
             </class>
         </classes>

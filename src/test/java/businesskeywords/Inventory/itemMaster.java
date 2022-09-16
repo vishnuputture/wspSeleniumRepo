@@ -196,7 +196,7 @@ public class itemMaster extends ReusableLib {
     }
 
     public By selectCodes(String text) {
-        return By.xpath("//div[@class='cell odd']/div[text()='" + text + "']");
+        return By.xpath("//div[contains(@class,'cell')]/div[text()='" + text + "']");
     }
 
     public void exitItemMaster() {
@@ -450,7 +450,10 @@ public class itemMaster extends ReusableLib {
         clearText(ItemMasterPage.poundStdPkg);
         sendKeysAndEnter(ItemMasterPage.poundStdPkg, jsonData.getData(poundStdPkg), "Enter [" + jsonData.getData(poundStdPkg) + "] into Pounds per Std Pkg:");
         String numberOnly = jsonData.getData(poundStdPkg).replaceAll("[^1-9]", "");
-        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkg, "value"), numberOnly + ".000", "");
+        if(poundStdPkg.equals("PoundsPerStdPkgDec"))
+            Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkg, "value"),   "."+numberOnly+"00", "");
+        else
+            Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkg, "value"), numberOnly + ".000", "");
         commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
     }
 
@@ -508,7 +511,10 @@ public class itemMaster extends ReusableLib {
         clearText(ItemMasterPage.poundStdPkgPur);
         sendKeysAndEnter(ItemMasterPage.poundStdPkgPur, jsonData.getData(poundStdPkg), "Enter [" + jsonData.getData(poundStdPkg) + "] into Pounds per Std Pkg:");
         String numberOnly = jsonData.getData(poundStdPkg).replaceAll("[^1-9]", "");
-        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkgPur, "value"), numberOnly + ".000", "");
+        if(poundStdPkg.equals("PoundsPerStdPkgDec"))
+            Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkgPur, "value"),   "."+numberOnly+"00", "");
+        else
+            Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.poundStdPkgPur, "value"), numberOnly + ".000", "");
         commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
     }
 
@@ -560,7 +566,7 @@ public class itemMaster extends ReusableLib {
         sendKeysAndEnter(ItemMasterPage.purchasingMax, jsonData.getData("PurchasingMax"), "Enter [" + jsonData.getData("PurchasingMax") + "] into Purchasing Max And Hit Enter");
         Utility_Functions.xAssertEquals(report, "Error - Maximum Quantity less than Minimun Quantity", getAttribute(ItemMasterPage.purchasingMin, "title"), "Error in Purchasing Min field");
         Utility_Functions.xAssertEquals(report, "Error - Maximum Quantity less than Minimun Quantity", getAttribute(ItemMasterPage.purchasingMax, "title"), "Error in Purchasing Max field");
-        sendKeysAndEnter(ItemMasterPage.purchasingMin, "" + (Integer.parseInt(jsonData.getData("PurchasingMin")) + 100) + "", "Enter [" + (Integer.parseInt(jsonData.getData("PurchasingMin")) + 100) + "] into Purchasing Max And Hit Enter");
+        sendKeysAndEnter(ItemMasterPage.purchasingMin, "" + (Integer.parseInt(jsonData.getData("PurchasingMin")) - 200) + "", "Enter [" + (Integer.parseInt(jsonData.getData("PurchasingMin")) + 100) + "] into Purchasing Max And Hit Enter");
         commonObj.validateText(InventoryReceiptsPage.growlText, "Fields have recently been changed=>VERIFY CHANGES!", "[Fields have recently been changed=>VERIFY CHANGES!] toaster is present");
     }
 
@@ -664,7 +670,7 @@ public class itemMaster extends ReusableLib {
         String expectedDesc = getText(ItemMasterPage.itemDetail).trim();
         click(linkIdEle("lnkABC"), "Click [ABC]");
         commonObj.validateText(ItemMasterPage.abcAbsoluteCalHeader, "ABC Absolute Calculations", "[ABC Absolute Calculations] header is present");
-        commonObj.validateText(ItemMasterPage.itemNumber, jsonData.getData("validItemNo"), "Item Number [" + jsonData.getData("validItemNo") + "] is present");
+        commonObj.validateText(ItemMasterPage.itemNumber1, jsonData.getData("validItemNo"), "Item Number [" + jsonData.getData("validItemNo") + "] is present");
         commonObj.validateText(ItemMasterPage.itemDescription, expectedDesc, "Item Description [" + expectedDesc + "] is present");
         click(SalesOrdersPage.btnCancel, "Click [F12=Cancel]");
     }
@@ -1104,18 +1110,18 @@ public class itemMaster extends ReusableLib {
      * Keyword to validate calculation of [Gross Margin %] field in ITEM MASTER (I-347)
      */
     public void vrfyGrossMarginCal() {
-        String listPriceText1 = getAttribute(ItemMasterPage.txtBoxListPrice, "value").trim();
-        String listPriceText = listPriceText1.replaceAll(",", "");
-        float listPrice = Float.parseFloat(listPriceText);
-
         String averagePriceText1 = getText(ItemMasterPage.lblAverage).trim();
         String averagePriceText = averagePriceText1.replaceAll(",", "");
         float averagePrice = Float.parseFloat(averagePriceText);
-
+        sendKeysAndEnter(ItemMasterPage.txtBoxListPrice,averagePriceText,"");
+        Utility_Functions.timeWait(3);
+        String listPriceText1 = getAttribute(ItemMasterPage.txtBoxListPrice, "value").trim();
+        String listPriceText = listPriceText1.replaceAll(",", "");
+        float listPrice = Float.parseFloat(listPriceText);
         float gm = ((listPrice - averagePrice) / listPrice) * 100;
         String grossMarginExpected = String.format("%.02f", gm);
 
-        String grossMarginActualText = getAttribute(ItemMasterPage.tbxGrossMargin, "value").trim();
+        String grossMarginActualText = "0"+getAttribute(ItemMasterPage.tbxGrossMargin, "value").trim();
         Utility_Functions.xAssertEquals(report, grossMarginExpected, grossMarginActualText, "Validating Gross Margin % value");
     }
 

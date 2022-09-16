@@ -76,6 +76,7 @@ public class createCost extends ReusableLib {
     }
 
     public void createAverageCostItem() {
+        Utility_Functions.timeWait(5);
         click(ItemMasterPage.addItemAction,"Click on add item");
         sendKeys(ItemMasterPage.txtBoxDescription,"testdesc1","Enter description");
         sendKeys(ItemMasterPage.txtBoxUOM,"EA","Enter UOM");
