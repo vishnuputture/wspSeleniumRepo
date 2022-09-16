@@ -18,16 +18,16 @@
                     <include name="Tc_961_SearchFilterRemainFunctionality"></include>
                     <include name="Tc_962_clearAllApplyFilterFunctionality"></include>
                     <include name="Tc_949_verifyItemNoInputField"></include>
-                     <include name="Tc_950_verifyItemDescriptionInputField"></include>
-                     <include name="Tc_951_verifyRemainingUI"></include>
-                     <include name="TC_CreatePOWithTwoLineItem"></include>
-                     <include name="Tc_965_ReceiveItemsStockPORFGun"></include>
+                    <include name="Tc_950_verifyItemDescriptionInputField"></include>
+                    <include name="Tc_951_verifyRemainingUI"></include>
+                    <include name="TC_CreatePOWithTwoLineItem"></include>
+                    <include name="Tc_965_ReceiveItemsStockPORFGun"></include>
                 </methods>
             </class>
         </classes>
     </test>
 
-   <test name="ReceivingInProcess1">
+    <test name="ReceivingInProcess1">
         <classes>
             <class name="testcases.MobileWarehousing.ReceivingInProcess">
                 <methods>
@@ -47,7 +47,7 @@
         </classes>
     </test>
 
-     <test name="ReceivingInProcess2">
+    <test name="ReceivingInProcess2">
         <classes>
             <class name="testcases.MobileWarehousing.ReceivingInProcess">
                 <methods>

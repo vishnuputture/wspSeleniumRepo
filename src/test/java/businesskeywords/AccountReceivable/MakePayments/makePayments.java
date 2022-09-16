@@ -1,29 +1,24 @@
 package businesskeywords.AccountReceivable.MakePayments;
 
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
-
-import commonkeywords.CommonActions;
-
 import com.winSupply.framework.selenium.FrameworkDriver;
+import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-
-import pages.AccountReceivable.makePayments.*;
-
+import org.openqa.selenium.WebElement;
+import pages.AccountReceivable.makePayments.InvoicePage;
+import pages.AccountReceivable.makePayments.MakeAPaymentPage;
+import pages.AccountReceivable.makePayments.MakePaymentLandingPage;
 import supportLibraries.Utility_Functions;
 
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class makePayments extends ReusableLib {
 
@@ -389,7 +384,7 @@ public class makePayments extends ReusableLib {
     public void makeSinglePaymentCC()
     {
         click(InvoicePage.supplierCheckBox);
-
+        click(By.xpath("//div[contains(text(),'Amt')]"));
         List<WebElement> invoiceCheckBoxCount = ownDriver.findElements(InvoicePage.invoiceCheckBox);
 
         for(int j=0;j<1;j++)
@@ -397,23 +392,24 @@ public class makePayments extends ReusableLib {
             int k=j+1;
             ownDriver.findElement(By.xpath("//div[contains(@class,'win-invoice-table-supplier-open-item')]"+"["+k+"]"+"//label")).click();
         }
-
+        String amt=getText(By.xpath("(//div[contains(@class,'item invoice-table')]/span)[2]"));
         click(InvoicePage.makePaymentBtn);
         Utility_Functions.timeWait(3);
         commonObj.validateText(MakeAPaymentPage.pageTitle,"Make a Payment","User navigated To Make a Payment Page");
         //     commonObj.validateText(MakeAPaymentPage.paymentAmount,"20.00","Amount Matches");
-
+        commonObj.validateText(By.xpath("//div/p/following-sibling::h2"),"$"+amt,"Total Amount: $"+amt);
         click(MakeAPaymentPage.cctab);
         click(MakeAPaymentPage.ccAccPay);
         click((MakeAPaymentPage.saveContinuebtn));
         Utility_Functions.timeWait(2);
+        commonObj.validateText(By.xpath("//p/span[contains(text(),'$"+amt+"')]"),"$"+amt,"Pay,ent Total: $"+amt);
         click(MakeAPaymentPage.submitPaymentbtn);
         Utility_Functions.timeWait(3);
         commonObj.validateText(MakeAPaymentPage.headerPaymentConfirmation,"Payment Confirmation","Payment Successful");
         scrollToView();
         String txt=ownDriver.findElement(MakeAPaymentPage.confirmationNumber).getText();
         Utility_Functions.xUpdateJson("MPInvoiceNumberCC",txt);
-
+        commonObj.validateText(By.xpath("//p/span[contains(text(),'$"+amt+"')]"),"$"+amt,"Pay,ent Total: $"+amt);
 
     }
 

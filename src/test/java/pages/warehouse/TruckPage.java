@@ -26,6 +26,7 @@ public class TruckPage {
     public static By saveBtnDis = By.xpath("//button[@disabled and contains(text(),'Save Truck')]");
     public static By pagination = By.xpath("//li[contains(@class,'pagination')]");
     public static By currentPage = By.id("currentPage");
+    public static By trash=By.xpath("//i[contains(@class,'fa fa-trash')]");
     public static By outOf = By.xpath("//span[@class='out-of']");
     public static By show = By.xpath("//span[@class='font-weight-bold']");
     public static By helpIcon = By.xpath("//a[contains(@href,'Help')]");
