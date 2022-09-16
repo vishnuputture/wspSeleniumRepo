@@ -14,16 +14,24 @@ public class AR2WISEPage extends ReusableLib {
     public static By btnOpenMenu = By.id("open");
     public static By menuTrnsctnExcptn = By.xpath("//a[text()='Transaction Exception']");
     public static By loaderIcon = By.xpath("//div[@class='loader ng-star-inserted']");
+    public static By txtNoResultsFound = By.xpath("//span[text()='No results found']");
+    public static By btnCollapse = By.xpath("//i[@class=\"fa fa-minus-square-o\"]");
+    public static By btnExpand = By.xpath("//i[@class=\"fa fa-plus-square-o\"]");
     public static By tbxCompany = By.id("typeahead-company");
     public static By ddnCompany = By.xpath("//ngb-typeahead-window/button");
     public static By tbxDate = By.xpath("//label[text()='Date']/following-sibling::div/input");
     public static By ddnDocumentType = By.xpath("//select[@name='document']");
+    public static By tbxSearchAll = By.xpath("//label[text()=' Search All ']/following-sibling::div/input");
     public static By thDocumentType = By.xpath("//th[text()='Document Type']");
     public static By lstDocumentTypeTable = By.xpath("//tr/td[5]/span");
     public static By lstResolveBtnTable = By.xpath("//i[contains(@class,'fa-check-circle-o pull-right')]");
     public static By lstStatusTable = By.xpath("//tr/td[6]//span[1]");
     public static By lstUnresolveBtnTable = By.xpath("//i[contains(@class,'fa-times pull-right')]");
     public static By lstViewBtnTable = By.xpath("//a[text()=' View']");
+    public static By lblItemsPerPage = By.xpath("//div[text()='Items per page:']");
+    public static By tbxPagination = By.xpath("//span[contains(@class,'mat-select-value-text')]/span");
+
+
 
 
 

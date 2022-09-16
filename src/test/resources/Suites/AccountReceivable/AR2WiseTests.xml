@@ -26,6 +26,10 @@
                     <include name="TC_467_VerifyUserCanChangeStatusOfMiscInventory"></include>
                     <include name="TC_469_VerifyViewHyperLinkForMiscInventory"></include>
                     <include name="TC_470_VerifyResolveRecordFromMiscInventoryWindow"></include>
+                    <include name="TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord"></include>
+                    <include name="TC_436_VerifyUIofTrnsctnExcptnLstWithRecord"></include>
+                    <include name="TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst"></include>
+                    <include name="TC_438_VerifyCompanyNameAndNumberField"></include>
 
                 </methods>
             </class>

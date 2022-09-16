@@ -16,8 +16,40 @@ public class AR2WISE extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify UI of Transaction Exception list without records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_434_VerifyUserCanChangeStatus(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test to verify user is able to change to Status");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_436_VerifyUIofTrnsctnExcptnLstWithRecord(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify UI of Transaction Exception list with records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the maximize and minimize functionality in Transaction Exception list page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_438_VerifyCompanyNameAndNumberField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Field verification for the 'Company Number and Name' field");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -166,6 +198,8 @@ public class AR2WISE extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+
 
 
 }

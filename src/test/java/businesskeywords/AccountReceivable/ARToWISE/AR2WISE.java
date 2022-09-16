@@ -5,6 +5,7 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.AccountReceivable.AR2WISE.AR2WISEPage;
 import supportLibraries.Utility_Functions;
@@ -54,6 +55,107 @@ public class AR2WISE extends ReusableLib {
         click(AR2WISEPage.btnOpenMenu, "Clicked open menu btn");
         click(AR2WISEPage.menuTrnsctnExcptn, "Click [Transaction Exception] menu");
         commonObj.validateText(AR2WISEPage.hdrTrnsctnExcptnList, "TRANSACTION EXCEPTION LIST", "Validating [TRANSACTION EXCEPTION LIST] page header");
+    }
+
+    /**
+     * Keyword to validate UI of [TRANSACTION EXCEPTION LIST] page
+     */
+    public void vrfyUIOfTrnctnExcptnLstPage(){
+        String[] labels = {"Company Number and Name", "Date", "Document Type", "Search All"};
+        for (int i=0; i< labels.length; i++){
+            commonObj.validateText(By.xpath("//label[contains(text(),'"+labels[i]+"')]"), labels[i], "Validating field [" + labels[i] + "]");
+        }
+        commonObj.validateElementExists(AR2WISEPage.tbxCompany, "Validating presence of [Company Number and Name] type-ahead textbox");
+        commonObj.validateElementExists(AR2WISEPage.tbxDate, "Validating presence of [Date] textbox");
+        commonObj.validateElementExists(AR2WISEPage.ddnDocumentType, "Validating presence of [Document Type] dropdown");
+        commonObj.validateElementExists(AR2WISEPage.tbxSearchAll, "Validating presence of [Search ALl] textbox");
+
+        List<String> docTypeOptionsActual = Utility_Functions.xgetDropdownOptionsAsList(ownDriver, AR2WISEPage.ddnDocumentType);
+        String[] docTypeOptionsExpected = {"Select one", "Non-Trade Payment", "Gross Margin Manager", "Non-Trade Invoices", "Inventory Adjustments", "Misc. Inventory Adjustments"};
+        for (int i=0; i< docTypeOptionsExpected.length; i++){
+            Utility_Functions.xAssertEquals(report, docTypeOptionsExpected[i], docTypeOptionsActual.get(i).trim(), "Validating [Document Type] options");
+        }
+    }
+
+    /**
+     * Keyword to select company
+     */
+    public void vrfyCompanyNameAndNumber(){
+        String[] invalidValues = jsonData.getData("InvalidData").split(",");
+        for (int i=0; i<invalidValues.length; i++){
+            sendKeysAndTab(AR2WISEPage.tbxCompany, invalidValues[i], "Enter invalid data in [Company Number and Name] textbox");
+            Utility_Functions.timeWait(1);
+            String color = getElement(AR2WISEPage.tbxCompany).getCssValue("border-color");
+            Utility_Functions.xAssertEquals(report, "rgb(204, 0, 0)", color, "Verify border color after entering - "+invalidValues[i]+" in [Company Number and Name] textbox");
+        }
+        String company = jsonData.getData("Company");
+        sendKeysAndTab(AR2WISEPage.tbxCompany, company, "Enter valid data in [Company Number and Name] textbox");
+        Utility_Functions.timeWait(1);
+        String color = getElement(AR2WISEPage.tbxCompany).getCssValue("border-color");
+        Utility_Functions.xAssertEquals(report, "rgb(204, 204, 204)", color, "Verify border color after entering - "+company+" in [Company Number and Name] textbox");
+    }
+
+    /**
+     * Keyword to validate collapse functionality in [TRANSACTION EXCEPTION LIST] page
+     */
+    public void vrfyCollapse() {
+        commonObj.validateElementExists(AR2WISEPage.btnCollapse, "Validating presence of [Collapse] button");
+        click(AR2WISEPage.btnCollapse, "Clicking on [Collapse] button");
+        commonObj.validateElementExists(AR2WISEPage.btnExpand, "Validating presence of [Expand] button");
+
+        boolean flag = false;
+        String[] labels = {"Company Number and Name", "Date", "Document Type", "Search All"};
+        for (int i=0; i< labels.length; i++){
+            flag = waitForElementDisappear(By.xpath("//label[contains(text(),'"+labels[i]+"')]"), 1);
+        }
+        flag = waitForElementDisappear(AR2WISEPage.tbxCompany, 1);
+        flag = waitForElementDisappear(AR2WISEPage.tbxDate, 1);
+        flag = waitForElementDisappear(AR2WISEPage.ddnDocumentType, 1);
+        flag = waitForElementDisappear(AR2WISEPage.tbxSearchAll, 1);
+
+        if (flag)
+            report.updateTestLog("Verify filters are hidden", "Verify filters are hidden",Status.PASS);
+        else
+            report.updateTestLog("Verify filters are hidden", "Verify filters are hidden",Status.FAIL);
+
+        commonObj.validateText(AR2WISEPage.txtNoResultsFound, "No results found", "Validating [No results found] text");
+    }
+
+    /**
+     * Keyword to Collapse filters
+     */
+    public void collapse(){
+        commonObj.validateElementExists(AR2WISEPage.btnCollapse, "Validating presence of [Collapse] button");
+        click(AR2WISEPage.btnCollapse, "Clicking on [Collapse] button");
+        commonObj.validateElementExists(AR2WISEPage.btnExpand, "Validating presence of [Expand] button");
+    }
+
+    /**
+     * Keyword to validate Expand functionality in [TRANSACTION EXCEPTION LIST] page
+     */
+    public void vrfyExpand() {
+        commonObj.validateElementExists(AR2WISEPage.btnExpand, "Validating presence of [Expand] button");
+        click(AR2WISEPage.btnExpand, "Clicking on [Expand] button");
+        commonObj.validateElementExists(AR2WISEPage.btnCollapse, "Validating presence of [Collapse] button");
+        vrfyUIOfTrnctnExcptnLstPage();
+    }
+
+    /**
+     * Keyword to Expand filters
+     */
+    public void expand(){
+        commonObj.validateElementExists(AR2WISEPage.btnExpand, "Validating presence of [Expand] button");
+        click(AR2WISEPage.btnExpand, "Clicking on [Expand] button");
+        commonObj.validateElementExists(AR2WISEPage.btnCollapse, "Validating presence of [Collapse] button");
+    }
+
+    /**
+     * Keyword to enter company details with Date and Doc Type
+     */
+    public void enterCompanyData(){
+        selectCompanyNumberAndName();
+        selectDate();
+        selectDocType();
     }
 
     /**
@@ -354,6 +456,15 @@ public class AR2WISE extends ReusableLib {
         Utility_Functions.xHighlight(ownDriver, lstStatus.get(index), "green");
         commonObj.validateContainsText("Resolved - "+date, newStatus, "Validating status after clicking on [Resolve] button");
     }
+
+    /**
+     * Keyword to validate pagination label and default value
+     */
+    public void vrfyPagination() {
+        commonObj.validateText(AR2WISEPage.lblItemsPerPage, "Items per page:", "Validating [Items per page:] pagination label");
+        commonObj.validateText(AR2WISEPage.tbxPagination, "1000", "Validating pagination is default set to 1000");
+    }
+
 
 
 
