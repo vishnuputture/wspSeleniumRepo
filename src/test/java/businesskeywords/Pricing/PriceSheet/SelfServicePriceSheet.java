@@ -7,6 +7,7 @@ import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.Purchasing.SPO.SpoPage;
@@ -204,7 +205,10 @@ public class SelfServicePriceSheet extends ReusableLib {
     public void validateUpload() {
         String strdate = generateDate();
         Utility_Functions.timeWait(4);
+
         commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
+        ownDriver.navigate().refresh();
+        Utility_Functions.timeWait(3);
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataName, Utility_Functions.xGetJsonData("priceSheetName"), "Name Matched");
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataManufacturer, jsonData.getData("Manufacturer"), "Manufacturer Matched");
         commonObj.validateText(SelfServicePriceSheetPage.uploadedDataStatus, "available", "Status Matched");
@@ -323,7 +327,12 @@ public class SelfServicePriceSheet extends ReusableLib {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strPriceDate = formatter.format(dt);
         Utility_Functions.timeWait(3);
+        //WebElement l = ownDriver.findElement(PriceSheetDetails.processedDate);
+        //((JavascriptExecutor) ownDriver.getWebDriver()).executeScript("arguments[0].value='"+strPriceDate+"'"+";", l);
         Utility_Functions.xSendkeysAndTab(ownDriver.findElement(PriceSheetDetails.processedDate), strPriceDate);
+        //Utility_Functions.timeWait(2);
+        //l.click();
+       //l.sendKeys(Keys.TAB);
     }
 
     public void markReady() {
