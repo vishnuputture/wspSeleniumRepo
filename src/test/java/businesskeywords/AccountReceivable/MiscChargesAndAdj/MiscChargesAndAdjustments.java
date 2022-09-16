@@ -1,4 +1,4 @@
-package businesskeywords.AccountReceivable;
+package businesskeywords.AccountReceivable.MiscChargesAndAdj;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
