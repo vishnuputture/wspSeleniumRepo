@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Marketplace" parallel="tests" thread-count="2">
+    <test name="Marketplace API">
+        <classes>
+            <class name="testcases.Marketplace.MarketplaceAPI">
+                <methods>
+                    <include name="Tc_API_validateWiseAccount"></include>
+                    <include name="Tc_API_validateLocalCompany"></include>
+                    <include name="Tc_API_validateInventory"></include>
+                    <include name="Tc_API_validatePricing"></include>
+                    <include name="Tc_API_validateTax"></include>
+                    <include name="Tc_API_validateOrders"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
