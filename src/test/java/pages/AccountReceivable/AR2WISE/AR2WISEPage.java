@@ -15,10 +15,10 @@ public class AR2WISEPage extends ReusableLib {
     public static By menuTrnsctnExcptn = By.xpath("//a[text()='Transaction Exception']");
     public static By loaderIcon = By.xpath("//div[@class='loader ng-star-inserted']");
     public static By txtNoResultsFound = By.xpath("//span[text()='No results found']");
-    public static By btnCollapse = By.xpath("//i[@class=\"fa fa-minus-square-o\"]");
-    public static By btnExpand = By.xpath("//i[@class=\"fa fa-plus-square-o\"]");
+    public static By btnCollapse = By.xpath("//i[@class='fa fa-minus-square-o']");
+    public static By btnExpand = By.xpath("//i[@class='fa fa-plus-square-o']");
     public static By tbxCompany = By.id("typeahead-company");
-    public static By ddnCompany = By.xpath("//ngb-typeahead-window/button");
+    public static By lstCompanyDdnOptions = By.xpath("//win-company-typeahead//button/ngb-highlight");
     public static By tbxDate = By.xpath("//label[text()='Date']/following-sibling::div/input");
     public static By ddnDocumentType = By.xpath("//select[@name='document']");
     public static By tbxSearchAll = By.xpath("//label[text()=' Search All ']/following-sibling::div/input");
@@ -30,10 +30,22 @@ public class AR2WISEPage extends ReusableLib {
     public static By lstViewBtnTable = By.xpath("//a[text()=' View']");
     public static By lblItemsPerPage = By.xpath("//div[text()='Items per page:']");
     public static By tbxPagination = By.xpath("//span[contains(@class,'mat-select-value-text')]/span");
+    public static By ddnItemsPerPage = By.xpath("//mat-select//div[contains(@class,'mat-select-arrow-wrapper')]");
+    public static By btnPaginationNext = By.xpath("//button[contains(@class,'mat-paginator-navigation-next')]");
+    public static By btnPaginationPrevious = By.xpath("//button[contains(@class,'mat-paginator-navigation-previous')]");
+    public static By txtPaginatorRange = By.xpath("//div[@class='mat-paginator-range-label']");
+    public static By txtResultsHidden = By.xpath("//span[@class='row text-lg-center']");
 
 
+    /************************************************ Table elements ************************************************/
 
-
+    public static By thDate = By.xpath("//button[text()=' Date ']/../..");
+    public static By thDescription = By.xpath("//button[text()=' Description ']/../..");
+    public static By thStatus = By.xpath("//button[text()=' Status ']/../..");
+    public static By lstDateColValue = By.xpath("//td[contains(@class,'mat-column-date')]");
+    public static By lstAmountColValue = By.xpath("//td[contains(@class,'mat-column-amount')]");
+    public static By lstDescriptionColValue = By.xpath("//td[contains(@class,'mat-column-explanation')]/span");
+    public static By lstStatusColValue = By.xpath("//td[contains(@class,'mat-column-status')]/div/div/span[1]");
 
     /************************************************ Non-Trade Payment popup elements ************************************************/
 
@@ -61,7 +73,5 @@ public class AR2WISEPage extends ReusableLib {
     public static By hdrInvAdjWindow = By.xpath("//h2[text()=' Inventory Adjustments ']");
     public static By lstInvAdjFieldsFirstSet = By.xpath("//h2[text()=' Inventory Adjustments ']/following-sibling::div[1]//strong");
     public static By lstInvAdjFieldsScndSet = By.xpath("//h2[text()=' Inventory Adjustments ']/following-sibling::div[2]//strong");
-
-
 
 }

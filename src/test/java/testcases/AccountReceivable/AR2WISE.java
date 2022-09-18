@@ -56,6 +56,46 @@ public class AR2WISE extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_442_VerifySortableColumnOfTrnsctnExcptnLst(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the sortable columns in TRANSACTION EXCEPTION LIST page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_443_VerifySearchCompanyNumberAndName(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify user is able to search Company Number and name");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_446_VerifyCompanyTypeaheadOptions(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify related suggestions are displayed on searching company name");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_447_VrfySearchResultsUsingDateAmountDescription(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify user can search the results using Date, Amount and Description");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_448_DateFieldVerification(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify Field Verification for 'Date' field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_450_VerifyViewHyperLink(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test to verify the functionality of the View hyperlink");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -88,6 +128,14 @@ public class AR2WISE extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_454_VerifyItemsPerPage(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify user can change 'Items per page' ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_456_VerifyViewHyperLinkForGMMR(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test to verify the functionality of the View hyperlink for Gross Margin Manager records");
         CoreScript coreScript = new CoreScript(testParameters);
@@ -98,6 +146,14 @@ public class AR2WISE extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_457_VerifyResolveRecordFromGMMRWindow(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test to verify that user can resolve the record from Gross Margin Manager pop-up");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_458_VerifyPagination(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify Pagination in TRANSACTION EXCEPTION LIST page");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -199,7 +255,37 @@ public class AR2WISE extends TestConfigurations {
         tearDownTestRunner(testParameters, coreScript);
     }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_471_SearchAllTbxFieldVerification(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can resolve the record from Misc. Inventory Adjustments pop-up");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_476_VrfyNoRecoordsMsgForValidCombi(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify when no records are present for the valid combination of company , date and document type");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_485_VrfyResultsWhenDocTypeIsChanged(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the search results when a document type is changed but company number/name and date are maintained as it is");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_486_VrfyResultsWhenDateIsChanged(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the search results when the date is changed but company number/name and document type is maintained as it is");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 
 
 }
