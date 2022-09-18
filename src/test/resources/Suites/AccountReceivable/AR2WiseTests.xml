@@ -13,6 +13,7 @@
                     <include name="TC_438_VerifyCompanyNameAndNumberField"></include>
                     <include name="TC_442_VerifySortableColumnOfTrnsctnExcptnLst"></include>
                     <include name="TC_443_VerifySearchCompanyNumberAndName"></include>
+                    <include name="TC_446_VerifyCompanyTypeaheadOptions"></include>
                 </methods>
             </class>
         </classes>
@@ -21,7 +22,6 @@
         <classes>
             <class name="testcases.AccountReceivable.AR2WISE">
                 <methods>
-                    <include name="TC_446_VerifyCompanyTypeaheadOptions"></include>
                     <include name="TC_447_VrfySearchResultsUsingDateAmountDescription"></include>
                     <include name="TC_448_DateFieldVerification"></include>
                     <include name="TC_450_VerifyViewHyperLink"></include>
@@ -29,6 +29,8 @@
                     <include name="TC_432_VerifyUserCanViewGrossMarginManagerRecords"></include>
                     <include name="TC_453_VerifyUserCanChangeStatusOfGMMR"></include>
                     <include name="TC_454_VerifyItemsPerPage"></include>
+                    <include name="TC_456_VerifyViewHyperLinkForGMMR"></include>
+                    <include name="TC_457_VerifyResolveRecordFromGMMRWindow"></include>
                 </methods>
             </class>
         </classes>
@@ -37,14 +39,15 @@
         <classes>
             <class name="testcases.AccountReceivable.AR2WISE">
                 <methods>
-                    <include name="TC_456_VerifyViewHyperLinkForGMMR"></include>
-                    <include name="TC_457_VerifyResolveRecordFromGMMRWindow"></include>
                     <include name="TC_458_VerifyPagination"></include>
                     <include name="TC_439_VerifyUserCanViewNonTradeInvoices"></include>
                     <include name="TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices"></include>
                     <include name="TC_461_VerifyViewHyperLinkForNonTradeInvoices"></include>
                     <include name="TC_462_VerifyResolveRecordFromNTIWindow"></include>
                     <include name="TC_440_VerifyUserCanViewInventoryAdjustmentRecords"></include>
+                    <include name="TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments"></include>
+                    <include name="TC_465_VerifyViewHyperLinkForInventoryAdjustments"></include>
+                    <include name="TC_466_VerifyResolveRecordFromInvAdjWindow"></include>
                 </methods>
             </class>
         </classes>
@@ -53,22 +56,11 @@
         <classes>
             <class name="testcases.AccountReceivable.AR2WISE">
                 <methods>
-                    <include name="TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments"></include>
-                    <include name="TC_465_VerifyViewHyperLinkForInventoryAdjustments"></include>
-                    <include name="TC_466_VerifyResolveRecordFromInvAdjWindow"></include>
                     <include name="TC_441_VerifyUserCanViewMiscInventoryRecords"></include>
                     <include name="TC_467_VerifyUserCanChangeStatusOfMiscInventory"></include>
                     <include name="TC_469_VerifyViewHyperLinkForMiscInventory"></include>
                     <include name="TC_470_VerifyResolveRecordFromMiscInventoryWindow"></include>
                     <include name="TC_471_SearchAllTbxFieldVerification"></include>
-                </methods>
-            </class>
-        </classes>
-    </test>
-    <test name="Transaction Exception List5">
-        <classes>
-            <class name="testcases.AccountReceivable.AR2WISE">
-                <methods>
                     <include name="TC_476_VrfyNoRecoordsMsgForValidCombi"></include>
                     <include name="TC_485_VrfyResultsWhenDocTypeIsChanged"></include>
                     <include name="TC_486_VrfyResultsWhenDateIsChanged"></include>
