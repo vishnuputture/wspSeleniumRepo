@@ -277,7 +277,8 @@ public class QtestAPIHandler {
 		RequestSpecification request = RestAssured.given();
 		request.config(RestAssured.config()
 				.encoderConfig(encoderConfig().encodeContentTypeAs("application/png", ContentType.BINARY)));
-		request.header("Authorization", "Bearer " + "16fe9baa-2f24-4dd7-9736-cd5ab9b9db63");
+		//request.header("Authorization", "Bearer " + "16fe9baa-2f24-4dd7-9736-cd5ab9b9db63");
+		request.header("Authorization", "Bearer " + accessToken);
 		request.header("Content-Type", "application/png");
 		request.header("File-Name", fileName);
 		request.body(binaryImage);
