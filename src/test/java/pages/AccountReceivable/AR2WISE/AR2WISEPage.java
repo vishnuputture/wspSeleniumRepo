@@ -31,4 +31,8 @@ public class AR2WISEPage extends ReusableLib {
     public static By nextPage=By.xpath("//button[@ng-reflect-disabled='false' and @aria-label='Next page']/span");
     public static By previousPage=By.xpath("//button[@ng-reflect-disabled='false' and @aria-label='Previous page']/span");
     public static By columnName=By.xpath("//tr/th/preceding::button");
+    public static By castReceipt=By.xpath("//a[text()=' Cash Receipts ']");
+    public static By journalType=By.id("journalType");
+    public static By glAccountNumber=By.id("glAccountNumber");
+    public static By datePick=By.id("date");
 }

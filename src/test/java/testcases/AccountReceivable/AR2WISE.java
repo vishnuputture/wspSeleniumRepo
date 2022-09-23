@@ -78,4 +78,92 @@ public class AR2WISE extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_428_verifyMinMaximize(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that search results can be minimized or expanded using '-' and '+' icons");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_374_VerifyCreationOfCreditMemo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify creation of credit memo");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_429_verifyCreditMemo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user created credit memo, debit memo or invoice ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_375_VerifyCreationOfDebitMemo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test Case to verify creation of debit memo");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_429_verifyDebitMemo(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user created credit memo, debit memo or invoice");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_480_verifyARGLDetailInquiryUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify UI of A/R G/L detail inquiry page without records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_481_verifyARGLDetailInquiryRecordsUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify UI of A/R G/L detail inquiry page with records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_495_verifyMinMaximizeARGL(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that the header section fields can be expanded or collapsed using maximize and minimize button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_489_verifyCompanyNoAndNameARGL(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the field verification for the 'Company Number and Name' field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_490_verifyEditDateField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the user is able to edit the date field in the format MM/YYYY");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_497_verifyDateField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the range of values accepted by 'Date' field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

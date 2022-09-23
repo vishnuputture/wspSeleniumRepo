@@ -58,6 +58,10 @@ public class AR2WISE extends ReusableLib {
         return By.xpath("//label[contains(text(),'" + textName + "')]");
     }
 
+    public By pTag(String text){
+        return By.xpath("//p[text()='"+text+"']");
+    }
+
     public void navigateToFixBusinessDays() {
         click(AR2WISEPage.openMenu, "CLick Open Menu Icon");
         click(anchorTag("Fix Business Days"));
@@ -74,8 +78,8 @@ public class AR2WISE extends ReusableLib {
 
     public void selectCompany() {
         Utility_Functions.timeWait(3);
-        sendKeys(AR2WISEPage.winLabel, "99599", "Enter [99599] into Company Number and Name text box");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, AR2WISEPage.dropDownSearchResult, "click [99599 - Automation Test Co.]");
+        sendKeys(AR2WISEPage.winLabel, jsonData.getData("companyName"), "Enter ["+jsonData.getData("companyName")+"] into Company Number and Name text box");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//ngb-highlight[contains(@ng-reflect-result,'"+jsonData.getData("companyName")+"')]"), "click "+jsonData.getData("companyName"));
         Utility_Functions.timeWait(4);
     }
 
@@ -89,7 +93,7 @@ public class AR2WISE extends ReusableLib {
     }
 
     public void verifyError(String companyNo) {
-        sendKeys(AR2WISEPage.winLabel, companyNo, "Enter [" + companyNo + "] into Company Number and Name text box");
+        sendKeysAndTab(AR2WISEPage.winLabel, companyNo, "Enter [" + companyNo + "] into Company Number and Name text box");
         commonObj.validateElementExists(AR2WISEPage.invalidCompany, "Error field present");
     }
 
@@ -156,7 +160,6 @@ public class AR2WISE extends ReusableLib {
             }
         }
         verifySearchError(jsonData.getData("searchSpecialCharacter"));
-        verifySearchError(jsonData.getData("searchNegative"));
         verifySearchError(jsonData.getData("searchBank"));
         verifySearchError(jsonData.getData("searchInvalid"));
     }
@@ -206,7 +209,6 @@ public class AR2WISE extends ReusableLib {
         selectCompany();
         itemCountSelect("10");
         itemCountSelect("50");
-        itemCountSelect("90");
         itemCountSelect("500");
         itemCountSelect("1000");
     }
@@ -222,20 +224,20 @@ public class AR2WISE extends ReusableLib {
             try {
                 isDisplayed(ownDriver.findElement(AR2WISEPage.nextPage));
             } catch (Exception e) {
-                click(AR2WISEPage.previousPage,"Verify Previous Arrow is enabled");
+                click(AR2WISEPage.previousPage, "Verify Previous Arrow is enabled");
                 break;
             }
         }
         Utility_Functions.xAssertEquals(report, sum, pageCount, "Count matches");
     }
 
-    public void sortingCol(){
-        List<WebElement> ele=ownDriver.findElements(By.xpath("//tr/th"));
-        List<WebElement> els=ownDriver.findElements(By.xpath("//tr/td"));
-        int rowCount=ownDriver.findElements(By.xpath("//tr")).size();
-        int columnCount=ele.size();
-        for(int i=0;i<columnCount;i++){
-            click(ele.get(i),"Click ["+getText(AR2WISEPage.columnName).trim()+"]");
+    public void sortingCol() {
+        List<WebElement> ele = ownDriver.findElements(By.xpath("//tr/th"));
+        List<WebElement> els = ownDriver.findElements(By.xpath("//tr/td"));
+        int rowCount = ownDriver.findElements(By.xpath("//tr")).size();
+        int columnCount = ele.size();
+        for (int i = 0; i < columnCount; i++) {
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("(//tr/th)[" + i + "]"), "Click [" + getText(AR2WISEPage.columnName).trim() + "]");
             /*int j=0;
             for(int k=j;k<rowCount;k++){
                 if(Integer.parseInt(els.get(i).getText().trim()Integer.parseInt(els.get(k+8).getText().trim())){
@@ -247,8 +249,134 @@ public class AR2WISE extends ReusableLib {
         }
     }
 
-    public void verifySortableColumn(){
+    public void verifySortableColumn() {
         selectCompany();
         sortingCol();
+    }
+
+    public void verifyMinMaximize() {
+        selectCompany();
+        click(AR2WISEPage.expandMinimize, "CLick Expand/Hide icon");
+        try {
+            click(By.xpath("//label[text()='Company Number and Name']"));
+            throw new Exception("Expand/Hide icon is not working");
+        } catch (Exception e) {
+            commonObj.validateText(AR2WISEPage.headerTitle, "fix business day", "[Company Number and Name, Business Day, Search All] is minimized");
+        }
+        click(AR2WISEPage.headerTitle, "CLick Expand/Hide icon");
+        click(By.xpath("//label[text()='Company Number and Name']"));
+    }
+
+    public By labelField(String text){
+        return By.xpath("//label[contains(text(),'"+text+"')]/parent::div/div/input");
+    }
+
+    public void verifyCreditDebitMemo(){
+        selectCompany();
+        String invoiceNo[]=Utility_Functions.xGetJsonData("InvoiceNumber").split("-");
+        sendKeys(labelField("Search All"),invoiceNo[0],"Enter invoice No. ["+invoiceNo[0]+"] into Search All field");
+        commonObj.validateElementExists(By.xpath("//td[contains(text(),'"+invoiceNo[0]+"')]"),"Invoice Number exist "+invoiceNo[0]);
+        commonObj.validateElementExists(By.xpath("//span[contains(text(),'"+jsonData.getData("memo")+"')]"),"Document type exist "+jsonData.getData("memo"));
+        String currentDate=Utility_Functions.getCurrentDate();
+        commonObj.validateElementExists(By.xpath("//td[contains(text(),'"+currentDate+"')]"),"Ship Date exist "+currentDate);
+    }
+
+    public void verifyARGLDetailInquiryUI(){
+        String[] labels = {"Company Number and Name", "Journal Type", "GL Account Number","Date","Search All"};
+        for (String label : labels) {
+            commonObj.validateElementExists(labelTag(label), "[" + label + "] label is present");
+        }
+        String[] actions={"ACTIONS","TOTALS","GL Account:  | Total: "};
+        for (String action : actions) {
+            commonObj.validateElementExists(pTag(action), "[" + action + "] Action label is present");
+        }
+        commonObj.validateElementExists(AR2WISEPage.castReceipt, "[Cash Receipt] label is present");
+    }
+
+    public void selectJournalType(){
+        String[] journalTypes={"ARJ","NTR","CRJ"};
+        for(String journalType:journalTypes){
+            Utility_Functions.xSelectDropdownByName(ownDriver,AR2WISEPage.journalType,journalType);
+            Utility_Functions.timeWait(5);
+            if(!isDisplayed(spanTag("No results found"))){
+                break;
+            }
+        }
+    }
+
+    public void glAccount(){
+        String account=getAttribute(AR2WISEPage.glAccountNumber,"ng-reflect-model");
+        commonObj.validateElementExists(By.xpath("//p[text()='GL Account: "+account+" | Total: ']"),"GL Account matches");
+        Utility_Functions.timeWait(2);
+        int rowCount=ownDriver.findElements(By.xpath("//tr")).size()-1;
+        commonObj.validateElementExists(By.xpath("//span/strong[text()=' "+rowCount+"']"),"Row count matches");
+        commonObj.validateElementExists(By.xpath("//div[text()='1 - "+rowCount+" of "+rowCount+"']"),"Pagination count matches");
+    }
+
+    public void totalAmount(){
+        int count=ownDriver.findElements(By.xpath("//td")).size();
+        double sum=0;
+        for(int i=3;i<count-1; ){
+            String amt=ownDriver.findElements(By.xpath("//td")).get(i).getText().trim().replace(",","");
+            if(amt.contains("CR")){
+                amt=amt.replace("CR","");
+            }
+            double amount=Double.parseDouble(amt);
+            sum=sum+amount;
+            i=i+6;
+        }
+        commonObj.validateElementExists(By.xpath("//span/strong[text()=' "+sum+"']"),"Total Amount matches");
+    }
+
+    public void getCompanyAndJournal(){
+        selectCompany();
+        selectJournalType();
+    }
+
+    public void verifyARGLDetailInquiryRecordsUI(){
+        getCompanyAndJournal();
+        glAccount();
+        totalAmount();
+        String[] buttons = {" Customer ", " Date ", " Reference ", " Amount ", " User ", " Business Day "};
+        for (String button : buttons) {
+            commonObj.validateElementExists(buttonTag(button), "[" + button + "] is present");
+        }
+        commonObj.validateElementExists(AR2WISEPage.expandMinimize, "Expand-Hide Icon is present");
+        commonObj.validateElementExists(buttonTag(" Export to Excel "),"[Export to Excel] button is present");
+    }
+
+    public void verifyMinMaximizeARGL() {
+        selectCompany();
+        click(AR2WISEPage.expandMinimize, "CLick Expand/Hide icon");
+        try {
+            click(By.xpath("//label[text()='Company Number and Name']"));
+            throw new Exception("Expand/Hide icon is not working");
+        } catch (Exception e) {
+            commonObj.validateText(AR2WISEPage.headerTitle, "A/R G/L DETAIL INQUIRY", "[Company Number and Name, Journal Type, GL Account Number, Date, Search All] is minimized");
+        }
+        click(AR2WISEPage.headerTitle, "CLick Expand/Hide icon");
+        click(By.xpath("//label[text()='Company Number and Name']"));
+    }
+
+    public void verifyEditDateField() {
+        getCompanyAndJournal();
+        String date=Utility_Functions.xGetCurrentDate("MM/YYYY");
+        Utility_Functions.xAssertEquals(report,getAttribute(AR2WISEPage.datePick,"value"),date,date+" is present");
+        sendKeysAndEnter(AR2WISEPage.datePick, jsonData.getData("date"), "Enter date");
+        Utility_Functions.xAssertEquals(report,getAttribute(AR2WISEPage.datePick,"value"),jsonData.getData("date"),jsonData.getData("date")+" is present");
+    }
+
+    public void dateField(String datePattern){
+        String date= jsonData.getData(datePattern);
+        sendKeysAndEnter(AR2WISEPage.datePick,date,"Enter "+date);
+        //commonObj.validateText(spanTag("No results found"),"No results found","[No results found] message is present");
+    }
+
+    public void verifyDateField() {
+        getCompanyAndJournal();
+        dateField("specialCharDate");
+        dateField("AlphaDate");
+        dateField("invalidFormat");
+        dateField("invalidDate");
     }
 }

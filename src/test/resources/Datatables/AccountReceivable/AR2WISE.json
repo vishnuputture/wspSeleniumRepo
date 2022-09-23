@@ -9,44 +9,128 @@
       "Tc_415_verifySearchResult": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchResult",
       "Tc_423_verifyItemPerPage": "navigateToAr2WISE,navigateToFixBusinessDays,verifyItemPerPage",
       "Tc_426_verifyPagination": "navigateToAr2WISE,navigateToFixBusinessDays,verifyPagination",
-      "Tc_427_verifySortableColumn": "navigateToAr2WISE,navigateToFixBusinessDays,verifySortableColumn"
+      "Tc_427_verifySortableColumn": "navigateToAr2WISE,navigateToFixBusinessDays,verifySortableColumn",
+      "Tc_428_verifyMinMaximize": "navigateToAr2WISE,navigateToFixBusinessDays,verifyMinMaximize",
+      "TC_374_VerifyCreationOfCreditMemo": "launchApp,siteLogin,navigateToMiscChargesAndAdjustment,vrfyDefaultValue,vrfyDefaultPrevInvPrevNameValue,selectRandomAccountNumber,enterInvoiceAmount,vrfyAllEntriesValidMsg,getAccountName,getInvoiceNumber,vrfyPrevInv,exitMiscChargesAdj,signOut",
+      "Tc_429_verifyCreditMemo": "navigateToAr2WISE,navigateToFixBusinessDays,verifyCreditDebitMemo",
+      "TC_375_VerifyCreationOfDebitMemo": "launchApp,siteLogin,navigateToMiscChargesAndAdjustment,vrfyDefaultValue,vrfyDefaultPrevInvPrevNameValue,selectRandomAccountNumber,enterInvoiceAmount,vrfyAllEntriesValidMsg,getAccountName,getInvoiceNumber,vrfyPrevInv,exitMiscChargesAdj,signOut",
+      "Tc_429_verifyDebitMemo": "navigateToAr2WISE,navigateToFixBusinessDays,verifyCreditDebitMemo",
+      "Tc_480_verifyARGLDetailInquiryUI": "navigateToAr2WISE,verifyARGLDetailInquiryUI",
+      "Tc_481_verifyARGLDetailInquiryRecordsUI": "navigateToAr2WISE,verifyARGLDetailInquiryRecordsUI",
+      "Tc_495_verifyMinMaximizeARGL": "navigateToAr2WISE,verifyMinMaximizeARGL",
+      "Tc_489_verifyCompanyNoAndNameARGL": "navigateToAr2WISE,verifyCompanyNoAndName",
+      "Tc_490_verifyEditDateField": "navigateToAr2WISE,verifyEditDateField",
+      "Tc_497_verifyDateField": "navigateToAr2WISE,verifyDateField"
     }
   ],
   "General_Data": [
     {
-      "TC_ID": "Tc_416_FixBusinessDaysUI"
+      "TC_ID": "Tc_416_FixBusinessDaysUI",
+      "companyName": "99599"
     },
     {
-      "TC_ID": "Tc_417_FixBusinessDaysRecordUI"
+      "TC_ID": "Tc_417_FixBusinessDaysRecordUI",
+      "companyName": "99599"
     },
     {
       "TC_ID": "Tc_420_verifyCompanyNoAndName",
+      "companyName": "99599",
       "specialCharacterCompanyN0": "@$%(*&",
       "negativeCompanyNo": "-100",
       "bankCompanyNo": "  ",
       "invalidCompanyNo": "123456789"
     },
     {
-      "TC_ID": "Tc_421_verifySearchRecordUsingBusinessDays"
+      "TC_ID": "Tc_421_verifySearchRecordUsingBusinessDays",
+      "companyName": "99599"
     },
     {
       "TC_ID": "Tc_424_verifySearchAllField",
+      "companyName": "99599",
       "searchSpecialCharacter": "@%(*&",
       "searchNegative": "-100",
       "searchBank": "  ",
       "searchInvalid": "123456789"
     },
     {
-      "TC_ID": "Tc_415_verifySearchResult"
+      "TC_ID": "Tc_415_verifySearchResult",
+      "companyName": "99599"
     },
     {
-      "TC_ID": "Tc_423_verifyItemPerPage"
+      "TC_ID": "Tc_423_verifyItemPerPage",
+      "companyName": "99599"
     },
     {
-      "TC_ID": "Tc_426_verifyPagination"
+      "TC_ID": "Tc_426_verifyPagination",
+      "companyName": "99599"
     },
     {
-      "TC_ID": "Tc_427_verifySortableColumn"
+      "TC_ID": "Tc_427_verifySortableColumn",
+      "companyName": "99599"
+    },
+    {
+      "TC_ID": "Tc_428_verifyMinMaximize",
+      "companyName": "99599"
+    },
+    {
+      "TC_ID": "TC_374_VerifyCreationOfCreditMemo",
+      "companyName": "99599",
+      "TransactionType": "CM",
+      "MemoType": "DSC",
+      "InvoiceAmount": "10",
+      "AccountName": "ERIC BIRECKI",
+      "InvoiceNumber": "000679-00"
+    },
+    {
+      "TC_ID": "Tc_429_verifyCreditMemo",
+      "companyName": "99599",
+      "memo": "Credit Memo"
+    },
+    {
+      "TC_ID": "TC_375_VerifyCreationOfDebitMemo",
+      "companyName": "99599",
+      "TransactionType": "DM",
+      "MemoType": "DSC",
+      "InvoiceAmount": "10",
+      "AccountName": "ERIC BIRECKI",
+      "InvoiceNumber": "000680-00"
+    },
+    {
+      "TC_ID": "Tc_429_verifyDebitMemo",
+      "companyName": "99599",
+      "memo": "Debit Memo"
+    },
+    {
+      "TC_ID": "Tc_480_verifyARGLDetailInquiryUI"
+    },
+    {
+      "TC_ID": "Tc_481_verifyARGLDetailInquiryRecordsUI",
+      "companyName": "00916"
+    },
+    {
+      "TC_ID": "Tc_495_verifyMinMaximizeARGL",
+      "companyName": "00916"
+    },
+    {
+      "TC_ID": "Tc_489_verifyCompanyNoAndNameARGL",
+      "companyName": "99599",
+      "specialCharacterCompanyN0": "@$%(*&",
+      "negativeCompanyNo": "-100",
+      "bankCompanyNo": "  ",
+      "invalidCompanyNo": "123456789"
+    },
+    {
+      "TC_ID": "Tc_490_verifyEditDateField",
+      "companyName": "00916",
+      "date": "01/2023"
+    },
+    {
+      "TC_ID": "Tc_497_verifyDateField",
+      "companyName": "00916",
+      "invalidDate": "13/2023",
+      "specialCharDate": "#$/^(%%",
+      "AlphaDate": "ADvFFg",
+      "invalidFormat": "2022/09"
     }
   ]
 }
