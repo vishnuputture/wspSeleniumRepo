@@ -45,16 +45,6 @@ public class AR2WISE extends ReusableLib {
     }
 
     /**
-     * Keyword to launch AR2Wise app
-     */
-    public void launchAR2Wise(){
-        String url = properties.getProperty("AR2WISE_URL");
-        ownDriver.get(url);
-        ngWaitRequestToFinish();
-        vrfyARGLDInquiryHeader();
-    }
-
-    /**
      * Keyword to validate header - [A/R G/L DETAIL INQUIRY]
      */
     public void vrfyARGLDInquiryHeader(){
