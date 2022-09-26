@@ -75,6 +75,7 @@ public class ItemMasterPage extends ReusableLib {
 
     public static By btnDown = By.id("down_button");
     public static By itemNumber = By.id("D_11_6");
+    public static By itemNumber1 = By.id("D_2_11_W1");
 
     /************************************ Matrix Row Codes Page elements ************************************/
 

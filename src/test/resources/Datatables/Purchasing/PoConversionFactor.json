@@ -68,24 +68,24 @@
     },
     {
       "TC_ID": "Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry",
-      "itemNo": "DVTWG840730",
-      "WithReceipts": "7",
-      "OnPO": "6",
-      "AvailableToSell": "1",
+      "itemNo": "CAL462107",
+      "WithReceipts": "12",
+      "OnPO": "12",
+      "AvailableToSell": "",
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000"
     },
     {
       "TC_ID": "Tc_253_VerifyItemDetailsAfterProcessingPO",
-      "itemNo": "CAL462107",
-      "WithReceipts": "18",
-      "OnPO": "18",
-      "AvailableToSell": "",
+      "itemNo": "BBI1110188",
+      "WithReceipts": "837",
+      "OnPO": "426",
+      "AvailableToSell": "411",
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000",
-      "PONumber": "034889"
+      "PONumber": "034665"
     },
     {
       "TC_ID": "Tc_256_VerifyLineItemAfterProcessingPO",
@@ -96,7 +96,7 @@
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000",
-      "PONumber": "034890"
+      "PONumber": "034667"
     },
     {
       "TC_ID": "Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO",

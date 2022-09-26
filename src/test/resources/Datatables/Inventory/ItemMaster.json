@@ -79,9 +79,9 @@
     {
       "TC_ID": "Tc_611_VerifyChangeMFPDVN",
       "validItemNo": "AABABM100",
-      "MF": "AA",
-      "PD": "AI",
-      "VN": "AA"
+      "MF": "ZZ",
+      "PD": "98",
+      "VN": "ZZ"
     },
     {
       "TC_ID": "Tc_615_VerifyHistoryMonthsToRetain",
@@ -248,8 +248,8 @@
     },
     {
       "TC_ID": "Tc_562_VerifyPriceMatrixRowFieldValueChange",
-      "PriceMatrixRow": "JAQ",
-      "SelectedPriceMatrixRow": "HOY"
+      "PriceMatrixRow": "AMP",
+      "SelectedPriceMatrixRow": "ADG"
     },
     {
       "TC_ID": "Tc_563_VerifyQuantityBreakFieldValueChange"

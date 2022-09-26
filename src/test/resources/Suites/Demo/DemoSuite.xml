@@ -1,0 +1,7 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Demo">
+    <suite-files>
+        <suite-file path="AccountReceivable.xml"></suite-file>
+        <suite-file path="Inventory.xml"></suite-file>
+    </suite-files>
+</suite>

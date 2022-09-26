@@ -94,6 +94,7 @@ public class SalesOrdersPage extends ReusableLib {
 
     //image invoice
     public static By invoiceImage = By.id("ImgInvoice");
+    public static By pickingImage=By.id("ImgPacklist");
     public static By continuebtn = By.id("btnContinue");
 
     public static By btnExitSalesOrderSummary = By.id("btnExit");

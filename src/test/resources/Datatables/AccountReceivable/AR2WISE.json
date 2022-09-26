@@ -1,6 +1,15 @@
 {
   "Business_Flow": [
     {
+      "Tc_416_FixBusinessDaysUI": "navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysUI",
+      "Tc_417_FixBusinessDaysRecordUI": "navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysRecordUI",
+      "Tc_420_verifyCompanyNoAndName": "navigateToAr2WISE,navigateToFixBusinessDays,verifyCompanyNoAndName",
+      "Tc_421_verifySearchRecordUsingBusinessDays": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchRecordUsingBusinessDays",
+      "Tc_424_verifySearchAllField": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchAllField",
+      "Tc_415_verifySearchResult": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchResult",
+      "Tc_423_verifyItemPerPage": "navigateToAr2WISE,navigateToFixBusinessDays,verifyItemPerPage",
+      "Tc_426_verifyPagination": "navigateToAr2WISE,navigateToFixBusinessDays,verifyPagination",
+      "Tc_427_verifySortableColumn": "navigateToAr2WISE,navigateToFixBusinessDays,verifySortableColumn",
       "TC_430_VerifyUserCanViewNonTradePaymentRecords": "launchAR2Wise,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
       "TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord": "launchAR2Wise,navToTrnctnExcptnLstPage,vrfyUIOfTrnctnExcptnLstPage,collapse,expand",
       "TC_436_VerifyUIofTrnsctnExcptnLstWithRecord": "launchAR2Wise,navToTrnctnExcptnLstPage,vrfyUIOfTrnctnExcptnLstPage,enterCompanyData,vrfyPagination",
@@ -39,6 +48,41 @@
     }
   ],
   "General_Data": [
+    {
+      "TC_ID": "Tc_416_FixBusinessDaysUI"
+    },
+    {
+      "TC_ID": "Tc_417_FixBusinessDaysRecordUI"
+    },
+    {
+      "TC_ID": "Tc_420_verifyCompanyNoAndName",
+      "specialCharacterCompanyN0": "@$%(*&",
+      "negativeCompanyNo": "-100",
+      "bankCompanyNo": "  ",
+      "invalidCompanyNo": "123456789"
+    },
+    {
+      "TC_ID": "Tc_421_verifySearchRecordUsingBusinessDays"
+    },
+    {
+      "TC_ID": "Tc_424_verifySearchAllField",
+      "searchSpecialCharacter": "@%(*&",
+      "searchNegative": "-100",
+      "searchBank": "  ",
+      "searchInvalid": "123456789"
+    },
+    {
+      "TC_ID": "Tc_415_verifySearchResult"
+    },
+    {
+      "TC_ID": "Tc_423_verifyItemPerPage"
+    },
+    {
+      "TC_ID": "Tc_426_verifyPagination"
+    },
+    {
+      "TC_ID": "Tc_427_verifySortableColumn"
+    },
     {
       "TC_ID": "TC_430_VerifyUserCanViewNonTradePaymentRecords",
       "Company": "00728",
