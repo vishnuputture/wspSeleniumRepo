@@ -5,15 +5,18 @@
         <classes>
             <class name="testcases.AccountReceivable.AR2WISE">
                 <methods>
+                    <include name="Tc_416_FixBusinessDaysUI"></include>
+                    <include name="Tc_417_FixBusinessDaysRecordUI"></include>
+                    <include name="Tc_420_verifyCompanyNoAndName"></include>
+                    <include name="Tc_421_verifySearchRecordUsingBusinessDays"></include>
+                    <include name="Tc_424_verifySearchAllField"></include>
+                    <include name="Tc_415_verifySearchResult"></include>
+                    <include name="Tc_423_verifyItemPerPage"></include>
+                    <include name="Tc_426_verifyPagination"></include>
+                    <include name="Tc_427_verifySortableColumn"></include>
                     <include name="TC_430_VerifyUserCanViewNonTradePaymentRecords"></include>
                     <include name="TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord"></include>
                     <include name="TC_436_VerifyUIofTrnsctnExcptnLstWithRecord"></include>
-                    <include name="TC_434_VerifyUserCanChangeStatus"></include>
-                    <include name="TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst"></include>
-                    <include name="TC_438_VerifyCompanyNameAndNumberField"></include>
-                    <include name="TC_442_VerifySortableColumnOfTrnsctnExcptnLst"></include>
-                    <include name="TC_443_VerifySearchCompanyNumberAndName"></include>
-                    <include name="TC_446_VerifyCompanyTypeaheadOptions"></include>
                 </methods>
             </class>
         </classes>
@@ -22,15 +25,18 @@
         <classes>
             <class name="testcases.AccountReceivable.AR2WISE">
                 <methods>
+                    <include name="TC_434_VerifyUserCanChangeStatus"></include>
+                    <include name="TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst"></include>
+                    <include name="TC_438_VerifyCompanyNameAndNumberField"></include>
+                    <include name="TC_442_VerifySortableColumnOfTrnsctnExcptnLst"></include>
+                    <include name="TC_443_VerifySearchCompanyNumberAndName"></include>
+                    <include name="TC_446_VerifyCompanyTypeaheadOptions"></include>
                     <include name="TC_447_VrfySearchResultsUsingDateAmountDescription"></include>
                     <include name="TC_448_DateFieldVerification"></include>
                     <include name="TC_450_VerifyViewHyperLink"></include>
                     <include name="TC_451_VerifyResolveRecordFromNTRWindow"></include>
                     <include name="TC_432_VerifyUserCanViewGrossMarginManagerRecords"></include>
                     <include name="TC_453_VerifyUserCanChangeStatusOfGMMR"></include>
-                    <include name="TC_454_VerifyItemsPerPage"></include>
-                    <include name="TC_456_VerifyViewHyperLinkForGMMR"></include>
-                    <include name="TC_457_VerifyResolveRecordFromGMMRWindow"></include>
                 </methods>
             </class>
         </classes>
@@ -39,6 +45,9 @@
         <classes>
             <class name="testcases.AccountReceivable.AR2WISE">
                 <methods>
+                    <include name="TC_454_VerifyItemsPerPage"></include>
+                    <include name="TC_456_VerifyViewHyperLinkForGMMR"></include>
+                    <include name="TC_457_VerifyResolveRecordFromGMMRWindow"></include>
                     <include name="TC_458_VerifyPagination"></include>
                     <include name="TC_439_VerifyUserCanViewNonTradeInvoices"></include>
                     <include name="TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices"></include>
