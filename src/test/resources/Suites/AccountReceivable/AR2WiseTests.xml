@@ -73,6 +73,10 @@
                     <include name="TC_476_VrfyNoRecoordsMsgForValidCombi"></include>
                     <include name="TC_485_VrfyResultsWhenDocTypeIsChanged"></include>
                     <include name="TC_486_VrfyResultsWhenDateIsChanged"></include>
+                    <include name="TC_472_VrfyInvAdjRecCreatedInWise"></include>
+                    <include name="TC_484_VrfyGMMRecordCreatedInWise"></include>
+                    <include name="TC_508_VrfyNonTradeInvRecordCreatedInWise"></include>
+                    <include name="TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise"></include>
                 </methods>
             </class>
         </classes>

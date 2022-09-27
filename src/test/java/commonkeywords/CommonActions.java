@@ -609,4 +609,11 @@ public class CommonActions extends ReusableLib {
 	public void inventoryOptionsAndConstantsToFreightClassCodePage() {
 		click(MasterPage.menuFreightClassCode,"Click [15 Revisions - Freight Class Code] option");
 	}
+
+	/**
+	 * This method presses [F9] key
+	 */
+	public void pressF9Key() {
+		Utility_Functions.actionKey(Keys.F9, ownDriver);
+	}
 }

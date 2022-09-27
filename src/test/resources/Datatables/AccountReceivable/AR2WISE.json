@@ -1,297 +1,352 @@
 {
-  "Business_Flow": [
+  "Business_Flow":[
     {
-      "Tc_416_FixBusinessDaysUI": "navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysUI",
-      "Tc_417_FixBusinessDaysRecordUI": "navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysRecordUI",
-      "Tc_420_verifyCompanyNoAndName": "navigateToAr2WISE,navigateToFixBusinessDays,verifyCompanyNoAndName",
-      "Tc_421_verifySearchRecordUsingBusinessDays": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchRecordUsingBusinessDays",
-      "Tc_424_verifySearchAllField": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchAllField",
-      "Tc_415_verifySearchResult": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchResult",
-      "Tc_423_verifyItemPerPage": "navigateToAr2WISE,navigateToFixBusinessDays,verifyItemPerPage",
-      "Tc_426_verifyPagination": "navigateToAr2WISE,navigateToFixBusinessDays,verifyPagination",
-      "Tc_427_verifySortableColumn": "navigateToAr2WISE,navigateToFixBusinessDays,verifySortableColumn",
-      "TC_430_VerifyUserCanViewNonTradePaymentRecords": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
-      "TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord": "navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyUIOfTrnctnExcptnLstPage,collapse,expand",
-      "TC_436_VerifyUIofTrnsctnExcptnLstWithRecord": "navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyUIOfTrnctnExcptnLstPage,enterCompanyData,vrfyPagination",
-      "TC_434_VerifyUserCanChangeStatus": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
-      "TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst": "navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCollapse,vrfyExpand",
-      "TC_438_VerifyCompanyNameAndNumberField": "navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCompanyNameAndNumber",
-      "TC_442_VerifySortableColumnOfTrnsctnExcptnLst": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfySortingTrnsctnExcptnPage",
-      "TC_443_VerifySearchCompanyNumberAndName": "navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCompanyNumberAndNameTypeahead,selectDate,selectCompanyNumberAndName",
-      "TC_446_VerifyCompanyTypeaheadOptions": "navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName",
-      "TC_447_VrfySearchResultsUsingDateAmountDescription": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfySearchAllFilter",
-      "TC_448_DateFieldVerification": "navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyDateField",
-      "TC_450_VerifyViewHyperLink": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyNTPPopup",
-      "TC_451_VerifyResolveRecordFromNTRWindow": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
-      "TC_432_VerifyUserCanViewGrossMarginManagerRecords": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
-      "TC_453_VerifyUserCanChangeStatusOfGMMR": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
-      "TC_456_VerifyViewHyperLinkForGMMR": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyGMMRPopup",
-      "TC_454_VerifyItemsPerPage": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyPagination,vrfyItemsPerPage",
-      "TC_457_VerifyResolveRecordFromGMMRWindow": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
-      "TC_458_VerifyPagination": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyPaginationNextPrev",
-      "TC_439_VerifyUserCanViewNonTradeInvoices": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
-      "TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
-      "TC_461_VerifyViewHyperLinkForNonTradeInvoices": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyNTIPopup",
-      "TC_462_VerifyResolveRecordFromNTIWindow": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
-      "TC_440_VerifyUserCanViewInventoryAdjustmentRecords": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
-      "TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
-      "TC_465_VerifyViewHyperLinkForInventoryAdjustments": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyInvAdjPopup",
-      "TC_466_VerifyResolveRecordFromInvAdjWindow": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
-      "TC_441_VerifyUserCanViewMiscInventoryRecords": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType",
-      "TC_467_VerifyUserCanChangeStatusOfMiscInventory": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,vrfyResolve,vrfyUnresolve",
-      "TC_469_VerifyViewHyperLinkForMiscInventory": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,clickRandomViewBtn,vrfyMiscInvAdjPopup",
-      "TC_470_VerifyResolveRecordFromMiscInventoryWindow": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
-      "TC_471_SearchAllTbxFieldVerification": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyInvalidSearchAllFilter",
-      "TC_476_VrfyNoRecoordsMsgForValidCombi": "navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyNoResultsMsg",
-      "TC_485_VrfyResultsWhenDocTypeIsChanged": "navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDate,changeDocTypeAndVrfyResults",
-      "TC_486_VrfyResultsWhenDateIsChanged": "navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,validateDateFilter"
+      "Tc_416_FixBusinessDaysUI":"navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysUI",
+      "Tc_417_FixBusinessDaysRecordUI":"navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysRecordUI",
+      "Tc_420_verifyCompanyNoAndName":"navigateToAr2WISE,navigateToFixBusinessDays,verifyCompanyNoAndName",
+      "Tc_421_verifySearchRecordUsingBusinessDays":"navigateToAr2WISE,navigateToFixBusinessDays,verifySearchRecordUsingBusinessDays",
+      "Tc_424_verifySearchAllField":"navigateToAr2WISE,navigateToFixBusinessDays,verifySearchAllField",
+      "Tc_415_verifySearchResult":"navigateToAr2WISE,navigateToFixBusinessDays,verifySearchResult",
+      "Tc_423_verifyItemPerPage":"navigateToAr2WISE,navigateToFixBusinessDays,verifyItemPerPage",
+      "Tc_426_verifyPagination":"navigateToAr2WISE,navigateToFixBusinessDays,verifyPagination",
+      "Tc_427_verifySortableColumn":"navigateToAr2WISE,navigateToFixBusinessDays,verifySortableColumn",
+      "TC_430_VerifyUserCanViewNonTradePaymentRecords":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
+      "TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyUIOfTrnctnExcptnLstPage,collapse,expand",
+      "TC_436_VerifyUIofTrnsctnExcptnLstWithRecord":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyUIOfTrnctnExcptnLstPage,enterCompanyData,vrfyPagination",
+      "TC_434_VerifyUserCanChangeStatus":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCollapse,vrfyExpand",
+      "TC_438_VerifyCompanyNameAndNumberField":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCompanyNameAndNumber",
+      "TC_442_VerifySortableColumnOfTrnsctnExcptnLst":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfySortingTrnsctnExcptnPage",
+      "TC_443_VerifySearchCompanyNumberAndName":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCompanyNumberAndNameTypeahead,selectDate,selectCompanyNumberAndName",
+      "TC_446_VerifyCompanyTypeaheadOptions":"navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName",
+      "TC_447_VrfySearchResultsUsingDateAmountDescription":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfySearchAllFilter",
+      "TC_448_DateFieldVerification":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyDateField",
+      "TC_450_VerifyViewHyperLink":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyNTPPopup",
+      "TC_451_VerifyResolveRecordFromNTRWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_432_VerifyUserCanViewGrossMarginManagerRecords":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
+      "TC_453_VerifyUserCanChangeStatusOfGMMR":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_456_VerifyViewHyperLinkForGMMR":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyGMMRPopup",
+      "TC_454_VerifyItemsPerPage":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyPagination,vrfyItemsPerPage",
+      "TC_457_VerifyResolveRecordFromGMMRWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_458_VerifyPagination":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyPaginationNextPrev",
+      "TC_439_VerifyUserCanViewNonTradeInvoices":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
+      "TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_461_VerifyViewHyperLinkForNonTradeInvoices":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyNTIPopup",
+      "TC_462_VerifyResolveRecordFromNTIWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_440_VerifyUserCanViewInventoryAdjustmentRecords":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
+      "TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_465_VerifyViewHyperLinkForInventoryAdjustments":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyInvAdjPopup",
+      "TC_466_VerifyResolveRecordFromInvAdjWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_441_VerifyUserCanViewMiscInventoryRecords":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType",
+      "TC_467_VerifyUserCanChangeStatusOfMiscInventory":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_469_VerifyViewHyperLinkForMiscInventory":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,clickRandomViewBtn,vrfyMiscInvAdjPopup",
+      "TC_470_VerifyResolveRecordFromMiscInventoryWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_471_SearchAllTbxFieldVerification":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyInvalidSearchAllFilter",
+      "TC_476_VrfyNoRecoordsMsgForValidCombi":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyNoResultsMsg",
+      "TC_485_VrfyResultsWhenDocTypeIsChanged":"navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDate,changeDocTypeAndVrfyResults",
+      "TC_486_VrfyResultsWhenDateIsChanged":"navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,validateDateFilter",
+      "TC_472_VrfyInvAdjRecCreatedInWise":"launchApp,siteLogin,navCycleCostAdj,enterDataAndProcessItems,exitFromCycleCostAdj,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableData",
+      "TC_484_VrfyGMMRecordCreatedInWise":"launchApp,siteLogin,validateSalesOrderTitle,createSOAndPO,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,processVendInvRecord,navigateToVendorInvoiceRec,processVendInvReconRecords,exitVendorInvoiceRec,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataGMM",
+      "TC_508_VrfyNonTradeInvRecordCreatedInWise":"launchApp,siteLogin,navigateToMiscChargesAndAdjustment,processMiscChargesAndAdj,exitMiscChargesAdj,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataNTI",
+      "TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise":"launchApp,siteLogin,navigateToMiscAdj,selectAdjCodeAndCustomer,enterItemDetails,processMiscAdjItems,pressF3ExitBtn,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataMiscInvAdj"
     }
   ],
-  "General_Data": [
+  "General_Data":[
     {
-      "TC_ID": "Tc_416_FixBusinessDaysUI"
+      "TC_ID":"Tc_416_FixBusinessDaysUI"
     },
     {
-      "TC_ID": "Tc_417_FixBusinessDaysRecordUI"
+      "TC_ID":"Tc_417_FixBusinessDaysRecordUI"
     },
     {
-      "TC_ID": "Tc_420_verifyCompanyNoAndName",
-      "specialCharacterCompanyN0": "@$%(*&",
-      "negativeCompanyNo": "-100",
-      "bankCompanyNo": "  ",
-      "invalidCompanyNo": "123456789"
+      "TC_ID":"Tc_420_verifyCompanyNoAndName",
+      "specialCharacterCompanyN0":"@$%(*&",
+      "negativeCompanyNo":"-100",
+      "bankCompanyNo":"  ",
+      "invalidCompanyNo":"123456789"
     },
     {
-      "TC_ID": "Tc_421_verifySearchRecordUsingBusinessDays"
+      "TC_ID":"Tc_421_verifySearchRecordUsingBusinessDays"
     },
     {
-      "TC_ID": "Tc_424_verifySearchAllField",
-      "searchSpecialCharacter": "@%(*&",
-      "searchNegative": "-100",
-      "searchBank": "  ",
-      "searchInvalid": "123456789"
+      "TC_ID":"Tc_424_verifySearchAllField",
+      "searchSpecialCharacter":"@%(*&",
+      "searchNegative":"-100",
+      "searchBank":"  ",
+      "searchInvalid":"123456789"
     },
     {
-      "TC_ID": "Tc_415_verifySearchResult"
+      "TC_ID":"Tc_415_verifySearchResult"
     },
     {
-      "TC_ID": "Tc_423_verifyItemPerPage"
+      "TC_ID":"Tc_423_verifyItemPerPage"
     },
     {
-      "TC_ID": "Tc_426_verifyPagination"
+      "TC_ID":"Tc_426_verifyPagination"
     },
     {
-      "TC_ID": "Tc_427_verifySortableColumn"
+      "TC_ID":"Tc_427_verifySortableColumn"
     },
     {
-      "TC_ID": "TC_430_VerifyUserCanViewNonTradePaymentRecords",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_430_VerifyUserCanViewNonTradePaymentRecords",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
     },
     {
-      "TC_ID": "TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord"
+      "TC_ID":"TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord"
     },
     {
-      "TC_ID": "TC_436_VerifyUIofTrnsctnExcptnLstWithRecord",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_436_VerifyUIofTrnsctnExcptnLstWithRecord",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
     },
     {
-      "TC_ID": "TC_434_VerifyUserCanChangeStatus",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_434_VerifyUserCanChangeStatus",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
     },
     {
-      "TC_ID": "TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst"
+      "TC_ID":"TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst"
     },
     {
-      "TC_ID": "TC_438_VerifyCompanyNameAndNumberField",
-      "InvalidData": "!@#^*(),-123,    ,tester681716987",
-      "Company": "00728"
+      "TC_ID":"TC_438_VerifyCompanyNameAndNumberField",
+      "InvalidData":"!@#^*(),-123,    ,tester681716987",
+      "Company":"00728"
     },
     {
-      "TC_ID": "TC_442_VerifySortableColumnOfTrnsctnExcptnLst",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_442_VerifySortableColumnOfTrnsctnExcptnLst",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
     },
     {
-      "TC_ID": "TC_443_VerifySearchCompanyNumberAndName",
-      "Company": "99599",
-      "Date": "06/2022"
+      "TC_ID":"TC_443_VerifySearchCompanyNumberAndName",
+      "Company":"99599",
+      "Date":"06/2022"
     },
     {
-      "TC_ID": "TC_446_VerifyCompanyTypeaheadOptions",
-      "Company": "99599"
+      "TC_ID":"TC_446_VerifyCompanyTypeaheadOptions",
+      "Company":"99599"
     },
     {
-      "TC_ID": "TC_447_VrfySearchResultsUsingDateAmountDescription",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_447_VrfySearchResultsUsingDateAmountDescription",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
     },
     {
-      "TC_ID": "TC_448_DateFieldVerification",
-      "InvalidData": "!@#^*(),abcd",
-      "Date": "06/2022"
+      "TC_ID":"TC_448_DateFieldVerification",
+      "InvalidData":"!@#^*(),abcd",
+      "Date":"06/2022"
     },
     {
-      "TC_ID": "TC_450_VerifyViewHyperLink",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_450_VerifyViewHyperLink",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
     },
     {
-      "TC_ID": "TC_451_VerifyResolveRecordFromNTRWindow",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment",
-      "DesiredStatus": "Unresolved",
-      "Comments": "Test Automation Comments"
+      "TC_ID":"TC_451_VerifyResolveRecordFromNTRWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
     },
     {
-      "TC_ID": "TC_432_VerifyUserCanViewGrossMarginManagerRecords",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Gross Margin Manager"
+      "TC_ID":"TC_432_VerifyUserCanViewGrossMarginManagerRecords",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
     },
     {
-      "TC_ID": "TC_453_VerifyUserCanChangeStatusOfGMMR",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Gross Margin Manager"
+      "TC_ID":"TC_453_VerifyUserCanChangeStatusOfGMMR",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
     },
     {
-      "TC_ID": "TC_454_VerifyItemsPerPage",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Gross Margin Manager"
+      "TC_ID":"TC_454_VerifyItemsPerPage",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
     },
     {
-      "TC_ID": "TC_456_VerifyViewHyperLinkForGMMR",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Gross Margin Manager"
+      "TC_ID":"TC_456_VerifyViewHyperLinkForGMMR",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
     },
     {
-      "TC_ID": "TC_457_VerifyResolveRecordFromGMMRWindow",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Gross Margin Manager",
-      "DesiredStatus": "Unresolved",
-      "Comments": "Test Automation Comments"
+      "TC_ID":"TC_457_VerifyResolveRecordFromGMMRWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
     },
     {
-      "TC_ID": "TC_458_VerifyPagination",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Gross Margin Manager"
+      "TC_ID":"TC_458_VerifyPagination",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
     },
     {
-      "TC_ID": "TC_439_VerifyUserCanViewNonTradeInvoices",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Invoices"
+      "TC_ID":"TC_439_VerifyUserCanViewNonTradeInvoices",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Invoices"
     },
     {
-      "TC_ID": "TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Invoices"
+      "TC_ID":"TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Invoices"
     },
     {
-      "TC_ID": "TC_461_VerifyViewHyperLinkForNonTradeInvoices",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Invoices"
+      "TC_ID":"TC_461_VerifyViewHyperLinkForNonTradeInvoices",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Invoices"
     },
     {
-      "TC_ID": "TC_462_VerifyResolveRecordFromNTIWindow",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Invoices",
-      "DesiredStatus": "Unresolved",
-      "Comments": "Test Automation Comments"
+      "TC_ID":"TC_462_VerifyResolveRecordFromNTIWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Invoices",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
     },
     {
-      "TC_ID": "TC_440_VerifyUserCanViewInventoryAdjustmentRecords",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Inventory Adjustments"
+      "TC_ID":"TC_440_VerifyUserCanViewInventoryAdjustmentRecords",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Inventory Adjustments"
     },
     {
-      "TC_ID": "TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Inventory Adjustments"
+      "TC_ID":"TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Inventory Adjustments"
     },
     {
-      "TC_ID": "TC_465_VerifyViewHyperLinkForInventoryAdjustments",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Inventory Adjustments"
+      "TC_ID":"TC_465_VerifyViewHyperLinkForInventoryAdjustments",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Inventory Adjustments"
     },
     {
-      "TC_ID": "TC_466_VerifyResolveRecordFromInvAdjWindow",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Inventory Adjustments",
-      "DesiredStatus": "Unresolved",
-      "Comments": "Test Automation Comments"
+      "TC_ID":"TC_466_VerifyResolveRecordFromInvAdjWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Inventory Adjustments",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
     },
     {
-      "TC_ID": "TC_441_VerifyUserCanViewMiscInventoryRecords",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Misc. Inventory Adjustments"
+      "TC_ID":"TC_441_VerifyUserCanViewMiscInventoryRecords",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Misc. Inventory Adjustments"
     },
     {
-      "TC_ID": "TC_467_VerifyUserCanChangeStatusOfMiscInventory",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Misc. Inventory Adjustments"
+      "TC_ID":"TC_467_VerifyUserCanChangeStatusOfMiscInventory",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Misc. Inventory Adjustments"
     },
     {
-      "TC_ID": "TC_469_VerifyViewHyperLinkForMiscInventory",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Misc. Inventory Adjustments"
+      "TC_ID":"TC_469_VerifyViewHyperLinkForMiscInventory",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Misc. Inventory Adjustments"
     },
     {
-      "TC_ID": "TC_470_VerifyResolveRecordFromMiscInventoryWindow",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Misc. Inventory Adjustments",
-      "DesiredStatus": "Unresolved",
-      "Comments": "Test Automation Comments"
+      "TC_ID":"TC_470_VerifyResolveRecordFromMiscInventoryWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Misc. Inventory Adjustments",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
     },
     {
-      "TC_ID": "TC_471_SearchAllTbxFieldVerification",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_471_SearchAllTbxFieldVerification",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
     },
     {
-      "TC_ID": "TC_476_VrfyNoRecoordsMsgForValidCombi",
-      "Company": "00728",
-      "Date": "09/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_476_VrfyNoRecoordsMsgForValidCombi",
+      "Company":"00728",
+      "Date":"09/2022",
+      "DocumentType":"Non-Trade Payment"
     },
     {
-      "TC_ID": "TC_485_VrfyResultsWhenDocTypeIsChanged",
-      "Company": "00728",
-      "Date": "06/2022",
-      "DocumentType": "Non-Trade Payment,Gross Margin Manager"
+      "TC_ID":"TC_485_VrfyResultsWhenDocTypeIsChanged",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment,Gross Margin Manager"
     },
     {
-      "TC_ID": "TC_486_VrfyResultsWhenDateIsChanged",
-      "Company": "00728",
-      "Date": "06/2022",
-      "Date2": "07/2022",
-      "DocumentType": "Non-Trade Payment"
+      "TC_ID":"TC_486_VrfyResultsWhenDateIsChanged",
+      "Company":"00728",
+      "Date":"06/2022",
+      "Date2":"07/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_472_VrfyInvAdjRecCreatedInWise",
+      "Quantity":"100",
+      "Explanation":"Other",
+      "Company":"99599",
+      "DocumentType":"Inventory Adjustments"
+    },
+    {
+      "TC_ID":"TC_484_VrfyGMMRecordCreatedInWise",
+      "ReceiverDoc":"000041466",
+      "accountNo":"099599",
+      "DirectShip":"Yes",
+      "ShipVia":"BEST WAY",
+      "QtyOrder":"50",
+      "itemNo":"AABABM100",
+      "QtyShip":"50",
+      "SalesOrderNo":"000793",
+      "QtyOrdered":"1",
+      "VendorNumber":"000388",
+      "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
+      "PONumber":"030392",
+      "QtyReceived":"1",
+      "DebitMemo":"10.00",
+      "InvoiceTotal":"10.00",
+      "DiscPercentage":"10",
+      "OrderNo":"030392",
+      "GMMgrAmount":"10.00",
+      "Company":"99599",
+      "DocumentType":"Gross Margin Manager"
+    },
+    {
+      "TC_ID":"TC_508_VrfyNonTradeInvRecordCreatedInWise",
+      "TransactionType":"DM",
+      "MemoType":"DSC",
+      "InvoiceAmount":"10.00",
+      "AccountName":"ERIC BIRECKI",
+      "InvoiceNumber":"000795-00",
+      "Company":"99599",
+      "DocumentType":"Non-Trade Invoices"
+    },
+    {
+      "TC_ID":"TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise",
+      "AdjustmentCode":"Promotions",
+      "Vendor":"99599",
+      "ItemNumber":"AABABM100",
+      "Quantity":"100",
+      "Explanation":"Test Exp1305",
+      "Amount":"100.00",
+      "Company":"99599",
+      "DocumentType":"Misc. Inventory Adjustments"
     }
   ]
 }

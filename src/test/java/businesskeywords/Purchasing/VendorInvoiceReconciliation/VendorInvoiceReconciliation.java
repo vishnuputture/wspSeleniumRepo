@@ -948,4 +948,35 @@ public class VendorInvoiceReconciliation extends ReusableLib {
         Utility_Functions.actionKey(Keys.F3, ownDriver);
         commonObj.validateText(VendorInvoiceReconciliationPage.vendorInvoiceRecHeader, "Vendor Invoice Reconciliation", "Validating [Vendor Invoice Reconciliation] page title");
     }
+
+    /**
+     * Keyword to enter data in [Vendor Invoice Reconciliation] page and process it
+     */
+    public void processVendInvReconRecords(){
+        enterReceiverDoc();
+        enterInvoiceDetails();
+        ensureDueDate();
+        ensureFreightCharges();
+        getOrderNo();
+        acceptInvoicePostEdit();
+        acceptInvoiceWithDebitMemoGMMgrPage();
+        vrfyDebitMemoProcess();
+        commonObj.pressF9Key();
+        commonObj.pressF9Key();
+    }
+
+    /**
+     * Keyword to enter Debit Memo, Invoice Amount and Discount Percentage data in VIR page
+     */
+    public void enterInvoiceDetails() {
+        String debitMemo = jsonData.getData("DebitMemo");
+        String intTotal = jsonData.getData("InvoiceTotal");
+        String dicsPercent = jsonData.getData("DiscPercentage");
+
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.debitMemoTextBox, debitMemo, "Entering data in [Debit Memo] field");
+        commonObj.validateText(VendorInvoiceReconciliationPage.gmMarginAmt, debitMemo, "Validating [GM Mgr Amount] is set as Debit Memo");
+        jsonData.putData("GMMgrAmount", getText(VendorInvoiceReconciliationPage.gmMarginAmt).trim());
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.invoiceTotalTextBox, intTotal, "Entering data in [Invoice Total] field");
+        sendKeysAndEnter(VendorInvoiceReconciliationPage.discountPercentTextBox, dicsPercent, "Entering data in [Disc. Percent] field");
+    }
 }

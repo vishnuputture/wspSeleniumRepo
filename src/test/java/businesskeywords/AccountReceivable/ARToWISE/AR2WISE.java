@@ -399,7 +399,7 @@ public class AR2WISE extends ReusableLib {
     public void selectCompanyNumberAndName(){
         String company = jsonData.getData("Company");
         sendKeys(AR2WISEPage.tbxCompany,company,"Enter company number in [Company Number and Name] textbox");
-        Utility_Functions.timeWait(1);
+        Utility_Functions.timeWait(3);
         List<WebElement> lstCompanySuggestions = getListElement(AR2WISEPage.lstCompanyDdnOptions);
         for (WebElement option : lstCompanySuggestions){
             String optionText = option.getText().trim();
@@ -879,6 +879,16 @@ public class AR2WISE extends ReusableLib {
     }
 
     /**
+     * Keyword to enter data in [Search All] textbox in [TRANSACTION EXCEPTION LIST] page
+     */
+    public void enterCurrentDateInSearchAll() {
+        String date = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
+        sendKeysAndEnter(AR2WISEPage.tbxSearchAll, date, "Enter current date in [Search All] textbox");
+        Utility_Functions.timeWait(1);
+        waitForElementDisappear(AR2WISEPage.loaderIcon, 30);
+    }
+
+    /**
      * Keyword to validate column data in [TRANSACTION EXCEPTION LIST] page
      */
     public void vrfyColumnData(String colName, String expectedText, By tableData) {
@@ -972,6 +982,106 @@ public class AR2WISE extends ReusableLib {
             report.updateTestLog("Verify table data", "[Date] column data is filtered properly", Status.PASS);
         else
             report.updateTestLog("Verify table data", "[Date] column data is NOT filtered properly", Status.FAIL);
+    }
+
+    /**
+     * Keyword to validate Data in [TRANSACTION EXCEPTION LIST] page
+     */
+    public void vrfyTableData() {
+        String extendedAmountExpected = Utility_Functions.xGetJsonData("CycleCounts_Amount");
+        String date = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
+        String descriptionExpected = "OTHER";
+        List<WebElement> lstTableData = getListElement(AR2WISEPage.lstDateColValue);
+        boolean flag = false;
+        for (int i=1; i<=lstTableData.size(); i++){
+            String dateActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-date')]"));
+            String amountActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-extendedAmount')]"));
+            String descriptionActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-explanation')]/span"));
+            if (dateActual.equalsIgnoreCase(date) && amountActual.contains(extendedAmountExpected) && descriptionActual.contains(descriptionExpected)) {
+                flag = true;
+                Utility_Functions.xHighlight(ownDriver, By.xpath("//tr["+i+"]"), "red");
+                break;
+            }
+        }
+        if (flag)
+            report.updateTestLog("Verify table data", "Table is showing recently created Investment Adjusted record created in WISE", Status.PASS);
+        else
+            report.updateTestLog("Verify table data", "Table is NOT showing recently created Investment Adjusted record created in WISE", Status.FAIL);
+    }
+
+    /**
+     * Keyword to validate Data in [TRANSACTION EXCEPTION LIST] page
+     */
+    public void vrfyTableDataGMM() {
+        String amount = jsonData.getData("GMMgrAmount");
+        String date = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
+        String descriptionExpected = "TESTING PURPOSE";
+        List<WebElement> lstTableData = getListElement(AR2WISEPage.lstDateColValue);
+        boolean flag = false;
+        for (int i=1; i<=lstTableData.size(); i++){
+            String dateActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-date')]"));
+            String amountActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-amount')]"));
+            String descriptionActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-explanation')]/span"));
+            if (dateActual.equalsIgnoreCase(date) && amountActual.contains(amount) && descriptionActual.contains(descriptionExpected)) {
+                flag = true;
+                Utility_Functions.xHighlight(ownDriver, By.xpath("//tr["+i+"]"), "red");
+                break;
+            }
+        }
+        if (flag)
+            report.updateTestLog("Verify table data", "Table is showing recently created Gross Margin Manager record created in WISE", Status.PASS);
+        else
+            report.updateTestLog("Verify table data", "Table is NOT showing recently created Gross Margin Manager record created in WISE", Status.FAIL);
+    }
+
+    /**
+     * Keyword to validate Data in [TRANSACTION EXCEPTION LIST] page
+     */
+    public void vrfyTableDataNTI() {
+        String amount = jsonData.getData("InvoiceAmount");
+        String date = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
+        String descriptionExpected = jsonData.getData("AccountName");
+        List<WebElement> lstTableData = getListElement(AR2WISEPage.lstDateColValue);
+        boolean flag = false;
+        for (int i=1; i<=lstTableData.size(); i++){
+            String dateActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-date')]"));
+            String amountActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-amount')]"));
+            String descriptionActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-explanation')]/span"));
+            if (dateActual.equalsIgnoreCase(date) && amountActual.contains(amount) && descriptionActual.contains(descriptionExpected)) {
+                flag = true;
+                Utility_Functions.xHighlight(ownDriver, By.xpath("//tr["+i+"]"), "red");
+                break;
+            }
+        }
+        if (flag)
+            report.updateTestLog("Verify table data", "Table is showing recently created Non Trade Invoices record created in WISE", Status.PASS);
+        else
+            report.updateTestLog("Verify table data", "Table is NOT showing recently created Non Trade Invoices record created in WISE", Status.FAIL);
+    }
+
+    /**
+     * Keyword to validate Data in [TRANSACTION EXCEPTION LIST] page
+     */
+    public void vrfyTableDataMiscInvAdj() {
+        String amount = jsonData.getData("Amount");
+        String date = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
+        String descriptionExpected = jsonData.getData("Explanation");
+        List<WebElement> lstTableData = getListElement(AR2WISEPage.lstDateColValue);
+        boolean flag = false;
+        for (int i=1; i<=lstTableData.size(); i++){
+            String dateActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-date')]"));
+            String amountActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-extendedAmount')]"));
+            String descriptionActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-explanation')]/span"));
+            if (dateActual.equalsIgnoreCase(date) && amountActual.contains(amount) && descriptionActual.contains(descriptionExpected)) {
+                flag = true;
+                Utility_Functions.xHighlight(ownDriver, By.xpath("//tr["+i+"]"), "red");
+                break;
+            }
+        }
+        if (flag)
+            report.updateTestLog("Verify table data", "Table is showing recently created Misc. Inventory Adjustments record created in WISE", Status.PASS);
+        else
+            report.updateTestLog("Verify table data", "Table is NOT showing recently created Misc. Inventory Adjustments record created in WISE", Status.FAIL);
     }
 
 

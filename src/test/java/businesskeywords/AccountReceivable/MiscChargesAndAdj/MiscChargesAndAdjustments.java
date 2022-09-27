@@ -541,4 +541,18 @@ public class MiscChargesAndAdjustments extends ReusableLib {
         commonObj.validateText(MiscChargesAndAdjustmentsPage.custMsg, "ERROR - 'A', 'I' and 'C' are the only valid Action Codes.", "Validating message [ERROR - 'A', 'I' and 'C' are the only valid Action Codes.]");
     }
 
+    /**
+     * Keyword to enter data and process DM transaction in [Misc. Charges and Adjustments] page
+     */
+    public void processMiscChargesAndAdj(){
+        vrfyDefaultValue();
+        vrfyDefaultPrevInvPrevNameValue();
+        selectRandomAccountNumber();
+        enterInvoiceAmount();
+        vrfyAllEntriesValidMsg();
+        getAccountName();
+        getInvoiceNumber();
+        vrfyPrevInv();
+    }
+
 }

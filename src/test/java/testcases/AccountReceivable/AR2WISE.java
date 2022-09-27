@@ -358,4 +358,36 @@ public class AR2WISE extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_472_VrfyInvAdjRecCreatedInWise(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that 'Inventory adjustments' records created in WISE application should reflect in AR2 WISE");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_484_VrfyGMMRecordCreatedInWise(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that 'Gross margin manager' records created in WISE application should reflect in AR2WISE");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_508_VrfyNonTradeInvRecordCreatedInWise(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that 'Non trade invoices' records created in WISE application should reflect in AR2WISE");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that 'Misc inventory adjustments' records created in WISE application should reflect in AR2WISE");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
