@@ -47,7 +47,7 @@
       "TC_486_VrfyResultsWhenDateIsChanged":"navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,validateDateFilter",
       "TC_472_VrfyInvAdjRecCreatedInWise":"launchApp,siteLogin,navCycleCostAdj,enterDataAndProcessItems,exitFromCycleCostAdj,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableData",
       "TC_484_VrfyGMMRecordCreatedInWise":"launchApp,siteLogin,validateSalesOrderTitle,createSOAndPO,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,processVendInvRecord,navigateToVendorInvoiceRec,processVendInvReconRecords,exitVendorInvoiceRec,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataGMM",
-      "TC_508_VrfyNonTradeInvRecordCreatedInWise":"launchApp,siteLogin,navigateToMiscChargesAndAdjustment,processMiscChargesAndAdj,exitMiscChargesAdj,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataNTI",
+      "TC_508_VrfyNonTradeInvRecordCreatedInWise":"launchApp,siteLogin,navigateToMiscChargesAndAdjustment,processMiscChargesAndAdj,exitMiscChargesAdj,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDate,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataNTI",
       "TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise":"launchApp,siteLogin,navigateToMiscAdj,selectAdjCodeAndCustomer,enterItemDetails,processMiscAdjItems,pressF3ExitBtn,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataMiscInvAdj"
     }
   ],
@@ -331,11 +331,12 @@
       "TC_ID":"TC_508_VrfyNonTradeInvRecordCreatedInWise",
       "TransactionType":"DM",
       "MemoType":"DSC",
-      "InvoiceAmount":"10.00",
+      "InvoiceAmount":"5075.00",
       "AccountName":"ERIC BIRECKI",
-      "InvoiceNumber":"000795-00",
+      "InvoiceNumber":"000828-00",
       "Company":"99599",
-      "DocumentType":"Non-Trade Invoices"
+      "DocumentType":"Non-Trade Invoices",
+      "Date":"01/2020"
     },
     {
       "TC_ID":"TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise",

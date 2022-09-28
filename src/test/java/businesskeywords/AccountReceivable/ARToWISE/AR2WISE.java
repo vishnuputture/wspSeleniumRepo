@@ -999,7 +999,7 @@ public class AR2WISE extends ReusableLib {
             String descriptionActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-explanation')]/span"));
             if (dateActual.equalsIgnoreCase(date) && amountActual.contains(extendedAmountExpected) && descriptionActual.contains(descriptionExpected)) {
                 flag = true;
-                Utility_Functions.xHighlight(ownDriver, By.xpath("//tr["+i+"]"), "red");
+                Utility_Functions.xHighlight(ownDriver, By.xpath("//tbody/tr["+i+"]"), "red");
                 break;
             }
         }
@@ -1024,7 +1024,7 @@ public class AR2WISE extends ReusableLib {
             String descriptionActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-explanation')]/span"));
             if (dateActual.equalsIgnoreCase(date) && amountActual.contains(amount) && descriptionActual.contains(descriptionExpected)) {
                 flag = true;
-                Utility_Functions.xHighlight(ownDriver, By.xpath("//tr["+i+"]"), "red");
+                Utility_Functions.xHighlight(ownDriver, By.xpath("//tbody/tr["+i+"]"), "red");
                 break;
             }
         }
@@ -1047,9 +1047,9 @@ public class AR2WISE extends ReusableLib {
             String dateActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-date')]"));
             String amountActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-amount')]"));
             String descriptionActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-explanation')]/span"));
-            if (dateActual.equalsIgnoreCase(date) && amountActual.contains(amount) && descriptionActual.contains(descriptionExpected)) {
+            if (dateActual.equalsIgnoreCase(date) && amountActual.equalsIgnoreCase(amount) && descriptionActual.contains(descriptionExpected)) {
                 flag = true;
-                Utility_Functions.xHighlight(ownDriver, By.xpath("//tr["+i+"]"), "red");
+                Utility_Functions.xHighlight(ownDriver, By.xpath("//tbody/tr["+i+"]"), "red");
                 break;
             }
         }
@@ -1074,7 +1074,7 @@ public class AR2WISE extends ReusableLib {
             String descriptionActual = getText(By.xpath("//tr["+i+"]/td[contains(@class,'mat-column-explanation')]/span"));
             if (dateActual.equalsIgnoreCase(date) && amountActual.contains(amount) && descriptionActual.contains(descriptionExpected)) {
                 flag = true;
-                Utility_Functions.xHighlight(ownDriver, By.xpath("//tr["+i+"]"), "red");
+                Utility_Functions.xHighlight(ownDriver, By.xpath("//tbody/tr["+i+"]"), "red");
                 break;
             }
         }

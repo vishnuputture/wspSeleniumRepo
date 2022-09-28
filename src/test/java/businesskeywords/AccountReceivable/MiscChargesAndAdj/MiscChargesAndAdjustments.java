@@ -284,6 +284,16 @@ public class MiscChargesAndAdjustments extends ReusableLib {
     }
 
     /**
+     * Keyword to enter Invoice Amount in [Misc. Charges and Adjustments] page
+     */
+    public void enterRandomInvoiceAmount() {
+        String random = Utility_Functions.xRandomFunction(99, 9999)+".00";
+        jsonData.putData("InvoiceAmount", random);
+        sendKeysAndEnter(MiscChargesAndAdjustmentsPage.invoiceAmount, random, "Entering random Invoice Amount");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    /**
      * Keyword to select Account Number in [Misc. Charges and Adjustments] page
      */
     public void selectAccountNumber(){
@@ -548,7 +558,7 @@ public class MiscChargesAndAdjustments extends ReusableLib {
         vrfyDefaultValue();
         vrfyDefaultPrevInvPrevNameValue();
         selectRandomAccountNumber();
-        enterInvoiceAmount();
+        enterRandomInvoiceAmount();
         vrfyAllEntriesValidMsg();
         getAccountName();
         getInvoiceNumber();
