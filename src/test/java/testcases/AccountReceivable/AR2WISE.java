@@ -166,4 +166,84 @@ public class AR2WISE extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_496_verifyFindARJRecords(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify A/R G/L DETAIL BREAKDOWN display when user clicks on individual Customer records of ARJ Journal Type");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_496_verifyFindNTRRecords(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify A/R G/L DETAIL BREAKDOWN display when user clicks on individual Customer records of NTR Journal Type");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_496_verifyFindCRJRecords(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify A/R G/L DETAIL BREAKDOWN display when user clicks on individual Customer records of CRJ Journal Type");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void CreateSalesOrder(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test case to create a sales order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_496_verifyARRecordsFromWise(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that AR records created in WISE application is reflected in AR2WISE application");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_473_verifySearchFilterItems(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify user can search/filter the results using Customer, Date, Reference, Amount or User");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_477_verifySearchAllField(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the field verification for the 'Business Day' dropdown");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_479_verifySortingColumn(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that the columns can be sorted in ascending or descending order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_482_verifyPaginationARGL(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that the columns can be sorted in ascending or descending order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_483_verifyArrowFunctionality(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user is able to move back and froth between the pages by clicking on '>' and '<' pagination arrows");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

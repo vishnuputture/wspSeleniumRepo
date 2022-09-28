@@ -19,6 +19,8 @@ public class AR2WISEPage extends ReusableLib {
     public static By openMenu = By.xpath("//a[@title='Click to open menu']/i");
     public static By noResultFound = By.xpath("//span[text()='No results found']");
     public static By winLabel = By.id("typeahead-company");
+    public static By debitCreditTotal=By.xpath("//tfoot/tr/td");
+    public static By breakDownCal=By.xpath("(//tbody[@role='rowgroup'])[2]/tr/td");
     public static By dropDownSearchResult = By.xpath("//ngb-highlight[@ng-reflect-result='99599 - Automation Test Co.']");
     public static By expandMinimize=By.xpath("//i[@class='fa fa-minus-square-o']");
     public static By invalidCompany=By.xpath("//input[contains(@class,'invalid-company')]");
@@ -35,4 +37,8 @@ public class AR2WISEPage extends ReusableLib {
     public static By journalType=By.id("journalType");
     public static By glAccountNumber=By.id("glAccountNumber");
     public static By datePick=By.id("date");
+    public static By searchAllARGL=By.id("glSearchFilter");
+    public static By filteredTotal=By.xpath("//span/strong");
+    public static By nextPageDis=By.xpath("//button[@aria-label='Next page']");
+    public static By totalAmount=By.xpath("//span[text()=' | Results: ']/strong/preceding-sibling::strong");
 }

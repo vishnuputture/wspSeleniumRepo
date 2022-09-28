@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Domain - Pricing" parallel="none" thread-count="2">
+<suite name="Domain - Pricing" parallel="tests" thread-count="2">C:\Users\Dell\IdeaProjects\qa-automation\CostPriceSheetTemplate.xlsx
+    C:\Users\Dell\IdeaProjects\qa-automation\CostPriceSheetTemplate.xlsx
+    C:\Users\Dell\IdeaProjects\qa-automation\CostPriceSheetTemplate.xlsx
+    C:\Users\Dell\IdeaProjects\qa-automation\CostPriceSheetTemplate.xlsx
 
     <test name="SelfServicePriceSheet1">
         <classes>

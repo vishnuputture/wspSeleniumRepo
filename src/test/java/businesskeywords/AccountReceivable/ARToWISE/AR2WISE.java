@@ -58,8 +58,8 @@ public class AR2WISE extends ReusableLib {
         return By.xpath("//label[contains(text(),'" + textName + "')]");
     }
 
-    public By pTag(String text){
-        return By.xpath("//p[text()='"+text+"']");
+    public By pTag(String text) {
+        return By.xpath("//p[text()='" + text + "']");
     }
 
     public void navigateToFixBusinessDays() {
@@ -76,15 +76,15 @@ public class AR2WISE extends ReusableLib {
         }
     }
 
-    public void selectCompany() {
+    public void selectCompanyAR() {
         Utility_Functions.timeWait(3);
-        sendKeys(AR2WISEPage.winLabel, jsonData.getData("companyName"), "Enter ["+jsonData.getData("companyName")+"] into Company Number and Name text box");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//ngb-highlight[contains(@ng-reflect-result,'"+jsonData.getData("companyName")+"')]"), "click "+jsonData.getData("companyName"));
+        sendKeys(AR2WISEPage.winLabel, jsonData.getData("companyName"), "Enter [" + jsonData.getData("companyName") + "] into Company Number and Name text box");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//ngb-highlight[contains(@ng-reflect-result,'" + jsonData.getData("companyName") + "')]"), "click " + jsonData.getData("companyName"));
         Utility_Functions.timeWait(4);
     }
 
     public void fixBusinessDaysRecordUI() {
-        selectCompany();
+        selectCompanyAR();
         String[] buttons = {" Customer Number ", " Customer Name ", " Invoice Number ", " Business Day ", " Document Type ", " Ship Date ", " Amount ", " Gross Margin Amount "};
         for (String button : buttons) {
             commonObj.validateElementExists(buttonTag(button), "[" + button + "] is present");
@@ -112,7 +112,7 @@ public class AR2WISE extends ReusableLib {
     }
 
     public void verifySearchRecordUsingBusinessDays() {
-        selectCompany();
+        selectCompanyAR();
         commonObj.validateText(AR2WISEPage.businessDays, "ALL", "By default [ALL] is present");
         int dropVal = 0;
         for (int i = 1; i < 24; i++) {
@@ -152,7 +152,7 @@ public class AR2WISE extends ReusableLib {
     }
 
     public void verifySearchAllField() {
-        selectCompany();
+        selectCompanyAR();
         for (int i = 1; i < 24; i++) {
             selectBusinessDay(i);
             if (!isDisplayed(AR2WISEPage.noResultFound)) {
@@ -177,7 +177,7 @@ public class AR2WISE extends ReusableLib {
     }
 
     public void verifySearchResult() {
-        selectCompany();
+        selectCompanyAR();
         for (int i = 0; i < 8; i++) {
             if (i != 3 && i != 4) {
                 searchResult(i);
@@ -206,7 +206,7 @@ public class AR2WISE extends ReusableLib {
     }
 
     public void verifyItemPerPage() {
-        selectCompany();
+        selectCompanyAR();
         itemCountSelect("10");
         itemCountSelect("50");
         itemCountSelect("500");
@@ -214,7 +214,7 @@ public class AR2WISE extends ReusableLib {
     }
 
     public void verifyPagination() {
-        selectCompany();
+        selectCompanyAR();
         int pageCount = itemCountSelect("10");
         int sum = ownDriver.findElements(By.xpath("//tr")).size() - 1;
         while (ownDriver.findElement(AR2WISEPage.nextPage).isEnabled()) {
@@ -250,12 +250,12 @@ public class AR2WISE extends ReusableLib {
     }
 
     public void verifySortableColumn() {
-        selectCompany();
+        selectCompanyAR();
         sortingCol();
     }
 
     public void verifyMinMaximize() {
-        selectCompany();
+        selectCompanyAR();
         click(AR2WISEPage.expandMinimize, "CLick Expand/Hide icon");
         try {
             click(By.xpath("//label[text()='Company Number and Name']"));
@@ -267,73 +267,85 @@ public class AR2WISE extends ReusableLib {
         click(By.xpath("//label[text()='Company Number and Name']"));
     }
 
-    public By labelField(String text){
-        return By.xpath("//label[contains(text(),'"+text+"')]/parent::div/div/input");
+    public By labelField(String text) {
+        return By.xpath("//label[contains(text(),'" + text + "')]/parent::div/div/input");
     }
 
-    public void verifyCreditDebitMemo(){
-        selectCompany();
-        String invoiceNo[]=Utility_Functions.xGetJsonData("InvoiceNumber").split("-");
-        sendKeys(labelField("Search All"),invoiceNo[0],"Enter invoice No. ["+invoiceNo[0]+"] into Search All field");
-        commonObj.validateElementExists(By.xpath("//td[contains(text(),'"+invoiceNo[0]+"')]"),"Invoice Number exist "+invoiceNo[0]);
-        commonObj.validateElementExists(By.xpath("//span[contains(text(),'"+jsonData.getData("memo")+"')]"),"Document type exist "+jsonData.getData("memo"));
-        String currentDate=Utility_Functions.getCurrentDate();
-        commonObj.validateElementExists(By.xpath("//td[contains(text(),'"+currentDate+"')]"),"Ship Date exist "+currentDate);
+    public void verifyCreditDebitMemo() {
+        selectCompanyAR();
+        String invoiceNo[] = Utility_Functions.xGetJsonData("InvoiceNumber").split("-");
+        sendKeys(labelField("Search All"), invoiceNo[0], "Enter invoice No. [" + invoiceNo[0] + "] into Search All field");
+        commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + invoiceNo[0] + "')]"), "Invoice Number exist " + invoiceNo[0]);
+        commonObj.validateElementExists(By.xpath("//span[contains(text(),'" + jsonData.getData("memo") + "')]"), "Document type exist " + jsonData.getData("memo"));
+        String currentDate = Utility_Functions.getCurrentDate();
+        commonObj.validateElementExists(By.xpath("//td[contains(text(),'" + currentDate + "')]"), "Ship Date exist " + currentDate);
     }
 
-    public void verifyARGLDetailInquiryUI(){
-        String[] labels = {"Company Number and Name", "Journal Type", "GL Account Number","Date","Search All"};
+    public void verifyARGLDetailInquiryUI() {
+        String[] labels = {"Company Number and Name", "Journal Type", "GL Account Number", "Date", "Search All"};
         for (String label : labels) {
             commonObj.validateElementExists(labelTag(label), "[" + label + "] label is present");
         }
-        String[] actions={"ACTIONS","TOTALS","GL Account:  | Total: "};
+        String[] actions = {"ACTIONS", "TOTALS", "GL Account:  | Total: "};
         for (String action : actions) {
             commonObj.validateElementExists(pTag(action), "[" + action + "] Action label is present");
         }
         commonObj.validateElementExists(AR2WISEPage.castReceipt, "[Cash Receipt] label is present");
     }
 
-    public void selectJournalType(){
-        String[] journalTypes={"ARJ","NTR","CRJ"};
-        for(String journalType:journalTypes){
-            Utility_Functions.xSelectDropdownByName(ownDriver,AR2WISEPage.journalType,journalType);
+    public void selectJournalType() {
+        String[] journalTypes = {"ARJ", "NTR", "CRJ"};
+        for (String journalType : journalTypes) {
+            Utility_Functions.xSelectDropdownByName(ownDriver, AR2WISEPage.journalType, journalType);
             Utility_Functions.timeWait(5);
-            if(!isDisplayed(spanTag("No results found"))){
+            if (!isDisplayed(spanTag("No results found"))) {
                 break;
             }
         }
     }
 
-    public void glAccount(){
-        String account=getAttribute(AR2WISEPage.glAccountNumber,"ng-reflect-model");
-        commonObj.validateElementExists(By.xpath("//p[text()='GL Account: "+account+" | Total: ']"),"GL Account matches");
+    public void glAccount() {
+        String account = getAttribute(AR2WISEPage.glAccountNumber, "ng-reflect-model");
+        commonObj.validateElementExists(By.xpath("//p[text()='GL Account: " + account + " | Total: ']"), "GL Account matches");
         Utility_Functions.timeWait(2);
-        int rowCount=ownDriver.findElements(By.xpath("//tr")).size()-1;
-        commonObj.validateElementExists(By.xpath("//span/strong[text()=' "+rowCount+"']"),"Row count matches");
-        commonObj.validateElementExists(By.xpath("//div[text()='1 - "+rowCount+" of "+rowCount+"']"),"Pagination count matches");
+        int rowCount = ownDriver.findElements(By.xpath("//tr")).size() - 1;
+        commonObj.validateElementExists(By.xpath("//span/strong[text()=' " + rowCount + "']"), "Row count matches");
+        commonObj.validateElementExists(By.xpath("//div[text()='1 - " + rowCount + " of " + rowCount + "']"), "Pagination count matches");
     }
 
-    public void totalAmount(){
-        int count=ownDriver.findElements(By.xpath("//td")).size();
-        double sum=0;
-        for(int i=3;i<count-1; ){
-            String amt=ownDriver.findElements(By.xpath("//td")).get(i).getText().trim().replace(",","");
-            if(amt.contains("CR")){
-                amt=amt.replace("CR","");
+    public Double getTotalAmount() {
+        int count = ownDriver.findElements(By.xpath("//td")).size();
+        double sum = 0;
+        for (int i = 3; i < count - 1; ) {
+            String amt = ownDriver.findElements(By.xpath("//td")).get(i).getText().trim().replace(",", "");
+            if (amt.contains("CR")) {
+                amt = amt.replace("CR", "");
+                double amount = Double.parseDouble(amt);
+                sum = sum - amount;
+            } else {
+                double amount = Double.parseDouble(amt);
+                sum = sum + amount;
             }
-            double amount=Double.parseDouble(amt);
-            sum=sum+amount;
-            i=i+6;
+            i = i + 6;
         }
-        commonObj.validateElementExists(By.xpath("//span/strong[text()=' "+sum+"']"),"Total Amount matches");
+        return sum;
     }
 
-    public void getCompanyAndJournal(){
-        selectCompany();
+    public void totalAmount() {
+        Double sum = getTotalAmount();
+        String amountVal = getText(AR2WISEPage.totalAmount).replace(",", "");
+        if (amountVal.contains(".00")) {
+            amountVal = amountVal.replace(".00", ".0");
+        }
+        Utility_Functions.xAssertEquals(report, amountVal, "" + sum + "", "Total Amount matches");
+    }
+
+    public void getCompanyAndJournal() {
+        selectCompanyAR();
         selectJournalType();
     }
 
-    public void verifyARGLDetailInquiryRecordsUI(){
+    public void verifyARGLDetailInquiryRecordsUI() {
         getCompanyAndJournal();
         glAccount();
         totalAmount();
@@ -342,11 +354,11 @@ public class AR2WISE extends ReusableLib {
             commonObj.validateElementExists(buttonTag(button), "[" + button + "] is present");
         }
         commonObj.validateElementExists(AR2WISEPage.expandMinimize, "Expand-Hide Icon is present");
-        commonObj.validateElementExists(buttonTag(" Export to Excel "),"[Export to Excel] button is present");
+        commonObj.validateElementExists(buttonTag(" Export to Excel "), "[Export to Excel] button is present");
     }
 
     public void verifyMinMaximizeARGL() {
-        selectCompany();
+        selectCompanyAR();
         click(AR2WISEPage.expandMinimize, "CLick Expand/Hide icon");
         try {
             click(By.xpath("//label[text()='Company Number and Name']"));
@@ -360,15 +372,15 @@ public class AR2WISE extends ReusableLib {
 
     public void verifyEditDateField() {
         getCompanyAndJournal();
-        String date=Utility_Functions.xGetCurrentDate("MM/YYYY");
-        Utility_Functions.xAssertEquals(report,getAttribute(AR2WISEPage.datePick,"value"),date,date+" is present");
+        String date = Utility_Functions.xGetCurrentDate("MM/YYYY");
+        Utility_Functions.xAssertEquals(report, getAttribute(AR2WISEPage.datePick, "value"), date, date + " is present");
         sendKeysAndEnter(AR2WISEPage.datePick, jsonData.getData("date"), "Enter date");
-        Utility_Functions.xAssertEquals(report,getAttribute(AR2WISEPage.datePick,"value"),jsonData.getData("date"),jsonData.getData("date")+" is present");
+        Utility_Functions.xAssertEquals(report, getAttribute(AR2WISEPage.datePick, "value"), jsonData.getData("date"), jsonData.getData("date") + " is present");
     }
 
-    public void dateField(String datePattern){
-        String date= jsonData.getData(datePattern);
-        sendKeysAndEnter(AR2WISEPage.datePick,date,"Enter "+date);
+    public void dateField(String datePattern) {
+        String date = jsonData.getData(datePattern);
+        sendKeysAndEnter(AR2WISEPage.datePick, date, "Enter " + date);
         //commonObj.validateText(spanTag("No results found"),"No results found","[No results found] message is present");
     }
 
@@ -378,5 +390,160 @@ public class AR2WISE extends ReusableLib {
         dateField("AlphaDate");
         dateField("invalidFormat");
         dateField("invalidDate");
+    }
+
+    public void verifyBreakDownPopupUI() {
+        String[] cols = {" Account ", " Debit ", " Credit "};
+        for (String col : cols) {
+            commonObj.validateText(By.xpath("//button[contains(text(),'" + col + "')]"), col.trim(), "Column present [" + col + "]");
+        }
+        commonObj.validateText(buttonTag("Close"), "Close", "[Close] button is present");
+    }
+
+    public void verifyBreakDownDetails() {
+        String customer = getText(By.xpath("//span/a"));
+        String invoice = ownDriver.findElements(By.xpath("//td")).get(2).getText();
+        click(By.xpath("//span/a"), "Click [" + getText(By.xpath("//span/a")) + "]");
+        String[] headers = {"A/R G/L DETAIL BREAKDOWN", customer, "Reference: " + invoice};
+        for (String header : headers) {
+            commonObj.validateText(By.xpath("//h2[contains(text(),'" + header + "')]"), header, "Header is present [" + header + "]");
+        }
+    }
+
+    public double verifyDebitCreditCalculationBeakDown(int debCred) {
+        int size = ownDriver.findElements(AR2WISEPage.breakDownCal).size();
+        double sum = 0;
+        for (int i = debCred; i < size; ) {
+            String debit = ownDriver.findElements(AR2WISEPage.breakDownCal).get(i).getText().trim();
+            if (debit.equals("")) {
+                debit = "0";
+            }
+            double debitInt = Double.parseDouble(debit);
+            sum = sum + debitInt;
+            i = i + 3;
+        }
+        return sum;
+    }
+
+    public void findRecords() {
+        String[] options = {"a", "b", "c", "d"};
+        int j = 0;
+        for (String option : options) {
+            sendKeys(AR2WISEPage.winLabel, option);
+            Utility_Functions.timeWait(3);
+            List<WebElement> els = ownDriver.findElements(By.xpath("//ngb-highlight"));
+            int dropDownOptions = els.size();
+            for (int i = 0; i < dropDownOptions; i++) {
+                click(ownDriver.findElements(By.xpath("//ngb-highlight")).get(i), "Click [" + ownDriver.findElements(By.xpath("//ngb-highlight")).get(i).getText() + "]");
+                Utility_Functions.timeWait(4);
+                if (isDisplayed(By.xpath("//span/a"))) {
+                    j = -1;
+                    break;
+                }
+                sendKeys(AR2WISEPage.winLabel, option);
+                Utility_Functions.timeWait(2);
+            }
+            if (j == -1) {
+                verifyBreakDownDetails();
+                verifyBreakDownPopupUI();
+                Double debitSum = verifyDebitCreditCalculationBeakDown(1);
+                Double creditSum = verifyDebitCreditCalculationBeakDown(2);
+                String debit = ownDriver.findElements(AR2WISEPage.debitCreditTotal).get(1).getText();
+                String credit = ownDriver.findElements(AR2WISEPage.debitCreditTotal).get(2).getText();
+                if (debit.endsWith("0")) {
+                    Utility_Functions.xAssertEquals(report, debit.substring(0, debit.length() - 1), "" + debitSum + "", "Debit sum Matches [" + debitSum + "]");
+                } else {
+                    Utility_Functions.xAssertEquals(report, debit, "" + debitSum + "", "Debit sum Matches [" + debitSum + "]");
+                }
+                if (credit.endsWith("0")) {
+                    Utility_Functions.xAssertEquals(report, credit.substring(0, credit.length() - 1), "" + creditSum + "", "Credit sum Matches [" + creditSum + "]");
+                } else {
+                    Utility_Functions.xAssertEquals(report, credit, "" + creditSum + "", "Debit sum Matches [" + creditSum + "]");
+                }
+                break;
+            }
+        }
+    }
+
+    public void verifyFindARJRecords() {
+        Utility_Functions.xSelectDropdownByName(ownDriver, AR2WISEPage.journalType, "ARJ");
+        Utility_Functions.timeWait(3);
+        findRecords();
+        click(buttonTag("Close"), "Click [Close] button");
+    }
+
+    public void verifyFindNTRRecords() {
+        Utility_Functions.xSelectDropdownByName(ownDriver, AR2WISEPage.journalType, "NTR");
+        Utility_Functions.timeWait(3);
+        findRecords();
+        click(buttonTag("Close"), "Click [Close] button");
+    }
+
+    public void verifyFindCRJRecords() {
+        Utility_Functions.xSelectDropdownByName(ownDriver, AR2WISEPage.journalType, "CRJ");
+        Utility_Functions.timeWait(3);
+        findRecords();
+        click(buttonTag("Close"), "Click [Close] button");
+    }
+
+    public void verifyFilteredAmount() {
+        Double sum = getTotalAmount();
+        String amountVal = getText(AR2WISEPage.filteredTotal).replace(",", "");
+        if (amountVal.contains(".00")) {
+            amountVal = amountVal.replace(".00", ".0");
+        }
+        Utility_Functions.xAssertEquals(report, amountVal, "" + sum + "", "Total Amount matches");
+    }
+
+    public void verifySearchFilterItems() {
+        getCompanyAndJournal();
+        Utility_Functions.timeWait(3);
+        String customer = getText(By.xpath("//span/a"));
+        sendKeysAndEnter(AR2WISEPage.searchAllARGL, customer, "Search for Customer Name [" + customer + "]");
+        Utility_Functions.timeWait(3);
+        int count = ownDriver.findElements(By.xpath("//span/a")).size();
+        commonObj.validateText(By.xpath("//span/strong[text()=' " + count + "']"), "" + count + "", "Filtered Result Matches to [" + count + "]");
+        verifyFilteredAmount();
+        for (int i = 1; i < 5; i++) {
+            String colVal = ownDriver.findElements(By.xpath("//td")).get(i).getText().trim();
+            sendKeysAndEnter(AR2WISEPage.searchAllARGL, colVal, "Search for [" + colVal + "]");
+            Utility_Functions.timeWait(3);
+            count = ownDriver.findElements(By.xpath("//span/a")).size();
+            commonObj.validateText(By.xpath("//span/strong[text()=' " + count + "']"), "" + count + "", "Filtered Result Matches to [" + count + "]");
+            verifyFilteredAmount();
+        }
+    }
+
+    public void verifySearchErrorALGL(String search) {
+        sendKeys(AR2WISEPage.searchAllARGL, search, "Enter [" + search + "] into Search All text box");
+        if (!search.equals("  ")) {
+            commonObj.validateText(AR2WISEPage.resultStatus, "Results hidden by '" + search + "' filter", "[Results hidden by '" + search + "' filter]");
+        } else {
+            commonObj.validateElementExists(By.xpath("//tr/td"), "For [Bank space] in [Search All] field Records are found");
+        }
+    }
+
+    public void verifySearchAllFieldARGL() {
+        verifySearchErrorALGL(jsonData.getData("searchSpecialCharacter"));
+        commonObj.validateText(By.xpath("//span/strong[text()=' 0']"), "0", "Filtered Result Matches to [0]");
+        Utility_Functions.xAssertEquals(report, "0.00", "0.00", "Total Amount matches [0.00]");
+        verifySearchErrorALGL(jsonData.getData("searchNegative"));
+        commonObj.validateText(By.xpath("//span/strong[text()=' 0']"), "0", "Filtered Result Matches to [0]");
+        Utility_Functions.xAssertEquals(report, "0.00", "0.00", "Total Amount matches [0.00]");
+        verifySearchErrorALGL(jsonData.getData("searchInvalid"));
+        commonObj.validateText(By.xpath("//span/strong[text()=' 0']"), "0", "Filtered Result Matches to [0]");
+        Utility_Functions.xAssertEquals(report, "0.00", "0.00", "Total Amount matches [0.00]");
+    }
+
+    public void verifyArrowFunctionality() {
+        Utility_Functions.timeWait(3);
+        itemCountSelect("10");
+        Boolean bl = isDisplayed(AR2WISEPage.nextPage);
+        if (bl) {
+            click(AR2WISEPage.nextPage, "Click [>] Arrow");
+            Utility_Functions.xAssertEquals(report, true, isDisplayed(AR2WISEPage.previousPage), "");
+            click(AR2WISEPage.previousPage,"Click [<] Previous Arrow");
+            Utility_Functions.xAssertEquals(report,true , isDisplayed(AR2WISEPage.nextPage), "");
+        }
     }
 }

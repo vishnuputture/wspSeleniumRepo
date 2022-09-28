@@ -20,7 +20,17 @@
       "Tc_495_verifyMinMaximizeARGL": "navigateToAr2WISE,verifyMinMaximizeARGL",
       "Tc_489_verifyCompanyNoAndNameARGL": "navigateToAr2WISE,verifyCompanyNoAndName",
       "Tc_490_verifyEditDateField": "navigateToAr2WISE,verifyEditDateField",
-      "Tc_497_verifyDateField": "navigateToAr2WISE,verifyDateField"
+      "Tc_497_verifyDateField": "navigateToAr2WISE,verifyDateField",
+      "Tc_496_verifyFindARJRecords": "navigateToAr2WISE,verifyFindARJRecords",
+      "Tc_496_verifyFindNTRRecords": "navigateToAr2WISE,verifyFindNTRRecords",
+      "Tc_496_verifyFindCRJRecords": "navigateToAr2WISE,verifyFindCRJRecords",
+      "CreateSalesOrder": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,fillInOtherFields,navigateToItemsTab,addItemsToSalesorder,saveExitSalesOrders,signOut",
+      "Tc_492_verifyARRecordsFromWise": "----DOBUTTTTTTTTTT-----",
+      "Tc_473_verifySearchFilterItems": "navigateToAr2WISE,verifySearchFilterItems",
+      "Tc_477_verifySearchAllField": "navigateToAr2WISE,selectJournalType,verifySearchAllFieldARGL",
+      "Tc_479_verifySortingColumn": "navigateToAr2WISE,selectJournalType,sortingCol",
+      "Tc_482_verifyPaginationARGL": "navigateToAr2WISE,selectJournalType,verifyPagination",
+      "Tc_483_verifyArrowFunctionality": "navigateToAr2WISE,selectJournalType,verifyArrowFunctionality"
     }
   ],
   "General_Data": [
@@ -79,7 +89,7 @@
       "MemoType": "DSC",
       "InvoiceAmount": "10",
       "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "000679-00"
+      "InvoiceNumber": "000820-00"
     },
     {
       "TC_ID": "Tc_429_verifyCreditMemo",
@@ -93,7 +103,7 @@
       "MemoType": "DSC",
       "InvoiceAmount": "10",
       "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "000680-00"
+      "InvoiceNumber": "000821-00"
     },
     {
       "TC_ID": "Tc_429_verifyDebitMemo",
@@ -131,6 +141,47 @@
       "specialCharDate": "#$/^(%%",
       "AlphaDate": "ADvFFg",
       "invalidFormat": "2022/09"
+    },
+    {
+      "TC_ID": "Tc_496_verifyFindNTRRecords"
+    },
+    {
+      "TC_ID": "Tc_496_verifyFindCRJRecords"
+    },
+    {
+      "TC_ID": "Tc_496_verifyFindARJRecords"
+    },
+    {
+      "TC_ID": "CreateSalesOrder",
+      "accountNo": "099599",
+      "JobName": "TEST AUTOMATION",
+      "PONumber": "16121",
+      "PlacedBy": "john doe",
+      "FilledBy": "joe",
+      "itemNo1": "0609CTS21001",
+      "itemNo2": "0609CTS2100112"
+    },
+    {
+      "TC_ID": "Tc_492_verifyARRecordsFromWise"
+    },
+    {
+      "TC_ID": "Tc_473_verifySearchFilterItems",
+      "companyName": "00916"
+    },
+    {
+      "TC_ID": "Tc_477_verifySearchAllField",
+      "companyName": "00916",
+      "searchSpecialCharacter": "@%(*&",
+      "searchNegative": "-100",
+      "searchInvalid": "123456ADc"
+    },
+    {
+      "TC_ID": "Tc_482_verifyPaginationARGL",
+      "companyName": "00916"
+    },
+    {
+      "TC_ID": "Tc_483_verifyArrowFunctionality",
+      "companyName": "00916"
     }
   ]
 }
