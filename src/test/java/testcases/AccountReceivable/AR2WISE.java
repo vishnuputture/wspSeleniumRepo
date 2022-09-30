@@ -192,7 +192,7 @@ public class AR2WISE extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void CreateSalesOrder(SeleniumTestParameters testParameters) {
+    public void CreateSalesOrderCA(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case to create a sales order");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -200,7 +200,7 @@ public class AR2WISE extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_496_verifyARRecordsFromWise(SeleniumTestParameters testParameters) {
+    public void Tc_492_verifyARRecordsFromWise(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test to verify that AR records created in WISE application is reflected in AR2WISE application");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
@@ -242,6 +242,46 @@ public class AR2WISE extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_483_verifyArrowFunctionality(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test to verify that user is able to move back and froth between the pages by clicking on '>' and '<' pagination arrows");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_505_verifyCashReceiptUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of 'Cash Receipt' pop up");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_verifyPaymentAdjustmentScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of 'Cash Receipt' pop up");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_verifyEntryBankDepositScreen(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of 'Cash Receipt' pop up");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_504_verifyCashReceiptFromWise(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify 'cash receipts' can be added by adjustment (9/1) screen in WISE");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_503_verifyNTRRecordFromWise(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify NTR record from WISE");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

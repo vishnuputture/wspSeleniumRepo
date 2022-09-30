@@ -24,13 +24,18 @@
       "Tc_496_verifyFindARJRecords": "navigateToAr2WISE,verifyFindARJRecords",
       "Tc_496_verifyFindNTRRecords": "navigateToAr2WISE,verifyFindNTRRecords",
       "Tc_496_verifyFindCRJRecords": "navigateToAr2WISE,verifyFindCRJRecords",
-      "CreateSalesOrder": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,fillInOtherFields,navigateToItemsTab,addItemsToSalesorder,saveExitSalesOrders,signOut",
-      "Tc_492_verifyARRecordsFromWise": "----DOBUTTTTTTTTTT-----",
+      "CreateSalesOrderCA": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,fillInOtherFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatusCA,loadLastOrder,saveExitSalesOrders,signOut",
+      "Tc_492_verifyARRecordsFromWise": "navigateToAr2WISE,selectCompanyAR,selectJournal,verifyARRecordsFromWise",
       "Tc_473_verifySearchFilterItems": "navigateToAr2WISE,verifySearchFilterItems",
       "Tc_477_verifySearchAllField": "navigateToAr2WISE,selectJournalType,verifySearchAllFieldARGL",
       "Tc_479_verifySortingColumn": "navigateToAr2WISE,selectJournalType,sortingCol",
       "Tc_482_verifyPaginationARGL": "navigateToAr2WISE,selectJournalType,verifyPagination",
-      "Tc_483_verifyArrowFunctionality": "navigateToAr2WISE,selectJournalType,verifyArrowFunctionality"
+      "Tc_483_verifyArrowFunctionality": "navigateToAr2WISE,selectJournalType,verifyArrowFunctionality",
+      "Tc_505_verifyCashReceiptUI": "navigateToAr2WISE,selectJournalType,navigateToCashReceipt,verifyCashReceiptUI",
+      "Tc_verifyPaymentAdjustmentScreen": "launchApp,siteLogin,navigateToCashReceiptAdjEntry,verifyInvoiceReflectedOnCash",
+      "Tc_verifyEntryBankDepositScreen": "launchApp,siteLogin,navigateToBankDepositScreen,verifyEntryBankDeposit",
+      "Tc_504_verifyCashReceiptFromWise": "navigateToAr2WISE,selectJournalType,verifyCashReceiptFromWise",
+      "Tc_503_verifyNTRRecordFromWise": "navigateToAr2WISE,selectCompanyAR,selectJournal,verifyNTRRecordFromWise"
     }
   ],
   "General_Data": [
@@ -89,7 +94,7 @@
       "MemoType": "DSC",
       "InvoiceAmount": "10",
       "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "000820-00"
+      "InvoiceNumber": "000829-00"
     },
     {
       "TC_ID": "Tc_429_verifyCreditMemo",
@@ -103,7 +108,7 @@
       "MemoType": "DSC",
       "InvoiceAmount": "10",
       "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "000821-00"
+      "InvoiceNumber": "000888-00"
     },
     {
       "TC_ID": "Tc_429_verifyDebitMemo",
@@ -152,7 +157,7 @@
       "TC_ID": "Tc_496_verifyFindARJRecords"
     },
     {
-      "TC_ID": "CreateSalesOrder",
+      "TC_ID": "CreateSalesOrderCA",
       "accountNo": "099599",
       "JobName": "TEST AUTOMATION",
       "PONumber": "16121",
@@ -162,7 +167,9 @@
       "itemNo2": "0609CTS2100112"
     },
     {
-      "TC_ID": "Tc_492_verifyARRecordsFromWise"
+      "TC_ID": "Tc_492_verifyARRecordsFromWise",
+      "companyName": "99599",
+      "journalType": "ARJ"
     },
     {
       "TC_ID": "Tc_473_verifySearchFilterItems",
@@ -182,6 +189,25 @@
     {
       "TC_ID": "Tc_483_verifyArrowFunctionality",
       "companyName": "00916"
+    },
+    {
+      "TC_ID": "Tc_505_verifyCashReceiptUI",
+      "companyName": "00916 - 3131 Dixie Drive LLC"
+    },
+    {
+      "TC_ID": "Tc_verifyPaymentAdjustmentScreen"
+    },
+    {
+      "TC_ID": "Tc_verifyEntryBankDepositScreen"
+    },
+    {
+      "TC_ID": "Tc_504_verifyCashReceiptFromWise",
+      "companyName": "00916"
+    },
+    {
+      "TC_ID": "Tc_503_verifyNTRRecordFromWise",
+      "companyName": "99599",
+      "journalType": "NTR"
     }
   ]
 }

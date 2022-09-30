@@ -36,9 +36,26 @@ public class AR2WISEPage extends ReusableLib {
     public static By castReceipt=By.xpath("//a[text()=' Cash Receipts ']");
     public static By journalType=By.id("journalType");
     public static By glAccountNumber=By.id("glAccountNumber");
+    public static By glAccount=By.id("glAccount");
+    public static By description=By.id("description");
+    public static By processBtn=By.id("processBtn");
+    public static By okToApply=By.id("I_8_21");
+    public static By printReceipt=By.id("I_9_23");
+    public static By commentBox=By.id("I_15_35");
+    public static By amountReceived=By.id("amountReceived");
     public static By datePick=By.id("date");
+    public static By amount=By.id("I_7_61");
+    public static By warningMsg=By.id("D_2_17_W1");
+    public static By invoiceTicket=By.id("I_11_50");
+    public static By printJournal=By.id("I_16_50");
+    public static By referenceNo=By.id("I_11_2");
+    public static By optionChekBx=By.xpath("//input[@class='A26 input']");
+    public static By PaymentType =By.xpath("//span[text()='Payments']");
     public static By searchAllARGL=By.id("glSearchFilter");
     public static By filteredTotal=By.xpath("//span/strong");
-    public static By nextPageDis=By.xpath("//button[@aria-label='Next page']");
+    public static By bankDeposit=By.xpath("//div[@id='D_8_7']/a");
+    public static By cashRecComName=By.xpath("(//input[@role])[2]");
+    public static By cashRecDate=By.xpath("(//input[@id='date'])[2]");
+    public static By totalBusinessDays=By.xpath("//select[@id='businessDay']/option");
     public static By totalAmount=By.xpath("//span[text()=' | Results: ']/strong/preceding-sibling::strong");
 }

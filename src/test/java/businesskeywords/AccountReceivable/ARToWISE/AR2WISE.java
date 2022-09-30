@@ -5,9 +5,18 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.AccountReceivable.AR2WISE.AR2WISEPage;
+import pages.AccountReceivable.MiscChargesAndAdjustmentsPage.MiscChargesAndAdjustmentsPage;
+import pages.Purchasing.PurchaseOrderDetailsPage;
+import pages.Purchasing.VendorInvoiceReconciliationPage;
+import pages.common.LoginPage;
 import pages.common.MasterPage;
+import pages.pricing.SalesOrders.SalesOrdersPage;
+import pages.pricing.SpecialPricePage;
+import pages.pricing.pricingmatrix.PricingMatrixPage;
+import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
 
 import java.util.List;
@@ -108,7 +117,7 @@ public class AR2WISE extends ReusableLib {
         click(AR2WISEPage.businessDays);
         Utility_Functions.xAssertEquals(report, ownDriver.findElements(By.xpath("//li")).get(option).getAttribute("data.val"), "" + option + "", "[" + option + "] Business Days dropdown options present");
         click(ownDriver.findElements(By.xpath("//li")).get(option));
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(5);
     }
 
     public void verifySearchRecordUsingBusinessDays() {
@@ -542,8 +551,151 @@ public class AR2WISE extends ReusableLib {
         if (bl) {
             click(AR2WISEPage.nextPage, "Click [>] Arrow");
             Utility_Functions.xAssertEquals(report, true, isDisplayed(AR2WISEPage.previousPage), "");
-            click(AR2WISEPage.previousPage,"Click [<] Previous Arrow");
-            Utility_Functions.xAssertEquals(report,true , isDisplayed(AR2WISEPage.nextPage), "");
+            click(AR2WISEPage.previousPage, "Click [<] Previous Arrow");
+            Utility_Functions.xAssertEquals(report, true, isDisplayed(AR2WISEPage.nextPage), "");
         }
+    }
+
+    public void verifyCashReceiptUI() {
+        Utility_Functions.xAssertEquals(report, getAttribute(AR2WISEPage.cashRecComName, "value"), jsonData.getData("companyName"), "");
+        Utility_Functions.xAssertEquals(report, getAttribute(AR2WISEPage.cashRecDate, "placeholder"), Utility_Functions.xGetCurrentDate("MM/dd/YYYY"), "");
+        int count = ownDriver.findElements(AR2WISEPage.totalBusinessDays).size();
+        Utility_Functions.xAssertEquals(report, count, 24, "Total business days: ");
+        commonObj.validateElementExists(AR2WISEPage.glAccount, "GL Account text Box present");
+        commonObj.validateElementExists(AR2WISEPage.description, "Description text Box present");
+        commonObj.validateElementExists(AR2WISEPage.amountReceived, "Amount Received text Box present");
+        commonObj.validateText(labelTag("Number of Transactions "), "Number of Transactions", "Label [Number of Transactions] is present");
+        commonObj.validateText(labelTag("Total Received"), "Total Received", "Label [Total Received] is present");
+        commonObj.validateElementExists(AR2WISEPage.processBtn, "Process Button is present");
+        commonObj.validateElementExists(buttonTag("Exit"), "Exit Button is present");
+    }
+
+    public void saveExitSalesOrdersCreateShipment() {
+        Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesOrdersPage.paymentMethodDropdown, "Cash");
+        click(SalesOrdersPage.btnApplyPayment, "Applying  payment method");
+        click(SalesOrdersPage.printAndExitbtn, "Click on Print&Exit button");
+    }
+
+    public void changeShipmentStatusCA() {
+        Utility_Functions.timeWait(3);
+        Utility_Functions.xSelectDropdownByIndex(ownDriver, ownDriver.findElement(SalesOrdersPage.shipmentStatus), 1);
+        click(AR2WISEPage.PaymentType, "Click Payment Tab");
+        saveExitSalesOrdersCreateShipment();
+        if (isDisplayed(SalesOrdersPage.printAndExitbtn)) {
+            Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElement(SalesOrdersPage.printAndExitbtn));
+            Utility_Functions.xClickHiddenElement(ownDriver, SalesOrdersPage.printAndExitbtn);
+            click(SalesOrdersPage.btnContinue, "Click on continue button");
+        }
+        click(SalesOrdersPage.pickingImage);
+        Utility_Functions.xScrollIntoView(ownDriver, ownDriver.findElement(SalesOrdersPage.invoiceImage));
+        click(SalesOrdersPage.invoiceImage, "clicking invoice image");
+        click(SalesOrdersPage.continuebtn, "Click on continue button");
+        if (isDisplayed(SalesOrdersPage.btnExitSalesOrderSummary)) {
+            click(SalesOrdersPage.btnExitSalesOrderSummary, "Exiting Sales Order Summary Page");
+        }
+    }
+
+    public void navigateToCashReceipt() {
+        click(anchorTag(" Cash Receipts "), "CLick [Cash Receipts]");
+        commonObj.validateText(By.xpath("//h2"), "cash receipts", "Header is present [cash receipts]");
+    }
+
+    public void verifyInvoiceReflectedOnCashRecAdjEntry() {
+        sendKeys(VendorInvoiceReconciliationPage.dueDateTextBox, Utility_Functions.xGetJsonData("AccountNumber"), "Enter customer Number");
+        sendKeysAndEnter(LoginPage.userNametxtBox, "CA", "Enter Payment Type");
+
+    }
+
+    public void clickCashReceiptAdjEntry() {
+        click(MiscChargesAndAdjustmentsPage.cashReceiptAdjEntry, "Click [Entry - Payments & Adjustments]");
+        if (isDisplayed(AR2WISEPage.warningMsg)) {
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+            sendKeysAndEnter(MasterPage.sqlTxtBox, "clrpfm ar1lck", "Enter [clrpfm ar1lck]");
+            commonObj.validateText(SpecialPricePage.papMessage, "Member AR1LCK file AR1LCK in DTA99599 cleared.", "Message is present");
+            click(MiscChargesAndAdjustmentsPage.cashReceiptAdjEntry, "Click [Entry - Payments & Adjustments]");
+        }
+        commonObj.validateText(MiscChargesAndAdjustmentsPage.cashAdjHeader, "Cash Receipts/Adj Entry", "Validating [Cash Receipts/Adj Entry] page title");
+    }
+
+    public void verifyARRecordsFromWise() {
+        sendKeysAndEnter(AR2WISEPage.datePick, "01/2020", "Enter Date");
+        Utility_Functions.timeWait(5);
+        String invoiceNo = Utility_Functions.xGetJsonAsString("SalesOrder");
+        sendKeys(AR2WISEPage.searchAllARGL, invoiceNo);
+        Utility_Functions.timeWait(5);
+        commonObj.validateElementExists(By.xpath("//td[contains(text(),' " + invoiceNo + "-01')]"), "Invoice number record found");
+        commonObj.validateText(By.xpath("//span/a"), "099599-AUTOMATION TEST CO.", "Company Name matches");
+        String user = getProperties("STGUserName").toUpperCase();
+        commonObj.validateText(By.xpath("//td[contains(text(),'" + Utility_Functions.xGetCurrentDate("MM/dd/YYYY") + "')]"), Utility_Functions.xGetCurrentDate("MM/dd/YYYY"), "Date matches");
+        commonObj.validateText(By.xpath("//td[contains(text(),'" + user + "')]"), user, "User name matches");
+    }
+
+    public void navigateToCashReceiptAdjScreen() {
+        click(MasterPage.accountReceivable, "Click [Account Receivable]");
+        clickCashReceiptAdjEntry();
+    }
+
+    public void verifyInvoiceReflectedOnCash() {
+        sendKeys(VendorInvoiceReconciliationPage.dueDateTextBox, "099599", "Enter customer Number");
+        sendKeysAndEnter(LoginPage.userNametxtBox, "CA", "Enter Payment Type");
+        sendKeys(AR2WISEPage.referenceNo, Utility_Functions.xGetJsonData("salesOrder"), "Enter Sales order number");
+        sendKeys(PurchaseOrderDetailsPage.datePOD, "01", "Enter invoice number");
+        sendKeysAndEnter(AR2WISEPage.amount, Utility_Functions.xGetJsonData("receivedAmount"), "Enter Amount");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        sendKeys(AR2WISEPage.okToApply, "Y", "Enter [Y] into [OK to apply?] check box");
+        sendKeys(AR2WISEPage.printReceipt, "N", "Enter [Y] into [Print Receipt?] check box");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        sendKeysAndEnter(AR2WISEPage.commentBox, "Automation Test", "Enter comment");
+        commonObj.validateText(VendorInvoiceReconciliationPage.warningMessage, "Successful application of entries to customer account.", "Success message present");
+    }
+
+    public void selectJournal() {
+        Utility_Functions.xSelectDropdownByName(ownDriver, AR2WISEPage.journalType, jsonData.getData("journalType"));
+        Utility_Functions.timeWait(5);
+    }
+
+    public void navigateToBankDepositScreen() {
+        click(MasterPage.accountReceivable, "Click [Account Receivable]");
+        click(AR2WISEPage.bankDeposit, "Click [Entry - Bank Deposit]");
+    }
+
+    public void clearInput() {
+        int count = ownDriver.findElements(AR2WISEPage.optionChekBx).size();
+        for (int i = 0; i < count; ) {
+            ownDriver.findElements(AR2WISEPage.optionChekBx).get(i).clear();
+            i = i + 2;
+        }
+    }
+
+    public void verifyEntryBankDeposit() {
+        sendKeys(AR2WISEPage.invoiceTicket, "NO", "Enter [NO] to KeyYESto invoice tickets");
+        sendKeysAndEnter(AR2WISEPage.printJournal, "NO", "Enter [NO] to KeyYESto print journal");
+        if (isDisplayed(AR2WISEPage.warningMsg)) {
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+            sendKeysAndEnter(MasterPage.sqlTxtBox, "clrpfm ar1lck", "Enter [clrpfm ar1lck]");
+            commonObj.validateText(SpecialPricePage.papMessage, "Member AR1LCK file AR1LCK in DTA99599 cleared.", "Message is present");
+            click(AR2WISEPage.bankDeposit, "Click [Entry - Bank Deposit]");
+            sendKeys(AR2WISEPage.invoiceTicket, "NO", "Enter [NO] to KeyYESto invoice tickets");
+            sendKeysAndEnter(AR2WISEPage.printJournal, "NO", "Enter [NO] to KeyYESto print journal");
+        }
+        commonObj.validateText(PricingMatrixPage.dispListTitle, "Select Deposits to Take to Bank", "Header is present");
+        clearInput();
+        while (isDisplayed(SpecialPriceAllowancePage.downButton)) {
+            click(SpecialPriceAllowancePage.downButton);
+            clearInput();
+        }
+    }
+
+    public void verifyNTRRecordFromWise() {
+        sendKeysAndEnter(AR2WISEPage.datePick, "01/2020", "Enter Date");
+        Utility_Functions.timeWait(5);
+        String invoiceNo = Utility_Functions.xGetJsonAsString("InvoiceNumber");
+        sendKeys(AR2WISEPage.searchAllARGL, invoiceNo);
+        Utility_Functions.timeWait(5);
+        commonObj.validateElementExists(By.xpath("//td[contains(text(),' " + invoiceNo + "')]"), "Invoice number record found");
+        commonObj.validateElementExists(By.xpath("//span/a[contains(text(),'"+Utility_Functions.xGetJsonData("AccountName")+"')]"), "Company Name matches");
+        String user = getProperties("STGUserName").toUpperCase();
+        commonObj.validateText(By.xpath("//td[contains(text(),'" + Utility_Functions.xGetCurrentDate("MM/dd/YYYY") + "')]"), Utility_Functions.xGetCurrentDate("MM/dd/YYYY"), "Date matches");
+        commonObj.validateText(By.xpath("//td[contains(text(),'" + user + "')]"), user, "User name matches");
     }
 }
