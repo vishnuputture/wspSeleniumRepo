@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.common.LoginPage;
 import pages.common.MasterPage;
-import pages.warehouse.SmokeTestPage;
 import supportLibraries.Utility_Functions;
 
 import java.util.Arrays;
@@ -115,7 +114,6 @@ public class Login extends ReusableLib {
         Utility_Functions.timeWait(4);
         String pass = getText(By.xpath("//h2"));
         Utility_Functions.xUpdateJson(environment+"Password", pass);
-        //System.out.println(environment + " " + pass +" "+ properties.getProperty(environment+"Password") + " " + properties.getProperty("GlobalUserName"));
     }
 
     public void winLogin() {

@@ -16,7 +16,7 @@ public class LoginPage extends ReusableLib {
     public static By informationScreenTitle = By.id("D_1_31");
     public static By signOnPageTitle = By.id("D_1_23");
 
-    /* Web Application login */
+    /* Web Application login -Brandon*/
     public static By winLogin = By.id("winlogo");
     public static By winLoginProd = By.xpath("/html/body/div/div/div[2]/div[2]/div[1]");
     public static By userName = By.id("username");
