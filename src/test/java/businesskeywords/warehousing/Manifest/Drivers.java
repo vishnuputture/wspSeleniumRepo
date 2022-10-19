@@ -164,8 +164,6 @@ public class Drivers extends ReusableLib {
             int driverCount = ownDriver.findElements(DriversPage.driverNameCount).size();
             commonObj.validateText(DriversPage.onePage, "of 1", "One page is available having count " + driverCount + "");
         } else {
-            int driverCount = ownDriver.findElements(DriversPage.driverNameCount).size();
-            Utility_Functions.xAssertEquals(report, "" + driverCount + "", "10", "The Count is 10 by default");
             valPageCount(10);
             valPageCount(15);
             valPageCount(30);

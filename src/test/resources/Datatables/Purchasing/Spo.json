@@ -18,7 +18,7 @@
       "Tc_86_verifySavedWorkSheetAvailablePopup": "navigateToSPO,selectCompany,filterCreatedWorksheet,verifySavedWorkSheet",
       "Tc_87_VerifyAddItemsToWS": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProduct,navigateToAddItemToWS,addItemsToWS,addSelectedItemsWorksheetBtn,backToWSBtn,verifyAddedItem,createWorksheet,filterCreatedWorksheet",
       "Tc_88_AddItemToWSUI": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,addItemsToWSUI",
-      "Tc_89_PaginationAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,searchVN,pagination",
+      "Tc_89_PaginationAddItemToWSScreen": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,searchVN,paginationSpo2",
       "Tc_PageCountAddItemToWSPage": "navigateToSPO,selectCompany,navigateToCreateWorksheet,findProductWS,navigateToAddItemToWS,searchVN,funPageCount",
       "Tc_102_VerifyEditWSTempUI": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,navigateEditWSTemp,verifyEditWSTempFields",
       "Tc_106_WSCalculationSection": "navigateToSPO,selectCompany,filterCreatedWorksheet,navigateWSOption,verifyWSCalculation",
@@ -110,15 +110,18 @@
     },
     {
       "TC_ID": "Tc_70_wsItemScreenUI",
-      "Title": "Test case to verify the UI of 'Worksheet Items' screen"
+      "Title": "Test case to verify the UI of 'Worksheet Items' screen",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_71_PaginationWsItemScreen",
-      "Title": "Test case to functionality of pagination,cancel and back buttons on worksheet items screen"
+      "Title": "Test case to functionality of pagination,cancel and back buttons on worksheet items screen",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_PageCountAddItemToWSScreen",
-      "Title": "Test case to functionality of Page count on worksheet items screen"
+      "Title": "Test case to functionality of Page count on worksheet items screen",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_73_RefreshWorkSheet",
@@ -134,23 +137,28 @@
     },
     {
       "TC_ID": "Tc_87_VerifyAddItemsToWS",
-      "Title": "Test case to Verify adding additional items to the worksheet"
+      "Title": "Test case to Verify adding additional items to the worksheet",
+      "CostOption": "List Price"
     },
     {
       "TC_ID": "Tc_88_AddItemToWSUI",
-      "Title": "Test case to Verify UI of 'Add Items To This Worksheet' screen"
+      "Title": "Test case to Verify UI of 'Add Items To This Worksheet' screen",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_89_PaginationAddItemToWSScreen",
-      "Title": "Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen"
+      "Title": "Test case to Verify pagination on 'ADD ITEMS TO THIS WORKSHEET' screen",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_PageCountAddItemToWSPage",
-      "Title": "Test case to Verify Page count on 'ADD ITEMS TO THIS WORKSHEET' screen"
+      "Title": "Test case to Verify Page count on 'ADD ITEMS TO THIS WORKSHEET' screen",
+      "CostOption": "List Price"
     },
     {
       "TC_ID": "Tc_102_VerifyEditWSTempUI",
-      "Title": "Test case to Verify Edit Worksheet Template UI"
+      "Title": "Test case to Verify Edit Worksheet Template UI",
+      "CostOption": "List Price"
     },
     {
       "TC_ID": "Tc_106_WSCalculationSection",
@@ -159,11 +167,13 @@
     },
     {
       "TC_ID": "Tc_110_PaginationWSDetailsPage",
-      "Title": "Test case to Verify Pagination WorkSheet Details Page"
+      "Title": "Test case to Verify Pagination WorkSheet Details Page",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_PageCountWSDetailsPage",
-      "Title": "Test case to Verify Page count on WorkSheet Details Page"
+      "Title": "Test case to Verify Page count on WorkSheet Details Page",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_116_VerifyAssignedUserCanBeChanged",
@@ -180,7 +190,8 @@
     },
     {
       "TC_ID": "Tc_120_EditWSTrashIcon",
-      "Title": "Test case to Verify Delete Worksheet"
+      "Title": "Test case to Verify Delete Worksheet",
+      "CostOption": "Last Cost"
     },
     {
       "TC_ID": "Tc_121_SaveWsButton",
