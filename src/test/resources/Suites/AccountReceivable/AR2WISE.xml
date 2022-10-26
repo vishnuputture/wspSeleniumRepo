@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Accounts Receivable" parallel="none" thread-count="2">
+    <test name="AR2WISE">
+        <classes>
+            <class name="testcases.AccountReceivable.AR2WISE">
+                <methods>
+                    <include name="Tc_416_FixBusinessDaysUI"></include>
+                    <include name="Tc_417_FixBusinessDaysRecordUI"></include>
+                    <include name="Tc_420_verifyCompanyNoAndName"></include>
+                    <include name="Tc_421_verifySearchRecordUsingBusinessDays"></include>
+                    <include name="Tc_424_verifySearchAllField"></include>
+                    <include name="Tc_415_verifySearchResult"></include>
+                    <include name="Tc_423_verifyItemPerPage"></include>
+                    <include name="Tc_426_verifyPagination"></include>
+                    <include name="Tc_427_verifySortableColumn"></include>
+                    <include name="Tc_428_verifyMinMaximize"></include>
+                    <include name="TC_374_VerifyCreationOfCreditMemo"></include>
+                    <include name="Tc_429_verifyCreditMemo"></include>
+                    <include name="TC_375_VerifyCreationOfDebitMemo"></include>
+                    <include name="Tc_429_verifyDebitMemo"></include>
+                    <include name="Tc_480_verifyARGLDetailInquiryUI"></include>
+                    <include name="Tc_481_verifyARGLDetailInquiryRecordsUI"></include>
+                    <include name="Tc_495_verifyMinMaximizeARGL"></include>
+                    <include name="Tc_489_verifyCompanyNoAndNameARGL"></include>
+                    <include name="Tc_490_verifyEditDateField"></include>
+                    <include name="Tc_497_verifyDateField"></include>
+                    <include name="Tc_496_verifyFindARJRecords"></include>
+                    <include name="Tc_496_verifyFindNTRRecords"></include>
+                    <include name="Tc_496_verifyFindCRJRecords"></include>
+                    <include name="CreateSalesOrder"></include>
+                    <include name="Tc_492_verifyARRecordsFromWise"></include>
+                    <include name="Tc_473_verifySearchFilterItems"></include>
+                    <include name="Tc_477_verifySearchAllField"></include>
+                    <include name="Tc_479_verifySortingColumn"></include>
+                    <include name="Tc_482_verifyPaginationARGL"></include>
+                    <include name="Tc_483_verifyArrowFunctionality"></include>
+                    <include name="Tc_505_verifyCashReceiptUI"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

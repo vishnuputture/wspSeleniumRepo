@@ -4939,4 +4939,26 @@ public class Utility_Functions extends ReusableLib {
             }
         }
     }
+
+    public static void waitTillClickHardSleep(Report report,FrameworkDriver driver,WebElement el,String custMsg) {
+        int count = 0;
+        Boolean flag=true;
+        while (flag) {
+            try {
+                el.click();
+                report.updateTestLog("Click", custMsg, Status.PASS);
+                flag=false;
+            } catch (Exception e) {
+                count++;
+                try {
+                    if (count == 30) {
+                        flag = false;
+                        throw new Exception("Element Not Found");
+                    }
+                    Thread.sleep(1000);
+                } catch (Exception ex) {
+                }
+            }
+        }
+    }
 }
