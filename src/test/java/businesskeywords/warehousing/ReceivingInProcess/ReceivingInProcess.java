@@ -321,6 +321,7 @@ public class ReceivingInProcess extends ReusableLib {
         Utility_Functions.timeWait(4);
         click(ReceivingInProcessPage.loginBtn, "Click Login Button");
         click(ReceivingInProcessPage.putAway, "Click Receive Put Away");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
     /**
@@ -955,7 +956,7 @@ public class ReceivingInProcess extends ReusableLib {
         String bin = jsonData.getData("Bin");
         sendKeysAndTab(ReceivingInProcessPage.tbxQty, qty, "Enter Quantity as [" + qty + "] in [Qty] box");
         Utility_Functions.timeWait(2);
-        click(ReceivingInProcessPage.btnSkip, "Click [Skip] button");
+        clickSkipBtnIfPresent();
         Utility_Functions.timeWait(2);
         sendKeysAndEnter(ReceivingInProcessPage.tbxScanLocation, bin, "Enter Bin as [" + bin + "] in [Scan Location] box");
         waitForElementDisappear(ReceivingInProcessPage.pageLoadSpinner, globalWait);

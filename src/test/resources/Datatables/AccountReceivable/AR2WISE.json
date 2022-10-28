@@ -1,213 +1,512 @@
 {
-  "Business_Flow": [
+  "Business_Flow":[
     {
-      "Tc_416_FixBusinessDaysUI": "navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysUI",
-      "Tc_417_FixBusinessDaysRecordUI": "navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysRecordUI",
-      "Tc_420_verifyCompanyNoAndName": "navigateToAr2WISE,navigateToFixBusinessDays,verifyCompanyNoAndName",
-      "Tc_421_verifySearchRecordUsingBusinessDays": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchRecordUsingBusinessDays",
-      "Tc_424_verifySearchAllField": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchAllField",
-      "Tc_415_verifySearchResult": "navigateToAr2WISE,navigateToFixBusinessDays,verifySearchResult",
-      "Tc_423_verifyItemPerPage": "navigateToAr2WISE,navigateToFixBusinessDays,verifyItemPerPage",
-      "Tc_426_verifyPagination": "navigateToAr2WISE,navigateToFixBusinessDays,verifyPagination",
-      "Tc_427_verifySortableColumn": "navigateToAr2WISE,navigateToFixBusinessDays,verifySortableColumn",
-      "Tc_428_verifyMinMaximize": "navigateToAr2WISE,navigateToFixBusinessDays,verifyMinMaximize",
-      "TC_374_VerifyCreationOfCreditMemo": "launchApp,siteLogin,navigateToMiscChargesAndAdjustment,vrfyDefaultValue,vrfyDefaultPrevInvPrevNameValue,selectRandomAccountNumber,enterInvoiceAmount,vrfyAllEntriesValidMsg,getAccountName,getInvoiceNumber,vrfyPrevInv,exitMiscChargesAdj,signOut",
-      "Tc_429_verifyCreditMemo": "navigateToAr2WISE,navigateToFixBusinessDays,verifyCreditDebitMemo",
-      "TC_375_VerifyCreationOfDebitMemo": "launchApp,siteLogin,navigateToMiscChargesAndAdjustment,vrfyDefaultValue,vrfyDefaultPrevInvPrevNameValue,selectRandomAccountNumber,enterInvoiceAmount,vrfyAllEntriesValidMsg,getAccountName,getInvoiceNumber,vrfyPrevInv,exitMiscChargesAdj,signOut",
-      "Tc_429_verifyDebitMemo": "navigateToAr2WISE,navigateToFixBusinessDays,verifyCreditDebitMemo",
-      "Tc_480_verifyARGLDetailInquiryUI": "navigateToAr2WISE,verifyARGLDetailInquiryUI",
-      "Tc_481_verifyARGLDetailInquiryRecordsUI": "navigateToAr2WISE,verifyARGLDetailInquiryRecordsUI",
-      "Tc_495_verifyMinMaximizeARGL": "navigateToAr2WISE,verifyMinMaximizeARGL",
-      "Tc_489_verifyCompanyNoAndNameARGL": "navigateToAr2WISE,verifyCompanyNoAndName",
-      "Tc_490_verifyEditDateField": "navigateToAr2WISE,verifyEditDateField",
-      "Tc_497_verifyDateField": "navigateToAr2WISE,verifyDateField",
-      "Tc_496_verifyFindARJRecords": "navigateToAr2WISE,verifyFindARJRecords",
-      "Tc_496_verifyFindNTRRecords": "navigateToAr2WISE,verifyFindNTRRecords",
-      "Tc_496_verifyFindCRJRecords": "navigateToAr2WISE,verifyFindCRJRecords",
-      "CreateSalesOrderCA": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,fillInOtherFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatusCA,loadLastOrder,saveExitSalesOrders,signOut",
-      "Tc_492_verifyARRecordsFromWise": "navigateToAr2WISE,selectCompanyAR,selectJournal,verifyARRecordsFromWise",
-      "Tc_473_verifySearchFilterItems": "navigateToAr2WISE,verifySearchFilterItems",
-      "Tc_477_verifySearchAllField": "navigateToAr2WISE,selectJournalType,verifySearchAllFieldARGL",
-      "Tc_479_verifySortingColumn": "navigateToAr2WISE,selectJournalType,sortingCol",
-      "Tc_482_verifyPaginationARGL": "navigateToAr2WISE,selectJournalType,verifyPagination",
-      "Tc_483_verifyArrowFunctionality": "navigateToAr2WISE,selectJournalType,verifyArrowFunctionality",
-      "Tc_505_verifyCashReceiptUI": "navigateToAr2WISE,selectJournalType,navigateToCashReceipt,verifyCashReceiptUI",
-      "Tc_verifyPaymentAdjustmentScreen": "launchApp,siteLogin,navigateToCashReceiptAdjEntry,verifyInvoiceReflectedOnCash",
-      "Tc_verifyEntryBankDepositScreen": "launchApp,siteLogin,navigateToBankDepositScreen,verifyEntryBankDeposit",
-      "Tc_504_verifyCashReceiptFromWise": "navigateToAr2WISE,selectJournalType,verifyCashReceiptFromWise",
-      "Tc_503_verifyNTRRecordFromWise": "navigateToAr2WISE,selectCompanyAR,selectJournal,verifyNTRRecordFromWise"
+      "Tc_416_FixBusinessDaysUI":"navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysUI",
+      "Tc_417_FixBusinessDaysRecordUI":"navigateToAr2WISE,navigateToFixBusinessDays,fixBusinessDaysRecordUI",
+      "Tc_420_verifyCompanyNoAndName":"navigateToAr2WISE,navigateToFixBusinessDays,verifyCompanyNoAndName",
+      "Tc_421_verifySearchRecordUsingBusinessDays":"navigateToAr2WISE,navigateToFixBusinessDays,verifySearchRecordUsingBusinessDays",
+      "Tc_424_verifySearchAllField":"navigateToAr2WISE,navigateToFixBusinessDays,verifySearchAllField",
+      "Tc_415_verifySearchResult":"navigateToAr2WISE,navigateToFixBusinessDays,verifySearchResult",
+      "Tc_423_verifyItemPerPage":"navigateToAr2WISE,navigateToFixBusinessDays,verifyItemPerPage",
+      "Tc_426_verifyPagination":"navigateToAr2WISE,navigateToFixBusinessDays,verifyPagination",
+      "Tc_427_verifySortableColumn":"navigateToAr2WISE,navigateToFixBusinessDays,verifySortableColumn",
+      "Tc_428_verifyMinMaximize":"navigateToAr2WISE,navigateToFixBusinessDays,verifyMinMaximize",
+      "TC_374_VerifyCreationOfCreditMemo":"launchApp,siteLogin,navigateToMiscChargesAndAdjustment,vrfyDefaultValue,vrfyDefaultPrevInvPrevNameValue,selectRandomAccountNumber,enterInvoiceAmount,vrfyAllEntriesValidMsg,getAccountName,getInvoiceNumber,vrfyPrevInv,exitMiscChargesAdj,signOut",
+      "Tc_429_verifyCreditMemo":"navigateToAr2WISE,navigateToFixBusinessDays,verifyCreditDebitMemo",
+      "TC_375_VerifyCreationOfDebitMemo":"launchApp,siteLogin,navigateToMiscChargesAndAdjustment,vrfyDefaultValue,vrfyDefaultPrevInvPrevNameValue,selectRandomAccountNumber,enterInvoiceAmount,vrfyAllEntriesValidMsg,getAccountName,getInvoiceNumber,vrfyPrevInv,exitMiscChargesAdj,signOut",
+      "Tc_429_verifyDebitMemo":"navigateToAr2WISE,navigateToFixBusinessDays,verifyCreditDebitMemo",
+      "Tc_480_verifyARGLDetailInquiryUI":"navigateToAr2WISE,verifyARGLDetailInquiryUI",
+      "Tc_481_verifyARGLDetailInquiryRecordsUI":"navigateToAr2WISE,verifyARGLDetailInquiryRecordsUI",
+      "Tc_495_verifyMinMaximizeARGL":"navigateToAr2WISE,verifyMinMaximizeARGL",
+      "Tc_489_verifyCompanyNoAndNameARGL":"navigateToAr2WISE,verifyCompanyNoAndName",
+      "Tc_490_verifyEditDateField":"navigateToAr2WISE,verifyEditDateField",
+      "Tc_497_verifyDateField":"navigateToAr2WISE,verifyDateField",
+      "Tc_496_verifyFindARJRecords":"navigateToAr2WISE,verifyFindARJRecords",
+      "Tc_496_verifyFindNTRRecords":"navigateToAr2WISE,verifyFindNTRRecords",
+      "Tc_496_verifyFindCRJRecords":"navigateToAr2WISE,verifyFindCRJRecords",
+      "CreateSalesOrderCA":"launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,fillInOtherFields,navigateToItemsTab,addItemsToSalesorder,navigateToShipmentsTab,changeShipmentStatusCA,loadLastOrder,saveExitSalesOrders,signOut",
+      "Tc_492_verifyARRecordsFromWise":"navigateToAr2WISE,selectCompanyAR,selectJournal,verifyARRecordsFromWise",
+      "Tc_473_verifySearchFilterItems":"navigateToAr2WISE,verifySearchFilterItems",
+      "Tc_477_verifySearchAllField":"navigateToAr2WISE,selectJournalType,verifySearchAllFieldARGL",
+      "Tc_479_verifySortingColumn":"navigateToAr2WISE,selectJournalType,sortingCol",
+      "Tc_482_verifyPaginationARGL":"navigateToAr2WISE,selectJournalType,verifyPagination",
+      "Tc_483_verifyArrowFunctionality":"navigateToAr2WISE,selectJournalType,verifyArrowFunctionality",
+      "Tc_505_verifyCashReceiptUI":"navigateToAr2WISE,selectJournalType,navigateToCashReceipt,verifyCashReceiptUI",
+      "Tc_verifyPaymentAdjustmentScreen":"launchApp,siteLogin,navigateToCashReceiptAdjEntry,verifyInvoiceReflectedOnCash",
+      "Tc_verifyEntryBankDepositScreen":"launchApp,siteLogin,navigateToBankDepositScreen,verifyEntryBankDeposit",
+      "Tc_504_verifyCashReceiptFromWise":"navigateToAr2WISE,selectJournalType,verifyCashReceiptFromWise",
+      "Tc_503_verifyNTRRecordFromWise":"navigateToAr2WISE,selectCompanyAR,selectJournal,verifyNTRRecordFromWise",
+      "TC_430_VerifyUserCanViewNonTradePaymentRecords":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
+      "TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyUIOfTrnctnExcptnLstPage,collapse,expand",
+      "TC_436_VerifyUIofTrnsctnExcptnLstWithRecord":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyUIOfTrnctnExcptnLstPage,enterCompanyData,vrfyPagination",
+      "TC_434_VerifyUserCanChangeStatus":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCollapse,vrfyExpand",
+      "TC_438_VerifyCompanyNameAndNumberField":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCompanyNameAndNumber",
+      "TC_442_VerifySortableColumnOfTrnsctnExcptnLst":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfySortingTrnsctnExcptnPage",
+      "TC_443_VerifySearchCompanyNumberAndName":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyCompanyNumberAndNameTypeahead,selectDate,selectCompanyNumberAndName",
+      "TC_446_VerifyCompanyTypeaheadOptions":"navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName",
+      "TC_447_VrfySearchResultsUsingDateAmountDescription":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfySearchAllFilter",
+      "TC_448_DateFieldVerification":"navigateToAr2WISE,navToTrnctnExcptnLstPage,vrfyDateField",
+      "TC_450_VerifyViewHyperLink":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyNTPPopup",
+      "TC_451_VerifyResolveRecordFromNTRWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_432_VerifyUserCanViewGrossMarginManagerRecords":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
+      "TC_453_VerifyUserCanChangeStatusOfGMMR":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_456_VerifyViewHyperLinkForGMMR":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyGMMRPopup",
+      "TC_454_VerifyItemsPerPage":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyPagination,vrfyItemsPerPage",
+      "TC_457_VerifyResolveRecordFromGMMRWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_458_VerifyPagination":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyPaginationNextPrev",
+      "TC_439_VerifyUserCanViewNonTradeInvoices":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
+      "TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_461_VerifyViewHyperLinkForNonTradeInvoices":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyNTIPopup",
+      "TC_462_VerifyResolveRecordFromNTIWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_440_VerifyUserCanViewInventoryAdjustmentRecords":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType",
+      "TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_465_VerifyViewHyperLinkForInventoryAdjustments":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,vrfyInvAdjPopup",
+      "TC_466_VerifyResolveRecordFromInvAdjWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_441_VerifyUserCanViewMiscInventoryRecords":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType",
+      "TC_467_VerifyUserCanChangeStatusOfMiscInventory":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,vrfyResolve,vrfyUnresolve",
+      "TC_469_VerifyViewHyperLinkForMiscInventory":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,clickRandomViewBtn,vrfyMiscInvAdjPopup",
+      "TC_470_VerifyResolveRecordFromMiscInventoryWindow":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyMiscInvDocumentType,clickRandomViewBtn,closeNTPPopup,resolveRecordNTPPopup",
+      "TC_471_SearchAllTbxFieldVerification":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyInvalidSearchAllFilter",
+      "TC_476_VrfyNoRecoordsMsgForValidCombi":"navigateToAr2WISE,navToTrnctnExcptnLstPage,enterCompanyData,vrfyNoResultsMsg",
+      "TC_485_VrfyResultsWhenDocTypeIsChanged":"navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDate,changeDocTypeAndVrfyResults",
+      "TC_486_VrfyResultsWhenDateIsChanged":"navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,validateDateFilter",
+      "TC_472_VrfyInvAdjRecCreatedInWise":"launchApp,siteLogin,navCycleCostAdj,enterDataAndProcessItems,exitFromCycleCostAdj,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableData",
+      "TC_484_VrfyGMMRecordCreatedInWise":"launchApp,siteLogin,validateSalesOrderTitle,createSOAndPO,saveExitSalesOrders,exitSalesQuotesToMasterPage,navigateToInventoryReceipt,processVendInvRecord,navigateToVendorInvoiceRec,processVendInvReconRecords,exitVendorInvoiceRec,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataGMM",
+      "TC_508_VrfyNonTradeInvRecordCreatedInWise":"launchApp,siteLogin,navigateToMiscChargesAndAdjustment,processMiscChargesAndAdj,exitMiscChargesAdj,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDate,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataNTI",
+      "TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise":"launchApp,siteLogin,navigateToMiscAdj,selectAdjCodeAndCustomer,enterItemDetails,processMiscAdjItems,pressF3ExitBtn,signOut,navigateToAr2WISE,navToTrnctnExcptnLstPage,selectCompanyNumberAndName,selectDocType,enterCurrentDateInSearchAll,vrfyTableDataMiscInvAdj"
     }
   ],
-  "General_Data": [
+  "General_Data":[
     {
-      "TC_ID": "Tc_416_FixBusinessDaysUI",
-      "companyName": "99599"
+      "TC_ID":"Tc_416_FixBusinessDaysUI"
     },
     {
-      "TC_ID": "Tc_417_FixBusinessDaysRecordUI",
-      "companyName": "99599"
+      "TC_ID":"Tc_417_FixBusinessDaysRecordUI",
+      "companyName":"99599"
     },
     {
-      "TC_ID": "Tc_420_verifyCompanyNoAndName",
-      "companyName": "99599",
-      "specialCharacterCompanyN0": "@$%(*&",
-      "negativeCompanyNo": "-100",
-      "bankCompanyNo": "  ",
-      "invalidCompanyNo": "123456789"
+      "TC_ID":"Tc_420_verifyCompanyNoAndName",
+      "specialCharacterCompanyN0":"@$%(*&",
+      "negativeCompanyNo":"-100",
+      "bankCompanyNo":"  ",
+      "invalidCompanyNo":"123456789"
     },
     {
-      "TC_ID": "Tc_421_verifySearchRecordUsingBusinessDays",
-      "companyName": "99599"
+      "TC_ID":"Tc_421_verifySearchRecordUsingBusinessDays",
+      "companyName":"99599"
     },
     {
-      "TC_ID": "Tc_424_verifySearchAllField",
-      "companyName": "99599",
-      "searchSpecialCharacter": "@%(*&",
-      "searchNegative": "-100",
-      "searchBank": "  ",
-      "searchInvalid": "123456789"
+      "TC_ID":"Tc_424_verifySearchAllField",
+      "companyName":"99599",
+      "searchSpecialCharacter":"@%(*&",
+      "searchNegative":"-100",
+      "searchBank":"  ",
+      "searchInvalid":"123456789"
     },
     {
-      "TC_ID": "Tc_415_verifySearchResult",
-      "companyName": "99599"
+      "TC_ID":"Tc_415_verifySearchResult",
+      "companyName":"99599"
     },
     {
-      "TC_ID": "Tc_423_verifyItemPerPage",
-      "companyName": "99599"
+      "TC_ID":"Tc_423_verifyItemPerPage",
+      "companyName":"99599"
     },
     {
-      "TC_ID": "Tc_426_verifyPagination",
-      "companyName": "99599"
+      "TC_ID":"Tc_426_verifyPagination",
+      "companyName":"99599"
     },
     {
-      "TC_ID": "Tc_427_verifySortableColumn",
-      "companyName": "99599"
+      "TC_ID":"Tc_427_verifySortableColumn",
+      "companyName":"99599"
     },
     {
-      "TC_ID": "Tc_428_verifyMinMaximize",
-      "companyName": "99599"
+      "TC_ID":"Tc_428_verifyMinMaximize",
+      "companyName":"99599"
     },
     {
-      "TC_ID": "TC_374_VerifyCreationOfCreditMemo",
-      "companyName": "99599",
-      "TransactionType": "CM",
-      "MemoType": "DSC",
-      "InvoiceAmount": "10",
-      "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "000829-00"
+      "TC_ID":"TC_374_VerifyCreationOfCreditMemo",
+      "companyName":"99599",
+      "TransactionType":"CM",
+      "MemoType":"DSC",
+      "InvoiceAmount":"10",
+      "AccountName":"ERIC BIRECKI",
+      "InvoiceNumber":"001051-00"
     },
     {
-      "TC_ID": "Tc_429_verifyCreditMemo",
-      "companyName": "99599",
-      "memo": "Credit Memo"
+      "TC_ID":"Tc_429_verifyCreditMemo",
+      "companyName":"99599",
+      "memo":"Credit Memo"
     },
     {
-      "TC_ID": "TC_375_VerifyCreationOfDebitMemo",
-      "companyName": "99599",
-      "TransactionType": "DM",
-      "MemoType": "DSC",
-      "InvoiceAmount": "10",
-      "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "000888-00"
+      "TC_ID":"TC_375_VerifyCreationOfDebitMemo",
+      "companyName":"99599",
+      "TransactionType":"DM",
+      "MemoType":"DSC",
+      "InvoiceAmount":"10",
+      "AccountName":"ERIC BIRECKI",
+      "InvoiceNumber":"001052-00"
     },
     {
-      "TC_ID": "Tc_429_verifyDebitMemo",
-      "companyName": "99599",
-      "memo": "Debit Memo"
+      "TC_ID":"Tc_429_verifyDebitMemo",
+      "companyName":"99599",
+      "memo":"Debit Memo"
     },
     {
-      "TC_ID": "Tc_480_verifyARGLDetailInquiryUI"
+      "TC_ID":"Tc_480_verifyARGLDetailInquiryUI"
     },
     {
-      "TC_ID": "Tc_481_verifyARGLDetailInquiryRecordsUI",
-      "companyName": "00916"
+      "TC_ID":"Tc_481_verifyARGLDetailInquiryRecordsUI",
+      "companyName":"00916"
     },
     {
-      "TC_ID": "Tc_495_verifyMinMaximizeARGL",
-      "companyName": "00916"
+      "TC_ID":"Tc_495_verifyMinMaximizeARGL",
+      "companyName":"00916"
     },
     {
-      "TC_ID": "Tc_489_verifyCompanyNoAndNameARGL",
-      "companyName": "99599",
-      "specialCharacterCompanyN0": "@$%(*&",
-      "negativeCompanyNo": "-100",
-      "bankCompanyNo": "  ",
-      "invalidCompanyNo": "123456789"
+      "TC_ID":"Tc_489_verifyCompanyNoAndNameARGL",
+      "companyName":"99599",
+      "specialCharacterCompanyN0":"@$%(*&",
+      "negativeCompanyNo":"-100",
+      "bankCompanyNo":"  ",
+      "invalidCompanyNo":"123456789"
     },
     {
-      "TC_ID": "Tc_490_verifyEditDateField",
-      "companyName": "00916",
-      "date": "01/2023"
+      "TC_ID":"Tc_490_verifyEditDateField",
+      "companyName":"00916",
+      "date":"01/2023"
     },
     {
-      "TC_ID": "Tc_497_verifyDateField",
-      "companyName": "00916",
-      "invalidDate": "13/2023",
-      "specialCharDate": "#$/^(%%",
-      "AlphaDate": "ADvFFg",
-      "invalidFormat": "2022/09"
+      "TC_ID":"Tc_497_verifyDateField",
+      "companyName":"00916",
+      "invalidDate":"13/2023",
+      "specialCharDate":"#$/^(%%",
+      "AlphaDate":"ADvFFg",
+      "invalidFormat":"2022/09"
     },
     {
-      "TC_ID": "Tc_496_verifyFindNTRRecords"
+      "TC_ID":"Tc_496_verifyFindNTRRecords"
     },
     {
-      "TC_ID": "Tc_496_verifyFindCRJRecords"
+      "TC_ID":"Tc_496_verifyFindCRJRecords"
     },
     {
-      "TC_ID": "Tc_496_verifyFindARJRecords"
+      "TC_ID":"Tc_496_verifyFindARJRecords"
     },
     {
-      "TC_ID": "CreateSalesOrderCA",
-      "accountNo": "099599",
-      "JobName": "TEST AUTOMATION",
-      "PONumber": "16121",
-      "PlacedBy": "john doe",
-      "FilledBy": "joe",
-      "itemNo1": "0609CTS21001",
-      "itemNo2": "0609CTS2100112"
+      "TC_ID":"CreateSalesOrderCA",
+      "accountNo":"099599",
+      "JobName":"TEST AUTOMATION",
+      "PONumber":"16121",
+      "PlacedBy":"john doe",
+      "FilledBy":"joe",
+      "itemNo1":"0609CTS21001",
+      "itemNo2":"0609CTS2100112"
     },
     {
-      "TC_ID": "Tc_492_verifyARRecordsFromWise",
-      "companyName": "99599",
-      "journalType": "ARJ"
+      "TC_ID":"Tc_492_verifyARRecordsFromWise",
+      "companyName":"99599",
+      "journalType":"ARJ"
     },
     {
-      "TC_ID": "Tc_473_verifySearchFilterItems",
-      "companyName": "00916"
+      "TC_ID":"Tc_473_verifySearchFilterItems",
+      "companyName":"00916"
     },
     {
-      "TC_ID": "Tc_477_verifySearchAllField",
-      "companyName": "00916",
-      "searchSpecialCharacter": "@%(*&",
-      "searchNegative": "-100",
-      "searchInvalid": "123456ADc"
+      "TC_ID":"Tc_477_verifySearchAllField",
+      "companyName":"00916",
+      "searchSpecialCharacter":"@%(*&",
+      "searchNegative":"-100",
+      "searchInvalid":"123456ADc"
     },
     {
-      "TC_ID": "Tc_482_verifyPaginationARGL",
-      "companyName": "00916"
+      "TC_ID":"Tc_482_verifyPaginationARGL",
+      "companyName":"00916"
     },
     {
-      "TC_ID": "Tc_483_verifyArrowFunctionality",
-      "companyName": "00916"
+      "TC_ID":"Tc_483_verifyArrowFunctionality",
+      "companyName":"00916"
     },
     {
-      "TC_ID": "Tc_505_verifyCashReceiptUI",
-      "companyName": "00916 - 3131 Dixie Drive LLC"
+      "TC_ID":"Tc_505_verifyCashReceiptUI",
+      "companyName":"00916 - 3131 Dixie Drive LLC"
     },
     {
-      "TC_ID": "Tc_verifyPaymentAdjustmentScreen"
+      "TC_ID":"Tc_verifyPaymentAdjustmentScreen"
     },
     {
-      "TC_ID": "Tc_verifyEntryBankDepositScreen"
+      "TC_ID":"Tc_verifyEntryBankDepositScreen"
     },
     {
-      "TC_ID": "Tc_504_verifyCashReceiptFromWise",
-      "companyName": "00916"
+      "TC_ID":"Tc_504_verifyCashReceiptFromWise",
+      "companyName":"00916"
     },
     {
-      "TC_ID": "Tc_503_verifyNTRRecordFromWise",
-      "companyName": "99599",
-      "journalType": "NTR"
+      "TC_ID":"Tc_503_verifyNTRRecordFromWise",
+      "companyName":"99599",
+      "journalType":"NTR"
+    },
+    {
+      "TC_ID":"TC_430_VerifyUserCanViewNonTradePaymentRecords",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord"
+    },
+    {
+      "TC_ID":"TC_436_VerifyUIofTrnsctnExcptnLstWithRecord",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_434_VerifyUserCanChangeStatus",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst"
+    },
+    {
+      "TC_ID":"TC_438_VerifyCompanyNameAndNumberField",
+      "InvalidData":"!@#^*(),-123,    ,tester681716987",
+      "Company":"00728"
+    },
+    {
+      "TC_ID":"TC_442_VerifySortableColumnOfTrnsctnExcptnLst",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_443_VerifySearchCompanyNumberAndName",
+      "Company":"99599",
+      "Date":"06/2022"
+    },
+    {
+      "TC_ID":"TC_446_VerifyCompanyTypeaheadOptions",
+      "Company":"99599"
+    },
+    {
+      "TC_ID":"TC_447_VrfySearchResultsUsingDateAmountDescription",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_448_DateFieldVerification",
+      "InvalidData":"!@#^*(),abcd",
+      "Date":"06/2022"
+    },
+    {
+      "TC_ID":"TC_450_VerifyViewHyperLink",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_451_VerifyResolveRecordFromNTRWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
+    },
+    {
+      "TC_ID":"TC_432_VerifyUserCanViewGrossMarginManagerRecords",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
+    },
+    {
+      "TC_ID":"TC_453_VerifyUserCanChangeStatusOfGMMR",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
+    },
+    {
+      "TC_ID":"TC_454_VerifyItemsPerPage",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
+    },
+    {
+      "TC_ID":"TC_456_VerifyViewHyperLinkForGMMR",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
+    },
+    {
+      "TC_ID":"TC_457_VerifyResolveRecordFromGMMRWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
+    },
+    {
+      "TC_ID":"TC_458_VerifyPagination",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Gross Margin Manager"
+    },
+    {
+      "TC_ID":"TC_439_VerifyUserCanViewNonTradeInvoices",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Invoices"
+    },
+    {
+      "TC_ID":"TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Invoices"
+    },
+    {
+      "TC_ID":"TC_461_VerifyViewHyperLinkForNonTradeInvoices",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Invoices"
+    },
+    {
+      "TC_ID":"TC_462_VerifyResolveRecordFromNTIWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Invoices",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
+    },
+    {
+      "TC_ID":"TC_440_VerifyUserCanViewInventoryAdjustmentRecords",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Inventory Adjustments"
+    },
+    {
+      "TC_ID":"TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Inventory Adjustments"
+    },
+    {
+      "TC_ID":"TC_465_VerifyViewHyperLinkForInventoryAdjustments",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Inventory Adjustments"
+    },
+    {
+      "TC_ID":"TC_466_VerifyResolveRecordFromInvAdjWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Inventory Adjustments",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
+    },
+    {
+      "TC_ID":"TC_441_VerifyUserCanViewMiscInventoryRecords",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Misc. Inventory Adjustments"
+    },
+    {
+      "TC_ID":"TC_467_VerifyUserCanChangeStatusOfMiscInventory",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Misc. Inventory Adjustments"
+    },
+    {
+      "TC_ID":"TC_469_VerifyViewHyperLinkForMiscInventory",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Misc. Inventory Adjustments"
+    },
+    {
+      "TC_ID":"TC_470_VerifyResolveRecordFromMiscInventoryWindow",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Misc. Inventory Adjustments",
+      "DesiredStatus":"Unresolved",
+      "Comments":"Test Automation Comments"
+    },
+    {
+      "TC_ID":"TC_471_SearchAllTbxFieldVerification",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_476_VrfyNoRecoordsMsgForValidCombi",
+      "Company":"00728",
+      "Date":"09/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_485_VrfyResultsWhenDocTypeIsChanged",
+      "Company":"00728",
+      "Date":"06/2022",
+      "DocumentType":"Non-Trade Payment,Gross Margin Manager"
+    },
+    {
+      "TC_ID":"TC_486_VrfyResultsWhenDateIsChanged",
+      "Company":"00728",
+      "Date":"06/2022",
+      "Date2":"07/2022",
+      "DocumentType":"Non-Trade Payment"
+    },
+    {
+      "TC_ID":"TC_472_VrfyInvAdjRecCreatedInWise",
+      "Quantity":"100",
+      "Explanation":"Other",
+      "Company":"99599",
+      "DocumentType":"Inventory Adjustments"
+    },
+    {
+      "TC_ID":"TC_484_VrfyGMMRecordCreatedInWise",
+      "ReceiverDoc":"000041577",
+      "accountNo":"099599",
+      "DirectShip":"Yes",
+      "ShipVia":"BEST WAY",
+      "QtyOrder":"50",
+      "itemNo":"AABABM100",
+      "QtyShip":"50",
+      "SalesOrderNo":"001053",
+      "QtyOrdered":"1",
+      "VendorNumber":"000388",
+      "FreightCode":"Full Frt Allowed/ NO Frt Chrg.",
+      "PONumber":"030612",
+      "QtyReceived":"1",
+      "DebitMemo":"10.00",
+      "InvoiceTotal":"10.00",
+      "DiscPercentage":"10",
+      "OrderNo":"030392",
+      "GMMgrAmount":"10.00",
+      "Company":"99599",
+      "DocumentType":"Gross Margin Manager"
+    },
+    {
+      "TC_ID":"TC_508_VrfyNonTradeInvRecordCreatedInWise",
+      "TransactionType":"DM",
+      "MemoType":"DSC",
+      "InvoiceAmount":"3772.00",
+      "AccountName":"ERIC BIRECKI",
+      "InvoiceNumber":"001054-00",
+      "Company":"99599",
+      "DocumentType":"Non-Trade Invoices",
+      "Date":"01/2020"
+    },
+    {
+      "TC_ID":"TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise",
+      "AdjustmentCode":"Promotions",
+      "Vendor":"99599",
+      "ItemNumber":"AABABM100",
+      "Quantity":"100",
+      "Explanation":"Test Exp4210",
+      "Amount":"100.00",
+      "Company":"99599",
+      "DocumentType":"Misc. Inventory Adjustments"
     }
   ]
 }

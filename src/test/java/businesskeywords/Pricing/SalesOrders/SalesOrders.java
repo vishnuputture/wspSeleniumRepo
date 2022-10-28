@@ -310,4 +310,16 @@ public class SalesOrders extends ReusableLib{
 		commonObj.validateText(SalesOrdersPage.lblRelatedPO,"Related P.O.","Validating Related Purchase Orders label");
 	}
 
+	/**
+	 * Keyword to create Purchase Order from Sales Order page
+	 */
+	public void createSOAndPO(){
+		createSalesOrderCOD();
+		selectDeliveryInfo();
+		navigateToItemsTab();
+		selectItems();
+		navigateToShipmentsTab();
+		createPOFromShipments();
+	}
+
 }
