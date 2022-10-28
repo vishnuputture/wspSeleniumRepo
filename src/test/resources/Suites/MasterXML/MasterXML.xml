@@ -21,5 +21,6 @@
 
         <suite-file path="../MobileWarehousing/ReceivingInProcess.xml"></suite-file>
         <suite-file path="../Inventory/ItemMaster.xml"></suite-file>
+        <suite-file path="../AccountReceivable/AR2WiseTests.xml"></suite-file>
     </suite-files>
 </suite>
