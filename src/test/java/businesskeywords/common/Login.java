@@ -48,6 +48,18 @@ public class Login extends ReusableLib {
         username = user;
     }
 
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
     /**
      * This method is invoked to login to WISE application
      */

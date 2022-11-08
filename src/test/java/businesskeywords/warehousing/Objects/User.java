@@ -1,0 +1,4 @@
+package businesskeywords.warehousing.Objects;
+
+public class User {
+}

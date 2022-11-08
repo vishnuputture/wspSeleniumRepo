@@ -1,0 +1,13 @@
+{
+  "Business_Flow": [
+    {
+      "FirstTestCase": "initiateSmokeTest",
+      "CreateSalesOrder": "getDriver"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "FirstTestCase"
+    }
+  ]
+}
