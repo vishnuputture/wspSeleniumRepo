@@ -1,0 +1,20 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_692_verifyADDITEMSUI": "getPassword,navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyADDITEMSUI",
+      "Tc_694_verifyReAssignUserUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyReAssignUserUI",
+      "Tc_690_verifyCycleCountRecAuditorUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyCycleCountRecAuditorUI"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_26_Navigation_to_Cycle_Count_Adjustments"
+    },
+    {
+      "TC_ID": "Tc_694_verifyReAssignUserUI"
+    },
+    {
+      "TC_ID": "Tc_690_verifyCycleCountRecAuditorUI"
+    }
+  ]
+}
