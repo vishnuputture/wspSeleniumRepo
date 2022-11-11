@@ -3,7 +3,12 @@
     {
       "Tc_692_verifyADDITEMSUI": "getPassword,navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyADDITEMSUI",
       "Tc_694_verifyReAssignUserUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyReAssignUserUI",
-      "Tc_690_verifyCycleCountRecAuditorUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyCycleCountRecAuditorUI"
+      "Tc_690_verifyCycleCountRecAuditorUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyCycleCountRecAuditorUI",
+      "Tc_693_verifyCycleCountRecLocalUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyCycleCountRecLocalUI",
+      "Tc_691_verifySearchFilterUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifySearchFilterUI",
+      "Tc_695_verifyPrintCycleCountSheetUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyPrintCycleCountSheetUI",
+      "Tc_696_verifyAutoAssignUserUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyAutoAssignUserUI",
+      "Tc_697_verifyCycleCountAuditHistoryUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyCycleCountAuditHistoryUI"
     }
   ],
   "General_Data": [
@@ -14,7 +19,22 @@
       "TC_ID": "Tc_694_verifyReAssignUserUI"
     },
     {
+      "TC_ID": "Tc_693_verifyCycleCountRecLocalUI"
+    },
+    {
       "TC_ID": "Tc_690_verifyCycleCountRecAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_691_verifySearchFilterUI"
+    },
+    {
+      "TC_ID": "Tc_695_verifyPrintCycleCountSheetUI"
+    },
+    {
+      "TC_ID": "Tc_696_verifyAutoAssignUserUI"
+    },
+    {
+      "TC_ID": "Tc_697_verifyCycleCountAuditHistoryUI"
     }
   ]
 }

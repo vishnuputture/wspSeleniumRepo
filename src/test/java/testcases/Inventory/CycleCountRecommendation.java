@@ -30,4 +30,44 @@ public class CycleCountRecommendation extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_693_verifyCycleCountRecLocalUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"CYCLE COUNT RECOMMENDATION\" (Auditor) page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_691_verifySearchFilterUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the Search Filters");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_695_verifyPrintCycleCountSheetUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"PRINT CYCLE COUNT SHEET\" popup");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_696_verifyAutoAssignUserUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"AUTO ASSIGN USERS\" popup");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_697_verifyCycleCountAuditHistoryUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"CYCLE COUNT AUDIT HISTORY\" page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
