@@ -1,8 +1,9 @@
 package businesskeywords.warehousing.Objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PurchaseOrder {
+public class PurchaseOrder implements Serializable {
     private String number;
     private String vendor;
     private String jobName;
@@ -23,6 +24,7 @@ public class PurchaseOrder {
     public PurchaseOrder(String number) {
         this.number = number;
     }
+    public PurchaseOrder() {}
 
     public String getOrderTotal() {
         return orderTotal;

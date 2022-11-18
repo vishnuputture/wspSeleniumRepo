@@ -1,8 +1,9 @@
 package businesskeywords.warehousing.Objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SalesOrder {
+public class SalesOrder implements Serializable {
     private String orderNumber;
     private String billTo;
     private String billToName;
@@ -15,6 +16,8 @@ public class SalesOrder {
     private String writtenBy;
     private String filledBy;
     private ArrayList<Shipment> shipments = new ArrayList<>();
+
+    public SalesOrder() {}
 
     public String getBillToName() {
         return billToName;

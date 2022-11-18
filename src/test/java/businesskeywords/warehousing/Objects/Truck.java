@@ -1,4 +1,6 @@
 package businesskeywords.warehousing.Objects;
 
-public class Truck {
+import java.io.Serializable;
+
+public class Truck implements Serializable {
 }

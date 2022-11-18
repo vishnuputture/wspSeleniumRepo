@@ -1,6 +1,8 @@
 package businesskeywords.warehousing.Manifest;
 
 import businesskeywords.warehousing.Objects.*;
+import com.paulhammant.ngwebdriver.ByAngular;
+import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
@@ -23,6 +25,7 @@ import java.util.Date;
 public class RTSPlanner extends ReusableLib {
     CommonActions commonObj;
     private FrameworkDriver ownDriver;
+    private NgWebDriver ngWebDriver;
     private Manifest manifest;
     private ArrayList<SalesOrder> salesOrders;
     private String company;
@@ -47,6 +50,7 @@ public class RTSPlanner extends ReusableLib {
         this.company = company;
         this.environment = environment;
         this.driver = getDriver();
+        this.ngWebDriver = ownDriver.getNgWebDriver();
     }
 
     public Manifest getManifest() {
@@ -82,11 +86,14 @@ public class RTSPlanner extends ReusableLib {
         String date = getValue(RTSPlannerPage.dateModal);
         String time = getValue(RTSPlannerPage.startTime);
         String truck = getTruck();
-        String driverName = driver.getFirstName() + " " + driver.getLastName();
 
-        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.truckDropDown, truck, "Selecting Dropdown");
-        Utility_Functions.xSelectDropDownByPartialText(ownDriver, report, RTSPlannerPage.driverDropDown, driverName);
-
+//        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.truckDropDown, truck, "Selecting Dropdown");
+//        Utility_Functions.xSelectDropDownByPartialText(ownDriver, report, RTSPlannerPage.driverDropDown, driverName);
+        click(RTSPlannerPage.truckDropDown, "Clicking Truck Dropdown");
+        click(By.xpath("//div[contains(@class,'win-dropdown active')]//span[contains(text(),'"+ truck +"')]"));
+        Utility_Functions.timeWait(1);
+        click(RTSPlannerPage.driverDropDown, "Clicking Driver Dropdown");
+        click(By.xpath("//div[contains(@class,'win-dropdown active')]//span[contains(text(),'"+ driver.getFirstName() +"')]"));
         click(RTSPlannerPage.completeCreate, "Creating Manifest");
         Utility_Functions.timeWait(4);
         while (Utility_Functions.xIsDisplayed(ownDriver, RTSPlannerPage.manifestExists)) {
@@ -112,12 +119,18 @@ public class RTSPlanner extends ReusableLib {
         Utility_Functions.timeWait(1);
         click(RTSPlannerPage.manifestFilterToDate, "Opening Calendar");
         click(By.cssSelector("td[data-date='"+timeStamp+"']"));
-        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.manifestFilterStatus,
-                manifest.getStatus(), "Selecting Dropdown");
-        Utility_Functions.xSelectDropDownByPartialText(ownDriver, report, RTSPlannerPage.manifestFilterDriver,
-                manifest.getDriver().getFullName());
-        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.manifestFilterTruck,
-                manifest.getTruck(), "Selecting Dropdown");
+        click(RTSPlannerPage.manifestFilterStatus, "Clicking Status Dropdown");
+        click(By.xpath("//div[contains(@class, 'win-dropdown active')]//span[contains(text(),'"+ manifest.getStatus() +"')]"));
+        click(RTSPlannerPage.manifestFilterDriver, "Clicking Driver Dropdown");
+        click(By.xpath("//div[contains(@class, 'win-dropdown active')]//span[contains(text(),'"+ driver.getFirstName() +"')]"));
+        click(RTSPlannerPage.manifestFilterTruck, "Clicking Truck Dropdown");
+        click(By.xpath("//div[contains(@class, 'win-dropdown active')]//span[contains(text(),'"+ manifest.getTruck() +"')]"));
+//        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.manifestFilterStatus,
+//                manifest.getStatus(), "Selecting Dropdown");
+//        Utility_Functions.xSelectDropDownByPartialText(ownDriver, report, RTSPlannerPage.manifestFilterDriver,
+//                manifest.getDriver().getFirstName());
+//        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.manifestFilterTruck,
+//                manifest.getTruck(), "Selecting Dropdown");
         click(RTSPlannerPage.manifestFilterApply, "Applying Filters");
         Utility_Functions.timeWait(1);
     }
@@ -225,8 +238,8 @@ public class RTSPlanner extends ReusableLib {
         waitForElementDisappear(RTSPlannerPage.loading, 5);
         manifest.setStatus("Generated");
         click(RTSPlannerPage.manifestsFilters, "Opening Filters Modal");
-        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.manifestFilterStatus,
-                manifest.getStatus(), "Selecting Dropdown");
+        click(RTSPlannerPage.manifestFilterStatus, "Clicking Status Dropdown");
+        click(By.xpath("//div[contains(@class, 'win-dropdown active')]//span[contains(text(),'"+ manifest.getStatus() +"')]"));
         click(RTSPlannerPage.manifestFilterApply, "Applying Filters");
         Utility_Functions.timeWait(1);
         commonObj.validateText(By.xpath("(//span[contains(text(),'"+manifest.getStatus()+"')])[1]"), manifest.getStatus(),
@@ -254,8 +267,10 @@ public class RTSPlanner extends ReusableLib {
         sendKeys(By.xpath("(//input[@placeholder='Enter Manifest Number'])[1]"), manifest.getNumber(), "Adding number");
         Utility_Functions.timeWait(1);
         click(By.xpath("(//li[@role='option'])[1]"), "Clicking Result Dropdown");
-        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.shipmentShipVia,
-                shipment.getShipVia(), "Selecting Dropdown");
+//        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.shipmentShipVia,
+//                shipment.getShipVia(), "Selecting Dropdown");
+        click(RTSPlannerPage.shipmentShipVia, "Clicking Ship Via Dropdown");
+        click(By.xpath("//div[contains(@class, 'win-dropdown active')]//span[normalize-space()='"+ shipment.getShipVia() +"']"));
         click(RTSPlannerPage.shipmentApply, "Applying Filters");
         waitForElementDisappear(RTSPlannerPage.loading, 5);
     }

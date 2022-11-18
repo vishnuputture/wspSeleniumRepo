@@ -11,8 +11,8 @@ public class RTSPlannerPage {
     public static By shipmentFilters = By.xpath("//div[@id='containerFluid']//ready-to-ship-planner//div//div//div//div//div//div//div//div//button[@type='button'][normalize-space()='Filters']");
     public static By dateModal = By.xpath("/html/body/my-app/div/ready-to-ship-planner/div[3]/new-manifest-modal/div/div/div[2]/form/div[1]/div[1]/div/win-datepicker/div/input");
     public static By startTime = By.xpath("/html[1]/body[1]/my-app[1]/div[1]/ready-to-ship-planner[1]/div[3]/new-manifest-modal[1]/div[1]/div[1]/div[2]/form[1]/div[1]/div[2]/div[1]/win-timepicker[1]/div[1]/input[1]");
-    public static By truckDropDown = By.xpath("(//select[@id='truck'])[2]");
-    public static By driverDropDown = By.xpath("//select[@id='driver'][1]");
+    public static By truckDropDown = By.xpath("(//input[@id='truck'])[1]");
+    public static By driverDropDown = By.xpath("//input[@id='driver'][1]");
     public static By completeCreate = By.xpath("(//span[contains(text(),'Create Manifest')])[3]");
     public static By driverNotes = By.xpath("(//textarea[@id='notes'])[2]");
     public static By createManifestClose = By.className("fa fa-close2");
@@ -20,9 +20,10 @@ public class RTSPlannerPage {
     public static By successMessage = By.cssSelector(".ui-growl-title");
     public static By manifestFilterFromDate = By.xpath("(//input[@id='fromDate'])[1]");
     public static By manifestFilterToDate = By.xpath("(//input[@id='toDate'])[1]");
-    public static By manifestFilterStatus = By.xpath("(//select[@id='status'])[1]");
-    public static By manifestFilterDriver = By.xpath("(//select[@id='driver'])[2]");
-    public static By manifestFilterTruck = By.xpath("(//select[@id='truck'])[3]");
+    public static By somethingID = By.id("BinMaint.ng");
+    public static By manifestFilterStatus = By.xpath("(//input[@id='status'])[1]");
+    public static By manifestFilterDriver = By.xpath("(//input[@id='driver'])[2]");
+    public static By manifestFilterTruck = By.xpath("(//input[@id='truck'])[2]");
     public static By manifestFilterApply = By.xpath("(//button[@type='button'][normalize-space()='Apply'])[1]");
     public static By shipmentSearch = By.id("ShipmentSearch");
     public static By manifestExists = By.xpath("(//span[contains(text(),'A manifest with this truck or driver already exist')])[1]");
@@ -32,7 +33,7 @@ public class RTSPlannerPage {
     public static By shipmentCustomerName = By.xpath("(//input[@placeholder='Enter Customer Name'])[1]");
     public static By shipmentStartDate = By.xpath("(//input[@id='startDate'])[1]");
     public static By shipmentEndDate = By.xpath("(//input[@id='endDate'])[1]");
-    public static By shipmentShipVia = By.xpath("(//select[@id='shipVia'])[1]");
+    public static By shipmentShipVia = By.xpath("(//input[@id='shipVia'])[1]");
     public static By shipmentStatus = By.xpath("(//select[@id='status'])[2]");
     public static By shipmentApply = By.xpath("(//button[@type='button'][normalize-space()='Apply'])[2]");
     public static By detailsDate = By.xpath("(//input[@id='newManifestDeliveryDate'])[1]");

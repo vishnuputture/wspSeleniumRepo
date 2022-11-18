@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 public class SmokeTest extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void FirstTestCase(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("First Test Case");
+    public void TC_1_SmokeTest(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Smoke Test");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
@@ -17,7 +17,7 @@ public class SmokeTest extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void CreateSalesOrder(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("First Test Case");
+        testParameters.setCurrentTestDescription("Testing NG stuff");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);

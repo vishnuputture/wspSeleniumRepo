@@ -19,70 +19,71 @@ import pages.pricing.SalesOrders.SalesOrdersPage;
 import pages.warehouse.RTSPlannerPage;
 import supportLibraries.Utility_Functions;
 
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 
 
 public class SmokeTest extends ReusableLib {
     private final CommonActions commonObj;
-    private Login login;
-    public static Properties properties = Settings.getInstance();
+    private transient Login login;
+    private Orders orders;
+    private Manifest manifest;
     private final FrameworkDriver ownDriver;
+    public static Properties properties = Settings.getInstance();
+    private ArrayList<String> vendors = new ArrayList<>();
     private final String environment = "DEV";//Prod, QA, DEV
     private final String company = "695";
-    private final String username = "wztestqa";
-    private final String user = "btjones1";
-    private final String password = "Nobodyknows1*";
-    private ArrayList<SalesOrder> salesOrders = new ArrayList<>();
-    private ArrayList<PurchaseOrder> purchaseOrders = new ArrayList<>();
-    private ArrayList<String> vendors = new ArrayList<>();
-    private int numberOfPurchaseOrders = 2;
+    private final User wiseUser = new User(helper, "btjones1", "Nobodyknows1(", environment, company);
+    private final User webUser = new User(helper, "wztestqa", environment, company);
+    private final RTSPlanner planner = new RTSPlanner(helper, company, environment);
+    private int numberOfPurchaseOrders = 1;
     private int numberOfSameVendors = 1;
     private int numberOfSalesOrders = 1;
     private int numberOfShipments = 2;
     private int numberOfItems = 1;
-    private Manifest manifest;
-    private final RTSPlanner planner = new RTSPlanner(helper, company, environment);;
+    private boolean useLastOrders = false;
 
     public SmokeTest(Helper helper) throws SQLException {
         super(helper);
         commonObj = new CommonActions(helper);
-        login = new Login(helper, environment, company, username);
         ownDriver = helper.getGSDriver();
+        orders = new Orders();
     }
 
-    public void initiateSmokeTest() throws SQLException {
-        loginToWise();
-        vendors = getRandomVendors();
-        for (int i = 1; i <= numberOfSalesOrders; i++) {
-            salesOrders.add(createSalesOrder());
-        }
+    public void initiateSmokeTest() throws SQLException, IOException {
+        if (!useLastOrders) {
+            wiseUser.loginToWISE();
+            vendors = getRandomVendors();
+            for (int i = 1; i <= numberOfSalesOrders; i++) {
+                orders.getSalesOrders().add(createSalesOrder());
+            }
+            saveOrders();
+            exitWise();
+        } else loadOrders();
 
-        exitWise();
         navigateToManifest();
         createManifestRTS();
     }
 
-
     public void navigateToManifest() {
-        login = new Login(helper, environment, company, username);
-        login.getDailyPassword();
+        boolean isDev = webUser.getEnvironment().equalsIgnoreCase("DEV");
         String url = properties.getProperty("manifestURL"+environment);
-        System.out.println(url);
+        if (!isDev) webUser.getDailyPassword();
         ownDriver.get(url);
-        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
-        login.winLogin();
-        login.selectCompany();
+        if (!isDev) webUser.loginToWebApp();
+        waitForElementDisappear(RTSPlannerPage.loading, 5);
+        webUser.selectCompany();
         waitForElementDisappear(RTSPlannerPage.loading, 5);
     }
 
     public void createManifestRTS() throws SQLException {
-        planner.setSalesOrders(salesOrders);
+        planner.setSalesOrders(orders.getSalesOrders());
         planner.navigateToRTS();
         planner.createManifestRTSPlanner();
         planner.applyManifestFilters();
         planner.verifyManifestCard();
-        for (SalesOrder salesOrder : salesOrders) {
+        for (SalesOrder salesOrder : orders.getSalesOrders()) {
             for (Shipment shipment : salesOrder.getShipments()) {
                 planner.searchShipment(shipment);
                 planner.dragShipment(shipment);
@@ -93,29 +94,12 @@ public class SmokeTest extends ReusableLib {
                 planner.validateManifestDetails();
             }
         }
-        for (PurchaseOrder purchaseOrder : purchaseOrders) {
+        for (PurchaseOrder purchaseOrder : orders.getPurchaseOrders()) {
             planner.searchPurchaseOrder(purchaseOrder);
             planner.dragPurchaseOrder(purchaseOrder);
             planner.validateManifestDetails();
         }
         planner.generate();
-    }
-
-    public void loginToWise() {
-        String url = environment.equalsIgnoreCase("prod")
-                ? "https://wise.winwholesale.com/wise?workstnid=&skin=WOBHighContrast"
-                : "https://newwisedev.winwholesale.com/wise?skin=WOBDark";
-        ownDriver.get(url);
-        sendKeys(LoginPage.userNametxtBox, user, "Entering username");
-        sendKeysAndEnter(LoginPage.passWordtxtBox, password, "Entering password ******");
-        if (Utility_Functions.xIsDisplayed(ownDriver, LoginPage.informationScreenTitle)) {
-            MattermostAPIHandler.postMessage(properties.getProperty("STGUserName") + " password will expire soon");
-            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        }
-        if (Utility_Functions.xIsDisplayed(ownDriver, LoginPage.pendingScreenTitle)) {
-            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        }
-        sendKeysAndEnter(MasterPage.sqlTxtBox, "win " + company, "WIN to company "+ company);
     }
 
     public SalesOrder createSalesOrder() throws SQLException {
@@ -239,7 +223,7 @@ public class SmokeTest extends ReusableLib {
         purchaseOrder.setVendorNumber(vendorNumber);
         purchaseOrder.setVendor(vendorName);
         setPOAddress(purchaseOrder);
-        this.purchaseOrders.add(purchaseOrder);
+        orders.getPurchaseOrders().add(purchaseOrder);
         System.out.println("Purchase Order "+purchaseOrder.getNumber()+" created");
     }
 
@@ -295,7 +279,7 @@ public class SmokeTest extends ReusableLib {
         }
         click(SalesOrdersPage.btnSaveExitPayment,"saving and exiting");
         click(SalesOrdersPage.btnExit," exiting SOE");
-        sendKeysAndEnter(MasterPage.sqlTxtBox, "23", "Going to Master Menu");
+        sendKeysAndEnter(By.xpath("//*[@id=\"I_20_7\"]"), "23", "Going to Master Menu");
     }
 
     public void exitWise() {
@@ -361,9 +345,10 @@ public class SmokeTest extends ReusableLib {
         boolean useProd = environment.equalsIgnoreCase("Prod");
         ArrayList<String> items = new ArrayList<>();
         Statement sqlStatement = db.dbConnection(company, useProd);
-        ResultSet resultSet = sqlStatement.executeQuery("SELECT ITEM_NUMBER FROM SOPKQDTV02 " +
+        ResultSet resultSet = sqlStatement.executeQuery("SELECT I.ITEM_NUMBER FROM SOPKQDTV02 S " +
+                "INNER JOIN IM02 I ON I.ITEM_NUMBER = S.ITEM_NUMBER " +
                 "WHERE PICK_VIA_CODE = '"+ pickVia +"' AND PRODUCT_AVAILABLE_TOSELL = 'Y' " +
-                "AND ITEM_NUMBER NOT LIKE 'J%' AND ITEM_NUMBER NOT LIKE '*%' " +
+                "AND I.ITEM_NUMBER NOT LIKE 'J%' AND I.ITEM_NUMBER NOT LIKE '*%' " +
                 "ORDER BY RAND() LIMIT "+quantity);
         if (!resultSet.isBeforeFirst()) {
             System.out.println("No data was available.");
@@ -389,7 +374,10 @@ public class SmokeTest extends ReusableLib {
     }
 
     public ArrayList<String> getRandomVendors() throws SQLException {
-        int number = (numberOfPurchaseOrders - numberOfSameVendors) * numberOfSalesOrders;
+        int total = numberOfPurchaseOrders - numberOfSameVendors;
+        total = (total == 0 && numberOfPurchaseOrders > 0) ? 1 : 0;
+        if (numberOfPurchaseOrders == 0 || total == 0) return new ArrayList<>();
+        int number = total * numberOfSalesOrders;
         ArrayList<String> vendors = getRandomAccount("vendor", number);
         int index = 0;
         for (int i = number; i < numberOfPurchaseOrders * numberOfSalesOrders; i++) {
@@ -471,5 +459,23 @@ public class SmokeTest extends ReusableLib {
 
     public void setManifest(Manifest manifest) {
         this.manifest = manifest;
+    }
+
+    public void saveOrders() throws IOException {
+        String fileName = "orders.ser";
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
+        out.writeObject(orders);
+        out.close();
+    }
+
+    public Orders loadOrders() throws IOException {
+        String fileName = "orders.ser";
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
+        try {
+            return (Orders) in.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

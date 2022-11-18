@@ -212,7 +212,7 @@ public class DBCall {
 		String url = "jdbc:as400://"+ server +".winwholesale.com;naming=system";
 		try {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
-			Connection con = DriverManager.getConnection(url, "btjones1", "Nobodyknows1*");
+			Connection con = DriverManager.getConnection(url, "btjones1", "Nobodyknows1(");
 			con.setSchema("DTA"+schema);
 			return con.createStatement();
 		} catch (ClassNotFoundException | SQLException e1) {

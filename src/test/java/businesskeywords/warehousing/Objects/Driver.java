@@ -1,6 +1,8 @@
 package businesskeywords.warehousing.Objects;
 
-public class Driver {
+import java.io.Serializable;
+
+public class Driver implements Serializable {
     private String firstName;
     private String lastName;
     private String alias;

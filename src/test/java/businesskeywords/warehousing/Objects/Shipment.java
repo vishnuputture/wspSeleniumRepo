@@ -2,9 +2,10 @@ package businesskeywords.warehousing.Objects;
 
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Shipment {
+public class Shipment implements Serializable {
     private String shipmentNumber;
     private String shipDate;
     private String requiredDate;

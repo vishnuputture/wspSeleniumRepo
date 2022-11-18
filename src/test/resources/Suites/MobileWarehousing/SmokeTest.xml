@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Mobile Warehousing" parallel="tests" thread-count="2">
-    <test name="BinMaintenance">
-
+    <test name="SmokeTest">
         <classes>
-            <class name="testcases.MobileWarehousing.BinMaintenance">
+            <class name="testcases.MobileWarehousing.SmokeTest">
                 <methods>
-                    <include name="FirstTestCase"></include>
+                    <include name="TC_1_SmokeTest"></include>
                 </methods>
             </class>
         </classes>

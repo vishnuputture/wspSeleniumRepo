@@ -1,8 +1,9 @@
 package businesskeywords.warehousing.Objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Stop {
+public class Stop implements Serializable {
     private String orderType;
     private ArrayList<Shipment> shipments = new ArrayList<>();
     private ArrayList<PurchaseOrder> purchaseOrders = new ArrayList<>();
@@ -11,6 +12,7 @@ public class Stop {
     public Stop(String orderType) {
         this.orderType = orderType;
     }
+    public Stop() {}
 
     public String getOrderType() {
         return orderType;

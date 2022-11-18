@@ -1,6 +1,8 @@
 package businesskeywords.warehousing.Objects;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private String number;
     private String qtyOrdered;
     private String qtyToShip;
@@ -12,7 +14,9 @@ public class Item {
         this.qtyToShip = qtyToShip;
         this.lineNumber = lineNumber;
     }
+    public Item() {
 
+    }
     public String getLineNumber() {
         return lineNumber;
     }
