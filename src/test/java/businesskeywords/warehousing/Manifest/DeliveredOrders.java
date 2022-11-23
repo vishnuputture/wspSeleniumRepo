@@ -40,19 +40,25 @@ public class DeliveredOrders extends ReusableLib {
      */
     public void navigateToDeliveredOrdersScreen() {
         click(TruckPage.menuIconTruck);
-        truck.callSelectCompany();
+        //truck.callSelectCompany();
         Utility_Functions.timeWait(3);
-        click(DeliveredShipmentsPage.subMenuDeliveredShip, "Navigate to Delivered Orders page");
+        try {
+            click(DeliveredShipmentsPage.subMenuDeliveredShip, "Navigate to trucks page");
+        }catch (Exception e){
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.menuIconTruck,"Click Menu");
+            Utility_Functions.timeWait(3);
+            click(DeliveredShipmentsPage.subMenuDeliveredShip, "Navigate to trucks page");
+        }
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(DeliveredShipmentsPage.deliveredShipmentsHeader, "Delivered Orders", "Delivered Orders Screen Header is present");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,DeliveredShipmentsPage.deliveredShipmentsHeader, "Delivered shipments Screen Header is present");
     }
 
     /**
      * Keyword to verify UI of Delivered Orders
      */
     public void deliveredOrdersUI() {
-        String[] actText={"Order Number","Date/Time","PO No.","Manifest No.","Delivered To","Shipment Status","Manifest Status","Driver","Truck","Ship Via"};
+        String[] actText={"Shipment","Date/Time","PO No.","Manifest No.","Delivered To","Shipment Status","Manifest Status","Driver","Truck","Ship Via"};
         List<WebElement> els=ownDriver.findElements(By.xpath("//th"));
         int i=0;
         for(WebElement el:els){
@@ -82,7 +88,7 @@ public class DeliveredOrders extends ReusableLib {
         click(TruckPage.filterSearch, "Click Search Filter icon");
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
-        String[] actText = {"Order Number", "Date Delivered Range", "Customer PO Number", "Delivered To","Ship Via", "Shipment Status", "Manifest Order Status", "Driver", "Truck", "Manifest Number"};
+        String[] actText = {"Shipment", "Date Delivered Range", "Customer PO Number", "Delivered To","Ship Via", "Shipment Status", "Manifest Order Status", "Driver", "Truck", "Manifest Number"};
         List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
         for (WebElement el : els) {

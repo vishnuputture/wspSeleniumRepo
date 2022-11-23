@@ -56,14 +56,6 @@ public class Warehouse extends TestConfigurations {
     }
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void Tc_searchFiltersTruckUi(SeleniumTestParameters testParameters) {
-        testParameters.setCurrentTestDescription("Search Filters Truck Ui");
-        CoreScript coreScript = new CoreScript(testParameters);
-        coreScript.driveTestExecution();
-        tearDownTestRunner(testParameters, coreScript);
-    }
-
-    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_DriversUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case UI of Drivers screen");
         CoreScript coreScript = new CoreScript(testParameters);

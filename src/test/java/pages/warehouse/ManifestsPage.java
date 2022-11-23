@@ -8,7 +8,7 @@ public class ManifestsPage {
     public static By subMenuManifest = By.xpath("//*[@id=\"side-nav-wrapper\"]/div[4]/div/div/div[2]/div[3]/a");
     public static By manifestListHeader = By.xpath("//h2[contains(text(),' Manifest List ')]");
     public static By createManBtn = By.xpath("//button[contains(text(),'Create Manifest')]");
-    public static By createNewManHeader = By.xpath("//h2[contains(text(),'Create New Manifest')]");
+    public static By createNewManHeader = By.xpath("//span[@class='manifest-modal-title']");
     public static By manifestDetail = By.xpath("//a[text()='Manifest Detail']");
     public static By createManLabel = By.xpath("//div[contains(@class,'col')]//label[@class='win-label' and @for]");
     public static By addShipmentLabel = By.xpath("//label[text()='Add Shipment']");
@@ -17,12 +17,14 @@ public class ManifestsPage {
     public static By addButton = By.xpath("//span[text()='Add']");
     public static By addStopBtn = By.xpath("//span[text()='Add Stop']");
     public static By addPOBtn = By.xpath("//span[text()='Add PO']");
-    public static By createManifestBtn = By.xpath("//span[text()='Create Manifest']");
-    public static By newManifestDeliveryDate = By.id("newManifestDeliveryDate");
+    public static By createManifestBtn = By.xpath("//button[@class='btn win-button win-button-primary m-0']/span");
+    public static By newManifestDeliveryDate = By.id("createManifestDeliveryDate");
     public static By newManifestStartTime = By.id("newManifestStartTime");
     public static By hour = By.id("hours");
     public static By notes = By.id("notes");
     public static By truckEle = By.xpath("//select[@name='truck']");
+    public static By saveManifest=By.xpath("//span[text()='Save Manifest']");
+    public static By closeIcn=By.xpath(" //i[@class='fa fa-times']");
     public static By driverEle = By.xpath("//select[@name='driver']");
     public static By createStatus = By.xpath("//span[contains(text(),'Created')]");
     public static By firstStatus = By.xpath("//span[@class='manifest-status-text']");
@@ -40,7 +42,7 @@ public class ManifestsPage {
     public static By updateStatusSO = By.xpath("//div[contains(text(),'Delivered')]");
     public static By updateStatusPOPick = By.xpath("//div[text()=' Picked Up ']");
     public static By updateStatusPONotPick = By.xpath("//div[text()=' Not Picked Up ']");
-    public static By soStatus = By.xpath("//p[@class='order-detail']");
+    public static By soStatus = By.xpath("//p[@class='order-detail order-detail-border']");
     public static By ifErrorExist = By.xpath("//span[@class='ui-growl-image pi pi-times']");
     public static By warningIcon = By.xpath("//i[contains(@class,'win-status-warning')]");
     public static By deliveredGreenIcon = By.xpath("//win-status-icon[@ng-reflect-status='DELIVERED']");

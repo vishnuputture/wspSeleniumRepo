@@ -8,7 +8,7 @@ public class TruckPage {
     public static By addNewTruckBtn = By.xpath("//*[contains(text(),'New Truck')]");
     //public static By addNewTruckHeader = By.xpath("//h2[text()='Add New Truck']");//*[@id="newTruckModal"]/truck-new/div/div/div[1]/span
     public static By addNewTruckHeader = By.xpath("//*[@id=\"newTruckModal\"]/truck-new/div/div/div[1]/span");
-    public static By newTruckLabel = By.xpath("//div[contains(@class,'col')]//label[@class='win-label']");
+    public static By newTruckLabel = By.xpath("//div[@class='modal-body container']//descendant::div[contains(@class,'col')]//label[@class='win-label']");
     public static By menuIconTruck = By.xpath("//*[contains(@class,'menu-icon fa fa-truck')]");
     public static By subMenuTruck = By.xpath("//a[contains(text(),'Trucks')]");
     public static By deleteInProgress = By.xpath("//span[text()=' In Process ']/ancestor::td/preceding-sibling::td/a[contains(@aria-describedby,'tooltip')]");
@@ -38,7 +38,7 @@ public class TruckPage {
     public static By clearFilters = By.xpath("//button[contains(text(),'Clear All Filters') and contains(@class,'red')]");
     public static By searchFilterPanelTitle = By.xpath("//h1[@class='panel-title']");
     public static By filtersCrossIcon = By.xpath("//span[contains(@class,'pi pi-times')]");
-    public static By truckFilter = By.id("trucks");
+    public static By truckFilter = By.id("name");
     public static By licensePlateNoFilter = By.id("licensePlate");
     public static By statusFilter = By.id("status");
     public static By cdlRequiredFilter = By.id("cdlRequired");

@@ -21,7 +21,7 @@ public class DriversPage {
     public static By saveDriverDis = By.xpath("//button[@disabled and contains(text(),'Save Driver')]");
     public static By cdlSort = By.xpath("//th[contains(text(),'CDL Expiration')]");
     public static By addNewDriverLabel = By.xpath("//div[contains(@class,'input-field col')]//label[@for and @class='win-label']");
-    public static By crossIcon = By.xpath("//i[@class='fa fa-times' and @aria-hidden='true']");
+    public static By crossIcon = By.xpath("//i[@class='fa fa-close2']");
     public static By driverNameSelect = By.id("driverNameSelect");
     public static By rankSelect = By.id("rankSelect");
     public static By statusSelect = By.id("statusSelect");
