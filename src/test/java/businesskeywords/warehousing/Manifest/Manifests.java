@@ -223,25 +223,43 @@ public class Manifests extends ReusableLib {
     }
 
     public void fillDetails() {
-        click(ManifestsPage.newManifestDeliveryDate);
+        try {
+            click(ManifestsPage.newManifestDeliveryDate);
+        }catch (Exception e){
+            click(ManifestsPage.newManifestDlvryDate);
+        }
         click(TruckPage.licensePlateExpSelect, "Select Delivery Date");
-        click(ownDriver.findElements(ManifestsPage.newManifestStartTime).get(1), "Select Start Date");
+        try {
+            click(ownDriver.findElements(ManifestsPage.newManifestStartTime).get(1), "Select Start Date");
+        }catch (Exception e){
+            click(ManifestsPage.newManifestStartTime, "Select Start Date");
+        }
         int hour = Utility_Functions.genRandNum(12);
         sendKeys(ManifestsPage.hour, "" + hour + "");
-        click(ownDriver.findElements(ManifestsPage.truckEle).get(1));
+        try {
+            click(ownDriver.findElements(ManifestsPage.truckEle).get(1));
+        }catch (Exception e){
+            click(ManifestsPage.truckEle);
+        }
         Utility_Functions.timeWait(3);
         String truckName = Utility_Functions.xGetJsonData("TruckName");
-        System.out.println("truckName...." + truckName);
         click(ownDriver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
-        click(ownDriver.findElements(ManifestsPage.notes).get(1));
+        try{
+            click(ownDriver.findElements(ManifestsPage.notes).get(1));
+        }catch (Exception e){
+            click(ManifestsPage.notes);
+        }
         Utility_Functions.timeWait(2);
         Utility_Functions.xMouseClick(ownDriver, ManifestsPage.driverEle);
         Utility_Functions.timeWait(2);
         String driverName = Utility_Functions.xGetJsonData("Driver");
-        System.out.println("driverName...." + driverName);
         click(ownDriver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
         Utility_Functions.timeWait(2);
-        sendKeys(ownDriver.findElements(ManifestsPage.notes).get(1), "All good", "Enter values in Notes to Driver (optional)");
+        try{
+            sendKeys(ownDriver.findElements(ManifestsPage.notes).get(1), "All good", "Enter values in Notes to Driver (optional)");
+        }catch (Exception e){
+            sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
+        }
         Utility_Functions.timeWait(2);
     }
 
@@ -309,20 +327,10 @@ public class Manifests extends ReusableLib {
      * Keyword to create manifest Add PO
      */
     public void createManifestPO() {
-        click(ManifestsPage.newManifestDeliveryDate);
-        click(TruckPage.licensePlateExpSelect, "Select Delivery Date");
-        click(ManifestsPage.newManifestStartTime, "Select Start Date");
-        click(ManifestsPage.truckEle);
-        Utility_Functions.timeWait(3);
-        String truckName = Utility_Functions.xGetJsonData("TruckName");
-        click(ownDriver.findElement(By.xpath("//label[text()='Truck (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + truckName + "')]")), "Select truck from the drop down");
-        click(ManifestsPage.notes);
-        Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(ownDriver, ManifestsPage.driverEle);
-        String driverName = Utility_Functions.xGetJsonData("Driver");
-        click(ownDriver.findElement(By.xpath("//label[text()='Driver (Optional)']/parent::div/descendant::option[@class='ng-star-inserted' and contains(text(),'" + driverName + "')]")), "Select Driver from the drop down");
-        sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
-        Utility_Functions.timeWait(2);
+        fillDetails();
+        click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+        verifyManifestNum();
+        navigateToEditManifest();
         Utility_Functions.xScrollIntoView(ownDriver, ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
         click(ManifestsPage.addPOBtn, "CLick Add PO button");
@@ -332,13 +340,9 @@ public class Manifests extends ReusableLib {
         click(btn(" Add to Manifest "), "Click Add to Manifest Button");
         Utility_Functions.timeWait(3);
         Utility_Functions.xScrollIntoView(ownDriver, By.xpath("//div[contains(@class,'order-header')]/span"));
-        click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
-        Utility_Functions.timeWait(3);
-        ifExist();
-        commonObj.validateElementExists(ManifestsPage.successMsg, "'Manifest successfully created.' message is present");
-        String maniNo = Utility_Functions.getText(ownDriver, truckObj.getTruck("Manifest Number"));
-        Utility_Functions.xUpdateJson("ManifestNo", maniNo);
-        commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
+        click(ManifestsPage.saveManifest, "Click Save Manifest Button");
+        verifyManifestNum();
+        commonObj.validateElementExists(ManifestsPage.mobileIcon, "Generate icon is present");
     }
 
     public void ifExist() {

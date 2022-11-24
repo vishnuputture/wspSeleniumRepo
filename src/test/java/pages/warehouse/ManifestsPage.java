@@ -19,10 +19,12 @@ public class ManifestsPage {
     public static By addPOBtn = By.xpath("//span[text()='Add PO']");
     public static By createManifestBtn = By.xpath("//button[@class='btn win-button win-button-primary m-0']/span");
     public static By newManifestDeliveryDate = By.id("createManifestDeliveryDate");
+    public static By newManifestDlvryDate = By.id("newManifestDeliveryDate");
     public static By newManifestStartTime = By.id("newManifestStartTime");
     public static By hour = By.id("hours");
     public static By notes = By.id("notes");
     public static By truckEle = By.xpath("//select[@name='truck']");
+    public static By manifestBtn=By.xpath("//span[text()='Create Manifest']");
     public static By saveManifest=By.xpath("//span[text()='Save Manifest']");
     public static By closeIcn=By.xpath(" //i[@class='fa fa-times']");
     public static By driverEle = By.xpath("//select[@name='driver']");

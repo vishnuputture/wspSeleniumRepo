@@ -157,14 +157,17 @@ public class NotDeliveredOrders extends ReusableLib {
      */
     public void createManNotDeliveredOrder() {
         verifyNotDeliveredOrders();
-        click(NotDeliveredShipmentsPage.addToManifestButton,"CLick Add To Manifest button");
-        Utility_Functions.timeWait(7);
-        commonObj.validateText(NotDeliveredShipmentsPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
-        Utility_Functions.timeWait(7);
-        click(NotDeliveredShipmentsPage.newManifestBtn,"Click New Manifest Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,NotDeliveredShipmentsPage.addToManifestButton,"CLick Add To Manifest button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,NotDeliveredShipmentsPage.manifestHeader,"Manifest screen header: ");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,NotDeliveredShipmentsPage.newManifestBtn,"Click New Manifest Button");
         manFest.fillDetails();
-        click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+        try {
+            click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+        }catch (Exception e){
+            click(ManifestsPage.manifestBtn, "Click Create Manifest Button");
+        }
         Utility_Functions.timeWait(5);
+        manFest.navigateToManifestsScreen();
         manFest.verifyManifestNum();
     }
 
