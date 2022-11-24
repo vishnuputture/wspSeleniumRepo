@@ -50,6 +50,16 @@ public class CycleCostAdjust extends ReusableLib {
     }
 
     /**
+     * This method navigate to Cycle Count Adjustment Option
+     */
+    public void navCycleCostAdj() {
+        commonObj.masterToInventory();
+        commonObj.inventoryToInvAdjustments();
+        click(CostAdjustmentPage.cycleCountAdj, "Click Cycle Cost Adjustments Program");
+        commonObj.validateText(CostAdjustmentPage.lblTitle, "CYCLE COUNTS (I-355)", "Validating [CYCLE COUNTS (I-355)] page title");
+    }
+
+    /**
      * This method navigate to Cycle Count Adjustment Option and Enter Valid Value
      */
     public String validValue() {
@@ -263,5 +273,26 @@ public class CycleCostAdjust extends ReusableLib {
         System.out.println("amount : " + amount);
         Utility_Functions.xAssertEquals(report, "" + amt + "", "" + amount + "", "Amount: ");
         return amont;
+    }
+
+    /**
+     * This enters data in [CYCLE COUNTS (I-355)] page and processes it
+     */
+    public void enterDataAndProcessItems() {
+        String qty = jsonData.getData("Quantity");
+        String explanation = jsonData.getData("Explanation");
+
+        selectQuantity(qty);
+        selectExplanation(explanation);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        String amount = ownDriver.findElement(CostAdjustmentPage.amountyMod).getText();
+        Utility_Functions.xUpdateJson("CycleCounts_Amount", amount);
+
+        click(CostAdjustmentPage.process, "Click on Process");
+        Utility_Functions.xWaitForElementVisible(ownDriver, ownDriver.findElement(CostAdjustmentPage.procConfm), 15);
+        Utility_Functions.xIsElementDisplayed(report, ownDriver.findElement(CostAdjustmentPage.procConfm), "Process Confirmation PopUp");
+        click(CostAdjustmentPage.postBtn, "Click On Post Button and Record(s) should be processed");
+        click(ownDriver.findElement(CostAdjustmentPage.continueBtn), "Click on Continue button");
+        Utility_Functions.xWaitForElementDisappear(ownDriver, CostAdjustmentPage.quantity, 3);
     }
 }

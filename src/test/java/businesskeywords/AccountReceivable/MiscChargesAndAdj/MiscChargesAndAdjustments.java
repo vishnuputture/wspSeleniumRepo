@@ -1,4 +1,4 @@
-package businesskeywords.AccountReceivable;
+package businesskeywords.AccountReceivable.MiscChargesAndAdj;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -284,6 +284,16 @@ public class MiscChargesAndAdjustments extends ReusableLib {
     }
 
     /**
+     * Keyword to enter Invoice Amount in [Misc. Charges and Adjustments] page
+     */
+    public void enterRandomInvoiceAmount() {
+        String random = Utility_Functions.xRandomFunction(99, 9999)+".00";
+        jsonData.putData("InvoiceAmount", random);
+        sendKeysAndEnter(MiscChargesAndAdjustmentsPage.invoiceAmount, random, "Entering random Invoice Amount");
+        waitForElementDisappear(MasterPage.loadingAnime, globalWait);
+    }
+
+    /**
      * Keyword to select Account Number in [Misc. Charges and Adjustments] page
      */
     public void selectAccountNumber(){
@@ -539,6 +549,20 @@ public class MiscChargesAndAdjustments extends ReusableLib {
         sendKeysAndEnter(MiscChargesAndAdjustmentsPage.actionCodeTxtBx, "D", "Entering [Action Code] value");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         commonObj.validateText(MiscChargesAndAdjustmentsPage.custMsg, "ERROR - 'A', 'I' and 'C' are the only valid Action Codes.", "Validating message [ERROR - 'A', 'I' and 'C' are the only valid Action Codes.]");
+    }
+
+    /**
+     * Keyword to enter data and process DM transaction in [Misc. Charges and Adjustments] page
+     */
+    public void processMiscChargesAndAdj(){
+        vrfyDefaultValue();
+        vrfyDefaultPrevInvPrevNameValue();
+        selectRandomAccountNumber();
+        enterRandomInvoiceAmount();
+        vrfyAllEntriesValidMsg();
+        getAccountName();
+        getInvoiceNumber();
+        vrfyPrevInv();
     }
 
 }

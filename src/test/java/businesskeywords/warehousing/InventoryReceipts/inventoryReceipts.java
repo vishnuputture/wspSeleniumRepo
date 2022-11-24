@@ -351,5 +351,13 @@ public class inventoryReceipts extends ReusableLib {
         Utility_Functions.timeWait(2);
     }
 
+    /**
+     * Keyword to enter data in [Inventory Receipts] page and process it
+     */
+    public void processVendInvRecord() {
+        enterExistingPONumber();
+        processIROrderWIthFreightAmount();
+    }
+
 
 }

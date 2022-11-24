@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Accounts Receivable" parallel="tests" thread-count="2">
+    <test name="Transaction Exception List1">
+        <classes>
+            <class name="testcases.AccountReceivable.AR2WISE">
+                <methods>
+                    <include name="Tc_416_FixBusinessDaysUI"></include>
+                    <include name="Tc_417_FixBusinessDaysRecordUI"></include>
+                    <include name="Tc_420_verifyCompanyNoAndName"></include>
+                    <include name="Tc_421_verifySearchRecordUsingBusinessDays"></include>
+                    <include name="Tc_424_verifySearchAllField"></include>
+                    <include name="Tc_415_verifySearchResult"></include>
+                    <include name="Tc_423_verifyItemPerPage"></include>
+                    <include name="Tc_426_verifyPagination"></include>
+                    <include name="Tc_427_verifySortableColumn"></include>
+                    <include name="Tc_428_verifyMinMaximize"></include>
+                    <include name="TC_374_VerifyCreationOfCreditMemo"></include>
+                    <include name="Tc_429_verifyCreditMemo"></include>
+                    <include name="TC_375_VerifyCreationOfDebitMemo"></include>
+                    <include name="Tc_429_verifyDebitMemo"></include>
+                    <include name="Tc_480_verifyARGLDetailInquiryUI"></include>
+                    <include name="Tc_481_verifyARGLDetailInquiryRecordsUI"></include>
+                    <include name="Tc_495_verifyMinMaximizeARGL"></include>
+                    <include name="Tc_489_verifyCompanyNoAndNameARGL"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Transaction Exception List2">
+        <classes>
+            <class name="testcases.AccountReceivable.AR2WISE">
+                <methods>
+                    <include name="Tc_490_verifyEditDateField"></include>
+                    <include name="Tc_497_verifyDateField"></include>
+                    <include name="Tc_496_verifyFindARJRecords"></include>
+                    <include name="Tc_496_verifyFindNTRRecords"></include>
+                    <include name="Tc_496_verifyFindCRJRecords"></include>
+                    <include name="CreateSalesOrderCA"></include>
+                    <include name="Tc_492_verifyARRecordsFromWise"></include>
+                    <include name="Tc_473_verifySearchFilterItems"></include>
+                    <include name="Tc_477_verifySearchAllField"></include>
+                    <include name="Tc_479_verifySortingColumn"></include>
+                    <include name="Tc_482_verifyPaginationARGL"></include>
+                    <include name="Tc_483_verifyArrowFunctionality"></include>
+                    <include name="Tc_505_verifyCashReceiptUI"></include>
+                    <include name="Tc_verifyPaymentAdjustmentScreen"></include>
+                    <include name="Tc_verifyEntryBankDepositScreen"></include>
+                    <include name="Tc_504_verifyCashReceiptFromWise"></include>
+                    <include name="Tc_503_verifyNTRRecordFromWise"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Transaction Exception List3">
+        <classes>
+            <class name="testcases.AccountReceivable.AR2WISE">
+                <methods>
+                    <include name="TC_430_VerifyUserCanViewNonTradePaymentRecords"></include>
+                    <include name="TC_433_VerifyUIofTrnsctnExcptnLstWithoutRecord"></include>
+                    <include name="TC_436_VerifyUIofTrnsctnExcptnLstWithRecord"></include>
+                    <include name="TC_434_VerifyUserCanChangeStatus"></include>
+                    <include name="TC_437_VerifyCollapseExpandFunctionForTrnsctnExcptnLst"></include>
+                    <include name="TC_438_VerifyCompanyNameAndNumberField"></include>
+                    <include name="TC_442_VerifySortableColumnOfTrnsctnExcptnLst"></include>
+                    <include name="TC_443_VerifySearchCompanyNumberAndName"></include>
+                    <include name="TC_446_VerifyCompanyTypeaheadOptions"></include>
+                    <include name="TC_447_VrfySearchResultsUsingDateAmountDescription"></include>
+                    <include name="TC_448_DateFieldVerification"></include>
+                    <include name="TC_450_VerifyViewHyperLink"></include>
+                    <include name="TC_451_VerifyResolveRecordFromNTRWindow"></include>
+                    <include name="TC_432_VerifyUserCanViewGrossMarginManagerRecords"></include>
+                    <include name="TC_453_VerifyUserCanChangeStatusOfGMMR"></include>
+                    <include name="TC_454_VerifyItemsPerPage"></include>
+                    <include name="TC_456_VerifyViewHyperLinkForGMMR"></include>
+                    <include name="TC_457_VerifyResolveRecordFromGMMRWindow"></include>
+                    <include name="TC_458_VerifyPagination"></include>
+                    <include name="TC_439_VerifyUserCanViewNonTradeInvoices"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Transaction Exception List4">
+        <classes>
+            <class name="testcases.AccountReceivable.AR2WISE">
+                <methods>
+                    <include name="TC_459_VerifyUserCanChangeStatusOfNonTradeInvoices"></include>
+                    <include name="TC_461_VerifyViewHyperLinkForNonTradeInvoices"></include>
+                    <include name="TC_462_VerifyResolveRecordFromNTIWindow"></include>
+                    <include name="TC_440_VerifyUserCanViewInventoryAdjustmentRecords"></include>
+                    <include name="TC_463_VerifyUserCanChangeStatusOfInventoryAdjustments"></include>
+                    <include name="TC_465_VerifyViewHyperLinkForInventoryAdjustments"></include>
+                    <include name="TC_466_VerifyResolveRecordFromInvAdjWindow"></include>
+                    <include name="TC_441_VerifyUserCanViewMiscInventoryRecords"></include>
+                    <include name="TC_467_VerifyUserCanChangeStatusOfMiscInventory"></include>
+                    <include name="TC_469_VerifyViewHyperLinkForMiscInventory"></include>
+                    <include name="TC_470_VerifyResolveRecordFromMiscInventoryWindow"></include>
+                    <include name="TC_471_SearchAllTbxFieldVerification"></include>
+                    <include name="TC_476_VrfyNoRecoordsMsgForValidCombi"></include>
+                    <include name="TC_485_VrfyResultsWhenDocTypeIsChanged"></include>
+                    <include name="TC_486_VrfyResultsWhenDateIsChanged"></include>
+                    <include name="TC_472_VrfyInvAdjRecCreatedInWise"></include>
+                    <include name="TC_484_VrfyGMMRecordCreatedInWise"></include>
+                    <include name="TC_508_VrfyNonTradeInvRecordCreatedInWise"></include>
+                    <include name="TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
