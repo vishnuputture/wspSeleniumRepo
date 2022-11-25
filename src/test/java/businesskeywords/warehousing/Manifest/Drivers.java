@@ -36,13 +36,13 @@ public class Drivers extends ReusableLib {
      * Keyword to Navigate to Drivers Screen
      */
     public void navigateToDriversScreen() {
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.menuIconTruck,"Click Menu");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.menuIconTruck, "Click Menu");
         //callSelectCompany();
         Utility_Functions.timeWait(3);
         try {
             click(DriversPage.subMenuDriver, "Navigate to trucks page");
-        }catch (Exception e){
-            Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.menuIconTruck,"Click Menu");
+        } catch (Exception e) {
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.menuIconTruck, "Click Menu");
             Utility_Functions.timeWait(3);
             click(DriversPage.subMenuDriver, "Navigate to trucks page");
         }
@@ -64,8 +64,8 @@ public class Drivers extends ReusableLib {
         return userName;
     }
 
-    public By labelTag(String labelName){
-        return By.xpath("//label[text()='"+labelName+"']");
+    public By labelTag(String labelName) {
+        return By.xpath("//label[text()='" + labelName + "']");
     }
 
     /**
@@ -79,9 +79,9 @@ public class Drivers extends ReusableLib {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
             i++;
         }
-        String[] labels={"Driver","Status","Status","CDL","Rank"};
-        for(String label:labels){
-            commonObj.validateText(labelTag(label),label,"Label ["+label+"] is present");
+        String[] labels = {"Driver", "Status", "Status", "CDL", "Rank"};
+        for (String label : labels) {
+            commonObj.validateText(labelTag(label), label, "Label [" + label + "] is present");
         }
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(TruckPage.helpIcon, "Help Icon '?' is present");
@@ -220,7 +220,7 @@ public class Drivers extends ReusableLib {
         sendKeys(DriversPage.username, genText(), "Entering username name");
         click(DriversPage.saveDriver, "Saving record");
         Utility_Functions.timeWait(3);
-        commonObj.validateText(TruckPage.deletePopUp,"Invalid username. Please make sure it is their WinZone username and not their WISE username.","[Invalid username. Please make sure it is their WinZone username and not their WISE username.] message found");
+        commonObj.validateText(TruckPage.deletePopUp, "Invalid username. Please make sure it is their WinZone username and not their WISE username.", "[Invalid username. Please make sure it is their WinZone username and not their WISE username.] message found");
         sendKeys(DriversPage.username, "wz99599a", "Entering username name");
         click(DriversPage.saveDriver, "Saving record");
         Utility_Functions.timeWait(3);
@@ -272,7 +272,7 @@ public class Drivers extends ReusableLib {
      */
     public void navigateToUpdateDriverPage() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td/a"));
+        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td"));
         Utility_Functions.timeWait(2);
         commonObj.validateText(DriversPage.popupHeader, "Driver Details", "Update Driver Page header is present");
     }
@@ -281,7 +281,7 @@ public class Drivers extends ReusableLib {
      * Keyword to Verify UI od Update Driver Page
      */
     public void updateDriverUI() {
-        String[] actText = {"First Name", "Last Name", "Alias", "Rank", "Status", "Accept Adjustments", "Employee", "Username", "Has CDL?"};
+        String[] actText = {"First Name", "Last Name", "Alias", "Rank", "Status", "Accept Adjustments", "Employee", "Username", "CDL?"};
         List<WebElement> els = ownDriver.findElements(DriversPage.addNewDriverLabel);
         int i = 0;
         for (WebElement el : els) {
@@ -289,9 +289,14 @@ public class Drivers extends ReusableLib {
             i++;
         }
         Utility_Functions.timeWait(2);
-        commonObj.validateText(DriversPage.saveDriverDis, "Save Driver", "Save Driver Button is Exist");
-        commonObj.validateText(TruckPage.deleteButton, "Delete Driver", "Delete Driver Button is Exist");
+        commonObj.validateText(buttonTg("Edit"), "Edit", "Edit Driver Button is Exist");
+        commonObj.validateText(buttonTg("Cancel"), "Cancel", "Cancel Driver Button is Exist");
+        commonObj.validateText(TruckPage.deleteButton, "Delete", "Delete Driver Button is Exist");
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
+    }
+
+    public By buttonTg(String text){
+        return By.xpath("//*[contains(text(),'"+text+"')]");
     }
 
     /**
@@ -302,13 +307,9 @@ public class Drivers extends ReusableLib {
             Utility_Functions.xHoverElementclicks(ownDriver.findElement(DriversPage.deleteButtonDisable), ownDriver);
             commonObj.validateElementExists(DriversPage.deleteButtonDisable, "Delete Driver button is disabled and message: Driver is tied manifest history. you may change status to inactive");
         } else {
-            click(TruckPage.deleteButton, "Click Delete Driver Button");
-            commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Driver Confirmation Pop Up is present");
-            click(TruckPage.noButtonPopUp, "Click No Button");
-            commonObj.validateText(DriversPage.updateDriverHeader, "Update Driver", "Update Driver Page header is present");
-            click(TruckPage.deleteButton, "Click Delete Driver Button");
-            commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Delete Driver Confirmation Pop Up is present");
-            click(TruckPage.yesButtonPopUp, "Click Yes Button");
+            Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
+            Utility_Functions.timeWait(2);
+            click(By.xpath("//button[text()='Delete Driver ? ']"));
             Utility_Functions.timeWait(3);
             commonObj.validateText(TruckPage.deletePopUp, "Driver " + Utility_Functions.xGetJsonData("Driver") + " (" + jsonData.getData("alias") + ") successfully deleted.", "Deleted Driver Successful message is present");
         }
@@ -318,6 +319,7 @@ public class Drivers extends ReusableLib {
      * Keyword to Update Driver
      */
     public void updateDriver() {
+        click(buttonTg("Edit"),"Click Edit Button");
         click(DriversPage.statusDriver, "Click Status drop down");
         click(DriversPage.inActive, "Select InActive From the status drop down");
         click(DriversPage.saveDriver, "Click Save Driver");

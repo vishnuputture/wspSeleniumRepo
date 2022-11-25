@@ -10,6 +10,7 @@ import pages.common.MasterPage;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.warehouse.DeliveredShipmentsPage;
 import pages.warehouse.DriversPage;
+import pages.warehouse.ManifestsPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
@@ -362,16 +363,16 @@ public class Trucks extends ReusableLib {
      */
     public void navigateToUpdateTruckPage() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td/a"));
+        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td"));
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
+        commonObj.validateText(TruckPage.truckDetailHeader, "Truck Details", "[Truck Details] Page header is present");
     }
 
     /**
      * Keyword to verify the UI of Update Truck Screen
      */
     public void uiUpdateTruck() {
-        String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model", "VIN", "Truck Weight - Unloaded", "Total Truck Weight Limit"};
+        String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model", "VIN", "Total Truck Weight Limit"};
         List<WebElement> els = ownDriver.findElements(TruckPage.newTruckLabel);
         int i = 0;
         for (WebElement el : els) {
@@ -390,15 +391,11 @@ public class Trucks extends ReusableLib {
     public void deleteTruck() {
         Utility_Functions.timeWait(2);
         Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
-        Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
-        click(TruckPage.noButtonPopUp, "Click No Button");
-        commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
-        Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
-        Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
-        click(TruckPage.yesButtonPopUp, "Click Yes Button");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(2);
+        if(!isDisplayed(ManifestsPage.linkedToManifest)) {
+            click(By.xpath("//button[text()='Delete Truck ? ']"));
+            Utility_Functions.timeWait(3);
+        }
         String exp = "Truck could not be deleted because it is assigned to a manifest.";
         String act = Utility_Functions.getText(ownDriver, TruckPage.deletePopUp);
         if (act.equals(exp)) {
@@ -408,10 +405,16 @@ public class Trucks extends ReusableLib {
         }
     }
 
+    public By buttonTag(String btnName){
+        return By.xpath("//button[text()='"+btnName+"']");
+    }
+
     /**
      * Keyword to Update Truck
      */
     public void updateTruck() {
+        click(buttonTag(" Edit "),"Click [EDit] button");
+        Utility_Functions.timeWait(2);
         click(TruckPage.statusDrop, "Click Status drop down");
         click(DriversPage.inActive, "Select InActive From the status drop down");
         Utility_Functions.timeWait(2);

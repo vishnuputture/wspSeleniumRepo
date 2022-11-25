@@ -292,20 +292,10 @@ public class Manifests extends ReusableLib {
      * Keyword to create manifest with multiple shipments
      */
     public void createManifestMultiShip() {
-        click(ManifestsPage.newManifestDeliveryDate);
-        click(TruckPage.licensePlateExpSelect, "Select Delivery Date");
-        click(ManifestsPage.newManifestStartTime, "Select Start Date");
-        click(ManifestsPage.truckEle);
-        Utility_Functions.timeWait(3);
-        click(truckDriverDrop("Truck (Optional)"), "Select truck from the drop down");
-        click(ManifestsPage.notes);
-        Utility_Functions.timeWait(2);
-        Utility_Functions.xMouseClick(ownDriver, ManifestsPage.driverEle);
-        Utility_Functions.timeWait(2);
-        click(truckDriverDrop("Driver (Optional)"), "Select driver from the drop down");
-        Utility_Functions.timeWait(2);
-        sendKeys(ManifestsPage.notes, "All good", "Enter values in Notes to Driver (optional)");
-        Utility_Functions.timeWait(2);
+        fillDetails();
+        click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+        verifyManifestNum();
+        navigateToEditManifest();
         Utility_Functions.xScrollIntoView(ownDriver, ManifestsPage.addOrderNo);
         Utility_Functions.timeWait(2);
         sendKeys(ManifestsPage.addOrderNo, Utility_Functions.xGetJsonData("SalesOrder") + "-01", "Enter first shipment number");
@@ -316,11 +306,9 @@ public class Manifests extends ReusableLib {
         click(ManifestsPage.addButton, "Click Add button");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.orderAddedMessage, "Order " + Utility_Functions.xGetJsonData("SalesOrder") + "-02 successfully added to manifest", "Order is added");
-        click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
-        Utility_Functions.timeWait(5);
-        String maniNo = Utility_Functions.getText(ownDriver, truckObj.getTruck("Manifest Number"));
-        Utility_Functions.xUpdateJson("ManifestNo", maniNo);
-        commonObj.validateText(ManifestsPage.createStatus, "Created", "Manifest is created and Manifest number is :" + maniNo + "");
+        click(ManifestsPage.saveManifest, "Click Save Manifest Button");
+        verifyManifestNum();
+        commonObj.validateElementExists(ManifestsPage.mobileIcon, "Generate icon is present");
     }
 
     /**
@@ -548,7 +536,7 @@ public class Manifests extends ReusableLib {
         commonObj.validateText(ManifestsPage.soStatus, "Delivered", "Verify the status: ");
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(ManifestsPage.warningIcon, "In progress Icon is present");
-        click(ownDriver.findElements(DriversPage.crossIcon).get(1), "CLick Close icon");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ownDriver.findElements(ManifestsPage.closeIcn).get(3), "Click Cross icon(Close icon)");
         Utility_Functions.timeWait(5);
         commonObj.validateText(ManifestsPage.inProgressStatus, "In Process", "Verify status: ");
     }
@@ -661,7 +649,7 @@ public class Manifests extends ReusableLib {
      */
     public void saveAdjReturnToOrderBtnPO() {
         Utility_Functions.timeWait(2);
-        click(ownDriver.findElements(DriversPage.crossIcon).get(1), "Click Cross icon(Close icon)");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ownDriver.findElements(ManifestsPage.closeIcn).get(3), "Click Cross icon(Close icon)");
         Utility_Functions.timeWait(3);
         commonObj.validateElementExists(ManifestsPage.manifestOrderHeader, "Navigate back to manifest Order page");
         navigateToOrderNumberPO();

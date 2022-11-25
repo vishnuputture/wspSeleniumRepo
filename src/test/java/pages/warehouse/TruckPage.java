@@ -52,4 +52,5 @@ public class TruckPage {
     public static By deleteConfPopUp = By.xpath("//h2[contains(text(),'DELETE')]");
     public static By noButtonPopUp = By.id("button2");
     public static By yesButtonPopUp = By.id("button1");
+    public static By truckDetailHeader=By.xpath("//span[@class='truck-modal-title']");
 }

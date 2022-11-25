@@ -44,6 +44,7 @@ public class ManifestsPage {
     public static By updateStatusSO = By.xpath("//div[contains(text(),'Delivered')]");
     public static By updateStatusPOPick = By.xpath("//div[text()=' Picked Up ']");
     public static By updateStatusPONotPick = By.xpath("//div[text()=' Not Picked Up ']");
+    public static By linkedToManifest=By.xpath("//p[@class='disabled-message ng-star-inserted']");
     public static By soStatus = By.xpath("//p[@class='order-detail order-detail-border']");
     public static By ifErrorExist = By.xpath("//span[@class='ui-growl-image pi pi-times']");
     public static By warningIcon = By.xpath("//i[contains(@class,'win-status-warning')]");
