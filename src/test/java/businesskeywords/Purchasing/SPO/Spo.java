@@ -25,6 +25,7 @@ import pages.pricing.pricingmatrix.PricingMatrixPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import pages.warehouse.BinMaintenance.BinMaintenancePage;
 import pages.warehouse.DriversPage;
+import pages.warehouse.ManifestsPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
@@ -177,7 +178,7 @@ public class Spo extends ReusableLib {
     }
 
     public void getPassword() {
-        String URL = "https://vprasad:Y25EpK!qSg@daily.winwholesale.com/";
+        String URL = "https://vprasad:CmFK4Qtc@daily.winwholesale.com/";
         ownDriver.get(URL);
         click(ownDriver.findElement(By.xpath("//a[text()='QA ']")));
         Utility_Functions.timeWait(4);
@@ -213,15 +214,21 @@ public class Spo extends ReusableLib {
         if (isDisplayed(BinMaintenancePage.toasterCloseIcon)) {
             click(BinMaintenancePage.toasterCloseIcon);
         }
+        if(isDisplayed(ManifestsPage.closePopUp)){
+            Utility_Functions.timeWait(6);
+            click(ManifestsPage.closePopUp);
+        }
         if (!Utility_Functions.xIsDisplayed(ownDriver, SpoPage.companyName)) {
-            Utility_Functions.waitTillClickHardSleep(report, ownDriver, SelfServicePriceSheetPage.companySelector, "");
-            click(SelfServicePriceSheetPage.companyLabel);
-            if (System.getProperty("company") == null) {
-                sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
-            } else {
-                sendKey(SelfServicePriceSheetPage.winCompanyNumber, System.getProperty("company"));
+            if (Utility_Functions.xIsDisplayed(ownDriver, SelfServicePriceSheetPage.companySelector)) {
+                Utility_Functions.waitTillClickHardSleep(report, ownDriver, SelfServicePriceSheetPage.companySelector, "");
+                click(SelfServicePriceSheetPage.companyLabel);
+                if (System.getProperty("company") == null) {
+                    sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
+                } else {
+                    sendKey(SelfServicePriceSheetPage.winCompanyNumber, System.getProperty("company"));
+                }
+                click(SelfServicePriceSheetPage.selectButton);
             }
-            click(SelfServicePriceSheetPage.selectButton);
         }
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "");
     }

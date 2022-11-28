@@ -8,7 +8,6 @@
                     <!-- ############ UI Of the page ############ -->
 
                     <include name="Tc_TruckUI"></include>
-                    <include name="Tc_searchFiltersTruckUi"></include>
                     <include name="Tc_AddNewTruckScreenUI"></include>
                     <include name="Tc_UpdateTruckUI"></include>
                     <include name="Tc_DriversUI"></include>
@@ -50,7 +49,7 @@
                     <include name="Tc_238_ManifestListPageCount"></include>
                     <include name="Tc_241_collapseExpandSession"></include>
                     <include name="Tc_OrderNumberSO_UI"></include>
-                    <!-- <include name="Tc_SaveAdjustment"></include>-->
+                    <include name="Tc_SaveAdjustment"></include>
                     <include name="TC_SOUpdateStatusDelivered"></include>
                     <include name="Tc_VerifyDeliveredShipments"></include>
                     <include name="Tc_DeleteTruck"></include>

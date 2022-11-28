@@ -79,7 +79,7 @@ public class binMaintenance extends ReusableLib {
         if (isDisplayed(BinMaintenancePage.toasterCloseIcon)) {
             click(BinMaintenancePage.toasterCloseIcon);
         }
-        if (!Utility_Functions.xIsDisplayed(ownDriver, SpoPage.spoPageTitle)) {
+        if (!Utility_Functions.xIsDisplayed(ownDriver, By.id("page-header"))) {
             Utility_Functions.waitTillClickHardSleep(report, ownDriver, SelfServicePriceSheetPage.companySelector, "");
             click(SelfServicePriceSheetPage.companyLabel);
             if (System.getProperty("company") == null) {

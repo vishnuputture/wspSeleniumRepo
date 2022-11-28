@@ -40,18 +40,24 @@ public class NotDeliveredOrders extends ReusableLib {
      */
     public void navigateToNotDeliveredOrdersScreen() {
         click(TruckPage.menuIconTruck);
-        truck.callSelectCompany();
-        click(NotDeliveredShipmentsPage.subMenuNotDeliveredShip, "Navigate to Not Delivered Orders page");
+        //truck.callSelectCompany();
+        try {
+            click(NotDeliveredShipmentsPage.subMenuNotDeliveredShip, "Navigate to trucks page");
+        }catch (Exception e){
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.menuIconTruck,"Click Menu");
+            Utility_Functions.timeWait(3);
+            click(NotDeliveredShipmentsPage.subMenuNotDeliveredShip, "Navigate to trucks page");
+        }
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
-        commonObj.validateText(NotDeliveredShipmentsPage.notDeliveredShipmentsHeader, "Not Delivered Orders", "Not Delivered Orders Screen Header is present");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,NotDeliveredShipmentsPage.notDeliveredShipmentsHeader, "Not Delivered Shipments Screen Header is present");
     }
 
     /**
      * Keyword to verify UI of Not Delivered Orders
      */
     public void notDeliveredOrdersUI() {
-        String[] actText={"Order Number","Date Not Delivered","Customer PO Number","Deliver To","Driver","Manifest Number","Actions"};
+        String[] actText={"Shipment","Date Not Delivered","Customer PO Number","Deliver To","Driver","Manifest Number","Actions"};
         List<WebElement> els=ownDriver.findElements(By.xpath("//th"));
         int i=0;
         for(WebElement el:els){
@@ -125,7 +131,7 @@ public class NotDeliveredOrders extends ReusableLib {
         Utility_Functions.timeWait(8);
         click(TruckPage.filterSearch, "Click search filter icon");
         Utility_Functions.timeWait(1);
-        sendKeys(filterField("Order Number"), Utility_Functions.xGetJsonData("SalesOrder")+"-01", "Enter Order Number");
+        sendKeys(filterField("Shipment"), Utility_Functions.xGetJsonData("SalesOrder")+"-01", "Enter Order Number");
         click(NotDeliveredShipmentsPage.notDeliveredDate,"Click Not Delivered Date");
         int size=ownDriver.findElements(NotDeliveredShipmentsPage.activeDay).size();
         click(ownDriver.findElements(NotDeliveredShipmentsPage.activeDay).get(size-1),"Select today date");
@@ -151,14 +157,17 @@ public class NotDeliveredOrders extends ReusableLib {
      */
     public void createManNotDeliveredOrder() {
         verifyNotDeliveredOrders();
-        click(NotDeliveredShipmentsPage.addToManifestButton,"CLick Add To Manifest button");
-        Utility_Functions.timeWait(7);
-        commonObj.validateText(NotDeliveredShipmentsPage.manifestHeader,"MANIFESTS","Manifest screen header: ");
-        Utility_Functions.timeWait(7);
-        click(NotDeliveredShipmentsPage.newManifestBtn,"Click New Manifest Button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,NotDeliveredShipmentsPage.addToManifestButton,"CLick Add To Manifest button");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,NotDeliveredShipmentsPage.manifestHeader,"Manifest screen header: ");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,NotDeliveredShipmentsPage.newManifestBtn,"Click New Manifest Button");
         manFest.fillDetails();
-        click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+        try {
+            click(ManifestsPage.createManifestBtn, "Click Create Manifest Button");
+        }catch (Exception e){
+            click(ManifestsPage.manifestBtn, "Click Create Manifest Button");
+        }
         Utility_Functions.timeWait(5);
+        manFest.navigateToManifestsScreen();
         manFest.verifyManifestNum();
     }
 

@@ -63,6 +63,7 @@ public class itemMaster extends ReusableLib {
 
     public void searchItemMasterData() {
         //  DBCall.createItemInItemMaster("*00000WS0004","Test-Item-Automation","EA");
+        Utility_Functions.timeWait(10);
         String item = DBCall.SearchItemInItemMaster(Utility_Functions.xGetJsonAsString("CreatedCost"));
         System.out.println("Item found " + item);
         Utility_Functions.xAssertEquals(report, Utility_Functions.xGetJsonAsString("CreatedCost"), item.substring(0, item.indexOf(" ")), "Item found Successfully");
@@ -689,9 +690,9 @@ public class itemMaster extends ReusableLib {
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemDesc1, "title"), "Description Blank", "");
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.txtBoxUOM, "title"), "Invalid U/M", "");
         Utility_Functions.xUpdateJson("NewItemNumber", getAttribute(ItemMasterPage.txtBoxSearch, "value"));
-        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.manufacturerCode, "value"), "XX - SPECIAL ORDER", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.manufacturerCode, "value"), "XX - SMITH", "");
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.productCode, "value"), "01 - NON STOCK-SPECIAL ORDER OR", "");
-        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.vendorCode, "value"), "XX - SPECIAL ORDER", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.vendorCode, "value"), "XX - SMITH", "");
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemType, "value"), "S", "");
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.historyMonth, "value"), "24", "");
         Utility_Functions.xAssertEquals(report, getAttribute(PoEntryConversionFactorPage.inPurchasingUOM, "value"), "EA", "");
