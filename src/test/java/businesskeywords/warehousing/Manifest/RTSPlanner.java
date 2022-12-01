@@ -1,7 +1,6 @@
 package businesskeywords.warehousing.Manifest;
 
 import businesskeywords.warehousing.Objects.*;
-import com.paulhammant.ngwebdriver.ByAngular;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
@@ -77,7 +76,7 @@ public class RTSPlanner extends ReusableLib {
         commonObj.validateText(RTSPlannerPage.RTSHeader, "READY TO SHIP PLANNER", "READY TO SHIP PLANNER Screen Header is present");
     }
 
-    public void createManifestRTSPlanner() throws SQLException {
+    public Manifest createManifestRTSPlanner() throws SQLException {
         click(RTSPlannerPage.createManifest, "Opening Create Manifest Modal");
         Utility_Functions.timeWait(2);
         click(RTSPlannerPage.dateModal, "Opening Calendar");
@@ -110,6 +109,7 @@ public class RTSPlanner extends ReusableLib {
         report.updateTestLog("Manifest created", manifestId, Status.PASS);
         manifestId = manifestId.substring((manifestId.indexOf("#")) + 1, manifestId.indexOf(" successfully"));
         manifest = generateManifest(manifestId, date, time, truck, driver);
+        return manifest;
     }
 
     public void applyManifestFilters() {
@@ -171,13 +171,12 @@ public class RTSPlanner extends ReusableLib {
         } catch (ParseException e) {e.printStackTrace();}
         return newDate;
     }
-    public void typeInField(WebElement element, String value){
-        String val = value;
+    public void typeInField(WebElement element, String value) throws InterruptedException {
         element.clear();
-        for (int i = 0; i < val.length(); i++){
-            char c = val.charAt(i);
-            String s = new StringBuilder().append(c).toString();
-            Utility_Functions.timeWait(1);
+        for (int i = 0; i < value.length(); i++){
+            char c = value.charAt(i);
+            String s = String.valueOf(c);
+            Thread.sleep(300);
             element.sendKeys(s);
         }
     }
@@ -189,7 +188,11 @@ public class RTSPlanner extends ReusableLib {
 
         click(RTSPlannerPage.shipmentSearch);
         //sendKeysAndEnter(RTSPlannerPage.shipmentSearch,  shipmentNumber, "Typing in Shipment Number");
-        typeInField(ownDriver.findElement(RTSPlannerPage.shipmentSearch), shipmentNumber);
+        try {
+            typeInField(ownDriver.findElement(RTSPlannerPage.shipmentSearch), shipmentNumber);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Utility_Functions.timeWait(2);
         commonObj.validateText(By.xpath("(//td[normalize-space()='"+shipmentNumber+"'])[1]"),
                 shipmentNumber, "Shipment is present");
@@ -210,7 +213,7 @@ public class RTSPlanner extends ReusableLib {
         String shipmentNumber = shipment.getShipmentNumber();
         commonObj.dragAndDrop(By.xpath("//tr[@id='"+shipmentNumber+"']//span//i"),
                 By.xpath("//span[normalize-space()='"+manifest.getNumber()+"']"));
-        manifest.addShipment(shipment);
+        manifest.addOrder(shipment);
         waitForElementDisappear(RTSPlannerPage.loading, 5);
         commonObj.validateText(By.xpath("(//span[normalize-space()='"+manifest.getStops().size()+"'])[1]"),
                 String.valueOf(manifest.getStops().size()), "Number of stops is correct");
@@ -221,7 +224,7 @@ public class RTSPlanner extends ReusableLib {
         String poNumber = purchaseOrder.getNumber();
         commonObj.dragAndDrop(By.xpath("//tr[@id='"+poNumber+"']//span//i"),
                 By.xpath("//span[normalize-space()='"+manifest.getNumber()+"']"));
-        manifest.addPurchaseOrder(purchaseOrder);
+        manifest.addOrder(purchaseOrder);
         waitForElementDisappear(RTSPlannerPage.loading, 5);
         commonObj.validateText(By.xpath("(//span[normalize-space()='"+manifest.getStops().size()+"'])[1]"),
                 String.valueOf(manifest.getStops().size()), "Number of stops is correct");
@@ -248,6 +251,7 @@ public class RTSPlanner extends ReusableLib {
 
     public void clearShipmentFilters(Shipment shipment) {
         String shipmentNumber = shipment.getShipmentNumber();
+        waitForElementDisappear(RTSPlannerPage.loading, 5);
         click(RTSPlannerPage.shipmentFilters, "Opening Filters Modal");
         click(RTSPlannerPage.clearShipmentFilters, "Clearing Filters");
         click(RTSPlannerPage.shipmentApply, "Applying Filters");
@@ -330,6 +334,7 @@ public class RTSPlanner extends ReusableLib {
         String title = "Manifest #: "+manifest.getId();
         commonObj.validateText(By.xpath("//h2[normalize-space()='"+title+"']"), title,
                 "Validating Manifest Number");
+        waitForElementDisappear(RTSPlannerPage.loading, 5);
         validateValue(RTSPlannerPage.detailsDate, manifest.getDate(), "Validating Date");
         validateValue(RTSPlannerPage.detailsTime, manifest.getTime(), "Validating Time");
         validateDropDownValue(RTSPlannerPage.detailsTruck, manifest.getTruck(), "Validating Truck");

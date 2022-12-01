@@ -77,6 +77,15 @@ public class User extends ReusableLib implements Serializable {
         this.environment = environment;
     }
 
+    public String getDailyPassword(String environment) {
+        String URL = "https://btjones1:Nobodyknows1(@daily.winwholesale.com/";
+        ownDriver.get(URL);
+        environment = environment.equalsIgnoreCase("prod") ? "Prod" : environment;
+        click(ownDriver.findElement(By.xpath("//a[text()='"+environment+"']")));
+        Utility_Functions.timeWait(4);
+        return getText(By.xpath("//h2"));
+    }
+
     public void getDailyPassword() {
         String URL = "https://btjones1:Nobodyknows1(@daily.winwholesale.com/";
         ownDriver.get(URL);
@@ -96,7 +105,7 @@ public class User extends ReusableLib implements Serializable {
 
     public void loginToWISE() {
         String url = environment.equalsIgnoreCase("prod")
-                ? "https://wise.winwholesale.com/wise?workstnid=&skin=WOBHighContrast"
+                ? "https://newwise.winwholesale.com/wise?workstnid=&skin=WOBHighContrast"
                 : "https://wisetest.winwholesale.com/wise?skin=WOBDark";
         ownDriver.get(url);
         sendKeys(LoginPage.userNametxtBox, name, "Entering username");

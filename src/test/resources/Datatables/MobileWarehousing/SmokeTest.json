@@ -1,13 +1,13 @@
 {
   "Business_Flow": [
     {
-      "TC_1_SmokeTest": "initiateSmokeTest",
+      "Tc_421_SmokeTest": "initiateSmokeTest",
       "CreateSalesOrder": "createSalesOrder"
     }
   ],
   "General_Data": [
     {
-      "TC_ID": "TC_1_SmokeTest",
+      "TC_ID": "Tc_421_SmokeTest",
       "Iteration": "1"
     }
   ]

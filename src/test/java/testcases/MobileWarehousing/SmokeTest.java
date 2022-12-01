@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class SmokeTest extends TestConfigurations {
 
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_1_SmokeTest(SeleniumTestParameters testParameters) {
+    public void Tc_421_SmokeTest(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Smoke Test");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();

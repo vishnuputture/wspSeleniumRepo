@@ -3,7 +3,6 @@ package businesskeywords.warehousing.Manifest;
 import businesskeywords.warehousing.Objects.*;
 import businesskeywords.Pricing.SalesOrders.SalesOrders;
 import businesskeywords.common.Login;
-import com.mattermost.MattermostAPIHandler;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Settings;
@@ -13,7 +12,6 @@ import commonkeywords.CommonActions;
 import commonkeywords.DBCall;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.*;
-import pages.common.LoginPage;
 import pages.common.MasterPage;
 import pages.pricing.SalesOrders.SalesOrdersPage;
 import pages.warehouse.RTSPlannerPage;
@@ -28,7 +26,6 @@ public class SmokeTest extends ReusableLib {
     private final CommonActions commonObj;
     private transient Login login;
     private Orders orders;
-    private Manifest manifest;
     private final FrameworkDriver ownDriver;
     public static Properties properties = Settings.getInstance();
     private ArrayList<String> vendors = new ArrayList<>();
@@ -37,10 +34,12 @@ public class SmokeTest extends ReusableLib {
     private final User wiseUser = new User(helper, "btjones1", "Nobodyknows1(", environment, company);
     private final User webUser = new User(helper, "wztestqa", environment, company);
     private final RTSPlanner planner = new RTSPlanner(helper, company, environment);
+    private final DriverApp driverApp = new DriverApp(helper);
+    private ArrayList<Manifest> manifests = new ArrayList<>();
     private int numberOfPurchaseOrders = 1;
     private int numberOfSameVendors = 1;
     private int numberOfSalesOrders = 1;
-    private int numberOfShipments = 2;
+    private int numberOfShipments = 1;
     private int numberOfItems = 1;
     private boolean useLastOrders = false;
 
@@ -64,6 +63,13 @@ public class SmokeTest extends ReusableLib {
 
         navigateToManifest();
         createManifestRTS();
+
+        driverApp.loginToDriverApp(webUser);
+        for (Manifest manifest : manifests) {
+            driverApp.verifyManifestCard(manifest);
+            driverApp.openManifest(manifest);
+            driverApp.validateStops(manifest);
+        }
     }
 
     public void navigateToManifest() {
@@ -80,7 +86,7 @@ public class SmokeTest extends ReusableLib {
     public void createManifestRTS() throws SQLException {
         planner.setSalesOrders(orders.getSalesOrders());
         planner.navigateToRTS();
-        planner.createManifestRTSPlanner();
+        manifests.add(planner.createManifestRTSPlanner());
         planner.applyManifestFilters();
         planner.verifyManifestCard();
         for (SalesOrder salesOrder : orders.getSalesOrders()) {
@@ -136,6 +142,7 @@ public class SmokeTest extends ReusableLib {
         Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.primarySalespersonDropDown), 1);
         SalesOrder salesOrder = generateSalesOrder(getValue(By.id("inOrderNum")));
         Shipment shipmentData = generateShipment();
+        shipmentData.setBillTo(salesOrder.getBillTo());
         so.navigateToItemsTab();
         int lineNumber = 1;
         ArrayList<String> items = getRandomItems(numberOfItems * numberOfShipments, "RF");
@@ -183,7 +190,8 @@ public class SmokeTest extends ReusableLib {
                 row++;
             }
             sendKeys(By.id("tbxDeliveryInstructions"), getRandomString(120));
-            click(By.id("btnAddGoToNew"));
+            Utility_Functions.actionKey(Keys.F9, ownDriver);
+            //click(By.id("btnAddGoToNew"));
             waitForElementDisappear(By.id("_pui_loading_animation"), 15);
             Utility_Functions.actionKey(Keys.PAGE_DOWN, ownDriver);
             Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(By.id("slbNextAction."+ index)), 2);
@@ -205,12 +213,6 @@ public class SmokeTest extends ReusableLib {
         vendors.remove(0);
         sendKeysAndEnter(By.id("inVendorNumber"), vendorNumber, "Adding Vendor Number");
         String vendorName = getValue(By.id("outCustomerPONumber_copy"));
-/*
-        String jobName = salesOrder.getJobName();
-        String customerPO = salesOrder.getPoNumber();
-        sendKeys(By.id("outJobName"), jobName);
-        sendKeys(By.id("outCustomerPONumber"), customerPO);
-*/
         Utility_Functions.xSelectDropdownByIndex(ownDriver, getElement(By.id("slbCostMethod")), 0);
         Utility_Functions.xSelectDropdownByIndex(ownDriver, getElement(By.id("slbFreightCode")), 2);
         String freightCode = Utility_Functions.xgetSelectedDropdownValue(ownDriver, By.id("slbFreightCode"));
@@ -260,7 +262,7 @@ public class SmokeTest extends ReusableLib {
         return new Item(itemNumber, qtyOrdered, qtyToShip, lineNumber);
     }
 
-    public void exitSalesOrder() {
+    public void exitSalesOrder() {//UPDATE PAYMENT TERMS TO COPY THE FIRST SHIPMENT'S PAYMENT TERMS
         click(SalesOrdersPage.paymentsTab, "Clicking Payments Tab");
         for (int i = 1; i <= numberOfShipments; i++) {
             Utility_Functions.timeWait(2);
@@ -348,7 +350,7 @@ public class SmokeTest extends ReusableLib {
         ResultSet resultSet = sqlStatement.executeQuery("SELECT I.ITEM_NUMBER FROM SOPKQDTV02 S " +
                 "INNER JOIN IM02 I ON I.ITEM_NUMBER = S.ITEM_NUMBER " +
                 "WHERE PICK_VIA_CODE = '"+ pickVia +"' AND PRODUCT_AVAILABLE_TOSELL = 'Y' " +
-                "AND I.ITEM_NUMBER NOT LIKE 'J%' AND I.ITEM_NUMBER NOT LIKE '*%' " +
+                "AND I.ITEM_NUMBER NOT LIKE 'J%' AND I.ITEM_NUMBER NOT LIKE '*%' AND I.AVERAGE_COST > 0 " +
                 "ORDER BY RAND() LIMIT "+quantity);
         if (!resultSet.isBeforeFirst()) {
             System.out.println("No data was available.");
@@ -375,7 +377,7 @@ public class SmokeTest extends ReusableLib {
 
     public ArrayList<String> getRandomVendors() throws SQLException {
         int total = numberOfPurchaseOrders - numberOfSameVendors;
-        total = (total == 0 && numberOfPurchaseOrders > 0) ? 1 : 0;
+        total = (total == 0 && numberOfPurchaseOrders > 0) ? 1 : total;
         if (numberOfPurchaseOrders == 0 || total == 0) return new ArrayList<>();
         int number = total * numberOfSalesOrders;
         ArrayList<String> vendors = getRandomAccount("vendor", number);
@@ -451,14 +453,6 @@ public class SmokeTest extends ReusableLib {
         sqlStatement.close();
         System.out.println(purchaseOrder.getAddressLine1() + " "+ purchaseOrder.getAddressLine2() + " "
                 + purchaseOrder.getAddressLine3());
-    }
-
-    public Manifest getManifest() {
-        return manifest;
-    }
-
-    public void setManifest(Manifest manifest) {
-        this.manifest = manifest;
     }
 
     public void saveOrders() throws IOException {
