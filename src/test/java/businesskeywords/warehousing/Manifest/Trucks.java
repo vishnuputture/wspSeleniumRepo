@@ -36,7 +36,7 @@ public class Trucks extends ReusableLib {
 
     public void navigateToShippingManifest() {
         //driver.get(jsonData.getData("Url"));
-        ownDriver.get(properties.getProperty("manifestURL"));
+        ownDriver.get(properties.getProperty("manifestDevURL"));
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
@@ -363,7 +363,7 @@ public class Trucks extends ReusableLib {
      */
     public void navigateToUpdateTruckPage() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td"));
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver, By.xpath("//td"),"Click grid");
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.truckDetailHeader, "Truck Details", "[Truck Details] Page header is present");
     }
@@ -380,8 +380,8 @@ public class Trucks extends ReusableLib {
             i++;
         }
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.saveBtnDis, "Save Truck", "Save Truck Button is Exist and button is disabled");
-        commonObj.validateText(TruckPage.deleteButton, "Delete Truck", "Delete Truck Button is Exist and button is disabled");
+        commonObj.validateText(buttonTag(" Edit "), "Edit", "Edit Button is Exist and button is disabled");
+        commonObj.validateText(buttonTag("Delete "), "Delete", "Delete Button is Exist and button is disabled");
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
     }
 

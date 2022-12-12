@@ -278,7 +278,7 @@
     },
     {
       "TC_ID": "Tc_767_verifyCreateNewBinWithConditionGood",
-      "BinLocation": "TEST33744",
+      "BinLocation": "TEST59405",
       "BinCondition": "Good",
       "BinZones": "DEFAULT",
       "BinPicking": "Automatic",
@@ -290,7 +290,7 @@
     },
     {
       "TC_ID": "Tc_768_verifyCreateNewBinWithConditionDamaged",
-      "BinLocation": "TEST102524",
+      "BinLocation": "TEST98214",
       "BinCondition": "Damaged",
       "BinZones": "DEFAULT",
       "BinPicking": "Manual Picking & Staging",
@@ -302,7 +302,7 @@
     },
     {
       "TC_ID": "Tc_769_verifyCreateNewBinWithConditionDefective",
-      "BinLocation": "TEST10322",
+      "BinLocation": "TEST107933",
       "BinCondition": "Defective",
       "BinZones": "DEFAULT",
       "BinPicking": "Manual Picking & Staging",
@@ -336,7 +336,7 @@
     },
     {
       "TC_ID": "Tc_785_verifyBinWithoutItemsCanBeDeleted",
-      "BinLocation": "TEST108606",
+      "BinLocation": "TEST63767",
       "BinCondition": "Good",
       "BinZones": "DEFAULT",
       "BinPicking": "Automatic",

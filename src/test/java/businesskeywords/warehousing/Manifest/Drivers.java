@@ -326,4 +326,14 @@ public class Drivers extends ReusableLib {
         Utility_Functions.timeWait(3);
         commonObj.validateText(TruckPage.deletePopUp, "Driver " + Utility_Functions.xGetJsonData("Driver") + " (" + jsonData.getData("alias") + ") successfully updated.", "Driver Update message should display");
     }
+
+    public String driverUserName(){
+        String userName="wz99599a";
+        int i=0;
+        while(!isDisplayed(TruckPage.deletePopUp)){
+            userName=userName.substring(0,1).toUpperCase()+userName.substring(1);
+            i++;
+        }
+        return userName;
+    }
 }
