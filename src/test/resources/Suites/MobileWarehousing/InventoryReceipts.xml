@@ -29,7 +29,6 @@
             </class>
         </classes>
     </test>
-
     <test name="InventoryReceipt2">
         <classes>
             <class name="testcases.MobileWarehousing.InventoryReceipts">

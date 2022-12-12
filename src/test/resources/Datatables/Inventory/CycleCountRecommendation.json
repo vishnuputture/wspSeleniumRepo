@@ -1,14 +1,24 @@
 {
   "Business_Flow": [
     {
-      "Tc_692_verifyADDITEMSUI": "getPassword,navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyADDITEMSUI",
-      "Tc_694_verifyReAssignUserUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyReAssignUserUI",
-      "Tc_690_verifyCycleCountRecAuditorUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyCycleCountRecAuditorUI",
-      "Tc_693_verifyCycleCountRecLocalUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyCycleCountRecLocalUI",
-      "Tc_691_verifySearchFilterUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifySearchFilterUI",
-      "Tc_695_verifyPrintCycleCountSheetUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyPrintCycleCountSheetUI",
-      "Tc_696_verifyAutoAssignUserUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyAutoAssignUserUI",
-      "Tc_697_verifyCycleCountAuditHistoryUI": "navigateToBinMain,selectCompanyCycleCost,clickInventory,verifyCycleCountAuditHistoryUI"
+      "Tc_692_verifyADDITEMSUI": "getPassword,navigateToCycleCountRec,selectCompanyCycleCost,verifyADDITEMSUI",
+      "Tc_694_verifyReAssignUserUI": "navigateToCycleCountRec,selectCompanyCycleCost,verifyReAssignUserUI",
+      "Tc_690_verifyCycleCountRecAuditorUI": "navigateToCycleCountRec,selectCompanyCycleCost,verifyCycleCountRecAuditorUI",
+      "Tc_693_verifyCycleCountRecLocalUI": "navigateToCycleCountRec,selectCompanyCycleCost,verifyCycleCountRecLocalUI",
+      "Tc_691_verifySearchFilterUI": "navigateToCycleCountRec,selectCompanyCycleCost,verifySearchFilterUI",
+      "Tc_695_verifyPrintCycleCountSheetUI": "navigateToCycleCountRec,selectCompanyCycleCost,verifyPrintCycleCountSheetUI",
+      "Tc_696_verifyAutoAssignUserUI": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignUserUI",
+      "Tc_697_verifyCycleCountAuditHistoryUI": "navigateToCycleCountRec,selectCompanyCycleCost,verifyCycleCountAuditHistoryUI",
+      "Tc_731_verifySortingColLocalCompany": "navigateToCycleCountRec,selectCompanyCycleCost,verifySortingCol",
+      "Tc_742_verifyPageCountLocalCompany": "navigateToCycleCountRec,selectCompanyCycleCost,verifyPageCount",
+      "Tc_743_verifyPaginationLocalCompany": "navigateToCycleCountRec,selectCompanyCycleCost,paginationItemMaintenance",
+      "Tc_745_verifyGraphPercentage": "navigateToCycleCountRec,selectCompanyCycleCost,verifyGraphPercentage",
+      "Tc_747_verifyChangesLocalCompWithAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,verifyChangesLocalCompWithAuditor",
+      "Tc_730_verifyEditAssignedUser": "navigateToCycleCountRec,selectCompanyCycleCost,verifyEditAssignedUser",
+      "Tc_733_verifyCycleCountEntry": "navigateToCycleCountRec,selectCompanyCycleCost,verifyCycleCountEntry",
+      "Tc_746_verifyUnassignedUser": "navigateToCycleCountRec,selectCompanyCycleCost,verifyEditAssignedUser",
+      "Tc_741_verifyRemoveCounted": "navigateToCycleCountRec,selectCompanyCycleCost,verifyRemoveCounted"
+
     }
   ],
   "General_Data": [
@@ -35,6 +45,41 @@
     },
     {
       "TC_ID": "Tc_697_verifyCycleCountAuditHistoryUI"
+    },
+    {
+      "TC_ID": "Tc_731_verifySortingColLocalCompany"
+    },
+    {
+      "TC_ID": "Tc_742_verifyPageCountLocalCompany"
+    },
+    {
+      "TC_ID": "Tc_743_verifyPaginationLocalCompany"
+    },
+    {
+      "TC_ID": "Tc_745_verifyGraphPercentage"
+    },
+    {
+      "TC_ID": "Tc_747_verifyChangesLocalCompWithAuditor",
+      "user": "winauto1",
+      "option": "By Individual Item"
+    },
+    {
+      "TC_ID": "Tc_730_verifyEditAssignedUser",
+      "user": "winauto1"
+    },
+    {
+      "TC_ID": "Tc_733_verifyCycleCountEntry",
+      "Assigned": "Assigned",
+      "Counted": "Not Counted"
+    },
+    {
+      "TC_ID": "Tc_746_verifyUnassignedUser"
+    },
+    {
+      "TC_ID": "Tc_741_verifyRemoveCounted",
+      "Assigned": "Select",
+      "Counted": "Counted",
+      "NotCounted": "Not Counted"
     }
   ]
 }
