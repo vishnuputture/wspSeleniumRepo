@@ -31,6 +31,7 @@ public class SalesOrdersPage extends ReusableLib {
     public static By inShipToAcct = By.id("inShipToAcct");
     public static By outSaveCustName = By.id("outSaveCustName");
     public static By outShipToCity = By.id("outShipToCity");
+    public static By outerUnitPrice = By.id("outSbfUnitPrice.1");
     public static By outShipToState = By.id("outShipToState");
     public static By outShipToZipCode = By.id("outShipToZipCode");
     public static By deliveryTypeDropDown = By.id("ddbDeliveryType");

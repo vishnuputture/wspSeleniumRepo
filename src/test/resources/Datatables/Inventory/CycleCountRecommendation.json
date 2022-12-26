@@ -17,8 +17,12 @@
       "Tc_730_verifyEditAssignedUser": "navigateToCycleCountRec,selectCompanyCycleCost,verifyEditAssignedUser",
       "Tc_733_verifyCycleCountEntry": "navigateToCycleCountRec,selectCompanyCycleCost,verifyCycleCountEntry",
       "Tc_746_verifyUnassignedUser": "navigateToCycleCountRec,selectCompanyCycleCost,verifyEditAssignedUser",
-      "Tc_741_verifyRemoveCounted": "navigateToCycleCountRec,selectCompanyCycleCost,verifyRemoveCounted"
-
+      "Tc_741_verifyRemoveCounted": "navigateToCycleCountRec,selectCompanyCycleCost,verifyRemoveCounted",
+      "Tc_800_verifyCountAudit": "navigateToCycleCountRec,selectCompanyCycleCost,verifyCountAudit",
+      "Tc_699_verifyItemLedger": "navigateToCycleCountRec,selectCompanyCycleCost,verifyItemLedger",
+      "Tc_700_verifyItemBinLedger": "navigateToCycleCountRec,selectCompanyCycleCost,verifyItemBinLedger",
+      "Tc_708_verifyOpenOrder": "navigateToCycleCountRec,selectCompanyCycleCost,verifyOpenOrder",
+      "Tc_708_verifyPrintLabel": "navigateToCycleCountRec,selectCompanyCycleCost,verifyPrintLabel"
     }
   ],
   "General_Data": [
@@ -80,6 +84,25 @@
       "Assigned": "Select",
       "Counted": "Counted",
       "NotCounted": "Not Counted"
+    },
+    {
+      "TC_ID": "Tc_800_verifyCountAudit",
+      "Assigned": "Select",
+      "Counted": "Counted",
+      "NotCounted": "Not Counted",
+      "Event": "CYCLE CNT"
+    },
+    {
+      "TC_ID": "Tc_699_verifyItemLedger"
+    },
+    {
+      "TC_ID": "Tc_700_verifyItemBinLedger"
+    },
+    {
+      "TC_ID": "Tc_708_verifyOpenOrder"
+    },
+    {
+      "TC_ID": "Tc_708_verifyPrintLabel"
     }
   ]
 }

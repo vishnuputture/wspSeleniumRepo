@@ -445,10 +445,14 @@ public class CycleCountRecommendation extends ReusableLib {
         return By.xpath("//li/a[text()='" + option + "']");
     }
 
-    public void assignedCountedFilter(String assign,String counted) {
+    public void clickSearchIcon(){
         Utility_Functions.timeWait(2);
         minimizeWindow(2);
         click(CostAdjustmentPage.searchIcon, "Click Search icon");
+    }
+
+    public void assignedCountedFilter(String assign,String counted) {
+        clickSearchIcon();
         Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.selectAssigned, jsonData.getData(assign));
         Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.countedFilter, jsonData.getData(counted));
         click(button(" Apply Filters "), "Click [Apply Filter] Button");
@@ -500,16 +504,35 @@ public class CycleCountRecommendation extends ReusableLib {
         paginationUI();
     }
 
-    public void removeCycleRec() {
+    public void dotMenu(String menu){
         Utility_Functions.timeWait(2);
         Utility_Functions.xHoverElementClk(ownDriver.findElement(CycleCountRecommendationPage.actionIcon), ownDriver);
         try {
-           /* Utility_Functions.timeWait(2);
-            click(CycleCountRecommendationPage.actionIcon);*/
+            Utility_Functions.timeWait(2);
+            click(CycleCountRecommendationPage.actionIcon);
         }catch (Exception e){}
         Utility_Functions.timeWait(2);
-        click(actionDropdown("Remove"), "Click [Remove]");
+        try {
+            ownDriver.findElement(actionDropdown(menu)).click();
+        }catch (Exception e){
+            Utility_Functions.xHoverElementClk(ownDriver.findElement(CycleCountRecommendationPage.actionIcon), ownDriver);
+            Utility_Functions.timeWait(2);
+            click(actionDropdown(menu), "Click [" + menu + "]");
+        }
+    }
+
+    public void removeCycleRec() {
+        dotMenu("Remove");
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, CycleCountRecommendationPage.removeOpoUp, "[Remove] Popup present");
+    }
+
+    public By h2Tag(String header){
+        return By.xpath("//h2[text()='"+header+"']");
+    }
+
+    public void cycleAudit() {
+        dotMenu("Count Audit");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver,h2Tag("Cycle Count Audit History") , "[Cycle Count Audit History] header present");
     }
 
     public void verifyRemoveCounted() {
@@ -527,5 +550,68 @@ public class CycleCountRecommendation extends ReusableLib {
         click(button("Remove "),"Click [Remove] button");
         commonObj.validateText(TruckPage.deletePopUp,"Successfully removed recommendation.","[Successfully removed recommendation.] toaster is present");
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "[Cycle Count Rec] header present");
+    }
+
+    public void verifyCountAudit(){
+        String itemNo;
+        String itemDescription;
+        assignedCountedFilter("Assigned","NotCounted");
+        itemNo=ownDriver.findElements(columnData("Item Number")).get(0).getText();
+        itemDescription=ownDriver.findElements(columnData("Item Description")).get(0).getText();
+        cycleAudit();
+        commonObj.validateText(columnData("Item Number"),itemNo,"Item Number exist");
+        commonObj.validateText(columnData("Item Description"),itemDescription,"Item Number exist");
+        commonObj.validateText(columnData("Bin Count"),"0","Bin COunt is 0");
+        click(button(" Back "),"Click Back button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "[Cycle Count Rec] header present");
+        assignedCountedFilter("Assigned","Counted");
+        itemNo=ownDriver.findElements(columnData("Item Number")).get(0).getText();
+        itemDescription=ownDriver.findElements(columnData("Item Description")).get(0).getText();
+        Utility_Functions.timeWait(2);
+        cycleAudit();
+        Utility_Functions.timeWait(2);
+        click(CostAdjustmentPage.searchIcon, "Click Search icon");
+        Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.selectEvent, jsonData.getData("Event"));
+        click(button(" Apply Filters "), "Click [Apply Filter] Button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"),"");
+        Utility_Functions.timeWait(5);
+        commonObj.validateText(columnData("Item Number"),itemNo,"Item Number exist");
+        commonObj.validateText(columnData("Item Description"),itemDescription,"Item Number exist");
+        commonObj.validateText(columnData("Event"),"CYCLE CNT","Even matches");
+    }
+
+    public void verifyItemLedger(){
+        dotMenu("Item Ledger");
+        //Utility_Functions.waitTillClickHardSleep(report, ownDriver,h2Tag("Cycle Count Audit History") , "[Cycle Count Audit History] header present");
+    }
+
+    public void verifyItemBinLedger(){
+        dotMenu(" Item Bin Ledger ");
+        Utility_Functions.xSwitchToWindow(ownDriver,1);
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver,h2Tag("ITEM-BIN LEDGER") , "[ITEM-BIN LEDGER] header present");
+    }
+
+    public void verifyOpenOrder(){
+        dotMenu("Open Orders");
+        Utility_Functions.xSwitchToWindow(ownDriver,1);
+        //Utility_Functions.waitTillClickHardSleep(report, ownDriver,h2Tag("ITEM-BIN LEDGER") , "[ITEM-BIN LEDGER] header present");
+    }
+
+    public void verifyPrintLabel(){
+        dotMenu("Print Labels");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver,h2Tag("Print Labels") , "[Print Labels] header present");
+        commonObj.validateText(actionDropdown("Item Labels"),"Item Labels","[Item Labels] is present");
+        commonObj.validateText(actionDropdown("Bin Labels"),"Bin Labels","[Bin Labels] is present");
+        commonObj.validateText(label("Printer"),"Printer","[Printer] label is present");
+        commonObj.validateElementExists(CycleCountRecommendationPage.printDropDown,"Printer dropdown is present");
+        Utility_Functions.xSelectDropdownByName(ownDriver,CycleCountRecommendationPage.printDropDown,"(Default)");
+        click(CycleCountRecommendationPage.printSelectCheckBox,"Click [Select All Items] check box");
+        Utility_Functions.xAssertEquals(report,getAttribute(BinMaintenancePage.printQty0,"ng-reflect-model"),"1","");
+        sendKeys(BinMaintenancePage.printQty0,"11","Enter [11] to quantity");
+        Utility_Functions.xAssertEquals(report,getAttribute(BinMaintenancePage.printQty0,"ng-reflect-model"),"10","");
+        //Utility_Functions.xAssertEquals(report,getAttribute(CycleCountRecommendationPage.printSelectCheckBox,"ng-reflect-model"),"true","Check box is enabled");
+        commonObj.validateText(label("Deselect All Items"),"Deselect All Items","[Deselect All Items] label is present");
+        commonObj.validateText(button("Cancel "),"Cancel ","[Cancel] Button is present");
+        commonObj.validateText(button("Print"),"Print","[Print] Button is present");
     }
 }

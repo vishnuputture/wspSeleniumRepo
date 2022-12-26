@@ -489,6 +489,7 @@ public class SpecialPricingAllowance extends ReusableLib {
             successMessage = Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.lblSuccess);
         } else {
             successMessage = Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.loadedSuccess);
+            commonObj.validateText(SpecialPriceAllowancePage.loadedSuccess,successMessage,"Message present");
         }
         System.out.println("Text: " + successMessage);
         //Utility_Functions.xAssertEquals(report, message, successMessage.trim(), "Validating success message");
@@ -503,6 +504,10 @@ public class SpecialPricingAllowance extends ReusableLib {
         String name = addRanActiveContract();
         click(SpecialPriceAllowancePage.btnReturn);
         sendKeysAndEnter(SpecialPriceAllowancePage.txtBoxSearchCon, name, "Search Contract Name");
+        loadSPOption(name);
+    }
+
+    public void loadSPOption(String name){
         optTextBox("7", "Enter 7 to Load Special Pricing");
         verifySpaChangeContractTitle("Load Special Pricing");
         String expVendorNo = Utility_Functions.getText(ownDriver, SpecialPriceAllowancePage.vendNo).trim();

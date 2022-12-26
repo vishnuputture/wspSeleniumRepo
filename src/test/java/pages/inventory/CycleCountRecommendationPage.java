@@ -33,7 +33,11 @@ public class CycleCountRecommendationPage extends ReusableLib {
     public static By countedFilter=By.id("select-counted");
     public static By actionIcon=By.xpath("//i[@class='fa fa-ellipsis-v fa-fw']");
     public static By selectAssigned=By.id("select-assigned");
+    public static By selectEvent=By.id("select-event");
     public static By addItemOpt=By.xpath("//select[@title='Select option to add item.']");
+    public static By printSelectCheckBox=By.xpath("//div/input[@type='checkbox']");
+    public static By printBtnDisabled=By.xpath("//button[@disabled and text()='Print']");
     public static By removeOpoUp=By.xpath("//p[@class='title']");
+    public static By printDropDown=By.id("selectPrinter1");
     public static By inputItem=By.xpath("//cyc-item-filter[@placeholder='Item Number, Description, or Alternate']/input");
 }

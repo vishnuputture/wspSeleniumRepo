@@ -4961,4 +4961,14 @@ public class Utility_Functions extends ReusableLib {
             }
         }
     }
+
+    public static String yearAdjust(int year){
+        Date dt = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(dt);
+        c.add(Calendar.DATE, year);
+        dt = c.getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+        return formatter.format(dt);
+    }
 }
