@@ -22,7 +22,23 @@
       "Tc_699_verifyItemLedger": "navigateToCycleCountRec,selectCompanyCycleCost,verifyItemLedger",
       "Tc_700_verifyItemBinLedger": "navigateToCycleCountRec,selectCompanyCycleCost,verifyItemBinLedger",
       "Tc_708_verifyOpenOrder": "navigateToCycleCountRec,selectCompanyCycleCost,verifyOpenOrder",
-      "Tc_708_verifyPrintLabel": "navigateToCycleCountRec,selectCompanyCycleCost,verifyPrintLabel"
+      "Tc_708_verifyPrintLabel": "navigateToCycleCountRec,selectCompanyCycleCost,verifyPrintLabel",
+      "Tc_744_verifyExportButton": "navigateToCycleCountRec,selectCompanyCycleCost,verifyExportButton",
+      "Tc_714_verifyAddItemBinLocationRange": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToAddItemScreen,verifyAddItemBinLocationRange",
+      "Tc_715_verifyAddItemUsingQuantity": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToAddItemScreen,verifyAddItemUsingQuantity",
+      "Tc_716_verifyAddItemUsingMFPDVN": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToAddItemScreen,verifyAddItemUsingMFPDVN",
+      "Tc_717_verifyAddItemUsingZone": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToAddItemScreen,verifyAddItemUsingZone",
+      "Tc_704_verifyUserReassign": "navigateToCycleCountRec,selectCompanyCycleCost,verifyUserReassign",
+      "Tc_705_verifyRemoveAssignedUser": "navigateToCycleCountRec,selectCompanyCycleCost,verifyRemoveAssignedUser",
+      "Tc_707_verifyCountSheet": "navigateToCycleCountRec,selectCompanyCycleCost,verifyPrintCycleCountSheetUI",
+      "Tc_735_verifyAutoAssignAcrossBinZone": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignAcrossBinZone",
+      "Tc_737_verifyAutoAssignByZone": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignByZone",
+      "Tc_738_verifyAutoBinLocation": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignByBinLoc",
+      "Tc_738_verifyAutoAssignReasonForRec": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignReasonForRec",
+      "Tc_740_verifyAutoAssignMFPDVN": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignMFPDVN",
+      "Tc_712_verifyZoneFilter": "navigateToCycleCountRec,selectCompanyCycleCost,verifyZoneFilter",
+      "Tc_718_verifyBinLocationFilter": "navigateToCycleCountRec,selectCompanyCycleCost,verifyBinLocationFilter",
+      "Tc_719_verifyMFPDVNFilter": "navigateToCycleCountRec,selectCompanyCycleCost,verifyMFPDVNFilter"
     }
   ],
   "General_Data": [
@@ -103,6 +119,89 @@
     },
     {
       "TC_ID": "Tc_708_verifyPrintLabel"
+    },
+    {
+      "TC_ID": "Tc_744_verifyExportButton"
+    },
+    {
+      "TC_ID": "Tc_714_verifyAddItemBinLocationRange",
+      "option": "By Bin Location Range",
+      "BinLocationStart": "1",
+      "BinLocationEnd": "1"
+    },
+    {
+      "TC_ID": "Tc_715_verifyAddItemUsingQuantity",
+      "option": "By Quantity",
+      "quantity": "2"
+    },
+    {
+      "TC_ID": "Tc_716_verifyAddItemUsingMFPDVN",
+      "option": "By MF/PD/VN Code",
+      "MF": "PR",
+      "PD": "PR",
+      "VN": "PR"
+    },
+    {
+      "TC_ID": "Tc_717_verifyAddItemUsingZone",
+      "option": "By Zone",
+      "zone": "PR"
+    },
+    {
+      "TC_ID": "Tc_704_verifyUserReassign",
+      "reassignedUser": "WINAUTO9"
+    },
+    {
+      "TC_ID": "Tc_705_verifyRemoveAssignedUser"
+    },
+    {
+      "TC_ID": "Tc_707_verifyCountSheet"
+    },
+    {
+      "TC_ID": "Tc_735_verifyAutoAssignAcrossBinZone",
+      "option": "Across all bin locations and zones",
+      "user": "WINAUTO1"
+    },
+    {
+      "TC_ID": "Tc_737_verifyAutoAssignByZone",
+      "option": "By Zone",
+      "user": "WINAUTO1",
+      "zone": "DF - DEFAULT"
+    },
+    {
+      "TC_ID": "Tc_738_verifyAutoBinLocation",
+      "option": "By Bin Location Range",
+      "user": "WINAUTO1",
+      "BinStart": "2",
+      "BinEnd": "4"
+    },
+    {
+      "TC_ID": "Tc_738_verifyAutoAssignReasonForRec",
+      "option": "By Reason for Recommendation",
+      "user": "WINAUTO1",
+      "ReasonForRecommendation": "REASSIGNED ITEM"
+    },
+    {
+      "TC_ID": "Tc_740_verifyAutoAssignMFPDVN",
+      "option": "By MF/PD/VN",
+      "user": "WINAUTO1",
+      "MF": "PR",
+      "PD": "PR",
+      "VN": "PR"
+    },
+    {
+      "TC_ID": "Tc_712_verifyZoneFilter",
+      "zone": "DF"
+    },
+    {
+      "TC_ID": "Tc_718_verifyBinLocationFilter",
+      "BinStart": "1",
+      "BinEnd": "1"
+    },
+    {
+      "TC_ID": "Tc_719_verifyMFPDVNFilter",
+      "MF": "PR",
+      "PD": "PR",
+      "VN": "PR"
     }
   ]
 }
