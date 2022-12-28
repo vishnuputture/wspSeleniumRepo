@@ -133,6 +133,17 @@ public class CycleCountRecommendation extends ReusableLib {
         commonObj.validateText(CycleCountRecommendationPage.cycleCountRecHeader, "Cycle Count Recommendation", "[Cycle Count Recommendation] Header is present");
     }
 
+    public void verifyADDITEMSAuditorUI() {
+        navigateToAddItemScreen();
+        String[] options = {"By Individual Item", "By Quantity", "By Certification"};
+        for (int i = 1; i < options.length; i++)
+            Utility_Functions.xAssertEquals(report, options[i - 1], ownDriver.findElements(CycleCountRecommendationPage.addItemOptions).get(i), "[" + options[i] + "] drop down option is present");
+        commonObj.validateText(button(" Cancel "), "Cancel", "[Cancel] button is present");
+        commonObj.validateText(button(" Process "), "Process", "[Process] button is present");
+        click(button(" Cancel "), "Click [Cancel] button");
+        commonObj.validateText(CycleCountRecommendationPage.cycleCountRecHeader, "Cycle Count Recommendation", "[Cycle Count Recommendation] Header is present");
+    }
+
     public void verifyReAssignUserUI() {
         navigateToReAssignUserScreen();
         String[] options = {"User Count", "Current User", "Name", "New User", "Name"};
@@ -451,7 +462,9 @@ public class CycleCountRecommendation extends ReusableLib {
     public void clickSearchIcon() {
         Utility_Functions.timeWait(2);
         minimizeWindow(2);
-        click(CostAdjustmentPage.searchIcon, "Click Search icon");
+        if (isDisplayed(CostAdjustmentPage.searchIcon)) {
+            click(CostAdjustmentPage.searchIcon, "Click Search icon");
+        }
     }
 
     public void assignedCountedFilter(String assign, String counted) {
@@ -502,14 +515,19 @@ public class CycleCountRecommendation extends ReusableLib {
     }
 
     public void verifyCycleCountEntry() {
+        if (isDisplayed(CycleCountRecommendationPage.closeIcon)) {
+            click(CycleCountRecommendationPage.closeIcon);
+        }
         assignedCountedFilter("Assigned", "Counted");
-        navigateToCycleCountEntry();
-        cycleCountEntryUI();
-        paginationUI();
+        if (!isDisplayed(TruckPage.deletePopUp)) {
+            navigateToCycleCountEntry();
+            cycleCountEntryUI();
+            paginationUI();
+        }
     }
 
     public void dotMenu(String menu) {
-        Utility_Functions.timeWait(2);
+        Utility_Functions.timeWait(6);
         Utility_Functions.xHoverElementClk(ownDriver.findElement(CycleCountRecommendationPage.actionIcon), ownDriver);
         try {
             Utility_Functions.timeWait(2);
@@ -541,48 +559,61 @@ public class CycleCountRecommendation extends ReusableLib {
     }
 
     public void verifyRemoveCounted() {
+        if (isDisplayed(CycleCountRecommendationPage.closeIcon)) {
+            click(CycleCountRecommendationPage.closeIcon);
+        }
         assignedCountedFilter("Assigned", "Counted");
-        if (!isDisplayed(CycleCountRecommendationPage.actionIcon)) {
-            commonObj.validateElementExists(By.xpath("//h2"), "[Remove] action not present");
-        } else {
-            new Exception("Remove Action Present Present");
+        if (!isDisplayed(TruckPage.deletePopUp)) {
+            if (!isDisplayed(CycleCountRecommendationPage.actionIcon)) {
+                commonObj.validateElementExists(By.xpath("//h2"), "[Remove] action not present");
+            } else {
+                try {
+                    throw new Exception("Remove Action Present Present");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
         assignedCountedFilter("Assigned", "NotCounted");
-        removeCycleRec();
-        click(button("Cancel "), "Click [Cancel] button");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "[Cycle Count Rec] header present");
-        removeCycleRec();
-        click(button("Remove "), "Click [Remove] button");
-        commonObj.validateText(TruckPage.deletePopUp, "Successfully removed recommendation.", "[Successfully removed recommendation.] toaster is present");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "[Cycle Count Rec] header present");
+        if (!isDisplayed(TruckPage.deletePopUp)) {
+            removeCycleRec();
+            click(button("Cancel "), "Click [Cancel] button");
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "[Cycle Count Rec] header present");
+            removeCycleRec();
+            click(button("Remove "), "Click [Remove] button");
+            commonObj.validateText(TruckPage.deletePopUp, "Successfully removed recommendation.", "[Successfully removed recommendation.] toaster is present");
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "[Cycle Count Rec] header present");
+        }
     }
 
     public void verifyCountAudit() {
         String itemNo;
         String itemDescription;
         assignedCountedFilter("Assigned", "NotCounted");
-        itemNo = ownDriver.findElements(columnData("Item Number")).get(0).getText();
-        itemDescription = ownDriver.findElements(columnData("Item Description")).get(0).getText();
-        cycleAudit();
-        commonObj.validateText(columnData("Item Number"), itemNo, "Item Number exist");
-        commonObj.validateText(columnData("Item Description"), itemDescription, "Item Number exist");
-        commonObj.validateText(columnData("Bin Count"), "0", "Bin COunt is 0");
-        click(button(" Back "), "Click Back button");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "[Cycle Count Rec] header present");
-        assignedCountedFilter("Assigned", "Counted");
-        itemNo = ownDriver.findElements(columnData("Item Number")).get(0).getText();
-        itemDescription = ownDriver.findElements(columnData("Item Description")).get(0).getText();
-        Utility_Functions.timeWait(2);
-        cycleAudit();
-        Utility_Functions.timeWait(2);
-        click(CostAdjustmentPage.searchIcon, "Click Search icon");
-        Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.selectEvent, jsonData.getData("Event"));
-        click(button(" Apply Filters "), "Click [Apply Filter] Button");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "");
-        Utility_Functions.timeWait(5);
-        commonObj.validateText(columnData("Item Number"), itemNo, "Item Number exist");
-        commonObj.validateText(columnData("Item Description"), itemDescription, "Item Number exist");
-        commonObj.validateText(columnData("Event"), "CYCLE CNT", "Even matches");
+        if (!isDisplayed(TruckPage.deletePopUp)) {
+            itemNo = ownDriver.findElements(columnData("Item Number")).get(0).getText();
+            itemDescription = ownDriver.findElements(columnData("Item Description")).get(0).getText();
+            cycleAudit();
+            commonObj.validateText(columnData("Item Number"), itemNo, "Item Number exist");
+            commonObj.validateText(columnData("Item Description"), itemDescription, "Item Number exist");
+            commonObj.validateText(columnData("Bin Count"), "0", "Bin COunt is 0");
+            click(button(" Back "), "Click Back button");
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "[Cycle Count Rec] header present");
+            assignedCountedFilter("Assigned", "Counted");
+            itemNo = ownDriver.findElements(columnData("Item Number")).get(0).getText();
+            itemDescription = ownDriver.findElements(columnData("Item Description")).get(0).getText();
+            Utility_Functions.timeWait(2);
+            cycleAudit();
+            Utility_Functions.timeWait(2);
+            click(CostAdjustmentPage.searchIcon, "Click Search icon");
+            Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.selectEvent, jsonData.getData("Event"));
+            click(button(" Apply Filters "), "Click [Apply Filter] Button");
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h2"), "");
+            Utility_Functions.timeWait(5);
+            commonObj.validateText(columnData("Item Number"), itemNo, "Item Number exist");
+            commonObj.validateText(columnData("Item Description"), itemDescription, "Item Number exist");
+            commonObj.validateText(columnData("Event"), "CYCLE CNT", "Even matches");
+        }
     }
 
     public void verifyItemLedger() {
@@ -616,8 +647,12 @@ public class CycleCountRecommendation extends ReusableLib {
         Utility_Functions.xAssertEquals(report, getAttribute(BinMaintenancePage.printQty0, "ng-reflect-model"), "10", "");
         //Utility_Functions.xAssertEquals(report,getAttribute(CycleCountRecommendationPage.printSelectCheckBox,"ng-reflect-model"),"true","Check box is enabled");
         commonObj.validateText(label("Deselect All Items"), "Deselect All Items", "[Deselect All Items] label is present");
-        commonObj.validateText(button("Cancel "), "Cancel ", "[Cancel] Button is present");
+        commonObj.validateText(getBtn("Print"), "Cancel", "[Cancel] Button is present");
         commonObj.validateText(button("Print"), "Print", "[Print] Button is present");
+    }
+
+    public By getBtn(String buttonSibling) {
+        return By.xpath("//button[text()='" + buttonSibling + "']/preceding-sibling::button");
     }
 
     public void verifyExportButton() {
@@ -641,10 +676,17 @@ public class CycleCountRecommendation extends ReusableLib {
 
     public void verifyAddItemUsingQuantity() {
         Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.addItemOpt, jsonData.getData("option"));
-        sendKeys(binLocationInput("By Zone"), jsonData.getData("quantity"), "Enter Quantity");
+        sendKeys(CycleCountRecommendationPage.qtyInput, jsonData.getData("quantity"), "Enter Quantity");
         click(button(" Process "), "Click [Process] button");
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Cancel "), "Click Cancel button");
         commonObj.validateText(TruckPage.deletePopUp, "Add items by quantity request has been received.", "[Add items by quantity request has been received.] toaster is present");
+    }
+
+    public void verifyAddItemUsingCertification() {
+        Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.addItemOpt, jsonData.getData("option"));
+        click(button(" Process "), "Click [Process] button");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Cancel "), "Click Cancel button");
+        commonObj.validateText(TruckPage.deletePopUp, "auditor certification request has been received.", "[auditor certification request has been received.] toaster is present");
     }
 
     public void verifyAddItemUsingMFPDVN() {
@@ -687,16 +729,18 @@ public class CycleCountRecommendation extends ReusableLib {
         click(CycleCountRecommendationPage.reAssignUserCancelBtn);
         commonObj.validateText(CycleCountRecommendationPage.cycleCountRecHeader, "Cycle Count Recommendation", "[Cycle Count Recommendation] Header is present");
         String itemNo = filterAssignedUser(currentUser, 4, "");
-        navigateToReAssignUserScreen();
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, searchForUser(currentUser), "");
-        sendKeys(searchForUser(currentUser), jsonData.getData("reassignedUser"));
-        click(spanTag(jsonData.getData("reassignedUser")));
-        click(CycleCountRecommendationPage.reAssignUserProcessBtn, "Click [Process] button");
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, CycleCountRecommendationPage.reAssignUserCancelBtn, "Click [Cancel] button");
-        commonObj.validateText(CycleCountRecommendationPage.cycleCountRecHeader, "Cycle Count Recommendation", "[Cycle Count Recommendation] Header is present");
-        filterAssignedUser(jsonData.getData("reassignedUser"), 0, itemNo);
-        Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(By.xpath("//td[text()='" + itemNo + "']"), "User is reassigned");
+        if (!isDisplayed(TruckPage.deletePopUp)) {
+            navigateToReAssignUserScreen();
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, searchForUser(currentUser), "");
+            sendKeys(searchForUser(currentUser), jsonData.getData("reassignedUser"));
+            click(spanTag(jsonData.getData("reassignedUser")));
+            click(CycleCountRecommendationPage.reAssignUserProcessBtn, "Click [Process] button");
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, CycleCountRecommendationPage.reAssignUserCancelBtn, "Click [Cancel] button");
+            commonObj.validateText(CycleCountRecommendationPage.cycleCountRecHeader, "Cycle Count Recommendation", "[Cycle Count Recommendation] Header is present");
+            filterAssignedUser(jsonData.getData("reassignedUser"), 0, itemNo);
+            Utility_Functions.timeWait(3);
+            commonObj.validateElementExists(By.xpath("//td[text()='" + itemNo + "']"), "User is reassigned");
+        }
     }
 
     public void verifyRemoveAssignedUser() {
@@ -767,8 +811,8 @@ public class CycleCountRecommendation extends ReusableLib {
         }
         sendKeys(CycleCountRecommendationPage.autoAssignInput, jsonData.getData("user"), "Select User");
         click(CycleCountRecommendationPage.typeHead);
-        ownDriver.findElements(popupVerification("Auto Assign Users","Enter Bin Location")).get(0).sendKeys(jsonData.getData("BinStart"));
-        ownDriver.findElements(popupVerification("Auto Assign Users","Enter Bin Location")).get(1).sendKeys(jsonData.getData("BinEnd"));
+        ownDriver.findElements(popupVerification("Auto Assign Users", "Enter Bin Location")).get(0).sendKeys(jsonData.getData("BinStart"));
+        ownDriver.findElements(popupVerification("Auto Assign Users", "Enter Bin Location")).get(1).sendKeys(jsonData.getData("BinEnd"));
         click(button("Process "), "Click [Process] button");
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.deletePopUp, "[Auto assign users were successfully updated.] toaster is present");
     }
@@ -792,7 +836,7 @@ public class CycleCountRecommendation extends ReusableLib {
         navigateAutoAssign();
         Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.selectAutoAssign, jsonData.getData("option"));
         Utility_Functions.timeWait(2);
-        String[] columns = {"User Count", "User", "Name", "MF","PD","VN"};
+        String[] columns = {"User Count", "User", "Name", "MF", "PD", "VN"};
         for (String column : columns) {
             commonObj.validateText(By.xpath("//h2[text()='Auto Assign Users']//ancestor::div[@class='modal-content']/descendant::th[text()='" + column + "']"), column, "[" + column + "] is present");
         }
@@ -805,23 +849,23 @@ public class CycleCountRecommendation extends ReusableLib {
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.deletePopUp, "[Auto assign users were successfully updated.] toaster is present");
     }
 
-    public void verifyZoneFilter(){
+    public void verifyZoneFilter() {
         clickSearchIcon();
         minimizeWindow(2);
-        sendKeys(CycleCountRecommendationPage.inputZone, jsonData.getData("zone"),"Enter Zone");
+        sendKeys(CycleCountRecommendationPage.inputZone, jsonData.getData("zone"), "Enter Zone");
         click(CycleCountRecommendationPage.typeHead);
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Apply Filters "), "Click [Apply Filter] Button");
         commonObj.validateText(CycleCountRecommendationPage.cycleCountRecHeader, "Cycle Count Recommendation", "[Cycle Count Recommendation] Header is present");
         commonObj.validateText(columnData("Zone"), jsonData.getData("zone"), "Validation Matches");
     }
 
-    public void verifyBinLocationFilter(){
+    public void verifyBinLocationFilter() {
         clickSearchIcon();
         minimizeWindow(2);
-        sendKeys(CycleCountRecommendationPage.inputBinStart, jsonData.getData("BinStart"),"Enter BinStart");
+        sendKeys(CycleCountRecommendationPage.inputBinStart, jsonData.getData("BinStart"), "Enter BinStart");
         click(CycleCountRecommendationPage.typeHead);
-        String bin=getAttribute(CycleCountRecommendationPage.inputBinStart,"value");
-        sendKeys(CycleCountRecommendationPage.inputBinEnd, jsonData.getData("BinEnd"),"Enter BinEnd");
+        String bin = getAttribute(CycleCountRecommendationPage.inputBinStart, "value");
+        sendKeys(CycleCountRecommendationPage.inputBinEnd, jsonData.getData("BinEnd"), "Enter BinEnd");
         click(CycleCountRecommendationPage.typeHead);
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Apply Filters "), "Click [Apply Filter] Button");
         Utility_Functions.timeWait(3);
@@ -829,14 +873,20 @@ public class CycleCountRecommendation extends ReusableLib {
         commonObj.validateText(columnData("Bin Location"), bin, "Validation Matches");
     }
 
-    public void verifyMFPDVNFilter(){
+    public void verifyMFPDVNFilter() {
         clickSearchIcon();
         minimizeWindow(2);
-        sendKeys(CycleCountRecommendationPage.inputMf, jsonData.getData("MF"),"Enter MF");
-        sendKeys(CycleCountRecommendationPage.inputMf, jsonData.getData("PD"),"Enter PD");
-        sendKeys(CycleCountRecommendationPage.inputMf, jsonData.getData("VN"),"Enter VN");
+        sendKeys(CycleCountRecommendationPage.inputMf, jsonData.getData("MF"), "Enter MF");
+        sendKeys(CycleCountRecommendationPage.inputMf, jsonData.getData("PD"), "Enter PD");
+        sendKeys(CycleCountRecommendationPage.inputMf, jsonData.getData("VN"), "Enter VN");
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, button(" Apply Filters "), "Click [Apply Filter] Button");
         Utility_Functions.timeWait(3);
         commonObj.validateText(CycleCountRecommendationPage.cycleCountRecHeader, "Cycle Count Recommendation", "[Cycle Count Recommendation] Header is present");
+    }
+
+    public void navigateToViewerAudit() {
+        Utility_Functions.xSelectDropdownByName(ownDriver, CycleCountRecommendationPage.viewingAs, "Auditor");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, CycleCountRecommendationPage.cycleCountRecHeader, "[Cycle Count Recommendation] Header is present");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, CycleCountRecommendationPage.auditorBanner, "[Currently Viewing As Auditor] Banner is present");
     }
 }

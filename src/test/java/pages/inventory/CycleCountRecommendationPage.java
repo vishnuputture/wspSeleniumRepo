@@ -56,6 +56,6 @@ public class CycleCountRecommendationPage extends ReusableLib {
     public static By inputBinEnd = By.xpath("//input[@id='input-bin-range-end']");
     public static By inputMf = By.xpath("//input[@id='input-mf']");
     public static By inputPd = By.xpath("//input[@id='input-pd']");
-    public static By inputVn = By.xpath("//input[@id='input-vn']");
+    public static By qtyInput = By.xpath("//input[@title='quantity input']");
     public static By autoAssignInput = By.xpath("//h2[text()='Auto Assign Users']//ancestor::div[@class='modal-content']/descendant::cyc-all-company-users/div/input");
 }

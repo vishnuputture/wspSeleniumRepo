@@ -310,4 +310,277 @@ public class CycleCountRecommendation extends TestConfigurations {
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_692_verifyADDITEMSAuditorUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"ADD ITEMS\" popup and the \"select an Options to Add Items\" dropdown");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_694_verifyReAssignUserAuditorUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"RE-ASSIGN USERS\" popup");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_693_verifyCycleCountRecAuditorUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"CYCLE COUNT RECOMMENDATION\" (Auditor) page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_691_verifySearchFilterAuditorUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"CYCLE COUNT RECOMMENDATION\" (Auditor) page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_695_verifyPrintCycleCountSheetAuditorUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the Search Filters");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_696_verifyAutoAssignUserAuditorUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"AUTO ASSIGN USERS\" popup");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_697_verifyCycleCountAuditHistoryAuditorUI(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the UI of the \"CYCLE COUNT AUDIT HISTORY\" page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_731_verifySortingColAuditorCompany(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that the user can sort the columns in ascending or descending order");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_742_verifyPageCountAuditorCompany(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can view the number of records on a page by selecting appropriate option from 'Show' field");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_743_verifyPaginationAuditorCompany(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user should be able to navigate through the pages using the navigation icons.");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_745_verifyGraphPercentageAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the functionality of the Percent Complete graph");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_730_verifyEditAssignedUserAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user is able to edit \"Assigned User\" for the recommendation displayed");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_733_verifyCycleCountEntryAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the \"Cycle Count Entry\" hyperlink present on the menu option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_746_verifyUnassignedUserAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that User can Un-Assign an assigned user for the recommendation");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_741_verifyRemoveCountedAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify tRemove records");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_800_verifyCountAuditAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that when the user selects ' Count Audit' from the menu option for an item, then the user should be navigated to 'Count Audit History Page' ");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_699_verifyItemLedgerAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that when the user selects ' Item Ledger' from the menu option for an item, then the user should be navigated to 'Item Ledger' page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_700_verifyItemBinLedgerAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that when the user selects ' Item Bin Ledger' from the menu option for an item, then the user should be navigated to 'Item Ledger' page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_708_verifyOpenOrderAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that when the user selects 'Open Order' from the menu option for an item, then the user should be navigated to 'Item Ledger' page");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_708_verifyPrintLabelAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the functionality of Print Labels option from the menu");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_744_verifyExportButtonAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that the 'Last Count User' and 'Last Count' displays the data when the item present in multiple bins, and any one bin has been counted.");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_715_verifyAddItemUsingQuantityAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can add items to recommendation by using Quantity");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_717_verifyAddItemUsingCertificationAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can add items to recommendation by using Zone");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_704_verifyUserReassignAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can Reassign the user name to the record");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_705_verifyRemoveAssignedUserAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that assigned user can be removed from the \"RE-ASSIGN USERS\" popup and also changes can be reverted back");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_707_verifyCountSheetAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify the functionality of \"Count Sheets\" button");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_735_verifyAutoAssignAcrossBinZoneAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can auto assign the user by using \"Across all bin locations and zones\" option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_737_verifyAutoAssignByZoneAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can auto assign user by using 'By Zone' option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_738_verifyAutoBinLocationAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can auto assign user by using 'By Bin Location Range' option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_738_verifyAutoAssignReasonForRecAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can auto assign user by using 'By Reason for Recommendation' option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_740_verifyAutoAssignMFPDVNAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify that user can auto assign user by using 'By MF/PD/VN' option");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_712_verifyZoneFilterAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify user is able to filter the records by zone.");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_718_verifyBinLocationFilterAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify user is able to filter the records by bin location start and end range.");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
+
+    @Test(groups = {"UI"}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void Tc_719_verifyMFPDVNFilterAuditor(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Test to verify user able to filter the records entering valid MF PD VN code");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }
