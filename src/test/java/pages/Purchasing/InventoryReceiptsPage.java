@@ -11,6 +11,7 @@ public class InventoryReceiptsPage extends ReusableLib {
     }
 
     public static By pageTitle = By.id("OP18_heading");
+    public static By btnWarningProcess = By.id("btnProcess");
     public static By tbxPONumber = By.id("VDORNM");
     public static By tbxQtyRcvd = By.id("VQR.1");
     public static By btnExit = By.id("RC1CTL_linkCF03");

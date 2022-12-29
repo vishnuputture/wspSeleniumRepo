@@ -3,9 +3,11 @@ package businesskeywords.warehousing.InventoryReceipts;
 import businesskeywords.Purchasing.PoEntryConversionFactor.PoEntryConversionFactor;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Report;
 import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.Purchasing.InventoryReceiptPage;
@@ -180,6 +182,12 @@ public class inventoryReceipts extends ReusableLib {
         sendKeysAndEnter(InventoryReceiptsPage.tbxFreightCost, "10", "Entering value in field [Freight Cost]");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.actionKey(Keys.F9, ownDriver);
+        Utility_Functions.timeWait(2);
+        int count = 0;
+        count = ownDriver.findElements(InventoryReceiptsPage.btnWarningProcess).size();
+        if(count > 0){
+            click(InventoryReceiptsPage.btnWarningProcess);
+        }
         Utility_Functions.timeWait(2);
         commonObj.validateText(InventoryReceiptsPage.pageTitle, "inventory receipts -", "Validating Inventory Receipts page title");
         Utility_Functions.actionKey(Keys.F3, ownDriver);
