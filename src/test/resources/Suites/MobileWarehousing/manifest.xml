@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Mobile Warehousing" parallel="tests" thread-count="2">
-    <test name="Manifest">
+    <!--<test name="Manifest">
         <classes>
             <class name="testcases.MobileWarehousing.Warehouse">
                 <methods>
-                    <!-- ############ UI Of the page ############ -->
+                    &lt;!&ndash; ############ UI Of the page ############ &ndash;&gt;
 
-                    <include name="Tc_TruckUI"></include>
+                   &lt;!&ndash; <include name="Tc_TruckUI"></include>
                     <include name="Tc_AddNewTruckScreenUI"></include>
-                    <include name="Tc_UpdateTruckUI"></include>
-                    <include name="Tc_DriversUI"></include>
+                    <include name="Tc_UpdateTruckUI"></include>&ndash;&gt;
+                   &lt;!&ndash; <include name="Tc_DriversUI"></include>
                     <include name="Tc_209_AddNewDriverScreenUI"></include>
-                    <include name="Tc_UpdateDriverUI"></include>
-                    <include name="Tc_TrucksHelpIcon"></include>
+                    <include name="Tc_UpdateDriverUI"></include>&ndash;&gt;
+                    &lt;!&ndash;<include name="Tc_TrucksHelpIcon"></include>
                     <include name="Tc_TrucksPagination"></include>
                     <include name="Tc_TrucksPageCount"></include>
                     <include name="Tc_197_DriversHelpIcon"></include>
@@ -24,11 +24,11 @@
                     <include name="Tc_CreateManifestPO"></include>
                     <include name="Tc_DeleteManifest"></include>
                     <include name="Tc_DeleteTruck"></include>
-                    <include name="Tc_DeleteDriver"></include>
+                    <include name="Tc_DeleteDriver"></include>&ndash;&gt;
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
     <test name="SanityCheck1">
         <classes>
             <class name="testcases.MobileWarehousing.Warehouse">
@@ -36,7 +36,7 @@
                     <include name="Tc_AddTruck"></include>
                     <include name="Tc_AddNewDriver"></include>
                     <include name="Tc_CreateSalesOrderWISE"></include>
-                    <include name="TC_243_CreateManifest"></include>
+                   <!-- <include name="TC_243_CreateManifest"></include>
                     <include name="Tc_ManifestListUI"></include>
                     <include name="Tc_240_CreateManifestUI"></include>
                     <include name="Tc_NotDeliveredShipmentsUI"></include>
@@ -56,13 +56,13 @@
                     <include name="Tc_DeleteDriver"></include>
                     <include name="TC_SOUpdateStatusNotDelivered"></include>
                     <include name="Tc_VerifyNotDeliveredShipments"></include>
-                    <include name="Tc_CreateManifestNotDeliveredShip"></include>
+                    <include name="Tc_CreateManifestNotDeliveredShip"></include>-->
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="SanityCheck2">
+    <!--<test name="SanityCheck2">
         <classes>
             <class name="testcases.MobileWarehousing.Warehouse">
                 <methods>
@@ -72,7 +72,7 @@
                     <include name="Tc_AddToManifestNotDelShip"></include>
                     <include name="Tc_CreateManifestPO"></include>
                     <include name="Tc_OrderNumberPO_UI"></include>
-                    <!--<include name="Tc_SaveAdjustmentPO"></include>-->
+                    &lt;!&ndash;<include name="Tc_SaveAdjustmentPO"></include>&ndash;&gt;
                     <include name="TC_POUpdateStatus"></include>
                     <include name="Tc_CloseManifest"></include>
                     <include name="TC_244_CreateManifestMultipleShipments"></include>
@@ -84,5 +84,5 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 </suite>

@@ -38,6 +38,7 @@ public class BinMaintenancePage {
     public static By clearFilter = By.xpath("//button[text()=' Clear All Filters ']");
     public static By searchIcon = By.xpath("//button[@class='filters-btn']");
     public static By buttonDis = By.xpath("//button[@disabled]");
+    public static By itemMissing = By.xpath("//span[text()='Item Number is missing.']");
     public static By matchesHeader = By.xpath("//h2[text()='SUGGESTED MATCHES']");
     public static By itemBinManItemDet = By.xpath("//h2[text()='Item-Bin Maintenance - Item Details']");
     public static By itemCount = By.xpath("//span[contains(text(),' Items ') or contains(text(),' Bins ')]");

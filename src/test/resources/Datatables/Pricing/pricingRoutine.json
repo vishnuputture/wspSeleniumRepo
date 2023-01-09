@@ -44,7 +44,10 @@
       "TC_ID": "Tc_913_SPWithoutSPAOther",
       "CustomerNo": "000037",
       "ItemNo": "0626A5110750",
-      "SpecialPrice": "75.00"
+      "SpecialPrice": "75.00",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_verifyItemWithNoCAFILL",
@@ -59,7 +62,10 @@
       "TC_ID": "Tc_915_SPWithoutSPAOther",
       "accountNo": "000037",
       "itemNo1": "0626A5110500",
-      "Iteration": "1"
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWISESPWithoutSPAOther",
@@ -76,7 +82,10 @@
       "TC_ID": "Tc_911_CustomerWithoutSPAC2",
       "accountNo": "000037",
       "itemNo1": "0626A5110500",
-      "Iteration": "1"
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWISECustomerWithoutSPAC2",
@@ -93,7 +102,10 @@
       "TC_ID": "Tc_917_MFCustomerC3",
       "accountNo": "000037",
       "itemNo1": "0626A5150750",
-      "Iteration": "1"
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWISEMFCustomerC3",
@@ -110,7 +122,10 @@
       "TC_ID": "Tc_919_PDCustomerC4",
       "accountNo": "000037",
       "itemNo1": "0626A5401112",
-      "Iteration": "1"
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWISEPDCustomerC4",
@@ -127,7 +142,10 @@
       "TC_ID": "Tc_923_AllCustomerX1",
       "accountNo": "000037",
       "itemNo1": "0626A5411000",
-      "Iteration": "1"
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWISEAllCustomerX1",
@@ -141,10 +159,13 @@
       "SalesOrder": "001094"
     },
     {
-      "TC_ID": "Tc_923_AllCustomerX1",
+      "TC_ID": "Tc_923_MFPDAllCustomerX2",
       "accountNo": "000037",
-      "itemNo1": "0626A5500625",
-      "Iteration": "1"
+      "itemNo1": "0626A5501000",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWISEMFPDAllCustomerX2",
@@ -161,7 +182,10 @@
       "TC_ID": "Tc_923_MFAllCustomerX3",
       "accountNo": "000037",
       "itemNo1": "0626A5501000",
-      "Iteration": "1"
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWISEMFAllCustomerX3",
@@ -178,7 +202,10 @@
       "TC_ID": "Tc_929_PDAllCustomerX4",
       "accountNo": "000037",
       "itemNo1": "0626A5501000",
-      "Iteration": "1"
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
     },
     {
       "TC_ID": "Tc_CreateSalesOrderWISEPDAllCustomerX4",

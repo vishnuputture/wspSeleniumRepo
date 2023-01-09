@@ -219,7 +219,7 @@ public class Trucks extends ReusableLib {
             i++;
         }
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.saveBtnDis, "Save Truck", "Save Button is Exist and button is disabled");
+        commonObj.validateText(buttonTag(" Save Truck "), "Save Truck", "Save Button is Exist and button is disabled");
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
         click(DriversPage.crossIcon, "Click Cross Icon");
         Utility_Functions.timeWait(3);
@@ -242,12 +242,14 @@ public class Trucks extends ReusableLib {
         Utility_Functions.xUpdateJson("licensePlateNo", "" + licensePlateNo + "");
         click(TruckPage.newTruckPlateExpInput);
         click(TruckPage.licensePlateExpSelect, "Select License Plate Expiration Date");
-        click(TruckPage.statusDrop);
-        click(TruckPage.statusDrop);
-        Utility_Functions.xSelectDropdownByName(ownDriver,TruckPage.statusDrop,"Active");
+        clickMultipleEl(TruckPage.statusDrop);
+        clickMultipleEl(spanTag("Active"));
+        //Utility_Functions.xSelectDropdownByName(ownDriver,TruckPage.statusDrop,"Active");
         Utility_Functions.timeWait(2);
         int size=ownDriver.findElements(TruckPage.cdlRequiredFilter).size();
-        Utility_Functions.xSelectDropdownByName(ownDriver,ownDriver.findElements(TruckPage.cdlRequiredFilter).get(size-1),"Yes");
+        clickMultipleEl(TruckPage.cdlRequiredFilter);
+        clickMultipleEl(spanTag("Yes"));
+        //Utility_Functions.xSelectDropdownByName(ownDriver,ownDriver.findElements(TruckPage.cdlRequiredFilter).get(size-1),"Yes");
         sendKeys(TruckPage.yearInput, jsonData.getData("MakeYear"), "Entering year");
         sendKeys(TruckPage.makeInput, jsonData.getData("Make"), "Entering make");
         sendKeys(TruckPage.modelInput, jsonData.getData("Model"), "Entering model");
@@ -265,6 +267,15 @@ public class Trucks extends ReusableLib {
         String expTx=driver.findElement(By.xpath("//a[text()='"+truckName+"']")).getText();
         Utility_Functions.xUpdateJson("TruckName",truckName);*/
         //Utility_Functions.xAssertEquals(report,actTx,expTx,"Truck successfully added");
+    }
+
+    public void clickMultipleEl(By by){
+        int count=ownDriver.findElements(by).size();
+        try {
+            click(by);
+        }catch (Exception e){
+            ownDriver.findElements(by).get(count-1).click();
+        }
     }
 
     /**
@@ -380,8 +391,8 @@ public class Trucks extends ReusableLib {
             i++;
         }
         Utility_Functions.timeWait(2);
-        commonObj.validateText(buttonTag(" Edit "), "Edit", "Edit Button is Exist and button is disabled");
-        commonObj.validateText(buttonTag("Delete "), "Delete", "Delete Button is Exist and button is disabled");
+        commonObj.validateText(TruckPage.saveBtnDis, "Save Truck", "Save Truck Button is Exist and button is disabled");
+        commonObj.validateText(buttonTag(" Delete "), "Delete", "Delete Button is Exist and button is disabled");
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
     }
 

@@ -40,11 +40,11 @@ public class Drivers extends ReusableLib {
         //callSelectCompany();
         Utility_Functions.timeWait(3);
         try {
-            click(DriversPage.subMenuDriver, "Navigate to trucks page");
+            click(DriversPage.subMenuDriver, "Navigate to Driver page");
         } catch (Exception e) {
             Utility_Functions.waitTillClickHardSleep(report, ownDriver, TruckPage.menuIconTruck, "Click Menu");
             Utility_Functions.timeWait(3);
-            click(DriversPage.subMenuDriver, "Navigate to trucks page");
+            click(DriversPage.subMenuDriver, "Navigate to Driver page");
         }
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
