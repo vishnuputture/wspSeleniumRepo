@@ -19,7 +19,8 @@ import pages.pricing.SpecialPricePage;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
-
+import java.lang.Math;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -345,6 +346,7 @@ public class AR2WISE extends ReusableLib {
     public Double getTotalAmount() {
         int count = ownDriver.findElements(By.xpath("//td")).size();
         double sum = 0;
+        int ittr = 0;
         for (int i = 3; i < count - 1; ) {
             String amt = ownDriver.findElements(By.xpath("//td")).get(i).getText().trim().replace(",", "");
             if (amt.contains("CR")) {
@@ -356,15 +358,23 @@ public class AR2WISE extends ReusableLib {
                 sum = sum + amount;
             }
             i = i + 6;
+            ittr++;
+        }
+        if(ittr == 1){
+            sum = Math.abs(sum);
         }
         return sum;
     }
 
     public void totalAmount() {
+        DecimalFormat df = new DecimalFormat("0.00");
         Double sum = getTotalAmount();
         String amountVal = getText(AR2WISEPage.totalAmount).replace(",", "");
         if (amountVal.contains(".00")) {
             amountVal = amountVal.replace(".00", ".0");
+        }
+        else{
+            sum = Double.valueOf(df.format(sum));
         }
         Utility_Functions.xAssertEquals(report, amountVal, "" + sum + "", "Total Amount matches");
     }
@@ -520,6 +530,9 @@ public class AR2WISE extends ReusableLib {
         String amountVal = getText(AR2WISEPage.filteredTotal).replace(",", "");
         if (amountVal.contains(".00")) {
             amountVal = amountVal.replace(".00", ".0");
+        }
+        if (amountVal.contains("CR")) {
+            amountVal = amountVal.replace("CR", "");
         }
         Utility_Functions.xAssertEquals(report, amountVal, "" + sum + "", "Total Amount matches");
     }
