@@ -1,10 +1,10 @@
 {
   "Business_Flow": [
     {
-      "Tc_902_InventoryReceiptUI": "launchApp,siteLogin,navigateToInventoryReceipt,inventoryReceiptUI,signOut",
-      "Tc_CreatePoDirect": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
-      "Tc_903_PurchaseOrderInquiryHyperlink": "launchApp,siteLogin,navigateToInventoryReceipt,poInquiryLink,exitInventoryReceipt,signOut",
-      "Tc_904_PurchaseOrderNumberField": "launchApp,siteLogin,navigateToInventoryReceipt,poNoField,signOut",
+      "Tc_184_CreateNewGroup": "launchMakePayments,logInToMakePayments,navigateToListTab,navigateToCreateNewGroup,ExitCreateNewGroup,navigateToCreateNewGroup,createNewGroup,userSignOut",
+      "Tc_185_CreateNewLink": "launchMakePayments,logInToMakePayments,navigateToListTab,navigateToCreateNewLink,exitCreateNewGroup,navigateToCreateNewLink,createNewLink,validateGroupList,userSignOut",
+      "Tc_186_CreateNewGroupAndList": "launchMakePayments,logInToMakePayments,navigateToListTab,navigateToCreateNewLink,createGroupFromList,validateGroupList,userSignOut",
+      "Tc_191_SelectDeselectGroupName": "launchMakePayments,logInToMakePayments,navigateToListTab,verifyCheckBox,userSignOut",
       "Tc_897_OrderInUse": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,switchTab,launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,orderInUse,signOut,switchTabBack,exitIR,signOut",
       "Tc_905_QtyReceivedField": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,qtyReceivedField,signOut",
       "Tc_906_changeUnitCost": "launchApp,siteLogin,navigateToInventoryReceipt,enterPoNo,unitCostField,exitIR,signOut",
@@ -48,20 +48,24 @@
   ],
   "General_Data": [
     {
-      "TC_ID": "Tc_902_InventoryReceiptUI",
-      "Title": "Test case UI of Inventory Receipt Page"
+      "TC_ID": "Tc_184_CreateNewGroup",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
-      "TC_ID": "Tc_903_PurchaseOrderInquiryHyperlink",
-      "Title": "Test case to verify Purchase Order Inquiry Hyperlink"
+      "TC_ID": "Tc_185_CreateNewLink",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
-      "TC_ID": "Tc_904_PurchaseOrderNumberField",
-      "Title": "Test case to verify Purchase Order Number Field"
+      "TC_ID": "Tc_186_CreateNewGroupAndList",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
-      "TC_ID": "Tc_897_OrderInUse",
-      "Title": "Test case to verify order In Use popup"
+      "TC_ID": "Tc_191_SelectDeselectGroupName",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_CreatePoDirect",

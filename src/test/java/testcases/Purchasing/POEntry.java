@@ -10,7 +10,7 @@ public class POEntry extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void Tc_203_PurchaseOrderHeadingUI(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Test case UI for  Purchase Order Heading");
-        CoreScript coreScript = new CoreScript(testParameters);
+        CoreScript coreScript =  new CoreScript(testParameters);
         coreScript.driveTestExecution();
         // tearDownTestRunner(testParameters, coreScript);
     }

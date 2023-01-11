@@ -1,5 +1,8 @@
 package commonkeywords;
 
+import com.ibm.db2.jcc.DB2Administrator;
+import supportLibraries.Utility_Functions;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,11 +10,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.*;
-
-import com.ibm.db2.jcc.DB2Administrator;
-
-import supportLibraries.Utility_Functions;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class DBCall {
 
@@ -407,6 +409,32 @@ public class DBCall {
 
 	}
 
+	public static ArrayList<String> sQLGetDATA(String column,String salesOrder) {
 
+		Statement sqlStatement = Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
+
+		ArrayList<String> arr = new ArrayList();
+			try {
+				String getOrders = "SELECT S4ORDER,\n" +
+						"       S4SFX,\n" +
+						"       S4LINE,\n" +
+						"       S4ORECPRC,\n" +
+						"       S4POMETH,\n" +
+						"       S4IRECPRC,\n" +
+						"       S4PIMETH,\n" +
+						"       S4ITMROW,\n" +
+						"       S4MCTYPE,\n" +
+						"       S4MMULT\n" +
+						"    FROM dta99599.So104L2\n" +
+						"    WHERE S4ORDER = '"+salesOrder+"'";
+				ResultSet customerSet = sqlStatement.executeQuery(getOrders);
+				while (customerSet.next()) {
+					arr.add(customerSet.getString(column));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return arr;
+	}
 
 }

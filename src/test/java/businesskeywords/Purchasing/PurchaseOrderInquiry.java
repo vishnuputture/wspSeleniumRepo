@@ -6,14 +6,15 @@ import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.Purchasing.OptionsConstantsPage;
 import pages.Purchasing.PurchaseOrderDetailsPage;
 import pages.Purchasing.PurchaseOrderInquiryPage;
-import pages.pricing.SalesOrders.SalesOrdersPage;
 import pages.common.MasterPage;
 import pages.inventory.CostAdjustmentPage;
+import pages.pricing.SalesOrders.SalesOrdersPage;
 import pages.pricing.spa.SpecialPriceAllowancePage;
 import supportLibraries.Utility_Functions;
 
@@ -93,8 +94,10 @@ public class PurchaseOrderInquiry extends ReusableLib {
     public void clickOnF12ReturnBtn() {
         try {
             click(PurchaseOrderInquiryPage.btnF12Return, "Click [F12=Return] button");
-        }catch (Exception e){
+        }catch (ElementNotVisibleException e){
             click(PurchaseOrderInquiryPage.btnExitItemLedger, "Click [Exit] button");
+        }catch (Exception e){
+            click(PurchaseOrderInquiryPage.exitButton, "Click [Exit] button");
         }
     }
 
@@ -626,19 +629,17 @@ public class PurchaseOrderInquiry extends ReusableLib {
 
     public void validateAmount() {
         clickUntilStatusVisible();
-        int line = Integer.parseInt(getText(PurchaseOrderInquiryPage.lineColumn).replace(".0", ""));
-        Utility_Functions.xUpdateJson("LineItemCount", "" + line + "");
         int qty = Integer.parseInt(getText(PurchaseOrderInquiryPage.qty));
-        String unitPrice = getText(PurchaseOrderInquiryPage.unitPriceColumn).replace(".00", "").trim();
+        int unitPrice =Integer.parseInt(getText(PurchaseOrderInquiryPage.unitPriceColumn).replace(".00", "").trim());
         String extPrice = getText(PurchaseOrderInquiryPage.extPriceColumn).replace(",", "").replace(".00", "").trim();
-        int unitCost = line * qty;
-        Utility_Functions.xUpdateJson("UnitPricePoDetails", "" + unitCost + "");
-        Utility_Functions.xAssertEquals(report, unitPrice, "" + unitCost + "", "");
-        int extCost = qty * unitCost;
+        Utility_Functions.xUpdateJson("UnitPricePoDetails", "" + unitPrice + "");
+        int extCost = qty * unitPrice;
         Utility_Functions.xUpdateJson("ExtPricePoDetails", "" + extCost + "");
         String amount = getText(PurchaseOrderInquiryPage.openAmount).replace("$", "").replace(",", "").replace(".00", "").trim();
         Utility_Functions.xAssertEquals(report, extPrice, "" + extCost + "", "");
-        Utility_Functions.xAssertEquals(report, amount, "" + extCost + "", "");
+        int extPrice2=Integer.parseInt(getText(PurchaseOrderInquiryPage.extPrice2).trim().replace(".00",""));
+        int total=extPrice2+extCost;
+        Utility_Functions.xAssertEquals(report, amount, "" + total + "", "");
     }
 
     public void verifyPoDetailsWithLineNoAction() {

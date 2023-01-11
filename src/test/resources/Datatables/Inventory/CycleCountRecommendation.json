@@ -17,13 +17,67 @@
       "Tc_730_verifyEditAssignedUser": "navigateToCycleCountRec,selectCompanyCycleCost,verifyEditAssignedUser",
       "Tc_733_verifyCycleCountEntry": "navigateToCycleCountRec,selectCompanyCycleCost,verifyCycleCountEntry",
       "Tc_746_verifyUnassignedUser": "navigateToCycleCountRec,selectCompanyCycleCost,verifyEditAssignedUser",
-      "Tc_741_verifyRemoveCounted": "navigateToCycleCountRec,selectCompanyCycleCost,verifyRemoveCounted"
-
+      "Tc_741_verifyRemoveCounted": "navigateToCycleCountRec,selectCompanyCycleCost,verifyRemoveCounted",
+      "Tc_800_verifyCountAudit": "navigateToCycleCountRec,selectCompanyCycleCost,verifyCountAudit",
+      "Tc_699_verifyItemLedger": "navigateToCycleCountRec,selectCompanyCycleCost,verifyItemLedger",
+      "Tc_700_verifyItemBinLedger": "navigateToCycleCountRec,selectCompanyCycleCost,verifyItemBinLedger",
+      "Tc_708_verifyOpenOrder": "navigateToCycleCountRec,selectCompanyCycleCost,verifyOpenOrder",
+      "Tc_708_verifyPrintLabel": "navigateToCycleCountRec,selectCompanyCycleCost,verifyPrintLabel",
+      "Tc_744_verifyExportButton": "navigateToCycleCountRec,selectCompanyCycleCost,verifyExportButton",
+      "Tc_714_verifyAddItemBinLocationRange": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToAddItemScreen,verifyAddItemBinLocationRange",
+      "Tc_715_verifyAddItemUsingQuantity": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToAddItemScreen,verifyAddItemUsingQuantity",
+      "Tc_716_verifyAddItemUsingMFPDVN": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToAddItemScreen,verifyAddItemUsingMFPDVN",
+      "Tc_717_verifyAddItemUsingZone": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToAddItemScreen,verifyAddItemUsingZone",
+      "Tc_704_verifyUserReassign": "navigateToCycleCountRec,selectCompanyCycleCost,verifyUserReassign",
+      "Tc_705_verifyRemoveAssignedUser": "navigateToCycleCountRec,selectCompanyCycleCost,verifyRemoveAssignedUser",
+      "Tc_707_verifyCountSheet": "navigateToCycleCountRec,selectCompanyCycleCost,verifyPrintCycleCountSheetUI",
+      "Tc_735_verifyAutoAssignAcrossBinZone": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignAcrossBinZone",
+      "Tc_737_verifyAutoAssignByZone": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignByZone",
+      "Tc_738_verifyAutoBinLocation": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignByBinLoc",
+      "Tc_738_verifyAutoAssignReasonForRec": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignReasonForRec",
+      "Tc_740_verifyAutoAssignMFPDVN": "navigateToCycleCountRec,selectCompanyCycleCost,verifyAutoAssignMFPDVN",
+      "Tc_712_verifyZoneFilter": "navigateToCycleCountRec,selectCompanyCycleCost,verifyZoneFilter",
+      "Tc_718_verifyBinLocationFilter": "navigateToCycleCountRec,selectCompanyCycleCost,verifyBinLocationFilter",
+      "Tc_719_verifyMFPDVNFilter": "navigateToCycleCountRec,selectCompanyCycleCost,verifyMFPDVNFilter",
+      "Tc_692_verifyADDITEMSAuditorUI": "getPassword,navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyADDITEMSAuditorUI",
+      "Tc_694_verifyReAssignUserAuditorUI": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyReAssignUserUI",
+      "Tc_693_verifyCycleCountRecAuditorUI": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyCycleCountRecLocalUI",
+      "Tc_691_verifySearchFilterAuditorUI": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifySearchFilterUI",
+      "Tc_695_verifyPrintCycleCountSheetAuditorUI": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyPrintCycleCountSheetUI",
+      "Tc_696_verifyAutoAssignUserAuditorUI": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyAutoAssignUserUI",
+      "Tc_697_verifyCycleCountAuditHistoryAuditorUI": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyCycleCountAuditHistoryUI",
+      "Tc_731_verifySortingColAuditorCompany": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifySortingCol",
+      "Tc_742_verifyPageCountAuditorCompany": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyPageCount",
+      "Tc_743_verifyPaginationAuditorCompany": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,paginationItemMaintenance",
+      "Tc_745_verifyGraphPercentageAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyGraphPercentage",
+      "Tc_730_verifyEditAssignedUserAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyEditAssignedUser",
+      "Tc_733_verifyCycleCountEntryAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyCycleCountEntry",
+      "Tc_746_verifyUnassignedUserAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyEditAssignedUser",
+      "Tc_741_verifyRemoveCountedAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyRemoveCounted",
+      "Tc_800_verifyCountAuditAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyCountAudit",
+      "Tc_699_verifyItemLedgerAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyItemLedger",
+      "Tc_700_verifyItemBinLedgerAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyItemBinLedger",
+      "Tc_708_verifyOpenOrderAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyOpenOrder",
+      "Tc_708_verifyPrintLabelAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyPrintLabel",
+      "Tc_744_verifyExportButtonAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyExportButton",
+      "Tc_715_verifyAddItemUsingQuantityAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,navigateToAddItemScreen,verifyAddItemUsingQuantity",
+      "Tc_717_verifyAddItemUsingCertificationAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,navigateToAddItemScreen,verifyAddItemUsingCertification",
+      "Tc_704_verifyUserReassignAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyUserReassign",
+      "Tc_705_verifyRemoveAssignedUserAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyRemoveAssignedUser",
+      "Tc_707_verifyCountSheetAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyPrintCycleCountSheetUI",
+      "Tc_735_verifyAutoAssignAcrossBinZoneAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyAutoAssignAcrossBinZone",
+      "Tc_737_verifyAutoAssignByZoneAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyAutoAssignByZone",
+      "Tc_738_verifyAutoBinLocationAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyAutoAssignByBinLoc",
+      "Tc_738_verifyAutoAssignReasonForRecAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyAutoAssignReasonForRec",
+      "Tc_740_verifyAutoAssignMFPDVNAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyAutoAssignMFPDVN",
+      "Tc_712_verifyZoneFilterAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyZoneFilter",
+      "Tc_718_verifyBinLocationFilterAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyBinLocationFilter",
+      "Tc_719_verifyMFPDVNFilterAuditor": "navigateToCycleCountRec,selectCompanyCycleCost,navigateToViewerAudit,verifyMFPDVNFilter"
     }
   ],
   "General_Data": [
     {
-      "TC_ID": "Tc_26_Navigation_to_Cycle_Count_Adjustments"
+      "TC_ID": "Tc_692_verifyADDITEMSUI"
     },
     {
       "TC_ID": "Tc_694_verifyReAssignUserUI"
@@ -80,6 +134,250 @@
       "Assigned": "Select",
       "Counted": "Counted",
       "NotCounted": "Not Counted"
+    },
+    {
+      "TC_ID": "Tc_800_verifyCountAudit",
+      "Assigned": "Select",
+      "Counted": "Counted",
+      "NotCounted": "Not Counted",
+      "Event": "CYCLE CNT"
+    },
+    {
+      "TC_ID": "Tc_699_verifyItemLedger"
+    },
+    {
+      "TC_ID": "Tc_700_verifyItemBinLedger"
+    },
+    {
+      "TC_ID": "Tc_708_verifyOpenOrder"
+    },
+    {
+      "TC_ID": "Tc_708_verifyPrintLabel"
+    },
+    {
+      "TC_ID": "Tc_744_verifyExportButton"
+    },
+    {
+      "TC_ID": "Tc_714_verifyAddItemBinLocationRange",
+      "option": "By Bin Location Range",
+      "BinLocationStart": "1",
+      "BinLocationEnd": "1"
+    },
+    {
+      "TC_ID": "Tc_715_verifyAddItemUsingQuantity",
+      "option": "By Quantity",
+      "quantity": "2"
+    },
+    {
+      "TC_ID": "Tc_716_verifyAddItemUsingMFPDVN",
+      "option": "By MF/PD/VN Code",
+      "MF": "PR",
+      "PD": "PR",
+      "VN": "PR"
+    },
+    {
+      "TC_ID": "Tc_717_verifyAddItemUsingZone",
+      "option": "By Zone",
+      "zone": "PR"
+    },
+    {
+      "TC_ID": "Tc_704_verifyUserReassign",
+      "reassignedUser": "WINAUTO9"
+    },
+    {
+      "TC_ID": "Tc_705_verifyRemoveAssignedUser"
+    },
+    {
+      "TC_ID": "Tc_707_verifyCountSheet"
+    },
+    {
+      "TC_ID": "Tc_735_verifyAutoAssignAcrossBinZone",
+      "option": "Across all bin locations and zones",
+      "user": "WINAUTO1"
+    },
+    {
+      "TC_ID": "Tc_737_verifyAutoAssignByZone",
+      "option": "By Zone",
+      "user": "WINAUTO1",
+      "zone": "DF - DEFAULT"
+    },
+    {
+      "TC_ID": "Tc_738_verifyAutoBinLocation",
+      "option": "By Bin Location Range",
+      "user": "WINAUTO1",
+      "BinStart": "2",
+      "BinEnd": "4"
+    },
+    {
+      "TC_ID": "Tc_738_verifyAutoAssignReasonForRec",
+      "option": "By Reason for Recommendation",
+      "user": "WINAUTO1",
+      "ReasonForRecommendation": "REASSIGNED ITEM"
+    },
+    {
+      "TC_ID": "Tc_740_verifyAutoAssignMFPDVN",
+      "option": "By MF/PD/VN",
+      "user": "WINAUTO1",
+      "MF": "PR",
+      "PD": "PR",
+      "VN": "PR"
+    },
+    {
+      "TC_ID": "Tc_712_verifyZoneFilter",
+      "zone": "DF"
+    },
+    {
+      "TC_ID": "Tc_718_verifyBinLocationFilter",
+      "BinStart": "1",
+      "BinEnd": "1"
+    },
+    {
+      "TC_ID": "Tc_719_verifyMFPDVNFilter",
+      "MF": "PR",
+      "PD": "PR",
+      "VN": "PR"
+    },
+    {
+      "TC_ID": "Tc_692_verifyADDITEMSAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_694_verifyReAssignUserAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_693_verifyCycleCountRecAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_690_verifyCycleCountRecAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_691_verifySearchFilterAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_695_verifyPrintCycleCountSheetAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_696_verifyAutoAssignUserAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_697_verifyCycleCountAuditHistoryAuditorUI"
+    },
+    {
+      "TC_ID": "Tc_731_verifySortingColAuditorCompany"
+    },
+    {
+      "TC_ID": "Tc_742_verifyPageCountAuditorCompany"
+    },
+    {
+      "TC_ID": "Tc_743_verifyPaginationAuditorCompany"
+    },
+    {
+      "TC_ID": "Tc_745_verifyGraphPercentageAuditor"
+    },
+    {
+      "TC_ID": "Tc_730_verifyEditAssignedUserAuditor",
+      "user": "winauto1"
+    },
+    {
+      "TC_ID": "Tc_733_verifyCycleCountEntryAuditor",
+      "Assigned": "Assigned",
+      "Counted": "Not Counted"
+    },
+    {
+      "TC_ID": "Tc_746_verifyUnassignedUserAuditor"
+    },
+    {
+      "TC_ID": "Tc_741_verifyRemoveCountedAuditor",
+      "Assigned": "Select",
+      "Counted": "Counted",
+      "NotCounted": "Not Counted"
+    },
+    {
+      "TC_ID": "Tc_800_verifyCountAuditAuditor",
+      "Assigned": "Select",
+      "Counted": "Counted",
+      "NotCounted": "Not Counted",
+      "Event": "CYCLE CNT"
+    },
+    {
+      "TC_ID": "Tc_699_verifyItemLedgerAuditor"
+    },
+    {
+      "TC_ID": "Tc_700_verifyItemBinLedgerAuditor"
+    },
+    {
+      "TC_ID": "Tc_708_verifyOpenOrderAuditor"
+    },
+    {
+      "TC_ID": "Tc_708_verifyPrintLabelAuditor"
+    },
+    {
+      "TC_ID": "Tc_744_verifyExportButtonAuditor"
+    },
+    {
+      "TC_ID": "Tc_715_verifyAddItemUsingQuantityAuditor",
+      "option": "By Quantity",
+      "quantity": "2"
+    },
+    {
+      "TC_ID": "Tc_717_verifyAddItemUsingCertificationAuditor",
+      "option": "By Certification"
+    },
+    {
+      "TC_ID": "Tc_704_verifyUserReassignAuditor",
+      "reassignedUser": "WINAUTO9"
+    },
+    {
+      "TC_ID": "Tc_705_verifyRemoveAssignedUserAuditor"
+    },
+    {
+      "TC_ID": "Tc_707_verifyCountSheetAuditor"
+    },
+    {
+      "TC_ID": "Tc_735_verifyAutoAssignAcrossBinZoneAuditor",
+      "option": "Across all bin locations and zones",
+      "user": "WINAUTO1"
+    },
+    {
+      "TC_ID": "Tc_737_verifyAutoAssignByZoneAuditor",
+      "option": "By Zone",
+      "user": "WINAUTO1",
+      "zone": "DF - DEFAULT"
+    },
+    {
+      "TC_ID": "Tc_738_verifyAutoBinLocationAuditor",
+      "option": "By Bin Location Range",
+      "user": "WINAUTO1",
+      "BinStart": "2",
+      "BinEnd": "4"
+    },
+    {
+      "TC_ID": "Tc_738_verifyAutoAssignReasonForRecAuditor",
+      "option": "By Reason for Recommendation",
+      "user": "WINAUTO1",
+      "ReasonForRecommendation": "REASSIGNED ITEM"
+    },
+    {
+      "TC_ID": "Tc_740_verifyAutoAssignMFPDVNAuditor",
+      "option": "By MF/PD/VN",
+      "user": "WINAUTO1",
+      "MF": "PR",
+      "PD": "PR",
+      "VN": "PR"
+    },
+    {
+      "TC_ID": "Tc_712_verifyZoneFilterAuditor",
+      "zone": "DF"
+    },
+    {
+      "TC_ID": "Tc_718_verifyBinLocationFilterAuditor",
+      "BinStart": "1",
+      "BinEnd": "1"
+    },
+    {
+      "TC_ID": "Tc_719_verifyMFPDVNFilterAuditor",
+      "MF": "PR",
+      "PD": "PR",
+      "VN": "PR"
     }
   ]
 }

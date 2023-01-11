@@ -1,0 +1,222 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_912_verifySPItemCustomerWithSPA": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISECustomerWithSPA": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation",
+      "Tc_913_SPWithoutSPAOther": "launchApp,siteLogin,validateSpPriceMntncTitle,addSpecialPrice,exitSPAApplication,signOut",
+      "Tc_verifyItemWithNoCAFILL": "dataBaseValidation",
+      "Tc_915_SPWithoutSPAOther": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISESPWithoutSPAOther": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation",
+      "Tc_911_CustomerWithoutSPAC2": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISECustomerWithoutSPAC2": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation",
+      "Tc_917_MFCustomerC3": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISEMFCustomerC3": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation",
+      "Tc_919_PDCustomerC4": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISEPDCustomerC4": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation",
+      "Tc_923_AllCustomerX1": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISEAllCustomerX1": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation",
+      "Tc_923_MFPDAllCustomerX2": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISEMFPDAllCustomerX2": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation",
+      "Tc_923_MFAllCustomerX3": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISEMFAllCustomerX3": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation",
+      "Tc_929_PDAllCustomerX4": "launchApp,siteLogin,createSPAContractCustomerItem,exitSPAApplication,signOut",
+      "Tc_CreateSalesOrderWISEPDAllCustomerX4": "launchApp,siteLogin,validateSalesOrderTitle,validateSalesOrderFields,navigateToItemsTab,addItemsSingleItemToSalesOrder,navigateToShipmentsTab,changeShipmentDeliveryType,saveExitSalesOrders,signOut,dataBaseValidation"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_912_verifySPItemCustomerWithSPA",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISECustomerWithSPA",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5110375",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "V1"
+    },
+    {
+      "TC_ID": "Tc_913_SPWithoutSPAOther",
+      "CustomerNo": "000037",
+      "ItemNo": "0626A5110750",
+      "SpecialPrice": "75.00",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_verifyItemWithNoCAFILL",
+      "accountNo": "000037",
+      "itemNo1": "0626A5110750",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "C1"
+    },
+    {
+      "TC_ID": "Tc_915_SPWithoutSPAOther",
+      "accountNo": "000037",
+      "itemNo1": "0626A5110500",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISESPWithoutSPAOther",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5110500",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "V2",
+      "SalesOrder": "001094"
+    },
+    {
+      "TC_ID": "Tc_911_CustomerWithoutSPAC2",
+      "accountNo": "000037",
+      "itemNo1": "0626A5110500",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISECustomerWithoutSPAC2",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5110500",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "C2",
+      "SalesOrder": "001094"
+    },
+    {
+      "TC_ID": "Tc_917_MFCustomerC3",
+      "accountNo": "000037",
+      "itemNo1": "0626A5150750",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISEMFCustomerC3",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5150750",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "C3",
+      "SalesOrder": "001094"
+    },
+    {
+      "TC_ID": "Tc_919_PDCustomerC4",
+      "accountNo": "000037",
+      "itemNo1": "0626A5401112",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISEPDCustomerC4",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5401112",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "C4",
+      "SalesOrder": "001094"
+    },
+    {
+      "TC_ID": "Tc_923_AllCustomerX1",
+      "accountNo": "000037",
+      "itemNo1": "0626A5411000",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISEAllCustomerX1",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5411000",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "X1",
+      "SalesOrder": "001094"
+    },
+    {
+      "TC_ID": "Tc_923_MFPDAllCustomerX2",
+      "accountNo": "000037",
+      "itemNo1": "0626A5501000",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISEMFPDAllCustomerX2",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5500625",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "X2",
+      "SalesOrder": "001094"
+    },
+    {
+      "TC_ID": "Tc_923_MFAllCustomerX3",
+      "accountNo": "000037",
+      "itemNo1": "0626A5501000",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISEMFAllCustomerX3",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5501000",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "X3",
+      "SalesOrder": "001094"
+    },
+    {
+      "TC_ID": "Tc_929_PDAllCustomerX4",
+      "accountNo": "000037",
+      "itemNo1": "0626A5501000",
+      "Iteration": "1",
+      "Contract_Name": "QA_Automation",
+      "VendorNo": "000388",
+      "GroupNo": "51"
+    },
+    {
+      "TC_ID": "Tc_CreateSalesOrderWISEPDAllCustomerX4",
+      "Title": "Verify Create Sales Order WISE",
+      "accountNo": "000037",
+      "itemNo1": "0626A5501000",
+      "Iteration": "1",
+      "columnName1": "S4IRECPRC",
+      "columnName2": "S4PIMETH",
+      "SpecialPriceMethod": "X4",
+      "SalesOrder": "001094"
+    }
+  ]
+}

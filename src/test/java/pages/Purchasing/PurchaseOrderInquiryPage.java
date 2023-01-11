@@ -55,6 +55,7 @@ public class PurchaseOrderInquiryPage extends ReusableLib {
     public static By btnExitItemLedger = By.id("btnExit");
     public static By hdrItemLedger = By.id("hdrItemLedger");
     public static By btnExitPOInquiryDtls = By.id("btnCF03");
+    public static By exitButton=By.xpath("//input[@value='Exit']");
     public static By poInquiry = By.xpath("//div[text()='13']/following-sibling::div/a[contains(text(),'Purchase')]");
     public static By vendorTextField = By.id("P1PTVENDNB");
     public static By orderBySearchIcon = By.id("imgOrderedBy");
@@ -72,6 +73,7 @@ public class PurchaseOrderInquiryPage extends ReusableLib {
     public static By statusPoDetails = By.id("outP4Status");
     public static By stockType = By.id("outP4TYPDSC");
     public static By openAmount = By.id("outP4ORDTOT");
+    public static By extPrice2 = By.id("outP4RECNUMDT.2");
     public static By dateField = By.id("outP4ORDDTE");
     public static By orderNumberPoDetails = By.id("outP4ORDNUM");
     public static By errorTitle = By.xpath("//input[@title='Invalid line number entered.']");
