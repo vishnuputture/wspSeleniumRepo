@@ -10,6 +10,7 @@ import pages.common.MasterPage;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import pages.warehouse.DeliveredShipmentsPage;
 import pages.warehouse.DriversPage;
+import pages.warehouse.ManifestsPage;
 import pages.warehouse.TruckPage;
 import supportLibraries.Utility_Functions;
 
@@ -35,7 +36,7 @@ public class Trucks extends ReusableLib {
 
     public void navigateToShippingManifest() {
         //driver.get(jsonData.getData("Url"));
-        ownDriver.get("http://lcoservicedev.winwholesale.com/shipping-manifest-manager/#/list/warehousing");
+        ownDriver.get(properties.getProperty("manifestDevURL"));
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
@@ -74,13 +75,23 @@ public class Trucks extends ReusableLib {
      * Keyword to Navigate to Trucks Screen
      */
     public void navigateToTrucksScreen() {
-        click(TruckPage.menuIconTruck);
-        callSelectCompany();
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.menuIconTruck,"Click Menu");
+        //callSelectCompany();
         Utility_Functions.timeWait(3);
-        click(TruckPage.subMenuTruck, "Navigate to trucks page");
+        try {
+            click(TruckPage.subMenuTruck, "Navigate to trucks page");
+        }catch (Exception e){
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,TruckPage.menuIconTruck,"Click Menu");
+            Utility_Functions.timeWait(3);
+            click(TruckPage.subMenuTruck, "Navigate to trucks page");
+        }
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         Utility_Functions.timeWait(3);
         commonObj.validateText(TruckPage.trucksHeader, "Trucks", "Trucks Screen Header is present");
+    }
+
+    public By labelTag(String labelName){
+        return By.xpath("//label[text()='"+labelName+"']");
     }
 
     /**
@@ -94,8 +105,11 @@ public class Trucks extends ReusableLib {
             Utility_Functions.xAssertEquals(report, el.getText().trim(), actText[i], "");
             i++;
         }
+        String[] labels={"Truck Name","License Plate Number","Status","CDL Required"};
+        for(String label:labels){
+            commonObj.validateText(labelTag(label),label,"Label ["+label+"] is present");
+        }
         commonObj.validateElementExists(TruckPage.helpIcon, "Help Icon '?' is present");
-        commonObj.validateElementExists(TruckPage.filterSearch, "Search filter icon is present");
         int size = ownDriver.findElements(TruckPage.pagination).size();
         Utility_Functions.xAssertEquals(report, size, 4, "Next page and previous page arrow icon is present");
         String page = Utility_Functions.getText(ownDriver, TruckPage.currentPage);
@@ -188,7 +202,7 @@ public class Trucks extends ReusableLib {
     }
 
     public void navigateToAddNewTruck() {
-        click(TruckPage.addNewTruckBtn, "Click on add new Truck button");
+        click(TruckPage.addNewTruckBtn, "Click on [New Truck] button");
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.addNewTruckHeader, "New Truck", "Verify Add new Truck Header");
     }
@@ -205,11 +219,15 @@ public class Trucks extends ReusableLib {
             i++;
         }
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.saveBtnDis, "Save Truck", "Save Button is Exist and button is disabled");
+        commonObj.validateText(buttonTag(" Save Truck "), "Save Truck", "Save Button is Exist and button is disabled");
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
         click(DriversPage.crossIcon, "Click Cross Icon");
         Utility_Functions.timeWait(3);
         commonObj.validateText(TruckPage.trucksHeader, "Trucks", "Verify Trucks screen Header");
+    }
+
+    public By spanTag(String text){
+        return By.xpath("//span[contains(text(),'"+text+"')]");
     }
 
     /**
@@ -224,6 +242,14 @@ public class Trucks extends ReusableLib {
         Utility_Functions.xUpdateJson("licensePlateNo", "" + licensePlateNo + "");
         click(TruckPage.newTruckPlateExpInput);
         click(TruckPage.licensePlateExpSelect, "Select License Plate Expiration Date");
+        clickMultipleEl(TruckPage.statusDrop);
+        clickMultipleEl(spanTag("Active"));
+        //Utility_Functions.xSelectDropdownByName(ownDriver,TruckPage.statusDrop,"Active");
+        Utility_Functions.timeWait(2);
+        int size=ownDriver.findElements(TruckPage.cdlRequiredFilter).size();
+        clickMultipleEl(TruckPage.cdlRequiredFilter);
+        clickMultipleEl(spanTag("Yes"));
+        //Utility_Functions.xSelectDropdownByName(ownDriver,ownDriver.findElements(TruckPage.cdlRequiredFilter).get(size-1),"Yes");
         sendKeys(TruckPage.yearInput, jsonData.getData("MakeYear"), "Entering year");
         sendKeys(TruckPage.makeInput, jsonData.getData("Make"), "Entering make");
         sendKeys(TruckPage.modelInput, jsonData.getData("Model"), "Entering model");
@@ -231,7 +257,7 @@ public class Trucks extends ReusableLib {
         sendKeys(TruckPage.emptyTruckWeightInput, jsonData.getData("EmptyWeight"), "Entering empty truck weight");
         sendKeys(TruckPage.weightLimitInput, jsonData.getData("WeightLimit"), "Entering weight limit");
         click(TruckPage.saveBtn, "Saving record");
-        Utility_Functions.timeWait(2);
+        Utility_Functions.timeWait(4);
         String actText = "Truck " + truckName + " successfully created.";
         String expTest = Utility_Functions.getText(ownDriver, By.xpath("//span[contains(text(),'" + truckName + "')]"));
         Utility_Functions.xAssertEquals(report, actText, expTest, "Truck successfully added pop up message");
@@ -241,6 +267,15 @@ public class Trucks extends ReusableLib {
         String expTx=driver.findElement(By.xpath("//a[text()='"+truckName+"']")).getText();
         Utility_Functions.xUpdateJson("TruckName",truckName);*/
         //Utility_Functions.xAssertEquals(report,actTx,expTx,"Truck successfully added");
+    }
+
+    public void clickMultipleEl(By by){
+        int count=ownDriver.findElements(by).size();
+        try {
+            click(by);
+        }catch (Exception e){
+            ownDriver.findElements(by).get(count-1).click();
+        }
     }
 
     /**
@@ -278,11 +313,6 @@ public class Trucks extends ReusableLib {
      * Keyword to verify UI of Search Filters
      */
     public void searchFiltersTruckUI() {
-        click(TruckPage.filterSearch, "Click Search Filter icon");
-        Utility_Functions.timeWait(2);
-        Utility_Functions.xScrollWindow(ownDriver);
-        Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.searchFilterPanelTitle, "Search Filters", "Search Filters panel title is present");
         String[] actText = {"Truck Name", "License Plate Number", "Status", "CDL Required"};
         List<WebElement> els = ownDriver.findElements(TruckPage.searchFiltersLabel);
         int i = 0;
@@ -323,19 +353,20 @@ public class Trucks extends ReusableLib {
         String truckN = Utility_Functions.xGetJsonData("TruckName");
         String licensePlateN = Utility_Functions.xGetJsonData("licensePlateNo");
         String status = jsonData.getData("status");
-        String cDLRequired = jsonData.getData("cDLRequired");
-        click(TruckPage.filterSearch, "Click search filter icon");
-        Utility_Functions.timeWait(1);
+        String cDLRequired = "Yes";
         selectFilter(TruckPage.truckFilter, "Truck Name", truckN);
         selectFilter(TruckPage.licensePlateNoFilter, "License Plate Number", licensePlateN);
         selectFilter(TruckPage.statusFilter, "Status", status);
         selectFilter(TruckPage.cdlRequiredFilter, "CDL Required", cDLRequired);
-        click(TruckPage.applyFilter, "Click Apply Filters");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.truckFirstName, truckN, "After filter Truck Name: ");
-        commonObj.validateText(getTruck("License Plate Number"), licensePlateN, "After filter License Plate Number: ");
-        commonObj.validateText(getTruck("Status"), status, "After filter status: ");
-        commonObj.validateText(getTruck("CDL Required"), cDLRequired, "After filter CDL Required: ");
+        commonObj.validateText(thTag(truckN), truckN, "After filter Truck Name: ");
+        commonObj.validateText(thTag(licensePlateN), licensePlateN, "After filter License Plate Number: ");
+        commonObj.validateText(By.xpath("//td/descendant::span"), status, "After filter status: ");
+        commonObj.validateText(thTag(cDLRequired), cDLRequired, "After filter CDL Required: ");
+    }
+
+    public By thTag(String text){
+        return By.xpath("//td[contains(text(),'"+text+"')]");
     }
 
     /**
@@ -343,16 +374,16 @@ public class Trucks extends ReusableLib {
      */
     public void navigateToUpdateTruckPage() {
         Utility_Functions.timeWait(3);
-        Utility_Functions.xClickHiddenElement(ownDriver, By.xpath("//td/a"));
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver, By.xpath("//td"),"Click grid");
         Utility_Functions.timeWait(2);
-        commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
+        commonObj.validateText(TruckPage.truckDetailHeader, "Truck Details", "[Truck Details] Page header is present");
     }
 
     /**
      * Keyword to verify the UI of Update Truck Screen
      */
     public void uiUpdateTruck() {
-        String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model", "VIN", "Truck Weight - Unloaded", "Total Truck Weight Limit"};
+        String[] actText = {"Truck Name", "License Plate Number", "License Plate Expiration", "Status", "CDL Required", "Year", "Make", "Model", "VIN", "Total Truck Weight Limit"};
         List<WebElement> els = ownDriver.findElements(TruckPage.newTruckLabel);
         int i = 0;
         for (WebElement el : els) {
@@ -361,7 +392,7 @@ public class Trucks extends ReusableLib {
         }
         Utility_Functions.timeWait(2);
         commonObj.validateText(TruckPage.saveBtnDis, "Save Truck", "Save Truck Button is Exist and button is disabled");
-        commonObj.validateText(TruckPage.deleteButton, "Delete Truck", "Delete Truck Button is Exist and button is disabled");
+        commonObj.validateText(buttonTag(" Delete "), "Delete", "Delete Button is Exist and button is disabled");
         commonObj.validateElementExists(DriversPage.crossIcon, "Cross icon is present");
     }
 
@@ -371,15 +402,11 @@ public class Trucks extends ReusableLib {
     public void deleteTruck() {
         Utility_Functions.timeWait(2);
         Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
-        Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
-        click(TruckPage.noButtonPopUp, "Click No Button");
-        commonObj.validateText(TruckPage.updateTruckHeader, "Update Truck", "Update Truck Page header is present");
-        Utility_Functions.xClickHiddenElement(ownDriver, TruckPage.deleteButton);
-        Utility_Functions.timeWait(3);
-        commonObj.validateElementExists(TruckPage.deleteConfPopUp, "Click Delete Truck Button and Delete Confirmation Pop Up is present");
-        click(TruckPage.yesButtonPopUp, "Click Yes Button");
-        Utility_Functions.timeWait(3);
+        Utility_Functions.timeWait(2);
+        if(!isDisplayed(ManifestsPage.linkedToManifest)) {
+            click(By.xpath("//button[text()='Delete Truck ? ']"));
+            Utility_Functions.timeWait(3);
+        }
         String exp = "Truck could not be deleted because it is assigned to a manifest.";
         String act = Utility_Functions.getText(ownDriver, TruckPage.deletePopUp);
         if (act.equals(exp)) {
@@ -389,10 +416,16 @@ public class Trucks extends ReusableLib {
         }
     }
 
+    public By buttonTag(String btnName){
+        return By.xpath("//button[text()='"+btnName+"']");
+    }
+
     /**
      * Keyword to Update Truck
      */
     public void updateTruck() {
+        click(buttonTag(" Edit "),"Click [EDit] button");
+        Utility_Functions.timeWait(2);
         click(TruckPage.statusDrop, "Click Status drop down");
         click(DriversPage.inActive, "Select InActive From the status drop down");
         Utility_Functions.timeWait(2);

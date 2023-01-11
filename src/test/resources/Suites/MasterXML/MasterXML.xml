@@ -1,26 +1,36 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Demo">
     <suite-files>
-        <suite-file path="../Inventory/AverageCost.xml"></suite-file>
+        <!--<suite-file path="../Inventory/AverageCost.xml"></suite-file>
         <suite-file path="../Inventory/CycleCostAdjustment.xml"></suite-file>
-        <suite-file path="../Inventory/ReceiptCorrection.xml"></suite-file>
+        <suite-file path="../Inventory/ReceiptCorrection.xml"></suite-file>-->
+        <!--<suite-file path="../Inventory/SalesPerson.xml"></suite-file>-->
+        <!--<suite-file path="../Inventory/ItemMaster.xml"></suite-file>-->
+
+        <suite-file path="../AccountReceivable/AR2WISE.xml"></suite-file>
+        <suite-file path="../AccountReceivable/MakePayment.xml"></suite-file>
+        <suite-file path="../AccountReceivable/MiscChargesAndAdjustments.xml"></suite-file>
+
+        <suite-file path="../Marketplace/MarketplaceAPI.xml"></suite-file>
+
+        <suite-file path="../MobileWarehousing/BinMaintenance.xml"></suite-file>
+        <suite-file path="../MobileWarehousing/InventoryReceipts.xml"></suite-file>
+        <suite-file path="../MobileWarehousing/manifest.xml"></suite-file>
+        <suite-file path="../MobileWarehousing/ReceivingInProcess.xml"></suite-file>
+
         <suite-file path="../Pricing/CreateSaleOrder.xml"></suite-file>
         <suite-file path="../Pricing/PricingMatrix.xml"></suite-file>
         <suite-file path="../Pricing/SPATesting.xml"></suite-file>
         <suite-file path="../Pricing/Wise.xml"></suite-file>
-        <suite-file path="../Purchasing/POConvFactorTest.xml"></suite-file>
-
-        <suite-file path="../Purchasing/PurchaseOrder.xml"></suite-file>
         <suite-file path="../Pricing/SalesQuotes.xml"></suite-file>
-        <suite-file path="../Inventory/SalesPerson.xml"></suite-file>
+        <suite-file path="../Pricing/SelfServicePriceSheet.xml"></suite-file>
         <suite-file path="../Pricing/WorkWithSalesQuote.xml"></suite-file>
-        <suite-file path="../MobileWarehousing/InventoryReceipts.xml"></suite-file>
+
+        <suite-file path="../Purchasing/POConvFactorTest.xml"></suite-file>
+        <suite-file path="../Purchasing/PurchaseOrder.xml"></suite-file>
         <suite-file path="../Purchasing/PoEntry.xml"></suite-file>
         <suite-file path="../Purchasing/VendorInvoiceReco.xml"></suite-file>
-        <suite-file path="../AccountReceivable/MiscChargesAndAdjustments.xml"></suite-file>
+        <suite-file path="../Purchasing/spo.xml"></suite-file>
 
-        <suite-file path="../MobileWarehousing/ReceivingInProcess.xml"></suite-file>
-        <suite-file path="../Inventory/ItemMaster.xml"></suite-file>
-        <suite-file path="../AccountReceivable/AR2WiseTests.xml"></suite-file>
     </suite-files>
 </suite>

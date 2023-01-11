@@ -34,6 +34,7 @@ public class SalesOrdersPage extends ReusableLib {
     public static By outShipToAddLine1 = By.id("outShipToAddLine1");
     public static By outShipToAddLine2 = By.id("outShipToAddLine2");
     public static By outShipToCity = By.id("outShipToCity");
+    public static By outerUnitPrice = By.id("outSbfUnitPrice.1");
     public static By outShipToState = By.id("outShipToState");
     public static By outShipToZipCode = By.id("outShipToZipCode");
     public static By outShipToPhone = By.id("outShipToPhone");

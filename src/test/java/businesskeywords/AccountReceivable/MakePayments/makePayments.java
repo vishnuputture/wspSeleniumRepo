@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import pages.AccountReceivable.makePayments.InvoicePage;
 import pages.AccountReceivable.makePayments.MakeAPaymentPage;
 import pages.AccountReceivable.makePayments.MakePaymentLandingPage;
+import pages.warehouse.ElectronicCommerce.ElectronicCommercePage;
 import supportLibraries.Utility_Functions;
 
 import java.text.SimpleDateFormat;
@@ -43,12 +44,13 @@ public class makePayments extends ReusableLib {
     public void logInToMakePayments()
     {
         Utility_Functions.xWaitForElementClickable(ownDriver,MakePaymentLandingPage.signIn,10);
-        Utility_Functions.timeWait(4);
-        commonObj.validateText(MakePaymentLandingPage.signIn,"Sign In","validating make payment dropdown");
-        click(MakePaymentLandingPage.signIn);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,MakePaymentLandingPage.signIn,"Click Sign In");
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,MakePaymentLandingPage.signIn,"Wait for page to be loaded");
         sendKey(MakePaymentLandingPage.userEmail,jsonData.getData("userName"));
         sendKey(MakePaymentLandingPage.userPassword,jsonData.getData("userPassword"));
         click(MakePaymentLandingPage.submitbtn);
+        Utility_Functions.timeWait(6);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver, ElectronicCommercePage.searchBox,"validating make payment dropdown");
         commonObj.validateText(MakePaymentLandingPage.makePaymentdrpdwntext,"Make Payments","validating make payment dropdown");
         Utility_Functions.timeWait(3);
     }

@@ -222,7 +222,7 @@
     {
       "TC_ID": "Tc_863_verifyBinLocation",
       "Title": "verify Bin Location",
-      "itemNumber": "*99599013999",
+      "itemNumber": "100001000",
       "BinCondition": "Good",
       "BinZone": "Test",
       "Picking": "RF Gun",
@@ -278,7 +278,7 @@
     },
     {
       "TC_ID": "Tc_767_verifyCreateNewBinWithConditionGood",
-      "BinLocation": "TEST67598",
+      "BinLocation": "TEST39440",
       "BinCondition": "Good",
       "BinZones": "DEFAULT",
       "BinPicking": "Automatic",
@@ -290,7 +290,7 @@
     },
     {
       "TC_ID": "Tc_768_verifyCreateNewBinWithConditionDamaged",
-      "BinLocation": "TEST61629",
+      "BinLocation": "TEST80066",
       "BinCondition": "Damaged",
       "BinZones": "DEFAULT",
       "BinPicking": "Manual Picking & Staging",
@@ -302,7 +302,7 @@
     },
     {
       "TC_ID": "Tc_769_verifyCreateNewBinWithConditionDefective",
-      "BinLocation": "TEST12945",
+      "BinLocation": "TEST93671",
       "BinCondition": "Defective",
       "BinZones": "DEFAULT",
       "BinPicking": "Manual Picking & Staging",
@@ -336,7 +336,7 @@
     },
     {
       "TC_ID": "Tc_785_verifyBinWithoutItemsCanBeDeleted",
-      "BinLocation": "TEST101789",
+      "BinLocation": "TEST23783",
       "BinCondition": "Good",
       "BinZones": "DEFAULT",
       "BinPicking": "Automatic",

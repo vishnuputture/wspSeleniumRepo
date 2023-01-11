@@ -226,13 +226,13 @@ public class ReceivingInProcess extends ReusableLib {
         String[] columnVal = {"Purchase Order", "Vendor", "Receiver Doc", "User ID", "Received / Open Lines", "Percent Complete", "First Received", "Last Received"};
         for (String name : columnVal) {
             commonObj.validateText(By.xpath("//th[contains(text(),'" + name + "')]"), name, name + "Column is present");
-            click(By.xpath("//th[contains(text(),'" + name + "')]/descendant::i"), "click" + name + " column");
+            Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//th[contains(text(),'" + name + "')]/descendant::i"), "click" + name + " column");
             Utility_Functions.timeWait(3);
         }
     }
 
     public void navigateToRemainingPage() {
-        Utility_Functions.timeWait(4);
+        Utility_Functions.timeWait(8);
         String po = getText(By.xpath("//tr/td/a")).trim();
         click(By.xpath("//tr/td/a"), "Click Purchase Order link");
         commonObj.validateText(By.xpath("//h2[text()='ORDER NUMBER: " + po + "']"), "ORDER NUMBER: " + po, "ORDER NUMBER: " + po + " is present");
@@ -329,18 +329,19 @@ public class ReceivingInProcess extends ReusableLib {
      */
     public void searchPo() {
         Utility_Functions.timeWait(6);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ReceivingInProcessPage.searchPo,"Waiting for page to be loaded");
         sendKeys(ReceivingInProcessPage.searchPo, Utility_Functions.xGetJsonData("PONumber"), "search Item Or PO");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
 
     public void processPurchase() {
         Utility_Functions.timeWait(5);
-        click(ReceivingInProcessPage.poItems, "Click on 1st PO Item");
-        Utility_Functions.timeWait(5);
+        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ReceivingInProcessPage.poItems, "Click on 1st PO Item");
+        Utility_Functions.timeWait(10);
         if (isDisplayed(ReceivingInProcessPage.completeBtn)) {
             click(ReceivingInProcessPage.completeBtn, "Click Complete PO button");
         }
-        Utility_Functions.timeWait(5);
+        Utility_Functions.timeWait(8);
         createBin();
         enterQty(jsonData.getData("InvalidQty"));
         Utility_Functions.timeWait(2);
@@ -351,11 +352,11 @@ public class ReceivingInProcess extends ReusableLib {
     public void processPartialPurchase() {
         Utility_Functions.timeWait(5);
         click(ReceivingInProcessPage.poItems, "Click on 1st PO Item");
-        Utility_Functions.timeWait(5);
+        Utility_Functions.timeWait(10);
         if (isDisplayed(ReceivingInProcessPage.completeBtn)) {
             click(ReceivingInProcessPage.completeBtn, "Click Complete PO button");
         }
-        Utility_Functions.timeWait(5);
+        Utility_Functions.timeWait(8);
         createBin();
         enterQty(jsonData.getData("InvalidQty"));
         Utility_Functions.timeWait(2);
@@ -438,7 +439,7 @@ public class ReceivingInProcess extends ReusableLib {
      * Keyword to verify Receive Search Po
      */
     public void verifyReceiveSearchPo() {
-        searchItem();
+        searchItemPo();
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, spanElement("There are no orders currently being received."), "'There are no orders currently being received.' message is present");
     }
 
@@ -459,7 +460,7 @@ public class ReceivingInProcess extends ReusableLib {
         commonObj.validateText(BinMaintenancePage.toaster, "PO " + po + " is not available.", "'PO " + po + " is not available.' is present");
     }
 
-    public void searchItem() {
+    public void searchItemPo() {
         clickSearchIcon();
         searchAndApplyFilter("Purchase Order", Utility_Functions.xGetJsonData("PONumber"));
     }
@@ -631,6 +632,9 @@ public class ReceivingInProcess extends ReusableLib {
         String error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
         if (error.contains("F8 to accept")) {
             Utility_Functions.actionKey(Keys.F8, ownDriver);
+        }
+        if (error.contains("WARNING- Item is obsolete.  Press F9 to reorder.")) {
+            Utility_Functions.actionKey(Keys.F9, ownDriver);
         }
         error = getText(PurchaseOrderDetailsPage.errorMsgPOD);
         if (error.contains("WARNING- Price field is zero or blank")) {

@@ -18,7 +18,7 @@
             </class>
         </classes>
     </test>
-    <!--<test name="Misc Charges And Adjustment1">
+    <test name="Misc Charges And Adjustment1">
         <classes>
             <class name="testcases.AccountReceivable.MiscChargesAndAdjustments">
                 <methods>
@@ -50,5 +50,5 @@
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
 </suite>
