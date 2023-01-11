@@ -30,16 +30,16 @@ public class SmokeTest extends ReusableLib {
     public static Properties properties = Settings.getInstance();
     private ArrayList<String> vendors = new ArrayList<>();
     private final String environment = "DEV";//Prod, QA, DEV
-    private final String company = "695";
+    private final String company = "273";
     private final User wiseUser = new User(helper, "btjones1", "Nobodyknows1(", environment, company);
     private final User webUser = new User(helper, "wztestqa", environment, company);
     private final RTSPlanner planner = new RTSPlanner(helper, company, environment);
     private final DriverApp driverApp = new DriverApp(helper);
     private ArrayList<Manifest> manifests = new ArrayList<>();
-    private int numberOfPurchaseOrders = 1;
-    private int numberOfSameVendors = 1;
-    private int numberOfSalesOrders = 1;
-    private int numberOfShipments = 1;
+    private int numberOfPurchaseOrders = 3;
+    private int numberOfSameVendors = 2;
+    private int numberOfSalesOrders = 2;
+    private int numberOfShipments = 2;
     private int numberOfItems = 1;
     private boolean useLastOrders = false;
 
@@ -145,7 +145,7 @@ public class SmokeTest extends ReusableLib {
         shipmentData.setBillTo(salesOrder.getBillTo());
         so.navigateToItemsTab();
         int lineNumber = 1;
-        ArrayList<String> items = getRandomItems(numberOfItems * numberOfShipments, "RF");
+        ArrayList<String> items = getRandomItems(numberOfItems * numberOfShipments, "");
         for (int i = 1; i <= numberOfShipments; i++) {
             Shipment shipment = new Shipment(shipmentData);
             for (int j = 1; j <= numberOfItems; j++) {
@@ -281,7 +281,8 @@ public class SmokeTest extends ReusableLib {
         }
         click(SalesOrdersPage.btnSaveExitPayment,"saving and exiting");
         click(SalesOrdersPage.btnExit," exiting SOE");
-        sendKeysAndEnter(By.xpath("//*[@id=\"I_20_7\"]"), "23", "Going to Master Menu");
+        //sendKeysAndEnter(By.xpath("//*[@id=\"I_20_7\"]"), "23", "Going to Master Menu");
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
 
     public void exitWise() {
@@ -332,7 +333,7 @@ public class SmokeTest extends ReusableLib {
         return sb.toString();
     }
     public ArrayList<String> getRandomItems(int quantity, String pickVia) throws SQLException {
-
+            String query = "SELECT ITEM_NUMBER FROM IM02 ORDER BY RAND() LIMIT "+ quantity;
             pickVia = pickVia.toUpperCase();
         if (pickVia.contains("RF") || pickVia.equals("RFGUNPICK"))
             pickVia = "RFGUNPICK";
@@ -340,18 +341,22 @@ public class SmokeTest extends ReusableLib {
             pickVia = "AUTOPICK";
         else if(pickVia.contains("MANUAL") || pickVia.equals("MANUALPICK"))
             pickVia = "MANUALPICK";
-        else
+        else if (!pickVia.isEmpty())
             pickVia = "NOTAVLPICK";
+
+        if (!pickVia.isEmpty()) {
+            query = "SELECT I.ITEM_NUMBER FROM SOPKQDTV02 S " +
+                    "INNER JOIN IM02 I ON I.ITEM_NUMBER = S.ITEM_NUMBER " +
+                    "WHERE PICK_VIA_CODE = '" + pickVia + "' AND PRODUCT_AVAILABLE_TOSELL = 'Y' " +
+                    "AND I.ITEM_NUMBER NOT LIKE 'J%' AND I.ITEM_NUMBER NOT LIKE '*%' AND I.AVERAGE_COST > 0 " +
+                    "ORDER BY RAND() LIMIT " + quantity;
+        }
 
         DBCall db = new DBCall();
         boolean useProd = environment.equalsIgnoreCase("Prod");
         ArrayList<String> items = new ArrayList<>();
         Statement sqlStatement = db.dbConnection(company, useProd);
-        ResultSet resultSet = sqlStatement.executeQuery("SELECT I.ITEM_NUMBER FROM SOPKQDTV02 S " +
-                "INNER JOIN IM02 I ON I.ITEM_NUMBER = S.ITEM_NUMBER " +
-                "WHERE PICK_VIA_CODE = '"+ pickVia +"' AND PRODUCT_AVAILABLE_TOSELL = 'Y' " +
-                "AND I.ITEM_NUMBER NOT LIKE 'J%' AND I.ITEM_NUMBER NOT LIKE '*%' AND I.AVERAGE_COST > 0 " +
-                "ORDER BY RAND() LIMIT "+quantity);
+        ResultSet resultSet = sqlStatement.executeQuery(query);
         if (!resultSet.isBeforeFirst()) {
             System.out.println("No data was available.");
             resultSet.close();

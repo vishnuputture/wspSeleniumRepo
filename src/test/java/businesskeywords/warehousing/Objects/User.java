@@ -105,7 +105,7 @@ public class User extends ReusableLib implements Serializable {
 
     public void loginToWISE() {
         String url = environment.equalsIgnoreCase("prod")
-                ? "https://newwise.winwholesale.com/wise?workstnid=&skin=WOBHighContrast"
+                ? "https://wise.winwholesale.com/wise?workstnid=&skin=WOBHighContrast"
                 : "https://wisetest.winwholesale.com/wise?skin=WOBDark";
         ownDriver.get(url);
         sendKeys(LoginPage.userNametxtBox, name, "Entering username");
