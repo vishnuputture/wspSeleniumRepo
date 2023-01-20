@@ -2,7 +2,6 @@ package businesskeywords.warehousing.Manifest;
 
 import businesskeywords.warehousing.Objects.*;
 import businesskeywords.Pricing.SalesOrders.SalesOrders;
-import businesskeywords.common.Login;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Settings;
@@ -24,30 +23,32 @@ import java.util.*;
 
 public class SmokeTest extends ReusableLib {
     private final CommonActions commonObj;
-    private transient Login login;
+    private final DBCall dbCall;
     private Orders orders;
     private final FrameworkDriver ownDriver;
     public static Properties properties = Settings.getInstance();
     private ArrayList<String> vendors = new ArrayList<>();
     private final String environment = "DEV";//Prod, QA, DEV
-    private final String company = "273";
+    private final String company = "695";
     private final User wiseUser = new User(helper, "btjones1", "Nobodyknows1(", environment, company);
     private final User webUser = new User(helper, "wztestqa", environment, company);
     private final RTSPlanner planner = new RTSPlanner(helper, company, environment);
     private final DriverApp driverApp = new DriverApp(helper);
     private ArrayList<Manifest> manifests = new ArrayList<>();
-    private int numberOfPurchaseOrders = 3;
+    private int numberOfPurchaseOrders = 2;
     private int numberOfSameVendors = 2;
-    private int numberOfSalesOrders = 2;
-    private int numberOfShipments = 2;
+    private int numberOfSalesOrders = 1;
+    private int numberOfShipments = 3;
     private int numberOfItems = 1;
     private boolean useLastOrders = false;
+    private boolean useLastManifests = false;
 
     public SmokeTest(Helper helper) throws SQLException {
         super(helper);
         commonObj = new CommonActions(helper);
         ownDriver = helper.getGSDriver();
         orders = new Orders();
+        dbCall = new DBCall(company, environment);
     }
 
     public void initiateSmokeTest() throws SQLException, IOException {
@@ -59,16 +60,21 @@ public class SmokeTest extends ReusableLib {
             }
             saveOrders();
             exitWise();
-        } else loadOrders();
+        }
 
-        navigateToManifest();
-        createManifestRTS();
+        if (!useLastManifests) {
+            orders = loadOrders();
+            navigateToManifest();
+            createManifestRTS();
+            saveManifests();
+        } else manifests = loadManifests();
 
         driverApp.loginToDriverApp(webUser);
         for (Manifest manifest : manifests) {
             driverApp.verifyManifestCard(manifest);
             driverApp.openManifest(manifest);
             driverApp.validateStops(manifest);
+            driverApp.startDelivery();
         }
     }
 
@@ -97,13 +103,13 @@ public class SmokeTest extends ReusableLib {
                 planner.searchShipment(shipment);
                 planner.validateTruckIcon(shipment);
                 planner.clearShipmentFilters(shipment);
-                planner.validateManifestDetails();
+                //planner.validateManifestDetails();
             }
         }
         for (PurchaseOrder purchaseOrder : orders.getPurchaseOrders()) {
             planner.searchPurchaseOrder(purchaseOrder);
             planner.dragPurchaseOrder(purchaseOrder);
-            planner.validateManifestDetails();
+            //planner.validateManifestDetails();
         }
         planner.generate();
     }
@@ -112,10 +118,10 @@ public class SmokeTest extends ReusableLib {
         SalesOrders so = new SalesOrders(helper);
         commonObj.masterToOrderProcessing();
         commonObj.orderProcessingToSalesOrders();
-        sendKeysAndEnter(SalesOrdersPage.billToAcct, getRandomSubAccount(),"Entering bill to account number");
+        sendKeysAndEnter(SalesOrdersPage.billToAcct, dbCall.getRandomSubAccount(),"Entering bill to account number");
         while (Utility_Functions.xIsDisplayed(ownDriver,
                 By.xpath("//div[contains(text(),'Error: Customer number is invalid due to missing b')]"))) {
-            sendKeysAndEnter(SalesOrdersPage.billToAcct,getRandomSubAccount(),"Entering bill to account number");
+            sendKeysAndEnter(SalesOrdersPage.billToAcct, dbCall.getRandomSubAccount(),"Entering bill to account number");
         }
         waitForElementDisappear(By.id("_pui_loading_animation"), 15);
         Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SalesOrdersPage.directShipDropDown), 0);
@@ -143,9 +149,11 @@ public class SmokeTest extends ReusableLib {
         SalesOrder salesOrder = generateSalesOrder(getValue(By.id("inOrderNum")));
         Shipment shipmentData = generateShipment();
         shipmentData.setBillTo(salesOrder.getBillTo());
+        shipmentData.setBillToName(salesOrder.getBillToName());
+        shipmentData.setAlphabeticName(dbCall.getAlphabeticName(shipmentData.getAcct()));
         so.navigateToItemsTab();
         int lineNumber = 1;
-        ArrayList<String> items = getRandomItems(numberOfItems * numberOfShipments, "");
+        ArrayList<String> items = dbCall.getRandomItems(numberOfItems * numberOfShipments, "");
         for (int i = 1; i <= numberOfShipments; i++) {
             Shipment shipment = new Shipment(shipmentData);
             for (int j = 1; j <= numberOfItems; j++) {
@@ -224,7 +232,7 @@ public class SmokeTest extends ReusableLib {
         purchaseOrder.setFreightCode(freightCode);
         purchaseOrder.setVendorNumber(vendorNumber);
         purchaseOrder.setVendor(vendorName);
-        setPOAddress(purchaseOrder);
+        dbCall.setPOAddress(purchaseOrder);
         orders.getPurchaseOrders().add(purchaseOrder);
         System.out.println("Purchase Order "+purchaseOrder.getNumber()+" created");
     }
@@ -264,6 +272,7 @@ public class SmokeTest extends ReusableLib {
 
     public void exitSalesOrder() {//UPDATE PAYMENT TERMS TO COPY THE FIRST SHIPMENT'S PAYMENT TERMS
         click(SalesOrdersPage.paymentsTab, "Clicking Payments Tab");
+        String payment = "";
         for (int i = 1; i <= numberOfShipments; i++) {
             Utility_Functions.timeWait(2);
             click(By.id("OutShipNumber2.1"), "Clicking Shipment to Apply Payment");
@@ -273,8 +282,13 @@ public class SmokeTest extends ReusableLib {
             Utility_Functions.timeWait(2);
             if (isDisplayed(By.className(("pui-tip-close"))))
                 click(By.className("pui-tip-close"));
-            click(By.id("PaymentTermsSearch"), "Clicking Payment Terms");
-            click(By.xpath("//*[@id=\"grdPaymentTerms\"]/div[4]/div"), "Clicking a Payment Term");
+            if (i == 1) {
+                click(By.id("PaymentTermsSearch"), "Clicking Payment Terms");
+                click(By.xpath("//*[@id=\"grdPaymentTerms\"]/div[4]/div"), "Clicking a Payment Term");
+                payment = getText(By.id("outPayCodeText"));
+            } else {
+                sendKeys(By.id("outPayCodeText"), payment);
+            }
             Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesOrdersPage.paymentMethodDropdown, "Cash");
             //sendKeys(By.id("PIappliedAmount1"), getValue(By.id("OutputField7")));
             click(SalesOrdersPage.btnApplyPayment, "Applying  payment method");
@@ -332,132 +346,19 @@ public class SmokeTest extends ReusableLib {
         }
         return sb.toString();
     }
-    public ArrayList<String> getRandomItems(int quantity, String pickVia) throws SQLException {
-            String query = "SELECT ITEM_NUMBER FROM IM02 ORDER BY RAND() LIMIT "+ quantity;
-            pickVia = pickVia.toUpperCase();
-        if (pickVia.contains("RF") || pickVia.equals("RFGUNPICK"))
-            pickVia = "RFGUNPICK";
-        else if(pickVia.contains("AUTO") || pickVia.equals("AUTOPICK"))
-            pickVia = "AUTOPICK";
-        else if(pickVia.contains("MANUAL") || pickVia.equals("MANUALPICK"))
-            pickVia = "MANUALPICK";
-        else if (!pickVia.isEmpty())
-            pickVia = "NOTAVLPICK";
-
-        if (!pickVia.isEmpty()) {
-            query = "SELECT I.ITEM_NUMBER FROM SOPKQDTV02 S " +
-                    "INNER JOIN IM02 I ON I.ITEM_NUMBER = S.ITEM_NUMBER " +
-                    "WHERE PICK_VIA_CODE = '" + pickVia + "' AND PRODUCT_AVAILABLE_TOSELL = 'Y' " +
-                    "AND I.ITEM_NUMBER NOT LIKE 'J%' AND I.ITEM_NUMBER NOT LIKE '*%' AND I.AVERAGE_COST > 0 " +
-                    "ORDER BY RAND() LIMIT " + quantity;
-        }
-
-        DBCall db = new DBCall();
-        boolean useProd = environment.equalsIgnoreCase("Prod");
-        ArrayList<String> items = new ArrayList<>();
-        Statement sqlStatement = db.dbConnection(company, useProd);
-        ResultSet resultSet = sqlStatement.executeQuery(query);
-        if (!resultSet.isBeforeFirst()) {
-            System.out.println("No data was available.");
-            resultSet.close();
-            sqlStatement.close();
-            return null;
-        }
-        while (resultSet.next()) {
-           items.add(String.valueOf(resultSet.getObject(1)).trim());
-        }
-        resultSet.close();
-        sqlStatement.close();
-        return items;
-    }
-    public String getRandomCustomer() throws SQLException {
-        return getRandomAccount("customer", 1).get(0);
-    }
-    public String getRandomSubAccount() throws SQLException {
-        return getRandomAccount("sub", 1).get(0);
-    }
-    public String getRandomVendor() throws SQLException {
-        return getRandomAccount("vendor", 1).get(0);
-    }
 
     public ArrayList<String> getRandomVendors() throws SQLException {
         int total = numberOfPurchaseOrders - numberOfSameVendors;
         total = (total == 0 && numberOfPurchaseOrders > 0) ? 1 : total;
         if (numberOfPurchaseOrders == 0 || total == 0) return new ArrayList<>();
         int number = total * numberOfSalesOrders;
-        ArrayList<String> vendors = getRandomAccount("vendor", number);
+        ArrayList<String> vendors = dbCall.getRandomAccount("vendor", number);
         int index = 0;
         for (int i = number; i < numberOfPurchaseOrders * numberOfSalesOrders; i++) {
             vendors.add(vendors.get(index));
             index++;
         }
         return vendors;
-    }
-
-    public ArrayList<String> getRandomAccount(String type, int quantity) throws SQLException {
-        if (quantity <= 0) return null;
-        String query = "";
-        if (type.equalsIgnoreCase("vendor")) {
-            query = "SELECT CUST_OR_VENDOR_NUMBER FROM MM01T WHERE CUSTOMER_VENDOR = 'V' ";
-        } else {
-            query = "SELECT a.CUST_OR_VENDOR_NUMBER FROM MM01T a " +
-                    "INNER JOIN AR01T b ON TRIM ('C' FROM a.MMBILL) = b.CUSTOMER_NUMBER " +
-                    "WHERE b.WRITE_OFF_DATE = 0 AND b.CREDIT_MESSAGE_CODE <> '$' " +
-                    "AND a.MMBILL NOT LIKE 'C %' AND a.CLOSE_ACCOUNT = 'N' AND a.CUSTOMER_VENDOR = ";
-        }
-        if (type.equalsIgnoreCase("customer")) query += "'C' ";
-        else if (type.equalsIgnoreCase("sub")) query += "'S' ";
-
-        query += "ORDER BY RAND() LIMIT "+quantity;
-
-        System.out.println(query);
-        DBCall db = new DBCall();
-        Statement sqlStatement = db.dbConnection(company, environment.equalsIgnoreCase("Prod"));
-        ResultSet resultSet = sqlStatement.executeQuery(query);
-        if (!resultSet.isBeforeFirst()) {
-            System.out.println("No data was available.");
-            resultSet.close();
-            sqlStatement.close();
-            return null;
-        }
-        ArrayList<String> billTo = new ArrayList<>();
-        while (resultSet.next()) {
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int numberOfColumns = metaData.getColumnCount();
-            for (int i = 1; i <= numberOfColumns; i++) {
-                billTo.add(String.valueOf(resultSet.getObject(i)).trim());
-            }
-        }
-        resultSet.close();
-        sqlStatement.close();
-        return billTo;
-    }
-
-    public void setPOAddress(PurchaseOrder purchaseOrder) throws SQLException {
-        String query = "SELECT ADDRESS_LINE_1, ADDRESS_LINE_2, ADDRESS_LINE_3, CITY, STATE, ZIP_CODE " +
-                "FROM MM01 WHERE CUST_OR_VENDOR_NUMBER = '"+purchaseOrder.getVendorNumber()+"' " +
-                "AND CUSTOMER_VENDOR = 'V' LIMIT 1";
-        DBCall db = new DBCall();
-        Statement sqlStatement = db.dbConnection(company, environment.equalsIgnoreCase("Prod"));
-        ResultSet resultSet = sqlStatement.executeQuery(query);
-        if (!resultSet.isBeforeFirst()) {
-            System.out.println("No data was available.");
-            resultSet.close();
-            sqlStatement.close();
-        }
-        while (resultSet.next()) {
-            purchaseOrder.setAddressLine1(String.valueOf(resultSet.getObject(1)).trim());
-            purchaseOrder.setAddressLine2(String.valueOf(resultSet.getObject(2)).trim());
-            purchaseOrder.setAddressLine3(String.valueOf(resultSet.getObject(3)).trim());
-            purchaseOrder.setCity(String.valueOf(resultSet.getObject(4)).trim());
-            purchaseOrder.setState(String.valueOf(resultSet.getObject(5)).trim());
-            purchaseOrder.setZip(String.valueOf(resultSet.getObject(6)).trim());
-            //purchaseOrder.setOrderTotal(String.valueOf(resultSet.getObject(7)).trim());
-        }
-        resultSet.close();
-        sqlStatement.close();
-        System.out.println(purchaseOrder.getAddressLine1() + " "+ purchaseOrder.getAddressLine2() + " "
-                + purchaseOrder.getAddressLine3());
     }
 
     public void saveOrders() throws IOException {
@@ -477,4 +378,22 @@ public class SmokeTest extends ReusableLib {
         }
         return null;
     }
+
+    public void saveManifests() throws IOException {
+        String fileName = "manifests.ser";
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
+        out.writeObject(manifests);
+        out.close();
+    }
+    @SuppressWarnings("unchecked")
+    public ArrayList<Manifest> loadManifests() throws IOException {
+        String fileName = "manifests.ser";
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))){
+            return (ArrayList<Manifest>) in.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

@@ -5,17 +5,21 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import commonkeywords.DBCall;
 import org.openqa.selenium.By;
 import pages.warehouse.DriverAppPage;
+import supportLibraries.Utility_Functions;
 
 public class DriverApp extends ReusableLib {
     private final CommonActions commonObj;
     private final FrameworkDriver ownDriver;
+    private DBCall dbCall;
 
     public DriverApp(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
         ownDriver = helper.getGSDriver();
+        dbCall = new DBCall();
     }
 
     public void loginToDriverApp(User user) {
@@ -23,6 +27,7 @@ public class DriverApp extends ReusableLib {
         String password = user.getDailyPassword("Prod");
         String URL = "http://lcoservicedev.winwholesale.com/shipping-manifest-mobile/#/auth";
         ownDriver.get(URL);
+        Utility_Functions.timeWait(2);
         sendKeysAndTab(DriverAppPage.username, username, "Inputting Username");
         sendKeys(DriverAppPage.password, password, "Inputting Password");
         click(DriverAppPage.loginButton, "Attempting to login...");
@@ -56,7 +61,7 @@ public class DriverApp extends ReusableLib {
                     "Stop #"+ stopId, "Validating Stop Number");
             if (isShipment) {
                 Shipment shipment = stop.getShipments().get(0);
-                company = shipment.getBillTo();
+                company = shipment.getAlphabeticName();
                 addressLine1 =  shipment.getName();
                 addressLine2 = shipment.getAddressLine1();
                 addressLine3 = shipment.getAddressLine2();
@@ -64,10 +69,14 @@ public class DriverApp extends ReusableLib {
             } else {
                 PurchaseOrder purchaseOrder = stop.getPurchaseOrders().get(0);
                 company = purchaseOrder.getVendor();
+                String zipCode = purchaseOrder.getZip();
+                if (zipCode.length() > 5)
+                    zipCode = zipCode.substring(0, 5).concat("-").concat(zipCode.substring(5));
+
                 addressLine1 = purchaseOrder.getAddressLine1();
                 addressLine2 = purchaseOrder.getAddressLine2();
                 addressLine3 = purchaseOrder.getAddressLine3();
-                addressLine4 = purchaseOrder.getCity() + ", " + purchaseOrder.getState() + " " + purchaseOrder.getZip();
+                addressLine4 = purchaseOrder.getCity() + ", " + purchaseOrder.getState() + " " + zipCode;
             }
             commonObj.validateText(By.xpath("//div[normalize-space()='"+ company +"']"),
                     company, "Validating Address");
@@ -82,5 +91,9 @@ public class DriverApp extends ReusableLib {
             commonObj.validateText(By.xpath("//div[normalize-space()='"+ addressLine4 +"']"),
                     addressLine4, "Validating Address");
         }
+    }
+
+    public void startDelivery() {
+        click(DriverAppPage.startDeliveryButton, "Clicking on Start Delivery");
     }
 }

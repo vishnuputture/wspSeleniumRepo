@@ -6,7 +6,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Shipment implements Serializable {
+    private String alphabeticName;
     private String billTo;
+    private String billToName;
     private String shipmentNumber;
     private String shipDate;
     private String requiredDate;
@@ -45,6 +47,25 @@ public class Shipment implements Serializable {
         this.state = shipment.getState();
         this.zip = shipment.getZip();
         this.phone = shipment.getPhone();
+        this.billTo = shipment.getBillTo();
+        this.billToName = shipment.getBillToName();
+        this.alphabeticName = shipment.getAlphabeticName();
+    }
+
+    public String getAlphabeticName() {
+        return alphabeticName;
+    }
+
+    public void setAlphabeticName(String alphabeticName) {
+        this.alphabeticName = alphabeticName;
+    }
+
+    public String getBillToName() {
+        return billToName;
+    }
+
+    public void setBillToName(String billToName) {
+        this.billToName = billToName;
     }
 
     public String getBillTo() {

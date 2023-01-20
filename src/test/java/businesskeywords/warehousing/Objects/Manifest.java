@@ -2,9 +2,10 @@ package businesskeywords.warehousing.Objects;
 
 import software.amazon.awssdk.services.ec2.model.Purchase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Manifest {
+public class Manifest implements Serializable {
     private String number;
     private String id;
     private String status;

@@ -81,7 +81,7 @@ public class User extends ReusableLib implements Serializable {
         String URL = "https://btjones1:Nobodyknows1(@daily.winwholesale.com/";
         ownDriver.get(URL);
         environment = environment.equalsIgnoreCase("prod") ? "Prod" : environment;
-        click(ownDriver.findElement(By.xpath("//a[text()='"+environment+"']")));
+        click(By.xpath("//a[normalize-space()='"+environment+"']"));
         Utility_Functions.timeWait(4);
         return getText(By.xpath("//h2"));
     }

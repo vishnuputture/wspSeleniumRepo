@@ -30,6 +30,7 @@ public class RTSPlanner extends ReusableLib {
     private String company;
     private String environment;
     private Driver driver;
+    private DBCall dbCall;
 
     Calendar cal = Calendar.getInstance();
     long timeStamp = getTimeStamp();
@@ -48,7 +49,8 @@ public class RTSPlanner extends ReusableLib {
         ownDriver = helper.getGSDriver();
         this.company = company;
         this.environment = environment;
-        this.driver = getDriver();
+        this.dbCall = new DBCall(company, environment);
+        this.driver = dbCall.getDriver();
         this.ngWebDriver = ownDriver.getNgWebDriver();
     }
 
@@ -84,12 +86,12 @@ public class RTSPlanner extends ReusableLib {
         click(RTSPlannerPage.startTime, "Selecting Time");
         String date = getValue(RTSPlannerPage.dateModal);
         String time = getValue(RTSPlannerPage.startTime);
-        String truck = getTruck();
+        String truck = dbCall.getTruck();
 
 //        Utility_Functions.xSelectDropdownByName(ownDriver, report, RTSPlannerPage.truckDropDown, truck, "Selecting Dropdown");
 //        Utility_Functions.xSelectDropDownByPartialText(ownDriver, report, RTSPlannerPage.driverDropDown, driverName);
         click(RTSPlannerPage.truckDropDown, "Clicking Truck Dropdown");
-        click(By.xpath("//div[contains(@class,'win-dropdown active')]//span[contains(text(),'"+ truck +"')]"));
+        click(By.xpath("//win-select[@id='editTruck']//span[contains(text(),'"+ truck +"')]"));
         Utility_Functions.timeWait(1);
         click(RTSPlannerPage.driverDropDown, "Clicking Driver Dropdown");
         click(By.xpath("//div[contains(@class,'win-dropdown active')]//span[contains(text(),'"+ driver.getFirstName() +"')]"));
@@ -138,7 +140,7 @@ public class RTSPlanner extends ReusableLib {
         String manifestTime = manifest.getTime().replaceFirst("^0+(?!$)", "");
         String dateAndTime = manifest.getDate() + " " + manifestTime;
         System.out.println(dateAndTime);
-        commonObj.validateText(By.xpath("(//span[contains(text(),'"+manifest.getStatus()+"')])[1]"), manifest.getStatus(),
+        commonObj.validateText(By.xpath("(//div[@ng-reflect-klass='summary-title'][normalize-space()='"+manifest.getStatus()+"'])[1]"), manifest.getStatus(),
                 "Manifest Status is on card");
         commonObj.validateText(By.xpath("//span[normalize-space()='"+manifest.getNumber()+"']"), manifest.getNumber(),
                 "Manifest Number is on card");
@@ -245,7 +247,7 @@ public class RTSPlanner extends ReusableLib {
         click(By.xpath("//div[contains(@class, 'win-dropdown active')]//span[contains(text(),'"+ manifest.getStatus() +"')]"));
         click(RTSPlannerPage.manifestFilterApply, "Applying Filters");
         Utility_Functions.timeWait(1);
-        commonObj.validateText(By.xpath("(//span[contains(text(),'"+manifest.getStatus()+"')])[1]"), manifest.getStatus(),
+        commonObj.validateText(By.xpath("(//div[contains(text(),'"+manifest.getStatus()+"')])[1]"), manifest.getStatus(),
                 "Manifest Status 'Generated' is on card");
     }
 
@@ -301,7 +303,7 @@ public class RTSPlanner extends ReusableLib {
                     "Stop #"+stopNumber, "Validating Stop Number");
             Shipment firstShipment = stop.getShipments().get(0);
             String addressLine2 = firstShipment.getAddressLine2();
-            String alphaName = getAlphabeticName(salesOrder.getBillTo());
+            String alphaName = dbCall.getAlphabeticName(salesOrder.getBillTo());
 
             String shipToName = !firstShipment.getName().equalsIgnoreCase(alphaName)
                     ? firstShipment.getName() + " "
@@ -416,71 +418,6 @@ public class RTSPlanner extends ReusableLib {
             throw new NoSuchElementException("Could not find :"+ ele);
         }
     }
-    public Driver getDriver() throws SQLException {
-        String query = "SELECT DRIVER_FIRST_NAME, DRIVER_LAST_NAME, NICKNAME FROM SOOSD30T" +
-                " WHERE UPPER(DRIVER_USERNAME) = 'WZTEST"+company+"A' LIMIT 1";
-        DBCall db = new DBCall();
-        Statement sqlStatement = db.dbConnection(company, environment.equalsIgnoreCase("Prod"));
-        ResultSet resultSet = sqlStatement.executeQuery(query);
-        if (!resultSet.isBeforeFirst()) {
-            System.out.println("No data was available.");
-            resultSet.close();
-            sqlStatement.close();
-            return null;
-        }
-        Driver driver = new Driver();
-        while (resultSet.next()) {
-            driver.setFirstName(String.valueOf(resultSet.getObject(1)).trim());
-            driver.setLastName(String.valueOf(resultSet.getObject(2)).trim());
-            driver.setAlias(String.valueOf(resultSet.getObject(3)).trim());
-        }
-        resultSet.close();
-        sqlStatement.close();
-        System.out.println(driver.getFirstName() + " " + driver.getLastName() + driver.getAlias());
-        return driver;
-    }
-    public String getTruck() throws SQLException {
-        String truck = "";
-        String query = "SELECT TRUCK_NAME FROM SOOSD20T " +
-                "WHERE TRUCK_STATUS = 'A' AND REQUIRES_CDL = 'N' AND TRUCK_NAME <> '' ORDER BY RAND() LIMIT 1";
-        DBCall db = new DBCall();
-        Statement sqlStatement = db.dbConnection(company, environment.equalsIgnoreCase("Prod"));
-        ResultSet resultSet = sqlStatement.executeQuery(query);
-        if (!resultSet.isBeforeFirst()) {
-            System.out.println("No data was available.");
-            resultSet.close();
-            sqlStatement.close();
-            return null;
-        }
-        while (resultSet.next()) {
-            truck = String.valueOf(resultSet.getObject(1)).trim();
-        }
-        resultSet.close();
-        sqlStatement.close();
-        return truck;
-    }
-
-    public String getAlphabeticName(String billTo) throws SQLException {
-        String name = "";
-        String query = "SELECT ALPHABETIC_NAME FROM MM01 WHERE CUST_OR_VENDOR_NUMBER = '"+billTo+"' " +
-                "AND CUSTOMER_VENDOR = 'C' LIMIT 1";
-        DBCall db = new DBCall();
-        Statement sqlStatement = db.dbConnection(company, environment.equalsIgnoreCase("Prod"));
-        ResultSet resultSet = sqlStatement.executeQuery(query);
-        if (!resultSet.isBeforeFirst()) {
-            System.out.println("No data was available.");
-            resultSet.close();
-            sqlStatement.close();
-            return null;
-        }
-        while (resultSet.next()) {
-            name = String.valueOf(resultSet.getObject(1)).trim();
-            name = name.replace("  ", " ");
-        }
-        resultSet.close();
-        sqlStatement.close();
-        return name;
-    }
 
     public long getTimeStamp() {
         long time = new Date().getTime();
@@ -492,12 +429,14 @@ public class RTSPlanner extends ReusableLib {
         String date = formatDate(purchaseOrder.getDate());
         String addressLine4 = purchaseOrder.getCity() + ", " + purchaseOrder.getState() + ", "
                 + purchaseOrder.getZip().replace("-", "");
-        Utility_Functions.xSelectDropdownByName(ownDriver, report, By.xpath("(//select[@id='show'])[1]"),
-                "Purchase Orders", "Switching to Purchase Orders");
+//        Utility_Functions.xSelectDropdownByName(ownDriver, report, By.xpath("(//select[@id='show'])[1]"),
+//                "Purchase Orders", "Switching to Purchase Orders");
+        click(RTSPlannerPage.orderDropDown);
+        click(RTSPlannerPage.poSelect);
         waitForElementDisappear(RTSPlannerPage.loading, 5);
-        sendKeys(By.xpath("(//input[@id='purchaseOrderSearch'])[1]"), purchaseOrder.getNumber(), "Searching PO");
+        sendKeys(RTSPlannerPage.poSearch, purchaseOrder.getNumber(), "Searching PO");
         waitForElementDisappear(RTSPlannerPage.loading, 5);
-        sendKeys(By.xpath("(//input[@id='vendor'])[1]"), purchaseOrder.getVendor(), "Searching Vendor");
+        sendKeys(RTSPlannerPage.vendorSearch, purchaseOrder.getVendor(), "Searching Vendor");
         waitForElementDisappear(RTSPlannerPage.loading, 5);
         click(By.xpath("(//tr[@id='"+purchaseOrder.getNumber()+"'])[1]"), "Clicking PO");
         commonObj.validateText(By.xpath("(//td[normalize-space()='" + purchaseOrder.getNumber() + "'])[1]"),
