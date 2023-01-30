@@ -2,11 +2,82 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Domain - Inventory" parallel="tests" thread-count="2">
 
-    <test name="CycleCostAdjustment">
+    <test name="CycleCountRecommendation">
         <classes>
-            <class name="testcases.Inventory.CycleCostAdjust">
+            <class name="testcases.Inventory.CycleCountRecommendation">
                 <methods>
-                    <include name="Tc_26_Navigation_to_Cycle_Count_Adjustments"></include>
+                    <include name="Tc_692_verifyADDITEMSUI"></include>
+                    <include name="Tc_694_verifyReAssignUserUI"></include>
+                    <include name="Tc_690_verifyCycleCountRecAuditorUI"></include>
+                    <include name="Tc_693_verifyCycleCountRecLocalUI"></include>
+                    <include name="Tc_691_verifySearchFilterUI"></include>
+                    <include name="Tc_695_verifyPrintCycleCountSheetUI"></include>
+                    <include name="Tc_696_verifyAutoAssignUserUI"></include>
+                    <include name="Tc_697_verifyCycleCountAuditHistoryUI"></include>
+                    <include name="Tc_731_verifySortingColLocalCompany"></include>
+                    <include name="Tc_742_verifyPageCountLocalCompany"></include>
+                    <include name="Tc_743_verifyPaginationLocalCompany"></include>
+                    <include name="Tc_745_verifyGraphPercentage"></include>
+                    <include name="Tc_747_verifyChangesLocalCompWithAuditor"></include>
+                    <include name="Tc_730_verifyEditAssignedUser"></include>
+                    <include name="Tc_733_verifyCycleCountEntry"></include>
+                    <include name="Tc_746_verifyUnassignedUser"></include>
+                    <include name="Tc_741_verifyRemoveCounted"></include>
+                    <include name="Tc_800_verifyCountAudit"></include>
+                    <include name="Tc_699_verifyItemLedger"></include>
+                    <include name="Tc_700_verifyItemBinLedger"></include>
+                    <include name="Tc_708_verifyOpenOrder"></include>
+                    <include name="Tc_708_verifyPrintLabel"></include>
+                    <include name="Tc_744_verifyExportButton"></include>
+                    <include name="Tc_714_verifyAddItemBinLocationRange"></include>
+                    <include name="Tc_715_verifyAddItemUsingQuantity"></include>
+                    <include name="Tc_716_verifyAddItemUsingMFPDVN"></include>
+                    <include name="Tc_717_verifyAddItemUsingZone"></include>
+                    <include name="Tc_704_verifyUserReassign"></include>
+                    <include name="Tc_705_verifyRemoveAssignedUser"></include>
+                    <include name="Tc_707_verifyCountSheet"></include>
+                    <include name="Tc_735_verifyAutoAssignAcrossBinZone"></include>
+                    <include name="Tc_737_verifyAutoAssignByZone"></include>
+                    <include name="Tc_738_verifyAutoBinLocation"></include>
+                    <include name="Tc_738_verifyAutoAssignReasonForRec"></include>
+                    <include name="Tc_740_verifyAutoAssignMFPDVN"></include>
+                    <include name="Tc_712_verifyZoneFilter"></include>
+                    <include name="Tc_718_verifyBinLocationFilter"></include>
+                    <include name="Tc_719_verifyMFPDVNFilter"></include>
+                    <include name="Tc_692_verifyADDITEMSAuditorUI"></include>
+                    <include name="Tc_694_verifyReAssignUserAuditorUI"></include>
+                    <include name="Tc_693_verifyCycleCountRecAuditorUI"></include>
+                    <include name="Tc_691_verifySearchFilterAuditorUI"></include>
+                    <include name="Tc_695_verifyPrintCycleCountSheetAuditorUI"></include>
+                    <include name="Tc_696_verifyAutoAssignUserAuditorUI"></include>
+                    <include name="Tc_697_verifyCycleCountAuditHistoryAuditorUI"></include>
+                    <include name="Tc_731_verifySortingColAuditorCompany"></include>
+                    <include name="Tc_742_verifyPageCountAuditorCompany"></include>
+                    <include name="Tc_743_verifyPaginationAuditorCompany"></include>
+                    <include name="Tc_745_verifyGraphPercentageAuditor"></include>
+                    <include name="Tc_730_verifyEditAssignedUserAuditor"></include>
+                    <include name="Tc_733_verifyCycleCountEntryAuditor"></include>
+                    <include name="Tc_746_verifyUnassignedUserAuditor"></include>
+                    <include name="Tc_741_verifyRemoveCountedAuditor"></include>
+                    <include name="Tc_800_verifyCountAuditAuditor"></include>
+                    <include name="Tc_699_verifyItemLedgerAuditor"></include>
+                    <include name="Tc_700_verifyItemBinLedgerAuditor"></include>
+                    <include name="Tc_708_verifyOpenOrderAuditor"></include>
+                    <include name="Tc_708_verifyPrintLabelAuditor"></include>
+                    <include name="Tc_744_verifyExportButtonAuditor"></include>
+                    <include name="Tc_715_verifyAddItemUsingQuantityAuditor"></include>
+                    <include name="Tc_717_verifyAddItemUsingCertificationAuditor"></include>
+                    <include name="Tc_704_verifyUserReassignAuditor"></include>
+                    <include name="Tc_705_verifyRemoveAssignedUserAuditor"></include>
+                    <include name="Tc_707_verifyCountSheetAuditor"></include>
+                    <include name="Tc_735_verifyAutoAssignAcrossBinZoneAuditor"></include>
+                    <include name="Tc_737_verifyAutoAssignByZoneAuditor"></include>
+                    <include name="Tc_738_verifyAutoBinLocationAuditor"></include>
+                    <include name="Tc_738_verifyAutoAssignReasonForRecAuditor"></include>
+                    <include name="Tc_740_verifyAutoAssignMFPDVNAuditor"></include>
+                    <include name="Tc_712_verifyZoneFilterAuditor"></include>
+                    <include name="Tc_718_verifyBinLocationFilterAuditor"></include>
+                    <include name="Tc_719_verifyMFPDVNFilterAuditor"></include>
                 </methods>
             </class>
         </classes>

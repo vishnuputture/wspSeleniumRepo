@@ -12,7 +12,8 @@
   "General_Data": [
     {
       "TC_ID": "Tc_26_Navigation_to_Cycle_Count_Adjustments",
-      "Title": "Navigate to Cycle Cost Adjustment"
+      "Title": "Navigate to Cycle Cost Adjustment",
+      "ENV": "QA"
     },
     {
       "TC_ID": "Tc_27_Verify_assignment_quantity_to_Item",
