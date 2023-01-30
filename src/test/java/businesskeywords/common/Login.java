@@ -37,18 +37,6 @@ public class Login extends ReusableLib {
         ownDriver = helper.getGSDriver();
     }
 
-    public Login(Helper helper, String env, String comp) {
-        this(helper);
-        environment = env.isEmpty() ? environment : env.toUpperCase();
-        environment = environment.equals("PROD") ? "Prod" : environment;
-        company = comp.isEmpty() ? company : comp;
-    }
-
-    public Login(Helper helper, User user) {
-        this(helper, user.getEnvironment(), user.getCompany());
-        username = user.getName();
-    }
-
     public String getEnvironment() {
         return environment;
     }
