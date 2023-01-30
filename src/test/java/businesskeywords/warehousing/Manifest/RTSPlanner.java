@@ -319,12 +319,12 @@ public class RTSPlanner extends ReusableLib {
             String stopDiv = count == 0 ? "" : "["+count+"]";
 //            commonObj.validateText(By.xpath("//*[@id=\"stopList\"]/div"+stopDiv+"/div[1]/div/span[2]"),
 //                    address, "Validating Address");
-                for (Shipment shipment : stop.getShipments()) {
-                    String shipmentNumber = shipment.getShipmentNumber();
-                    commonObj.validateText(By.xpath("(//span[normalize-space()='"+shipmentNumber+"'])[1]"),
-                            shipmentNumber, "Validating Shipment Number");
-                    Utility_Functions.actionKey(Keys.PAGE_DOWN, ownDriver);
-                }
+            for (Shipment shipment : stop.getShipments()) {
+                String shipmentNumber = shipment.getShipmentNumber();
+                commonObj.validateText(By.xpath("(//span[normalize-space()='"+shipmentNumber+"'])[1]"),
+                        shipmentNumber, "Validating Shipment Number");
+                Utility_Functions.actionKey(Keys.PAGE_DOWN, ownDriver);
+            }
             count++;
             Utility_Functions.actionKey(Keys.PAGE_DOWN, ownDriver);
         }

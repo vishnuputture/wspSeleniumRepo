@@ -6,7 +6,6 @@
             <class name="testcases.MobileWarehousing.SmokeTest">
                 <methods>
                     <include name="Tc_421_SmokeTest"></include>
-                </methods>
             </class>
         </classes>
     </test>

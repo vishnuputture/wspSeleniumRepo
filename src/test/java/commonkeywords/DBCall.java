@@ -220,27 +220,27 @@ public class DBCall {
 
 	//DELETE FROM DTA99599/IM08
 	//DElete method to be written
-	
+
 	/**
 	 * This method on invocation will delete the table contents of IM08
 	 */
-	
+
 	public static void delteDBTableData()
 	{
-		
+
 		Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
 
-		
-			try
-			{
-				String delCustomerData = "DELETE FROM DTA99599/IM08";
-				int i=sqlStatement.executeUpdate(delCustomerData);
-				System.out.println("Delet Statement RUN Successfully and value is "+i);
-			}catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		
+
+		try
+		{
+			String delCustomerData = "DELETE FROM DTA99599/IM08";
+			int i=sqlStatement.executeUpdate(delCustomerData);
+			System.out.println("Delet Statement RUN Successfully and value is "+i);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -329,12 +329,12 @@ public class DBCall {
 			e.printStackTrace();
 		} finally {
 			if(c1 !=null)
-			try
-			{
-				c1.close();
-			}catch (SQLException e){
-				e.printStackTrace();
-			}
+				try
+				{
+					c1.close();
+				}catch (SQLException e){
+					e.printStackTrace();
+				}
 		}
 
 		return x;
@@ -449,7 +449,7 @@ public class DBCall {
 	}
 
 
-    public static  Connection getConnection()
+	public static  Connection getConnection()
 	{
 		Connection con=Utility_Functions.xDBConnectionWise("db2", "WINQAauto", "P3rFoRm3R", "db2");
 		return con;
@@ -500,7 +500,7 @@ public class DBCall {
 		}
 		return item;
 
-		}
+	}
 
 	public static String UpdateItemInItemMaster(String itemNo,ArrayList<String> key,ArrayList<String> val)
 	{
@@ -612,27 +612,27 @@ public class DBCall {
 		Statement sqlStatement = Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
 
 		ArrayList<String> arr = new ArrayList();
-			try {
-				String getOrders = "SELECT S4ORDER,\n" +
-						"       S4SFX,\n" +
-						"       S4LINE,\n" +
-						"       S4ORECPRC,\n" +
-						"       S4POMETH,\n" +
-						"       S4IRECPRC,\n" +
-						"       S4PIMETH,\n" +
-						"       S4ITMROW,\n" +
-						"       S4MCTYPE,\n" +
-						"       S4MMULT\n" +
-						"    FROM dta99599.So104L2\n" +
-						"    WHERE S4ORDER = '"+salesOrder+"'";
-				ResultSet customerSet = sqlStatement.executeQuery(getOrders);
-				while (customerSet.next()) {
-					arr.add(customerSet.getString(column));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+		try {
+			String getOrders = "SELECT S4ORDER,\n" +
+					"       S4SFX,\n" +
+					"       S4LINE,\n" +
+					"       S4ORECPRC,\n" +
+					"       S4POMETH,\n" +
+					"       S4IRECPRC,\n" +
+					"       S4PIMETH,\n" +
+					"       S4ITMROW,\n" +
+					"       S4MCTYPE,\n" +
+					"       S4MMULT\n" +
+					"    FROM dta99599.So104L2\n" +
+					"    WHERE S4ORDER = '"+salesOrder+"'";
+			ResultSet customerSet = sqlStatement.executeQuery(getOrders);
+			while (customerSet.next()) {
+				arr.add(customerSet.getString(column));
 			}
-			return arr;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return arr;
 	}
 
 }
