@@ -815,7 +815,7 @@ public abstract class ReusableLib {
     protected void sendKeysAndEnter(By el, String strVal, String CustomMsg) {
     	sendKeys(el, strVal);
     	Utility_Functions.actionKey(Keys.ENTER, helper.getGSDriver());
-    	report.updateTestLog("EnterData and press enter", strVal + " " + CustomMsg, Status.PASS);
+    	report.updateTestLog("EnterData and press enter", CustomMsg, Status.PASS);
     }
     
     protected void sendKeysAndFunction(By el, String strVal,Keys key, String CustomMsg) {

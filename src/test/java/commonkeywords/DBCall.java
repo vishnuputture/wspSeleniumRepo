@@ -1,11 +1,19 @@
 package commonkeywords;
 
+import businesskeywords.warehousing.Objects.Driver;
+import businesskeywords.warehousing.Objects.PurchaseOrder;
 import com.ibm.db2.jcc.DB2Administrator;
 import supportLibraries.Utility_Functions;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.*;
+import java.util.*;
+
+import com.ibm.db2.jcc.DB2Administrator;
+
+import supportLibraries.Utility_Functions;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +24,15 @@ import java.util.List;
 import java.util.Random;
 
 public class DBCall {
+	private String schema;
+	private String environment;
+	public DBCall(String schema, String environment) {
+		this.schema = schema;
+		this.environment = environment;
+	}
+
+	public DBCall() {
+	}
 
 	public byte[] readPayloadJson(String json)
 	{
@@ -30,32 +47,200 @@ public class DBCall {
 		return bytesJson;
 	}
 
+	public void setPOAddress(PurchaseOrder purchaseOrder) throws SQLException {
+		String query = "SELECT ADDRESS_LINE_1, ADDRESS_LINE_2, ADDRESS_LINE_3, CITY, STATE, ZIP_CODE " +
+				"FROM MM01 WHERE CUST_OR_VENDOR_NUMBER = '"+purchaseOrder.getVendorNumber()+"' " +
+				"AND CUSTOMER_VENDOR = 'V' LIMIT 1";
+		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		ResultSet resultSet = sqlStatement.executeQuery(query);
+		if (!resultSet.isBeforeFirst()) {
+			System.out.println("No data was available.");
+			resultSet.close();
+			sqlStatement.close();
+		}
+		while (resultSet.next()) {
+			purchaseOrder.setAddressLine1(String.valueOf(resultSet.getObject(1)).trim());
+			purchaseOrder.setAddressLine2(String.valueOf(resultSet.getObject(2)).trim());
+			purchaseOrder.setAddressLine3(String.valueOf(resultSet.getObject(3)).trim());
+			purchaseOrder.setCity(String.valueOf(resultSet.getObject(4)).trim());
+			purchaseOrder.setState(String.valueOf(resultSet.getObject(5)).trim());
+			purchaseOrder.setZip(String.valueOf(resultSet.getObject(6)).trim());
+			//purchaseOrder.setOrderTotal(String.valueOf(resultSet.getObject(7)).trim());
+		}
+		resultSet.close();
+		sqlStatement.close();
+		System.out.println(purchaseOrder.getAddressLine1() + " "+ purchaseOrder.getAddressLine2() + " "
+				+ purchaseOrder.getAddressLine3());
+	}
+
+	public ArrayList<String> getRandomItems(int quantity, String pickVia) throws SQLException {
+		String query = "SELECT ITEM_NUMBER FROM IM02 ORDER BY RAND() LIMIT "+ quantity;
+		pickVia = pickVia.toUpperCase();
+		if (pickVia.contains("RF") || pickVia.equals("RFGUNPICK"))
+			pickVia = "RFGUNPICK";
+		else if(pickVia.contains("AUTO") || pickVia.equals("AUTOPICK"))
+			pickVia = "AUTOPICK";
+		else if(pickVia.contains("MANUAL") || pickVia.equals("MANUALPICK"))
+			pickVia = "MANUALPICK";
+		else if (!pickVia.isEmpty())
+			pickVia = "NOTAVLPICK";
+
+		if (!pickVia.isEmpty()) {
+			query = "SELECT I.ITEM_NUMBER FROM SOPKQDTV02 S " +
+					"INNER JOIN IM02 I ON I.ITEM_NUMBER = S.ITEM_NUMBER " +
+					"WHERE PICK_VIA_CODE = '" + pickVia + "' AND PRODUCT_AVAILABLE_TOSELL = 'Y' " +
+					"AND I.ITEM_NUMBER NOT LIKE 'J%' AND I.ITEM_NUMBER NOT LIKE '*%' AND I.AVERAGE_COST > 0 " +
+					"ORDER BY RAND() LIMIT " + quantity;
+		}
+		ArrayList<String> items = new ArrayList<>();
+		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		ResultSet resultSet = sqlStatement.executeQuery(query);
+		if (!resultSet.isBeforeFirst()) {
+			System.out.println("No data was available.");
+			resultSet.close();
+			sqlStatement.close();
+			return null;
+		}
+		while (resultSet.next()) {
+			items.add(String.valueOf(resultSet.getObject(1)).trim());
+		}
+		resultSet.close();
+		sqlStatement.close();
+		return items;
+	}
+	public ArrayList<String> getRandomAccount(String type, int quantity) throws SQLException {
+		if (quantity <= 0) return null;
+		String query = "";
+		if (type.equalsIgnoreCase("vendor")) {
+			query = "SELECT CUST_OR_VENDOR_NUMBER FROM MM01T WHERE CUSTOMER_VENDOR = 'V' ";
+		} else {
+			query = "SELECT a.CUST_OR_VENDOR_NUMBER FROM MM01T a " +
+					"INNER JOIN AR01T b ON TRIM ('C' FROM a.MMBILL) = b.CUSTOMER_NUMBER " +
+					"WHERE b.WRITE_OFF_DATE = 0 AND b.CREDIT_MESSAGE_CODE <> '$' " +
+					"AND a.MMBILL NOT LIKE 'C %' AND a.CLOSE_ACCOUNT = 'N' AND a.CUSTOMER_VENDOR = ";
+		}
+		if (type.equalsIgnoreCase("customer")) query += "'C' ";
+		else if (type.equalsIgnoreCase("sub")) query += "'S' ";
+
+		query += "ORDER BY RAND() LIMIT "+quantity;
+		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		ResultSet resultSet = sqlStatement.executeQuery(query);
+		if (!resultSet.isBeforeFirst()) {
+			System.out.println("No data was available.");
+			resultSet.close();
+			sqlStatement.close();
+			return null;
+		}
+		ArrayList<String> billTo = new ArrayList<>();
+		while (resultSet.next()) {
+			ResultSetMetaData metaData = resultSet.getMetaData();
+			int numberOfColumns = metaData.getColumnCount();
+			for (int i = 1; i <= numberOfColumns; i++) {
+				billTo.add(String.valueOf(resultSet.getObject(i)).trim());
+			}
+		}
+		resultSet.close();
+		sqlStatement.close();
+		return billTo;
+	}
+	public String getRandomCustomer() throws SQLException {
+		return getRandomAccount("customer", 1).get(0);
+	}
+	public String getRandomSubAccount() throws SQLException {
+		return getRandomAccount("sub", 1).get(0);
+	}
+	public String getRandomVendor() throws SQLException {
+		return getRandomAccount("vendor", 1).get(0);
+	}
+
+	public String getAlphabeticName(String billTo) throws SQLException {
+		String name = "";
+		String query = "SELECT ALPHABETIC_NAME FROM MM01 WHERE CUST_OR_VENDOR_NUMBER = '"+billTo+"' " +
+				"AND CUSTOMER_VENDOR = 'C' LIMIT 1";
+		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		ResultSet resultSet = sqlStatement.executeQuery(query);
+		if (!resultSet.isBeforeFirst()) {
+			System.out.println("No data was available.");
+			resultSet.close();
+			sqlStatement.close();
+			return null;
+		}
+		while (resultSet.next()) {
+			name = String.valueOf(resultSet.getObject(1)).trim();
+			name = name.replace("  ", " ");
+		}
+		resultSet.close();
+		sqlStatement.close();
+		return name;
+	}
+
+	public businesskeywords.warehousing.Objects.Driver getDriver() throws SQLException {
+		String query = "SELECT DRIVER_FIRST_NAME, DRIVER_LAST_NAME, NICKNAME FROM SOOSD30T" +
+				" WHERE UPPER(DRIVER_USERNAME) = 'WZTEST"+schema+"A' LIMIT 1";
+		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		ResultSet resultSet = sqlStatement.executeQuery(query);
+		if (!resultSet.isBeforeFirst()) {
+			System.out.println("No data was available.");
+			resultSet.close();
+			sqlStatement.close();
+			return null;
+		}
+		businesskeywords.warehousing.Objects.Driver driver = new Driver();
+		while (resultSet.next()) {
+			driver.setFirstName(String.valueOf(resultSet.getObject(1)).trim());
+			driver.setLastName(String.valueOf(resultSet.getObject(2)).trim());
+			driver.setAlias(String.valueOf(resultSet.getObject(3)).trim());
+		}
+		resultSet.close();
+		sqlStatement.close();
+		System.out.println(driver.getFirstName() + " " + driver.getLastName() + driver.getAlias());
+		return driver;
+	}
 
 
+	public String getTruck() throws SQLException {
+		String truck = "";
+		String query = "SELECT TRUCK_NAME FROM SOOSD20T " +
+				"WHERE TRUCK_STATUS = 'A' AND REQUIRES_CDL = 'N' AND TRUCK_NAME <> '' AND TRUCK_NAME NOT LIKE 'Amy%' ORDER BY RAND() LIMIT 1";
+		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		ResultSet resultSet = sqlStatement.executeQuery(query);
+		if (!resultSet.isBeforeFirst()) {
+			System.out.println("No data was available.");
+			resultSet.close();
+			sqlStatement.close();
+			return null;
+		}
+		while (resultSet.next()) {
+			truck = String.valueOf(resultSet.getObject(1)).trim();
+		}
+		resultSet.close();
+		sqlStatement.close();
+		return truck;
+	}
 
 	//DELETE FROM DTA99599/IM08
 	//DElete method to be written
-	
+
 	/**
 	 * This method on invocation will delete the table contents of IM08
 	 */
-	
+
 	public static void delteDBTableData()
 	{
-		
+
 		Statement sqlStatement=Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
 
-		
-			try
-			{
-				String delCustomerData = "DELETE FROM DTA99599/IM08";
-				int i=sqlStatement.executeUpdate(delCustomerData);
-				System.out.println("Delet Statement RUN Successfully and value is "+i);
-			}catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		
+
+		try
+		{
+			String delCustomerData = "DELETE FROM DTA99599/IM08";
+			int i=sqlStatement.executeUpdate(delCustomerData);
+			System.out.println("Delet Statement RUN Successfully and value is "+i);
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -144,12 +329,12 @@ public class DBCall {
 			e.printStackTrace();
 		} finally {
 			if(c1 !=null)
-			try
-			{
-				c1.close();
-			}catch (SQLException e){
-				e.printStackTrace();
-			}
+				try
+				{
+					c1.close();
+				}catch (SQLException e){
+					e.printStackTrace();
+				}
 		}
 
 		return x;
@@ -212,6 +397,19 @@ public class DBCall {
 
 	}
 
+	public Statement dbConnection(String schema, boolean useProd) {
+		String server = !useProd ? "windev1" : "winsrv1";
+		String url = "jdbc:as400://"+ server +".winwholesale.com;naming=system";
+		try {
+			Class.forName("com.ibm.db2.jcc.DB2Driver");
+			Connection con = DriverManager.getConnection(url, "btjones1", "Nobodyknows1(");
+			con.setSchema("DTA"+schema);
+			return con.createStatement();
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+			return null;
+		}
+	}
 
 	/**
 	 *
@@ -251,7 +449,7 @@ public class DBCall {
 	}
 
 
-    public static  Connection getConnection()
+	public static  Connection getConnection()
 	{
 		Connection con=Utility_Functions.xDBConnectionWise("db2", "WINQAauto", "P3rFoRm3R", "db2");
 		return con;
@@ -302,7 +500,7 @@ public class DBCall {
 		}
 		return item;
 
-		}
+	}
 
 	public static String UpdateItemInItemMaster(String itemNo,ArrayList<String> key,ArrayList<String> val)
 	{
@@ -414,27 +612,27 @@ public class DBCall {
 		Statement sqlStatement = Utility_Functions.xDBConntion("db2", "WINQAauto", "P3rFoRm3R", "db2");
 
 		ArrayList<String> arr = new ArrayList();
-			try {
-				String getOrders = "SELECT S4ORDER,\n" +
-						"       S4SFX,\n" +
-						"       S4LINE,\n" +
-						"       S4ORECPRC,\n" +
-						"       S4POMETH,\n" +
-						"       S4IRECPRC,\n" +
-						"       S4PIMETH,\n" +
-						"       S4ITMROW,\n" +
-						"       S4MCTYPE,\n" +
-						"       S4MMULT\n" +
-						"    FROM dta99599.So104L2\n" +
-						"    WHERE S4ORDER = '"+salesOrder+"'";
-				ResultSet customerSet = sqlStatement.executeQuery(getOrders);
-				while (customerSet.next()) {
-					arr.add(customerSet.getString(column));
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+		try {
+			String getOrders = "SELECT S4ORDER,\n" +
+					"       S4SFX,\n" +
+					"       S4LINE,\n" +
+					"       S4ORECPRC,\n" +
+					"       S4POMETH,\n" +
+					"       S4IRECPRC,\n" +
+					"       S4PIMETH,\n" +
+					"       S4ITMROW,\n" +
+					"       S4MCTYPE,\n" +
+					"       S4MMULT\n" +
+					"    FROM dta99599.So104L2\n" +
+					"    WHERE S4ORDER = '"+salesOrder+"'";
+			ResultSet customerSet = sqlStatement.executeQuery(getOrders);
+			while (customerSet.next()) {
+				arr.add(customerSet.getString(column));
 			}
-			return arr;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return arr;
 	}
 
 }

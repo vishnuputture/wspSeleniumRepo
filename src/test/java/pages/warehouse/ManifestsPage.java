@@ -6,7 +6,10 @@ public class ManifestsPage {
 
     //public static By subMenuManifest = By.xpath("//a[contains(text(),'Manifest')]");
     public static By subMenuManifest = By.xpath("//*[@id=\"side-nav-wrapper\"]/div[4]/div/div/div[2]/div[3]/a");
+    public static By subMenuRTS = By.xpath("/html/body/my-app/win-nav/div[1]/side-nav/expanded-side-nav/div/div[2]/div[5]/div[2]/a[3]");
     public static By manifestListHeader = By.xpath("//h2[contains(text(),' Manifest List ')]");
+    public static By menuIcon = By.id("open");
+    public static By closeMenu = By.xpath("//i[contains(@class, 'fa fa-times')]");
     public static By createManBtn = By.xpath("//button[contains(text(),'Create Manifest')]");
     public static By createNewManHeader = By.xpath("//span[@class='manifest-modal-title']");
     public static By manifestDetail = By.xpath("//a[text()='Manifest Detail']");

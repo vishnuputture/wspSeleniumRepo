@@ -1,9 +1,12 @@
 package businesskeywords.common;
 
+import businesskeywords.warehousing.Objects.User;
 import com.mattermost.MattermostAPIHandler;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Settings;
 import com.winSupply.framework.selenium.FrameworkDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.common.LoginPage;
 import pages.common.MasterPage;
@@ -11,10 +14,15 @@ import supportLibraries.Utility_Functions;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 public class Login extends ReusableLib {
 
+    public static Properties properties = Settings.getInstance();
     private FrameworkDriver ownDriver;
+    private String environment = "DEV";
+    private String company = "99599";
+    private String username = "wztestqa";
 
     /**
      * Constructor to initialize the {@link Helper} object and in turn the
@@ -29,6 +37,29 @@ public class Login extends ReusableLib {
         ownDriver = helper.getGSDriver();
     }
 
+    public Login(Helper helper, String env, String comp) {
+        this(helper);
+        environment = env.isEmpty() ? environment : env.toUpperCase();
+        environment = environment.equals("PROD") ? "Prod" : environment;
+        company = comp.isEmpty() ? company : comp;
+    }
+
+    public Login(Helper helper, User user) {
+        this(helper, user.getEnvironment(), user.getCompany());
+        username = user.getName();
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 
     /**
      * This method is invoked to login to WISE application
@@ -88,5 +119,37 @@ public class Login extends ReusableLib {
 
         ownDriver.get(url);
         //    ngWaitRequestToFinish();
+    }
+    public String getDailyPassword() {
+        String URL = "https://btjones1:Nobodyknows1(@daily.winwholesale.com/";
+        ownDriver.get(URL);
+        click(ownDriver.findElement(By.xpath("//a[text()='"+environment+" ']")));
+        Utility_Functions.timeWait(4);
+        return getText(By.xpath("//h2"));
+        //Utility_Functions.xUpdateJson(environment+"Password", pass);
+    }
+
+    public void winLogin(User user) {
+        By logo = environment.equals("Prod") ? LoginPage.winLoginProd : LoginPage.winLogin;
+        if (Utility_Functions.xWaitForElementPresent(ownDriver, logo, 5)) {
+            sendKeys(environment.equals("Prod") ? LoginPage.prodUsername : LoginPage.userName, username);
+            sendKeys(LoginPage.password, user.getPassword());
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, LoginPage.submit, "");
+        }
+    }
+    public void selectCompany() {
+        if (isDisplayed(LoginPage.toasterCloseIcon)) {
+            click(LoginPage.toasterCloseIcon);
+        }
+        if (!Utility_Functions.xIsDisplayed(ownDriver, LoginPage.pageTitle)) {
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, LoginPage.companySelector, "");
+            click(LoginPage.companyLabel);
+            if (System.getProperty("company") == null) {
+                sendKey(LoginPage.winCompanyNumber, company);
+            } else {
+                sendKey(LoginPage.winCompanyNumber, System.getProperty("company"));
+            }
+            click(LoginPage.selectButton);
+        }
     }
 }

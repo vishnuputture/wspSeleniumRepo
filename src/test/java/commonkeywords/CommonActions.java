@@ -5,10 +5,7 @@ import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import pages.OrderProcessingPage;
 import pages.Purchasing.OptionsConstantsPage;
 import pages.Purchasing.PurchaseOrderEntryPage;
@@ -156,6 +153,39 @@ public class CommonActions extends ReusableLib {
 	 */
 	public void inventoryToAlternateItemNoRevision() {
 		click(AlternateItemNumberPage.revisionAlternateItemNoMenu,"Click [Revision - Alternate Item Number] menu button");
+	}
+
+	/**
+	 *
+	 *
+	 * This method drag and drops one element to another
+	 *
+	 */
+	public void dragAndDrop(By from, By to) {
+		dragAndDrop(from, to, "Drag and Drop");
+	}
+	public void dragAndDrop(By from, By to, String msg) {
+		WebElement ElementTo = ownDriver.findElement(to);
+		WebElement ElementFrom = ownDriver.findElement(from);
+		WebDriver driver = ownDriver.getWebDriver();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("function createEvent(typeOfEvent) {\n" + "var event =document.createEvent(\"CustomEvent\");\n"
+				+ "event.initCustomEvent(typeOfEvent,true, true, null);\n" + "event.dataTransfer = {\n" + "data: {},\n"
+				+ "setData: function (key, value) {\n" + "this.data[key] = value;\n" + "},\n"
+				+ "getData: function (key) {\n" + "return this.data[key];\n" + "}\n" + "};\n" + "return event;\n"
+				+ "}\n" + "\n" + "function dispatchEvent(element, event,transferData) {\n"
+				+ "if (transferData !== undefined) {\n" + "event.dataTransfer = transferData;\n" + "}\n"
+				+ "if (element.dispatchEvent) {\n" + "element.dispatchEvent(event);\n"
+				+ "} else if (element.fireEvent) {\n" + "element.fireEvent(\"on\" + event.type, event);\n" + "}\n"
+				+ "}\n" + "\n" + "function simulateHTML5DragAndDrop(element, destination) {\n"
+				+ "var dragStartEvent =createEvent('dragstart');\n" + "dispatchEvent(element, dragStartEvent);\n"
+				+ "var dropEvent = createEvent('drop');\n"
+				+ "dispatchEvent(destination, dropEvent,dragStartEvent.dataTransfer);\n"
+				+ "var dragEndEvent = createEvent('dragend');\n"
+				+ "dispatchEvent(element, dragEndEvent,dropEvent.dataTransfer);\n" + "}\n" + "\n"
+				+ "var source = arguments[0];\n" + "var destination = arguments[1];\n"
+				+ "simulateHTML5DragAndDrop(source,destination);", ElementFrom, ElementTo);
+		report.updateTestLog(msg, msg, Status.PASS);
 	}
 
 	/**

@@ -17,6 +17,7 @@ public class SalesOrdersPage extends ReusableLib {
     public static By poNumberEntry = By.id("inCustPO");
     public static By placedByEntry = By.id("inPlacedBy");
     public static By primarySalespersonDropDown = By.id("ddbPrimarySalesperson");
+    public static By deliveryInstructions = By.id("inDeliveryInstructions");
     public static By matrixColumn = By.id("txtS2MatrixColumn");
     public static By writtenByDropDown = By.id("ddbWrittenBy");
     public static By filledByEntry = By.id("txtFilledBy");
@@ -30,10 +31,13 @@ public class SalesOrdersPage extends ReusableLib {
     public static By billZipCode = By.id("outBillToZipCode");
     public static By inShipToAcct = By.id("inShipToAcct");
     public static By outSaveCustName = By.id("outSaveCustName");
+    public static By outShipToAddLine1 = By.id("outShipToAddLine1");
+    public static By outShipToAddLine2 = By.id("outShipToAddLine2");
     public static By outShipToCity = By.id("outShipToCity");
     public static By outerUnitPrice = By.id("outSbfUnitPrice.1");
     public static By outShipToState = By.id("outShipToState");
     public static By outShipToZipCode = By.id("outShipToZipCode");
+    public static By outShipToPhone = By.id("outShipToPhone");
     public static By deliveryTypeDropDown = By.id("ddbDeliveryType");
     public static By deliveryTypeError = By.xpath("//*[@id=\"5250\"]/div[138]");
     public static By directShipDropDown = By.id("ddbDirectShip");
@@ -41,6 +45,7 @@ public class SalesOrdersPage extends ReusableLib {
     public static By shipCompleteDropDown = By.id("ddbShipComplete");
     public static By btnExit = By.id("btnExitBill");
     public static By btnOk = By.xpath("//div[@id='btnOk']/span/span");
+    public static By nextAction = By.id("ddbNxtActLabel");
 
     //item tab
     public static By itemsTab = By.xpath("//span[text()='Items'][@istab='true']");
@@ -89,6 +94,7 @@ public class SalesOrdersPage extends ReusableLib {
     public static By tbxUnitPrice = By.id("inUnitPrice");
 
     //payments tab
+    public static By paymentsTab = By.xpath("//span[text()='Payments'][@istab='true']");
     public static By paymentMethodDropdown = By.id("PIpaymentMethod1");
     public static By btnApplyPayment = By.id("applyPmtBtn1");
     public static By btnSaveExitPayment = By.id("btnSaveExit");
