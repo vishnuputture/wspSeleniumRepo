@@ -13,7 +13,7 @@ public class RTSPlannerPage {
     public static By startTime = By.xpath("/html[1]/body[1]/my-app[1]/div[1]/ready-to-ship-planner[1]/div[3]/new-manifest-modal[1]/div[1]/div[1]/div[2]/form[1]/div[1]/div[2]/div[1]/win-timepicker[1]/div[1]/input[1]");
     public static By truckDropDown = By.xpath("(//input[@id='editTruck'])[1]");
     public static By driverDropDown = By.xpath("//input[@id='driver'][1]");
-    public static By completeCreate = By.xpath("//button[@type='button']//span[contains(text(),'Create Manifest')]");
+    public static By completeCreate = By.xpath("//button[@class='btn win-button win-button-primary m-0']//span[contains(text(),'Create Manifest')]");
     public static By driverNotes = By.xpath("(//textarea[@id='notes'])[2]");
     public static By createManifestClose = By.className("fa fa-close2");
     public static By createManifestModal = By.className("modal-dialog");
@@ -22,8 +22,8 @@ public class RTSPlannerPage {
     public static By manifestFilterToDate = By.xpath("(//input[@id='toDate'])[1]");
     public static By somethingID = By.id("BinMaint.ng");
     public static By manifestFilterStatus = By.xpath("(//input[@id='status'])[1]");
-    public static By manifestFilterDriver = By.xpath("(//input[@id='driver'])[2]");
-    public static By manifestFilterTruck = By.xpath("(//input[@id='truck'])[1]");
+    public static By manifestFilterDriver = By.xpath("//div[@class='col']//input[@id='driver']");
+    public static By manifestFilterTruck = By.xpath("//div[@class='col']//input[@id='truck']");
     public static By manifestFilterApply = By.xpath("(//button[contains(@type,'button')][normalize-space()='Apply'])[1]");
     public static By shipmentSearch = By.id("ShipmentSearch");
     public static By manifestExists = By.xpath("(//span[contains(text(),'A manifest with this truck or driver already exist')])[1]");

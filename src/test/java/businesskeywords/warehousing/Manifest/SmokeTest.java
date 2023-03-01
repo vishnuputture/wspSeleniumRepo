@@ -28,8 +28,8 @@ public class SmokeTest extends ReusableLib {
     private final FrameworkDriver ownDriver;
     public static Properties properties = Settings.getInstance();
     private ArrayList<String> vendors = new ArrayList<>();
-    private final String environment = "DEV";//Prod, QA, DEV
-    private final String company = "695";
+    private final String environment = "QA";//Prod, QA, DEV
+    private final String company = "235";
     private final User wiseUser = new User(helper, "btjones1", "Nobodyknows1(", environment, company);
     private final User webUser = new User(helper, "wztestqa", environment, company);
     private final RTSPlanner planner = new RTSPlanner(helper, company, environment);
@@ -111,6 +111,7 @@ public class SmokeTest extends ReusableLib {
             planner.dragPurchaseOrder(purchaseOrder);
             //planner.validateManifestDetails();
         }
+        planner.validateManifestDetails();
         planner.generate();
     }
 
@@ -197,7 +198,7 @@ public class SmokeTest extends ReusableLib {
                 sendKeys(By.id("inQtyBO."+row), "0");
                 row++;
             }
-            sendKeys(By.id("tbxDeliveryInstructions"), getRandomString(120));
+            sendKeys(By.id("tbxDeliveryInstructions"), generateRandomSentence(120));
             Utility_Functions.actionKey(Keys.F9, ownDriver);
             //click(By.id("btnAddGoToNew"));
             waitForElementDisappear(By.id("_pui_loading_animation"), 15);
@@ -395,5 +396,45 @@ public class SmokeTest extends ReusableLib {
             return null;
         }
     }
+    final private String[] nouns = {"farmer", "rooster", "judge", "man", "maiden", "cow", "dog", "cat", "cheese"};
+    final private String[] verbs = {"kept", "waked", "married", "milked", "tossed", "chased", "lay in"};
+    final private String[] modifiers = {"that crowed in the morn", "sowing his corn", "all shaven and shorn", "all forlorn", "with the crumpled horn"};
+
+    public String generateRandomSentence(int max) {
+        StringBuilder sentence = new StringBuilder();
+        while (sentence.length() < max) {
+            randomSimpleSentence(sentence, max);
+            if (sentence.length() < max && Math.random() > 0.75) {
+                sentence.append(" and ");
+            }
+        }
+        sentence.setLength(max);
+        return sentence.toString();
+    }
+
+    private void randomSimpleSentence(StringBuilder sentence, int max) {
+        sentence.append("this is ");
+        if (sentence.length() < max && Math.random() > 0.15) {
+            randomNounPhrase(sentence, max);
+        }
+        if (sentence.length() < max) {
+            sentence.append("the house that Jack built");
+        }
+    }
+
+    private void randomNounPhrase(StringBuilder sentence, int max) {
+        int n = (int) (Math.random() * nouns.length);
+        sentence.append("the ").append(nouns[n]);
+        if (sentence.length() < max && Math.random() > 0.75) {
+            int m = (int) (Math.random() * modifiers.length);
+            sentence.append(" ").append(modifiers[m]);
+        }
+        int v = (int) (Math.random() * verbs.length);
+        sentence.append(" that ").append(verbs[v]).append(" ");
+        if (sentence.length() < max && Math.random() > 0.5) {
+            randomNounPhrase(sentence, max);
+        }
+    }
+
 
 }

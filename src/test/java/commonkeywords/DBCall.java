@@ -410,6 +410,27 @@ public class DBCall {
 			return null;
 		}
 	}
+	public Statement shr460(boolean useProd) {
+		String server = !useProd ? "windev1" : "winsrv1";
+		String url = "jdbc:as400://"+ server +".winwholesale.com;naming=system";
+		try {
+			Class.forName("com.ibm.db2.jcc.DB2Driver");
+			Connection con = DriverManager.getConnection(url, "btjones1", "Nobodyknows1(");
+			con.setSchema("SHR460");
+			return con.createStatement();
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+			return null;
+		}
+	}
+	public PreparedStatement dbPrepared(String schema, boolean useProd, String query) throws SQLException {
+		String server = !useProd ? "windev1" : "winsrv1";
+		String url = "jdbc:as400://" + server + ".winwholesale.com;naming=system";
+		Connection con = DriverManager.getConnection(url, "btjones1", "Nobodyknows1(");
+		con.setSchema("DTA" + schema);
+		PreparedStatement preparedStatement = con.prepareStatement(query);
+		return preparedStatement;
+	}
 
 	/**
 	 *
