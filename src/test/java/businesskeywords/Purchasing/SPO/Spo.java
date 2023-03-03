@@ -198,7 +198,7 @@ public class Spo extends ReusableLib {
     /**
      * Keyword to login to SPO
      */
-    public void winLogin() {
+    public void winLoginSPO() {
         if (Utility_Functions.xWaitForElementPresent(ownDriver, SpoPage.winLogin, 10)) {
             sendKeys(SpoPage.userName, properties.getProperty("SpoUserName"));
             sendKeys(SpoPage.password, Utility_Functions.xGetJsonData("spoPass"));
@@ -210,7 +210,7 @@ public class Spo extends ReusableLib {
      * Keyword to select Company
      */
     public void selectCompany() {
-        winLogin();
+        winLoginSPO();
         if (isDisplayed(BinMaintenancePage.toasterCloseIcon)) {
             click(BinMaintenancePage.toasterCloseIcon);
         }
