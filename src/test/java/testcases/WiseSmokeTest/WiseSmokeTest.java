@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class WiseSmokeTest extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_SmokeTest1(SeleniumTestParameters testParameters) {
+    public void TC_WiseSmokeTest(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Smoke Test for the release");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
