@@ -1,9 +1,8 @@
 {
   "Business_Flow": [
     {
-      "TC_WiseSmokeTest": "url,login,win,where,backorderOCClearforNewOrder,salesQuote,salesQuoteDetailLines,itemAddInformation,salesQuotedtllines,sqconversiontoSO,shipmentsTab,navigateToInventoryReceipt,inventoryreceipts,navigateToVendorInvoiceRec,vIR,navigatetoItemLedger,verifyItemLedgerWISE,naviagtetoSOInquiry,salesOrderSelectionfromInq,navigateToShippingConf,shippingConf,invoiceSO,naviagtetoSOInquiry,invoiceVerificationSOI,navigatetoinventoryandSPInq,invNSPInq,navigateToBuyersInq,invNBuyInq,navigateToLiveShop,invNLiveShop,navigateToPOEntry,poNPOEntry,navigateToPOInquiry,poNPOInq,signoff"
-
-
+      "TC_WiseSmokeTest": "url,login,win,where,backorderOCClearforNewOrder,salesQuote,salesQuoteDetailLines,itemAddInformation,salesQuotedtllines,sqconversiontoSO,shipmentsTab,navigateToPOInquiry, validatePOPDF, navigateToInventoryReceipt,inventoryreceipts,navigateToVendorInvoiceRec,vIR,navigatetoItemLedger,verifyItemLedgerWISE,naviagtetoSOInquiry,salesOrderSelectionfromInq,navigateToShippingConf,shippingConf,invoiceSO,naviagtetoSOInquiry,invoiceVerificationSOI,navigatetoinventoryandSPInq,invNSPInq,navigateToBuyersInq,invNBuyInq,navigateToLiveShop,invNLiveShop,navigateToPOEntry,poNPOEntry,navigateToPOInquiry,poNPOInq,signoff",
+      "_TC_WiseSmokeTest": "url,login,win,navigateToPOInquiry,validatePOPDF"
     }
   ],
   "General_Data": [

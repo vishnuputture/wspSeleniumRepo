@@ -4,27 +4,41 @@ import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
+import commonkeywords.DBCall;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.Purchasing.InventoryReceiptPage;
-import pages.Purchasing.MailingMasterSearchPage;
 import pages.Purchasing.VendorInvoiceReconciliationPage;
 import pages.WiseSmokeTest.WiseSmokeTestPage;
 import pages.common.MasterPage;
 import supportLibraries.Utility_Functions;
 
+import java.awt.*;
+import java.io.*;
+import java.sql.SQLException;
+
 public class WiseSmokeTest extends ReusableLib {
 
     CommonActions commonObj;
     private FrameworkDriver ownDriver;
+    private final boolean isUsingProd = jsonData.getData("environment").equalsIgnoreCase("prod");
+    private final String company = isUsingProd ? jsonData.getData("prodCompany") : jsonData.getData("devCompany");
+    DBCall db;
+    String multiBinStatus;
 
     public WiseSmokeTest(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
         ownDriver = helper.getGSDriver();
+        db = new DBCall();
+        try {
+            multiBinStatus = db.getFeatureCodeStatus("MULTI_BINS", company, isUsingProd);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     public void url(){
-        String url = jsonData.getData("environment").equalsIgnoreCase("prod") ?
-                properties.getProperty("PRODURL") : properties.getProperty("STGURL");
+        String url = isUsingProd ? properties.getProperty("PRODURL") : properties.getProperty("STGURL");
         ownDriver.get(url);
     }
     public void login() {
@@ -35,8 +49,6 @@ public class WiseSmokeTest extends ReusableLib {
         commonObj.validateText(WiseSmokeTestPage.headerTitle, "WISE - Wholesalers Information Services Executive", "Validating header title for main menu");
     }
     public void win() {
-        String company = jsonData.getData("environment").equalsIgnoreCase("prod") ?
-                jsonData.getData("prodCompany") : jsonData.getData("devCompany");
         sendKeysAndEnter(MasterPage.sqlTxtBox, "win " + company, "WIN to company "+ company);
     }
     public void where(){
@@ -60,7 +72,7 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void salesQuote(){
-        String customer = jsonData.getData("environment").equalsIgnoreCase("prod") ?
+        String customer = isUsingProd ?
                 jsonData.getData("prodCustomer") : jsonData.getData("devCustomer");
         click(WiseSmokeTestPage.SalesQuote,"CLick on Sales Quotes from the main menu");
         click(WiseSmokeTestPage.WorkWithSQ,"Click on work with sales quotes");
@@ -157,8 +169,24 @@ public class WiseSmokeTest extends ReusableLib {
         click(WiseSmokeTestPage.saleQExtBtn, "Click Exit Button");
         click(WiseSmokeTestPage.F3exit, "Click Exit Button");
     }
+
+    public void validatePOPDF() throws IOException, InterruptedException, AWTException {
+        String purchaseOrder = Utility_Functions.xGetJsonData("POSmoke");
+        String itemNumber = Utility_Functions.xGetJsonData("itemNum");
+        sendKeys(WiseSmokeTestPage.PostoOrderPOI, purchaseOrder);
+        //search for purchase order
+        Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(WiseSmokeTestPage.poStatusDropDown),2);
+        Utility_Functions.timeWait(1);
+        Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.poOptionDropDown);
+        Utility_Functions.xMouseClick(ownDriver, By.xpath("(//div[normalize-space()='5-Display PDF/Vendor'])[1]"));
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        String[] validations = {purchaseOrder, itemNumber};
+        commonObj.validatePDFPopUp(purchaseOrder, validations);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+    }
+
     public void navigateToInventoryReceipt() {
-        commonObj.masterToPurchaseOrder();
         commonObj.purchaseOrderToInventoryReceipt();
         commonObj.validateText(InventoryReceiptPage.inventoryHeader, "Inventory Receipts -", "'Inventory Receipts - (I-735)' header is present");
     }

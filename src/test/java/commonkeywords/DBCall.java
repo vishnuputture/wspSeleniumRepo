@@ -218,6 +218,26 @@ public class DBCall {
 		return truck;
 	}
 
+	public String getFeatureCodeStatus(String featureCode, String company, boolean useProd) throws SQLException {
+		String status = "INACTIVE";
+		String query = "SELECT STATUS_CODE FROM ACSYCFCV02 FEAT JOIN CICNTCTLF CON ON FEAT.ORGANIZATION_KEY = CON.CIORGKY " +
+				"JOIN CIADDLF ADDR ON CON.CICID = ADDR.CIADDID JOIN CICOMPLF COMP ON FEAT.CIORGKY = COMP.CIORGKY " +
+				"WHERE FEATURE_NAME = '" + featureCode + "' " +
+				"AND CON.CICTYP = 'MA' AND ORGANIZATION_KEY = " + company + " LIMIT 1";
+		Statement sqlStatement = shr460(useProd);
+		ResultSet resultSet = sqlStatement.executeQuery(query);
+		if (!resultSet.isBeforeFirst()) {
+			resultSet.close();
+			sqlStatement.close();
+		}
+		while (resultSet.next()) {
+			status = String.valueOf(resultSet.getObject(1)).trim();
+		}
+		resultSet.close();
+		sqlStatement.close();
+		return status;
+	}
+
 	//DELETE FROM DTA99599/IM08
 	//DElete method to be written
 
