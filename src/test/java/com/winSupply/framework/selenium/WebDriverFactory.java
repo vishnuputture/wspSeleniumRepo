@@ -99,7 +99,6 @@ public class WebDriverFactory {
     			options.addArguments("--disable-web-security");
     			options.addArguments("--allow-running-insecure-content");
     			options.addArguments(" --ignore-certificate-errors");
-    			options.addArguments("--allow-running-insecure-content");
     			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
     			WebDriverManager.chromedriver().setup();
     				ChromeDriverService.Builder builder = new ChromeDriverService.Builder();

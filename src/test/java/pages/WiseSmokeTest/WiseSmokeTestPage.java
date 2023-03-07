@@ -198,5 +198,8 @@ public class WiseSmokeTestPage extends ReusableLib {
 
     public static By signoff = By.id("D_18_7");
 
+    public static By poStatusDropDown = By.id("ddbP1PTODRSTS");
+    public static By poOptionDropDown = By.id("P1OPT.1");
+
 }
 
