@@ -3,6 +3,7 @@ package com.winSupply.framework.selenium;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -27,6 +28,8 @@ import com.winSupply.framework.FrameworkException;
 import com.winSupply.framework.Settings;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import javax.swing.filechooser.FileSystemView;
 
 /**
  * Factory class for creating the {@link WebDriver} object as required
@@ -61,18 +64,14 @@ public class WebDriverFactory {
         switch (browser) {
             case CHROME:
             	// Takes the system proxy settings automatically
-
-
     			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
     			ChromeOptions options = new ChromeOptions();
-    			// disable ephemeral flash permissions flag
-    			options.addArguments("--disable-features=EnableEphemeralFlashPermission");
 
+                HashMap<String, Object> prefs = new HashMap<>();
+                String downloadDirPath = System.getProperty("user.home") + File.separator + "AutomationPDFs";
+                File downloadDir = new File(downloadDirPath);
 
-//    	    options.addArguments("--disable-web-security");
-//    			options.addArguments("--allow-running-insecure-content");
-
-    			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                if (!downloadDir.exists()) downloadDir.mkdir();
 
 
     			try {
@@ -99,6 +98,11 @@ public class WebDriverFactory {
     			options.addArguments("--disable-web-security");
     			options.addArguments("--allow-running-insecure-content");
     			options.addArguments(" --ignore-certificate-errors");
+                options.addArguments("--disable-features=EnableEphemeralFlashPermission");
+                options.setExperimentalOption("prefs", prefs);
+                prefs.put("plugins.always_open_pdf_externally", true);
+                prefs.put("download.default_directory", downloadDirPath);
+                prefs.put("download.prompt_for_download", false);
     			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
     			WebDriverManager.chromedriver().setup();
     				ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
