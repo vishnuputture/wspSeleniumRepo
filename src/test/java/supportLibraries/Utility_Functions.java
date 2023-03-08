@@ -4918,14 +4918,14 @@ public class Utility_Functions extends ReusableLib {
         return getRandomName;
     }
 
-    public static void waitTillClickHardSleep(Report report,FrameworkDriver driver,By el,String custMsg) {
+    public static void waitTillClickHardSleep(Report report, FrameworkDriver driver, By el, String custMsg) {
         int count = 0;
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
             try {
                 driver.findElement(el).click();
                 report.updateTestLog("Click", custMsg, Status.PASS);
-                flag=false;
+                flag = false;
             } catch (Exception e) {
                 count++;
                 try {
