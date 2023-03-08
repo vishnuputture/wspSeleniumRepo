@@ -2,11 +2,13 @@ package businesskeywords.WiseSmokeTest;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.Util;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import commonkeywords.DBCall;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import pages.Purchasing.InventoryReceiptPage;
 import pages.Purchasing.VendorInvoiceReconciliationPage;
 import pages.WiseSmokeTest.WiseSmokeTestPage;
@@ -34,7 +36,7 @@ public class WiseSmokeTest extends ReusableLib {
         ownDriver = helper.getGSDriver();
         db = new DBCall();
         try {
-            multiBinStatus = db.getFeatureCodeStatus("MULTI_BINS", company, isUsingProd);
+            multiBinStatus = db.getFeatureCodeStatus("MULTI_BINS", company, isUsingProd);//ACTIVE INACTIVE PARTIAL
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -131,11 +133,10 @@ public class WiseSmokeTest extends ReusableLib {
         click(WiseSmokeTestPage.btnBack, "Clicking on back button");
         ownDriver.findElement(SalesQuotesPage.printSendBtn).click();
         Utility_Functions.waitForElementVisible(ownDriver, SalesQuotePrintSendPage.printSendHeader, 5);
-        Utility_Functions.xClick(ownDriver, SalesQuotePrintSendPage.deselectAll);
-        Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesQuotePrintSendPage.localPrintCopyOptionsDropdown, "1-Select");
-        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        Utility_Functions.xSelectDropdownByVisibleText(ownDriver, SalesQuotePrintSendPage.localPrintCopyOptionsDropdown, "5-Print Preview");
-        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        click(SalesQuotePrintSendPage.deselectAll, "Clicking Deselect All");
+        click(SalesQuotePrintSendPage.localPrintCopyOptionsDropdown, "Clicking Dropdown");
+        Utility_Functions.actionKey(Keys.NUMPAD5, ownDriver);
+        click(WiseSmokeTestPage.Enter, "Clicking Next");
         String salesQuoteNum = Utility_Functions.xGetJsonData("SQNum");
         String[] validations = {salesQuoteNum};
         commonObj.validatePDFPopUp(salesQuoteNum, validations);
