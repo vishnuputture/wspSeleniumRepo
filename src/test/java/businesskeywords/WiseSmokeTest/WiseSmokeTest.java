@@ -139,7 +139,7 @@ public class WiseSmokeTest extends ReusableLib {
         click(WiseSmokeTestPage.Enter, "Clicking Next");
         String salesQuoteNum = Utility_Functions.xGetJsonData("SQNum");
         String[] validations = {salesQuoteNum};
-        commonObj.validatePDFPopUp(salesQuoteNum, validations);
+        commonObj.validatePDFPopUp(validations);
         click(SalesQuotePrintSendPage.backBtn, "Clicking on back button on Sales Quote Print/Send page");
         click(WiseSmokeTestPage.btnBack, "Clicking on back button");
         click(WiseSmokeTestPage.SortQuote, "Sorting Quotes");
@@ -200,7 +200,7 @@ public class WiseSmokeTest extends ReusableLib {
         Utility_Functions.xMouseClick(ownDriver, By.xpath("(//div[normalize-space()='5-Display PDF/Vendor'])[1]"));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String[] validations = {purchaseOrder, itemNumber};
-        commonObj.validatePDFPopUp(purchaseOrder, validations);
+        commonObj.validatePDFPopUp(validations);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
@@ -310,7 +310,7 @@ public class WiseSmokeTest extends ReusableLib {
         sendKeysAndEnter(WiseSmokeTestPage.optBox, "1", "Choose the option to generate a Sales Order PDF");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String[] validations = {Utility_Functions.xGetJsonData("soNum")};
-        commonObj.validatePDFPopUp(Utility_Functions.xGetJsonData("soNum"), validations);
+        commonObj.validatePDFPopUp(validations);
         Utility_Functions.actionKey(Keys.F12, ownDriver);
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOline2);
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOENTRY9);

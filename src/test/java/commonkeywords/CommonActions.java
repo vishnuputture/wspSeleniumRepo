@@ -28,6 +28,7 @@ import pages.pricing.matrixcost.InventoryManagementMenu2Page;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
 import supportLibraries.Utility_Functions;
 
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
@@ -661,58 +662,26 @@ public class CommonActions extends ReusableLib {
 
 	/**
 	 *
-	 * @param fileName
 	 * @param validations
 	 * @throws IOException
 	 * @throws InterruptedException
 	 * @throws AWTException
-	 * This method takes will take the fileName parameter and save a popped up PDF that opens in a new tab
+	 * This method saves a popped up PDF
 	 * and saves it locally then takes the validations array and validates all of that text exists in the PDF
 	 * then deletes the file
 	 */
 
-	public void validatePDFPopUp(String fileName, String[] validations) throws IOException, InterruptedException, AWTException {
-		String currentWindow = ownDriver.getWindowHandle();
-		WebDriverWait wait = new WebDriverWait(ownDriver.getWebDriver(), 3);
-		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-
-		Set<String> windowHandles = ownDriver.getWindowHandles();
-		for (String window : windowHandles) {
-			if (!window.equals(currentWindow)) {
-				ownDriver.switchTo().window(window);
-				break;
-			}
-		}
-
-		Utility_Functions.timeWait(2);
-		StringSelection contents = new StringSelection(fileName);
-		Toolkit toolKit = Toolkit.getDefaultToolkit();
-		toolKit.getSystemClipboard().setContents(contents, null);
-		Robot rb = new Robot();
-		//Open Save Dialog CTRL+S
-		rb.keyPress(KeyEvent.VK_CONTROL);
-		rb.keyPress(KeyEvent.VK_S);
-		rb.keyRelease(KeyEvent.VK_CONTROL);
-		rb.keyRelease(KeyEvent.VK_S);
-		Utility_Functions.timeWait(1);
-		//Paste Clipboard CTRL+V
-		rb.keyPress(KeyEvent.VK_CONTROL);
-		rb.keyPress(KeyEvent.VK_V);
-		rb.keyRelease(KeyEvent.VK_CONTROL);
-		rb.keyRelease(KeyEvent.VK_V);
-		//Press Enter
-		rb.keyPress(KeyEvent.VK_ENTER);
-		rb.keyRelease(KeyEvent.VK_ENTER);
-
+	public void validatePDFPopUp(String[] validations) throws IOException, InterruptedException {
 		//Find the downloaded file, retries every second 10 times while waiting for download to complete
+		String downloadDirPath = System.getProperty("user.home") + File.separator + "AutomationPDFs";
+		Path downloadDir = Paths.get(downloadDirPath);
 		File downloadFile = null;
 		boolean fileFound = false;
 		int retryCount = 0;
 		while (!fileFound && retryCount < 10) {
 			Thread.sleep(1000);
-			Path downloadDir = Paths.get(System.getProperty("user.home"), "Downloads");
 			Path filePath = Files.list(downloadDir)
-					.filter(p -> p.getFileName().toString().equalsIgnoreCase(fileName + ".pdf"))
+					.filter(p -> p.getFileName().toString().toLowerCase().endsWith(".pdf"))
 					.findFirst()
 					.orElse(null);
 			if (filePath != null) {
@@ -737,13 +706,17 @@ public class CommonActions extends ReusableLib {
 		//Close Stream and Document then Delete File
 		inputStream.close();
 		document.close();
-		downloadFile.delete();
+
+		//Delete all PDFs
+		Files.list(downloadDir).forEach(file -> {
+			try {
+				Files.delete(file);
+			} catch (IOException e) {
+				System.out.println("Couldn't Delete");
+			}
+		});
 
 		//Update Test Log with Screenshot
 		report.updateTestLog("Validate PDF", "Download PDF and validate "+ Arrays.toString(validations), Status.PASS);
-
-		//Closes the PDF tab and then switches back to WISE
-		ownDriver.close();
-		ownDriver.switchTo().window(currentWindow);
 	}
 }
