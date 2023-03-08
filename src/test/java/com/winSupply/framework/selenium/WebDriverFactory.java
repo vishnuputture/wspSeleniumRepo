@@ -99,10 +99,10 @@ public class WebDriverFactory {
     			options.addArguments("--allow-running-insecure-content");
     			options.addArguments(" --ignore-certificate-errors");
                 options.addArguments("--disable-features=EnableEphemeralFlashPermission");
-                options.setExperimentalOption("prefs", prefs);
                 prefs.put("plugins.always_open_pdf_externally", true);
                 prefs.put("download.default_directory", downloadDirPath);
                 prefs.put("download.prompt_for_download", false);
+                options.setExperimentalOption("prefs", prefs);
     			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
     			WebDriverManager.chromedriver().setup();
     				ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
@@ -264,14 +264,37 @@ public class WebDriverFactory {
                 desiredCapabilities.setPlatform(platform);
             }
             switch (browser) {
-                case FIREFOX:
+                case CHROME -> {
+                    desiredCapabilities = DesiredCapabilities.chrome();
+                    ChromeOptions options = new ChromeOptions();
+                    HashMap<String, Object> prefs = new HashMap<>();
+                    String downloadDirPath = System.getProperty("user.home") + File.separator + "AutomationPDFs";
+                    File downloadDir = new File(downloadDirPath);
+                    if (!downloadDir.exists()) downloadDir.mkdir();
+                    try {
+
+                        options.addArguments("--disable-web-security");
+                        options.addArguments("--allow-running-insecure-content");
+                        options.addArguments(" --ignore-certificate-errors");
+                        options.addArguments("--disable-features=EnableEphemeralFlashPermission");
+                        prefs.put("plugins.always_open_pdf_externally", true);
+                        prefs.put("download.default_directory", downloadDirPath);
+                        prefs.put("download.prompt_for_download", false);
+                        options.setExperimentalOption("prefs", prefs);
+                        desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                        WebDriverManager.chromedriver().setup();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.out.println(e);
+                    }
+                }
+                case FIREFOX -> {
                     desiredCapabilities = DesiredCapabilities.firefox();
                     desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-
-                    break;
-                default:
-                    break;
-
+                }
+                default -> {
+                }
             }
 
             desiredCapabilities.setJavascriptEnabled(true); // Pre-requisite for
