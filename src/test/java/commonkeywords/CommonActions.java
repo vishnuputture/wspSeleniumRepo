@@ -673,7 +673,7 @@ public class CommonActions extends ReusableLib {
 
 	public void validatePDFPopUp(String fileName, String[] validations) throws IOException, InterruptedException, AWTException {
 		String currentWindow = ownDriver.getWindowHandle();
-		WebDriverWait wait = new WebDriverWait(ownDriver.getWebDriver(), 10);
+		WebDriverWait wait = new WebDriverWait(ownDriver.getWebDriver(), 3);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
 		Set<String> windowHandles = ownDriver.getWindowHandles();
