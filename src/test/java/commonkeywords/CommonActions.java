@@ -3,6 +3,7 @@ package commonkeywords;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
+import com.winSupply.framework.Util;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -673,6 +674,7 @@ public class CommonActions extends ReusableLib {
 
 	public void validatePDFPopUp(String[] validations) throws IOException, InterruptedException {
 		//Find the downloaded file, retries every second 10 times while waiting for download to complete
+		report.updateTestLog("Downloading PDF", "Downloading PDF", Status.SCREENSHOT);
 		String downloadDirPath = System.getProperty("user.home") + File.separator + "AutomationPDFs";
 		Path downloadDir = Paths.get(downloadDirPath);
 		File downloadFile = null;
@@ -717,6 +719,6 @@ public class CommonActions extends ReusableLib {
 		});
 
 		//Update Test Log with Screenshot
-		report.updateTestLog("Validate PDF", "Download PDF and validate "+ Arrays.toString(validations), Status.PASS);
+		report.updateTestLog("Validate PDF", "Validating Data in PDF "+ Arrays.toString(validations), Status.PASS);
 	}
 }
