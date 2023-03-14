@@ -10,7 +10,6 @@ import com.winSupply.framework.selenium.MobileExecutionPlatform;
 import com.winSupply.framework.selenium.SeleniumParametersBuilders;
 import com.winSupply.framework.selenium.ToolName;
 
-import org.testng.annotations.Test;
 import supportLibraries.DefaultSettings;
 
 public class TestConfigurations extends BaseTestCase {
@@ -48,17 +47,20 @@ public class TestConfigurations extends BaseTestCase {
 	public Object[][] desktopBrowsersParallel(Method currentMethod) {
 		currentScenario = currentMethod.getDeclaringClass().getSimpleName();
 		currentTestcase = currentMethod.getName();
+
+		currentMethodName = currentMethod.getDeclaringClass().getPackage().toString();
+
 		currentTestcase = currentTestcase.substring(0, 1).toUpperCase().concat(currentTestcase.substring(1));
 
 		return new Object[][] {
 				{ new SeleniumParametersBuilders(currentScenario, currentTestcase).extentReport(extentReport)
-						.extentTest(extentTest).testInstance("Instance1").executionMode(ExecutionMode.LOCAL)
+						.extentTest(extentTest).testInstance("Instance1").executionMode(DefaultSettings.setExecutionMode())
 						.browser(Browser.CHROME).build() },
 				{ new SeleniumParametersBuilders(currentScenario, currentTestcase).extentReport(extentReport)
-						.extentTest(extentTest).testInstance("Instance2").executionMode(ExecutionMode.LOCAL)
+						.extentTest(extentTest).testInstance("Instance2").executionMode(DefaultSettings.setExecutionMode())
 						.browser(Browser.CHROME).build() },
 				{ new SeleniumParametersBuilders(currentScenario, currentTestcase).extentReport(extentReport)
-						.extentTest(extentTest).testInstance("Instance3").executionMode(ExecutionMode.LOCAL)
+						.extentTest(extentTest).testInstance("Instance3").executionMode(DefaultSettings.setExecutionMode())
 						.browser(Browser.CHROME).build() } };
 	}
 

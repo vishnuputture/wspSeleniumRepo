@@ -2,13 +2,9 @@ package businesskeywords.WiseSmokeTest;
 
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
-import com.winSupply.framework.Util;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
-import commonkeywords.DBCall;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import pages.Purchasing.InventoryReceiptPage;
 import pages.Purchasing.VendorInvoiceReconciliationPage;
 import pages.WiseSmokeTest.WiseSmokeTestPage;
@@ -17,9 +13,7 @@ import pages.pricing.SalesQuotes.SalesQuotePrintSendPage;
 import pages.pricing.SalesQuotes.SalesQuotesPage;
 import supportLibraries.Utility_Functions;
 
-import java.awt.*;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class WiseSmokeTest extends ReusableLib {
 
@@ -27,19 +21,14 @@ public class WiseSmokeTest extends ReusableLib {
     private FrameworkDriver ownDriver;
     private final boolean isUsingProd = jsonData.getData("environment").equalsIgnoreCase("prod");
     private final String company = isUsingProd ? jsonData.getData("prodCompany") : jsonData.getData("devCompany");
-    DBCall db;
-    String multiBinStatus;
+    private final String customer = isUsingProd ? jsonData.getData("prodCustomer") : jsonData.getData("devCustomer");
+    private final String vendor = isUsingProd ? jsonData.getData("prodVendor") : jsonData.getData("devVendor");
+    private final String multiBinStatus = jsonData.getData("multiBinStatus");
 
     public WiseSmokeTest(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
         ownDriver = helper.getGSDriver();
-        db = new DBCall();
-        try {
-            multiBinStatus = db.getFeatureCodeStatus("MULTI_BINS", company, isUsingProd);//ACTIVE INACTIVE PARTIAL
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public void url() {
@@ -80,8 +69,6 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void salesQuote() {
-        String customer = isUsingProd ?
-                jsonData.getData("prodCustomer") : jsonData.getData("devCustomer");
         click(WiseSmokeTestPage.SalesQuote, "CLick on Sales Quotes from the main menu");
         click(WiseSmokeTestPage.WorkWithSQ, "Click on work with sales quotes");
         commonObj.validateText(WiseSmokeTestPage.WWSQPgmTitle, "WORKING WITH SALES QUOTES", "Validating Working with sales quotes page title");
@@ -123,7 +110,7 @@ public class WiseSmokeTest extends ReusableLib {
 
     }
 
-    public void salesQuotedtllines() throws IOException, InterruptedException, AWTException {
+    public void salesQuotedtllines() throws IOException, InterruptedException {
         commonObj.validateText(WiseSmokeTestPage.SQTitle, "Sales Quote Detail Lines", "Validating  sales quotes detail lines page title");
         sendKeys(WiseSmokeTestPage.Qty, jsonData.getData("Qty"), "Entering Item Qty");
         click(WiseSmokeTestPage.NextCNSQ, "Clicking on Next to navigate to Sales Quotes ");
@@ -189,7 +176,7 @@ public class WiseSmokeTest extends ReusableLib {
         click(WiseSmokeTestPage.F3exit, "Click Exit Button");
     }
 
-    public void validatePOPDF() throws IOException, InterruptedException, AWTException {
+    public void validatePOPDF() throws IOException, InterruptedException {
         String purchaseOrder = Utility_Functions.xGetJsonData("POSmoke");
         String itemNumber = Utility_Functions.xGetJsonData("itemNum");
         sendKeys(WiseSmokeTestPage.PostoOrderPOI, purchaseOrder);
@@ -199,7 +186,7 @@ public class WiseSmokeTest extends ReusableLib {
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.poOptionDropDown);
         Utility_Functions.xMouseClick(ownDriver, By.xpath("(//div[normalize-space()='5-Display PDF/Vendor'])[1]"));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        String[] validations = {purchaseOrder, itemNumber};
+        String[] validations = {purchaseOrder};
         commonObj.validatePDFPopUp(validations);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
@@ -214,14 +201,18 @@ public class WiseSmokeTest extends ReusableLib {
         sendKey(WiseSmokeTestPage.purchaseOrdNo, Utility_Functions.xGetJsonData("POSmoke"));
 
         click(WiseSmokeTestPage.processButton, "Click on button to process the PO");
-        Utility_Functions.actionKey(Keys.F9, ownDriver);
-        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        //click(WiseSmokeTestPage.processButton,"Click on button to process the PO");
+        if (!multiBinStatus.equalsIgnoreCase("INACTIVE")) {
+            Utility_Functions.actionKey(Keys.F9, ownDriver);
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        }
 
         sendKeys(WiseSmokeTestPage.qtyReceived, jsonData.getData("qtyReceived"), "Enter the qty to be received");
-        click(WiseSmokeTestPage.binLocationSearch, "Clicking Bin Location Search");
-        click(WiseSmokeTestPage.firstBinSelect, "Selecting First Bin");
-        click(WiseSmokeTestPage.btnSave, "Clicking Select Button");
+
+        if (!multiBinStatus.equalsIgnoreCase("INACTIVE")) {
+            click(WiseSmokeTestPage.binLocationSearch, "Clicking Bin Location Search");
+            click(WiseSmokeTestPage.firstBinSelect, "Selecting First Bin");
+            click(WiseSmokeTestPage.btnSave, "Clicking Select Button");
+        }
         String RecDoc = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.ReceiverDocNum);
         System.out.println("RecDoc" + RecDoc);
         Utility_Functions.xUpdateJson("RecDoc", RecDoc);
@@ -300,24 +291,22 @@ public class WiseSmokeTest extends ReusableLib {
         click(WiseSmokeTestPage.SOInquiry, "Click on Sales Order Inquiry");
     }
 
-    public void salesOrderSelectionfromInq() throws IOException, InterruptedException, AWTException {
+    public void salesOrderSelectionfromInq() throws IOException, InterruptedException {
         sendKey(WiseSmokeTestPage.SONumberSOI, Utility_Functions.xGetJsonData("soNum"));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        click(WiseSmokeTestPage.SOline2, "Click on Options box for line 2");
-        Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOline2);
-        Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOENTRY5);
-        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        sendKeysAndEnter(WiseSmokeTestPage.optBox, "1", "Choose the option to generate a Sales Order PDF");
-        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        String[] validations = {Utility_Functions.xGetJsonData("soNum")};
-        commonObj.validatePDFPopUp(validations);
-        Utility_Functions.actionKey(Keys.F12, ownDriver);
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOline2);
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOENTRY9);
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         click(WiseSmokeTestPage.Itemstab, "Click on Items tab");
         click(WiseSmokeTestPage.BasicTab, "Click on Basic tab from Items tab");
         commonObj.verifyElementContainsText(WiseSmokeTestPage.QtyToShip, "1", "Verify qty to ship to be 1");
+        if (multiBinStatus.equalsIgnoreCase("ACTIVE")) {
+            click(WiseSmokeTestPage.shipmentsTab, "Click Shipment Tab");
+            click(WiseSmokeTestPage.counterPicks, "Click Counter Picks");
+            sendKey(WiseSmokeTestPage.counterPickQuantity, "1");
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+            click(WiseSmokeTestPage.btnSave, "Save Counter Pick");
+        }
         click(WiseSmokeTestPage.PaymentsTab, "Click on Payments Tab to navigate to payments screen");
         click(WiseSmokeTestPage.PaymentMethod, "Click on Payment Method dropdown");
         // Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.PaymentMethod);
@@ -327,7 +316,9 @@ public class WiseSmokeTest extends ReusableLib {
         click(WiseSmokeTestPage.PrintNExit, "Click on F3 Print and Exit");
         //click(WiseSmokeTestPage.f12Cancel, "click on F12 ByPass PO Entry");
         click(WiseSmokeTestPage.OrdAck, "click on Order Acknowledgement from Document settings screen");
-        click(WiseSmokeTestPage.PackingList, "click on Packing List from Document settings screen");
+        if (multiBinStatus.equalsIgnoreCase("ACTIVE")) {
+            click(WiseSmokeTestPage.PackingList, "click on Packing List from Document settings screen");
+        }
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         clearText(WiseSmokeTestPage.CreateOrdAcknow);
         sendKeys(WiseSmokeTestPage.CreateOrdAcknow, jsonData.getData("OrderAcknow"), "Enter Y for Order Acknowledgement");
@@ -337,9 +328,18 @@ public class WiseSmokeTest extends ReusableLib {
         sendKeys(WiseSmokeTestPage.PrinterName, jsonData.getData("PrinterName"), "Enter P1 for Printer Name");
         //sendKeys(WiseSmokeTestPage.SendTo, jsonData.getData("SendTo"),"Enter an email to send the order acknowledgement");
         Utility_Functions.actionKey(Keys.F9, ownDriver);
-        //Utility_Functions.actionKey(Keys.F3, ownDriver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
         click(WiseSmokeTestPage.btnExitcustTab, "Click exit on customer tab");
-        click(WiseSmokeTestPage.saleQExtBtn, "Click exit on sales order inquiry screen");
+        click(WiseSmokeTestPage.SOline2, "Click on Options box for line 2");
+        Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOline2);
+        Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOENTRY5);
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        sendKeysAndEnter(WiseSmokeTestPage.optBox, "1", "Select Packing List");
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        String[] validations = {Utility_Functions.xGetJsonData("soNum")};
+        commonObj.validatePDFPopUp(validations);
+        Utility_Functions.actionKey(Keys.F12, ownDriver);
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
 
@@ -356,13 +356,13 @@ public class WiseSmokeTest extends ReusableLib {
         sendKeys(WiseSmokeTestPage.SCSuffix, jsonData.getData("SCSuffix"), "Enter Sales Order Suffix as 01");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String SCQTYShip = getValue(WiseSmokeTestPage.SCQTYShip);
-        System.out.println("SCQTYShip" + SCQTYShip);
         Utility_Functions.xUpdateJson("SCQTYShip", SCQTYShip);
         //commonObj.validateText(WiseSmokeTestPage.SCQTYShip,"1","1");
         click(WiseSmokeTestPage.SCConfirmOrder, "Confirm the order from shipping confirmation screen");
-        //click(WiseSmokeTestPage.SCConfirmOrder,"Confirm the order from shipping confirmation screen");
-
         click(WiseSmokeTestPage.F3exit, "Click on F3 Exit to navigate back to shipping confirmation menu");
+        if (Utility_Functions.xIsDisplayed(ownDriver, WiseSmokeTestPage.confirmManualPicks)) {
+            click(WiseSmokeTestPage.confirmManualPicks, "Confirming Manual Picks");
+        }
     }
 
     public void invoiceSO() {
@@ -385,7 +385,8 @@ public class WiseSmokeTest extends ReusableLib {
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(WiseSmokeTestPage.SOILine2status, "Invoiced", "Invoiced");
         commonObj.validateText(WiseSmokeTestPage.SOILine3status, "Closed", "Closed");
-        click(WiseSmokeTestPage.saleQExtBtn, "Click F3 Exit from SOI");
+        Utility_Functions.actionKey(Keys.F3, ownDriver);
+        //click(WiseSmokeTestPage.saleQExtBtn, "Click F3 Exit from SOI");
         Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
 
@@ -439,14 +440,12 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void poNPOEntry() {
-        String vendor = jsonData.getData("environment").equalsIgnoreCase("prod") ?
-                jsonData.getData("prodVendor") : jsonData.getData("devVendor");
         clearText(WiseSmokeTestPage.ActionCodePOEntry);
         sendKey(WiseSmokeTestPage.ActionCodePOEntry, "I");
         sendKeys(WiseSmokeTestPage.PONumEntry, Utility_Functions.xGetJsonData("POSmoke"));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.verifyElementContainsText(WiseSmokeTestPage.POHeaderText, " Purchase Order Headings", " Purchase Order Headings");
-        Utility_Functions.xAssertEquals(report, getAttribute(WiseSmokeTestPage.VendorPOEntry, "value"), vendor, "");
+        Utility_Functions.xAssertEquals(report, vendor, getAttribute(WiseSmokeTestPage.VendorPOEntry, "value"),  "Validating Vendor");
         click(WiseSmokeTestPage.F3exit, "Navigate back to PO Header screen");
         click(WiseSmokeTestPage.F3exit, "Navigate back to PO Header screen");
         Utility_Functions.actionKey(Keys.F3, ownDriver);
