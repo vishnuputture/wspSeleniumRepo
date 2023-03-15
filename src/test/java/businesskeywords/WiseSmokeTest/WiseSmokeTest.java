@@ -14,13 +14,14 @@ import pages.pricing.SalesQuotes.SalesQuotesPage;
 import supportLibraries.Utility_Functions;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class WiseSmokeTest extends ReusableLib {
 
     CommonActions commonObj;
     private FrameworkDriver ownDriver;
     private final boolean isUsingProd = jsonData.getData("environment").equalsIgnoreCase("prod");
-    private final String company = isUsingProd ? jsonData.getData("prodCompany") : jsonData.getData("devCompany");
+    private String company = isUsingProd ? jsonData.getData("prodCompany") : jsonData.getData("devCompany");
     private final String customer = isUsingProd ? jsonData.getData("prodCustomer") : jsonData.getData("devCustomer");
     private final String vendor = isUsingProd ? jsonData.getData("prodVendor") : jsonData.getData("devVendor");
     private final String multiBinStatus = jsonData.getData("multiBinStatus");
@@ -29,10 +30,19 @@ public class WiseSmokeTest extends ReusableLib {
         super(helper);
         commonObj = new CommonActions(helper);
         ownDriver = helper.getGSDriver();
+        company = String.format("%05d", Integer.parseInt(company));
     }
 
-    public void url() {
-        String url = isUsingProd ? properties.getProperty("PRODURL") : properties.getProperty("STGURL");
+    public void url() throws IOException {
+        commonObj.clearDownloadDirectory();
+        String url = properties.getProperty("STGURL");
+        if (isUsingProd) {
+            Random random = new Random();
+            int randomNumber = random.nextInt(900) + 100;
+            String workstation = "B" + company + "D"+ randomNumber;
+            url = properties.getProperty("PRODURL");
+            url = url.replaceFirst("(workstnid=)(&)", "$1" + workstation + "$2");
+        }
         ownDriver.get(url);
     }
 
@@ -49,10 +59,9 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void where() {
-        sendKeys(WiseSmokeTestPage.Where, jsonData.getData("Where"), "Checking which company");
+        sendKeys(WiseSmokeTestPage.Where, "where", "Checking which company");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        String lc = getText(WiseSmokeTestPage.whichLC);
-        System.out.println("lc" + lc);
+        commonObj.validateText(WiseSmokeTestPage.whichLC, company, "Validating Company");
         click(WiseSmokeTestPage.f12Cancel, "Click on F12 Cancel to get on to main page");
         commonObj.validateText(WiseSmokeTestPage.headerTitle, "WISE - Wholesalers Information Services Executive", "Validating header title for main menu");
     }
@@ -80,7 +89,7 @@ public class WiseSmokeTest extends ReusableLib {
 
         String sqNum = getText(WiseSmokeTestPage.SQNum);
         System.out.println("sqNum" + sqNum);
-        Utility_Functions.xUpdateJson("SQNum", sqNum);
+        Utility_Functions.xUpdateJson("SQNum"+company, sqNum);
 
         sendKeys(WiseSmokeTestPage.SQEmail, jsonData.getData("SQEmail"), "Entering email for sales quote");
         click(WiseSmokeTestPage.NextCNSQ, "Clicking on Next to navigate to Sales Quotes detail lines");
@@ -96,11 +105,12 @@ public class WiseSmokeTest extends ReusableLib {
         System.out.println("item number is visible");
         String itemNum = getText(WiseSmokeTestPage.itemNumber);
         System.out.println("itemNum" + itemNum);
-        Utility_Functions.xUpdateJson("itemNum", itemNum);
+        Utility_Functions.xUpdateJson("itemNum"+company, itemNum);
 
     }
 
     public void itemAddInformation() {
+        Utility_Functions.timeWait(1);
         sendKeys(WiseSmokeTestPage.itemDesc1, jsonData.getData("itemDesc1"), "Enter line 1 description");
         sendKeys(WiseSmokeTestPage.itemDesc2, jsonData.getData("itemDesc2"), "Enter line 2 description");
         sendKeys(WiseSmokeTestPage.matrixCost, jsonData.getData("matrixCost"), "Enter matrix cost");
@@ -124,13 +134,14 @@ public class WiseSmokeTest extends ReusableLib {
         click(SalesQuotePrintSendPage.localPrintCopyOptionsDropdown, "Clicking Dropdown");
         Utility_Functions.actionKey(Keys.NUMPAD5, ownDriver);
         click(WiseSmokeTestPage.Enter, "Clicking Next");
-        String salesQuoteNum = Utility_Functions.xGetJsonData("SQNum");
+        String salesQuoteNum = Utility_Functions.xGetJsonData("SQNum"+company);
         String[] validations = {salesQuoteNum};
-        commonObj.validatePDFPopUp(validations);
+        commonObj.validatePDFPopUp(company,"sq", validations); //SQ0006699
         click(SalesQuotePrintSendPage.backBtn, "Clicking on back button on Sales Quote Print/Send page");
         click(WiseSmokeTestPage.btnBack, "Clicking on back button");
         click(WiseSmokeTestPage.SortQuote, "Sorting Quotes");
-        click(WiseSmokeTestPage.SortQuote, "Sorting Quotes");
+        if (!multiBinStatus.equalsIgnoreCase("INACTIVE"))
+            click(WiseSmokeTestPage.SortQuote, "Sorting Quotes");
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SQOptionsDD);
         click(WiseSmokeTestPage.Convert, "Clicking Convert");
         click(WiseSmokeTestPage.NextCNSQ);
@@ -143,7 +154,7 @@ public class WiseSmokeTest extends ReusableLib {
         System.out.println("So number is visible");
         String soNum = getText(WiseSmokeTestPage.SONum);
         System.out.println("soNum" + soNum);
-        Utility_Functions.xUpdateJson("soNum", soNum);
+        Utility_Functions.xUpdateJson("soNum"+company, soNum);
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.soQtyShippedDD);
         sendKey(WiseSmokeTestPage.soQtyShippedDD, "1");
         click(WiseSmokeTestPage.NextCNSQ, "Click Next Button");
@@ -163,8 +174,8 @@ public class WiseSmokeTest extends ReusableLib {
         Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(WiseSmokeTestPage.ddnFreightCode), 1);
         click(WiseSmokeTestPage.btnCreatePO, "Click on create PO Button");
         String purchaseOrder = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.txtPONumber);
-        Utility_Functions.xUpdateJson("POSmoke", purchaseOrder);
-        Utility_Functions.xUpdateJsonWithArray("POSmoke1", purchaseOrder);
+        Utility_Functions.xUpdateJson("POSmoke"+company, purchaseOrder);
+        Utility_Functions.xUpdateJsonWithArray("POSmoke1"+company, purchaseOrder);
         System.out.println("purchaseOrder: " + purchaseOrder);
         click(WiseSmokeTestPage.btnBack, "Click Back Button");
         String RelPO = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.relatedPO);
@@ -177,8 +188,8 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void validatePOPDF() throws IOException, InterruptedException {
-        String purchaseOrder = Utility_Functions.xGetJsonData("POSmoke");
-        String itemNumber = Utility_Functions.xGetJsonData("itemNum");
+        String purchaseOrder = Utility_Functions.xGetJsonData("POSmoke"+company);
+        String itemNumber = Utility_Functions.xGetJsonData("itemNum"+company);
         sendKeys(WiseSmokeTestPage.PostoOrderPOI, purchaseOrder);
         //search for purchase order
         Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(WiseSmokeTestPage.poStatusDropDown), 2);
@@ -187,7 +198,7 @@ public class WiseSmokeTest extends ReusableLib {
         Utility_Functions.xMouseClick(ownDriver, By.xpath("(//div[normalize-space()='5-Display PDF/Vendor'])[1]"));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String[] validations = {purchaseOrder};
-        commonObj.validatePDFPopUp(validations);
+        commonObj.validatePDFPopUp(company, "po", validations); //last 6 digits of username
         Utility_Functions.actionKey(Keys.F3, ownDriver);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
@@ -198,7 +209,7 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void inventoryreceipts() {
-        sendKey(WiseSmokeTestPage.purchaseOrdNo, Utility_Functions.xGetJsonData("POSmoke"));
+        sendKey(WiseSmokeTestPage.purchaseOrdNo, Utility_Functions.xGetJsonData("POSmoke"+company));
 
         click(WiseSmokeTestPage.processButton, "Click on button to process the PO");
         if (!multiBinStatus.equalsIgnoreCase("INACTIVE")) {
@@ -215,7 +226,7 @@ public class WiseSmokeTest extends ReusableLib {
         }
         String RecDoc = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.ReceiverDocNum);
         System.out.println("RecDoc" + RecDoc);
-        Utility_Functions.xUpdateJson("RecDoc", RecDoc);
+        Utility_Functions.xUpdateJson("RecDoc"+company, RecDoc);
 
 
         click(WiseSmokeTestPage.mainInvProcessbtn, "Click on Process button");
@@ -242,7 +253,7 @@ public class WiseSmokeTest extends ReusableLib {
 
     public void vIR() {
         commonObj.validateElementExists(WiseSmokeTestPage.Operator, "Operator is present: " + getAttribute(WiseSmokeTestPage.Operator, "value"));
-        sendKey(WiseSmokeTestPage.ReceiverDocVIR, Utility_Functions.xGetJsonData("RecDoc"));
+        sendKey(WiseSmokeTestPage.ReceiverDocVIR, Utility_Functions.xGetJsonData("RecDoc"+company));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         sendKeys(WiseSmokeTestPage.VIRDueDate, jsonData.getData("virDueDate"), "Entering VIR Due Date");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
@@ -259,26 +270,26 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void verifyItemLedgerWISE() {
-        sendKey(WiseSmokeTestPage.itmnumledger, Utility_Functions.xGetJsonData("itemNum"));
+        sendKey(WiseSmokeTestPage.itmnumledger, Utility_Functions.xGetJsonData("itemNum"+company));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
 
         String SCLine1 = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.SCline1);
         System.out.println("SCLine1" + SCLine1);
-        Utility_Functions.xUpdateJson("SCLine1", SCLine1);
+        Utility_Functions.xUpdateJson("SCLine1"+company, SCLine1);
 
         String SCLine2 = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.SCline2);
         System.out.println("SCLine2" + SCLine2);
-        Utility_Functions.xUpdateJson("SCLine2", SCLine2);
+        Utility_Functions.xUpdateJson("SCLine2"+company, SCLine2);
         commonObj.verifyElementContainsText(WiseSmokeTestPage.SCline1, "PA", "Verify text to be PA");
         commonObj.verifyElementContainsText(WiseSmokeTestPage.SCline2, "PR", "verify text to be PR");
 
         String QtyAfterLine1 = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.QtyAfterLine1);
         System.out.println("QtyAfterLine1" + QtyAfterLine1);
-        Utility_Functions.xUpdateJson("QtyAfterLine1", QtyAfterLine1);
+        Utility_Functions.xUpdateJson("QtyAfterLine1"+company, QtyAfterLine1);
 
         String QtyAfterLine2 = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.QtyAfterLine2);
         System.out.println("QtyAfterLine2" + QtyAfterLine2);
-        Utility_Functions.xUpdateJson("QtyAfterLine2", QtyAfterLine2);
+        Utility_Functions.xUpdateJson("QtyAfterLine2"+company, QtyAfterLine2);
 
         commonObj.verifyElementContainsText(WiseSmokeTestPage.QtyAfterLine1, "1", "Verify qty to be 1");
         commonObj.verifyElementContainsText(WiseSmokeTestPage.QtyAfterLine2, "1", "verify qty to be 1");
@@ -292,7 +303,7 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void salesOrderSelectionfromInq() throws IOException, InterruptedException {
-        sendKey(WiseSmokeTestPage.SONumberSOI, Utility_Functions.xGetJsonData("soNum"));
+        sendKey(WiseSmokeTestPage.SONumberSOI, Utility_Functions.xGetJsonData("soNum"+company));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOline2);
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOENTRY9);
@@ -336,8 +347,8 @@ public class WiseSmokeTest extends ReusableLib {
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         sendKeysAndEnter(WiseSmokeTestPage.optBox, "1", "Select Packing List");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        String[] validations = {Utility_Functions.xGetJsonData("soNum")};
-        commonObj.validatePDFPopUp(validations);
+        String[] validations = {Utility_Functions.xGetJsonData("soNum"+company)};
+        commonObj.validatePDFPopUp(company, "packlist", validations); //custNumber(6 digits)_orderNumber(6)_02
         Utility_Functions.actionKey(Keys.F12, ownDriver);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
@@ -352,11 +363,11 @@ public class WiseSmokeTest extends ReusableLib {
 
     public void shippingConf() {
 
-        sendKey(WiseSmokeTestPage.SCOrdNum, Utility_Functions.xGetJsonData("soNum"));
+        sendKey(WiseSmokeTestPage.SCOrdNum, Utility_Functions.xGetJsonData("soNum"+company));
         sendKeys(WiseSmokeTestPage.SCSuffix, jsonData.getData("SCSuffix"), "Enter Sales Order Suffix as 01");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String SCQTYShip = getValue(WiseSmokeTestPage.SCQTYShip);
-        Utility_Functions.xUpdateJson("SCQTYShip", SCQTYShip);
+        Utility_Functions.xUpdateJson("SCQTYShip"+company, SCQTYShip);
         //commonObj.validateText(WiseSmokeTestPage.SCQTYShip,"1","1");
         click(WiseSmokeTestPage.SCConfirmOrder, "Confirm the order from shipping confirmation screen");
         click(WiseSmokeTestPage.F3exit, "Click on F3 Exit to navigate back to shipping confirmation menu");
@@ -371,7 +382,7 @@ public class WiseSmokeTest extends ReusableLib {
         sendKeys(WiseSmokeTestPage.IRselection, "I", "Select I for Individual invoices");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         click(WiseSmokeTestPage.ReportInvOrd1, "Click on Key Numbers for Order 1");
-        sendKeys(WiseSmokeTestPage.ReportInvOrd1, Utility_Functions.xGetJsonData("soNum"));
+        sendKeys(WiseSmokeTestPage.ReportInvOrd1, Utility_Functions.xGetJsonData("soNum"+company));
         sendKeys(WiseSmokeTestPage.ReportSuffOrd1, jsonData.getData("SCSuffix"), "Enter Sales Order Suffix as 01 in Print Invoices screen");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.actionKey(Keys.F1, ownDriver);
@@ -381,7 +392,7 @@ public class WiseSmokeTest extends ReusableLib {
 
     public void invoiceVerificationSOI() {
 
-        sendKey(WiseSmokeTestPage.SONumberSOI, Utility_Functions.xGetJsonData("soNum"));
+        sendKey(WiseSmokeTestPage.SONumberSOI, Utility_Functions.xGetJsonData("soNum"+company));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(WiseSmokeTestPage.SOILine2status, "Invoiced", "Invoiced");
         commonObj.validateText(WiseSmokeTestPage.SOILine3status, "Closed", "Closed");
@@ -397,7 +408,7 @@ public class WiseSmokeTest extends ReusableLib {
 
     public void invNSPInq() {
         commonObj.validateText(WiseSmokeTestPage.SPINQHeaderText, "Salesperson Inquiry", "Salesperson Inquiry");
-        sendKey(WiseSmokeTestPage.SPINQQItemNumber, Utility_Functions.xGetJsonData("itemNum"));
+        sendKey(WiseSmokeTestPage.SPINQQItemNumber, Utility_Functions.xGetJsonData("itemNum"+company));
         click(WiseSmokeTestPage.saleQExtBtn, "Click F3 Exit from SPInquiry");
         Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
@@ -409,7 +420,7 @@ public class WiseSmokeTest extends ReusableLib {
     }
 
     public void invNBuyInq() {
-        sendKey(WiseSmokeTestPage.BuyersStockNumber, Utility_Functions.xGetJsonData("itemNum"));
+        sendKey(WiseSmokeTestPage.BuyersStockNumber, Utility_Functions.xGetJsonData("itemNum"+company));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.validateText(WiseSmokeTestPage.BuyersItemDesc1, "QA Automation Desc1", "QA Automation Desc1");
         commonObj.validateText(WiseSmokeTestPage.BuyersItemDesc2, "QA Automation Desc2", "QA Automation Desc2");
@@ -442,7 +453,7 @@ public class WiseSmokeTest extends ReusableLib {
     public void poNPOEntry() {
         clearText(WiseSmokeTestPage.ActionCodePOEntry);
         sendKey(WiseSmokeTestPage.ActionCodePOEntry, "I");
-        sendKeys(WiseSmokeTestPage.PONumEntry, Utility_Functions.xGetJsonData("POSmoke"));
+        sendKeys(WiseSmokeTestPage.PONumEntry, Utility_Functions.xGetJsonData("POSmoke"+company));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.verifyElementContainsText(WiseSmokeTestPage.POHeaderText, " Purchase Order Headings", " Purchase Order Headings");
         Utility_Functions.xAssertEquals(report, vendor, getAttribute(WiseSmokeTestPage.VendorPOEntry, "value"),  "Validating Vendor");
@@ -458,17 +469,17 @@ public class WiseSmokeTest extends ReusableLib {
 
     public void poNPOInq() {
         click(WiseSmokeTestPage.PostoOrderPOI, "Click on Position to Order from PO Inquiry screen");
-        sendKeys(WiseSmokeTestPage.PostoOrderPOI, Utility_Functions.xGetJsonData("POSmoke"));
+        sendKeys(WiseSmokeTestPage.PostoOrderPOI, Utility_Functions.xGetJsonData("POSmoke"+company));
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         commonObj.verifyElementContainsText(WiseSmokeTestPage.POIHeaderText, "PURCHASE ORDER INQUIRY", "PURCHASE ORDER INQUIRY");
 
         String POrderLine1 = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.POrderLine1);
         System.out.println("POrderLine1" + POrderLine1);
-        Utility_Functions.xUpdateJson("POrderLine1", POrderLine1);
+        Utility_Functions.xUpdateJson("POrderLine1"+company, POrderLine1);
 
         String POrderLine2 = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.POrderLine2);
         System.out.println("POrderLine2" + POrderLine2);
-        Utility_Functions.xUpdateJson("POrderLine2", POrderLine2);
+        Utility_Functions.xUpdateJson("POrderLine2"+company, POrderLine2);
 
         commonObj.verifyElementContainsText(WiseSmokeTestPage.POStatusLine1, "OPEN  ", "OPEN  ");
         commonObj.verifyElementContainsText(WiseSmokeTestPage.POStatusLine2, "CLOSED", "CLOSED");

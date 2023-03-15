@@ -80,19 +80,21 @@ public class WebDriverFactory {
 
     			try {
                     if (!headless.equalsIgnoreCase("NO")){
-                        options.addArguments("--headless");
+                        options.addArguments("--headless=new");
+                        options.addArguments("--window-size=1920,1080");
                     }
 
-    			options.addArguments("--disable-web-security");
-    			options.addArguments("--allow-running-insecure-content");
-    			options.addArguments(" --ignore-certificate-errors");
-                options.addArguments("--disable-features=EnableEphemeralFlashPermission");
-                prefs.put("plugins.always_open_pdf_externally", true);
-                prefs.put("download.default_directory", downloadDirPath);
-                prefs.put("download.prompt_for_download", false);
-                options.setExperimentalOption("prefs", prefs);
-    			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-    			WebDriverManager.chromedriver().setup();
+                    options.addArguments("--disable-web-security");
+                    options.addArguments("--allow-running-insecure-content");
+                    options.addArguments(" --ignore-certificate-errors");
+                    options.addArguments("--disable-features=EnableEphemeralFlashPermission");
+                    options.addArguments("--disable-features=EnableEphemeralFlashPermission");
+                    prefs.put("plugins.always_open_pdf_externally", true);
+                    prefs.put("download.default_directory", downloadDirPath);
+                    prefs.put("download.prompt_for_download", false);
+                    options.setExperimentalOption("prefs", prefs);
+                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                    WebDriverManager.chromedriver().setup();
     				ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
     				builder.usingAnyFreePort();
     				ChromeDriverService service = builder

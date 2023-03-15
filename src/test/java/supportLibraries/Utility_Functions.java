@@ -2151,22 +2151,23 @@ public class Utility_Functions extends ReusableLib {
     }
 
     public static void xHighlight(FrameworkDriver driver, By element, String color) {
-        for (int i = 0; i < 2; i++) {
-            JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
-            js.executeScript("arguments[0].setAttribute('style', arguments[1]);", driver.findElement(element),
-                    "border: 2px solid " + color + ";");
-
-        }
+        JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+        js.executeScript("arguments[0].style.cssText += '; position: relative; margin: 0; padding: 0; box-sizing: " +
+                "border-box;';", driver.findElement(element));
+        js.executeScript("arguments[0].style.border = '2px solid " + color + "'; " +
+                "arguments[0].style.width = arguments[0].offsetWidth + 'px'; " +
+                "arguments[0].style.height = arguments[0].offsetHeight + 'px';", driver.findElement(element));
     }
 
     public static void xHighlight(FrameworkDriver driver, WebElement element, String color) {
-        for (int i = 0; i < 2; i++) {
-            JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
-            js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element,
-                    "border: 2px solid " + color + ";");
-
-        }
+        JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+        js.executeScript("arguments[0].style.cssText += '; position: relative; margin: 0; padding: 0; box-sizing: " +
+                "border-box;';", element);
+        js.executeScript("arguments[0].style.border = '2px solid " + color + "'; " +
+                "arguments[0].style.width = arguments[0].offsetWidth + 'px'; " +
+                "arguments[0].style.height = arguments[0].offsetHeight + 'px';", element);
     }
+
 
     public static boolean xHoverElementclicks(WebElement el, FrameworkDriver driver) {
         Actions builder = new Actions(driver.getWebDriver());
