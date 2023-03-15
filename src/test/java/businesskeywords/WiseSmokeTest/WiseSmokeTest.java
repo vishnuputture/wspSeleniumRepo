@@ -175,7 +175,6 @@ public class WiseSmokeTest extends ReusableLib {
         click(WiseSmokeTestPage.btnCreatePO, "Click on create PO Button");
         String purchaseOrder = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.txtPONumber);
         Utility_Functions.xUpdateJson("POSmoke"+company, purchaseOrder);
-        Utility_Functions.xUpdateJsonWithArray("POSmoke1"+company, purchaseOrder);
         System.out.println("purchaseOrder: " + purchaseOrder);
         click(WiseSmokeTestPage.btnBack, "Click Back Button");
         String RelPO = Utility_Functions.getText(ownDriver, WiseSmokeTestPage.relatedPO);
