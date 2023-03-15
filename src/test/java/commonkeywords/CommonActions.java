@@ -661,6 +661,18 @@ public class CommonActions extends ReusableLib {
 		Utility_Functions.actionKey(Keys.F9, ownDriver);
 	}
 
+	public void clearDownloadDirectory() throws IOException {
+		String downloadDirPath = System.getProperty("user.home") + File.separator + "AutomationPDFs";
+		Path downloadDir = Paths.get(downloadDirPath);
+		Files.list(downloadDir).forEach(file -> {
+			try {
+				Files.delete(file);
+			} catch (IOException e) {
+				System.out.println("Couldn't Delete");
+			}
+		});
+	}
+
 	/**
 	 *
 	 * @param validations
@@ -672,18 +684,38 @@ public class CommonActions extends ReusableLib {
 	 * then deletes the file
 	 */
 
-	public void validatePDFPopUp(String[] validations) throws IOException, InterruptedException {
+	public void validatePDFPopUp(String company, String type, String[] validations) throws IOException, InterruptedException {
 		//Find the downloaded file, retries every second 10 times while waiting for download to complete
-		report.updateTestLog("Downloading PDF", "Downloading PDF", Status.SCREENSHOT);
+		String fileName = "";
+
+		switch(type.toLowerCase(Locale.ROOT)) {
+			case "po" -> {
+				String username = jsonData.getData("userName");
+				fileName = username.substring(username.length() - 6).toLowerCase() + "po";
+			}
+			case "sq" -> {
+				String sqNum = Utility_Functions.xGetJsonData("SQNum"+company);
+				fileName = "sq"+ String.format("%07d", Integer.parseInt(sqNum));
+			}
+			case "packlist" -> {
+				String soNum = Utility_Functions.xGetJsonData("soNum"+company);
+				String customer = jsonData.getData("environment").equalsIgnoreCase("prod")
+						? jsonData.getData("prodCustomer") : jsonData.getData("devCustomer");
+				fileName = customer + "_" + String.format("%06d", Integer.parseInt(soNum));
+			}
+		}
+
+		report.updateTestLog("Downloading PDF ("+fileName+")", "Downloading PDF", Status.PASS);
 		String downloadDirPath = System.getProperty("user.home") + File.separator + "AutomationPDFs";
 		Path downloadDir = Paths.get(downloadDirPath);
 		File downloadFile = null;
 		boolean fileFound = false;
 		int retryCount = 0;
-		while (!fileFound && retryCount < 10) {
+		while (!fileFound && retryCount < 30) {
 			Thread.sleep(1000);
+			String finalFileName = fileName;
 			Path filePath = Files.list(downloadDir)
-					.filter(p -> p.getFileName().toString().toLowerCase().endsWith(".pdf"))
+					.filter(p -> p.getFileName().toString().toLowerCase().contains(finalFileName))
 					.findFirst()
 					.orElse(null);
 			if (filePath != null) {
@@ -693,7 +725,7 @@ public class CommonActions extends ReusableLib {
 			retryCount++;
 		}
 		if (!fileFound) {
-			throw new FileNotFoundException("PDF file not found in download directory");
+			throw new FileNotFoundException("PDF file name containing "+ fileName + " not found in download directory");
 		}
 
 		InputStream inputStream = new FileInputStream(downloadFile);
@@ -702,23 +734,18 @@ public class CommonActions extends ReusableLib {
 		String text = new PDFTextStripper().getText(document);
 
 		//Validate text within PDF
-		for (String validation : validations)
-			org.junit.Assert.assertTrue(text.contains(validation));
+		for (String validation : validations) {
+			org.junit.Assert.assertTrue("Validating " + validation, text.contains(validation));
+			report.updateTestLog("Validating PDF Contents", "Validate " + validation + " PDF", Status.PASS);
+		}
 
 		//Close Stream and Document then Delete File
 		inputStream.close();
 		document.close();
-
-		//Delete all PDFs
-		Files.list(downloadDir).forEach(file -> {
-			try {
-				Files.delete(file);
-			} catch (IOException e) {
-				System.out.println("Couldn't Delete");
-			}
-		});
+		//delete file
+		downloadFile.delete();
 
 		//Update Test Log with Screenshot
-		report.updateTestLog("Validate PDF", "Validating Data in PDF "+ Arrays.toString(validations), Status.PASS);
+		report.updateTestLog("Validate PDF Complete", "Validate Data in PDF "+ Arrays.toString(validations), Status.PASS);
 	}
 }
