@@ -37,6 +37,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Stream;
@@ -213,6 +214,7 @@ public class CommonActions extends ReusableLib {
 			String title = Utility_Functions.getText(ownDriver,ele);
 			System.out.println("Text: "+title);
 			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
+			Utility_Functions.removeHighlight(ownDriver, ele);
 		}else {
 			System.out.println("Text: Not found");
 			throw new NoSuchElementException("Could not find :"+ele);
@@ -224,6 +226,20 @@ public class CommonActions extends ReusableLib {
 			String title = Utility_Functions.getText(ownDriver,ele);
 			System.out.println("Text: "+title);
 			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
+			Utility_Functions.removeHighlight(ownDriver, ele);
+		}else {
+			System.out.println("Text: Not found");
+			throw new NoSuchElementException("Could not find :"+ele);
+		}
+	}
+	public void validateTextWithLines(WebElement ele,String text,String msg) {
+		if(Utility_Functions.xWaitForElementPresent(ownDriver,ele, 5)) {
+			Utility_Functions.xHighlight(ownDriver, ele, "red");
+			String[] lines = ele.getText().split("\n"); // split the text by newline character
+			String title = String.join(" ", lines); // concatenate the lines with a space
+			System.out.println("Text: "+title);
+			Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
+			Utility_Functions.removeHighlight(ownDriver, ele);
 		}else {
 			System.out.println("Text: Not found");
 			throw new NoSuchElementException("Could not find :"+ele);
@@ -233,6 +249,23 @@ public class CommonActions extends ReusableLib {
 	/**
 	 * This method verifies that the element contains expected text
 	 */
+	public void verifyElementContainsText(WebElement ele, String textExpected, String msg) {
+		if(Utility_Functions.xWaitForElementPresent(ownDriver,ele, 5)) {
+			String textActual = Utility_Functions.getText(ownDriver,ele);
+			System.out.println("Text: "+textActual);
+			boolean flag = textActual.contains(textExpected);
+			if (flag)
+				report.updateTestLog("Verify text", "Element contains text expected: "+textExpected+" and actual: "+textActual, Status.PASS);
+			else
+				report.updateTestLog("Verify text", "Element contains text expected: "+textExpected+" and actual: "+textActual, Status.FAIL);
+			Assert.assertTrue(msg, flag);
+			Utility_Functions.removeHighlight(ownDriver, ele);
+		}else {
+			System.out.println("Text: Not found");
+			throw new NoSuchElementException("Could not find :"+ele);
+		}
+	}
+
 	public void verifyElementContainsText(By ele,String textExpected,String msg) {
 		if(Utility_Functions.xWaitForElementPresent(ownDriver,ele, 5)) {
 			String textActual = Utility_Functions.getText(ownDriver,ele);
@@ -243,6 +276,7 @@ public class CommonActions extends ReusableLib {
 			else
 				report.updateTestLog("Verify text", "Element contains text expected: "+textExpected+" and actual: "+textActual, Status.FAIL);
 			Assert.assertTrue(msg, flag);
+			Utility_Functions.removeHighlight(ownDriver, ele);
 		}else {
 			System.out.println("Text: Not found");
 			throw new NoSuchElementException("Could not find :"+ele);
@@ -747,5 +781,46 @@ public class CommonActions extends ReusableLib {
 
 		//Update Test Log with Screenshot
 		report.updateTestLog("Validate PDF Complete", "Validate Data in PDF "+ Arrays.toString(validations), Status.PASS);
+	}
+	public void validateValue(By ele, String text, String msg) {
+		if(Utility_Functions.xWaitForElementPresent(ownDriver, ele, 5)) {
+			String title = getValue(ele);
+			if (title.equalsIgnoreCase(text)) {
+				System.out.println("Text: " + title);
+				Utility_Functions.xAssertEquals(report, text.toLowerCase(), title.trim().toLowerCase(), msg);
+			} else {
+				System.out.println("Found text: "+ title + " Expected text: "+ text);
+				report.updateTestLog("Verify text", msg, Status.FAIL);
+			}
+		}else {
+			System.out.println("Text: Not found");
+			throw new NoSuchElementException("Could not find :"+ ele);
+		}
+	}
+
+	public void validateDropDownValue(By ele, String text, String msg) {
+		if(Utility_Functions.xWaitForElementPresent(ownDriver, ele, 5)) {
+			String title = Utility_Functions.xgetSelectedDropdownValue(ownDriver, ele).toLowerCase().trim();
+			if (title.contains(text.toLowerCase().trim())) {
+				System.out.println("Text: " + title);
+				title = text;
+				Utility_Functions.xAssertEquals(report, text, title, msg);
+			} else {
+				System.out.println("Found text: "+ title + " Expected text: "+ text);
+				report.updateTestLog("Verify text", msg, Status.FAIL);
+			}
+		} else {
+			System.out.println("Text: Not found");
+			throw new NoSuchElementException("Could not find :"+ ele);
+		}
+	}
+	public String formatDate(String date) {
+		SimpleDateFormat oldFormat = new SimpleDateFormat("MM/dd/yy");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		String newDate = date;
+		try {
+			newDate = simpleDateFormat.format(oldFormat.parse(date));
+		} catch (ParseException e) {e.printStackTrace();}
+		return newDate;
 	}
 }

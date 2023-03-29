@@ -15,9 +15,81 @@ public class SalesOrder implements Serializable {
     private String matrixColumn;
     private String writtenBy;
     private String filledBy;
+    private String alphabeticName;
+    private String addressLine1;
+    private String addressLine2;
+    private String deliveryType;
+    private String city;
+    private String State;
+    private String zip;
+    private String phoneNumber;
     private ArrayList<Shipment> shipments = new ArrayList<>();
 
     public SalesOrder() {}
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
+    }
+
+    public String getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(String deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAlphabeticName() {
+        return alphabeticName;
+    }
+
+    public void setAlphabeticName(String alphabeticName) {
+        this.alphabeticName = alphabeticName;
+    }
 
     public String getBillToName() {
         return billToName;

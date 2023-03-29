@@ -2,6 +2,7 @@ package commonkeywords;
 
 import businesskeywords.warehousing.Objects.Driver;
 import businesskeywords.warehousing.Objects.PurchaseOrder;
+import businesskeywords.warehousing.Objects.User;
 import com.ibm.db2.jcc.DB2Administrator;
 import supportLibraries.Utility_Functions;
 
@@ -26,9 +27,14 @@ import java.util.Random;
 public class DBCall {
 	private String schema;
 	private String environment;
-	public DBCall(String schema, String environment) {
-		this.schema = schema;
-		this.environment = environment;
+	private User user;
+	private boolean useProd;
+
+	public DBCall(User user) {
+		this.user = user;
+		this.schema = user.getCompany();
+		this.environment = user.getEnvironment();
+		this.useProd = user.getEnvironment().equalsIgnoreCase("prod");
 	}
 
 	public DBCall() {
@@ -51,7 +57,7 @@ public class DBCall {
 		String query = "SELECT ADDRESS_LINE_1, ADDRESS_LINE_2, ADDRESS_LINE_3, CITY, STATE, ZIP_CODE " +
 				"FROM MM01 WHERE CUST_OR_VENDOR_NUMBER = '"+purchaseOrder.getVendorNumber()+"' " +
 				"AND CUSTOMER_VENDOR = 'V' LIMIT 1";
-		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		Statement sqlStatement = dbConnection();
 		ResultSet resultSet = sqlStatement.executeQuery(query);
 		if (!resultSet.isBeforeFirst()) {
 			System.out.println("No data was available.");
@@ -74,7 +80,8 @@ public class DBCall {
 	}
 
 	public ArrayList<String> getRandomItems(int quantity, String pickVia) throws SQLException {
-		String query = "SELECT ITEM_NUMBER FROM IM02 ORDER BY RAND() LIMIT "+ quantity;
+		String query = "SELECT ITEM_NUMBER FROM IM02 WHERE ITEM_NUMBER NOT LIKE 'J%' AND ITEM_NUMBER NOT LIKE '*%' " +
+				"ORDER BY RAND() LIMIT "+ quantity;
 		pickVia = pickVia.toUpperCase();
 		if (pickVia.contains("RF") || pickVia.equals("RFGUNPICK"))
 			pickVia = "RFGUNPICK";
@@ -93,7 +100,7 @@ public class DBCall {
 					"ORDER BY RAND() LIMIT " + quantity;
 		}
 		ArrayList<String> items = new ArrayList<>();
-		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		Statement sqlStatement = dbConnection();
 		ResultSet resultSet = sqlStatement.executeQuery(query);
 		if (!resultSet.isBeforeFirst()) {
 			System.out.println("No data was available.");
@@ -123,7 +130,7 @@ public class DBCall {
 		else if (type.equalsIgnoreCase("sub")) query += "'S' ";
 
 		query += "ORDER BY RAND() LIMIT "+quantity;
-		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		Statement sqlStatement = dbConnection();
 		ResultSet resultSet = sqlStatement.executeQuery(query);
 		if (!resultSet.isBeforeFirst()) {
 			System.out.println("No data was available.");
@@ -157,7 +164,7 @@ public class DBCall {
 		String name = "";
 		String query = "SELECT ALPHABETIC_NAME FROM MM01 WHERE CUST_OR_VENDOR_NUMBER = '"+billTo+"' " +
 				"AND CUSTOMER_VENDOR = 'C' LIMIT 1";
-		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		Statement sqlStatement = dbConnection();
 		ResultSet resultSet = sqlStatement.executeQuery(query);
 		if (!resultSet.isBeforeFirst()) {
 			System.out.println("No data was available.");
@@ -177,7 +184,7 @@ public class DBCall {
 	public businesskeywords.warehousing.Objects.Driver getDriver() throws SQLException {
 		String query = "SELECT DRIVER_FIRST_NAME, DRIVER_LAST_NAME, NICKNAME FROM SOOSD30T" +
 				" WHERE UPPER(DRIVER_USERNAME) = 'WZTEST"+schema+"A' LIMIT 1";
-		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		Statement sqlStatement = dbConnection();
 		ResultSet resultSet = sqlStatement.executeQuery(query);
 		if (!resultSet.isBeforeFirst()) {
 			System.out.println("No data was available.");
@@ -202,7 +209,7 @@ public class DBCall {
 		String truck = "";
 		String query = "SELECT TRUCK_NAME FROM SOOSD20T " +
 				"WHERE TRUCK_STATUS = 'A' AND REQUIRES_CDL = 'N' AND TRUCK_NAME <> '' AND TRUCK_NAME NOT LIKE 'Amy%' ORDER BY RAND() LIMIT 1";
-		Statement sqlStatement = dbConnection(schema, environment.equalsIgnoreCase("Prod"));
+		Statement sqlStatement = dbConnection();
 		ResultSet resultSet = sqlStatement.executeQuery(query);
 		if (!resultSet.isBeforeFirst()) {
 			System.out.println("No data was available.");
@@ -224,7 +231,7 @@ public class DBCall {
 				"JOIN CIADDLF ADDR ON CON.CICID = ADDR.CIADDID JOIN CICOMPLF COMP ON FEAT.CIORGKY = COMP.CIORGKY " +
 				"WHERE FEATURE_NAME = '" + featureCode + "' " +
 				"AND CON.CICTYP = 'MA' AND ORGANIZATION_KEY = " + company + " LIMIT 1";
-		Statement sqlStatement = shr460(useProd);
+		Statement sqlStatement = shr460();
 		ResultSet resultSet = sqlStatement.executeQuery(query);
 		if (!resultSet.isBeforeFirst()) {
 			resultSet.close();
@@ -417,12 +424,15 @@ public class DBCall {
 
 	}
 
-	public Statement dbConnection(String schema, boolean useProd) {
+	public Statement dbConnection() {
+		boolean useProd = user.getEnvironment().equalsIgnoreCase("prod");
+		String userName = user.getName();
+		String password = user.getPassword();
 		String server = !useProd ? "windev1" : "winsrv1";
 		String url = "jdbc:as400://"+ server +".winwholesale.com;naming=system";
 		try {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
-			Connection con = DriverManager.getConnection(url, "btjones1", "Nobodyknows1(");
+			Connection con = DriverManager.getConnection(url, userName, password);
 			con.setSchema("DTA"+schema);
 			return con.createStatement();
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -430,12 +440,12 @@ public class DBCall {
 			return null;
 		}
 	}
-	public Statement shr460(boolean useProd) {
+	public Statement shr460() {
 		String server = !useProd ? "windev1" : "winsrv1";
 		String url = "jdbc:as400://"+ server +".winwholesale.com;naming=system";
 		try {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
-			Connection con = DriverManager.getConnection(url, "btjones1", "Nobodyknows1(");
+			Connection con = DriverManager.getConnection(url, user.getName(), user.getPassword());
 			con.setSchema("SHR460");
 			return con.createStatement();
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -443,10 +453,10 @@ public class DBCall {
 			return null;
 		}
 	}
-	public PreparedStatement dbPrepared(String schema, boolean useProd, String query) throws SQLException {
+	public PreparedStatement dbPrepared(String query) throws SQLException {
 		String server = !useProd ? "windev1" : "winsrv1";
 		String url = "jdbc:as400://" + server + ".winwholesale.com;naming=system";
-		Connection con = DriverManager.getConnection(url, "btjones1", "Nobodyknows1(");
+		Connection con = DriverManager.getConnection(url, user.getName(), user.getPassword());
 		con.setSchema("DTA" + schema);
 		PreparedStatement preparedStatement = con.prepareStatement(query);
 		return preparedStatement;

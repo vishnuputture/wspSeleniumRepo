@@ -46,6 +46,12 @@ public class SalesOrdersPage extends ReusableLib {
     public static By btnExit = By.id("btnExitBill");
     public static By btnOk = By.xpath("//div[@id='btnOk']/span/span");
     public static By nextAction = By.id("ddbNxtActLabel");
+    public static By billToAddLine1 = By.id("outBillToAddLine1");
+    public static By billToAddLine2 = By.id("outBillToAddLine2");
+    public static By billToCity = By.id("outBillToCity");
+    public static By billToState = By.id("outBillToState");
+    public static By billToZip = By.id("outBillToZipCode");
+    public static By billToPhone = By.id("outBillToPhone");
 
     //item tab
     public static By itemsTab = By.xpath("//span[text()='Items'][@istab='true']");

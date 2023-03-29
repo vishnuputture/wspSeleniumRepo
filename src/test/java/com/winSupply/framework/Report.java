@@ -14,6 +14,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
@@ -527,7 +528,7 @@ public class Report {
 	private String handleStepInvolvingScreenshot(String stepName, Status stepStatus) {
 		String screenshotName = reportSettings.getReportName() + "_"
 				+ Util.getCurrentFormattedTime(reportSettings.getDateFormatString()).replace(" ", "_").replace(":", "-")
-				+ "_" + stepName.replace(" ", "_") + ".png";
+				+ "_" + stepName.replace(" ", "_") + "_" + UUID.randomUUID() + ".png";
 
 		if ((stepStatus.equals(Status.FAIL) && reportSettings.shouldTakeScreenshotFailedStep())
 				|| (stepStatus.equals(Status.PASS) && reportSettings.shouldTakeScreenshotPassedStep())

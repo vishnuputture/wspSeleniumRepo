@@ -52,6 +52,14 @@ public class JsonDataExcess {
 
     }
 
+    public boolean getBoolean(String column) {
+        return Boolean.parseBoolean(getData(column));
+    }
+
+    public int getInt(String column) {
+        return Integer.parseInt(getData(column));
+    }
+
 
     public List<HashMap<String, String>> getData() {
 
