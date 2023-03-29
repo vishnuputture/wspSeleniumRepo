@@ -2,12 +2,24 @@
   "Business_Flow": [
     {
       "Tc_421_SmokeTest": "initiateSmokeTest",
-      "CreateSalesOrder": "createSalesOrder"
+      "CreateSalesOrder": "soCreation"
     }
   ],
   "General_Data": [
     {
       "TC_ID": "Tc_421_SmokeTest",
+      "user": "btjones1",
+      "webUser": "wztestqa",
+      "password": "Terriblepassword1",
+      "environment": "DEV",
+      "company": "123",
+      "numberOfPurchaseOrders": "0",
+      "numberOfSameVendors": "0",
+      "numberOfSalesOrders": "1",
+      "numberOfShipments": "1",
+      "numberOfItems": "1",
+      "useLastOrders": "true",
+      "useLastManifests": "false",
       "Iteration": "1"
     }
   ]

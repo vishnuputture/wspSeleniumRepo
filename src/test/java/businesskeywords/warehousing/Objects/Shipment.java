@@ -25,6 +25,8 @@ public class Shipment implements Serializable {
     private String state;
     private String zip;
     private String phone;
+    private String amount;
+    private String paymentTerms;
     private ArrayList<Item> items = new ArrayList<>();;
 
     public Shipment() {
@@ -50,6 +52,24 @@ public class Shipment implements Serializable {
         this.billTo = shipment.getBillTo();
         this.billToName = shipment.getBillToName();
         this.alphabeticName = shipment.getAlphabeticName();
+        this.amount = shipment.getAmount();
+        this.paymentTerms = shipment.getPaymentTerms();
+    }
+
+    public String getPaymentTerms() {
+        return paymentTerms;
+    }
+
+    public void setPaymentTerms(String paymentTerms) {
+        this.paymentTerms = paymentTerms;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
     public String getAlphabeticName() {
