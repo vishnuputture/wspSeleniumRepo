@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Domain - All" parallel="tests" thread-count="6">
+<suite name="Domain - Utilities" parallel="tests" thread-count="6">
     <test name="WiseSmokeTestActive">
         <classes>
             <class name="testcases.WiseSmokeTest.WiseSmokeTestActive">
                 <methods>
-                    <include name="TC_WiseSmokeTest_ACTIVE"></include>
+                    <include name="Tc_91_WiseSmokeTestACTIVE"></include>
                 </methods>
             </class>
         </classes>
@@ -14,7 +14,7 @@
         <classes>
             <class name="testcases.WiseSmokeTest.WiseSmokeTestPartial">
                 <methods>
-                    <include name="TC_WiseSmokeTest_PARTIAL"></include>
+                    <include name="Tc_92_WiseSmokeTestPARTIAL"></include>
                 </methods>
             </class>
         </classes>
@@ -23,7 +23,7 @@
         <classes>
             <class name="testcases.WiseSmokeTest.WiseSmokeTestInactive">
                 <methods>
-                    <include name="TC_WiseSmokeTest_INACTIVE"></include>
+                    <include name="Tc_93_WiseSmokeTestINACTIVE"></include>
                 </methods>
             </class>
         </classes>

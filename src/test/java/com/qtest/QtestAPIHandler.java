@@ -6,12 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.Instant;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
+import com.winSupply.framework.TestStepBean;
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 
@@ -29,6 +27,8 @@ public class QtestAPIHandler {
 	public static String accessToken;
 	public static String companyName;
 	public static int testLogID=0;
+	public static List<Map<String, Integer>> stepIds;
+	public static String startDate;
 
 	/**
 	 * Get login token from QTest
@@ -53,11 +53,11 @@ public class QtestAPIHandler {
 			Response res = request.post("https://" + companyName + ".qtestnet.com/oauth/token");
 			int code = res.getStatusCode();
 			Assert.assertEquals(code, 200);
-			System.out.println("Connected established with the QTest Server...");
+			System.out.println("Connection established with the QTest Server...");
 			JsonPath jsonResponse = res.jsonPath();
 			accessToken = jsonResponse.get("access_token");
 			String tokenType = jsonResponse.get("token_type");
-
+			startDate = getQtestFormatTimeStamp();
 		}
 	}
 
@@ -223,7 +223,67 @@ public class QtestAPIHandler {
 		Assert.assertEquals(code, 201);
 		JsonPath jsonResponse = res.jsonPath();
 		int testRunID = jsonResponse.getInt("id");
+		System.out.println("Test Run: "+ testRunID);
+		System.out.println("Test Case: "+ testCaseID);
+		System.out.println("Suite: " + testSuiteID);
 		return testRunID;
+	}
+
+	public static List<Map<String, Integer>> getTestStepIds(int projectID, int testRunID) {
+		List<Map<String, Integer>> testStepIds = new ArrayList<>();
+		RequestSpecification request = RestAssured.given();
+		request.header("Authorization", "Bearer " + accessToken);
+		Response res = request.get("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID + "/test-runs/" + testRunID + "/test-logs");
+		int code = res.getStatusCode();
+		Assert.assertEquals(code, 200);
+		JsonPath jsonResponse = res.jsonPath();
+		List<Object> items = jsonResponse.getList("items");
+		for (Object item : items) {
+			if (item instanceof Map) {
+				Map<String, Object> itemMap = (Map<String, Object>) item;
+				List<Map<String, Object>> testStepLogs = (List<Map<String, Object>>) itemMap.get("test_step_logs");
+				for (Map<String, Object> testStepLog : testStepLogs) {
+					int testStepId = (int) testStepLog.get("test_step_id");
+					int testStepLogId = (int) testStepLog.get("test_step_log_id");
+					Map<String, Integer> testStepIdMap = new HashMap<>();
+					testStepIdMap.put("test_step_id", testStepId);
+					testStepIdMap.put("test_step_log_id", testStepLogId);
+					testStepIds.add(testStepIdMap);
+				}
+			}
+		}
+		stepIds = testStepIds;
+		return testStepIds;
+	}
+
+
+	public static void createTestRun(int projectID, int testRunID) {
+		String submittedBy = "Automation Test";
+		JSONObject json = new JSONObject();
+		json.put("submittedBy", submittedBy);
+		json.put("exe_start_date", startDate);
+		json.put("exe_end_date", startDate);
+		JSONObject jsonNest = new JSONObject();
+		jsonNest.put("id", 605);
+		jsonNest.put("name", "Unexecuted");
+		json.put("status", jsonNest);
+		String jsonBody = json.toJSONString();
+		RequestSpecification request = RestAssured.given();
+		request.header("Authorization", "Bearer " + accessToken);
+		request.header("Content-Type", "application/json");
+		request.body(jsonBody);
+
+		Response res = request.post("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID
+				+ "/test-runs/" + testRunID + "/test-logs");
+		int code = res.getStatusCode();
+		JsonPath jsonResponse = res.jsonPath();
+		if (code == 400) {
+			System.out.println(jsonResponse.getString("message").toUpperCase());
+			return;
+		}
+		testLogID = jsonResponse.getInt("id");
+		System.out.println("Test Log ID: "+ testLogID);
+		Assert.assertEquals(code, 201);
 	}
 
 	/**
@@ -233,18 +293,46 @@ public class QtestAPIHandler {
 	 * @param testRunID
 	 * @param status
 	 */
-	public static void updateTestStatus(int projectID, int testRunID, String status) {
-
+	public static void updateTestStatus(int projectID, int testRunID, String status, List<TestStepBean> testStepBeanList) {
 		String submittedBy = "Automation Test";
 		int statusID = testStatusId(status);
 		JSONObject json = new JSONObject();
 		json.put("submittedBy", submittedBy);
-		json.put("exe_start_date", getQtestFormatTimeStamp());
+		json.put("exe_start_date", startDate);
 		json.put("exe_end_date", getQtestFormatTimeStamp());
 		JSONObject jsonNest = new JSONObject();
 		jsonNest.put("id", statusID);
 		jsonNest.put("name", status);
 		json.put("status", jsonNest);
+
+		JSONArray testStepsArray = new JSONArray();
+		List<Map<String, Integer>> testSteps = getTestStepIds(projectID, testRunID);
+		for (int i = 0; i < testSteps.size(); i++) {
+			Map<String, Integer> testStep = testSteps.get(i);
+			int testStepId = testStep.get("test_step_id");
+			int testStepLogId = testStep.get("test_step_log_id");
+			String stepStatus = "Unexecuted";
+			String actualResult = "Unavailable";
+			int statusId = 605;
+			if (i < testStepBeanList.size()) {
+				TestStepBean step = testStepBeanList.get(i);
+				statusId = testStatusId(step.getTestStepStatus());
+				stepStatus = step.getTestStepStatus();
+				actualResult = step.getTestStepDescription();
+			}
+			JSONObject testStepObj = new JSONObject();
+			JSONObject statusObj = new JSONObject();
+			statusObj.put("id", statusId);
+			statusObj.put("name", stepStatus);
+			testStepObj.put("test_step_id",  testStepId);
+			testStepObj.put("test_step_log_id", testStepLogId);
+			testStepObj.put("order", i + 1);
+			testStepObj.put("status", statusObj);
+			testStepObj.put("actual_result", actualResult);
+			testStepsArray.put(testStepObj);
+		}
+
+		json.put("test_step_logs", testStepsArray);
 		String jsonBody = json.toJSONString();
 
 		RequestSpecification request = RestAssured.given();
@@ -252,15 +340,30 @@ public class QtestAPIHandler {
 		request.header("Content-Type", "application/json");
 		request.body(jsonBody);
 
-		Response res = request.post("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID
-				+ "/test-runs/" + testRunID + "/test-logs");
+		Response res = request.put("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID
+				+ "/test-runs/" + testRunID + "/test-logs/" + testLogID);
 		int code = res.getStatusCode();
+		Assert.assertEquals(code, 200);
+	}
 
-		JsonPath jsonResponse = res.jsonPath();
-		testLogID = jsonResponse.getInt("id");
-		System.out.println(testLogID);
-		Assert.assertEquals(code, 201);
+	public static void updateTestSteps(int projectID, int testCaseId, List<TestStepBean> testSteps) {
+		for (TestStepBean step : testSteps) {
+			JSONObject json = new JSONObject();
+			json.put("description", step.getTestStepDescription());
+			json.put("expected", step.getTestStepDescription());
+			json.put("order", testSteps.indexOf(step) + 1);
+			json.put("plain_value_text", step.getTestStepDescription());
+			String jsonBody = json.toJSONString();
+			RequestSpecification request = RestAssured.given();
+			request.header("Authorization", "Bearer " + accessToken);
+			request.header("Content-Type", "application/json");
+			request.body(jsonBody);
 
+			Response res = request.post("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID
+					+ "/test-cases/" + testCaseId + "/test-steps");
+			int code = res.getStatusCode();
+			Assert.assertEquals(code, 201);
+		}
 	}
 
 	/**
@@ -271,27 +374,36 @@ public class QtestAPIHandler {
 	 * @param fileName
 	 * @throws IOException
 	 */
-	public static void uploadTestLogAttachment(int projectID, String filePath, String fileName) throws IOException {
-
-		byte[] binaryImage = getBinaryImage(filePath, fileName);
-		RequestSpecification request = RestAssured.given();
-		request.config(RestAssured.config()
-				.encoderConfig(encoderConfig().encodeContentTypeAs("application/png", ContentType.BINARY)));
-		//request.header("Authorization", "Bearer " + "16fe9baa-2f24-4dd7-9736-cd5ab9b9db63");
-		request.header("Authorization", "Bearer " + accessToken);
-		request.header("Content-Type", "application/png");
-		request.header("File-Name", fileName);
-		request.body(binaryImage);
-		if(testLogID!=0)
-		{
-		Response res = request.post("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID
-				+ "/test-logs/" + testLogID + "/blob-handles");
-		JsonPath jsonResponse = res.jsonPath();
-		Assert.assertTrue(jsonResponse.get("name").equals(fileName));
-		int code = res.getStatusCode();
-		Assert.assertEquals(code, 201);
+	public static void uploadTestLogAttachment(int projectID, String filePath, List<String> screenShots) throws IOException {
+		if (stepIds.isEmpty()) {
+			System.out.println("NO TEST STEPS FOR THIS TEST CASE, UNABLE TO ATTACH PHOTOS TO STEPS!");
+			return;
 		}
-
+		for (int i = 0; i < screenShots.size(); i++) {
+			if (i >= stepIds.size()) {
+				System.out.println("NUMBER OF STEPS IN QTEST DO NOT MATCH WITH STEPS COMPLETED.");
+				return;
+			}
+			String fileName = screenShots.get(i);
+			Map<String, Integer> testStep = stepIds.get(i);
+			int testStepLogId = testStep.get("test_step_log_id");
+			byte[] binaryImage = getBinaryImage(filePath, fileName);
+			RequestSpecification request = RestAssured.given();
+			request.config(RestAssured.config()
+					.encoderConfig(encoderConfig().encodeContentTypeAs("application/png", ContentType.BINARY)));
+			request.header("Authorization", "Bearer " + accessToken);
+			request.header("Content-Type", "application/png");
+			request.header("File-Name", fileName);
+			request.body(binaryImage);
+			if (testLogID != 0) {
+				Response res = request.post("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID
+						+ "/test-step-logs/" + testStepLogId + "/blob-handles");
+				JsonPath jsonResponse = res.jsonPath();
+				Assert.assertTrue(jsonResponse.get("name").equals(fileName));
+				int code = res.getStatusCode();
+				Assert.assertEquals(code, 201);
+			}
+		}
 	}
 
 	/**
@@ -324,24 +436,13 @@ public class QtestAPIHandler {
 	 */
 	public static int testStatusId(String status) {
 		int id = 0;
-		switch (status) {
-		case "Passed":
-			id = 601;
-			break;
-		case "Failed":
-			id = 602;
-			break;
-		case "Incomplete":
-			id = 603;
-			break;
-		case "Blocked":
-			id = 604;
-			break;
-		case "Unexecuted":
-			id = 605;
-			break;
-		default:
-			System.out.println("Status Undetermined");
+		switch (status.toUpperCase()) {
+			case "PASSED", "PASS" -> id = 601;
+			case "FAILED", "FAIL" -> id = 602;
+			case "INCOMPLETE" -> id = 603;
+			case "BLOCKED" -> id = 604;
+			case "UNEXECUTED" -> id = 605;
+			default -> System.out.println("Status Undetermined");
 		}
 		return id;
 	}
