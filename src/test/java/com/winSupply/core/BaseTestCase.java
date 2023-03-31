@@ -198,12 +198,11 @@ public abstract class BaseTestCase {
 
 		if (qtestSave.equalsIgnoreCase("true")) {
 			QTestManager.createTestRunInsideTestSuite(testParameters.getCurrentTestcase());
-			QTestManager.updateTestRunStatus(testStatus);
+			QTestManager.updateTestRunStatus(testStatus, coreScript.getReport().getTestStepBeanList());
 			String path = resultSummaryManager.getReportPath() + Util.getFileSeparator() + "Screenshots"
 					+ Util.getFileSeparator();
 			QTestManager.uploadTestScreenshotstoTestLog(path, currentTestCase);
-
-			// System.out.println(path);
+			//QTestManager.uploadSteps(extent); //UNCOMMENT THIS IF YOU WANT TO UPLOAD STEPS AFTER TEST COMPLETION
 		}
 		if (getProperties("Mattermost_post_details").equalsIgnoreCase("true")) {
 			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));

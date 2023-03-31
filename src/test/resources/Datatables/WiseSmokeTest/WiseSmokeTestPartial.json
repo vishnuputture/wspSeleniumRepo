@@ -1,12 +1,12 @@
 {
   "Business_Flow": [
     {
-     "TC_WiseSmokeTest_PARTIAL": "url,login,where,backorderOCClearforNewOrder,salesQuote,salesQuoteDetailLines,itemAddInformation,salesQuotedtllines,sqconversiontoSO,shipmentsTab,navigateToPOInquiry, validatePOPDF, navigateToInventoryReceipt,inventoryreceipts,navigateToVendorInvoiceRec,vIR,navigatetoItemLedger,verifyItemLedgerWISE,naviagtetoSOInquiry,salesOrderSelectionfromInq,navigateToShippingConf,shippingConf,invoiceSO,naviagtetoSOInquiry,invoiceVerificationSOI,navigatetoinventoryandSPInq,invNSPInq,navigateToBuyersInq,invNBuyInq,navigateToLiveShop,invNLiveShop,navigateToPOEntry,poNPOEntry,navigateToPOInquiry,poNPOInq,signoff",
+     "Tc_92_WiseSmokeTestPARTIAL": "url,login,where,backorderOCClearforNewOrder,salesQuote,salesQuoteDetailLines,itemAddInformation,salesQuotedtllines,sqconversiontoSO,shipmentsTab,navigateToPOInquiry, validatePOPDF, navigateToInventoryReceipt,inventoryreceipts,navigateToVendorInvoiceRec,vIR,navigatetoItemLedger,verifyItemLedgerWISE,naviagtetoSOInquiry,salesOrderSelectionfromInq,navigateToShippingConf,shippingConf,invoiceSO,naviagtetoSOInquiry,invoiceVerificationSOI,navigatetoinventoryandSPInq,invNSPInq,navigateToBuyersInq,invNBuyInq,navigateToLiveShop,invNLiveShop,navigateToPOEntry,poNPOEntry,navigateToPOInquiry,poNPOInq,signoff",
     }
   ],
   "General_Data": [
     {
-      "TC_ID": "TC_WiseSmokeTest_PARTIAL",
+      "TC_ID": "Tc_92_WiseSmokeTestPARTIAL",
       "userName": "cnt13344",
       "passWord": "count13344",
       "prodCompany": "13344",

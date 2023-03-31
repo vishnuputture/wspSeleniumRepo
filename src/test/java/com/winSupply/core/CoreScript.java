@@ -339,6 +339,10 @@ public class CoreScript {
         return report.getTestCaseBean();
     }
 
+    public Report getReport() {
+        return report;
+    }
+
 
     /**
      * Function to get the status of the test case executed
@@ -1028,6 +1032,6 @@ public class CoreScript {
             testStep.put("BriefErroMessage", tsb.getBriefErrorMesg());
             listDat.add(testStep);
         }
-        System.out.print(  listDat.toString());
+//        System.out.print(  listDat.toString());
     }
 }
