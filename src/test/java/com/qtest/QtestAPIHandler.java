@@ -347,7 +347,9 @@ public class QtestAPIHandler {
 	}
 
 	public static void updateTestSteps(int projectID, int testCaseId, List<TestStepBean> testSteps) {
-		for (TestStepBean step : testSteps) {
+		for (int i = 0; i < testSteps.size(); i++) {
+			if (i < 106) continue;
+			TestStepBean step = testSteps.get(i);
 			JSONObject json = new JSONObject();
 			json.put("description", step.getTestStepDescription());
 			json.put("expected", step.getTestStepDescription());
@@ -358,7 +360,7 @@ public class QtestAPIHandler {
 			request.header("Authorization", "Bearer " + accessToken);
 			request.header("Content-Type", "application/json");
 			request.body(jsonBody);
-
+			System.out.println(step.getTestStepDescription());
 			Response res = request.post("https://" + companyName + ".qtestnet.com/api/v3/projects/" + projectID
 					+ "/test-cases/" + testCaseId + "/test-steps");
 			int code = res.getStatusCode();
