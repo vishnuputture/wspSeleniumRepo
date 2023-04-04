@@ -339,7 +339,8 @@ public class WiseSmokeTest extends ReusableLib {
         //sendKeys(WiseSmokeTestPage.SendTo, jsonData.getData("SendTo"),"Enter an email to send the order acknowledgement");
         Utility_Functions.actionKey(Keys.F9, ownDriver);
         Utility_Functions.actionKey(Keys.F3, ownDriver);
-        click(WiseSmokeTestPage.btnExitcustTab, "Click exit on customer tab");
+        if (!multiBinStatus.equalsIgnoreCase("INACTIVE"))
+            click(WiseSmokeTestPage.saleQExtBtn, "Click exit on customer tab");
         click(WiseSmokeTestPage.SOline2, "Click on Options box for line 2");
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOline2);
         Utility_Functions.xMouseClick(ownDriver, WiseSmokeTestPage.SOENTRY5);
