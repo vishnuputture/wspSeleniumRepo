@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 10px;
+            width: 250px;
+            background-color: #222;
+            color: #eee;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            font-size: 0;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        svg {
+            width: 32px;
+            height: 32px;
+            transition: fill 0.3s;
+        }
+        #play,
+        #pause {
+            fill: #4caf50;
+        }
+        #stop {
+            fill: #f65044;
+        }
+        button:hover #play,
+        button:hover #pause {
+            fill: #2e7d32;
+        }
+        button:hover #stop {
+            fill: #d32f2f;
+        }
+        button:active #play,
+        button:active #pause {
+            fill: #1b5e20;
+        }
+        button:active #stop {
+            fill: #c62828;
+        }
+    </style>
+</head>
+<body>
+<h1>Event Recorder</h1>
+<div class="button-container">
+    <button id="record">
+        <svg id="play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+        <svg id="pause" style="display: none;" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+    </button>
+    <button id="stop">
+        <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"></path></svg>
+    </button>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>

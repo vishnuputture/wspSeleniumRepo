@@ -74,6 +74,7 @@ public class WebDriverFactory {
                 HashMap<String, Object> prefs = new HashMap<>();
                 String downloadDirPath = System.getProperty("user.home") + File.separator + "AutomationPDFs";
                 File downloadDir = new File(downloadDirPath);
+                File extensionFile = new File("src/test/resources/event_recorder.crx");
 
                 if (!downloadDir.exists()) downloadDir.mkdir();
 
@@ -89,6 +90,7 @@ public class WebDriverFactory {
                     options.addArguments(" --ignore-certificate-errors");
                     options.addArguments("--disable-features=EnableEphemeralFlashPermission");
                     options.addArguments("--disable-features=EnableEphemeralFlashPermission");
+                    options.addExtensions(extensionFile);
                     prefs.put("plugins.always_open_pdf_externally", true);
                     prefs.put("download.default_directory", downloadDirPath);
                     prefs.put("download.prompt_for_download", false);
