@@ -1,6 +1,5 @@
 window.userActions = [];
 window.hasNewEvents = false;
-window.recordEvents = false;
 window.isTypingInInput = false;
 
 initializeRecordEventsState();
@@ -18,70 +17,104 @@ const debouncedInput = debounce(function(event) {
     window.isTypingInInput = false;
 }, 1000);
 
-document.addEventListener('click', function(event) {
-    if (event.altKey) {
-        eventHandler(event, 'validateText');
-    } else {
-        eventHandler(event, 'click');
+const eventListeners = {
+    click: null,
+    mouseover: null,
+    mousedown: null,
+    keydown: null,
+    scroll: null,
+    input: null
+};
+function createEventListeners() {
+    eventListeners.click = function(event) {
+        if (event.altKey) {
+            eventHandler(event, 'validateText');
+        } else {
+            eventHandler(event, 'click');
+        }
     }
-}, true);
-document.addEventListener('mouseover', function(event) {
-    if (!hasHoverableAction(event.target)) return;
-    eventHandler(event, 'mouseover');
-}, true);
 
-document.addEventListener('input', function(event) {
-    if (event.altKey) return;
-    const tagName = event.target.tagName.toLowerCase();
-    const inputType = event.target.type;
-    if ((tagName === 'input' && (inputType === 'text' || inputType === 'search' || inputType === 'password'
-            || inputType === 'email' || inputType === 'url' || inputType === 'tel' || inputType === 'number'))
-        || tagName === 'textarea') {
-            window.isTypingInInput = true;
-            debouncedInput(event);
-            highlightElement(event.target);
-            console.log('Input recorded.');
+    eventListeners.mouseover = function(event) {
+        if (!hasHoverableAction(event.target)) return;
+        eventHandler(event, 'mouseover');
     }
-}, true);
+
+    eventListeners.input = function(event) {
+        if (event.altKey) return;
+        const tagName = event.target.tagName.toLowerCase();
+        const inputType = event.target.type;
+        if ((tagName === 'input' && (inputType === 'text' || inputType === 'search' || inputType === 'password'
+                || inputType === 'email' || inputType === 'url' || inputType === 'tel' || inputType === 'number'))
+            || tagName === 'textarea') {
+                window.isTypingInInput = true;
+                debouncedInput(event);
+                highlightElement(event.target);
+                console.log('Input recorded.');
+        }
+    }
 
 
-document.addEventListener('scroll', function(event) {
-    //eventHandler(event, 'scroll');
-}, true);
+    eventListeners.scroll = function(event) {
+        //eventHandler(event, 'scroll');
+    }
 
-document.addEventListener('keydown', function(event) {
-    if (event.altKey) return;
-    const tagName = event.target.tagName.toLowerCase();
-    const inputType = event.target.type;
-    const isTextInput = (tagName === 'input' && (inputType === 'text' || inputType === 'search' || inputType === 'password'
-            || inputType === 'email' || inputType === 'url' || inputType === 'tel' || inputType === 'number'))
-        || tagName === 'textarea';
-    const isActionKey = event.key === 'Enter' || event.key === 'Tab' || (event.key.startsWith('F') && parseInt(event.key.slice(1)) >= 1 && parseInt(event.key.slice(1)) <= 12);
+    eventListeners.keydown = function(event) {
+        if (event.altKey) return;
+        const tagName = event.target.tagName.toLowerCase();
+        const inputType = event.target.type;
+        const isTextInput = (tagName === 'input' && (inputType === 'text' || inputType === 'search' || inputType === 'password'
+                || inputType === 'email' || inputType === 'url' || inputType === 'tel' || inputType === 'number'))
+            || tagName === 'textarea';
+        const isActionKey = event.key === 'Enter' || event.key === 'Tab' || (event.key.startsWith('F') && parseInt(event.key.slice(1)) >= 1 && parseInt(event.key.slice(1)) <= 12);
 
-    if (!window.isTypingInInput && !isTextInput) {
-        setTimeout(() => {
+        if (!window.isTypingInInput && !isTextInput) {
+            setTimeout(() => {
+                if (window.isTypingInInput) {
+                    debouncedInput.flush(event);
+                }
+                eventHandler(event, 'keydown');
+            }, 50);
+        } else if (isTextInput && isActionKey) {
             if (window.isTypingInInput) {
                 debouncedInput.flush(event);
             }
-            eventHandler(event, 'keydown');
-        }, 50);
-    } else if (isTextInput && isActionKey) {
-        if (window.isTypingInInput) {
-            debouncedInput.flush(event);
+            setTimeout(() => {
+                eventHandler(event, 'keydown');
+            }, 50);
         }
-        setTimeout(() => {
-            eventHandler(event, 'keydown');
-        }, 50);
     }
-}, true);
 
-document.addEventListener('mousedown', function(event) {
-    //eventHandler(event, 'mousedown');
-}, true);
+    eventListeners.mousedown = function(event) {
+        //eventHandler(event, 'mousedown');
+    }
+}
+function initializeEventListeners() {
+    createEventListeners();
+    document.addEventListener('click', eventListeners.click, true);
+    document.addEventListener('input', eventListeners.input, true);
+    document.addEventListener('keydown', eventListeners.keydown, true);
+    document.addEventListener('mouseover', eventListeners.mouseover, true);
+    document.addEventListener('mousedown', eventListeners.mousedown, true);
+    document.addEventListener('scroll', eventListeners.scroll, true);
+}
+
+function removeEventListeners() {
+    document.removeEventListener('click', eventListeners.click, true);
+    document.removeEventListener('input', eventListeners.input, true);
+    document.removeEventListener('keydown', eventListeners.keydown, true);
+    document.removeEventListener('mouseover', eventListeners.mouseover, true);
+    document.removeEventListener('mousedown', eventListeners.mousedown, true);
+    document.removeEventListener('scroll', eventListeners.scroll, true);
+}
 
 function initializeRecordEventsState() {
     chrome.storage.local.get('recordingState', function(result) {
-        window.recordEvents = result.recordingState === 'pause';
+        let recordEvents = result.recordingState === 'play';
+        if (recordEvents) {
+            initializeEventListeners();
+        } else {
+            removeEventListeners();
+        }
     });
 }
 
@@ -224,7 +257,7 @@ const eventThreshold = 100;
 
 function eventHandler(event, eventType) {
     const currentTime = Date.now();
-    if (isHandlingEvent || currentTime - lastEventTimestamp < eventThreshold || !recordEvents) {
+    if (isHandlingEvent || currentTime - lastEventTimestamp < eventThreshold) {
         return;
     }
     if (isTypingInInput) {
@@ -260,23 +293,6 @@ function eventHandler(event, eventType) {
         isHandlingEvent = false;
     }, eventThreshold);
 }
-
-// function recordValidateText(event) {
-//     let element = event.target;
-//     if (isHandlingEvent || !recordEvents) return;
-//     if (isTypingInInput) {
-//         debouncedInput.flush(event);
-//     }
-//     let xpath = getXPath(element);
-//     let cssSelector = getCssSelector(element);
-//     let currentText = element.textContent || element.innerText || '';
-//     window.userActions.push({ type: 'validateText', cssSelector: cssSelector, xpath: xpath, expectedText: currentText.trim(), timestamp: Date.now() });
-//     window.hasNewEvents = true;
-//     highlightElement(event.target);
-//     saveEventsToStorage();
-//     console.log('Validate Text recorded.')
-// }
-
 function hasHoverableAction(element) {
     const inlineHoverStyle = element.getAttribute('style') && element.getAttribute('style').includes(':hover');
     const hasMouseOverListener = element.getAttribute('onmouseover') !== null;
@@ -284,17 +300,16 @@ function hasHoverableAction(element) {
 
     return inlineHoverStyle || hasMouseOverListener || hasTooltip;
 }
-
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.type === 'startRecording') {
-        window.recordEvents = true;
+        initializeEventListeners();
         console.log('Start Recording Pressed');
     } else if (request.type === 'pauseRecording') {
-        window.recordEvents = false;
+        removeEventListeners();
         console.log('Pause Recording Pressed');
     } else if (request.type === 'stopRecording') {
         console.log('Received stopRecording message');
-        window.recordEvents = false;
+        removeEventListeners();
         window.postMessage({ type: 'stopRecording' }, window.location.origin);
         chrome.storage.local.get('userActions', function(result) {
             if (result.userActions) {

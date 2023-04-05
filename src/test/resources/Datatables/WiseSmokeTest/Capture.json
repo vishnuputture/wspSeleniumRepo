@@ -1,7 +1,7 @@
 {
   "Business_Flow": [
     {
-      "Capture": "executeRecordedActions"
+      "Capture": "captureElements"
     }
   ],
   "General_Data": [

@@ -6,7 +6,7 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 10px;
-            width: 250px;
+            width: 400px;
             background-color: #222;
             color: #eee;
         }
@@ -19,6 +19,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 10px;
         }
         button {
             font-size: 0;
@@ -53,7 +54,85 @@
         button:active #stop {
             fill: #c62828;
         }
+        .step-header {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .action-details {
+            font-size: 14px;
+            padding: 5px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #555;
+        }
+
+        .action-details p {
+            margin: 0;
+            padding: 0;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+            background-color: #444;
+            cursor: move;
+        }
+
+        .remove-step {
+            font-size: 18px;
+            color: #f65044;
+            cursor: pointer;
+            margin-top: 10px;
+            align-self: flex-end;
+        }
+
+        .step:nth-child(odd) {
+            background-color: #333;
+        }
+        .step input {
+            margin-right: 10px;
+        }
+        .step-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sortable {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sortable-placeholder {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px dashed #333;
+            margin-bottom: 10px;
+            height: 150px;
+        }
+        .check {
+            font-size: 18px;
+            color: #4caf50;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .pencil {
+            font-size: 18px;
+            color: #0040fd;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .step-name {
+            background-color: #222;
+            color: #eee;
+            border: 1px solid transparent;
+            padding: 5px;
+        }
     </style>
+    <link rel="stylesheet" href="jquery-ui.css">
 </head>
 <body>
 <h1>Event Recorder</h1>
@@ -66,6 +145,19 @@
         <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"></path></svg>
     </button>
 </div>
+<div id="test-name-container">
+    <label for="test-name">Test Name:</label>
+    <input type="text" id="test-name" placeholder="Enter test name" />
+    <span id="test-name-check" class="check">&#10004;</span>
+    <span id="test-name-pencil" class="pencil" style="display: none;">&#9998;</span>
+</div>
+<div id="steps-container">
+    <ul id="event-list" class="sortable"></ul>
+</div>
+<div id="event-detail"></div>
+
+<script src="jquery-3.6.0.min.js"></script>
+<script src="jquery-ui.min.js"></script>
 <script src="popup.js"></script>
 </body>
 </html>
