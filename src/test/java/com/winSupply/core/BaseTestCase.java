@@ -202,7 +202,7 @@ public abstract class BaseTestCase {
 			String path = resultSummaryManager.getReportPath() + Util.getFileSeparator() + "Screenshots"
 					+ Util.getFileSeparator();
 			QTestManager.uploadTestScreenshotstoTestLog(path, currentTestCase);
-			//QTestManager.uploadSteps(extent); //UNCOMMENT THIS IF YOU WANT TO UPLOAD STEPS AFTER TEST COMPLETION
+			//QTestManager.updateSteps(coreScript.getReport().getTestStepBeanList()); //UNCOMMENT THIS IF YOU WANT TO UPLOAD STEPS AFTER TEST COMPLETION
 		}
 		if (getProperties("Mattermost_post_details").equalsIgnoreCase("true")) {
 			String channel = MattermostAPIHandler.getChannelIDByName(properties.getProperty("Mattermost_channel_name"));
