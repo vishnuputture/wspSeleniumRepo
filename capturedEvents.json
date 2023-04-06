@@ -1,37 +1,26 @@
 [
   {
-    "clientX": 1065,
-    "clientY": 269,
-    "cssSelector": "html > body.wob.normal-display > div > div > div > div.genie > form > input.A24.focusInp",
-    "id": "I_6_53",
-    "innerText": "",
-    "name": "InputField0",
-    "step": 1,
-    "timestamp": 1680642136915,
-    "type": "click",
-    "xpath": "/html/body/div/div/div[2]/div[2]/form/input[2]"
-  },
-  {
-    "clientX": 1071,
-    "clientY": 315,
-    "cssSelector": "html > body.wob.normal-display > div",
-    "id": "grid",
-    "innerText": "\n\n      \n\n        \n          \n          \n           \n\n          \n        \n\n        \n\n          \n\n            Actions\n\n          \n\n                       Sign OnSystem  . . . . . :WINDEV1Subsystem . . . . :QINTERDisplay . . . . . :DEVKJF001User  . . . . . . . . . . . . . .Password  . . . . . . . . . . . .Program/procedure . . . . . . . .Menu  . . . . . . . . . . . . . .Current library . . . . . . . . . (C) COPYRIGHT IBM CORP. 1980, 2021.\n\n        \n\n      \n    ",
-    "step": 2,
-    "timestamp": 1680642137899,
-    "type": "click",
-    "xpath": "/html/body/div"
-  },
-  {
-    "clientX": 1072,
-    "clientY": 297,
+    "clientX": 1188,
+    "clientY": 288,
     "cssSelector": "html > body.wob.normal-display > div > div > div > div.genie > form > input.A27.focusInp",
     "id": "I_7_53",
     "innerText": "",
     "name": "InputField1",
-    "step": 3,
-    "timestamp": 1680642138763,
+    "step": 1,
+    "timestamp": 1680714490400,
     "type": "click",
     "xpath": "/html/body/div/div/div[2]/div[2]/form/input[3]"
+  },
+  {
+    "clientX": 1093,
+    "clientY": 264,
+    "cssSelector": "html > body.wob.normal-display > div > div > div > div.genie > form > input.A24.focusInp",
+    "id": "I_6_53",
+    "innerText": "",
+    "name": "InputField0",
+    "step": 2,
+    "timestamp": 1680714491066,
+    "type": "click",
+    "xpath": "/html/body/div/div/div[2]/div[2]/form/input[2]"
   }
 ]
