@@ -1,0 +1,13 @@
+{
+  "Business_Flow": [
+    {
+      "Capture": "captureElements"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Capture",
+      "useExtension": "false"
+    }
+  ]
+}
