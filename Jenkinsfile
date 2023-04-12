@@ -29,11 +29,11 @@ pipeline{
         stage('Test'){
         if (env.BRANCH_NAME == 'prod'){
             steps{
-                bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_PROD_USR% -DPassword=%APP_PROD_PSW%'
+                bat 'mvn -f pom.xml clean test -P runDemo -DDefaultExecutionMode=LOCAL -DUserName=%APP_PROD_USR% -DPassword=%APP_PROD_PSW%'
             }
           }else{
              steps{
-                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
+                 bat 'mvn -f pom.xml clean test -P runDemo -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
                 }
             }
         }
