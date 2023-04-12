@@ -164,7 +164,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<testNG.suiteXmlFile>src/test/resources/Suites/Demo/testng_Demo.xml</testNG.suiteXmlFile>
+				<testNG.suiteXmlFile>src/test/resources/Suites/WiseSmokeTest/WiseSmokeTest.xml</testNG.suiteXmlFile>
 			</properties>
 			<build>
 				<pluginManagement>
