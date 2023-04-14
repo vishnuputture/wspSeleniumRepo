@@ -1,0 +1,26 @@
+[
+  {
+    "clientX": 1188,
+    "clientY": 288,
+    "cssSelector": "html > body.wob.normal-display > div > div > div > div.genie > form > input.A27.focusInp",
+    "id": "I_7_53",
+    "innerText": "",
+    "name": "InputField1",
+    "step": 1,
+    "timestamp": 1680714490400,
+    "type": "click",
+    "xpath": "/html/body/div/div/div[2]/div[2]/form/input[3]"
+  },
+  {
+    "clientX": 1093,
+    "clientY": 264,
+    "cssSelector": "html > body.wob.normal-display > div > div > div > div.genie > form > input.A24.focusInp",
+    "id": "I_6_53",
+    "innerText": "",
+    "name": "InputField0",
+    "step": 2,
+    "timestamp": 1680714491066,
+    "type": "click",
+    "xpath": "/html/body/div/div/div[2]/div[2]/form/input[2]"
+  }
+]

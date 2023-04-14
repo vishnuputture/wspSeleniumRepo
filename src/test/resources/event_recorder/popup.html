@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="jquery-ui.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="content">
+            <h1>Brandon's Event Recorder</h1>
+            <div class="button-container">
+                <div class="tooltip">
+                    <button id="record">
+                        <svg id="recordButton" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle></svg>
+                        <svg id="pause" style="display: none;" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
+                    </button>
+                    <span class="tooltiptext">Record</span>
+                    <span class="tooltiptext" id="pauseTooltip" style="display: none;">Pause</span>
+                </div>
+                <div class="tooltip">
+                    <button id="stop" class="tooltip">
+                        <svg id="save-icon" viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-1.99.89-1.99 2L3 19c0 1.1.89 2 1.99 2H17c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H5V5h12v16zM7 7h5v5H7z"></path></svg>
+                    </button>
+                    <span class="tooltiptext">Save and Exit</span>
+                </div>
+            </div>
+            <div id="test-name-container">
+                <label for="test-name">Test Name:</label>
+                <input type="text" id="test-name" placeholder="Enter test name" />
+                <span id="test-name-check" class="check">&#10004;</span>
+                <span id="test-name-pencil" class="pencil" style="display: none;">&#9998;</span>
+            </div>
+            <div id="steps-container">
+                <ul id="event-list" class="sortable"></ul>
+            </div>
+            <div id="event-detail"></div>
+        </div>
+        <div id="details-panel" class="details-panel"></div>
+        <script src="jquery-3.6.0.min.js"></script>
+        <script src="jquery-ui.min.js"></script>
+        <script src="recordButtons.js"></script>
+        <script src="ui.js"></script>
+    </body>
+</html>

@@ -1,7 +1,6 @@
 package businesskeywords.warehousing.Manifest;
 
 import businesskeywords.warehousing.Objects.*;
-import com.paulhammant.ngwebdriver.NgWebDriver;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Status;
@@ -11,10 +10,7 @@ import commonkeywords.DBCall;
 import org.openqa.selenium.*;
 import pages.warehouse.*;
 import supportLibraries.Utility_Functions;
-
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,34 +20,20 @@ import java.util.Date;
 public class RTSPlanner extends ReusableLib {
     CommonActions commonObj;
     private FrameworkDriver ownDriver;
-    private NgWebDriver ngWebDriver;
     private Manifest manifest;
     private ArrayList<SalesOrder> salesOrders;
-    private String company;
-    private String environment;
     private Driver driver;
     private DBCall dbCall;
 
     Calendar cal = Calendar.getInstance();
     long timeStamp = getTimeStamp();
 
-    /**
-     * Constructor to initialize the {@link Helper} object and in turn the
-     * objects wrapped by it
-     *
-     * @param helper The {@link Helper} object
-     * @param company
-     * @param environment
-     */
-    public RTSPlanner(Helper helper, String company, String environment) throws SQLException {
+    public RTSPlanner(Helper helper, User user) throws SQLException {
         super(helper);
         commonObj = new CommonActions(helper);
         ownDriver = helper.getGSDriver();
-        this.company = company;
-        this.environment = environment;
-        this.dbCall = new DBCall(company, environment);
+        this.dbCall = new DBCall(user);
         this.driver = dbCall.getDriver();
-        this.ngWebDriver = ownDriver.getNgWebDriver();
     }
 
     public Manifest getManifest() {

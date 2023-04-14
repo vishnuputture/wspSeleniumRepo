@@ -661,7 +661,7 @@ public class Utility_Functions extends ReusableLib {
 
     public static String getText(FrameworkDriver driver, WebElement element) {
         xHighlight(driver, element, "red");
-        return (String) ((JavascriptExecutor) driver).executeScript("return jQuery(arguments[0]).text();", element);
+        return (String) ((JavascriptExecutor) driver.getWebDriver()).executeScript("return jQuery(arguments[0]).text();", element);
 
     }
 
@@ -921,6 +921,14 @@ public class Utility_Functions extends ReusableLib {
         try {
             long result = time * 1000;
             Thread.sleep(result);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void msTimeWait(long time) {
+        try {
+            Thread.sleep(time);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -2067,6 +2075,24 @@ public class Utility_Functions extends ReusableLib {
         // return Key;
 
     }
+    public static Object xGetJsonObject(String Key) {
+        try {
+
+            Object obj = new JSONParser().parse(new FileReader(jsonFile));
+
+            // typecasting obj to JSONObject
+            JSONObject jo = (JSONObject) obj;
+            return jo.get(Key);
+        } catch (IOException e) {
+
+            return e.getMessage();
+        } catch (org.json.simple.parser.ParseException e) {
+
+            return e.getMessage();
+        }
+        // return Key;
+
+    }
 
     @SuppressWarnings("unchecked")
     public static List<HashMap<String, Object>> xGetJsonList(String Key) {
@@ -2155,22 +2181,32 @@ public class Utility_Functions extends ReusableLib {
     }
 
     public static void xHighlight(FrameworkDriver driver, By element, String color) {
-        for (int i = 0; i < 2; i++) {
-            JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
-            js.executeScript("arguments[0].setAttribute('style', arguments[1]);", driver.findElement(element),
-                    "border: 2px solid " + color + ";");
-
-        }
+        JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+        js.executeScript("arguments[0].style.cssText += '; position: relative; margin: 0; padding: 0; box-sizing: " +
+                "border-box;';", driver.findElement(element));
+        js.executeScript("arguments[0].style.border = '2px solid " + color + "'; " +
+                "arguments[0].style.width = arguments[0].offsetWidth + 'px'; " +
+                "arguments[0].style.height = arguments[0].offsetHeight + 'px';", driver.findElement(element));
     }
 
     public static void xHighlight(FrameworkDriver driver, WebElement element, String color) {
-        for (int i = 0; i < 2; i++) {
-            JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
-            js.executeScript("arguments[0].setAttribute('style', arguments[1]);", element,
-                    "border: 2px solid " + color + ";");
-
-        }
+        JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+        js.executeScript("arguments[0].style.cssText += '; position: relative; margin: 0; padding: 0; box-sizing: " +
+                "border-box;';", element);
+        js.executeScript("arguments[0].style.border = '2px solid " + color + "'; " +
+                "arguments[0].style.width = arguments[0].offsetWidth + 'px'; " +
+                "arguments[0].style.height = arguments[0].offsetHeight + 'px';", element);
     }
+
+    public static void removeHighlight(FrameworkDriver driver, WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+        js.executeScript("arguments[0].style.border = '';", element);
+    }
+    public static void removeHighlight(FrameworkDriver driver, By element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
+        js.executeScript("arguments[0].style.border = '';", driver.findElement(element));
+    }
+
 
     public static boolean xHoverElementclicks(WebElement el, FrameworkDriver driver) {
         Actions builder = new Actions(driver.getWebDriver());
@@ -3816,6 +3852,28 @@ public class Utility_Functions extends ReusableLib {
 
     @SuppressWarnings("unchecked")
     public static void xUpdateJson(String Key, String value) {
+        try {
+            createJsonFile(jsonFile);
+            Object obj = new JSONParser().parse(new FileReader(jsonFile));
+
+            // typecasting obj to JSONObject
+            JSONObject jo = (JSONObject) obj;
+
+            jo.put(Key, value);
+
+            PrintWriter pw = new PrintWriter(jsonFile);
+            pw.write(jo.toJSONString());
+
+            pw.flush();
+            pw.close();
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
+    }
+    public static void xUpdateJson(String Key, Object value) {
         try {
             createJsonFile(jsonFile);
             Object obj = new JSONParser().parse(new FileReader(jsonFile));

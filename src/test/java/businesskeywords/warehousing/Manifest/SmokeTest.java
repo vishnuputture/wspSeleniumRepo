@@ -2,6 +2,8 @@ package businesskeywords.warehousing.Manifest;
 
 import businesskeywords.warehousing.Objects.*;
 import businesskeywords.Pricing.SalesOrders.SalesOrders;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.winSupply.core.Helper;
 import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.Settings;
@@ -23,32 +25,31 @@ import java.util.*;
 
 public class SmokeTest extends ReusableLib {
     private final CommonActions commonObj;
-    private final DBCall dbCall;
     private Orders orders;
     private final FrameworkDriver ownDriver;
     public static Properties properties = Settings.getInstance();
-    private ArrayList<String> vendors = new ArrayList<>();
-    private final String environment = "QA";//Prod, QA, DEV
-    private final String company = "235";
-    private final User wiseUser = new User(helper, "btjones1", "Nobodyknows1(", environment, company);
-    private final User webUser = new User(helper, "wztestqa", environment, company);
-    private final RTSPlanner planner = new RTSPlanner(helper, company, environment);
+    private final String environment = jsonData.getData("environment");
+    private final String company = jsonData.getData("company");
+    private final User wiseUser = new User(helper, jsonData.getData("user"), jsonData.getData("password"), environment, company);
+    private final User webUser = new User(helper, jsonData.getData("webUser"), environment, company);
+    private final boolean useLastOrders = jsonData.getBoolean("useLastOrders");
+    private final boolean useLastManifests = jsonData.getBoolean("UseLastManifests");
+    private final int numberOfSalesOrders = jsonData.getInt("numberOfSalesOrders");
+    private final int numberOfItems = jsonData.getInt("numberOfItems");
+    private final int numberOfShipments = jsonData.getInt("numberOfShipments");
+    private final int numberOfPurchaseOrders = jsonData.getInt("numberOfPurchaseOrders");
+    private final int numberOfSameVendors = jsonData.getInt("numberOfSameVendors");
+    private final DBCall dbCall = new DBCall(wiseUser);;
+    private final RTSPlanner planner = new RTSPlanner(helper, wiseUser);
     private final DriverApp driverApp = new DriverApp(helper);
     private ArrayList<Manifest> manifests = new ArrayList<>();
-    private int numberOfPurchaseOrders = 2;
-    private int numberOfSameVendors = 2;
-    private int numberOfSalesOrders = 1;
-    private int numberOfShipments = 3;
-    private int numberOfItems = 1;
-    private boolean useLastOrders = false;
-    private boolean useLastManifests = false;
+    private ArrayList<String> vendors = new ArrayList<>();
 
     public SmokeTest(Helper helper) throws SQLException {
         super(helper);
         commonObj = new CommonActions(helper);
         ownDriver = helper.getGSDriver();
         orders = new Orders();
-        dbCall = new DBCall(company, environment);
     }
 
     public void initiateSmokeTest() throws SQLException, IOException {
@@ -76,6 +77,13 @@ public class SmokeTest extends ReusableLib {
             driverApp.validateStops(manifest);
             driverApp.startDelivery();
         }
+    }
+    public void soCreation() throws SQLException, JsonProcessingException {
+        wiseUser.loginToWISE();
+        for (int i = 1; i <= numberOfSalesOrders; i++) {
+            orders.getSalesOrders().add(createSalesOrder());
+        }
+        saveOrders();
     }
 
     public void navigateToManifest() {
@@ -170,12 +178,17 @@ public class SmokeTest extends ReusableLib {
             report.updateTestLog("Finishing Shipment",
                     "Finished creating shipment " + shipment.getShipmentNumber(), Status.PASS);
         }
-        createShipments(salesOrder);
+        if (numberOfShipments > 1)
+            createShipments(salesOrder);
+        if (vendors.size() > 0) {
+            for (Shipment shipment : salesOrder.getShipments())
+                convertToPO(salesOrder, shipment);
+        }
         exitSalesOrder();
         return salesOrder;
     }
 
-    private void createShipments(SalesOrder salesOrder) throws SQLException {
+    private void createShipments(SalesOrder salesOrder) {
         click(SalesOrdersPage.shipmentTab);
         waitForElementDisappear(By.id("_pui_loading_animation"), 15);
         Utility_Functions.contextClickOnElement(ownDriver,SalesOrdersPage.elementForContextClick);
@@ -204,8 +217,6 @@ public class SmokeTest extends ReusableLib {
             waitForElementDisappear(By.id("_pui_loading_animation"), 15);
             Utility_Functions.actionKey(Keys.PAGE_DOWN, ownDriver);
             Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(By.id("slbNextAction."+ index)), 2);
-            if (vendors.size() > 0)
-                convertToPO(salesOrder, shipment);
         }
     }
 
@@ -336,17 +347,6 @@ public class SmokeTest extends ReusableLib {
 
         return salesOrder;
     }
-    public static String getRandomString(int n) {
-        String AlphaNumericString = " ABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                + " 0123456789 "
-                + " abcdefghijklmnopqrstuvxyz ";
-        StringBuilder sb = new StringBuilder(n);
-        for (int i = 0; i < n; i++) {
-            int index = (int)(AlphaNumericString.length()  * Math.random());
-            sb.append(AlphaNumericString.charAt(index));
-        }
-        return sb.toString();
-    }
 
     public ArrayList<String> getRandomVendors() throws SQLException {
         int total = numberOfPurchaseOrders - numberOfSameVendors;
@@ -362,22 +362,15 @@ public class SmokeTest extends ReusableLib {
         return vendors;
     }
 
-    public void saveOrders() throws IOException {
-        String fileName = "orders.ser";
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName));
-        out.writeObject(orders);
-        out.close();
+    public void saveOrders() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        String test = mapper.writeValueAsString(orders);
+        System.out.println(test);
+        Utility_Functions.xUpdateJson("Orders", test);
     }
-
     public Orders loadOrders() throws IOException {
-        String fileName = "orders.ser";
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName));
-        try {
-            return (Orders) in.readObject();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(Utility_Functions.xGetJsonData("Orders"), Orders.class);
     }
 
     public void saveManifests() throws IOException {
@@ -435,6 +428,4 @@ public class SmokeTest extends ReusableLib {
             randomNounPhrase(sentence, max);
         }
     }
-
-
 }

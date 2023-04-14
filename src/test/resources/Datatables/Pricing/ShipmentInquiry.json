@@ -1,0 +1,23 @@
+{
+  "Business_Flow": [
+    {
+      "ShipmentInquiry": "loginToWISE, createSalesOrder, exitSalesOrder, exitWise, navigateToShipmentInquiry, applyFiltersAndValidateDetails",
+      "_ShipmentInquiry": "navigateToShipmentInquiry, applyFiltersAndValidateDetails"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "ShipmentInquiry",
+      "user": "winauto2",
+      "webUser": "wztestqa",
+      "password": "winauto",
+      "dbUser": "WINQAauto",
+      "dbPassword": "P3rFoRm3R",
+      "environment": "DEV",
+      "company": "123",
+      "numberOfShipments": "2",
+      "numberOfItems": "2",
+      "Iteration": "1"
+    }
+  ]
+}

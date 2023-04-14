@@ -1,8 +1,13 @@
 package com.winSupply.framework.selenium;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -27,6 +32,8 @@ import com.winSupply.framework.FrameworkException;
 import com.winSupply.framework.Settings;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+
+import javax.swing.filechooser.FileSystemView;
 
 /**
  * Factory class for creating the {@link WebDriver} object as required
@@ -61,48 +68,36 @@ public class WebDriverFactory {
         switch (browser) {
             case CHROME:
             	// Takes the system proxy settings automatically
-
-
     			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
     			ChromeOptions options = new ChromeOptions();
-    			// disable ephemeral flash permissions flag
-    			options.addArguments("--disable-features=EnableEphemeralFlashPermission");
 
+                HashMap<String, Object> prefs = new HashMap<>();
+                String downloadDirPath = System.getProperty("user.home") + File.separator + "AutomationPDFs";
+                File downloadDir = new File(downloadDirPath);
+                File extensionFile = new File("src/test/resources/event_recorder.crx");
 
-//    	    options.addArguments("--disable-web-security");
-//    			options.addArguments("--allow-running-insecure-content");
-
-    			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                if (!downloadDir.exists()) downloadDir.mkdir();
 
 
     			try {
-    				/*String path=null;
-    				switch (platform) {
-    				case "WINDOWS":
-    					path=properties.getProperty("ChromeDriverPath");
-    					
-    					break;
-    				case "MAC":
-    					path=properties.getProperty("MChromeDriverPath");
-    					
-    					break;
-
-    				}*/
-    				//System.setProperty("webdriver.chrome.driver", path);
-    				
-    				//driver = new ChromeDriver(capabilities);
-                    if (!headless.toUpperCase().equals("NO")){
-                        options.addArguments("--headless");
-
+                    if (!headless.equalsIgnoreCase("NO")){
+                        options.addArguments("--headless=new");
+                        options.addArguments("--window-size=1920,1080");
                     }
 
-    			options.addArguments("--disable-web-security");
-    			options.addArguments("--allow-running-insecure-content");
-    			options.addArguments(" --ignore-certificate-errors");
-    			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-    			WebDriverManager.chromedriver().setup();
+                    options.addArguments("--disable-web-security");
+                    options.addArguments("--allow-running-insecure-content");
+                    options.addArguments(" --ignore-certificate-errors");
+                    options.addArguments("--disable-features=EnableEphemeralFlashPermission");
+                    options.addArguments("--disable-features=EnableEphemeralFlashPermission");
+                    options.addExtensions(extensionFile);
+                    prefs.put("plugins.always_open_pdf_externally", true);
+                    prefs.put("download.default_directory", downloadDirPath);
+                    prefs.put("download.prompt_for_download", false);
+                    options.setExperimentalOption("prefs", prefs);
+                    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+                    WebDriverManager.chromedriver().setup();
     				ChromeDriverService.Builder builder = new ChromeDriverService.Builder();
-    				//builder.usingDriverExecutable(new File(path));
     				builder.usingAnyFreePort();
     				ChromeDriverService service = builder
     					.build();
@@ -112,22 +107,9 @@ public class WebDriverFactory {
     				e.printStackTrace();
     				System.out.println(e);
     			}
-
-    			// driver.manage().deleteAllCookies();
     			break;
 
             case FIREFOX:
-                // Takes the system proxy settings automatically
-
-                /*switch (platform) {
-                    case "WINDOWS":
-                        System.setProperty("webdriver.gecko.driver", properties.getProperty("GeckoDriverPath"));
-                        break;
-                    case "MAC":
-                        System.setProperty("webdriver.gecko.driver", properties.getProperty("MGeckoDriverPath"));
-                        break;
-                }*/
-
 
                 FirefoxBinary firefoxBinary = new FirefoxBinary();
                 firefoxBinary.addCommandLineOptions("--headless");
@@ -140,7 +122,7 @@ public class WebDriverFactory {
                 WebDriverManager.firefoxdriver().setup();
                 
                 try {
-                    if (headless.toUpperCase().equals("NO")) {
+                    if (headless.equalsIgnoreCase("NO")) {
                         driver = new FirefoxDriver(handlSSLErr);
                     } else {
                         driver = new FirefoxDriver(firefoxOptions);
@@ -251,6 +233,38 @@ public class WebDriverFactory {
                 desiredCapabilities = new DesiredCapabilities();
             }
 
+            if (browser == Browser.CHROME) {
+                ChromeOptions options = new ChromeOptions();
+                HashMap<String, Object> prefs = new HashMap<>();
+                String downloadDirPath = System.getenv("DOWNLOAD_DIR");
+                if (downloadDirPath == null || downloadDirPath.isEmpty()) {
+                    downloadDirPath = "/home/seluser/Downloads";
+                } else {
+                    downloadDirPath = Paths.get(downloadDirPath).toString();
+                }
+                try {
+
+                    options.addArguments("--disable-web-security");
+                    options.addArguments("--allow-running-insecure-content");
+                    options.addArguments("--ignore-certificate-errors");
+                    options.addArguments("--disable-features=EnableEphemeralFlashPermission");
+                    prefs.put("download.default_directory", downloadDirPath);
+                    prefs.put("download.prompt_for_download", false);
+                    prefs.put("plugins.always_open_pdf_externally", true);
+                    prefs.put("credentials_enable_service", false);
+                    prefs.put("profile.password_manager_enabled", false);
+                    options.setExperimentalOption("prefs", prefs);
+                    options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation")); // to remove the "controlled by automated test software" notification
+                    desiredCapabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println(e);
+                }
+            } else if (browser == Browser.FIREFOX) {
+                desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+            }
+
             desiredCapabilities.setBrowserName(browser.getValue());
 
             if (browserVersion != null) {
@@ -258,16 +272,6 @@ public class WebDriverFactory {
             }
             if (platform != null) {
                 desiredCapabilities.setPlatform(platform);
-            }
-            switch (browser) {
-                case FIREFOX:
-                    desiredCapabilities = DesiredCapabilities.firefox();
-                    desiredCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-
-                    break;
-                default:
-                    break;
-
             }
 
             desiredCapabilities.setJavascriptEnabled(true); // Pre-requisite for

@@ -9,9 +9,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.winSupply.framework.Settings;
-import io.restassured.RestAssured;
-import io.restassured.specification.RequestSpecification;
-import org.json.simple.JSONObject;
+import com.winSupply.framework.TestStepBean;
 
 public class QTestManager {
 	public static int projectid;
@@ -27,6 +25,7 @@ public class QTestManager {
 	public static int testSuiteID;
 	public static int testCaseid;
 	public static int testRunid;
+	public static int testLogid;
 	public static Properties properties = Settings.getInstance();
 
 	/**
@@ -199,6 +198,7 @@ public class QTestManager {
 			// for(int testCaseid : testCaseMapper.keySet()) {
 			testRunid = QtestAPIHandler.addTestCasetoTestSuite(projectid, testSuiteID, testCaseid,
 					getTestRunName(currentTestCase));
+			QtestAPIHandler.createTestRun(projectid, testRunid);
 			testRunMapper.put(uiTestID, testRunid);
 		}
 		// }
@@ -210,9 +210,15 @@ public class QTestManager {
 	 * 
 	 * @param status
 	 */
-	public static void updateTestRunStatus(String status) {
+	public static void updateTestRunStatus(String status, List<TestStepBean> testStepBeanList) {
 		if (testCaseid != 0) {
-			QtestAPIHandler.updateTestStatus(projectid, testRunid, status);
+			QtestAPIHandler.updateTestStatus(projectid, testRunid, status, testStepBeanList);
+		}
+	}
+
+	public static void updateSteps(List<TestStepBean> testStepBean) {
+		if (testCaseid != 0) {
+			QtestAPIHandler.updateTestSteps(projectid, testCaseid, testStepBean);
 		}
 	}
 
@@ -223,10 +229,10 @@ public class QTestManager {
 	 * @param uiTestID
 	 * @param status
 	 */
-	public static void updateTestRunStatus(String uiTestID, String status) {
-		int testrunID = testRunMapper.get(uiTestID);
-		QtestAPIHandler.updateTestStatus(projectid, testrunID, status);
-	}
+//	public static void updateTestRunStatus(String uiTestID, String status) {
+//		int testrunID = testRunMapper.get(uiTestID);
+//		QtestAPIHandler.updateTestStatus(projectid, testrunID, status);
+//	}
 
 	/**
 	 * Upload Test Screenshot to the test log
@@ -236,14 +242,12 @@ public class QTestManager {
 	 */
 	public static void uploadTestScreenshotstoTestLog(String path, String testCaseName) {
 		if (testCaseid != 0) {
-		List<String> allScreenshots = getAllScreenshots(path, testCaseName);
-		for (String imgName : allScreenshots) {
+			List<String> allScreenshots = getAllScreenshots(path, testCaseName);
 			try {
-				QtestAPIHandler.uploadTestLogAttachment(projectid, path, imgName);
+				QtestAPIHandler.uploadTestLogAttachment(projectid, path, allScreenshots);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
 		}
 
 	}

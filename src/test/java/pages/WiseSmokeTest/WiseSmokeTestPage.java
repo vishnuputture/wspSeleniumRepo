@@ -56,6 +56,7 @@ public class WiseSmokeTestPage extends ReusableLib {
     public static By rgtClk = By.id("My Account.1");
     public static By createPcsOrd = By.xpath("//td[text()='Create Purchase Order']");
     public static By convertEntShp = By.xpath("//td[text()='Convert Entire Shipment']");
+    public static By counterPicks = By.id("counterPickLink.1");
     public static By searchBtn = By.id("imgVendorSearch");
     public static By btnNext = By.id("btnNext");
     public static By ddnFreightCode = By.id("slbFreightCode"); //Full Frt Allowed/ NO Frt Chrg.
@@ -147,6 +148,8 @@ public class WiseSmokeTestPage extends ReusableLib {
     public static By PrintYesNo = By.id("I_10_14_W1");
     public static By PrinterName = By.id("I_10_16_W1");
     public static By SendTo = By.id("I_15_14_W1");
+    public static By counterPickQuantity = By.id("InCntrPckQty.1");
+    public static By confirmManualPicks = By.id("btnButton1");
 
     public static By ShippingConfirmation = By.id("D_10_7");
     public static By DaysBusiness = By.id("I_3_19");

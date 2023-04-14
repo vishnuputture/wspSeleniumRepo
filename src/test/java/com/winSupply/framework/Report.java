@@ -14,6 +14,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
@@ -344,11 +345,8 @@ public class Report {
 	 *            The status of the test step
 	 */
 	public void updateTestLog(String stepName, String stepDescription, Status stepStatus) {
-		System.out.println("Screenshot 0 "+stepDescription);
+		System.out.println("Screenshot: "+stepDescription);
 		String screenshotName = handleStepInvolvingScreenshot(stepName, stepStatus);
-		if (stepStatus==Status.PASS) {
-			System.out.println("Screenshot 1 " + stepDescription);
-		}
 		if ((stepName != "GS Info") && (stepStatus != Status.DEBUG)) {
 			setTestLogValues(stepName, stepDescription, stepStatus.toString());
 			//updateExtentStatus(stepName, stepDescription, stepStatus);
@@ -363,13 +361,7 @@ public class Report {
 
 			}
 		}
-		if (stepStatus==Status.PASS) {
-			System.out.println("Screenshot 2 " + stepDescription);
-		}
 		handleStepInvolvingPassOrFail(stepDescription, stepStatus);
-		if (stepStatus==Status.PASS) {
-			System.out.println("Screenshot 3 " + stepDescription);
-		}
 		if (stepStatus.ordinal() <= reportSettings.getLogLevel()) {
 
 
@@ -527,7 +519,7 @@ public class Report {
 	private String handleStepInvolvingScreenshot(String stepName, Status stepStatus) {
 		String screenshotName = reportSettings.getReportName() + "_"
 				+ Util.getCurrentFormattedTime(reportSettings.getDateFormatString()).replace(" ", "_").replace(":", "-")
-				+ "_" + stepName.replace(" ", "_") + ".png";
+				+ "_" + stepName.replace(" ", "_") + "_" + UUID.randomUUID() + ".png";
 
 		if ((stepStatus.equals(Status.FAIL) && reportSettings.shouldTakeScreenshotFailedStep())
 				|| (stepStatus.equals(Status.PASS) && reportSettings.shouldTakeScreenshotPassedStep())
