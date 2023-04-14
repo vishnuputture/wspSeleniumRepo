@@ -17,7 +17,7 @@ public class MatrixCostUpdatePage extends ReusableLib {
     public static By noActionRadioBtn = By.id("rbtNoAction.1");
     public static By excMCRepoRadioBtn = By.id("rbtExlMC.1");
     public static By selectFunDrop = By.id("ddbSelFunction");
-    public static By discardButton = By.id("CssButton1");
+    public static By discardButton,updateButton = By.id("CssButton1");
     public static By cancelButton = By.id("CssButton2");
     public static By checkBox = By.id("RbtMtxUpdAll");
     public static By avgColor = By.id("outAvgCost.1");
@@ -25,7 +25,8 @@ public class MatrixCostUpdatePage extends ReusableLib {
     public static By continueButton = By.id("CssButton1");
     public static By saveButton = By.id("btnSubmit");
     public static By itmMsrPropoFld = By.id("inMatrix");
-    public static By updateButton = By.id("CssButton1");
+
+    public static By updateMatrixCostCheckbox = By.xpath("//div[contains(text(),'Update Matrix Cost')]/a[1]/input[1]");
     public static By firstItemNumber = By.id("inpItemNbr");
     public static By totalPages = By.id("txtTotalPage");
     public static By txtBoxSearch = By.id("inItemNumber");

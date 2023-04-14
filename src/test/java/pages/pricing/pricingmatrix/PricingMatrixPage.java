@@ -48,6 +48,9 @@ public class PricingMatrixPage extends ReusableLib {
     public static By dispListTitle = By.id("D_2_20");
     public static By selectRowTxtBox = By.id("I_4_26");
     public static By selectColTxtBox = By.id("I_4_28");
+    public static By rowValueForPricingMatrix = By.id("I_9_26");
+    public static By colValueForPricingMatrix = By.id("I_9_28");
+
 
 
     public static By getButton(String id) {

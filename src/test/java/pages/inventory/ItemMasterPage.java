@@ -10,6 +10,8 @@ public class ItemMasterPage extends ReusableLib {
         super(helper);
     }
 
+    public static By search_itemMaster_Lookup = By.xpath("//div[@id='faItemSearch']//i[@class='fa fa-search']");
+
     public static By pageTitle = By.xpath("//div[@id='Title']");
     public static By addItemAction = By.xpath("//div[@title='F8 - Add Item']");
     public static By txtBoxDescription = By.xpath("//input[@title='Description Blank']");
@@ -90,5 +92,7 @@ public class ItemMasterPage extends ReusableLib {
     public static By tbxFCC = By.id("I_6_25");
     public static By tbxDescriptionFCC = By.id("I_8_25");
     public static By lblCode = By.id("D_7_4");
+
+    public static By wssNetPrice = By.id("outWSSNtPrc");
 
 }

@@ -31,6 +31,8 @@ import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
+import pages.WiseSmokeTest.WiseSmokeTestPage;
+import pages.common.MasterPage;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -44,6 +46,8 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -4918,14 +4922,14 @@ public class Utility_Functions extends ReusableLib {
         return getRandomName;
     }
 
-    public static void waitTillClickHardSleep(Report report,FrameworkDriver driver,By el,String custMsg) {
+    public static void waitTillClickHardSleep(Report report, FrameworkDriver driver, By el, String custMsg) {
         int count = 0;
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
             try {
                 driver.findElement(el).click();
                 report.updateTestLog("Click", custMsg, Status.PASS);
-                flag=false;
+                flag = false;
             } catch (Exception e) {
                 count++;
                 try {
@@ -4940,14 +4944,14 @@ public class Utility_Functions extends ReusableLib {
         }
     }
 
-    public static void waitTillClickHardSleep(Report report,FrameworkDriver driver,WebElement el,String custMsg) {
+    public static void waitTillClickHardSleep(Report report, FrameworkDriver driver, WebElement el, String custMsg) {
         int count = 0;
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
             try {
                 el.click();
                 report.updateTestLog("Click", custMsg, Status.PASS);
-                flag=false;
+                flag = false;
             } catch (Exception e) {
                 count++;
                 try {
@@ -4962,7 +4966,7 @@ public class Utility_Functions extends ReusableLib {
         }
     }
 
-    public static String yearAdjust(int year){
+    public static String yearAdjust(int year) {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -4970,5 +4974,66 @@ public class Utility_Functions extends ReusableLib {
         dt = c.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
         return formatter.format(dt);
+    }
+
+    public void exitToMaster(int numberOfExitsNeeded) {
+        for (int i = 0; i < numberOfExitsNeeded; i++) {
+            click(WiseSmokeTestPage.F3exit);
+
+        }
+    }
+
+    public void navigations(int... navigators) {
+        for (int eachNavigator : navigators) {
+            sendKeysAndEnter(MasterPage.sqlTxtBox, Integer.toString(eachNavigator), "Entered" + eachNavigator);
+        }
+    }
+
+    public int convertDecimalToInteger(String s) {
+        int decimalIndex = s.indexOf('.');
+        int roundedValue = Integer.parseInt(s.substring(0, decimalIndex).replaceAll("[^0-9]", ""));
+        return roundedValue;
+    }
+
+    public String updatedDecimalToIntegerValue(String s) {
+        int updatedValue = convertDecimalToInteger(s) + 5;
+        return Integer.toString(updatedValue);
+    }
+
+    public String retrieveDecimalToIntegerValue(String s) {
+        int updatedValue = convertDecimalToInteger(s);
+        return Integer.toString(updatedValue);
+    }
+
+    public String appendLocalDate()
+    {
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+        String formatted = now.format(formatter);
+        return formatted;
+    }
+
+    public String appendTomorrowLocalDate()
+    {
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+        String formatted = tomorrow.format(formatter);
+        return formatted;
+    }
+
+    public String appendLocalTime()
+    {
+        LocalTime now = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return ""+now.format(formatter);
+    }
+
+    public void multipleClicksOnTheSameElement(By el,int count) throws InterruptedException {
+        for(int i=0; i<count; i++)
+        {
+            ownDriver.findElement(el).click();
+            Thread.sleep(1000);
+        }
     }
 }

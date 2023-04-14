@@ -12,7 +12,10 @@ public class ItemLedgerPage extends ReusableLib {
     }
 
     public static By lblLedgerPrice = By.xpath("//div[@id='outPrice.1']");
+
+    public static By lblLedgerSC = By.xpath("//div[@id='outSC.1']");
     public static By lblQtyAfter = By.xpath("//div[@id='outQtyAfter.1']");
     public static By txtItemNumber = By.xpath("//input[@id='inpItemNbr']");
     public static By btnExit = By.xpath("//div/input[@id='btnExit']");
+    public static By updatedUserName = By.xpath("//div[@id='outBy.1']");
 }

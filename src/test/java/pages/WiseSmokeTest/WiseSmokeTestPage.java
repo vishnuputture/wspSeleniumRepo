@@ -8,7 +8,6 @@ import pages.pricing.ShippingConfirmation;
 public class WiseSmokeTestPage extends ReusableLib {
     public WiseSmokeTestPage (Helper helper) {super(helper);}
 
-
     public static By userName = By.id("I_6_53");
     public static By passWord = By.id("I_7_53");
     public static By Where = By.id("I_22_7");
@@ -200,6 +199,11 @@ public class WiseSmokeTestPage extends ReusableLib {
 
     public static By poStatusDropDown = By.id("ddbP1PTODRSTS");
     public static By poOptionDropDown = By.id("P1OPT.1");
+
+    public static By SOENTRY5 = By.xpath("//div[normalize-space()='5-Display PDFs']");
+    public static By optBox = By.id("I_11_3");
+
+    public static By cancelF12 = By.id("btnCF12");
 
 }
 

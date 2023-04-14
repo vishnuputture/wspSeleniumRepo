@@ -1,0 +1,27 @@
+{
+  "Business_Flow": [
+    {
+      "TC_PricingSmokeTest": "url,login,win,validateItemMasterTitle,searchItemOnItemMaster,navigateToBillingInstructions,chooseSuitableCustomer,navigateToCostAndPriceRevisions,searchItemNumberInCostAndPrices,verifyUpdatedListPriceAndUpdateMatrixCost,verifyPricingMatrixValues,verifyUpdatedValuesInSalesPersonInquiry,verifyMatrixCostWarnings,verifyMatrixCostItemLedger,pricingSPA,createSPAContract,verifySpecialPriceInItemMaster"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "TC_PricingSmokeTest",
+      "userName": "winauto2",
+      "passWord": "winauto",
+      "prodCompany": "13344",
+      "winCompany": "028",
+      "environment": "STG",
+      "itemNumber": "041501880",
+      "SC": "IA",
+      "Rebate Cost": "14",
+      "Selling Price" : "120",
+      "Rebate Discount Type" : "T",
+      "Selling Multiplier Type" : "T",
+      "Rebate Discount" : ".1500",
+      "Selling Multiplier" : ".2000",
+      "Special Pricing Value" : "Y",
+
+    }
+  ]
+}

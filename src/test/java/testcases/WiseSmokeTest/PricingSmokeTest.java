@@ -5,9 +5,9 @@ import com.winSupply.core.TestConfigurations;
 import com.winSupply.framework.selenium.SeleniumTestParameters;
 import org.testng.annotations.Test;
 
-public class WiseSmokeTest extends TestConfigurations {
+public class PricingSmokeTest extends TestConfigurations{
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
-    public void TC_WiseSmokeTest(SeleniumTestParameters testParameters) {
+    public void TC_PricingSmokeTest(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Smoke Test for the release");
         CoreScript coreScript = new CoreScript(testParameters);
         coreScript.driveTestExecution();
