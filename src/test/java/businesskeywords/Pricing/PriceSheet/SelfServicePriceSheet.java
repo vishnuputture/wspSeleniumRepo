@@ -58,29 +58,26 @@ public class SelfServicePriceSheet extends ReusableLib {
     public void navigateToSelfServicePriceSheet() {
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//h1"), "Wait for page to be loaded");
         click(SelfServicePriceSheetPage.companySelector);
-        click(SelfServicePriceSheetPage.companyLabel);
         sendKey(SelfServicePriceSheetPage.winCompanyNumber, "99599");
-        commonObj.validateText(SelfServicePriceSheetPage.selectButton, "Select", "Validating Select button");
-        click(SelfServicePriceSheetPage.selectButton);
+        click(SelfServicePriceSheetPage.selectCompany);
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, SelfServicePriceSheetPage.headerTitle, "Wait for page to be loaded");
-        // Utility_Functions.timeWait(6);
         commonObj.validateText(SelfServicePriceSheetPage.headerTitle, "SELF SERVICE PRICE SHEETS", "Validating Landing page title");
     }
 
     public void extractSheetDetails() {
         Utility_Functions.timeWait(5);
-        if(!ownDriver.findElement(PriceSheetDetails.updateListPrice).isSelected()) {
+        if (!ownDriver.findElement(PriceSheetDetails.updateListPrice).isSelected()) {
             click(PriceSheetDetails.updateListPrice);
         }
-        if(!ownDriver.findElement(PriceSheetDetails.updatePOCost).isSelected()) {
+        if (!ownDriver.findElement(PriceSheetDetails.updatePOCost).isSelected()) {
             click(PriceSheetDetails.updatePOCost);
         }
-        if(!ownDriver.findElement(PriceSheetDetails.updateMatrixCost).isSelected()) {
+        if (!ownDriver.findElement(PriceSheetDetails.updateMatrixCost).isSelected()) {
             click(PriceSheetDetails.updateMatrixCost);
         }
-        Utility_Functions.xUpdateJson("PoCostMultiplier", ownDriver.findElement(SelfServicePriceSheetPage.poCostMultiplier).getText().replace("$",""));
-        Utility_Functions.xUpdateJson("MatrixCostMultiplier", ownDriver.findElement(SelfServicePriceSheetPage.matrixCostMultiplier).getText().replace("$",""));
-        Utility_Functions.xUpdateJson("ListPrice", ownDriver.findElement(SelfServicePriceSheetPage.listPrice).getText().replace("$",""));
+        Utility_Functions.xUpdateJson("PoCostMultiplier", ownDriver.findElement(SelfServicePriceSheetPage.poCostMultiplier).getText().replace("$", ""));
+        Utility_Functions.xUpdateJson("MatrixCostMultiplier", ownDriver.findElement(SelfServicePriceSheetPage.matrixCostMultiplier).getText().replace("$", ""));
+        Utility_Functions.xUpdateJson("ListPrice", ownDriver.findElement(SelfServicePriceSheetPage.listPrice).getText().replace("$", ""));
         click(PriceSheetDetails.saveButton);
         Utility_Functions.timeWait(2);
     }
@@ -127,7 +124,7 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     public void validateSheetProcessed() {
-        Utility_Functions.timeWait(4);
+        Utility_Functions.timeWait(10);
         ownDriver.navigate().refresh();
         Utility_Functions.timeWait(6);
         String status = ownDriver.findElement(By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span")).getText();
@@ -179,18 +176,14 @@ public class SelfServicePriceSheet extends ReusableLib {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strPriceDate = formatter.format(dt);
         System.out.println(strPriceDate);
-
         codeGen();
-
         Utility_Functions.timeWait(6);
         click(SelfServicePriceSheetPage.addPriceSheetbtn);
-
-        autoComplete(SelfServicePriceSheetPage.manufacturer, "koh", SelfServicePriceSheetPage.manufacturerList, jsonData.getData("Manufacturer"));
+        autoComplete(SelfServicePriceSheetPage.manufacturer, "KOHLER CO", SelfServicePriceSheetPage.manufacturerList, jsonData.getData("Manufacturer"));
         sendKey(SelfServicePriceSheetPage.priceSheetName, name);
         // sendKeyDate(SelfServicePriceSheetPage.effectiveDate,strPriceDate);
         Utility_Functions.xSendkeysAndTab(ownDriver.findElement(SelfServicePriceSheetPage.effectiveDate), strPriceDate);
         sendKey(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"));
-
         click(SelfServicePriceSheetPage.choosePriceSheet);
         String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
         System.out.println(path);
@@ -205,7 +198,6 @@ public class SelfServicePriceSheet extends ReusableLib {
     public void validateUpload() {
         String strdate = generateDate();
         Utility_Functions.timeWait(4);
-
         commonObj.validateText(SelfServicePriceSheetPage.successMessage, "Price Sheet successfully uploaded", "upload Successful");
         ownDriver.navigate().refresh();
         Utility_Functions.timeWait(3);
@@ -332,15 +324,16 @@ public class SelfServicePriceSheet extends ReusableLib {
         Utility_Functions.xSendkeysAndTab(ownDriver.findElement(PriceSheetDetails.processedDate), strPriceDate);
         //Utility_Functions.timeWait(2);
         //l.click();
-       //l.sendKeys(Keys.TAB);
+        //l.sendKeys(Keys.TAB);
     }
 
     public void markReady() {
         processDatePick();
         Utility_Functions.timeWait(3);
+        click(PriceSheetDetails.updateListPrice);
         try {
             click(PriceSheetDetails.markAsReadyButton);
-        }catch (Exception e){
+        } catch (Exception e) {
             click(SelfServicePriceSheetPage.updateListPriceCheckBox, "Click Update List Price Check Box");
             click(PriceSheetDetails.markAsReadyButton);
         }
@@ -609,7 +602,7 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     public void ingestingStatus() {
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span"),"");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span"), "");
         String status = ownDriver.findElement(By.xpath("//tbody//tr//td[text()='" + Utility_Functions.xGetJsonData("priceSheetName") + "']//following-sibling::td//span")).getText();
         if (status.equalsIgnoreCase("Ingesting")) {
             report.updateTestLog("VerifyRecord", "status Matched", Status.PASS);
@@ -702,7 +695,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         double poPercentageCostChange = (calculatedPoCost - wisePoCost) * 100;
         double actPoPerChang = poPercentageCostChange / wisePoCost;
         double actPoPerChange = Math.round(actPoPerChang * 10.0) / 10.0;
-        commonObj.validateText(PriceSheetDetails.currentHighlights, "" + actPoPerChange+ "%", "");
+        commonObj.validateText(PriceSheetDetails.currentHighlights, "" + actPoPerChange + "%", "");
     }
 
     public void poCostCalculation() {
@@ -713,10 +706,10 @@ public class SelfServicePriceSheet extends ReusableLib {
         calculatePoCost(wisePriceInt);
     }
 
-    public void wisePo(){
+    public void wisePo() {
         String wiseListPrice = ownDriver.findElements(PriceSheetDetails.wiseListPriceChangePrice).get(3).getText();
         String wisePrice = wiseListPrice.replace("$", "");
-        Utility_Functions.xUpdateJson("wisePO",wisePrice);
+        Utility_Functions.xUpdateJson("wisePO", wisePrice);
     }
 
     public void calculateMatrixCost(int wisePriceInt) {

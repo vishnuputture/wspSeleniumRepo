@@ -90,7 +90,6 @@ public class Login extends ReusableLib {
             if (!companyList.contains(currentCompany)) {
                 sendKeys(MasterPage.sqlTxtBox, "win " + companyList.get(0));
                 Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-
             }
         }
     }

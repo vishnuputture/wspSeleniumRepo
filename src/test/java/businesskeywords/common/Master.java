@@ -70,4 +70,13 @@ public class Master extends ReusableLib {
     public void signOut() {
         click(MasterPage.btnSignOut, "Click on signout");
     }
+
+    /**
+     * This method is used to navigate to Billing Instructions screen
+     */
+    public void navigateToBillingInstructions() {
+        click(MasterPage.orderProcessMenu);
+        click(MasterPage.billingInstructions);
+    }
+
 }

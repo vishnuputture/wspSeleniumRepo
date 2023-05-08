@@ -8,7 +8,6 @@ import pages.pricing.ShippingConfirmation;
 public class WiseSmokeTestPage extends ReusableLib {
     public WiseSmokeTestPage (Helper helper) {super(helper);}
 
-
     public static By userName = By.id("I_6_53");
     public static By passWord = By.id("I_7_53");
     public static By Where = By.id("I_22_7");

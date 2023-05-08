@@ -58,7 +58,7 @@ public class SalesPersonPage extends ReusableLib {
 
     public static By listPrice=By.id("outListPrice");
     public static By matrixCost=By.id("IBCSTA1");
-    //public static By grossMargin=By.id("DSMUPA1");
+    public static By grossMarginPrice=By.id("DSMUPA1");
     public static By marginPercent=By.id("IBMUP1");
 
     /********************************** Inventory tab **********************************/
@@ -108,4 +108,8 @@ public class SalesPersonPage extends ReusableLib {
     public static By tbxCustNoCustNotesPage=By.id("I_5_12");
     public static By notificationMsg=By.id("D_23_3");
 
+    public static By exit = By.id("btnCF03");
+    public static By specialPrice = By.id("SPRC");
+
+    public static By contractName = By.id("CSTMSG");
 }

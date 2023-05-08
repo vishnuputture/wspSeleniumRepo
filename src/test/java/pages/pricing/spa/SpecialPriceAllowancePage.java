@@ -11,14 +11,14 @@ public class SpecialPriceAllowancePage extends ReusableLib {
 
     public static By header = By.id("D_2_25");
     public static By appHeader = By.id("D_2_16");
-    public static By textSearchHeader = By.id("D_4_2");
+    public static By textSearchHeader,confirmLoadSpecialPricing = By.id("D_4_2");
     public static By inputSearchBox = By.xpath("//input[@id='I_4_32']");
     public static By optionsHeader = By.id("D_6_2");
     public static By optionsSet = By.id("D_7_3");
     public static By btnExit = By.id("btnExit");
     public static By lblExpired = By.xpath("//div[text()='Expired']");
     public static By lblActive = By.xpath("//div[text()='Active']");
-    public static By btnHideShowExpired = By.id("btnCF07");
+    public static By btnHideShowExpired,addMFPDCodes = By.id("btnCF07");
     public static By btnAddContract = By.id("btnCF06");
     public static By txtBoxContractname = By.id("I_4_22");
     public static By txtBoxStartDate = By.id("I_5_22");
@@ -35,7 +35,7 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By txtBoxOption = By.id("I_10_3");
     public static By btnReturn = By.id("btnCF12");
     public static By lblInvalidDeletionMessage = By.xpath("//div[@id='D_24_2'][contains(text(),'Delete')]");
-    public static By btnDelete = By.id("btnCF09");
+    public static By btnDelete,loadSpecialPrice = By.id("btnCF09");
     public static By showContractDate = By.id("btnCF11");
     public static By contractStartDate = By.id("D_9_44");
     public static By endDate = By.id("D_9_55");
@@ -61,7 +61,7 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By status = By.id("D_4_72");
     public static By delSpaRec = By.id("I_3_35_W1");
     public static By codeFileLookUp = By.id("D_1_18_W1");
-    public static By optCostUpdate = By.id("I_8_2_W1");
+    public static By optCostUpdate,productSelectionCode = By.id("I_8_2_W1");
     public static By downButton = By.id("down_button");
     public static By lOpt = By.id("I_13_3");
     public static By venNameMfPd = By.id("D_6_30");
@@ -83,6 +83,7 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By olCode = By.id("D_14_9");
     public static By optMfPd = By.id("I_14_3");
     public static By sellMultType = By.id("I_16_30");
+    public static By sellMultTypeValue = By.xpath("(//input[@id='I_16_30'])[1]");
     public static By sellMult = By.id("I_17_30");
     public static By firstItemNo = By.id("D_13_6");
     public static By rebateMultType = By.id("I_10_30");
@@ -93,5 +94,17 @@ public class SpecialPriceAllowancePage extends ReusableLib {
     public static By bottom = By.xpath("//div[contains(text(),'Bottom')]");
     public static By codeUpdateSuccess = By.xpath("//div[@id='D_24_2'][contains(text(),'Cost')]");
 
+    public static By vendorNameLink = By.xpath("//div[@id='D_6_2']/a[1]");
     public static By btnF11 = By.id("btnCF11");
+    public static By optionOneToChooseVendor = By.id("I_8_2");
+
+    public static By rebateCost = By.id("I_15_30");
+    public static By sellingPrice = By.id("I_19_30");
+    public static By successMessageForIndividualItems = By.id("D_24_2");
+    public static By mfpdCodes = By.id("D_13_3");
+    public static By optionOneForMFPDCode = By.id("I_8_2_W1");
+    public static By prompt = By.id("btnCF04");
+
+    public static By rebateDiscountType = By.id("I_14_30");
+    public static By rebateDiscount = By.id("I_15_30");
 }

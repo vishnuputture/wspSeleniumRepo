@@ -20,13 +20,14 @@ public class SelfServicePriceSheetPage extends ReusableLib {
 
     public static By companySelector = By.id("companySelectorToggle");
     public static By companyLabel = By.xpath("//*[text()=' WIN Into Company ']");
-    public static By winCompanyNumber = By.cssSelector("div.form-group.company-selection.mb-0>input");
+    public static By winCompanyNumber = By.xpath("//input[@role='searchbox' and contains(@class,'p-autocomplete-input')]");
+    public static By selectCompany = By.xpath("//td[contains(@class,'inserted') and text()='99599']");
     public static By selectButton = By.cssSelector("div.select-btn-div>button");
 
     //landing Page
 
     public static By headerTitle = By.xpath("//h2[text()='SELF SERVICE PRICE SHEETS']");
-    public static By iconI = By.xpath("//span[@class='fa-info-circle']");
+    public static By iconI = By.xpath("//span[@class='fa-info_outline']");
     public static By addPriceSheetbtn = By.xpath("//button[text()=' Add Price Sheet ']");
     public static By downloadNewVersion = By.xpath("//a[@download='CostPriceSheetTemplate.xlsx']");
     public static By helpIcon = By.xpath("//a[contains(@class,'help-icon')]");

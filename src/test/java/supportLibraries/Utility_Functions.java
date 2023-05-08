@@ -1,22 +1,18 @@
 package supportLibraries;
 
-import com.github.javafaker.Faker;
-import com.winSupply.core.ReusableLib;
-import com.winSupply.core.Helper;
-import com.winSupply.framework.*;
-import com.winSupply.framework.selenium.FrameworkDriver;
-
-//import src.test.java.supportLibraries.String;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import com.jayway.jsonpath.*;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import com.jayway.jsonpath.spi.json.JsonProvider;
 import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 import com.jayway.jsonpath.spi.mapper.MappingProvider;
-
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+import com.winSupply.core.Helper;
+import com.winSupply.core.ReusableLib;
+import com.winSupply.framework.*;
+import com.winSupply.framework.selenium.FrameworkDriver;
 import com.winSupply.framework.selenium.SeleniumReport;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -31,6 +27,8 @@ import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
+import pages.WiseSmokeTest.WiseSmokeTestPage;
+import pages.common.MasterPage;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -44,6 +42,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -2071,6 +2070,7 @@ public class Utility_Functions extends ReusableLib {
         // return Key;
 
     }
+
     public static Object xGetJsonObject(String Key) {
         try {
 
@@ -2198,6 +2198,7 @@ public class Utility_Functions extends ReusableLib {
         JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
         js.executeScript("arguments[0].style.border = '';", element);
     }
+
     public static void removeHighlight(FrameworkDriver driver, By element) {
         JavascriptExecutor js = (JavascriptExecutor) driver.getWebDriver();
         js.executeScript("arguments[0].style.border = '';", driver.findElement(element));
@@ -3869,6 +3870,7 @@ public class Utility_Functions extends ReusableLib {
         }
 
     }
+
     public static void xUpdateJson(String Key, Object value) {
         try {
             createJsonFile(jsonFile);
@@ -4966,7 +4968,6 @@ public class Utility_Functions extends ReusableLib {
 
     public static String getRandomName() {
         Faker faker = new Faker();
-
         String name = faker.name().fullName();
         String[] splitName = name.split(" ");
         String firstName = faker.name().firstName();
@@ -4998,14 +4999,14 @@ public class Utility_Functions extends ReusableLib {
         }
     }
 
-    public static void waitTillClickHardSleep(Report report,FrameworkDriver driver,WebElement el,String custMsg) {
+    public static void waitTillClickHardSleep(Report report, FrameworkDriver driver, WebElement el, String custMsg) {
         int count = 0;
-        Boolean flag=true;
+        Boolean flag = true;
         while (flag) {
             try {
                 el.click();
                 report.updateTestLog("Click", custMsg, Status.PASS);
-                flag=false;
+                flag = false;
             } catch (Exception e) {
                 count++;
                 try {
@@ -5020,7 +5021,7 @@ public class Utility_Functions extends ReusableLib {
         }
     }
 
-    public static String yearAdjust(int year){
+    public static String yearAdjust(int year) {
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
@@ -5028,5 +5029,89 @@ public class Utility_Functions extends ReusableLib {
         dt = c.getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
         return formatter.format(dt);
+    }
+
+    public void exitToMaster(int numberOfExitsNeeded) {
+        for (int i = 0; i < numberOfExitsNeeded; i++) {
+            click(WiseSmokeTestPage.F3exit);
+
+        }
+    }
+
+    public void navigations(int... navigators) {
+        for (int eachNavigator : navigators) {
+            sendKeysAndEnter(MasterPage.sqlTxtBox, Integer.toString(eachNavigator), "Entered" + eachNavigator);
+        }
+    }
+
+    public int convertDecimalToInteger(String s) {
+        int decimalIndex = s.indexOf('.');
+        int roundedValue = Integer.parseInt(s.substring(0, decimalIndex).replaceAll("[^0-9]", ""));
+        return roundedValue;
+    }
+
+    public String updatedDecimalToIntegerValue(String s) {
+        int updatedValue = convertDecimalToInteger(s) + 5;
+        return Integer.toString(updatedValue);
+    }
+
+    public String retrieveDecimalToIntegerValue(String s) {
+        int updatedValue = convertDecimalToInteger(s);
+        return Integer.toString(updatedValue);
+    }
+
+    public String appendLocalDate() {
+        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+        String formatted = now.format(formatter);
+        return formatted;
+    }
+
+    public String appendFutureLocalDate(int noOfDaysInFuture) {
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(noOfDaysInFuture);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+        String formatted = tomorrow.format(formatter);
+        return formatted;
+    }
+
+    public String appendLocalTime() {
+        LocalTime now = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return "" + now.format(formatter);
+    }
+
+    public void multipleClicksOnTheSameElement(By el, int count) throws InterruptedException {
+        for (int i = 0; i < count; i++) {
+            ownDriver.findElement(el).click();
+            Thread.sleep(1000);
+        }
+    }
+
+    public void winIntoCompany() {
+        sendKeys(MasterPage.sqlTxtBox, "win " + jsonData.getData("winTestCompany"));
+        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+    }
+
+    public String lengthyTextConvertedIntoAString(By element, FrameworkDriver driver) {
+        List<WebElement> l = driver.findElements((By) element);
+        List<String> plist = new ArrayList<>();
+        for (WebElement e : l) {
+            plist.add(e.getText().replaceAll("[^0-9a-zA-Z\\s]", ""));
+        }
+        return plist.stream().collect(Collectors.joining(" ")).toString();
+    }
+
+    public String removeTheTrailingZeors(String st) {
+        int temp = 0;
+        for (int i = st.length() - 1; i >= 0; i--) {
+            if (st.charAt(i) != '0') {
+                temp = i;
+                break;
+            }
+        }
+        if (st.charAt(0) == '.')
+            return "0" + st.substring(0, temp + 1);
+        return st.substring(0, temp + 1);
     }
 }
