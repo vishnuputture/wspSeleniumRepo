@@ -99,7 +99,7 @@ public abstract class ReusableLib {
     /**
      * The {@link FrameworkDriver} object
      */
-   // protected static FrameworkDriver driver;
+    // protected static FrameworkDriver driver;
 
     protected WebDriverUtil driverUtil;
     /**
@@ -152,11 +152,11 @@ public abstract class ReusableLib {
      *
      */
     protected void click(By el) {
-        By loadingAnime=By.id("_pui_loading_animation");
-        waitForElementDisappear(loadingAnime,globalWait);
+        By loadingAnime = By.id("_pui_loading_animation");
+        waitForElementDisappear(loadingAnime, globalWait);
         waitForElementClickable(el, globalWait);
         getElement(el).click();
-        waitForElementDisappear(loadingAnime,globalWait);
+        waitForElementDisappear(loadingAnime, globalWait);
 
     }
 
@@ -766,6 +766,7 @@ public abstract class ReusableLib {
             elment.sendKeys(Keys.TAB);
         }
     }
+
     protected void sendKey(By el, String strVal) {
         if (!strVal.isEmpty() && strVal != "" && strVal != null) {
             waitForElementClickable(el, globalWait);
@@ -786,7 +787,7 @@ public abstract class ReusableLib {
         }
     }
 
-    protected void sendKeys(WebElement el, String strVal,String CustomMsg) {
+    protected void sendKeys(WebElement el, String strVal, String CustomMsg) {
         if (!strVal.isEmpty() && strVal != "" && strVal != null) {
             WebElement elment = el;
             elment.click();
@@ -801,30 +802,29 @@ public abstract class ReusableLib {
         sendKeys(el, strVal);
         report.updateTestLog("EnterData", strVal + " " + CustomMsg, Status.PASS);
     }
-    
+
     protected void clearText(By el) {
-    	 getElement(el).clear();
+        getElement(el).clear();
     }
-    
+
     protected void sendKeysAndTab(By el, String strVal, String CustomMsg) {
-    	sendKeys(el, strVal);
-    	Utility_Functions.actionKey(Keys.TAB, helper.getGSDriver());
-    	report.updateTestLog("EnterData and tab", strVal + " " + CustomMsg, Status.PASS);
+        sendKeys(el, strVal);
+        Utility_Functions.actionKey(Keys.TAB, helper.getGSDriver());
+        report.updateTestLog("EnterData and tab", strVal + " " + CustomMsg, Status.PASS);
     }
-    
+
     protected void sendKeysAndEnter(By el, String strVal, String CustomMsg) {
-    	sendKeys(el, strVal);
-    	Utility_Functions.actionKey(Keys.ENTER, helper.getGSDriver());
-    	report.updateTestLog("EnterData and press enter", CustomMsg, Status.PASS);
+        sendKeys(el, strVal);
+        Utility_Functions.actionKey(Keys.ENTER, helper.getGSDriver());
+        report.updateTestLog("EnterData and press enter", CustomMsg, Status.PASS);
     }
-    
-    protected void sendKeysAndFunction(By el, String strVal,Keys key, String CustomMsg) {
-    	sendKeys(el, strVal);
-    	Utility_Functions.actionKey(key, helper.getGSDriver());
-    	report.updateTestLog("EnterData and perform action", strVal + " " + CustomMsg, Status.PASS);
+
+    protected void sendKeysAndFunction(By el, String strVal, Keys key, String CustomMsg) {
+        sendKeys(el, strVal);
+        Utility_Functions.actionKey(key, helper.getGSDriver());
+        report.updateTestLog("EnterData and perform action", strVal + " " + CustomMsg, Status.PASS);
     }
-    
-    
+
 
     // Performs the swipe and search operation
     // Code here shouldn't be modified
@@ -1168,13 +1168,12 @@ public abstract class ReusableLib {
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.invisibilityOfElementWithText(locator, text));
             return true;
-        }
-        catch (StaleElementReferenceException e) {
+        } catch (StaleElementReferenceException e) {
             FluentWait<WebDriver> wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), timeWait)
                     .ignoring(StaleElementReferenceException.class);
             wait.until(ExpectedConditions.invisibilityOfElementWithText(locator, text));
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Element could not disappear within the specified time");
             System.out.println(e.getMessage());
             return false;
@@ -1337,32 +1336,30 @@ public abstract class ReusableLib {
         ngWebDriver.waitForAngularRequestsToFinish();
     }
 
-    protected  String getProperties(String key){
-        String val=System.getProperty(key);
-        if(val==null){
-            val=     properties.getProperty(key);
+    protected String getProperties(String key) {
+        String val = System.getProperty(key);
+        if (val == null) {
+            val = properties.getProperty(key);
         }
         return val;
     }
+
     protected String getValue(By ele) {
         return helper.getGSDriver().findElement(ele).getAttribute("value");
 
     }
 
-    public void autoComplete(By elm,String str1,By list,String str2)
-    {
+    public void autoComplete(By elm, String str1, By list, String str2) {
         try {
-            sendKeys(elm,str1);
+            sendKeys(elm, str1);
 
             //wait for visibility
 
             waitForVisible(list);
             Utility_Functions.timeWait(3);
-            List<WebElement> listElm= helper.getGSDriver().findElements(list);
-            for(int i=0;i<listElm.size();i++)
-            {
-                if (listElm.get(i).getText().equalsIgnoreCase(str2))
-                {
+            List<WebElement> listElm = helper.getGSDriver().findElements(list);
+            for (int i = 0; i < listElm.size(); i++) {
+                if (listElm.get(i).getText().equalsIgnoreCase(str2)) {
                     listElm.get(i).click();
                 }
             }
@@ -1370,17 +1367,14 @@ public abstract class ReusableLib {
 
         } catch (NoSuchElementException e) {
             System.out.println(e.getStackTrace());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getStackTrace());
         }
     }
 
-    public List<WebElement> getRowData(By by)
-    {
+    public List<WebElement> getRowData(By by) {
         return helper.getGSDriver().findElements(by);
     }
-
 
 
 }

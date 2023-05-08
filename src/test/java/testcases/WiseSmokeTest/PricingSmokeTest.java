@@ -13,4 +13,12 @@ public class PricingSmokeTest extends TestConfigurations{
         coreScript.driveTestExecution();
         tearDownTestRunner(testParameters, coreScript);
     }
+
+    @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
+    public void TC_PricingSmokeTest_SSPS(SeleniumTestParameters testParameters) {
+        testParameters.setCurrentTestDescription("Smoke Test for the release");
+        CoreScript coreScript = new CoreScript(testParameters);
+        coreScript.driveTestExecution();
+        tearDownTestRunner(testParameters, coreScript);
+    }
 }

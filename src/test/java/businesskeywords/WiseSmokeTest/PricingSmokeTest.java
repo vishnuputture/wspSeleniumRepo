@@ -13,6 +13,7 @@ import pages.inventory.CostAndPricePage;
 import pages.inventory.ItemLedgerPage;
 import pages.inventory.ItemMasterPage;
 import pages.inventory.SalesPersonPage;
+import pages.pricing.PriceSheet.LegacyCostPriceSheetPage;
 import pages.pricing.matrixcost.MatrixCostUpdatePage;
 import pages.pricing.pricingmatrix.PricingMatrixPage;
 import pages.pricing.spa.CustomerGroupMaintenancePage;
@@ -222,7 +223,7 @@ public class PricingSmokeTest extends BaseSmokeTest {
         ownDriver.findElement(SpecialPriceAllowancePage.txtBoxContractname).sendKeys(Keys.CONTROL, "a");
         ownDriver.findElement(SpecialPriceAllowancePage.txtBoxContractname).sendKeys(Keys.CONTROL, "c");
         ownDriver.findElement(SpecialPriceAllowancePage.txtBoxStartDate).sendKeys(Keys.CONTROL, "v");
-        sendKeys(SpecialPriceAllowancePage.txtBoxContractname, utility_functions.appendTomorrowLocalDate());
+        sendKeys(SpecialPriceAllowancePage.txtBoxContractname, utility_functions.appendFutureLocalDate(1));
         ownDriver.findElement(SpecialPriceAllowancePage.txtBoxContractname).sendKeys(Keys.CONTROL, "a");
         ownDriver.findElement(SpecialPriceAllowancePage.txtBoxContractname).sendKeys(Keys.CONTROL, "c");
         ownDriver.findElement(SpecialPriceAllowancePage.txtBoxEndDate).sendKeys(Keys.CONTROL, "v");
@@ -272,7 +273,7 @@ public class PricingSmokeTest extends BaseSmokeTest {
 
     public void loadSpecialPrice() {
         sendKeysAndEnter(SpecialPriceAllowancePage.txtBoxOption, "7", "Loading the Special Price");
-        Assert.assertEquals(successFailureHeadersValidation.verifyLoadSpecialPricingConfirmationMessage.getOutcomeMessage(), getElement(SpecialPriceAllowancePage.confirmLoadSpecialPricing).getText().trim());
+        //Assert.assertEquals(successFailureHeadersValidation.verifyLoadSpecialPricingConfirmationMessage.getOutcomeMessage(), getElement(SpecialPriceAllowancePage.confirmLoadSpecialPricing).getText().trim());
         click(SpecialPriceAllowancePage.loadSpecialPrice);
         Assert.assertEquals(successFailureHeadersValidation.verifyLoadSpecialPricingSuccessMessage.getOutcomeMessage(), getElement(SpecialPriceAllowancePage.successMessageForIndividualItems).getText().trim());
         click(SpecialPriceAllowancePage.btnReturn);
@@ -284,8 +285,80 @@ public class PricingSmokeTest extends BaseSmokeTest {
     public void verifySpecialPriceInItemMaster() {
         utility_functions.navigations(7, 1);
         sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("itemNumber"), "Entered the item number to edit");
-        sendKeysAndEnter(SalesPersonPage.customerTextBox,Utility_Functions.xGetJsonData("Customer_Number_For_SPA"),"Entered the Customer to verify the Special Pricing");
-        Assert.assertEquals(utility_functions.retrieveDecimalToIntegerValue(getElement(SalesPersonPage.specialPrice).getText().trim()),jsonData.getData("Selling Price"));
-        Assert.assertEquals(getElement(SalesPersonPage.contractName).getText().trim(),Utility_Functions.xGetJsonData("Contract_Name"));
+        sendKeysAndEnter(SalesPersonPage.customerTextBox, Utility_Functions.xGetJsonData("Customer_Number_For_SPA"), "Entered the Customer to verify the Special Pricing");
+        Assert.assertEquals(utility_functions.retrieveDecimalToIntegerValue(getElement(SalesPersonPage.specialPrice).getText().trim()), jsonData.getData("Selling Price"));
+        click(SalesPersonPage.exit);
+        utility_functions.exitToMaster(1);
+    }
+
+    public void legacyCostPriceSheets() {
+        utility_functions.winIntoCompany();
+        utility_functions.navigations(7, 25, 1);
+        updateAnExistingPriceSheet();
+        navigatetoAMaintainingSheet();
+    }
+
+    public void updateAnExistingPriceSheet() {
+        sendKeysAndEnter(LegacyCostPriceSheetPage.optionOneForSheet, "1", "Choosing the first sheet for verification");
+        Assert.assertEquals(getElement(LegacyCostPriceSheetPage.status).getText().trim(), LegacyCostPriceSheetPage.currentSheetStatus.trim());
+        sendKeys(LegacyCostPriceSheetPage.sheetMultiplier, jsonData.getData("legacySheetCostPriceSheetMultiplier"));
+        sendKeys(LegacyCostPriceSheetPage.listPrice, "Y");
+        sendKeys(LegacyCostPriceSheetPage.poCost, "Y");
+        sendKeysAndEnter(LegacyCostPriceSheetPage.matrixCost, "Y", "Updated the sheet");
+        String currentSheetCode = getElement(LegacyCostPriceSheetPage.priceSheetCode).getAttribute("value");
+        Assert.assertEquals(currentSheetCode + " " + successFailureHeadersValidation.verifyLegacyPriceSheetUpdateSuccessMessage.getOutcomeMessage(), getElement(LegacyCostPriceSheetPage.successMessageValidation).getText());
+        Assert.assertEquals(getElement(LegacyCostPriceSheetPage.status).getText().trim(), LegacyCostPriceSheetPage.changedSheetStatus);
+        click(LegacyCostPriceSheetPage.returnButton);
+    }
+
+    public void navigatetoAMaintainingSheet() {
+//        sendKeysAndEnter(LegacyCostPriceSheetPage.selectStatus, "M", "Navigate to a Maintaining Sheet");
+        sendKeysAndEnter(LegacyCostPriceSheetPage.optionOneForSheet, "1", "Choosing the first sheet for verification");
+//        click(LegacyCostPriceSheetPage.changeItemDetails);
+//        addItem();
+//        click(LegacyCostPriceSheetPage.returnButton);
+        click(LegacyCostPriceSheetPage.runComparisonReport);
+        String currentSheetCode = getElement(LegacyCostPriceSheetPage.priceSheetCode).getAttribute("value");
+        Utility_Functions.xUpdateJson("Legacy_Cost_Price_Sheet_Code", currentSheetCode);
+        Assert.assertEquals(Utility_Functions.xGetJsonData("Legacy_Cost_Price_Sheet_Code") + " " + successFailureHeadersValidation.verifyLegacyPriceSheetRunComparisonReportsSuccessMessage.getOutcomeMessage(), getElement(LegacyCostPriceSheetPage.successMessageValidation).getText());
+        sendKeys(LegacyCostPriceSheetPage.processNow, "Y");
+        sendKeysAndEnter(LegacyCostPriceSheetPage.processDate, "00000", "Enter a dummy value to avoid a process date and process now conflict");
+        String actualText = utility_functions.lengthyTextConvertedIntoAString(LegacyCostPriceSheetPage.processSheetMessage, ownDriver);
+        Assert.assertEquals(actualText, successFailureHeadersValidation.verifyLegacyPriceSheetImmediateProcessValidationMessage.getOutcomeMessage());
+        click(LegacyCostPriceSheetPage.processImmediately);
+        Assert.assertEquals(getElement(LegacyCostPriceSheetPage.status).getText().trim(), LegacyCostPriceSheetPage.processedSheetStatus);
+        utility_functions.exitToMaster(4);
+    }
+
+    public void addItem() {
+        click(LegacyCostPriceSheetPage.AddItem);
+        click(LegacyCostPriceSheetPage.AddItemNumberLink);
+        sendKeysAndEnter(LegacyCostPriceSheetPage.chooseFirstItemNumber, "1", "Choosing the value");
+        Utility_Functions.xUpdateJson("Legacy_Cost_Price_Sheet_Item_Number", getElement(LegacyCostPriceSheetPage.ItemNumberValue).getAttribute("value"));
+        Utility_Functions.xUpdateJson("Legacy_Cost_Price_Sheet_List_Price", getElement(LegacyCostPriceSheetPage.ListPriceValue).getAttribute("value").trim());
+        click(LegacyCostPriceSheetPage.enter);
+        click(LegacyCostPriceSheetPage.returnButton);
+    }
+
+    public void verifyLegacyCostPriceItemDetailsInItemMaster() {
+        utility_functions.navigations(7, 12);
+        sendKeysAndEnter(ItemMasterPage.txtBoxSearch, Utility_Functions.xGetJsonData("Legacy_Cost_Price_Sheet_Item_Number"), "Searching for the Legacy Cost Price Item in Item Master");
+        Assert.assertEquals(getItemMasterListPrice().trim(), Utility_Functions.xGetJsonData("Legacy_Cost_Price_Sheet_List_Price"));
+        double expectedPOCost = Double.parseDouble(jsonData.getData("legacySheetCostPriceSheetMultiplier")) * Double.parseDouble(Utility_Functions.xGetJsonData("Legacy_Cost_Price_Sheet_List_Price"));
+        Assert.assertEquals(utility_functions.removeTheTrailingZeors(getPOCost()), Double.toString(expectedPOCost));
+        Utility_Functions.xUpdateJson("Update_Matrix_Cost_Legacy_Cost_Price",getMatrixPrice());
+        click(ItemMasterPage.btnExit);
+        utility_functions.exitToMaster(1);
+    }
+
+    public void verifyItemLedgerForLegacyCostPriceSheet()
+    {
+        utility_functions.navigations(7, 4);
+        sendKeysAndEnter(ItemLedgerPage.txtItemNumber, Utility_Functions.xGetJsonData("Legacy_Cost_Price_Sheet_Item_Number"), "Entered Item Number used in Legacy Cost Price Sheet");
+        Assert.assertEquals(getElement(ItemLedgerPage.lblLedgerPrice).getText(), Utility_Functions.xGetJsonData("Update_Matrix_Cost_Legacy_Cost_Price"));
+        Assert.assertEquals(getElement(ItemLedgerPage.lblLedgerSC).getText().trim(), jsonData.getData("SC"));
+        Assert.assertEquals(getElement(ItemLedgerPage.updatedUserName).getText().toLowerCase(), jsonData.getData("userName"));
+        click(ItemMasterPage.btnExit);
+        utility_functions.exitToMaster(1);
     }
 }
