@@ -186,7 +186,6 @@ public class SelfServicePriceSheet extends ReusableLib {
         sendKey(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"));
         click(SelfServicePriceSheetPage.choosePriceSheet);
         String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
-        System.out.println(path);
         Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
         Utility_Functions.timeWait(2);
@@ -319,12 +318,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         String strPriceDate = formatter.format(dt);
         Utility_Functions.timeWait(3);
-        //WebElement l = ownDriver.findElement(PriceSheetDetails.processedDate);
-        //((JavascriptExecutor) ownDriver.getWebDriver()).executeScript("arguments[0].value='"+strPriceDate+"'"+";", l);
         Utility_Functions.xSendkeysAndTab(ownDriver.findElement(PriceSheetDetails.processedDate), strPriceDate);
-        //Utility_Functions.timeWait(2);
-        //l.click();
-        //l.sendKeys(Keys.TAB);
     }
 
     public void markReady() {
@@ -466,6 +460,7 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     /**
+     *
      * This method To Filter Price sheet Records
      */
     public void filterPriceSheetRecords() {
