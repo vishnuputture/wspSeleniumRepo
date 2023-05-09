@@ -3933,12 +3933,13 @@ public class Utility_Functions extends ReusableLib {
      */
     public static void xUploadFile(Report report, String fileLocation) {
         try {
-            Robot robot = new Robot();
 
             StringSelection ss = new StringSelection(fileLocation);
             // copy the above string to clip board
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-            robot.setAutoDelay(1000);
+            Robot robot = new Robot();
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
             robot.keyPress(KeyEvent.VK_CONTROL);
             robot.keyPress(KeyEvent.VK_V);
             // paste the copied string to dialog box
