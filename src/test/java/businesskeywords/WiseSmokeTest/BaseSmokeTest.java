@@ -17,6 +17,7 @@ public class BaseSmokeTest extends ReusableLib {
      */
     public FrameworkDriver ownDriver;
     public CommonActions commonObj;
+
     public BaseSmokeTest(Helper helper) {
         super(helper);
         commonObj = new CommonActions(helper);
@@ -25,12 +26,14 @@ public class BaseSmokeTest extends ReusableLib {
 
 
     public void url() {
-        String env = jsonData.getData("environment");
+        String env = jsonData.getData("environment").toUpperCase();
         String url;
         switch (env) {
             case "STG" -> url = properties.getProperty("STGURL");
 
             case "PROD" -> url = properties.getProperty("PRODURL");
+
+            case "QA" -> url = properties.getProperty("QAURL");
 
             default -> throw new RuntimeException("Invalid Environment please check");
         }
