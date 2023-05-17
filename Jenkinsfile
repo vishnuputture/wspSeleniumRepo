@@ -30,26 +30,26 @@ pipeline{
         {
      
              steps{
-                 bat 'mvn -f pom.xml clean test -P runDemo -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
+                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
                 }
             
         }
     }
 
-//     post {
-//         success {
-//             emailext mimeType: 'text/html',
-//                body: "Execution Report Attachment Details",
-//                subject: "Email Report from - '${env.JOB_NAME}' - Build Passed",
-//                to: 'QAAutomation@winsupplyinc.com',
-//                attachmentsPattern: '**/ExtentReport.html'
-//             }
-//         failure {
-//              emailext mimeType: 'text/html',
-//                body: "Execution Report Attachment Details",
-//                subject: "Email Report from - '${env.JOB_NAME}' - Build Failed",
-//                to: 'QAAutomation@winsupplyinc.com',
-//                attachmentsPattern: '**/ExtentReport.html'
-//         }
-//     }
+    post {
+        success {
+            emailext mimeType: 'text/html',
+               body: "Execution Report Attachment Details",
+               subject: "Email Report from - '${env.JOB_NAME}' - Build Passed",
+               to: 'QAAutomation@winsupplyinc.com',
+               attachmentsPattern: '**/ExtentReport.html'
+            }
+        failure {
+             emailext mimeType: 'text/html',
+               body: "Execution Report Attachment Details",
+               subject: "Email Report from - '${env.JOB_NAME}' - Build Failed",
+               to: 'QAAutomation@winsupplyinc.com',
+               attachmentsPattern: '**/ExtentReport.html'
+        }
+    }
 }
