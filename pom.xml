@@ -102,7 +102,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <testNG.suiteXmlFile>src\test\resources\Suites\Pricing\PricingSmokeTest.xml</testNG.suiteXmlFile>
+                <testNG.suiteXmlFile>src\test\resources\Suites\Sanity\PricingSmokeTest.xml</testNG.suiteXmlFile>
             </properties>
             <build>
                 <pluginManagement>
