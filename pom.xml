@@ -90,7 +90,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<testNG.suiteXmlFile>src\test\resources\Suites\Pricing\CreateSaleOrder.xml</testNG.suiteXmlFile>
+				<testNG.suiteXmlFile>src\test\resources\Suites\Pricing\PricingSmokeTest.xml</testNG.suiteXmlFile>
 			</properties>
 			<build>
 				<pluginManagement>
