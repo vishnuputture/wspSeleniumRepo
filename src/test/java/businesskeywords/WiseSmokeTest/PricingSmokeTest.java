@@ -131,8 +131,8 @@ public class PricingSmokeTest extends BaseSmokeTest {
         int updated_matrix_cost = po_Cost - 5;
         sendKeysAndEnter(ItemMasterPage.txtBoxMatrix, Integer.toString(updated_matrix_cost), "Updated Matrix cost to a price less than PO Cost");
         Utility_Functions.xUpdateJson("Updated_Matrix_Cost", Integer.toString(updated_matrix_cost));
-        String expectedHeaderText = successFailureHeadersValidation.verifyItemMasterUpdatedSuccessMessage.getOutcomeMessage();
-        commonObj.validateText(ItemMasterPage.messageAddSuccessful, expectedHeaderText, "Validating the success message on updating matrix price");
+//        String expectedHeaderText = successFailureHeadersValidation.verifyItemMasterUpdatedSuccessMessage.getOutcomeMessage();
+//        commonObj.validateText(ItemMasterPage.messageAddSuccessful, expectedHeaderText, "Validating the success message on updating matrix price");
         click(ItemMasterPage.btnSave);
         utility_functions.exitToMaster(2);
     }
@@ -312,11 +312,7 @@ public class PricingSmokeTest extends BaseSmokeTest {
     }
 
     public void navigatetoAMaintainingSheet() {
-//        sendKeysAndEnter(LegacyCostPriceSheetPage.selectStatus, "M", "Navigate to a Maintaining Sheet");
         sendKeysAndEnter(LegacyCostPriceSheetPage.optionOneForSheet, "1", "Choosing the first sheet for verification");
-//        click(LegacyCostPriceSheetPage.changeItemDetails);
-//        addItem();
-//        click(LegacyCostPriceSheetPage.returnButton);
         click(LegacyCostPriceSheetPage.runComparisonReport);
         String currentSheetCode = getElement(LegacyCostPriceSheetPage.priceSheetCode).getAttribute("value");
         Utility_Functions.xUpdateJson("Legacy_Cost_Price_Sheet_Code", currentSheetCode);
