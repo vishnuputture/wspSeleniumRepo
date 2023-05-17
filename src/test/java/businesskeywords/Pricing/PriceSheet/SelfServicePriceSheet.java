@@ -15,9 +15,13 @@ import pages.pricing.PriceSheet.PriceSheetDetails;
 import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 import supportLibraries.Utility_Functions;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.List;
 
 public class SelfServicePriceSheet extends ReusableLib {
     /**
@@ -166,7 +170,7 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
 
-    public void addPriceSheetDetails() {
+    public void addPriceSheetDetails() throws AWTException {
         String name = Utility_Functions.getRandomName();
         Date dt = new Date();
         Calendar c = Calendar.getInstance();
@@ -184,8 +188,8 @@ public class SelfServicePriceSheet extends ReusableLib {
         // sendKeyDate(SelfServicePriceSheetPage.effectiveDate,strPriceDate);
         Utility_Functions.xSendkeysAndTab(ownDriver.findElement(SelfServicePriceSheetPage.effectiveDate), strPriceDate);
         sendKey(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"));
-        click(SelfServicePriceSheetPage.choosePriceSheet);
         String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
+        click(SelfServicePriceSheetPage.choosePriceSheet);
         Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
         Utility_Functions.timeWait(2);

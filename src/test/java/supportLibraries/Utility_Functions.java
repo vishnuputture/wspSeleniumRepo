@@ -29,6 +29,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import pages.WiseSmokeTest.WiseSmokeTestPage;
 import pages.common.MasterPage;
+import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -3933,23 +3934,19 @@ public class Utility_Functions extends ReusableLib {
      */
     public static void xUploadFile(Report report, String fileLocation) {
         try {
-
+            Robot robot = new Robot();
+            robot.setAutoDelay(3000);
             StringSelection ss = new StringSelection(fileLocation);
             // copy the above string to clip board
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-            Robot robot = new Robot();
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
+            robot.setAutoDelay(3000);
             robot.keyPress(KeyEvent.VK_CONTROL);
             robot.keyPress(KeyEvent.VK_V);
-            // paste the copied string to dialog box
-
-            robot.keyRelease(KeyEvent.VK_V);
             robot.keyRelease(KeyEvent.VK_CONTROL);
-
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.setAutoDelay(3000);
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
-
             report.updateTestLog("Upload ", "File upload" + fileLocation, Status.PASS);
         } catch (Exception exp) {
             exp.printStackTrace();
