@@ -29,13 +29,21 @@ public class BaseSmokeTest extends ReusableLib {
         String env = jsonData.getData("environment").toUpperCase();
         String url;
         switch (env) {
-            case "STG" -> url = properties.getProperty("STGURL");
 
-            case "PROD" -> url = properties.getProperty("PRODURL");
+            case "STG":
+                url = properties.getProperty("STGURL");
+                break;
 
-            case "QA" -> url = properties.getProperty("QAURL");
+            case "PROD":
+                url = properties.getProperty("PRODURL");
+                break;
 
-            default -> throw new RuntimeException("Invalid Environment please check");
+            case "QA":
+                url = properties.getProperty("QAURL");
+                break;
+
+            default:
+                throw new RuntimeException("Invalid Environment please check");
         }
         ownDriver.get(url);
     }

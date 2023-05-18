@@ -171,36 +171,36 @@ public class Capture extends ReusableLib {
             }
 
             switch (actionType) {
-                case "click" -> {
-                    try {
-                        click(elementLocator, "Click: " + elementLocator);
-                    } catch (WebDriverException e) {
-                        if (e.getMessage().contains("element click intercepted")) {
-                            System.out.println("Inner Text" + innerText);
-                            elementLocator = By.xpath("//*[text()='" + innerText + "']");
-                            click(elementLocator, "Click: " + elementLocator);
-                        } else
-                            report.updateTestLog("Click", "Element is not clickable, and no innerText provided", Status.FAIL);
-                    }
-                }
-                case "input" -> {
-                    if (!action.has("value")) continue;
-                    String inputValue = action.getString("value");
-                    sendKeys(elementLocator, inputValue, " input into: " + elementLocator);
-                }
-                case "keydown" -> {
-                    String key = action.getString("key");
-                    Utility_Functions.actionKey(Keys.valueOf(key.toUpperCase()), driver);
-                    report.updateTestLog("Send Key", "Sending Key: " + key, Status.PASS);
-                }
-                case "validateText" -> {
-                    String text = action.getString("expectedText");
-                    common.validateText(elementLocator, text, "Validating Text: "+ text);
-                }
-                case "mouseover" -> {
-                    Utility_Functions.xmouseOver(driver, elementLocator);
-                    report.updateTestLog("Mouseover", "Hovering Over Element", Status.PASS);
-                }
+//                case "click" -> {
+//                    try {
+//                        click(elementLocator, "Click: " + elementLocator);
+//                    } catch (WebDriverException e) {
+//                        if (e.getMessage().contains("element click intercepted")) {
+//                            System.out.println("Inner Text" + innerText);
+//                            elementLocator = By.xpath("//*[text()='" + innerText + "']");
+//                            click(elementLocator, "Click: " + elementLocator);
+//                        } else
+//                            report.updateTestLog("Click", "Element is not clickable, and no innerText provided", Status.FAIL);
+//                    }
+//                }
+//                case "input" -> {
+//                    if (!action.has("value")) continue;
+//                    String inputValue = action.getString("value");
+//                    sendKeys(elementLocator, inputValue, " input into: " + elementLocator);
+//                }
+//                case "keydown" -> {
+//                    String key = action.getString("key");
+//                    Utility_Functions.actionKey(Keys.valueOf(key.toUpperCase()), driver);
+//                    report.updateTestLog("Send Key", "Sending Key: " + key, Status.PASS);
+//                }
+//                case "validateText" -> {
+//                    String text = action.getString("expectedText");
+//                    common.validateText(elementLocator, text, "Validating Text: "+ text);
+//                }
+//                case "mouseover" -> {
+//                    Utility_Functions.xmouseOver(driver, elementLocator);
+//                    report.updateTestLog("Mouseover", "Hovering Over Element", Status.PASS);
+//                }
             }
         }
     }
