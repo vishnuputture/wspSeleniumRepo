@@ -437,14 +437,14 @@ public class QtestAPIHandler {
 	 */
 	public static int testStatusId(String status) {
 		int id = 0;
-		switch (status.toUpperCase()) {
-			case "PASSED", "PASS" -> id = 601;
-			case "FAILED", "FAIL" -> id = 602;
-			case "INCOMPLETE" -> id = 603;
-			case "BLOCKED" -> id = 604;
-			case "UNEXECUTED" -> id = 605;
-			default -> System.out.println("Status Undetermined");
-		}
+//		switch (status.toUpperCase()) {
+//			case "PASSED", "PASS" -> id = 601;
+//			case "FAILED", "FAIL" -> id = 602;
+//			case "INCOMPLETE" -> id = 603;
+//			case "BLOCKED" -> id = 604;
+//			case "UNEXECUTED" -> id = 605;
+//			default -> System.out.println("Status Undetermined");
+//		}
 		return id;
 	}
 

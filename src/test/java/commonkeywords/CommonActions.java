@@ -723,20 +723,20 @@ public class CommonActions extends ReusableLib {
 		String fileName = "";
 
 		switch(type.toLowerCase(Locale.ROOT)) {
-			case "po" -> {
-				String username = jsonData.getData("userName");
-				fileName = username.substring(username.length() - 6).toLowerCase() + "po";
-			}
-			case "sq" -> {
-				String sqNum = Utility_Functions.xGetJsonData("SQNum"+company);
-				fileName = "sq"+ String.format("%07d", Integer.parseInt(sqNum));
-			}
-			case "packlist" -> {
-				String soNum = Utility_Functions.xGetJsonData("soNum"+company);
-				String customer = jsonData.getData("environment").equalsIgnoreCase("prod")
-						? jsonData.getData("prodCustomer") : jsonData.getData("devCustomer");
-				fileName = customer + "_" + String.format("%06d", Integer.parseInt(soNum));
-			}
+//			case "po" -> {
+//				String username = jsonData.getData("userName");
+//				fileName = username.substring(username.length() - 6).toLowerCase() + "po";
+//			}
+//			case "sq" -> {
+//				String sqNum = Utility_Functions.xGetJsonData("SQNum"+company);
+//				fileName = "sq"+ String.format("%07d", Integer.parseInt(sqNum));
+//			}
+//			case "packlist" -> {
+//				String soNum = Utility_Functions.xGetJsonData("soNum"+company);
+//				String customer = jsonData.getData("environment").equalsIgnoreCase("prod")
+//						? jsonData.getData("prodCustomer") : jsonData.getData("devCustomer");
+//				fileName = customer + "_" + String.format("%06d", Integer.parseInt(soNum));
+//			}
 		}
 
 		report.updateTestLog("Downloading PDF ("+fileName+")", "Downloading PDF", Status.PASS);
