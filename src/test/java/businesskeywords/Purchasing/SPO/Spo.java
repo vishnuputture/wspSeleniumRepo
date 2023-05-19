@@ -178,7 +178,8 @@ public class Spo extends ReusableLib {
     }
 
     public void getPassword() {
-        String URL = "https://vprasad:CmFK4Qtc@daily.winwholesale.com/";
+        String password = System.getenv("PASSWORD");
+        String URL = "https://kkm:" + password + "@daily.winwholesale.com/";
         ownDriver.get(URL);
         click(ownDriver.findElement(By.xpath("//a[text()='QA ']")));
         Utility_Functions.timeWait(4);
@@ -214,7 +215,7 @@ public class Spo extends ReusableLib {
         if (isDisplayed(BinMaintenancePage.toasterCloseIcon)) {
             click(BinMaintenancePage.toasterCloseIcon);
         }
-        if(isDisplayed(ManifestsPage.closePopUp)){
+        if (isDisplayed(ManifestsPage.closePopUp)) {
             Utility_Functions.timeWait(6);
             click(ManifestsPage.closePopUp);
         }
@@ -481,7 +482,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
         click(By.xpath("//option[contains(text(),'List Price')]"), "Select List Price option");
         Utility_Functions.timeWait(2);
-        if(isDisplayed(SpoPage.multiplierField))
+        if (isDisplayed(SpoPage.multiplierField))
             sendKeys(SpoPage.multiplierField, "10", "Enter Multiplier");
         else
             sendKeys(SpoPage.discountOrMultiplier, "10", "Enter discount");
@@ -951,7 +952,7 @@ public class Spo extends ReusableLib {
     public void selectPreviousMonth(String month) {
         sendKeys(SpoPage.trailingMonths, month, "Enter '" + month + "' into Trailing month");
         int size = ownDriver.findElements(SpoPage.selectedMonth).size();
-        Utility_Functions.xAssertEquals(report, ""+size / 2+"", month, "");
+        Utility_Functions.xAssertEquals(report, "" + size / 2 + "", month, "");
     }
 
     public void costOption() {
@@ -1753,7 +1754,7 @@ public class Spo extends ReusableLib {
             sendKeys(ownDriver.findElements(SpoPage.orderQuantity).get(1), "10", "Modify Order Quantity");
         }
         click(SpoPage.saveWorksheetBtn, "Click Save Worksheet button");
-        if(isDisplayed(SpoPage.modalLabel)){
+        if (isDisplayed(SpoPage.modalLabel)) {
             click(SpoPage.saveButton);
         }
         Utility_Functions.timeWait(4);
@@ -1796,7 +1797,7 @@ public class Spo extends ReusableLib {
         Utility_Functions.timeWait(2);
         commonObj.validateElementExists(SpoPage.yellowModCol, "Border color changed to Yellow after Order quantity modification");
         sendKeys(ownDriver.findElements(SpoPage.orderQuantity).get(2), "999999999", "Modify Second item Order Quantity to 999999");
-        Utility_Functions.xIsDisplayed(ownDriver,SpoPage.errorMsg);
+        Utility_Functions.xIsDisplayed(ownDriver, SpoPage.errorMsg);
     }
 
     /**
@@ -1865,7 +1866,7 @@ public class Spo extends ReusableLib {
         sendKeys(VendorInformationPage.vendorNo, Utility_Functions.xGetJsonData("VendorNumber"), "Enter Vendor Number");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         String[] split = Utility_Functions.xGetJsonData("VendorNoForHeader").split(" ");
-        String vendorName = split[2] + " " + split[3]+" "+split[4];
+        String vendorName = split[2] + " " + split[3] + " " + split[4];
         commonObj.validateText(VendorInformationPage.vendorName, vendorName, "Vendor Name: " + vendorName + " is present");
         Utility_Functions.xScrollIntoView(ownDriver, VendorInformationPage.minOrderCode);
         validateAssignedField();
@@ -1911,12 +1912,12 @@ public class Spo extends ReusableLib {
     public void verifyOrderQuantityZero() {
         click(SpoPage.convertPOBtn, "Click Convert to PO button");
         Utility_Functions.timeWait(2);
-        if(isDisplayed(By.xpath("//h2[text()='FREIGHT CHARGES']"))){
-            Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SpoPage.freightChargeCodes),1);
+        if (isDisplayed(By.xpath("//h2[text()='FREIGHT CHARGES']"))) {
+            Utility_Functions.xSelectDropdownByIndex(ownDriver.findElement(SpoPage.freightChargeCodes), 1);
             click(button(" Convert "));
             Utility_Functions.timeWait(2);
             click(button(" Return to Landing Page "));
-        }else {
+        } else {
             commonObj.validateText(SpoPage.popUp, "Cannot convert to PO since all items order quantities is zero.", "'Cannot convert to PO since all items order quantities is zero.' message is present");
             click(SpoPage.xIcon);
             Utility_Functions.timeWait(2);
@@ -2097,7 +2098,7 @@ public class Spo extends ReusableLib {
             click(SpoPage.saveWorksheetBtn, "Click Save Worksheet button");
         }
         try {
-            click(SchedulePaymentPage.cancelButton,"Click Cancel button");
+            click(SchedulePaymentPage.cancelButton, "Click Cancel button");
         } catch (Exception e) {
             Utility_Functions.xClickHiddenElement(ownDriver, ownDriver.findElements(By.xpath("//button[contains(text(),'Cancel')]")).get(1));
         }
