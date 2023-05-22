@@ -187,10 +187,12 @@ public class SelfServicePriceSheet extends ReusableLib {
         sendKey(SelfServicePriceSheetPage.priceSheetName, name);
         // sendKeyDate(SelfServicePriceSheetPage.effectiveDate,strPriceDate);
         Utility_Functions.xSendkeysAndTab(ownDriver.findElement(SelfServicePriceSheetPage.effectiveDate), strPriceDate);
-        sendKey(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"));
+        sendKeysAndTab(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"), "Added the price sheet Code");
         String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
-        click(SelfServicePriceSheetPage.choosePriceSheet);
-        Utility_Functions.xUploadFile(report, path);
+        ownDriver.findElement(By.xpath("//span[@class='weight file-label']/following::input[@type='file']")).sendKeys(path);
+        System.out.println("Uploaded the file successfully");
+//        click(SelfServicePriceSheetPage.choosePriceSheet);
+//        Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);
         Utility_Functions.timeWait(2);
         Utility_Functions.waitTillClickHardSleep(report, ownDriver, SelfServicePriceSheetPage.successMessage, "Wait for page to be loaded");
@@ -329,6 +331,7 @@ public class SelfServicePriceSheet extends ReusableLib {
         processDatePick();
         Utility_Functions.timeWait(3);
         click(PriceSheetDetails.updateListPrice);
+        ownDriver.navigate().refresh();
         try {
             click(PriceSheetDetails.markAsReadyButton);
         } catch (Exception e) {
@@ -464,7 +467,6 @@ public class SelfServicePriceSheet extends ReusableLib {
     }
 
     /**
-     *
      * This method To Filter Price sheet Records
      */
     public void filterPriceSheetRecords() {
