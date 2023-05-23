@@ -42,9 +42,8 @@ pipeline{
 
         stage('Test')
         {
-     
              steps{
-                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW% -Dvpnusername='
+                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
                 }
             
         }
