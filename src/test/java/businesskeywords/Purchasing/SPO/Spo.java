@@ -178,9 +178,9 @@ public class Spo extends ReusableLib {
     }
 
     public void getPassword() {
+        String username = System.getenv("USERNAME");
         String password = System.getenv("PASSWORD");
-        String URL = "https://kkm:" + password + "@daily.winwholesale.com/";
-        System.out.println(URL);
+        String URL = "https://" + username + ":" + password + "@daily.winwholesale.com/";
         ownDriver.get(URL);
         click(ownDriver.findElement(By.xpath("//a[text()='QA ']")));
         Utility_Functions.timeWait(4);
