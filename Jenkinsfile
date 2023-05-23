@@ -26,14 +26,30 @@ pipeline{
                 bat 'mvn compile'
             }
         }
+
+        stage('çredentials'){
+            steps{
+                script{
+
+                    withCredentials([usernamePassword(credentialsId: 'karthik-credentials', passwordVariable: 'passwordVar', usernameVariable: 'usernameVar')]) {
+                        env.USERNAME=usernameVar;
+                        env.PASSWORD=passwordVar;
+                    }
+                }
+            }
+        }
+
+
         stage('Test')
         {
      
              steps{
-                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW%'
+                 bat 'mvn -f pom.xml clean test -P runSanity -DDefaultExecutionMode=LOCAL -DUserName=%APP_CREDS_USR% -DPassword=%APP_CREDS_PSW% -Dvpnusername='
                 }
             
         }
+
+
     }
 
 //     post {
