@@ -1,0 +1,40 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_802_VerifyWinVisionHomeScreen":"navigateToWinVisionHomePage,verifyWinVisionHomePage",
+      "Tc_803_VerifyNavigationToOnlineCatalog":"navigateToWinVisionHomePage,verifyOnlineCatalogHomePageUI",
+      "Tc_813_VerifyUIofOnlineCatalogWithoutSearchResults":"navigateToWinVisionHomePage,verifyOnlineCatalogHomePageUI,verifyOnlineCatalogPageWithoutResults",
+      "Tc_814_VerifyHelpIcon":"navigateToWinVisionHomePage,verifyOnlineCatalogHomePageUI,verifyOCHelpIcon",
+      "Tc_815_VerifyUIofSearchPop":"navigateToWinVisionHomePage,verifyOnlineCatalogHomePageUI,verifySearchPopUpUI",
+      "Tc_806_VerifyNavigationToOrderTracking":"navigateToWinVisionHomePage,navigateToOrderTrackingAndVerifyUI",
+      "Tc_807_VerifyHelpIconUI":"navigateToWinVisionHomePage,navigateToOrderTrackingAndVerifyUI,verifyOTHelpIcon",
+      "Tc_811_VerifyUIWithoutRecord":"navigateToWinVisionHomePage,navigateToOrderTrackingAndVerifyUI,verifyUIWithoutRecord"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_802_VerifyWinVisionHomeScreen"
+    },
+    {
+      "TC_ID": "Tc_803_VerifyNavigationToOnlineCatalog"
+    },
+    {
+      "TC_ID": "Tc_813_VerifyUIofOnlineCatalogWithoutSearchResults"
+    },
+    {
+      "TC_ID": "Tc_814_VerifyHelpIcon"
+    },
+    {
+      "TC_ID": "Tc_815_VerifyUIofSearchPop"
+    },
+    {
+      "TC_ID": "Tc_806_VerifyNavigationToOrderTracking"
+    },
+    {
+      "TC_ID": "Tc_807_VerifyHelpIconUI"
+    },
+    {
+      "TC_ID": "Tc_811_VerifyUIWithoutRecord"
+    }
+  ]
+}
