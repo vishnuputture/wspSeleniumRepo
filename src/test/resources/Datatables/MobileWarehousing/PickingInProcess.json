@@ -1,0 +1,177 @@
+{
+  "Business_Flow": [
+    {
+      "Tc_997_VerifyPickingInProcessHomeUI":"navigateToPiPHomePage,verifyPIHomePageUI,logoutFromApp",
+      "Tc_999_VerifySearchFilterUI":"navigateToPiPHomePage,verifyPIPSearchFilterUI,logoutFromApp",
+      "Tc_1000_VerifyOrderDetailsPageUI": "navigateToPiPHomePage,selectFirstOrder,verifyShipmentDetailsUI,logoutFromApp",
+      "Tc_1003_VerifySortingFunctionality": "navigateToPiPHomePage,verifySorting,logoutFromApp",
+      "Tc_1004_VerifyFilters": "navigateToPiPHomePage,verifyFilters,logoutFromApp",
+      "Tc_998_NavigateToPickingInProcess": "launchWISEapp, navigateToPIP, logoutFromApp",
+      "Tc_1154_VerifyDefaultPickStatusShipment": "navigateToPiPHomePage,defaultPickStatusShipments,logoutFromApp",
+      "Tc_1161_VerifyCurrentZoneFilter": "navigateToPiPHomePage,filterCurrentZone,logoutFromApp",
+      "Tc_1001_VerifyLogout": "navigateToPiPHomePage,logoutFromApp",
+      "Tc_1162_VerifyOpenTotalLines": "navigateToPiPHomePage,verifyOpenTotalLines,logoutFromApp",
+      "Tc_1199_VerifyShipDateToggle": "navigateToPiPHomePage,shipDateDropDown,logoutFromApp",
+      "Tc_1200_VerifyIconsBesideShipment": "navigateToPiPHomePage,verifyIconsBesideShipment,logoutFromApp",
+      "Tc_1204_VerifyReturnToPickQPriority": "navigateToPiPHomePage,verifyReturnToPickQPriority,logoutFromApp",
+      "Tc_1197_VerifyPagination": "navigateToPiPHomePage,verifyPagination,logoutFromApp",
+      "Tc_1198_VerifyRecordsPerPage": "navigateToPiPHomePage,changeViewOfRecords,logoutFromApp",
+      "Tc_1203_VerifyLoadPickQueuePopUp": "navigateToPiPHomePage,verifyLoadPickQpopUp,logoutFromApp",
+      "Tc_1204_VerifyReturnToPickQueuePriority": "navigateToPiPHomePage,verifyReturnToPickQ,logoutFromApp",
+      "Tc_1167_VerifyPercentCompleteCalculation": "navigateToPiPHomePage,verifyPercentCompleteCalculation,logoutFromApp",
+      "Tc_1168_VerifyStatusOfZOne": "navigateToPiPHomePage,clickOnShipIDWithHalfCompleted,verifyStatusForPicked,verifyStatusForNotPicked,logoutFromApp",
+      "Tc_1169_VerifyPrintDocumentsAndLabelsUI": "navigateToPiPHomePage,clickOnShipIDWithHalfCompleted,verifyPrintDocumentLabelsUI,logoutFromApp",
+      "Tc_1170_VerifyRemovingStagingDetails": "navigateToPiPHomePage,clickOnPickStatus,removeStagingDetails,logoutFromApp",
+      "Tc_1157_VerifyWarehouseSettingsPage": "navigateToPiPHomePage,navigateToWarehouseSettings,verifyWarehouseSettingsPageUI",
+      "Tc_1160_VerifyShipViaScreenUI": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToShipViaScreen,verifyShipViaScreenUI",
+      "Tc_1166_VerifyModifyingPriorityShipViaPage": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToShipViaScreen,modifyPriorityInShipViaScreen",
+      "Tc_1195_CreateNewShipMethod": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToShipViaScreen,createNewShipMethod ",
+      "Tc_1172_VerifyPickQueueScheduleScreenUI": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToPickQueueScheduleScreen,verifyPickQueueScheduleScreenUI",
+      "Tc_1173_VerifyAddingDayInPickQueueScheduleScreen": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToPickQueueScheduleScreen,addingDayInPickQueueScheduleScreen",
+      "Tc_1175_VerifyHolidayEventScheduleScreenUI": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToHolidayEventScheduleScreen,verifyHolidayEventScheduleScreenUI",
+      "Tc_1179_VerifyAddAnsEditEvent": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToHolidayEventScheduleScreen,deleteExistingRecords,addNewEvent,deleteEvent,verifyPreviousYearHolidays",
+      "Tc_1177_VerifyEditEventFunctionality": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToHolidayEventScheduleScreen,deleteExistingRecords,addNewEvent,editEventSuccessfully,verifyMandatoryFieldMessages",
+      "Tc_1182_VerifyNavigationToPackagingUnits": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToPackagingUnitsScreen",
+      "Tc_1183_VerifyUIOfPackagingUnits": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToPackagingUnitsScreen,verifyPackagingUnitsScreenUI",
+      "Tc_1185_ModifyPackagingUnitsPriority": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToPackagingUnitsScreen,verifyPackagingUnitPriority",
+      "Tc_1187_VerifyAddingPackagingUnits": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToPackagingUnitsScreen,addAndEditPackingUnits",
+      "Tc_1188_VerifyListOrderAndUnitLabel": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToPackagingUnitsScreen,verifyListOrderAndUnitLabel",
+      "Tc_1189_VerifyLeaveWithoutSaving": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToPackagingUnitsScreen,verifyLeaveWithoutSavingPopUp",
+      "Tc_1191_VerifyDocumentsAndPrintingScreenUI": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToDocumentsAndPrintingScreen,verifyDocumentsAndPrintingScreenUI",
+      "Tc_1192_VerifyPrinterDetailsPopupUI": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToDocumentsAndPrintingScreen,verifyPrinterDetailsPopupUI",
+      "Tc_1194_VerifyAddingPrinter": "navigateToPiPHomePage,navigateToWarehouseSettings,navigateToDocumentsAndPrintingScreen,verifyAddingPrinter",
+      "Tc_1206_VerifySearchRecordsWithShipmentNo": "navigateToPiPHomePage,verifySearchRecordsWithShipmentNo",
+      "Tc_1207_VerifySearchRecordsWithCustomer": "navigateToPiPHomePage,verifySearchRecordsWithCustomer",
+      "Tc_1208_VerifySearchRecordsWithAssignedTo": "navigateToPiPHomePage,verifySearchRecordsWithAssignedTo",
+      "Tc_1209_VerifySearchRecordsWithShipVia": "navigateToPiPHomePage,verifySearchRecordsWithShipVia",
+      "Tc_1210_VerifySearchRecordsWithTruckName": "navigateToPiPHomePage,verifySearchRecordsWithTruckName",
+      "Tc_1211_VerifySearchRecordsWithPickStatus": "navigateToPiPHomePage,verifySearchRecordsWithPickStatus",
+      "Tc_1213_VerifySearchRecordsWithStagedStatusPrintY": "navigateToPiPHomePage,verifySearchRecordsWithStagedStatusPrintY",
+      "Tc_1214_VerifySearchRecordsWithStagedStatusPrintN": "navigateToPiPHomePage,verifySearchRecordsWithStagedStatusPrintN",
+      "Tc_1218_VerifySearchRecordsWithShipDate": "navigateToPiPHomePage,verifySearchRecordsWithShipDate",
+      "Tc_1219_VerifySearchRecordsWithShipmentNoCustomer": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoValidCustomer,verifySearchRecordsWithValidShipmentNoInvalidCustomer,verifySearchRecordsWithInvalidShipmentNoValidCustomer,verifySearchRecordsWithInvalidShipmentNoInvalidCustomer",
+      "Tc_1223_VerifySearchRecordsWithShipmentNoShipVia": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoValidShipVia,verifySearchRecordsWithInvalidShipmentNoValidShipVia,verifySearchRecordsWithValidShipmentNoInvalidShipVia",
+      "Tc_1224_VerifySearchRecordsWithShipmentNoTruckName": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoValidTruckName,verifySearchRecordsWithInvalidShipmentNoValidTruckName,verifySearchRecordsWithValidShipmentNoInvalidTruckName",
+      "Tc_1225_VerifySearchRecordsWithShipmentNoPickStatus": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoValidPickStatus,verifySearchRecordsWithInvalidShipmentNoValidPickStatus",
+      "Tc_1227_VerifySearchRecordsWithShipmentNoPickStatusStagedPrintY": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoValidPickStatusStaged,verifySearchRecordsWithInvalidShipmentNoValidPickStatusStaged",
+      "Tc_1228_VerifySearchRecordsWithShipmentNoStagedPrintN": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoValidStagedPrintN,verifySearchRecordsWithInvalidShipmentNoValidPickStatusStagedPrintN",
+      "Tc_1229_VerifySearchRecordsWithShipmentNoShipDate": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoValidShipDate,verifySearchRecordsWithInvalidShipmentNoInvalidShipDate",
+      "Tc_1230_VerifySearchRecordsWithCustomerAssignedTo": "navigateToPiPHomePage,verifySearchRecordsWithValidCustomerValidAssignedTo,verifySearchRecordsWithInvalidCustomerValidAssignedTo,verifySearchRecordsWithValidCustomerInvalidAssignedTo",
+      "Tc_1232_VerifySearchRecordsWithCustomerShipVia": "navigateToPiPHomePage,verifySearchRecordsWithValidCustomerValidShipVia,verifySearchRecordsWithInvalidCustomerValidShipVia,verifySearchRecordsWithValidCustomerInvalidShipVia",
+      "Tc_1233_VerifySearchRecordsWithCustomerTruckName": "navigateToPiPHomePage,verifySearchRecordsWithValidCustomerValidTruckName,verifySearchRecordsWithInvalidCustomerValidTruckName,verifySearchRecordsWithValidCustomerInvalidTruckName",
+      "Tc_1238_VerifySearchRecordsWithCustomerPickStatus": "navigateToPiPHomePage,verifySearchRecordsWithValidCustomerValidPickStatus,verifySearchRecordsWithInvalidCustomerValidPickStatus",
+      "Tc_1239_VerifySearchRecordsWithCustomerPickStatusStagedPrintY": "navigateToPiPHomePage,verifySearchRecordsWithValidCustomerValidPickStatusStagedPrintY,verifySearchRecordsWithInvalidCustomerValidPickStatusStagedPrintY",
+      "Tc_1240_VerifySearchRecordsWithCustomerStagedPrintN": "navigateToPiPHomePage,verifySearchRecordsWithValidCustomerValidStagedPrintN,verifySearchRecordsWithInvalidCustomerValidPickStatusStagedPrintN",
+      "Tc_1243_VerifySearchRecordsWithCustomerShipDate": "navigateToPiPHomePage,verifySearchRecordsWithValidCustomerValidShipDate,verifySearchRecordsWithInvalidCustomerValidShipDate,verifySearchRecordsWithValidCustomerInvalidShipDate",
+      "Tc_1244_VerifySearchRecordsWithShipViaTruckName": "navigateToPiPHomePage,verifySearchRecordsWithValidShipViaValidTruckName,verifySearchRecordsWithInvalidShipViaInvalidTruckName",
+      "Tc_1245_VerifySearchRecordsWithShipViaPickStatus": "navigateToPiPHomePage,verifySearchRecordsWithValidShipViaValidPickStatus,verifySearchRecordsWithInvalidShipViaInvalidPickStatus",
+      "Tc_1246_VerifySearchRecordsWithShipViaPickStatusStagedPrintY": "navigateToPiPHomePage,verifySearchRecordsWithValidShipViaValidPickStatusStagedPrintY,verifySearchRecordsWithInvalidShipViaValidPickStatusStagedPrintY",
+      "Tc_1248_VerifySearchRecordsWithShipViaPickStatusStagedPrintN": "navigateToPiPHomePage,verifySearchRecordsWithValidShipViaValidPickStatusStagedPrintN,verifySearchRecordsWithInvalidShipViaValidPickStatusStagedPrintN",
+      "Tc_1247_VerifySearchRecordsWithShipViaShipDate": "navigateToPiPHomePage,verifySearchRecordsWithValidShipViaValidShipDate,verifySearchRecordsWithInvalidShipViaValidShipDate,verifySearchRecordsWithValidShipViaInvalidShipDate",
+      "Tc_1249_VerifySearchRecordsWithShipDatePickStatusInProcess": "navigateToPiPHomePage,verifySearchRecordsWithValidShipDateValidPickStatus,verifySearchRecordsWithInvalidShipDateValidPickStatus",
+      "Tc_1250_VerifySearchRecordsWithShipDatePickStatusStagedPrintY": "navigateToPiPHomePage,verifySearchRecordsWithValidShipDateValidPickStatusStagedPrintY,verifySearchRecordsWithInvalidShipDateValidPickStatusStagedPrintY",
+      "Tc_1251_VerifySearchRecordsWithShipDatePickStatusStagedPrintN": "navigateToPiPHomePage,verifySearchRecordsWithValidShipDateValidPickStatusStagedPrintN,verifySearchRecordsWithInvalidShipDateValidPickStatusStagedPrintN",
+      "Tc_1252_VerifySearchRecordsWithTruckNameShipDatePickStatusInProcess": "navigateToPiPHomePage,verifySearchRecordsWithValidTruckNameValidShipDateValidPickStatus,verifySearchRecordsWithInvalidTruckNameValidShipDateValidPickStatus,verifySearchRecordsWithValidTruckNameInvalidShipDateValidPickStatus",
+      "Tc_1253_VerifySearchRecordsWithTruckNameShipDatePickStatusStagedPrintY": "navigateToPiPHomePage,verifySearchRecordsWithValidShipViaValidPickStatusStagedPrintY,verifySearchRecordsWithInvalidShipViaValidPickStatusStagedPrintY",
+      "Tc_1255_VerifySearchRecordsWithTruckNameShipDatePickStatusStagedPrintN": "navigateToPiPHomePage,verifySearchRecordsWithValidShipViaValidPickStatusStagedPrintN,verifySearchRecordsWithInvalidShipViaValidPickStatusStagedPrintN",
+      "Tc_1259_VerifySearchRecordsWithShipmentNoCustomerTruckNamePickStatusInProcess": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoCustomerTruckNamePickStatusInProcess,verifySearchRecordsWithInvalidShipmentNoCustomerTruckNamePickStatusInProcess",
+      "Tc_1261_VerifySearchRecordsWithShipmentNoCustomerPickStatusStagedPrintY": "navigateToPiPHomePage,verifySearchRecordsWithValidShipmentNoCustomerPickStatusStagedPrintY,verifySearchRecordsWithInvalidShipmentNoCustomerPickStatusStagedPrintY",
+      "Tc_1258_VerifyManualPickingInPickingInProcessPage": "navigateToPiPHomePage,verifyManualPickingInPickingInProcessPage",
+      "Tc_1308_VerifySortingInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue, verifySortingInExceptionQueuePage",
+      "Tc_1309_VerifyExportToExcelInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue, verifyExportToExcelInExceptionQueuePage",
+      "Tc_1310_VerifyPaginationInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifyPaginationInExceptionQueuePage",
+      "Tc_1311_VerifyReslutionNotesInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifyResolutionNotesInExceptionQueuePage",
+      "Tc_1312_VerifyUIInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifyUIInExceptionQueuePage",
+      "Tc_1313_VerifyClosingRecordsInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifyClosingRecordsInExceptionQueuePage",
+      "Tc_1314_VerifyClosingMultipleRecordsInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifyClosingMultipleRecordsInExceptionQueuePage",
+      "Tc_1320_VerifySearchWithSourceInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithSourceInExceptionQueuePage",
+      "Tc_1321_VerifySearchWithDateInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithDateInExceptionQueuePage",
+      "Tc_1322_VerifySearchWithErrorReasonInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithErrorReasonInExceptionQueuePage",
+      "Tc_1323_VerifySearchWithStatusInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithStatusInExceptionQueuePage",
+      "Tc_1324_VerifySearchWithDateSourceInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithDateSourceInExceptionQueuePage",
+      "Tc_1325_VerifySearchWithDateErrorReasonInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithDateErrorReasonInExceptionQueuePage",
+      "Tc_1326_VerifySearchWithDateStatusInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithDateStatusInExceptionQueuePage",
+      "Tc_1332_VerifySearchWithSourceStatusInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithSourceStatusInExceptionQueuePage",
+      "Tc_1333_VerifySearchWithErrorReasonStatusInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithErrorReasonStatusInExceptionQueuePage",
+      "Tc_1334_VerifySearchWithAllFiltersInExceptionQueuePage": "navigateToPiPHomePage, navigateToExceptionQueue,verifySearchWithAllFiltersInExceptionQueuePage"
+    }
+
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_997_VerifyPickingInProcessHomeUI"
+    },
+    {
+      "TC_ID": "Tc_999_VerifySearchFilterUI"
+    },
+    {
+      "TC_ID": "Tc_1000_VerifyOrderDetailsPageUI"
+    },
+    {
+      "TC_ID": "Tc_1003_VerifySortingFunctionality"
+    },
+    {
+      "TC_ID": "Tc_1004_VerifyFilters"
+    },
+    {
+      "TC_ID": "Tc_998_NavigateToPickingInProcess"
+    },
+    {
+      "TC_ID": "Tc_1154_VerifyDefaultPickStatusShipment"
+    },
+    {
+      "TC_ID": "Tc_1161_VerifyCurrentZoneFilter"
+    },
+    {
+      "TC_ID": "Tc_1001_VerifyLogout"
+    },
+    {
+      "TC_ID": "Tc_1162_VerifyOpenTotalLines"
+    },
+    {
+      "TC_ID": "Tc_1199_VerifyShipDateToggle"
+    },
+    {
+      "TC_ID": "Tc_1200_VerifyIconsBesideShipment"
+    },
+    {
+      "TC_ID": "Tc_1204_VerifyReturnToPickQPriority"
+    },
+    {
+      "TC_ID": "Tc_1197_VerifyPagination"
+    },
+    {
+      "TC_ID": "Tc_1198_VerifyRecordsPerPage"
+    },
+    {
+      "TC_ID": "Tc_1203_VerifyLoadPickQueuePopUp"
+    },
+    {
+      "TC_ID": "Tc_1204_VerifyReturnToPickQueuePriority"
+    },
+    {
+      "TC_ID": "Tc_1167_VerifyPercentCompleteCalculation"
+    },
+    {
+      "TC_ID": "Tc_1168_VerifyStatusOfZOne"
+    },
+    {
+      "TC_ID": "Tc_1169_VerifyPrintDocumentsAndLabelsUI"
+    },
+    {
+      "TC_ID": "Tc_1170_VerifyRemovingStagingDetails"
+    },
+    {
+      "TC_ID": "Tc_1157_VerifyWarehouseSettingsPage"
+    },
+    {
+      "TC_ID": "Tc_1160_VerifyShipViaScreenUI"
+    },
+    {
+      "TC_ID" :"Tc_1166_VerifyModifyingPriorityShipViaPage"
+    },
+    {
+      "TC_ID" :"Tc_1195_CreateNewShipMethod"
+    }
+  ]
+}
