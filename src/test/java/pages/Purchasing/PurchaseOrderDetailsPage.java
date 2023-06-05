@@ -19,29 +19,29 @@ public class PurchaseOrderDetailsPage extends ReusableLib {
     public static By vendor = By.id("D_3_37");
     public static By shipViaPOD = By.id("D_4_3");
     public static By customerPOD = By.id("D_4_37");
-    public static By quantityOrdered = By.id("I_8_6");
+    public static By quantityOrdered = By.id("I_7_6");
     public static By quantityOpen = By.id("D_8_15");
-    public static By itemNumberPOD = By.id("I_8_23");
-    public static By pricePOD = By.id("I_8_43");
-    public static By umPOD = By.id("I_8_58");
-    public static By disc = By.id("I_8_61");
-    public static By extendedAmount = By.id("I_8_68");
-    public static By descPOD = By.id("I_9_8");
-    public static By line2 = By.id("I_9_48");
-    public static By vendorPart = By.id("I_10_18");
-    public static By relatedSo = By.id("I_10_52");
-    public static By datePOD = By.id("I_11_9");
-    public static By weightPOD = By.id("I_11_26");
-    public static By pkgQty = By.id("I_11_45");
+    public static By itemNumberPOD = By.id("I_7_23");
+    public static By pricePOD = By.id("I_7_43");
+    public static By umPOD = By.id("I_7_58");
+    public static By disc = By.id("I_7_61");
+    public static By extendedAmount = By.id("I_7_68");
+    public static By descPOD = By.id("I_8_8");
+    public static By line2 = By.id("I_8_48");
+    public static By vendorPart = By.id("I_9_18");
+    public static By relatedSo = By.id("I_9_52");
+    public static By datePOD = By.id("I_10_9");
+    public static By weightPOD = By.id("I_10_26");
+    public static By pkgQty = By.id("I_10_45");
     public static By convFactor = By.id("D_11_52");
     public static By ediStat = By.id("D_2_15");
     public static By sendViaFax = By.id("D_3_33");
-    public static By tyPOD = By.id("I_8_3");
+    public static By tyPOD = By.id("I_7_3");
     public static By errorMsg = By.id("D_3_64");
     public static By subjectEditMail = By.id("I_7_3_W2");
 
-    public static By firstItemNumber = By.id("I_11_3");
-    public static By secondItemNumber = By.id("I_12_3");
+    public static By firstItemNumber = By.id("I_10_3");
+    public static By secondItemNumber = By.id("I_11_3");
     public static By errorMsgPOD = By.id("D_24_2");
     public static By userIdentifier = By.id("D_4_29");
     public static By nameAppear = By.id("I_5_29");
@@ -70,7 +70,7 @@ public class PurchaseOrderDetailsPage extends ReusableLib {
     public static By convFactorValue = By.id("D_11_65");
     public static By orderNo2 = By.id("D_2_49");
     public static By btnSubmit = By.id("btnSubmit");
-    public static By tbxMultiplier = By.id("I_8_61");
+    public static By tbxMultiplier = By.id("I_7_61");
 
     /******************************* Actions panel locators *******************************/
 
