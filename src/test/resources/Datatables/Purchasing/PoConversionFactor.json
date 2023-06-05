@@ -10,8 +10,8 @@
       "Tc_250_EditItemPOPriceAndVerifyInPODetailsPage": "launchApp,siteLogin,validateItemMasterTitle,selectRandomItem,editRandomPOCost,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterOrderedItemNumber,vrfyItemPOPrice,exitToMaster,signOut",
       "Tc_251_VerifyErrorWhileAddingItemToDirectPO": "launchApp,siteLogin,validatePOHeadingTitle,selectDirectOrderAndVerify,findOrderAndEnterQty,verifySalesOrderError,exitToMaster,signOut",
       "Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry": "launchApp,siteLogin,navigateToBuyersInquiry,selectRandomStock,getStockData,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,navigateFromPODetailsToMaster,navigateToBuyersInquiry,selectStock,verifyStockData,exitToMaster,signOut",
-      "Tc_253_VerifyItemDetailsAfterProcessingPO": "launchApp,siteLogin,navigateToBuyersInquiry,selectRandomStock,getStockData,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipts,enterExistingPONumber,enterQtyRcvdAndProcess,navigateInventoryReceiptsToMaster,navigateToBuyersInquiry,selectStock,verifyStockData,exitToMaster,signOut",
-      "Tc_256_VerifyLineItemAfterProcessingPO": "launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipts,enterExistingPONumber,enterQtyRcvdAndProcess,navigateInventoryReceiptsToMaster,signOut",
+      "Tc_253_VerifyItemDetailsAfterProcessingPO": "launchApp,siteLogin,navigateToBuyersInquiry,selectRandomStock,getStockData,exitToMaster,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipts,enterExistingPONumber,navigateInventoryReceiptsToMaster,navigateToBuyersInquiry,selectStock,verifyStockData,exitToMaster,signOut",
+      "Tc_256_VerifyLineItemAfterProcessingPO": "launchApp,siteLogin,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,vrfyCostVarianceError,enterItemNumberAndQty,vrfyCostVarianceError,getOrderNumberValue,navigateFromPODetailsToMaster,navigateToInventoryReceipts,enterExistingPONumber,navigateInventoryReceiptsToMaster,signOut",
       "Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,saveExitSalesOrders,exitSalesQuotesToMasterPage,validatePOHeadingTitle,findVendorFreight,enterItemNumberAndQty,enterRelatedSO,exitToMaster,signOut",
       "Tc_258_VerifyAddingDirectPOToRelatedSO": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders,exitSalesQuotesToMasterPage,validatePOHeadingTitle,selectAction,enterOrderNumber,verifyActionChange,verifyTypeShipmentChange,exitToMaster,signOut"
     }
@@ -59,33 +59,33 @@
     },
     {
       "TC_ID": "Tc_251_VerifyErrorWhileAddingItemToDirectPO",
-      "OrderType": "DIRECT",
+      "OrderType": "ALL",
       "Action": "C",
-      "TypeShipment": "D",
+      "TypeShipment": "S",
       "QtyOrdered": "1",
-      "Error1": "ERROR - Related Sales Order Required For Direct POs.",
+      "Error1": "ERROR - Multiplier can NOT be 0.",
       "Error2": "ERROR - Related Sales Order Not Found."
     },
     {
       "TC_ID": "Tc_252_VerifyItemDetailsFromBuyersInquiryToPOEntry",
-      "itemNo": "0626A5411000",
-      "WithReceipts": "1,000",
+      "itemNo": "0018BRPL0112NL",
+      "WithReceipts": "",
       "OnPO": "",
-      "AvailableToSell": "1,000",
+      "AvailableToSell": "",
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000"
     },
     {
       "TC_ID": "Tc_253_VerifyItemDetailsAfterProcessingPO",
-      "itemNo": "0626A5411000",
-      "WithReceipts": "977",
-      "OnPO": "",
-      "AvailableToSell": "977",
+      "itemNo": "0018BRBU1003NL",
+      "WithReceipts": "4",
+      "OnPO": "4",
+      "AvailableToSell": "",
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000",
-      "PONumber": "034665"
+      "PONumber": "030138"
     },
     {
       "TC_ID": "Tc_256_VerifyLineItemAfterProcessingPO",
@@ -96,7 +96,7 @@
       "CostOption": "1",
       "QtyOrdered": "2",
       "ConvFactor": "1.000",
-      "PONumber": "031175"
+      "PONumber": "030139"
     },
     {
       "TC_ID": "Tc_257_VerifyWarningMsgWhenAddingLineItemToDirectPO",
@@ -106,7 +106,7 @@
       "QtyOrder": "50",
       "itemNo": "AABABM100",
       "QtyShip": "50",
-      "SalesOrderNo": "001601",
+      "SalesOrderNo": "000260",
       "QtyOrdered": "25",
       "CostOption": "1"
     },
@@ -116,14 +116,14 @@
       "DirectShip": "Yes",
       "ShipVia": "BEST WAY",
       "QtyOrder": "50",
-      "itemNo": "AABABM100",
+      "itemNo": "1657ATI240HX3N0",
       "QtyShip": "50",
-      "SalesOrderNo": "001602",
+      "SalesOrderNo": "000261",
       "QtyOrdered": "25",
       "VendorNumber": "000388",
       "CostOption": "1",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "031177",
+      "PONumber": "030141",
       "Action": "I",
       "ActionExpected": "C",
       "TypeShipmentExpected": "D"
