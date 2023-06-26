@@ -90,8 +90,10 @@ public class CycleCostAdjust extends ReusableLib {
         Utility_Functions.xmouseOver(ownDriver, CostAdjustmentPage.itemLedger);
         click(CostAdjustmentPage.itemLedger);
         click(CostAdjustmentPage.itemLedSearch);
-        sendKeys(CostAdjustmentPage.includeYes, "Y");
-        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        if(isDisplayed(CostAdjustmentPage.includeYes)) {
+            sendKeys(CostAdjustmentPage.includeYes, "Y");
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        }
         sendKeys(CostAdjustmentPage.optBox, "1", "Item Number already Created in Item Master should be entered");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
     }
@@ -182,9 +184,11 @@ public class CycleCostAdjust extends ReusableLib {
     public String selectQuantity(String count) {
         sendKeys(CostAdjustmentPage.countFiled, count, "Quantity");
         click(CostAdjustmentPage.searchIcon);
-        Utility_Functions.xWaitForElementVisible(ownDriver, CostAdjustmentPage.includeYes, 15);
-        sendKeys(CostAdjustmentPage.includeYes, "Y");
-        Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        if(isDisplayed(CostAdjustmentPage.includeYes)) {
+            Utility_Functions.xWaitForElementVisible(ownDriver, CostAdjustmentPage.includeYes, 15);
+            sendKeys(CostAdjustmentPage.includeYes, "Y");
+            Utility_Functions.actionKey(Keys.ENTER, ownDriver);
+        }
         sendKeys(CostAdjustmentPage.optBox, "1", "Item Number already Created in Item Master should be entered");
         String onHold = ownDriver.findElement(CostAdjustmentPage.onHold).getText();
         System.out.println("onHold: " + onHold);

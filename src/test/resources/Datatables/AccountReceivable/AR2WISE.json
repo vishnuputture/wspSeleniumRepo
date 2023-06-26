@@ -131,7 +131,7 @@
       "MemoType": "DSC",
       "InvoiceAmount": "10",
       "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "001147-00"
+      "InvoiceNumber": "000500-00"
     },
     {
       "TC_ID": "Tc_429_verifyCreditMemo",
@@ -145,7 +145,7 @@
       "MemoType": "DSC",
       "InvoiceAmount": "10",
       "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "001148-00"
+      "InvoiceNumber": "000501-00"
     },
     {
       "TC_ID": "Tc_429_verifyDebitMemo",
@@ -465,23 +465,23 @@
     },
     {
       "TC_ID": "TC_484_VrfyGMMRecordCreatedInWise",
-      "ReceiverDoc": "000041577",
+      "ReceiverDoc": "000041483",
       "accountNo": "099599",
       "DirectShip": "Yes",
       "ShipVia": "BEST WAY",
       "QtyOrder": "50",
-      "itemNo": "AABABM100",
+      "itemNo": "ACC12573",
       "QtyShip": "50",
-      "SalesOrderNo": "001149",
+      "SalesOrderNo": "000502",
       "QtyOrdered": "1",
       "VendorNumber": "000388",
       "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
-      "PONumber": "030729",
+      "PONumber": "030324",
       "QtyReceived": "1",
       "DebitMemo": "10.00",
       "InvoiceTotal": "10.00",
       "DiscPercentage": "10",
-      "OrderNo": "030392",
+      "OrderNo": "030324",
       "GMMgrAmount": "10.00",
       "Company": "99599",
       "DocumentType": "Gross Margin Manager"
@@ -490,9 +490,9 @@
       "TC_ID": "TC_508_VrfyNonTradeInvRecordCreatedInWise",
       "TransactionType": "DM",
       "MemoType": "DSC",
-      "InvoiceAmount": "3366.00",
+      "InvoiceAmount": "1214.00",
       "AccountName": "ERIC BIRECKI",
-      "InvoiceNumber": "001150-00",
+      "InvoiceNumber": "000503-00",
       "Company": "99599",
       "DocumentType": "Non-Trade Invoices",
       "Date": "01/2020"
@@ -501,10 +501,10 @@
       "TC_ID": "TC_507_VrfyMiscInventoryAdjustmentsRecordCreatedInWise",
       "AdjustmentCode": "Promotions",
       "Vendor": "99599",
-      "ItemNumber": "AABABM100",
+      "ItemNumber": "ACC12573",
       "Quantity": "100",
-      "Explanation": "Test Exp6903",
-      "Amount": "100.00",
+      "Explanation": "Test Exp2833",
+      "Amount": "1000.00",
       "Company": "99599",
       "DocumentType": "Misc. Inventory Adjustments"
     }

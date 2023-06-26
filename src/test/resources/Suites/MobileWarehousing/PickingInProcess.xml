@@ -8,7 +8,7 @@
                 <methods>
 
 
-                    <!--<include name="Tc_997_VerifyPickingInProcessHomeUI"></include>
+                    <include name="Tc_997_VerifyPickingInProcessHomeUI"></include>
                     <include name="Tc_999_VerifySearchFilterUI"></include>
                     <include name="Tc_1000_VerifyOrderDetailsPageUI"></include>
                     <include name="Tc_1003_VerifySortingFunctionality"></include>
@@ -37,9 +37,9 @@
                     <include name="Tc_1173_VerifyAddingDayInPickQueueScheduleScreen"></include>
                     <include name="Tc_1175_VerifyHolidayEventScheduleScreenUI"></include>
                     <include name="Tc_1179_VerifyAddAnsEditEvent"></include>
-                    <include name="Tc_1177_VerifyEditEventFunctionality"></include>-->
+                    <include name="Tc_1177_VerifyEditEventFunctionality"></include>
 
-                    <!--<include name="Tc_1182_VerifyNavigationToPackagingUnits"></include>
+                    <include name="Tc_1182_VerifyNavigationToPackagingUnits"></include>
                     <include name="Tc_1183_VerifyUIOfPackagingUnits"></include>
                     <include name="Tc_1185_ModifyPackagingUnitsPriority"></include>
                     <include name="Tc_1187_VerifyAddingPackagingUnits"></include>
@@ -47,8 +47,8 @@
                     <include name="Tc_1189_VerifyLeaveWithoutSaving"></include>
                     <include name="Tc_1191_VerifyDocumentsAndPrintingScreenUI"></include>
                     <include name="Tc_1192_VerifyPrinterDetailsPopupUI"></include>
-                    <include name="Tc_1194_VerifyAddingPrinter"></include>-->
-                    <!--<include name="Tc_1206_VerifySearchRecordsWithShipmentNo"></include>
+                    <include name="Tc_1194_VerifyAddingPrinter"></include>
+                    <include name="Tc_1206_VerifySearchRecordsWithShipmentNo"></include>
                     <include name="Tc_1207_VerifySearchRecordsWithCustomer"></include>
                     <include name="Tc_1208_VerifySearchRecordsWithAssignedTo"></include>
                     <include name="Tc_1209_VerifySearchRecordsWithShipVia"></include>
@@ -70,8 +70,8 @@
                     <include name="Tc_1238_VerifySearchRecordsWithCustomerPickStatus"></include>
                     <include name="Tc_1239_VerifySearchRecordsWithCustomerPickStatusStagedPrintY"></include>
                     <include name="Tc_1240_VerifySearchRecordsWithCustomerStagedPrintN"></include>
-                    <include name="Tc_1243_VerifySearchRecordsWithCustomerShipDate"></include>-->
-                    <!--<include name="Tc_1244_VerifySearchRecordsWithShipViaTruckName"></include>-->
+                    <include name="Tc_1243_VerifySearchRecordsWithCustomerShipDate"></include>
+                    <include name="Tc_1244_VerifySearchRecordsWithShipViaTruckName"></include>
                     <include name="Tc_1245_VerifySearchRecordsWithShipViaPickStatus"></include>
                     <include name="Tc_1246_VerifySearchRecordsWithShipViaPickStatusStagedPrintY"></include>
                     <include name="Tc_1248_VerifySearchRecordsWithShipViaPickStatusStagedPrintN"></include>

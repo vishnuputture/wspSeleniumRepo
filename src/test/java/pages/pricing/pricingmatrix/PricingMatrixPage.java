@@ -36,7 +36,7 @@ public class PricingMatrixPage extends ReusableLib {
     public static By strCol = By.id("I_4_14");
     public static By firstCell = By.xpath("//input[@name='InputField4']");
     public static By secondCell = By.xpath("//input[@name='InputField6']");
-    public static By pageTitle = By.id("D_2_28");
+    public static By pageTitle = By.id("D_2_45");
     public static By btnF3Exit = By.id("btnExit");
     public static By copyRow1 = By.id("D_8_4");
     public static By copyRow2 = By.id("D_10_4");
