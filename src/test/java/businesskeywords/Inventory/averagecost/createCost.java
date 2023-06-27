@@ -33,19 +33,6 @@ public class createCost extends ReusableLib {
         commonObj = new CommonActions(helper);
         ownDriver=helper.getGSDriver();
     }
-
-    /**
-     * This method validates the title of Item Master Page
-     *
-     * @throws NoSuchElementException
-     */
-    public void validateItemMasterTitle() throws NoSuchElementException {
-
-        commonObj.masterToInventory();
-        commonObj.inventoryToItemMaster();
-        //commonObj.splPricingToAddPricing();
-        commonObj.validateText(ItemMasterPage.pageTitle, "ITEM MASTER (I-347)", "Validating item Master page title");
-    }
     
     /**
      * This method validates the title of Receive Correction Page

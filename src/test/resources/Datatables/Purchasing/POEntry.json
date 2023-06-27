@@ -1,1 +1,202 @@
-{"Business_Flow":[{"Tc_203_PurchaseOrderHeadingUI":"launchApp,siteLogin,validatePOHeadingTitle,validatePOEntryUI","Tc_changeMultiplierToDisc":"launchApp,siteLogin,assignVendorNumber,backToMaster,navigateToDiscountMultiplier,chooseDiscountOpt,signOut","Tc_changeDiscToMultiplier":"launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut","Tc_204_ORDER_IN_USE_popup_when_user_IAD_particular_Order_No":"","Tc_205_Purchase_Order_DetailsUI":"launchApp,siteLogin,validatePOHeadingTitle,findVendor,validatePODetailsUI","Tc_206_Field_Verification_for_Vendor_and_Order_Number":"launchApp,siteLogin,validatePOHeadingTitle,validateVendorNo,validateOrderNo","Tc_207_Functionality_of_F12_Vendor_Notes":"launchApp,siteLogin,addVendornotes,deleteVendornotes","Tc_208_Create_line_item_by_changing_Customer_number":"launchApp,siteLogin,validatePOHeadingTitle,selectFirstCustomer,addPOWithPOPriceAndDisc","Tc_209_Verify_the_functionality_of_Type_Shipment_S":"launchApp,siteLogin,validatePOHeadingTitle,selectFirstCustomer,findVendor,validateShipmentType","Tc_210_Verify_the_error_message":"launchApp,siteLogin,validatePOHeadingTitle,addPOWithListPriceWithoutDisc","Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount":"launchApp,siteLogin,validatePOHeadingTitle,addPOWithListPriceAndDisc","Tc_212_Calculation_of_Extended_amount_for_Last_Cost_with_and_without_Discount":"launchApp,siteLogin,validatePOHeadingTitle,addPOWithLastPriceAndDisc,addPOWithLastPriceWithoutDisc","Tc_213_Verification_for_addition_of_duplicate_line_item_number":"launchApp,siteLogin,validatePOHeadingTitle,addDuplicateLineItem","Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected":"","Tc_215_Verify_the_functionality_of_Ship_Date_and_Line_item_have_different_Ship_Date":"","Tc_216_Verify_the_functionality_of_Freight_Charges":"launchApp,siteLogin,validatePOHeadingTitle,findVendorWithoutFreightCharges,validateFrieghtCharges,pressF3ExitBtn,pressF3ExitBtn,signOut","Tc_217_Verify_the_functionality_of_Cost_Option":"launchApp,siteLogin,validatePOHeadingTitle,enquireOrderNo,validateCostOptionFunc,pressF3ExitBtn,pressF3ExitBtn,signOut","Tc_308_CreateSOUI":"launchApp,siteLogin,validatePOHeadingTitle,getVendor,navigateToCreateSo,verifyPoEntryUi,exitPoEntry,signOut","Tc_CreatePo":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInformation,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders","Tc_310_SoFromStockPO":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,navigateToCreateSo,selectCustNo,selectShipVia,processSo,exitPoEntry,signOut","Tc_311_VerifySalesOrderCreated":"launchApp,siteLogin,validateSalesOrderTitle,verifySalesOrderEntryFields,pressF3ExitBtn,signOut","Tc_309_verifyF21Preferences":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,enterFreightCharges,navigateToPoUserIdentifier,verifyPreferences,navigateToPoUserIdentifier,validateIdentifier,clickReturn,exitPoEntry,signOut","Tc_314_verifyErrorMessageEmailFaxOptions":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,verifyErrorMsgMailEDI,exitPoEntry,signOut","Tc_315_verifySelectChangeDeselect":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,sendViaMail,enterItemNumberAndQty,vrfyCostVarianceError,navigateToPoHeading,changeMailDetails,selectMailDetails,deselectMailDetails,exitFromPOSend,exitPoEntry,signOut","Tc_321_verifyClosedMail":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,sendViaMail,enterItemNumberAndQty,vrfyCostVarianceError,navigateToPoHeading,selectMailDetails,processMail,exitFromPOSend,exitPoEntry,signOut","Tc_CreatePoDirect":"launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders","Tc_312_VerifyCannotCreateSoForDirectPo":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,directPoCreateSoError,exitPoEntry,signOut","Tc_316_verifyFieldExpansionOrderNo":"launchApp,siteLogin,validatePOHeadingTitle,getVendor,verifyOrderNo,exitPoEntry,signOut","Tc_317_verifyFieldExpansionSONoField":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo2,navigateToCreateSo,SoFieldVerification,exitPoEntry,signOut","Tc_318_verifyFieldExpansionRelatedSaleField":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,verifyActionCode,enterFreightCharges,enterItemNumberAndQty,verifyRelatedSO,exitPoEntry,signOut","Tc_319_InquiryOrderNumber":"launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,enterFreightCharges,verifyPoDetailsWithLineNoAction,exitPoEntry,signOut","Tc_335_deleteOrderNumber":"launchApp,siteLogin,validatePOHeadingTitle,typeShipmentD,enter,deleteOrderNo,exitPoEntry,signOut","Tc_339_deleteDirectOrderNumber":"launchApp,siteLogin,validatePOHeadingTitle,typeShipmentD,enter,deleteOrderNo,exitPoEntry,signOut"}],"General_Data":[{"TC_ID":"Tc_207_Functionality_of_F12_Vendor_Notes","validVendorNo":"019351","vendorNotes1":"Test Vendor Note"},{"TC_ID":"Tc_changeMultiplierToDisc"},{"TC_ID":"Tc_changeDiscToMultiplier"},{"TC_ID":"Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount","quantityOrdered":"3","discount":"1","listCostOption":"1"},{"TC_ID":"Tc_212_Calculation_of_Extended_amount_for_Last_Cost_with_and_without_Discount","quantityOrdered":"2","discount":"5","lastCostOption":"3","secondQuantityOrdered":"1"},{"TC_ID":"Tc_213_Verification_for_addition_of_duplicate_line_item_number","lastCostOption":"3","secondQuantityOrdered":"5"},{"TC_ID":"Tc_217_Verify_the_functionality_of_Cost_Option","orderNo":"032965","invalidCostOption":"9999","invalidCostOptionSpecialChar":"9999!@#$%^&*()","validCostOption":"1"},{"TC_ID":"Tc_208_Create_line_item_by_changing_Customer_number","POCostOption":"2","quantityOrdered":"2","discount":"9"},{"TC_ID":"Tc_210_Verify_the_error_message","listCostOption":"1","quantityOrdered":"1","nodiscount":"0"},{"TC_ID":"Tc_216_Verify_the_functionality_of_Freight_Charges","invalidFrieght":"GGGGG","invalidFrieghtSpecialChar":"GGGGG!@#$%^&*()","validFrieght":"FFA"},{"TC_ID":"Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected","orderno":"","invalidLineno":"","validLineno":""},{"TC_ID":"Tc_308_CreateSOUI"},{"TC_ID":"Tc_310_SoFromStockPO","orderNo":"030452"},{"TC_ID":"Tc_CreatePo","Title":"Test case to Create Purchase order","accountNo":"099599","DirectShip":"Yes","ShipVia":"BEST WAY","QtyOrder":"50","itemNo":"AABABM100","QtyShip":"50","SalesOrderNo":"000349","QtyOrdered":"25","VendorNumber":"000388","CostOption":"1","FreightCode":"Full Frt Allowed/ NO Frt Chrg.","PONumber":"031214"},{"TC_ID":"Tc_311_VerifySalesOrderCreated"},{"TC_ID":"Tc_CreatePoDirect","Title":"Test case to Create Purchase order","accountNo":"099599","DirectShip":"Yes","ShipVia":"BEST WAY","QtyOrder":"50","itemNo":"AABABM100","QtyShip":"50","SalesOrderNo":"000351","QtyOrdered":"25","VendorNumber":"000388","CostOption":"1","FreightCode":"Full Frt Allowed/ NO Frt Chrg.","PONumber":"031224"},{"TC_ID":"Tc_312_VerifyCannotCreateSoForDirectPo"},{"TC_ID":"Tc_316_verifyFieldExpansionOrderNo"},{"TC_ID":"Tc_317_verifyFieldExpansionSONoField","PONumber":"030002"},{"TC_ID":"Tc_318_verifyFieldExpansionRelatedSaleField","itemNo":"AABABM100","QtyOrdered":"5","RelatedSONegativeValue":"-12233","RelatedSOZeroValue":"0","RelatedSOAlphaNumericValue":"WD23#$er"},{"TC_ID":"Tc_319_InquiryOrderNumber","itemNo":"AABABM100"},{"TC_ID":"Tc_335_deleteOrderNumber"},{"TC_ID":"Tc_339_deleteDirectOrderNumber"},{"TC_ID":"Tc_309_verifyF21Preferences","nameAppear":"AutomationTest","emailAddress":"Automation@testing.com","CountryCode":"092","teleNo":"092","teleNo1":"4444"},{"TC_ID":"Tc_314_verifyErrorMessageEmailFaxOptions"},{"TC_ID":"Tc_315_verifySelectChangeDeselect","itemNo":"AABABM100","QtyOrdered":"5","nameAppear":"AutomationTestSuite","emailAddress":"Automation@test.com","CountryCode":"091","teleNo":"096","teleNo1":"4435"},{"TC_ID":"Tc_321_verifyClosedMail","itemNo":"AABABM100","QtyOrdered":"5","nameAppear":"AutomationTestSuite","emailAddress":"Automation@test.com","CountryCode":"091","teleNo":"096","teleNo1":"4435"}]}
+{
+  "Business_Flow": [
+    {
+      "Tc_203_PurchaseOrderHeadingUI": "launchApp,siteLogin,validatePOHeadingTitle,validatePOEntryUI",
+      "Tc_changeMultiplierToDisc": "launchApp,siteLogin,assignVendorNumber,backToMaster,navigateToDiscountMultiplier,chooseDiscountOpt,signOut",
+      "Tc_changeDiscToMultiplier": "launchApp,siteLogin,navigateToDiscountMultiplier,chooseMultiplierOpt,signOut",
+      "Tc_204_ORDER_IN_USE_popup_when_user_IAD_particular_Order_No": "",
+      "Tc_205_Purchase_Order_DetailsUI": "launchApp,siteLogin,validatePOHeadingTitle,findVendor,validatePODetailsUI",
+      "Tc_206_Field_Verification_for_Vendor_and_Order_Number": "launchApp,siteLogin,validatePOHeadingTitle,validateVendorNo,validateOrderNo",
+      "Tc_207_Functionality_of_F12_Vendor_Notes": "launchApp,siteLogin,addVendornotes,deleteVendornotes",
+      "Tc_208_Create_line_item_by_changing_Customer_number": "launchApp,siteLogin,validatePOHeadingTitle,selectFirstCustomer,addPOWithPOPriceAndDisc",
+      "Tc_209_Verify_the_functionality_of_Type_Shipment_S": "launchApp,siteLogin,validatePOHeadingTitle,selectFirstCustomer,findVendor,validateShipmentType",
+      "Tc_210_Verify_the_error_message": "launchApp,siteLogin,validatePOHeadingTitle,addPOWithListPriceWithoutDisc",
+      "Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount": "launchApp,siteLogin,validatePOHeadingTitle,addPOWithListPriceAndDisc",
+      "Tc_212_Calculation_of_Extended_amount_for_Last_Cost_with_and_without_Discount": "launchApp,siteLogin,validatePOHeadingTitle,addPOWithLastPriceAndDisc,addPOWithLastPriceWithoutDisc",
+      "Tc_213_Verification_for_addition_of_duplicate_line_item_number": "launchApp,siteLogin,validatePOHeadingTitle,addDuplicateLineItem",
+      "Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected": "",
+      "Tc_215_Verify_the_functionality_of_Ship_Date_and_Line_item_have_different_Ship_Date": "",
+      "Tc_216_Verify_the_functionality_of_Freight_Charges": "launchApp,siteLogin,validatePOHeadingTitle,findVendorWithoutFreightCharges,validateFrieghtCharges,pressF3ExitBtn,pressF3ExitBtn,signOut",
+      "Tc_217_Verify_the_functionality_of_Cost_Option": "launchApp,siteLogin,validatePOHeadingTitle,enquireOrderNo,validateCostOptionFunc,pressF3ExitBtn,pressF3ExitBtn,signOut",
+      "Tc_308_CreateSOUI": "launchApp,siteLogin,validatePOHeadingTitle,getVendor,navigateToCreateSo,verifyPoEntryUi,exitPoEntry,signOut",
+      "Tc_CreatePo": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInformation,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
+      "Tc_310_SoFromStockPO": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,navigateToCreateSo,selectCustNo,selectShipVia,processSo,exitPoEntry,signOut",
+      "Tc_311_VerifySalesOrderCreated": "launchApp,siteLogin,validateSalesOrderTitle,verifySalesOrderEntryFields,pressF3ExitBtn,signOut",
+      "Tc_309_verifyF21Preferences": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,enterFreightCharges,navigateToPoUserIdentifier,verifyPreferences,navigateToPoUserIdentifier,validateIdentifier,clickReturn,exitPoEntry,signOut",
+      "Tc_314_verifyErrorMessageEmailFaxOptions": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,verifyErrorMsgMailEDI,exitPoEntry,signOut",
+      "Tc_315_verifySelectChangeDeselect": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,sendViaMail,enterItemNumberAndQty,vrfyCostVarianceError,navigateToPoHeading,changeMailDetails,selectMailDetails,deselectMailDetails,exitFromPOSend,exitPoEntry,signOut",
+      "Tc_321_verifyClosedMail": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,sendViaMail,enterItemNumberAndQty,vrfyCostVarianceError,navigateToPoHeading,selectMailDetails,processMail,exitFromPOSend,exitPoEntry,signOut",
+      "Tc_CreatePoDirect": "launchApp,siteLogin,validateSalesOrderTitle,createSalesOrderCOD,selectDeliveryInfo,navigateToItemsTab,selectItems,navigateToShipmentsTab,createPOFromShipments,saveExitSalesOrders",
+      "Tc_312_VerifyCannotCreateSoForDirectPo": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,directPoCreateSoError,exitPoEntry,signOut",
+      "Tc_316_verifyFieldExpansionOrderNo": "launchApp,siteLogin,validatePOHeadingTitle,getVendor,verifyOrderNo,exitPoEntry,signOut",
+      "Tc_317_verifyFieldExpansionSONoField": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo2,navigateToCreateSo,SoFieldVerification,exitPoEntry,signOut",
+      "Tc_318_verifyFieldExpansionRelatedSaleField": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,verifyActionCode,enterFreightCharges,enterItemNumberAndQty,verifyRelatedSO,exitPoEntry,signOut",
+      "Tc_319_InquiryOrderNumber": "launchApp,siteLogin,validatePOHeadingTitle,enquirePOrderNo,enterFreightCharges,verifyPoDetailsWithLineNoAction,exitPoEntry,signOut",
+      "Tc_335_deleteOrderNumber": "launchApp,siteLogin,validatePOHeadingTitle,typeShipmentD,enter,deleteOrderNo,exitPoEntry,signOut",
+      "Tc_339_deleteDirectOrderNumber": "launchApp,siteLogin,validatePOHeadingTitle,typeShipmentD,enter,deleteOrderNo,exitPoEntry,signOut"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "Tc_207_Functionality_of_F12_Vendor_Notes",
+      "validVendorNo": "019351",
+      "vendorNotes1": "Test Vendor Note"
+    },
+    {
+      "TC_ID": "Tc_changeMultiplierToDisc"
+    },
+    {
+      "TC_ID": "Tc_changeDiscToMultiplier"
+    },
+    {
+      "TC_ID": "Tc_211_Calculation_of_Extended_amount_for_List_Price_with_Discount",
+      "quantityOrdered": "3",
+      "discount": "1",
+      "listCostOption": "1"
+    },
+    {
+      "TC_ID": "Tc_212_Calculation_of_Extended_amount_for_Last_Cost_with_and_without_Discount",
+      "quantityOrdered": "2",
+      "discount": "5",
+      "lastCostOption": "3",
+      "secondQuantityOrdered": "1"
+    },
+    {
+      "TC_ID": "Tc_213_Verification_for_addition_of_duplicate_line_item_number",
+      "lastCostOption": "3",
+      "secondQuantityOrdered": "5"
+    },
+    {
+      "TC_ID": "Tc_217_Verify_the_functionality_of_Cost_Option",
+      "orderNo": "032965",
+      "invalidCostOption": "9999",
+      "invalidCostOptionSpecialChar": "9999!@#$%^&*()",
+      "validCostOption": "1"
+    },
+    {
+      "TC_ID": "Tc_208_Create_line_item_by_changing_Customer_number",
+      "POCostOption": "2",
+      "quantityOrdered": "2",
+      "discount": "9"
+    },
+    {
+      "TC_ID": "Tc_210_Verify_the_error_message",
+      "listCostOption": "1",
+      "quantityOrdered": "1",
+      "nodiscount": "0"
+    },
+    {
+      "TC_ID": "Tc_216_Verify_the_functionality_of_Freight_Charges",
+      "invalidFrieght": "GGGGG",
+      "invalidFrieghtSpecialChar": "GGGGG!@#$%^&*()",
+      "validFrieght": "FFA"
+    },
+    {
+      "TC_ID": "Tc_214_Verify_error_message_inquiring_line_item_that_does_not_exist_and_Freight_Charges_code_is_not_selected",
+      "orderno": "",
+      "invalidLineno": "",
+      "validLineno": ""
+    },
+    {
+      "TC_ID": "Tc_308_CreateSOUI"
+    },
+    {
+      "TC_ID": "Tc_310_SoFromStockPO",
+      "orderNo": "030452"
+    },
+    {
+      "TC_ID": "Tc_CreatePo",
+      "Title": "Test case to Create Purchase order",
+      "accountNo": "099599",
+      "DirectShip": "Yes",
+      "ShipVia": "BEST WAY",
+      "QtyOrder": "50",
+      "itemNo": "ACC12573",
+      "QtyShip": "50",
+      "SalesOrderNo": "000399",
+      "QtyOrdered": "25",
+      "VendorNumber": "000388",
+      "CostOption": "1",
+      "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
+      "PONumber": "031214"
+    },
+    {
+      "TC_ID": "Tc_311_VerifySalesOrderCreated"
+    },
+    {
+      "TC_ID": "Tc_CreatePoDirect",
+      "Title": "Test case to Create Purchase order",
+      "accountNo": "099599",
+      "DirectShip": "Yes",
+      "ShipVia": "BEST WAY",
+      "QtyOrder": "50",
+      "itemNo": "ACC12573",
+      "QtyShip": "50",
+      "SalesOrderNo": "000400",
+      "QtyOrdered": "25",
+      "VendorNumber": "000388",
+      "CostOption": "1",
+      "FreightCode": "Full Frt Allowed/ NO Frt Chrg.",
+      "PONumber": "031224"
+    },
+    {
+      "TC_ID": "Tc_312_VerifyCannotCreateSoForDirectPo"
+    },
+    {
+      "TC_ID": "Tc_316_verifyFieldExpansionOrderNo"
+    },
+    {
+      "TC_ID": "Tc_317_verifyFieldExpansionSONoField",
+      "PONumber": "030002"
+    },
+    {
+      "TC_ID": "Tc_318_verifyFieldExpansionRelatedSaleField",
+      "itemNo": "ACC12573",
+      "QtyOrdered": "5",
+      "RelatedSONegativeValue": "-12233",
+      "RelatedSOZeroValue": "0",
+      "RelatedSOAlphaNumericValue": "WD23#$er"
+    },
+    {
+      "TC_ID": "Tc_319_InquiryOrderNumber",
+      "itemNo": "ACC12573"
+    },
+    {
+      "TC_ID": "Tc_335_deleteOrderNumber"
+    },
+    {
+      "TC_ID": "Tc_339_deleteDirectOrderNumber"
+    },
+    {
+      "TC_ID": "Tc_309_verifyF21Preferences",
+      "nameAppear": "AutomationTest",
+      "emailAddress": "Automation@testing.com",
+      "CountryCode": "092",
+      "teleNo": "092",
+      "teleNo1": "4444"
+    },
+    {
+      "TC_ID": "Tc_314_verifyErrorMessageEmailFaxOptions"
+    },
+    {
+      "TC_ID": "Tc_315_verifySelectChangeDeselect",
+      "itemNo": "ACC12573",
+      "QtyOrdered": "5",
+      "nameAppear": "AutomationTestSuite",
+      "emailAddress": "Automation@test.com",
+      "CountryCode": "091",
+      "teleNo": "096",
+      "teleNo1": "4435"
+    },
+    {
+      "TC_ID": "Tc_321_verifyClosedMail",
+      "itemNo": "ACC12573",
+      "QtyOrdered": "5",
+      "nameAppear": "AutomationTestSuite",
+      "emailAddress": "Automation@test.com",
+      "CountryCode": "091",
+      "teleNo": "096",
+      "teleNo1": "4435"
+    }
+  ]
+}

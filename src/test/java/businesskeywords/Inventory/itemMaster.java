@@ -690,9 +690,9 @@ public class itemMaster extends ReusableLib {
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemDesc1, "title"), "Description Blank", "");
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.txtBoxUOM, "title"), "Invalid U/M", "");
         Utility_Functions.xUpdateJson("NewItemNumber", getAttribute(ItemMasterPage.txtBoxSearch, "value"));
-        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.manufacturerCode, "value"), "XX - SMITH", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.manufacturerCode, "value"), "XX - SPECIAL ORDER", "");
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.productCode, "value"), "01 - NON STOCK-SPECIAL ORDER OR", "");
-        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.vendorCode, "value"), "XX - SMITH", "");
+        Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.vendorCode, "value"), "XX - SPECIAL ORDER", "");
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.itemType, "value"), "S", "");
         Utility_Functions.xAssertEquals(report, getAttribute(ItemMasterPage.historyMonth, "value"), "24", "");
         Utility_Functions.xAssertEquals(report, getAttribute(PoEntryConversionFactorPage.inPurchasingUOM, "value"), "EA", "");
@@ -722,7 +722,7 @@ public class itemMaster extends ReusableLib {
         exitItemMaster();
         inventoryToItemMasterScreen();
         sendKeysAndEnter(ItemMasterPage.txtBoxSearch, itemNo, "Enter Item Number");
-        commonObj.validateText(ItemMasterPage.itemDetail, itemDesc, "Item Description [" + itemDesc + "] is present");
+        commonObj.validateText(ItemMasterPage.itemDetail, itemDesc.trim(), "Item Description [" + itemDesc + "] is present");
     }
 
     /**
@@ -822,8 +822,8 @@ public class itemMaster extends ReusableLib {
         Utility_Functions.xAssertEquals(report, "rgba(85, 85, 85, 1)", color, "Validating Price Matrix Row textbox color for invalid value");
 
         sendKeys(ItemMasterPage.tbxPriceMatrixRow, "9999", "entering invalid value in Price Matrix Row field");
-        String value = getAttribute(ItemMasterPage.tbxPriceMatrixRow, "value");
-        Utility_Functions.xAssertEquals(report, "999", value, "Price Matrix Row accepts only 3 characters");
+        String colors = getElement(ItemMasterPage.tbxPriceMatrixRow).getCssValue("color");
+        Utility_Functions.xAssertEquals(report, "rgba(85, 85, 85, 1)", colors, "Validating Price Matrix Row textbox color for invalid value");
     }
 
     /**

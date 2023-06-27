@@ -60,8 +60,8 @@
     },
     {
       "TC_ID": "Tc_NavigateToMakePayments",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_165_ValidateFixedPaymentRecordBA",
@@ -95,8 +95,8 @@
     },
     {
       "TC_ID": "Tc_NavigateToSchedulePayments",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_SortByInvoiceNumber",
@@ -130,63 +130,63 @@
     },
     {
       "TC_ID": "Tc_139_clickHere_Link_SchedulePage",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_140_disabling_Terms_Condition_CheckBox_Enroll",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_141_EnableTermsConditionCheckBoxAndEnroll",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_142_disabling_Terms_Condition_CheckBox_Exit",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_143_enablingTermsConditionCheckBoxExit",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_144_validateMakeRegPayment",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_145_FieldVerificationStartDateEndDate",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_149_CalenderValidation",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_152_ValidateOutStandingBalance",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_153_ValidateOtherAmount",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_205_ValidateOneTimeSchedule",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_208_ValidateOneTimeScheduleDateField",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_MakeSinglePaymentByBankAcc",
@@ -200,8 +200,8 @@
     },
     {
       "TC_ID": "Tc_211_addNewBankAcc",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021",
       "NameOnAccount": "AutomationTesting",
       "AccountName": "QATesting",
       "AccountType": "Personal Savings",
@@ -215,8 +215,8 @@
     },
     {
       "TC_ID": "Tc_155_validateReviewSession",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021",
       "NameOnAccount": "AutomationTesting",
       "AccountName": "QATesting",
       "AccountType": "Personal Savings",
@@ -224,8 +224,8 @@
     },
     {
       "TC_ID": "Tc_156_validateCancelButtonOnReviewSession",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021",
       "NameOnAccount": "AutomationTesting",
       "AccountName": "QATesting",
       "AccountType": "Personal Savings",
@@ -233,8 +233,8 @@
     },
     {
       "TC_ID": "Tc_159_validateEnrollButtonOnReviewSession",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1",
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021",
       "NameOnAccount": "AutomationTesting",
       "AccountName": "QATesting",
       "AccountType": "Personal Savings",
@@ -242,13 +242,13 @@
     },
     {
       "TC_ID": "Tc_160_validateEditSavedSchedulePayment",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_161_validateStopSavedSchedulePayment",
-      "userName": "vishnuprasad@numerique.biz",
-      "userPassword": "Qwerty@1"
+      "userName": "bhabani.mishra@numerique.biz",
+      "userPassword": "Win2021"
     },
     {
       "TC_ID": "Tc_162_NavigateToFixedPayments",

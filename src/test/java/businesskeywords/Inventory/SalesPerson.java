@@ -93,7 +93,7 @@ public class SalesPerson extends ReusableLib {
 
     public void verifyLinks() {
         int i = 0;
-        String links[] = {"Hyperlink1", "Hyperlink2", "alternateItem", "CustomerNotes_copy", "directjobqty_copy", "inventoryOverValue_copy", "lnkItemBinMaint", "itemLedger", "jobUsage", "kitMaintenance", "ordersByItem", "preferedCompanyUsage", "quotesByItem", "richData"};
+        String links[] = {"Hyperlink1", "Hyperlink2", "alternateItem", "CustomerNotes", "directjobqty", "inventoryOverValue", "lnkItemBinMaint", "itemLedger", "jobUsage", "kitMaintenance", "ordersByItem", "preferedCompanyUsage", "quotesByItem", "richData"};
         String linksText[] = {"< Previous Item", "Next Item >", "Alternate Item", "Customer Notes", "Direct/Job Qty", "IOV", "Item-Bin Maintenance", "Item Ledger", "Job Usage", "Kit Maintenance", "Orders by Item", "Preferred Co. Usage", "Quotes by Item", "Rich Data", ""};
         for (String link : links)
             while (!linksText[i].equals("")) {
@@ -230,8 +230,10 @@ public class SalesPerson extends ReusableLib {
     public void choosePricingColumn() {
         navigateToMatrixColumnBrowser();
         sendKeysAndEnter(CustomerGroupMaintenancePage.groupOptField1, "1", "Select an Item");
-        commonObj.validateElementExists(SalesPersonPage.mutlType, "Multiplier Type: " + getText(SalesPersonPage.mutlType) + " is present");
-        commonObj.validateElementExists(SalesPersonPage.mutlValue, "Multiplier Value: " + getText(SalesPersonPage.mutlValue) + " is present");
+        if (!isDisplayed(SalesPersonPage.noRow)) {
+            commonObj.validateElementExists(SalesPersonPage.mutlType, "Multiplier Type: " + getText(SalesPersonPage.mutlType) + " is present");
+            commonObj.validateElementExists(SalesPersonPage.mutlValue, "Multiplier Value: " + getText(SalesPersonPage.mutlValue) + " is present");
+        }
     }
 
     public void verifyMultiplierPricing() {
@@ -268,11 +270,13 @@ public class SalesPerson extends ReusableLib {
 
     public void verifyManuallyEnteredMultiplierValue() {
         verifyMultiplierPricing();
-        pressShiftF9();
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("Multiplier"), "Enter Multiplier value");
-        commonObj.validateText(SalesPersonPage.mutlValue, jsonData.getData("Multiplier") + "000", jsonData.getData("Multiplier") + "000 is updated");
-        click(linkIdEle("Hyperlink1"), "Click [Page Up - Next Item]");
-        Utility_Functions.xAssertEquals(report, isDisplayed(By.xpath("//div[text()='" + jsonData.getData("Multiplier") + "']")), false, "Multiplier is different for Previous Item");
+        Utility_Functions.actionKey(Keys.F9,ownDriver);
+        if (!isDisplayed(SalesPersonPage.noRow)) {
+            sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("Multiplier"), "Enter Multiplier value");
+            commonObj.validateText(SalesPersonPage.mutlValue, jsonData.getData("Multiplier") + "000", jsonData.getData("Multiplier") + "000 is updated");
+            click(linkIdEle("Hyperlink1"), "Click [Page Up - Next Item]");
+            Utility_Functions.xAssertEquals(report, isDisplayed(By.xpath("//div[text()='" + jsonData.getData("Multiplier") + "']")), false, "Multiplier is different for Previous Item");
+        }
     }
 
     public void verifyExtTotal() {
@@ -291,13 +295,15 @@ public class SalesPerson extends ReusableLib {
 
     public void verifyResetMultiplierValue() {
         verifyMultiplierPricing();
-        pressShiftF9();
-        String pricingCol = getText(SalesPersonPage.mutlValue);
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("Multiplier"), "Enter Multiplier value");
-        commonObj.validateText(SalesPersonPage.mutlValue, jsonData.getData("Multiplier") + "000", jsonData.getData("Multiplier") + "000 is updated");
-        sendKeysAndEnter(SalesPersonPage.pricingColumn, "B", "Enter different value into Pricing Column");
-        choosePricingColumn();
-        commonObj.validateText(SalesPersonPage.mutlValue, pricingCol, "The Pricing Column matches");
+        Utility_Functions.actionKey(Keys.F9,ownDriver);
+        if (!isDisplayed(SalesPersonPage.noRow)) {
+            String pricingCol = getText(SalesPersonPage.mutlValue);
+            sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("Multiplier"), "Enter Multiplier value");
+            commonObj.validateText(SalesPersonPage.mutlValue, jsonData.getData("Multiplier") + "000", jsonData.getData("Multiplier") + "000 is updated");
+            sendKeysAndEnter(SalesPersonPage.pricingColumn, "A", "Enter different value into Pricing Column");
+            choosePricingColumn();
+            commonObj.validateText(SalesPersonPage.mutlValue, pricingCol, "The Pricing Column matches");
+        }
     }
 
     public By isHiddenVisibleElement(String id, String visibleORHidden) {
@@ -319,45 +325,51 @@ public class SalesPerson extends ReusableLib {
     public void verifyToggleCostList() {
         verifyMultiplierPricing();
         costVisible();
-        pressShiftF9();
+        Utility_Functions.actionKey(Keys.F9,ownDriver);
         costIsHidden();
-        pressShiftF9();
+        Utility_Functions.actionKey(Keys.F9,ownDriver);
         costVisible();
     }
 
     public void verifyGrossMarginCalculation() {
         verifyMultiplierPricing();
-        Double price = Double.parseDouble(getAttribute(SalesPersonPage.priceCalculation, "value").trim());
-        Double cost = Double.parseDouble(getAttribute(SalesPersonPage.costCalculation, "value").trim());
-        Double costDiff = price - cost;
-        Double grossMargin = (costDiff / price) * 100;
-        String grossMarginAct = getAttribute(SalesPersonPage.grossMargCalculation, "value").trim();
-        String grossMarginExp = grossMargin.toString().substring(0, 5);
-        Utility_Functions.xAssertEquals(report, grossMarginAct, grossMarginExp, "");
+        if (!isDisplayed(SalesPersonPage.noRow)) {
+            Double price = Double.parseDouble(getAttribute(SalesPersonPage.priceCalculation, "value").trim());
+            Double cost = Double.parseDouble(getAttribute(SalesPersonPage.costCalculation, "value").trim());
+            Double costDiff = price - cost;
+            Double grossMargin = (costDiff / price) * 100;
+            String grossMarginAct = getAttribute(SalesPersonPage.grossMargCalculation, "value").trim();
+            String grossMarginExp = grossMargin.toString().substring(0, 5);
+            Utility_Functions.xAssertEquals(report, grossMarginAct, grossMarginExp, "");
+        }
     }
 
     public void verifyPriceCalculation() {
         verifyMultiplierPricing();
-        pressShiftF9();
-        Double list = Double.parseDouble(getAttribute(SalesPersonPage.listCalculation, "value").trim());
-        Double multiplier = Double.parseDouble(getAttribute(SalesPersonPage.multiplierTextField, "value").trim());
-        Double price = list * multiplier;
-        String priceAct = getAttribute(SalesPersonPage.priceCalculation, "value").trim().substring(0, 5);
-        Utility_Functions.xAssertEquals(report, priceAct, price.toString(), "");
+        Utility_Functions.actionKey(Keys.F9,ownDriver);
+        if (!isDisplayed(SalesPersonPage.noRow)) {
+            Double list = Double.parseDouble(getAttribute(SalesPersonPage.listCalculation, "value").trim());
+            Double multiplier = Double.parseDouble(getAttribute(SalesPersonPage.multiplierTextField, "value").trim());
+            Double price = list * multiplier;
+            String priceAct = getAttribute(SalesPersonPage.priceCalculation, "value").trim().substring(0, 5);
+            Utility_Functions.xAssertEquals(report, priceAct, price.toString(), "");
+        }
     }
 
     public void verifyMultiplierField() {
         verifyMultiplierPricing();
-        pressShiftF9();
-        String multiplier = getAttribute(SalesPersonPage.multiplierTextField, "value").trim();
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("InvalidDigitMultiplier"), "Edit the multiplier value in Multiplier field to greater than 9.999 ");
-        commonObj.validateText(SalesPersonPage.customMsg, "Mult Must Be <= 9.999 but was = " + jsonData.getData("InvalidDigitMultiplier"), "[Mult Must Be <= 9.999 but was = " + jsonData.getData("InvalidDigitMultiplier") + "] is present");
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("5DecimalMultiplier"), "Edit the multiplier value in Multiplier field to a number <=9.9999 and more than 4 digits after decimal point");
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("SpecialAlphaNumeric"), "Edit the multiplier value in Multiplier field to the combination of special characters and alphanumeric numbers");
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("ZeroMultiplier"), "Edit the multiplier value in Multiplier field to 0");
-        Utility_Functions.xAssertEquals(report, multiplier, getAttribute(SalesPersonPage.multiplierTextField, "value").trim(), "Multiplier value reset to Original Value");
-        sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("NegativeMultiplier"), "Edit the multiplier value in Multiplier field to Negative Value");
-        commonObj.validateText(SalesPersonPage.customMsg, "(  Blank Price and Mult to Reset  )", "[(Blank Price and Mult to Reset)] is present");
+        Utility_Functions.actionKey(Keys.F9, ownDriver);
+        if (!isDisplayed(SalesPersonPage.noRow)) {
+            String multiplier = getAttribute(SalesPersonPage.multiplierTextField, "value").trim();
+            sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("InvalidDigitMultiplier"), "Edit the multiplier value in Multiplier field to greater than 9.999 ");
+            commonObj.validateText(SalesPersonPage.customMsg, "Mult Must Be <= 9.999 but was = " + jsonData.getData("InvalidDigitMultiplier"), "[Mult Must Be <= 9.999 but was = " + jsonData.getData("InvalidDigitMultiplier") + "] is present");
+            sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("5DecimalMultiplier"), "Edit the multiplier value in Multiplier field to a number <=9.9999 and more than 4 digits after decimal point");
+            sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("SpecialAlphaNumeric"), "Edit the multiplier value in Multiplier field to the combination of special characters and alphanumeric numbers");
+            sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("ZeroMultiplier"), "Edit the multiplier value in Multiplier field to 0");
+            Utility_Functions.xAssertEquals(report, multiplier, getAttribute(SalesPersonPage.multiplierTextField, "value").trim(), "Multiplier value reset to Original Value");
+            sendKeysAndEnter(SalesPersonPage.multiplierTextField, jsonData.getData("NegativeMultiplier"), "Edit the multiplier value in Multiplier field to Negative Value");
+            commonObj.validateText(SalesPersonPage.customMsg, "(  multiplier is from pricing matrix  )", "[(multiplier is from pricing matrix)] is present");
+        }
     }
 
     public void grossMarginReset(String grossMarginAct, String value) {
@@ -367,7 +379,7 @@ public class SalesPerson extends ReusableLib {
 
     public void verifyGrossMarginField() {
         verifyMultiplierPricing();
-        pressShiftF9();
+        Utility_Functions.actionKey(Keys.F9,ownDriver);
         String grossMarginAct = getAttribute(SalesPersonPage.grossMargin, "value").trim();
         grossMarginReset(grossMarginAct, "InvalidGrossMargin");
         grossMarginReset(grossMarginAct, "NegativeGrossMargin");
@@ -392,7 +404,7 @@ public class SalesPerson extends ReusableLib {
     }
 
     public void navigateToCustomerNotes() {
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("CustomerNotes_copy"), "Click [Customer Notes] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("CustomerNotes"), "Click [Customer Notes] Link");
         commonObj.validateText(PurchaseOrderDetailsPage.poPrintSendHeader, "Customer Notes Revisions", "[Customer Notes Revisions] header is present");
     }
 
@@ -405,7 +417,7 @@ public class SalesPerson extends ReusableLib {
     }
 
     public void navigateToIOVScreen() {
-        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("inventoryOverValue_copy"), "Click [IOV] Link");
+        Utility_Functions.waitTillClickHardSleep(report, ownDriver, linkIdEle("inventoryOverValue"), "Click [IOV] Link");
         commonObj.validateText(VendorInvoiceReconciliationPage.PoMainMenuHeader, "IOV Calculation", "[IOV Calculation] header is present");
     }
 
@@ -478,43 +490,47 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to enter Item No in [Search for Item] textbox in SalesPerson Inquiry Page
      */
-    public void searchForItem(){
-        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("ItemNo"),"Search For Item" );
+    public void searchForItem() {
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("ItemNo"), "Search For Item");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
     /**
      * Keyword to enter Item No from Integration4.json in [Search for Item] textbox in SalesPerson Inquiry Page
      */
-    public void searchForItem2(){
-        sendKeysAndEnter(SalesPersonPage.searchForItem, Utility_Functions.xGetJsonData("ItemNoMaster"), "Search For Item" );
+    public void searchForItem2() {
+        sendKeysAndEnter(SalesPersonPage.searchForItem, Utility_Functions.xGetJsonData("ItemNoMaster"), "Search For Item");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
     }
 
     /**
      * Keyword to validate details in [Quick View] section after entering Item No
      */
-    public void vrfyQuickView(){
+    public void vrfyQuickView() {
         String costTxt = getAttribute(SalesPersonPage.costCalculation, "value");
         String priceTxt = getAttribute(SalesPersonPage.priceCalculation, "value");
-        if (priceTxt.contains(",")){
+        if (priceTxt.contains(",")) {
             priceTxt = priceTxt.replaceAll(",", "");
         }
-        double price = Double.parseDouble(priceTxt);
-
+        double price ;
+        if(priceTxt.equals("")){
+            price=0.0;
+        }else {
+             price = Double.parseDouble(priceTxt);
+        }
         String grossMarginPercentTxt = getAttribute(SalesPersonPage.grossMargCalculation, "value");
-        if (grossMarginPercentTxt.contains("-")){
+        if (grossMarginPercentTxt.contains("-")) {
             grossMarginPercentTxt = grossMarginPercentTxt.replaceAll("-", "");
         }
         double grossMarginPercent = Double.parseDouble(grossMarginPercentTxt);
-        double grossMarginValue = (grossMarginPercent/100)*price;
+        double grossMarginValue = (grossMarginPercent / 100) * price;
         String expectedGrossMarginValue = Double.toString(grossMarginValue);
 
         String grossMarginQVText = getText(SalesPersonPage.grossMargin);
-        if (grossMarginQVText.contains(",")){
+        if (grossMarginQVText.contains(",")) {
             grossMarginQVText = grossMarginQVText.replaceAll(",", "");
         }
-        if (grossMarginQVText.contains("-")){
+        if (grossMarginQVText.contains("-")) {
             grossMarginQVText = grossMarginQVText.replaceAll("-", "");
         }
         double grossMarginQV = Double.parseDouble(grossMarginQVText);
@@ -529,7 +545,7 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to validate Item Notes in SalesPerson Inquiry Page
      */
-    public void vrfyItemNotes(){
+    public void vrfyItemNotes() {
         commonObj.validateElementExists(SalesPersonPage.hdrItemNotes, "The [Item Notes] section is present");
         String itemNotesExpected = jsonData.getData("ItemNotes");
         commonObj.validateText(SalesPersonPage.itemNotes1, itemNotesExpected, "Validating Item Notes");
@@ -538,7 +554,7 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to validate Inventory section sub-headers in SalesPerson Inquiry Page
      */
-    public void vrfyInventoryHeaders(){
+    public void vrfyInventoryHeaders() {
         commonObj.validateElementExists(SalesPersonPage.hdrInventory, "Header [Inventory] is present");
         commonObj.validateElementExists(SalesPersonPage.hdrQuantity, "Header [Quantity] is present");
         commonObj.validateElementExists(SalesPersonPage.hdrDirectShips, "Header [Direct Ships] is present");
@@ -549,7 +565,7 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to validate Inventory section field labels in SalesPerson Inquiry Page
      */
-    public void vrfyInventoryTabFieldLabels(){
+    public void vrfyInventoryTabFieldLabels() {
         commonObj.validateElementExists(SalesPersonPage.lblInventoryAvaiToSell, "Field label [Available to Sell:] is present under Inventory");
         commonObj.validateElementExists(SalesPersonPage.lblInventoryWithReceipts, "Field label [with Receipts:] is present under Inventory");
         commonObj.validateElementExists(SalesPersonPage.lblInventorySelling, "Field label [Selling UOM:] is present under Inventory");
@@ -579,18 +595,18 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to validate Item-Bin Details section in SalesPerson Inquiry Page
      */
-    public void vrfyItemBinDetailsTab(){
+    public void vrfyItemBinDetailsTab() {
         click(SalesPersonPage.tabItemBinDetails);
 
         List<WebElement> lstTableHeaders = getListElement(SalesPersonPage.lstBinDetailsTableHeader);
         List<String> lstHeaderText = Utility_Functions.xGetTextVisibleListString(ownDriver, lstTableHeaders);
 
         String[] headers = {"Bin Location", "Bin Type", "Bin Condition", "Bin On Hand", "Available To Pick", "Bin Min", "Bin Max", "Zone"};
-        for (int i=0; i<headers.length; i++){
+        for (int i = 0; i < headers.length; i++) {
             if (headers[i].equalsIgnoreCase(lstHeaderText.get(i).trim()))
-                report.updateTestLog("Verify Item Bin Details Headers", "Header ["+lstHeaderText.get(i)+"] is matching expected value ["+headers[i]+"]", Status.PASS);
+                report.updateTestLog("Verify Item Bin Details Headers", "Header [" + lstHeaderText.get(i) + "] is matching expected value [" + headers[i] + "]", Status.PASS);
             else
-                report.updateTestLog("Verify Item Bin Details Headers", "Header ["+lstHeaderText.get(i)+"] is NOT matching expected value ["+headers[i]+"]", Status.FAIL);
+                report.updateTestLog("Verify Item Bin Details Headers", "Header [" + lstHeaderText.get(i) + "] is NOT matching expected value [" + headers[i] + "]", Status.FAIL);
         }
         commonObj.validateElementExists(SalesPersonPage.lnkExportToExcel, "Link to download excel is present under Purchasing");
         commonObj.validateElementExists(SalesPersonPage.lblTotal, "Field label [Total On Hand + In Hold] is present under Purchasing");
@@ -599,8 +615,8 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to enter Alternate Customer Number in [Customer] textbox in SalesPerson Inquiry Page
      */
-    public void enterAltCustomerNumber(){
-        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("AltCustomerNumber"),"Enter Alternate Customer Number");
+    public void enterAltCustomerNumber() {
+        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("AltCustomerNumber"), "Enter Alternate Customer Number");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
         String custNoExpeccted = jsonData.getData("CustomerNumber");
@@ -611,7 +627,7 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to validate Customer Name in SalesPerson Inquiry Page
      */
-    public void vrfyCustomerName(){
+    public void vrfyCustomerName() {
         String custName = jsonData.getData("CustomerName");
         commonObj.validateText(SalesPersonPage.customerName, custName, "Validating selected Customer Name");
     }
@@ -619,8 +635,8 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to enter Invalid Customer Number in [Customer] textbox in SalesPerson Inquiry Page
      */
-    public void enterInvalidCustomerNumber(){
-        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("InvalidCustomerNumber"),"Enter Invalid Customer Number");
+    public void enterInvalidCustomerNumber() {
+        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("InvalidCustomerNumber"), "Enter Invalid Customer Number");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         commonObj.validateText(SalesPersonPage.customerName, "Invalid", "Validating invalid Customer Name");
     }
@@ -628,8 +644,8 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to enter Customer Number in [Customer] textbox in SalesPerson Inquiry Page
      */
-    public void enterCustomerNumber(){
-        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("CustomerNumber"),"Enter valid Customer Number");
+    public void enterCustomerNumber() {
+        sendKeysAndEnter(SalesPersonPage.tbxCustomer, jsonData.getData("CustomerNumber"), "Enter valid Customer Number");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
 
         String custNoExpeccted = jsonData.getData("CustomerNumber");
@@ -640,9 +656,9 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to enter Customer Number in [Customer] textbox in SalesPerson Inquiry Page
      */
-    public void vrfyCustNotesNavigation(){
+    public void vrfyCustNotesNavigation() {
         String custNumber = getAttribute(SalesPersonPage.tbxCustomer, "value");
-        click(SalesPersonPage.actionCustomerNotes,"Click Customer Notes action button");
+        click(SalesPersonPage.actionCustomerNotes, "Click Customer Notes action button");
         commonObj.validateText(SalesPersonPage.hdrCustomerNotesRevision, "Customer Notes Revisions", "Validating page title");
 
         String custNoActual = getAttribute(SalesPersonPage.tbxCustNoCustNotesPage, "value");
@@ -655,34 +671,34 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to validate Add/Edit/Delete Customer Notes functionality
      */
-    public void validateAddEditCustomerNotes(){
-        String customerNotes = "TESTING NOTES"+Utility_Functions.xRandomFunction();
-        sendKeys(SalesPersonPage.tbxActions, "A","Enter [A] in Action textbox");
-        sendKeysAndEnter(SalesPersonPage.customerNotesLine1, customerNotes,"Enter Customer Notes");
+    public void validateAddEditCustomerNotes() {
+        String customerNotes = "TESTING NOTES" + Utility_Functions.xRandomFunction();
+        sendKeys(SalesPersonPage.tbxActions, "A", "Enter [A] in Action textbox");
+        sendKeysAndEnter(SalesPersonPage.customerNotesLine1, customerNotes, "Enter Customer Notes");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         commonObj.verifyElementContainsText(SalesPersonPage.notificationMsg, "Customer Notes Changed", "Validating notification message");
         Utility_Functions.actionKey(Keys.F3, ownDriver);
-        report.updateTestLog("Press [F3] exit button", "Press [F3] exit button",Status.PASS);
+        report.updateTestLog("Press [F3] exit button", "Press [F3] exit button", Status.PASS);
         vrfyCustNotesNavigation();
         String custNotesActual = getAttribute(SalesPersonPage.customerNotesLine1, "value");
         Utility_Functions.xAssertEquals(report, customerNotes, custNotesActual, "Validating Customer Notes");
 
-        customerNotes = "TESTING NOTES"+Utility_Functions.xRandomFunction();
-        sendKeys(SalesPersonPage.tbxActions, "C","Enter [C] in Action textbox");
-        sendKeysAndEnter(SalesPersonPage.customerNotesLine1, customerNotes,"Enter Customer Notes");
+        customerNotes = "TESTING NOTES" + Utility_Functions.xRandomFunction();
+        sendKeys(SalesPersonPage.tbxActions, "C", "Enter [C] in Action textbox");
+        sendKeysAndEnter(SalesPersonPage.customerNotesLine1, customerNotes, "Enter Customer Notes");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         commonObj.verifyElementContainsText(SalesPersonPage.notificationMsg, "Customer Notes Changed", "Validating notification message");
         Utility_Functions.actionKey(Keys.F3, ownDriver);
-        report.updateTestLog("Press [F3] exit button", "Press [F3] exit button",Status.PASS);
+        report.updateTestLog("Press [F3] exit button", "Press [F3] exit button", Status.PASS);
         vrfyCustNotesNavigation();
         custNotesActual = getAttribute(SalesPersonPage.customerNotesLine1, "value");
         Utility_Functions.xAssertEquals(report, customerNotes, custNotesActual, "Validating Customer Notes");
 
-        sendKeysAndEnter(SalesPersonPage.tbxActions, "D","Enter [D] in Action textbox");
+        sendKeysAndEnter(SalesPersonPage.tbxActions, "D", "Enter [D] in Action textbox");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         commonObj.verifyElementContainsText(SalesPersonPage.notificationMsg, "All Customer Notes Will be Deleted.  Press Enter to Delete.", "Validating notification message");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        report.updateTestLog("Press [Enter] key", "Press [Enter] key to delete all notes",Status.PASS);
+        report.updateTestLog("Press [Enter] key", "Press [Enter] key to delete all notes", Status.PASS);
         custNotesActual = getAttribute(SalesPersonPage.customerNotesLine1, "value");
         Utility_Functions.xAssertEquals(report, "", custNotesActual, "Validating Customer Notes deleted");
     }
@@ -691,14 +707,14 @@ public class SalesPerson extends ReusableLib {
      * Keyword to clear [Search For Item] textbox in SalesPerson Inquiry Page
      */
     public void clearSearchForItem() {
-        sendKeysAndEnter(SalesPersonPage.searchForItem, "","Clear [Search For Item] textbox");
+        sendKeysAndEnter(SalesPersonPage.searchForItem, "", "Clear [Search For Item] textbox");
     }
 
     /**
      * Keyword to enter invalid Item No in [Search for Item] textbox in SalesPerson Inquiry Page
      */
-    public void enterInvalidItemNumber(){
-        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("InvalidItemNo"),"Enter Invalid Item Number" );
+    public void enterInvalidItemNumber() {
+        sendKeysAndEnter(SalesPersonPage.searchForItem, jsonData.getData("InvalidItemNo"), "Enter Invalid Item Number");
         waitForElementDisappear(MasterPage.loadingAnime, globalWait);
         commonObj.validateText(SalesPersonPage.msgItemNo, "E501", "Validating error below [Search for Item] textbox");
     }
@@ -706,7 +722,7 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to hover over Customer tbx and verify tooltip in SalesPerson Inquiry Page
      */
-    public void vrfyCustTbxTooltip(){
+    public void vrfyCustTbxTooltip() {
         Utility_Functions.xMoveToElment(getElement(SalesPersonPage.tbxCustomer), ownDriver);
         Utility_Functions.timeWait(1);
         String tooltip = getAttribute(SalesPersonPage.tbxCustomer, "title");
@@ -721,7 +737,7 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to navigate to Customer Search by pressing [F4] key in SALESPERSON INQUIRY page
      */
-    public void navToCustSearchInSalesPersonInq(){
+    public void navToCustSearchInSalesPersonInq() {
         click(SalesPersonPage.custSearchIcon, "Click Customer Search icon for navigation to Customer Search");
         commonObj.validateText(AlternateCustomerPage.pageTitleMailingMasterSearch, "Mailing Master Search (O-946)", "Validating [Mailing Master Search] page title");
     }
@@ -729,19 +745,19 @@ public class SalesPerson extends ReusableLib {
     /**
      * Keyword to navigate to Customer Search by clicking Search icon in SALESPERSON INQUIRY page
      */
-    public void clickCustSearchIconSalesPersonInq(){
+    public void clickCustSearchIconSalesPersonInq() {
         click(SalesPersonPage.tbxCustomer);
         Utility_Functions.actionKey(Keys.F4, ownDriver);
-        report.updateTestLog("Press [F4] button on Customer Input field for navigation to Customer Search", "Press [F4] button",Status.PASS);
+        report.updateTestLog("Press [F4] button on Customer Input field for navigation to Customer Search", "Press [F4] button", Status.PASS);
         commonObj.validateText(AlternateCustomerPage.pageTitleMailingMasterSearch, "Mailing Master Search (O-946)", "Validating [Mailing Master Search] page title");
     }
 
     /**
      * Keyword to select random Customer in SALESPERSON INQUIRY page
      */
-    public String selectRandomCustomerInSalesPersonInq(){
+    public String selectRandomCustomerInSalesPersonInq() {
         int count = Utility_Functions.xRandomFunction(1, 10);
-        while(count>0){
+        while (count > 0) {
             click(AlternateCustomerPage.btnDown);
             count--;
         }

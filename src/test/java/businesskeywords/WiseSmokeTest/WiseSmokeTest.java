@@ -439,7 +439,7 @@ public class WiseSmokeTest extends ReusableLib {
         sendKeys(WiseSmokeTestPage.Industry, jsonData.getData("Industry"), "Enter as R for HVAC");
         sendKeys(WiseSmokeTestPage.LivePosToItem, jsonData.getData("LiveItem"), "Enter an item Number in Position to item number field");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
-        commonObj.validateText(WiseSmokeTestPage.FirstItemLiveShop, "AABABM100", "AABABM100");
+        commonObj.validateText(WiseSmokeTestPage.FirstItemLiveShop, "ACC12573", "ACC12573");
         click(WiseSmokeTestPage.F3exit, "Navigate back to Inventory Menu");
         Utility_Functions.actionKey(Keys.F3, ownDriver);
     }
