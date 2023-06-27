@@ -167,6 +167,14 @@ public class SPORegressionTest extends BaseSmokeTest {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(SpoPage.applyFilter));
         element.click();
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
+        try
+        {
+            wait.until(ExpectedConditions.presenceOfElementLocated((SpoPage.closeIcn)));
+        }
+        catch (Exception e)
+        {
+            return;
+        }
     }
 
     public void searchTemplate() {
@@ -442,13 +450,14 @@ public class SPORegressionTest extends BaseSmokeTest {
     }
 
     public void verifyDayOfTheWeek() {
+        scrollTillTheEndOfPage();
         verifyFiveDaysAreSelected();
         verifyTheDayNames();
         verifyDayOptionsOnSelectAndDeSelect();
     }
 
     public void verifyFiveDaysAreSelected() {
-        scrollTillTheEndOfPage();
+
         click(SpoPage.dayOfTheWeekButton);
         List<WebElement> noOfDaysOfTheWeek = ownDriver.findElements(SpoPage.daysOfTheWeekDropdown);
         Assert.assertEquals(noOfDaysOfTheWeek.size(), Integer.parseInt(jsonData.getData("noOfDaysOfTheWeek")));
