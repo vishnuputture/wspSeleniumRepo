@@ -209,7 +209,7 @@ public class CycleCostAdjust extends ReusableLib {
         click(CostAdjustmentPage.searchIcon2);
         exp_Number = num;
         Utility_Functions.timeWait(2);
-        sendKeys(CostAdjustmentPage.optBox, "1", "Item Number already Created in Item Master should be entered");
+        sendKeys(CostAdjustmentPage.optBox1, "1", "Item Number already Created in Item Master should be entered");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         getCount();
         getAdjQt();

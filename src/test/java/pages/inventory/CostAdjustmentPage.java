@@ -28,6 +28,8 @@ public class CostAdjustmentPage extends ReusableLib {
     public static By explanation = By.xpath("//input[@class='combo-main-box win-combo-option']");
     public static By process = By.xpath("//input[@type='button' and @id='btnSubmit']");
     public static By optBox = By.id("I_11_3");
+    public static By optBox1 = By.id("I_12_3");
+
     public static By onHold = By.id("D_11_101");
     public static By quantity = By.id("AdjQty");
     public static By includeYes = By.id("I_6_64");

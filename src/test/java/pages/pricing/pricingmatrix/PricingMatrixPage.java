@@ -13,7 +13,7 @@ public class PricingMatrixPage extends ReusableLib {
     public static By addCol = By.id("btnCF04");
     public static By cellSecRow = By.id("I_10_11");
     public static By cellSecRowSecCol = By.id("I_10_21");
-    public static By firstRow = By.id("D_8_4");
+    public static By firstRow = By.id("D_9_4");
     public static By secondRow = By.id("D_10_4");
     public static By firstCol = By.id("D_7_12");
     public static By secondCol = By.id("D_7_22");
