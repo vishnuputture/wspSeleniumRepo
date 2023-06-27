@@ -5,7 +5,7 @@ import com.winSupply.core.TestConfigurations;
 import com.winSupply.framework.selenium.SeleniumTestParameters;
 import org.testng.annotations.Test;
 
-public class PricingSmokeTest extends TestConfigurations{
+public class PricingSmokeTest extends TestConfigurations {
     @Test(groups = {}, dataProvider = "DesktopBrowsers", dataProviderClass = TestConfigurations.class)
     public void TC_PricingSmokeTest(SeleniumTestParameters testParameters) {
         testParameters.setCurrentTestDescription("Smoke Test for the release");

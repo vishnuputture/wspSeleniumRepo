@@ -414,8 +414,7 @@ public class CoreScript {
         String[] businessKeywordsArr = businessKeyword.split(",");
         String dataValue;
         businessFlowData = new ArrayList<String>();
-        for (String bkey : businessKeywordsArr
-        ) {
+        for (String bkey : businessKeywordsArr) {
             System.out.println("Test case business flow : "+testParameters.getCurrentTestcase()+" Thread "+Thread.currentThread().getId());
             businessFlowData.add(bkey.trim());
         }
@@ -809,7 +808,7 @@ public class CoreScript {
 
                         if (fileSubName.endsWith(CLASS_FILE_EXTENSION)) {
                             // Remove the .class extension to get the class name
-                            String className = fileSubName.substring(0, fileSubName.length() - CLASS_FILE_EXTENSION.length());
+                            String className = fileSubName.substring(0, fileSubName.length() - CLASS_FILE_EXTENSION.length()).replace("$1","");
                             encryptedReusableComponents = WhitelistingPath
                                     .cleanStringForFilePath(packageName + "." + packageSubName + "." + className);
                             Class<?> reusableComponents = Class.forName(encryptedReusableComponents);

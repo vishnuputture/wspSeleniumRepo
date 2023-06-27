@@ -1,5 +1,6 @@
 package businesskeywords.WiseSmokeTest;
 
+import com.winSupply.core.BaseSmokeTest;
 import com.winSupply.core.Helper;
 import org.apache.tools.ant.taskdefs.Java;
 import org.openqa.selenium.JavascriptExecutor;

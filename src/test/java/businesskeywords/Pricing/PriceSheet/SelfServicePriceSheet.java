@@ -185,12 +185,10 @@ public class SelfServicePriceSheet extends ReusableLib {
         click(SelfServicePriceSheetPage.addPriceSheetbtn);
         autoComplete(SelfServicePriceSheetPage.manufacturer, "KOHLER CO", SelfServicePriceSheetPage.manufacturerList, jsonData.getData("Manufacturer"));
         sendKey(SelfServicePriceSheetPage.priceSheetName, name);
-        // sendKeyDate(SelfServicePriceSheetPage.effectiveDate,strPriceDate);
         Utility_Functions.xSendkeysAndTab(ownDriver.findElement(SelfServicePriceSheetPage.effectiveDate), strPriceDate);
         sendKeysAndTab(SelfServicePriceSheetPage.priceSheetCode, Utility_Functions.xGetJsonData("priceSheetCode"), "Added the price sheet Code");
         String path = commonObj.getFilePath() + File.separator + "CostPriceSheetTemplate.xlsx";
-        ownDriver.findElement(By.xpath("//span[@class='weight file-label']/following::input[@type='file']")).sendKeys(path);
-        System.out.println("Uploaded the file successfully");
+        ownDriver.findElement(SelfServicePriceSheetPage.uploadFile).sendKeys(path);
 //        click(SelfServicePriceSheetPage.choosePriceSheet);
 //        Utility_Functions.xUploadFile(report, path);
         click(SelfServicePriceSheetPage.saveUpload);

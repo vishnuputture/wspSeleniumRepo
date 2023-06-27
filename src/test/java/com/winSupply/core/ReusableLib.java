@@ -1,6 +1,7 @@
 package com.winSupply.core;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -10,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import com.winSupply.framework.*;
 import com.winSupply.framework.selenium.FrameworkDriver;
@@ -21,6 +24,7 @@ import org.openqa.selenium.remote.RemoteExecuteMethod;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.aventstack.extentreports.ExtentTest;
@@ -29,6 +33,7 @@ import com.winSupply.framework.selenium.WebDriverUtil;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
+import pages.Purchasing.SPO.SpoPage;
 import supportLibraries.Utility_Functions;
 
 import org.testng.Assert;
@@ -807,6 +812,11 @@ public abstract class ReusableLib {
         getElement(el).clear();
     }
 
+    protected void clearAttribute(By el)
+    {
+        getElement(el).getAttribute("value").replaceAll("[0-9A-Za-z]","");
+    }
+
     protected void sendKeysAndTab(By el, String strVal, String CustomMsg) {
         sendKeys(el, strVal);
         Utility_Functions.actionKey(Keys.TAB, helper.getGSDriver());
@@ -1376,5 +1386,9 @@ public abstract class ReusableLib {
         return helper.getGSDriver().findElements(by);
     }
 
-
+    public void clickTypeAhead(String str) {
+        By element = By.xpath("//span[contains(@class,'ng-star-inserted') and contains(text(),'" + str + "')]");
+        waitForVisible(element);
+        click(element);
+    }
 }

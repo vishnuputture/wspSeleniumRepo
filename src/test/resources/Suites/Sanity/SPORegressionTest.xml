@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Pricing" parallel="tests" thread-count="2">
+    <test name="SPORegressionTest">
+        <classes>
+            <class name="testcases.WISERegression.SPORegressionTest">
+                <methods>
+                    <include name="TC_SPO_Regression_Prerequisites"></include>
+                    <include name="TC_SPO_LandingPage_Pagination_Regression_Test"></include>
+                    <include name="TC_SPO_Sales_Option_Regression_Test"></include>
+                    <include name="TC_SPO_Days_To_Refresh_Regression_Test"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

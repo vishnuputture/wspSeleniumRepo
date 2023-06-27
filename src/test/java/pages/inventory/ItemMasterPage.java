@@ -92,7 +92,8 @@ public class ItemMasterPage extends ReusableLib {
     public static By tbxFCC = By.id("I_6_25");
     public static By tbxDescriptionFCC = By.id("I_8_25");
     public static By lblCode = By.id("D_7_4");
-
     public static By wssNetPrice = By.id("outWSSNtPrc");
+
+    public static By addItem = By.id("lnkAddItem");
 
 }

@@ -2208,4 +2208,10 @@ public class Spo extends ReusableLib {
             }
         }
     }
+
+    public void launchWinVision()
+    {
+        String url = properties.getProperty("winvision");
+        ownDriver.get(url);
+    }
 }
