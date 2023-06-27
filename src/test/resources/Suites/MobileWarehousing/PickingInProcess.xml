@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Domain - Mobile Warehousing" parallel="none" thread-count="2">
+    <test name="PickingInProcess">
+
+        <classes>
+            <class name="testcases.MobileWarehousing.PickingInProcess">
+                <methods>
+
+
+                    <!--<include name="Tc_997_VerifyPickingInProcessHomeUI"></include>
+                    <include name="Tc_999_VerifySearchFilterUI"></include>
+                    <include name="Tc_1000_VerifyOrderDetailsPageUI"></include>
+                    <include name="Tc_1003_VerifySortingFunctionality"></include>
+                    <include name="Tc_1004_VerifyFilters"></include>
+                    <include name="Tc_998_NavigateToPickingInProcess"></include>
+                    <include name="Tc_1154_VerifyDefaultPickStatusShipment"></include>
+                    <include name="Tc_1161_VerifyCurrentZoneFilter"></include>
+                    <include name="Tc_1001_VerifyLogout"></include>
+                    <include name="Tc_1162_VerifyOpenTotalLines"></include>
+                    <include name="Tc_1199_VerifyShipDateToggle"></include>
+                    <include name="Tc_1200_VerifyIconsBesideShipment"></include>
+                    <include name="Tc_1204_VerifyReturnToPickQPriority"></include>
+                    <include name="Tc_1197_VerifyPagination"></include>
+                    <include name="Tc_1198_VerifyRecordsPerPage"></include>
+                    <include name="Tc_1203_VerifyLoadPickQueuePopUp"></include>
+                    <include name="Tc_1204_VerifyReturnToPickQueuePriority"></include>
+                    <include name="Tc_1167_VerifyPercentCompleteCalculation"></include>
+                    <include name="Tc_1168_VerifyStatusOfZOne"></include>
+                    <include name="Tc_1169_VerifyPrintDocumentsAndLabelsUI"></include>
+                    <include name="Tc_1170_VerifyRemovingStagingDetails"></include>
+                    <include name="Tc_1157_VerifyWarehouseSettingsPage"></include>
+                    <include name="Tc_1160_VerifyShipViaScreenUI"></include>
+                    <include name="Tc_1166_VerifyModifyingPriorityShipViaPage"></include>
+                    <include name="Tc_1195_CreateNewShipMethod"></include>
+                    <include name="Tc_1172_VerifyPickQueueScheduleScreenUI"></include>
+                    <include name="Tc_1173_VerifyAddingDayInPickQueueScheduleScreen"></include>
+                    <include name="Tc_1175_VerifyHolidayEventScheduleScreenUI"></include>
+                    <include name="Tc_1179_VerifyAddAnsEditEvent"></include>
+                    <include name="Tc_1177_VerifyEditEventFunctionality"></include>-->
+
+                    <!--<include name="Tc_1182_VerifyNavigationToPackagingUnits"></include>
+                    <include name="Tc_1183_VerifyUIOfPackagingUnits"></include>
+                    <include name="Tc_1185_ModifyPackagingUnitsPriority"></include>
+                    <include name="Tc_1187_VerifyAddingPackagingUnits"></include>
+                    <include name="Tc_1188_VerifyListOrderAndUnitLabel"></include>
+                    <include name="Tc_1189_VerifyLeaveWithoutSaving"></include>
+                    <include name="Tc_1191_VerifyDocumentsAndPrintingScreenUI"></include>
+                    <include name="Tc_1192_VerifyPrinterDetailsPopupUI"></include>
+                    <include name="Tc_1194_VerifyAddingPrinter"></include>-->
+                    <!--<include name="Tc_1206_VerifySearchRecordsWithShipmentNo"></include>
+                    <include name="Tc_1207_VerifySearchRecordsWithCustomer"></include>
+                    <include name="Tc_1208_VerifySearchRecordsWithAssignedTo"></include>
+                    <include name="Tc_1209_VerifySearchRecordsWithShipVia"></include>
+                    <include name="Tc_1210_VerifySearchRecordsWithTruckName"></include>
+                    <include name="Tc_1211_VerifySearchRecordsWithPickStatus"></include>
+                    <include name="Tc_1213_VerifySearchRecordsWithStagedStatusPrintY"></include>
+                    <include name="Tc_1214_VerifySearchRecordsWithStagedStatusPrintN"></include>
+                    <include name="Tc_1218_VerifySearchRecordsWithShipDate"></include>
+                    <include name="Tc_1219_VerifySearchRecordsWithShipmentNoCustomer"></include>
+                    <include name="Tc_1223_VerifySearchRecordsWithShipmentNoShipVia"></include>
+                    <include name="Tc_1224_VerifySearchRecordsWithShipmentNoTruckName"></include>
+                    <include name="Tc_1225_VerifySearchRecordsWithShipmentNoPickStatus"></include>
+                    <include name="Tc_1227_VerifySearchRecordsWithShipmentNoPickStatusStaged"></include>
+                    <include name="Tc_1228_VerifySearchRecordsWithShipmentNoStagedPrintN"></include>
+                    <include name="Tc_1229_VerifySearchRecordsWithShipmentNoShipDate"></include>
+                    <include name="Tc_1230_VerifySearchRecordsWithCustomerAssignedTo"></include>
+                    <include name="Tc_1232_VerifySearchRecordsWithCustomerShipVia"></include>
+                    <include name="Tc_1233_VerifySearchRecordsWithCustomerTruckName"></include>
+                    <include name="Tc_1238_VerifySearchRecordsWithCustomerPickStatus"></include>
+                    <include name="Tc_1239_VerifySearchRecordsWithCustomerPickStatusStagedPrintY"></include>
+                    <include name="Tc_1240_VerifySearchRecordsWithCustomerStagedPrintN"></include>
+                    <include name="Tc_1243_VerifySearchRecordsWithCustomerShipDate"></include>-->
+                    <!--<include name="Tc_1244_VerifySearchRecordsWithShipViaTruckName"></include>-->
+                    <include name="Tc_1245_VerifySearchRecordsWithShipViaPickStatus"></include>
+                    <include name="Tc_1246_VerifySearchRecordsWithShipViaPickStatusStagedPrintY"></include>
+                    <include name="Tc_1248_VerifySearchRecordsWithShipViaPickStatusStagedPrintN"></include>
+                    <include name="Tc_1247_VerifySearchRecordsWithShipViaShipDate"></include>
+                    <include name="Tc_1249_VerifySearchRecordsWithShipDatePickStatusInProcess"></include>
+                    <include name="Tc_1250_VerifySearchRecordsWithShipDatePickStatusStagedPrintY"></include>
+                    <include name="Tc_1251_VerifySearchRecordsWithShipDatePickStatusStagedPrintN"></include>
+                    <include name="Tc_1252_VerifySearchRecordsWithTruckNameShipDatePickStatusInProcess"></include>
+                    <include name="Tc_1253_VerifySearchRecordsWithTruckNameShipDatePickStatusStagedPrintY"></include>
+                    <include name="Tc_1255_VerifySearchRecordsWithTruckNameShipDatePickStatusStagedPrintN"></include>
+                    <include name="Tc_1259_VerifySearchRecordsWithShipmentNoCustomerTruckNamePickStatusInProcess"></include>
+                    <include name="Tc_1261_VerifySearchRecordsWithShipmentNoCustomerPickStatusStagedPrintY"></include>
+                    <include name="Tc_1258_VerifyManualPickingInPickingInProcessPage"></include>
+                    <include name="Tc_1308_VerifySortingInExceptionQueuePage"></include>
+                    <include name="Tc_1309_VerifyExportToExcelInExceptionQueuePage"></include>
+                    <include name="Tc_1310_VerifyPaginationInExceptionQueuePage"></include>
+                    <include name="Tc_1311_VerifyReslutionNotesInExceptionQueuePage"></include>
+                    <include name="Tc_1312_VerifyUIInExceptionQueuePage"></include>
+                    <include name="Tc_1313_VerifyClosingRecordsInExceptionQueuePage"></include>
+                    <include name="Tc_1314_VerifyClosingMultipleRecordsInExceptionQueuePage"></include>
+                    <include name="Tc_1320_VerifySearchWithSourceInExceptionQueuePage"></include>
+                    <include name="Tc_1321_VerifySearchWithDateInExceptionQueuePage"></include>
+                    <include name="Tc_1322_VerifySearchWithErrorReasonInExceptionQueuePage"></include>
+                    <include name="Tc_1323_VerifySearchWithStatusInExceptionQueuePage"></include>
+                    <include name="Tc_1324_VerifySearchWithDateSourceInExceptionQueuePage"></include>
+                    <include name="Tc_1325_VerifySearchWithDateErrorReasonInExceptionQueuePage"></include>
+                    <include name="Tc_1326_VerifySearchWithDateStatusInExceptionQueuePage"></include>
+                    <include name="Tc_1332_VerifySearchWithSourceStatusInExceptionQueuePage"></include>
+                    <include name="Tc_1333_VerifySearchWithErrorReasonStatusInExceptionQueuePage"></include>
+                    <include name="Tc_1334_VerifySearchWithAllFiltersInExceptionQueuePage"></include>
+
+
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

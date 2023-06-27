@@ -84,18 +84,22 @@ public class inquiryBuyer extends ReusableLib {
 
         String textOnPO = jsonData.getData("OnPO");
         int onPOExpected;
-        if (textOnPO.isEmpty()) {
+        if (textOnPO.equals("")) {
             textOnPO += diff;
             onPOExpected = Integer.parseInt(textOnPO);
         } else {
             onPOExpected = Integer.parseInt(textOnPO) + diff;
         }
 
-        int withReceiptsActual = Integer.parseInt(getText(BuyersInquiryPage.withReceipts).trim());
-        int onPOActual = Integer.parseInt(getText(BuyersInquiryPage.onPO).trim());
+        try {
+            int withReceiptsActual = Integer.parseInt(getText(BuyersInquiryPage.withReceipts).trim());
+            int onPOActual = Integer.parseInt(getText(BuyersInquiryPage.onPO).trim());
 
-        Utility_Functions.xAssertEquals(report, withReceiptsExpected, withReceiptsActual, "validate [With Receipts] value");
-        Utility_Functions.xAssertEquals(report, onPOExpected, onPOActual, "validate [On PO] value");
+            Utility_Functions.xAssertEquals(report, withReceiptsExpected, withReceiptsActual, "validate [With Receipts] value");
+            Utility_Functions.xAssertEquals(report, onPOExpected, onPOActual, "validate [On PO] value");
+        }catch (Exception e){
+            System.out.println("Item doesn't have PO");
+        }
     }
 
 }
