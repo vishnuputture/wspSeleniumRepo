@@ -21,7 +21,6 @@ import supportLibraries.Utility_Functions;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static supportLibraries.Utility_Functions.getDesiredTime;
 
@@ -176,15 +175,21 @@ public class SPORegressionTest extends BaseSmokeTest {
         wait.until(ExpectedConditions.elementToBeClickable(SpoPage.refreshWorksheet));
         click(SpoPage.refreshWorksheet);
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
-        String actualValue = getElement(SpoPage.popUp).getText();
-        Assert.assertEquals(actualValue, successFailureHeadersValidation.verifyTheWorksheetRefreshedSuccessMessage.getOutcomeMessage());
+        while (true) {
+            try {
+                WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(SpoPage.popUp));
+                String actualValue = getElement(SpoPage.popUp).getText();
+                Assert.assertEquals(actualValue, successFailureHeadersValidation.verifyTheWorksheetRefreshedSuccessMessage.getOutcomeMessage());
+                break;
+            } catch (Exception e) {
+                click(SpoPage.refreshWorksheet);
+            }
+        }
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
-//        click(SpoPage.closeIcn);
         click(SpoPage.refreshWorksheet);
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
         Assert.assertEquals(getElement(SpoPage.extractESTDateAndTime).getText().replace("Last Updated: ", "").trim(), getDesiredTime("America/New_York", "MM/dd/yy h:mm a"));
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
-//        click(SpoPage.closeIcn);
     }
 
     public void verifyDeleteButton() {
@@ -428,7 +433,7 @@ public class SPORegressionTest extends BaseSmokeTest {
 
     public void verifyMeridian() {
         Select s = new Select(getElement(SpoPage.meridianDropdown));
-        List<String> meridianList = s.getOptions().stream().map(x->x.getText()).collect(Collectors.toList());
+        List<String> meridianList = s.getOptions().stream().map(x -> x.getText()).collect(Collectors.toList());
         List<String> expectedMeridianElements = new ArrayList<>();
         expectedMeridianElements.add("AM");
         expectedMeridianElements.add("PM");
@@ -436,39 +441,35 @@ public class SPORegressionTest extends BaseSmokeTest {
         meridianList.equals(expectedMeridianElements);
     }
 
-    public void verifyDayOfTheWeek()
-    {
+    public void verifyDayOfTheWeek() {
         verifyFiveDaysAreSelected();
         verifyTheDayNames();
         verifyDayOptionsOnSelectAndDeSelect();
     }
 
-    public void verifyFiveDaysAreSelected()
-    {
+    public void verifyFiveDaysAreSelected() {
+        scrollTillTheEndOfPage();
         click(SpoPage.dayOfTheWeekButton);
         List<WebElement> noOfDaysOfTheWeek = ownDriver.findElements(SpoPage.daysOfTheWeekDropdown);
-        Assert.assertEquals(noOfDaysOfTheWeek.size(),Integer.parseInt(jsonData.getData("noOfDaysOfTheWeek")));
+        Assert.assertEquals(noOfDaysOfTheWeek.size(), Integer.parseInt(jsonData.getData("noOfDaysOfTheWeek")));
     }
 
-    public void verifyTheDayNames()
-    {
+    public void verifyTheDayNames() {
         String[] daysOfWeek = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
         List<WebElement> days = ownDriver.findElements(SpoPage.namesOfDays);
         int indx = 0;
-        for(WebElement element : days)
-        {
-            Assert.assertEquals(element.getText(),daysOfWeek[indx]);
+        for (WebElement element : days) {
+            Assert.assertEquals(element.getText(), daysOfWeek[indx]);
             indx++;
         }
     }
 
-    public void verifyDayOptionsOnSelectAndDeSelect()
-    {
+    public void verifyDayOptionsOnSelectAndDeSelect() {
         click(SpoPage.selectADay);
         List<WebElement> noOfDaysOfTheWeek = ownDriver.findElements(SpoPage.daysOfTheWeekDropdown);
-        Assert.assertEquals(noOfDaysOfTheWeek.size(),Integer.parseInt(jsonData.getData("noOfDaysOfTheWeek"))-1);
+        Assert.assertEquals(noOfDaysOfTheWeek.size(), Integer.parseInt(jsonData.getData("noOfDaysOfTheWeek")) - 1);
         click(SpoPage.selectADay);
         List<WebElement> currentNoOfDaysOfTheWeek = ownDriver.findElements(SpoPage.daysOfTheWeekDropdown);
-        Assert.assertEquals(currentNoOfDaysOfTheWeek.size(),Integer.parseInt(jsonData.getData("noOfDaysOfTheWeek")));
+        Assert.assertEquals(currentNoOfDaysOfTheWeek.size(), Integer.parseInt(jsonData.getData("noOfDaysOfTheWeek")));
     }
 }
