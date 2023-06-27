@@ -465,6 +465,7 @@ public class SPORegressionTest extends BaseSmokeTest {
     }
 
     public void verifyDayOptionsOnSelectAndDeSelect() {
+        scrollTillTheEndOfPage();
         click(SpoPage.selectADay);
         List<WebElement> noOfDaysOfTheWeek = ownDriver.findElements(SpoPage.daysOfTheWeekDropdown);
         Assert.assertEquals(noOfDaysOfTheWeek.size(), Integer.parseInt(jsonData.getData("noOfDaysOfTheWeek")) - 1);
