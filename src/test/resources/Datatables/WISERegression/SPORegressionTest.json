@@ -1,0 +1,46 @@
+{
+  "Business_Flow": [
+    {
+      "TC_SPO_Regression_Prerequisites": "url,login,captureVendorNumber,createProductCode,createManufactureCode,addDiscountGroup,addFreightChargesCode,createAnItem,captureCostOption,captureDiscountMultiplierOption",
+      "TC_SPO_LandingPage_Pagination_Regression_Test": "launchWinVision,winIntoCompany,createTemplate,createTemplateValidations,searchTemplate,verifyDeleteButton,verifyDeleteButtonWarningMessage,verifyWorksheetAfterDelete,verifyPurchasingPagination,verifyPurchasingNavigations,templateValidations",
+      "TC_SPO_Sales_Option_Regression_Test": "launchWinVision,winIntoCompany,verifySalesOptions",
+      "TC_SPO_Days_To_Refresh_Regression_Test": "launchWinVision,winIntoCompany,verifyDaysToRefresh"
+    }
+  ],
+  "General_Data": [
+    {
+      "TC_ID": "TC_SPO_Regression_Prerequisites",
+      "userName": "winauto1",
+      "passWord": "winauto",
+      "environment": "STG",
+      "Product Code": "AUTOPC_",
+      "Vendor Name": "TESTVENDOR_"
+    },
+    {
+      "TC_ID": "TC_SPO_LandingPage_Pagination_Regression_Test",
+      "winCompany": "99599",
+      "Template_name": "AutoTestTemplate",
+      "defaultRowCount": "30",
+      "changedRowCount": "15",
+      "badManufactureCode": "Bad Manufacture Code",
+      "badProductCode": "Bad Product Code",
+      "badVendorCode": "Bad Vendor Code"
+    },
+    {
+      "TC_ID": "TC_SPO_Sales_Option_Regression_Test",
+      "winCompany": "99599",
+      "Template_name": "AutoTestTemplate",
+      "NumberOfMonthBoxes": "24",
+      "defaultNumberOfSelectedBoxes": "3",
+      "dynamicMonthsChange": "11",
+      "MonthsOfHistoryToZero": "0",
+      "dynamicMonthsChangeGreaterThanTheValue": "27"
+    },
+    {
+      "TC_ID": "TC_SPO_Days_To_Refresh_Regression_Test",
+      "winCompany": "99599",
+      "minuteIntervals": "15",
+      "noOfDaysOfTheWeek": "5"
+    }
+  ]
+}

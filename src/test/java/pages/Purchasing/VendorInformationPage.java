@@ -19,5 +19,8 @@ public class VendorInformationPage extends ReusableLib {
     public static By freightOrderCode = By.id("I_18_32");
     public static By freightOrderQty = By.id("I_19_32");
     public static By vendorName = By.id("D_3_48");
+    public static By freightChargesCode = By.id("I_20_32");
+
+    public static By exitButton = By.id("btnExit");
 
 }

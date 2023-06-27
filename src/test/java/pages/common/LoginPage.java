@@ -31,5 +31,6 @@ public class LoginPage extends ReusableLib {
     public static By selectButton = By.cssSelector("div.select-btn-div>button");
 
     public static By passwordExpiresMsg = By.xpath("//div[contains(text(),'password')]");
+    public static By winIntoCompanyToggle = By.xpath("//i[@class='fa fa-angle-right']");
 
 }

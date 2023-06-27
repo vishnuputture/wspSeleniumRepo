@@ -29,7 +29,6 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import pages.WiseSmokeTest.WiseSmokeTestPage;
 import pages.common.MasterPage;
-import pages.pricing.PriceSheet.SelfServicePriceSheetPage;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,6 +42,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -5111,5 +5111,37 @@ public class Utility_Functions extends ReusableLib {
         if (st.charAt(0) == '.')
             return "0" + st.substring(0, temp + 1);
         return st.substring(0, temp + 1);
+    }
+
+    public String generateARandomNumber(int numberToBeGenerated) {
+        int desiredNumber = 0;
+        Random r = new Random();
+        switch (numberToBeGenerated) {
+            case 10:
+                desiredNumber = r.nextInt(90) + 10;
+                break;
+
+            case 100:
+                desiredNumber = r.nextInt(900) + 100;
+                break;
+
+            case 1000:
+                desiredNumber = r.nextInt(9000) + 1000;
+                break;
+
+            default:
+                System.out.println("The desired value doesn't exist");
+                break;
+
+        }
+        return Integer.toString(desiredNumber);
+    }
+
+    public static String getDesiredTime(String standardTime, String format)
+    {
+        LocalDateTime currentTime = LocalDateTime.now(ZoneId.of(standardTime));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+        String estTime = currentTime.format(formatter);
+        return  estTime.toUpperCase();
     }
 }
