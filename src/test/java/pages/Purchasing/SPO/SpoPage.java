@@ -58,6 +58,7 @@ public class SpoPage extends ReusableLib {
     public static By totalCost = By.xpath("//div[contains(text(),'$')]");
     public static By totalWeight = By.xpath("//td[contains(text(),'lbs')]");
     public static By disFindProduct = By.xpath("//button[contains(text(),'Find Products') and @disabled]");
+    public static By findProducts = By.id("find-products");
     public static By worksheetNameLink = By.xpath("//span[contains(text(),'Last Updated:')]/preceding::a[@class='header-name-link']");
     public static By worksheetNameHeader = By.id("modalLabelSM");
     public static By modalLabel=By.id("modalLabel");
@@ -111,9 +112,11 @@ public class SpoPage extends ReusableLib {
     public static By itemDescription = By.xpath("//p-autocomplete[@id='itemDescription']/descendant::input");
     public static By toggleSlider = By.xpath("//div[@class='toggle-ball']");
     public static By convertPOBtn = By.xpath("//span[text()='Convert to PO']");
-    public static By manufacturerCode = By.id("manufacturerCode");
-    public static By productCode = By.id("productCode");
-    public static By vendorName = By.id("vendorName");
+    public static By manufacturerCode = By.xpath("//p-autocomplete[@id='manufacturerCode1']/span/input");
+    public static By productCode = By.xpath("//p-autocomplete[@id='productCode1']/span/input");
+    public static By vendorName = By.xpath("//p-autocomplete[@id='vendorName1']/span/input");
+
+    public static By vendorNumber = By.xpath("//p-autocomplete[@id='searchTerm1']/span/input");
     public static By lastOrdered = By.id("lastOrdered");
     public static By unitCost = By.id("unitCost");
     public static By unitWeight = By.id("unitWeight");
@@ -150,4 +153,68 @@ public class SpoPage extends ReusableLib {
     public static By getPD = By.xpath("//p-autocomplete[contains(@id,'pd-filter-')]/descendant::input");
     public static By errorMsg = By.xpath("//tr[contains(@class,'ng-dirty p-highlight ng-invalid')]");
     public static By getMF = By.xpath("//p-autocomplete[contains(@id,'mf-filter-')]/descendant::input");
+    public static By createTemplate = By.id("create-worksheet");
+
+    public static By search = By.id("open-flyout-filter");
+    public static By purchasingTemplateName = By.xpath("//input[@placeholder='Worksheet Name']");
+
+    public static By applyFilter = By.id("apply-filters");
+
+    public static By refreshWorksheet = By.id("refresh-worksheet-0");
+    public static By extractESTDateAndTime = By.xpath("//span[contains(text(),'Last Updated:')]/..");
+    public static By workSheet = By.id("header-name-0");
+    public static By backButton = By.id("back-button");
+    public static By deleteButton = By.xpath("//i[contains(@id,'delete-worksheet')]");
+    public static By deleteMessage = By.xpath("//*[contains(text(),'Are you sure you want to permanently delete the saved worksheet')]");
+
+    public static By deleteYes = By.id("delete-worksheet");
+
+    public static By deleteNo = By.xpath("//button[text()='No']");
+
+    public static By clearFilter = By.xpath("//i[@class='fa fa-times win-text-error']");
+
+    public static By defaultPagination = By.xpath("(//a[@class='count win-blue mx-1 selected-count ng-star-inserted']/span[@class='font-weight-bold'])[1]");
+    public static By templateTableRows = By.xpath("//table/tbody/tr");
+
+    public static By chooseRowsFifteen = By.xpath("(//a[@class='count win-blue mx-1 ng-star-inserted']/span[contains(text(),'15')])[1]");
+
+    public static By currentSheetNumber = By.xpath("(//input[@id='currentPage'])[1]");
+
+    public static By noOfSheets = By.xpath("(//input[@id='currentPage']/following::span[1])[1]");
+
+    public static By nextPageNavigation = By.xpath("(//li[@class='pagination-next page-item ng-star-inserted'])[1]");
+
+    public static By lastPageNavigation = By.xpath("(//li[@class='pagination-last page-item ng-star-inserted'])[1]");
+
+    public static By invalidManufactureCode =By.xpath("(//div[text()='Invalid Manufacturer Code.'])[1]");
+    public static By invalidProductCode =By.xpath("(//div[text()='Invalid Product Code.'])[1]");
+    public static By invalidVendorCode =By.xpath("(//div[text()='Invalid Vendor Code.'])[1]");
+    public static By loadingSpinner = By.xpath("//i[contains(@class,'fa fa-spinner')]");
+    public static By defaultCostOption = By.id("costOption");
+    public static By cancel = By.xpath("//button[@id='cancel-button' and contains(@class,'btn win-button win-button-secondary')]");
+    public static By cancelTemplateWarningMessage = By.xpath("//*[contains(text(),' Are you sure you want to cancel the creation of this template? ')]");
+    public static By cancelTemplateYes = By.xpath("//button[@class='btn win-button win-button-primary mt-2']");
+
+    public static By monthsSupplyToOrder = By.id("supplyToOrder");
+    public static By monthSupplyToOrderErrorMessage = By.xpath("(//div[@class='invalid-feedback ng-star-inserted'])[1]");
+
+    public static By purchasingMultiplierDefaultValue = By.xpath("//label[text()='Multiplier']/following-sibling::p-inputnumber/span/input");
+    public static By leadTimeErrorMessage = By.xpath("(//div[contains(text(),'Please enter a valid lead time from 1-999.')])[1]");
+
+    public static By noOfSelectedBoxes = By.xpath("(//div[@class='col-12']/div[@class='row no-gutters sales-history-grid-row'])[2]/div[@ng-reflect-ng-class='sales-history-grid-selected']");
+
+    public static By noOfDeSelectedBoxes = By.xpath("(//div[@class='col-12']/div[@class='row no-gutters sales-history-grid-row'])[2]/div[@ng-reflect-ng-class='sales-history-grid-deselected']");
+    public static By noOfMonthsInsertedBoxes = By.xpath("(//div[@class='col-12 ng-star-inserted']/div[@class='row no-gutters'])[1]/div[@class='col-1 sales-history-grid-col sales-history-grid-deselected ng-star-inserted']");
+
+    public static By hourDropdown = By.xpath("//select[@id='hour']");
+    public static By minutesDropdown = By.xpath("//select[@id='minute']");
+    public static By meridianDropdown = By.xpath("//select[@id='meridian']");
+
+    public static By dayOfTheWeekButton = By.xpath("(//div[text()='5 items selected'])[1]");
+
+    public static By daysOfTheWeekDropdown = By.xpath("//span[@class='p-checkbox-icon pi pi-check']");
+    public static By selectADay = By.xpath("//li[@aria-label='Monday']");
+    public static By namesOfDays = By.xpath("//span[@class='p-checkbox-icon pi pi-check']/../../following-sibling::span[1]");
+
+
 }

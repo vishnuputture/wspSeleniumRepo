@@ -1,10 +1,9 @@
-package businesskeywords.WiseSmokeTest;
+package com.winSupply.core;
 
-import com.winSupply.core.Helper;
-import com.winSupply.core.ReusableLib;
 import com.winSupply.framework.selenium.FrameworkDriver;
 import commonkeywords.CommonActions;
 import org.openqa.selenium.Keys;
+import org.testng.ITestContext;
 import pages.WiseSmokeTest.BaseSmokeTestPage;
 import supportLibraries.Utility_Functions;
 
@@ -17,6 +16,7 @@ public class BaseSmokeTest extends ReusableLib {
      */
     public FrameworkDriver ownDriver;
     public CommonActions commonObj;
+
 
     public BaseSmokeTest(Helper helper) {
         super(helper);

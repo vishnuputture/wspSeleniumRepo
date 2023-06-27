@@ -56,7 +56,8 @@ public class SelfServicePriceSheetPage extends ReusableLib {
     public static By successMessage = By.xpath("//div[@role='alert']//div//*[contains(text(),'Sheet')]");
     public static By uploadedDataName = By.xpath("//tbody//tr[1]//td[1]");
     public static By uploadedDataManufacturer = By.xpath("//tbody//tr[1]//td[2]");
-    public static By uploadedDataCode = By.xpath("//tbody//tr[1]//td[3]");
+
+    public static By uploadFile = By.xpath("//span[@class='weight file-label']/following::input[@type='file']");
     public static By uploadedDataStatus = By.xpath("//tbody//tr[1]//td[4]");
     public static By poCostMultiplier = By.xpath("//tbody//tr[1]//td[13]");
     public static By netPrice = By.id("netSheet");
