@@ -1391,4 +1391,10 @@ public abstract class ReusableLib {
         waitForVisible(element);
         click(element);
     }
+
+    public void scrollTillTheEndOfPage()
+    {
+        JavascriptExecutor js = (JavascriptExecutor) helper.getGSDriver().getWebDriver();
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
 }
