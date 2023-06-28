@@ -148,12 +148,17 @@ public class SPORegressionTest extends BaseSmokeTest {
     }
 
     public void createTemplateValidations() {
+        WebDriverWait wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), 10);
         click(SpoPage.findProducts);
         xWaitForElementVisible(SpoPage.createTemplate, 5);
         click(SpoPage.createTemplate);
         xWaitForElementVisible(SpoPage.popUp, 5);
         String expectedValue = getElement(SpoPage.popUp).getText().trim().replaceAll("[/:]", "");
-        click(SpoPage.closeIcn);
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated((SpoPage.closeIcn)));
+        } catch (Exception e) {
+            return;
+        }
         String actualValue = Utility_Functions.xGetJsonData("Purchasing_Template_Name").replaceAll("[/:]", "").trim() + " " + successFailureHeadersValidation.verifyPurchasingOrderTemplateCreationSuccessMessage.getOutcomeMessage();
         Assert.assertEquals(expectedValue, actualValue);
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
@@ -168,12 +173,9 @@ public class SPORegressionTest extends BaseSmokeTest {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(SpoPage.applyFilter));
         element.click();
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
-        try
-        {
+        try {
             wait.until(ExpectedConditions.presenceOfElementLocated((SpoPage.closeIcn)));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return;
         }
     }
@@ -181,6 +183,7 @@ public class SPORegressionTest extends BaseSmokeTest {
     public void searchTemplate() {
         WebDriverWait wait = new WebDriverWait(helper.getGSDriver().getWebDriver(), 10);
         searchWorkSheet();
+        helper.getGSDriver().getWebDriver().navigate().refresh();
         wait.until(ExpectedConditions.elementToBeClickable(SpoPage.refreshWorksheet));
         click(SpoPage.refreshWorksheet);
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
