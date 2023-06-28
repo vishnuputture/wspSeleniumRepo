@@ -153,6 +153,7 @@ public class SPORegressionTest extends BaseSmokeTest {
         click(SpoPage.createTemplate);
         xWaitForElementVisible(SpoPage.popUp, 5);
         String expectedValue = getElement(SpoPage.popUp).getText().trim().replaceAll("[/:]", "");
+        click(SpoPage.closeIcn);
         String actualValue = Utility_Functions.xGetJsonData("Purchasing_Template_Name").replaceAll("[/:]", "").trim() + " " + successFailureHeadersValidation.verifyPurchasingOrderTemplateCreationSuccessMessage.getOutcomeMessage();
         Assert.assertEquals(expectedValue, actualValue);
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
