@@ -185,7 +185,9 @@ public class SPORegressionTest extends BaseSmokeTest {
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
         while (true) {
             try {
-                WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(SpoPage.popUp));
+                wait.until(ExpectedConditions.elementToBeClickable(SpoPage.refreshWorksheet));
+                click(SpoPage.refreshWorksheet);
+                wait.until(ExpectedConditions.presenceOfElementLocated(SpoPage.popUp));
                 String actualValue = getElement(SpoPage.popUp).getText();
                 Assert.assertEquals(actualValue, successFailureHeadersValidation.verifyTheWorksheetRefreshedSuccessMessage.getOutcomeMessage());
                 break;
@@ -219,7 +221,6 @@ public class SPORegressionTest extends BaseSmokeTest {
         click(SpoPage.deleteButton);
         click(SpoPage.deleteYes);
         waitForElementDisappear(SpoPage.loadingSpinner, 10);
-//        click(SpoPage.closeIcn);
         click(SpoPage.clearFilter);
     }
 
