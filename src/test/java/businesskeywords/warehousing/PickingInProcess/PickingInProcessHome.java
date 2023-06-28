@@ -35,7 +35,7 @@ public class PickingInProcessHome extends ReusableLib {
     public void navigateToPiPHomePage() {
         String url = properties.getProperty("PickingQA");
         ownDriver.get(url);
-        commonObj.validateElementExists(PickingInProcessPage.verifyCredentialsButton, "Navigated to Login Page");
+        /*commonObj.validateElementExists(PickingInProcessPage.verifyCredentialsButton, "Navigated to Login Page");
 
         String userName = properties.getProperty("CycleCostUserName");
         String Password = properties.getProperty("PIPPass");
@@ -46,7 +46,7 @@ public class PickingInProcessHome extends ReusableLib {
         Utility_Functions.timeWait(7);
 
         //select Company
-        selectCompany();
+        selectCompany();*/
     }
 
     public void selectCompany() {

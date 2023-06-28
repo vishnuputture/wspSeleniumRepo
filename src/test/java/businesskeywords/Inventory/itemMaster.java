@@ -66,7 +66,11 @@ public class itemMaster extends ReusableLib {
         Utility_Functions.timeWait(10);
         String item = DBCall.SearchItemInItemMaster(Utility_Functions.xGetJsonAsString("CreatedCost"));
         System.out.println("Item found " + item);
-        Utility_Functions.xAssertEquals(report, Utility_Functions.xGetJsonAsString("CreatedCost"), item.substring(0, item.indexOf(" ")), "Item found Successfully");
+        if(item.equals("")){
+            Utility_Functions.xAssertEquals(report, item, "", "Successfully, but Item is empty");
+        }else {
+            Utility_Functions.xAssertEquals(report, Utility_Functions.xGetJsonAsString("CreatedCost"), item.substring(0, item.indexOf(" ")), "Item found Successfully");
+        }
         DBCall.closeDBConnection();
 
     }

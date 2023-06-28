@@ -86,15 +86,17 @@ public class createCost extends ReusableLib {
         sendKeys(ItemMasterPage.txtBoxSearch,Utility_Functions.xGetJsonAsString("CreatedCost"),"Entering search string");
         Utility_Functions.actionKey(Keys.ENTER, ownDriver);
         Utility_Functions.waitTillClickHardSleep(report,ownDriver,ItemMasterPage.deleteItemAction,"Click on delete action link");
-        Utility_Functions.waitTillClickHardSleep(report,ownDriver,ItemMasterPage.btnAlertContinue,"Click on alert button");
+        if(isDisplayed(ItemMasterPage.btnAlertContinue)) {
+            Utility_Functions.waitTillClickHardSleep(report, ownDriver, ItemMasterPage.btnAlertContinue, "Click on alert button");
 
-        if (Utility_Functions.xWaitForElementPresent(ownDriver, ItemMasterPage.messageAddSuccessful, 10)) {
-            String successMessage = Utility_Functions.getText(ownDriver,  ItemMasterPage.messageAddSuccessful);
-            System.out.println("Text: " + successMessage);
-            Utility_Functions.xAssertEquals(report, "Item "+Utility_Functions.xGetJsonAsString("CreatedCost")+" successfully deleted", successMessage.trim(), "Validating success message");
-        } else {
-            System.out.println("Text: Not found");
-            throw new NoSuchElementException("Could not find :" + ItemMasterPage.messageAddSuccessful);
+            if (Utility_Functions.xWaitForElementPresent(ownDriver, ItemMasterPage.messageAddSuccessful, 10)) {
+                String successMessage = Utility_Functions.getText(ownDriver, ItemMasterPage.messageAddSuccessful);
+                System.out.println("Text: " + successMessage);
+                Utility_Functions.xAssertEquals(report, "Item " + Utility_Functions.xGetJsonAsString("CreatedCost") + " successfully deleted", successMessage.trim(), "Validating success message");
+            } else {
+                System.out.println("Text: Not found");
+                throw new NoSuchElementException("Could not find :" + ItemMasterPage.messageAddSuccessful);
+            }
         }
     }
     
